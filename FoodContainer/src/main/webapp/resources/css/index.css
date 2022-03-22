@@ -236,10 +236,47 @@
 }
 
 #pView{
-
 	margin-bottom : 50px;
 }
 
 #pDelivery{
 	margin-bottom : 50px;
+}
+
+#reviewTable th, #reviewTable td:not(#reviewContent){
+	text-align : center;
+	vertical-align : middle;
+}
+
+#reviewContent{
+	vertical-align : middle;
+}
+
+#reViewImg{
+	width : 150px;
+}
+
+#reviewTable{
+	width : 900px;
+	margin : 0 auto;
+}
+
+#reviewTable>thead>tr th:nth-child(1){
+	width : 110px;
+}
+
+#reviewTable>thead>tr th:nth-child(3){
+	width : 100px;
+}
+
+#reviewTable>thead>tr th:nth-child(4){
+	width : 120px;
+}
+
+.reviewTop{
+	text-align : center;
+}
+
+#review{
+	margin-top : 50px;
 }
