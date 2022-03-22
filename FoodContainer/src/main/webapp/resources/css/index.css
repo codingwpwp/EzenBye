@@ -167,6 +167,7 @@
 	width : 150px;
 	position : fixed;
 	left : 130px;
+	top : 20px;
 	display : none;
 }
 
@@ -198,6 +199,10 @@
 	max-width : 400px;
 }
 
+.viewStar{
+	max-width : 200px;
+}
+
 .productNum i:hover{
 	cursor : pointer;
 }
@@ -223,9 +228,6 @@
 	max-height : 150px;
 }
 
-.viewStar{
-	float : right;
-}
 /*서브 메뉴*/
 .subMenuButton{
 	width : 100%;

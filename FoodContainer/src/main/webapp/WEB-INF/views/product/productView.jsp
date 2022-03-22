@@ -49,15 +49,17 @@
 				      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 				        <div class="col-auto d-flex d-lg-block">
 				        	<img src="<%=request.getContextPath()%>/resources/img/CJ/컵밥,햇반/2.jpg" alt="d" class="img-fluid viewImg">
-				        	<div><span class="viewStar">평점 : 
-				        		<span class="fs-4">
+				        	<div class="viewStar">
+				        		<span>평점 : 
+				        		<span class="fs-4 ">
 				        			<i class="bi bi-star-fill"></i>
 				        			<i class="bi bi-star-fill"></i>
 				        			<i class="bi bi-star-fill"></i>
 				        			<i class="bi bi-star-fill"></i>
 				        			<i class="bi bi-star"></i>
 				        		</span>
-				        	</span></div>
+				        		</span>
+				        	</div>
 				        </div>
 				        <div class="col p-4 d-flex flex-column position-static">
 				          <strong class="d-inline-block mb-2 text-danger">[인기]</strong>
