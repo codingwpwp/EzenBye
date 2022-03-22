@@ -52,57 +52,57 @@
 						
 						<h3 class="fw-bold">회원 정보</h3>
                         
-                        <div class="row" id="rows">
-                            <div class="col-4 pe-0"><span id="memberCol1"><span class="d-none d-sm-inline">회원 </span>번호</span></div>
+                        <div class="row rows">
+                            <div class="col-4 pe-0"><span class="memberCol1"><span class="d-none d-sm-inline">회원 </span>번호</span></div>
                             <div class="col-8 pe-0">
                                 <input type="text" class="form-control bg-warning bg-gradient bg-opacity-25" value="1" disabled>
                             </div>
                         </div>
 
-                        <div class="row" id="rows">
-                            <div class="col-4 pe-0"><span id="memberCol1">아이디</span></div>
+                        <div class="row rows">
+                            <div class="col-4 pe-0"><span class="memberCol1">아이디</span></div>
                             <div class="col-8 pe-0">
                                 <input type="text" class="form-control bg-warning bg-gradient bg-opacity-25" value="tester1" disabled>
                             </div>
                         </div>
 
-                        <div class="row" id="rows">
-                            <div class="col-4 pe-0"><span id="memberCol1">닉네임</span></div>
+                        <div class="row rows">
+                            <div class="col-4 pe-0"><span class="memberCol1">닉네임</span></div>
                             <div class="col-8 pe-0">
                                 <input type="text" class="form-control bg-warning bg-gradient bg-opacity-25" value="나는테스터" disabled>
                             </div>
                         </div>
 
-                        <div class="row" id="rows">
-                            <div class="col-4 pe-0"><span id="memberCol1">가입일</span></div>
+                        <div class="row rows">
+                            <div class="col-4 pe-0"><span class="memberCol1">가입일</span></div>
                             <div class="col-8 pe-0">
                                 <input type="text" class="form-control bg-warning bg-gradient bg-opacity-25" value="2022-01-01" disabled>
                             </div>
                         </div>
 
-                        <div class="row" id="rows">
-                            <div class="col-4 pe-0"><span id="memberCol1">이름</span></div>
+                        <div class="row rows">
+                            <div class="col-4 pe-0"><span class="memberCol1">이름</span></div>
                             <div class="col-8 pe-0">
                                 <input type="text" class="form-control bg-warning bg-gradient bg-opacity-25" value="테스터일" disabled>
                             </div>
                         </div>
 
-                        <div class="row" id="rows">
-                            <div class="col-4 pe-0"><span id="memberCol1">연락처</span></div>
+                        <div class="row rows">
+                            <div class="col-4 pe-0"><span class="memberCol1">연락처</span></div>
                             <div class="col-8 pe-0">
                                 <input type="text" class="form-control bg-warning bg-gradient bg-opacity-25" value="010-3333-1111" disabled>
                             </div>
                         </div>
 
-                        <div class="row" id="rows">
-                            <div class="col-4 pe-0"><span id="memberCol1">이메일</span></div>
+                        <div class="row rows">
+                            <div class="col-4 pe-0"><span class="memberCol1">이메일</span></div>
                             <div class="col-8 pe-0">
                                 <input type="text" class="form-control bg-warning bg-gradient bg-opacity-25" value="dkek@naver.com" disabled>
                             </div>
                         </div>
 
-                        <div class="row" id="rows">
-                            <div class="col-4 pe-0"><span id="memberCol1"><span class="d-none d-sm-inline">기본 </span>배송지</span></div>
+                        <div class="row rows">
+                            <div class="col-4 pe-0"><span class="memberCol1"><span class="d-none d-sm-inline">기본 </span>배송지</span></div>
                             <div class="col-8 pe-0">
                                 <textarea class="form-control bg-warning bg-gradient bg-opacity-25" id="exampleFormControlTextarea1" rows="4" disabled>전라북도 전주시 덕진구 금암1동 667-52</textarea>
                             </div>
