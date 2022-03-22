@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Container-상품상세</title>
+    <title>Food Container-상품상세보기</title>
     <!-- css링크 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -87,7 +87,7 @@
 					  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" onclick="location.href='#pCancel'">
 					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio3">취소 규정</label>
 					  
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
+					  <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off" onclick="location.href='#review'">
 					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio4">리뷰</label>
 					</div>
 					
@@ -104,6 +104,116 @@
 					<!-- 취소 규정 -->
 					<div class="d-flex justify-content-center" id="pCancel">
 						<img src="<%=request.getContextPath()%>/resources/img/취소.png" alt="취소규정" class="img-fluid">
+					</div>
+					
+					<!-- 리뷰 -->
+					<div id="review">
+						<div class="fs-2 reviewTop">리뷰</div>
+						<table id="reviewTable" class="table table-sm">
+							<thead>
+								<tr>
+									<th>별점</th>
+									<th colspan="2">리뷰</th>
+									<th>닉네임</th>
+									<th>작성일</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<span>
+									    	<i class="bi bi-star-fill"></i>
+							        		<i class="bi bi-star-fill"></i>
+							        		<i class="bi bi-star-fill"></i>
+							        		<i class="bi bi-star-fill"></i>
+							        		<i class="bi bi-star"></i>
+							        		<br>
+							        		좋음
+									    </span>
+									</td>
+									<td id="reViewImg">
+										<img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid">
+									</td>
+									<td id="reviewContent">좋아요</td>
+									<td>홍길동</td>
+									<td>2022-03-22</td>
+								</tr>
+								<tr>
+									<td>
+										<span>
+									    	<i class="bi bi-star-fill"></i>
+							        		<i class="bi bi-star-fill"></i>
+							        		<i class="bi bi-star-fill"></i>
+							        		<i class="bi bi-star-fill"></i>
+							        		<i class="bi bi-star"></i>
+							        		<br>
+							        		좋음
+									    </span>
+									</td>
+									<td id="reViewImg">
+										<img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid">
+									</td>
+									<td id="reviewContent">좋아요</td>
+									<td>홍길동</td>
+									<td>2022-03-22</td>
+								</tr>
+								<tr>
+									<td>
+										<span>
+									    	<i class="bi bi-star-fill"></i>
+							        		<i class="bi bi-star-fill"></i>
+							        		<i class="bi bi-star-fill"></i>
+							        		<i class="bi bi-star-fill"></i>
+							        		<i class="bi bi-star"></i>
+							        		<br>
+							        		좋음
+									    </span>
+									</td>
+									<td id="reViewImg">
+									</td>
+									<td id="reviewContent">좋아요</td>
+									<td>홍길동</td>
+									<td>2022-03-22</td>
+								</tr>
+								<tr>
+									<td>
+										<span>
+									    	<i class="bi bi-star-fill"></i>
+							        		<i class="bi bi-star-fill"></i>
+							        		<i class="bi bi-star-fill"></i>
+							        		<i class="bi bi-star-fill"></i>
+							        		<i class="bi bi-star"></i>
+							        		<br>
+							        		좋음
+									    </span>
+									</td>
+									<td id="reViewImg">
+									</td>
+									<td id="reviewContent">좋아요</td>
+									<td>홍길동</td>
+									<td>2022-03-22</td>
+								</tr>
+								<tr>
+									<td>
+										<span>
+									    	<i class="bi bi-star-fill"></i>
+							        		<i class="bi bi-star-fill"></i>
+							        		<i class="bi bi-star-fill"></i>
+							        		<i class="bi bi-star-fill"></i>
+							        		<i class="bi bi-star"></i>
+							        		<br>
+							        		좋음
+									    </span>
+									</td>
+									<td id="reViewImg">
+										<img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid">
+									</td>
+									<td id="reviewContent">좋아요</td>
+									<td>홍길동</td>
+									<td>2022-03-22</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 					
                 </article>

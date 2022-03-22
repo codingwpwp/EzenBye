@@ -209,29 +209,42 @@
 	window.addEventListener("scroll", function(){
 		var scrollLocation = document.documentElement.scrollTop;
 		var browserHeight = window.innerHeight;
+		var bodyHeight = document.body.scrollHeight;
 		
-		console.log(scrollLocation);
-		console.log(browserHeight);
+		console.log("1:"+scrollLocation);
+		console.log("2:"+browserHeight);
+		console.log("3:"+bodyHeight);
+		console.log("4:"+bodyHeight*0.85);
 		
 		if(window.innerWidth < 991){
-			if(scrollLocation > (browserHeight*1.3)){
+			if(scrollLocation > (browserHeight*1.3) && scrollLocation < (bodyHeight*0.89)){
 				$(".subMenuGroup").css({"position" : "fixed", 
 										"top" : "0px",
 										"left" : "0px",
 										"width" : "100%"
 										});
-			}else{
+				$("#btnradio1").prop("checked",true);
+			}else if(scrollLocation < (browserHeight*1.3)){
 				$(".subMenuGroup").css("position","static");
+				$("#btnradio1").prop("checked",false);
+			}else if(scrollLocation > (bodyHeight*0.7)){
+				$("#btnradio1").prop("checked",false);
+				$("#btnradio2").prop("checked",true);
 			}
 		}else{
-			if(scrollLocation > (browserHeight*0.8)){
+			if(scrollLocation > (browserHeight*0.7) && scrollLocation < (bodyHeight*0.88)){
 				$(".subMenuGroup").css({"position" : "fixed", 
 										"top" : "0px",
 										"left" : "0px",
 										"width" : "100%"
 										});
-			}else{
+				$("#btnradio1").prop("checked",true);
+			}else if(scrollLocation < (browserHeight*0.7)){
 				$(".subMenuGroup").css("position","static");
+				$("#btnradio1").prop("checked",false);
+			}else if(scrollLocation > (bodyHeight*0.88)){
+				$("#btnradio1").prop("checked",false);
+				$("#btnradio2").prop("checked",true);
 			}
 		}
 	})
