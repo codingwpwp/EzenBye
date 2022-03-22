@@ -87,7 +87,7 @@
 					  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" onclick="location.href='#pCancel'">
 					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio3">취소 규정</label>
 					  
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off" onclick="location.href='#review'">
+					  <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off" onclick="location.href='#reviewTop'">
 					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio4">리뷰</label>
 					</div>
 					
@@ -108,14 +108,14 @@
 					
 					<!-- 리뷰 -->
 					<div id="review">
-						<div class="fs-2 reviewTop">리뷰</div>
+						<div class="fs-2" id="reviewTop">리뷰</div>
 						<table id="reviewTable" class="table table-sm">
 							<thead>
 								<tr>
-									<th>별점</th>
-									<th colspan="2">리뷰</th>
-									<th>닉네임</th>
-									<th>작성일</th>
+									<th scope="col">별점</th>
+									<th colspan="2" scope="col">리뷰</th>
+									<th scope="col">닉네임</th>
+									<th scope="col">작성일</th>
 								</tr>
 							</thead>
 							<tbody>

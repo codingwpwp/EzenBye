@@ -205,7 +205,6 @@
 	}
 	
 	//서브메뉴
-	//서브메뉴 만나는 점 931
 	window.addEventListener("scroll", function(){
 		var scrollLocation = document.documentElement.scrollTop;
 		var browserHeight = window.innerHeight;
@@ -217,22 +216,25 @@
 		console.log("4:"+bodyHeight*0.85);
 		
 		if(window.innerWidth < 991){
-			if(scrollLocation > (browserHeight*1.3) && scrollLocation < (bodyHeight*0.89)){
+			if(scrollLocation > (browserHeight*1.2) && scrollLocation < (bodyHeight*0.8)){
 				$(".subMenuGroup").css({"position" : "fixed", 
 										"top" : "0px",
 										"left" : "0px",
 										"width" : "100%"
 										});
 				$("#btnradio1").prop("checked",true);
-			}else if(scrollLocation < (browserHeight*1.3)){
+			}else if(scrollLocation < (browserHeight*1.2)){
 				$(".subMenuGroup").css("position","static");
 				$("#btnradio1").prop("checked",false);
-			}else if(scrollLocation > (bodyHeight*0.7)){
-				$("#btnradio1").prop("checked",false);
+			}else if(scrollLocation > (bodyHeight*0.8) && scrollLocation < (bodyHeight*0.84)){
 				$("#btnradio2").prop("checked",true);
+			}else if(scrollLocation > (bodyHeight*0.84) && scrollLocation < (bodyHeight*0.88)){
+				$("#btnradio3").prop("checked",true);
+			}else if(scrollLocation > (bodyHeight*0.88)){
+				$("#btnradio4").prop("checked",true);
 			}
 		}else{
-			if(scrollLocation > (browserHeight*0.7) && scrollLocation < (bodyHeight*0.88)){
+			if(scrollLocation > (browserHeight*0.7) && scrollLocation < (bodyHeight*0.81)){
 				$(".subMenuGroup").css({"position" : "fixed", 
 										"top" : "0px",
 										"left" : "0px",
@@ -242,9 +244,12 @@
 			}else if(scrollLocation < (browserHeight*0.7)){
 				$(".subMenuGroup").css("position","static");
 				$("#btnradio1").prop("checked",false);
-			}else if(scrollLocation > (bodyHeight*0.88)){
-				$("#btnradio1").prop("checked",false);
+			}else if(scrollLocation > (bodyHeight*0.81) && scrollLocation < (bodyHeight*0.87)){
 				$("#btnradio2").prop("checked",true);
+			}else if(scrollLocation > (bodyHeight*0.87) && scrollLocation < (bodyHeight*0.9)){
+				$("#btnradio3").prop("checked",true);
+			}else if(scrollLocation > (bodyHeight*0.9)){
+				$("#btnradio4").prop("checked",true);
 			}
 		}
 	})
