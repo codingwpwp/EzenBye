@@ -1,0 +1,262 @@
+.nav-mypage, .nav-title{
+	padding: 0.5rem 1rem;
+	font-weight: bold;
+	margin: 0px;
+}
+.left-nav {
+	z-index: 1000;
+}
+.left-nav-text {
+	color: black;
+	font-size: 15px;
+}
+#leftAside{
+    display: flex;
+    border-radius: 5px;
+    transition: all 0.5s;
+    margin: 0 auto;
+}
+#leftAside #menu_size_up{
+    cursor: pointer;
+    font-size: large;
+    border-radius: 5px;
+    background-color: whitesmoke;
+}
+#leftAside #menu_size_down{
+    cursor: pointer;
+    font-size: large;
+    text-align: center;
+    border-radius: 5px;
+    background-color: whitesmoke;
+}
+/* 왼쪽nav부분 */
+
+.col-md-10 {
+	margin: 0 auto;
+}
+/* 섹션 전체 */
+
+.text-point {
+	font-size: 20px; 
+}
+/* 포인트, 할인쿠폰 */
+
+.number-point{
+	font-size: 20px; 
+	color: blue;
+}
+/* 포인트, 할인쿠폰 숫자부분 */
+
+.point {
+	margin-bottom: 15px;
+}
+/* 포인트, 할인쿠폰 합친거 */
+
+.lookup-fs-6 {
+	font-weight: bold;
+	margin-top: 10px; margin-bottom: 10px;
+}
+/* 두번째타이틀 */
+
+.findT, .number-good {
+	text-align: right;
+}
+/* 배송조회, 상품주문번호 */
+
+.card-good {
+	margin-bottom: 30px;
+}
+/* 상품카드 */
+
+.cancle-btn {
+	margin-bottom: 30px;
+}
+/* 주문취소버튼 */
+
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  justify-content: space-around;
+  padding: 0 0.2em;
+  text-align: center;
+  width: 5em;
+}
+.star-rating input {
+  display: none;
+}
+.star-rating label {
+  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 2.3px;
+  -webkit-text-stroke-color: #2b2a29;
+  cursor: pointer;
+}
+.star-rating :checked ~ label {
+  -webkit-text-fill-color: gold;
+}
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  -webkit-text-fill-color: #fff58c;
+}
+/* 리뷰 별점부분 */
+
+#result-star{
+	font-size: 1.5rem; font-weight: bold; color: blue;
+}
+/* 별점 옆에 텍스트 */
+
+.reviewTextarea {
+	margin-top: 20px;
+}
+/* 리뷰 내용작성 */
+
+.lookupView-infmoney, .cancle-text{
+	margin-top: 20px;
+}
+/* 조회상세 + 취소조회 텍스트 */
+
+.cancleTextarea {
+	margin-top: 5px;
+}
+/* 주문취소 내용 작성 */
+
+.cancleOk{
+	color: red;
+	font-weight: bold;
+}
+/* 취소완료 텍스트 */
+
+.cancleView-btn{
+	margin-bottom: 30px;
+}
+/* 취소상세조회 버튼부분 */
+
+.interItem-icon{
+	text-align: right; margin-top: 20px;
+}
+/* 관심상품 상품삭제 아이콘 */
+
+.interItem-btn{
+	width: 35%;
+}
+/* 관심상품 버튼 */
+
+.coupon-table{
+	margin-bottom: 30px;
+}
+/* 쿠폰페이지 테이블 */
+
+.review-title{
+	text-indent: 0.5em; font-weight: bold;
+	margin-bottom: 10px;
+}
+/* 리뷰상세보기 제목 */
+
+.review-content{
+	text-indent: 0.5em;
+	margin-top: 10px;
+}
+/* 리뷰상세보기 내용 */
+
+.review-paging{
+	justify-content : center;
+	margin-top: 20px; margin-bottom: 30px;
+}
+/* 리뷰페이징 */
+
+.card-img-top{
+	height: 13rem;
+	object-fit: cover;
+}
+/* 레시피 카드 이미지 */
+
+.recipe-text{
+	font-size: 0.5em;
+	white-space:nowrap;
+}
+/* 레피시 카드 텍스트 */
+
+.changeInfor{
+	margin-top: 100px;
+}
+/* 개인정보변경 비밀번호 입력란전체 */
+
+.changeInfor-label{
+	font-weight: bold;
+}
+/* 개인정보변경 비밀번호 입력부분 라벨 */
+
+.changeInforOk-inputId{
+	width: 90%;
+}
+
+.changeInforOk-inputName{
+	margin-top: 25px; width: 90%;
+}
+/* 개인정보변경 이름입력 */
+
+.changeInforOk-inputPhone{
+	margin-top: 25px; width: 90%;
+}
+/* 개인정보변경 핸드폰입력 */
+
+.changeInforOk-inputNicName {
+ 	margin-top: 25px; width: 90%;
+}
+/* 개인정보변경 닉네임입력 */
+ 
+.changeInforOk-inputEmail{
+ 	margin-top: 25px; margin-bottom: 40px; width: 90%;
+}
+/* 개인정보변경 이메일입력 */
+ 
+.changeInforOk-btn{
+ 	width: 30%;
+}
+/* 개인정보변경 버튼 */
+
+.addressManage-1 {
+	margin-top: 25px; width: 90%;
+}
+
+.addressManage-2 {
+	margin-top: 25px; width: 90%;
+}
+
+.addressManage-3 {
+	margin-top: 25px; margin-bottom: 40px; width: 90%;
+}
+
+.addressManage-4{
+	margin-top: 25px; width: 90%;
+}
+
+.addressManage-5{
+	margin-top: 25px; width: 90%;
+}
+
+.addressManage-6{
+	margin-top: 25px; width: 90%; margin-bottom: 40px;
+}
+/* 배송지관리 부분 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
