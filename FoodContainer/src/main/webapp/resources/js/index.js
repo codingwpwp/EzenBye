@@ -46,6 +46,16 @@
 			$(obj).find("i").attr("class","bi bi-check-circle-fill");
 		}
 	}
+	//전체메뉴 모바일
+	function allProductM(obj){
+		var check = $(obj).find("i").attr("class").indexOf("fill");
+		
+		if(check > 0){
+			$(obj).find("i").attr("class","bi bi-check-circle");
+		}else{
+			$(obj).find("i").attr("class","bi bi-check-circle-fill");
+		}
+	}
 	
 	//냉동식품 체크박스
 	function asideIceAll(obj){
@@ -61,6 +71,27 @@
 		var ice = $("input[name='asideIce']");
 		var checkIce = $("input[name='asideIce']:checked");
 		var iceAll = $("input[name='asideIceAll']");
+		
+		if(ice.length == checkIce.length){
+			iceAll.prop("checked", true);
+		}else{
+			iceAll.prop("checked", false);
+		}
+	}
+	//냉동식품 체크박스 모바일
+	function asideIceAllM(obj){
+		var ice = $("input[name='asideIceM']");
+		var check = $(obj).is(":checked");
+		
+		$.each(ice,function(){
+			ice.prop("checked",check);
+		})
+	}
+	
+	function asideIceM(obj){
+		var ice = $("input[name='asideIceM']");
+		var checkIce = $("input[name='asideIceM']:checked");
+		var iceAll = $("input[name='asideIceAllM']");
 		
 		if(ice.length == checkIce.length){
 			iceAll.prop("checked", true);
@@ -91,6 +122,28 @@
 			productAll.prop("checked", false);
 		}
 	}
+	//즉석식품 체크박스 모바일
+	function asideProductAllM(obj){
+		var product = $("input[name='asideProductM']");
+		var check = $(obj).is(":checked");
+		
+		$.each(product,function(){
+			product.prop("checked",check);
+		})
+		
+	}
+	
+	function asideProductM(obj){
+		var product = $("input[name='asideProductM']");
+		var checkProduct = $("input[name='asideProductM']:checked");
+		var productAll = $("input[name='asideProductAllM']");
+		
+		if(product.length == checkProduct.length){
+			productAll.prop("checked", true);
+		}else{
+			productAll.prop("checked", false);
+		}
+	}
 		
 	
 	//브랜드 체크박스
@@ -114,6 +167,27 @@
 			brandAll.prop("checked",false);
 		}
 	}
+	//브랜드 체크박스 모바일
+	function asideBrandAllM(obj){
+		var brand = $("input[name='asideBrandM']");
+		var check = $(obj).is(":checked");
+		
+		$.each(brand,function(){
+			brand.prop("checked", check);
+		})
+	}
+	
+	function asideBrandM(obj){
+		var brand = $("input[name='asideBrandM']");
+		var checkBrand = $("input[name='asideBrandM']:checked");
+		var brandAll = $("input[name='asideBrandAllM']");
+		
+		if(brand.length == checkBrand.length){
+			brandAll.prop("checked",true);
+		}else{
+			brandAll.prop("checked",false);
+		}
+	}
 
 	//가격 체크박스
 	function asidePriceAll(obj){
@@ -129,6 +203,27 @@
 		var price = $("input[name='asidePrice']");
 		var checkPrice = $("input[name='asidePrice']:checked");
 		var priceAll = $("input[name='asidePriceAll']");
+		
+		if(price.length == checkPrice.length){
+			priceAll.prop("checked",true);
+		}else{
+			priceAll.prop("checked",false);
+		}
+	}
+	//가격 체크박스 모바일
+	function asidePriceAllM(obj){
+		var price = $("input[name='asidePriceM']");
+		var check = $(obj).is(":checked");
+		
+		$.each(price,function(){
+			price.prop("checked",check);
+		})
+	}
+	
+	function asidePriceM(obj){
+		var price = $("input[name='asidePriceM']");
+		var checkPrice = $("input[name='asidePriceM']:checked");
+		var priceAll = $("input[name='asidePriceAllM']");
 		
 		if(price.length == checkPrice.length){
 			priceAll.prop("checked",true);
@@ -244,9 +339,9 @@
 			}else if(scrollLocation < (browserHeight*0.7)){
 				$(".subMenuGroup").css("position","static");
 				$("#btnradio1").prop("checked",false);
-			}else if(scrollLocation > (bodyHeight*0.81) && scrollLocation < (bodyHeight*0.87)){
+			}else if(scrollLocation > (bodyHeight*0.81) && scrollLocation < (bodyHeight*0.86)){
 				$("#btnradio2").prop("checked",true);
-			}else if(scrollLocation > (bodyHeight*0.87) && scrollLocation < (bodyHeight*0.9)){
+			}else if(scrollLocation > (bodyHeight*0.86) && scrollLocation < (bodyHeight*0.9)){
 				$("#btnradio3").prop("checked",true);
 			}else if(scrollLocation > (bodyHeight*0.9)){
 				$("#btnradio4").prop("checked",true);
