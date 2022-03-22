@@ -46,7 +46,7 @@
                     <!-- 실질적인 메인 내용 -->
                      <div class="maintitle"><h1>유저레시피</h1></div>
                     <div style="border-bottom:1px solid black"> <strong>총123,456개의 레시피가 있습니다</strong></div>
-                    <button class="btnwr"><a href="recipewrite.do"><span>레시피 작성</span></a></button>
+                    <button class="btnwr"><a href="<%=request.getContextPath()%>/recipe/recipewrite.do"><span>레시피 작성</span></a></button>
                     <select class="select1" name="searchType">
                         <option>정렬</option>
                         <option value="">추천순</option>
@@ -55,8 +55,9 @@
                     <div class="container">
                         <div class="row">
                             <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-xs-1 g-4 menu">
+                            <a href="<%=request.getContextPath()%>/recipe/recipeview.do">
                                 <div class="card shadow-sm">
-                                    <img src="<%=request.getContextPath()%>/resources/img/CJ/국/1.jpg" width="100%" height="190">
+                                    <img src="1.jpg" width="100%" height="190">
                                     <div class="card-body">
                                         <p class="card-text">중식 특유의 그 맛이 땡기는 날! 멀리 배달 기다릴 필요도 없음</p>
                                         <div class="d-flex justify-content-between align-items-center">
@@ -67,9 +68,9 @@
                                         </div>
                                       </div>
                                 </div>
-                           
+                           </a>
                                 <div class="card shadow-sm">
-                                    <img src="<%=request.getContextPath()%>/resources/img/CJ/국/1.jpg" width="100%" height="190">
+                                    <img src="1.jpg" width="100%" height="190">
                                     <div class="card-body">
                                         <p class="card-text">중식 특유의 그 맛이 땡기는 날! 멀리 배달 기다릴 필요도 없음</p>
                                         <div class="d-flex justify-content-between align-items-center">
@@ -82,7 +83,7 @@
                                 </div>
                             
                                 <div class="card shadow-sm">
-                                    <img src="<%=request.getContextPath()%>/resources/img/CJ/국/1.jpg" width="100%" height="190">
+                                    <img src="1.jpg" width="100%" height="190">
                                     <div class="card-body">
                                         <p class="card-text">중식 특유의 그 맛이 땡기는 날! 멀리 배달 기다릴 필요도 없음</p>
                                         <div class="d-flex justify-content-between align-items-center">
@@ -97,7 +98,7 @@
                         
                        
                                 <div class="card shadow-sm">
-                                    <img src="<%=request.getContextPath()%>/resources/img/CJ/국/1.jpg" width="100%" height="190">
+                                    <img src="1.jpg" width="100%" height="190">
                                     <div class="card-body">
                                         <p class="card-text">중식 특유의 그 맛이 땡기는 날! 멀리 배달 기다릴 필요도 없음</p>
                                         <div class="d-flex justify-content-between align-items-center">
@@ -110,7 +111,7 @@
                                 </div>
                            
                                 <div class="card shadow-sm">
-                                    <img src="<%=request.getContextPath()%>/resources/img/CJ/국/1.jpg" width="100%" height="190">
+                                    <img src="1.jpg" width="100%" height="190">
                                     <div class="card-body">
                                         <p class="card-text">중식 특유의 그 맛이 땡기는 날! 멀리 배달 기다릴 필요도 없음</p>
                                         <div class="d-flex justify-content-between align-items-center">
@@ -123,7 +124,7 @@
                                 </div>
                           
                                 <div class="card shadow-sm">
-                                    <img src="<%=request.getContextPath()%>/resources/img/CJ/국/1.jpg" width="100%" height="190">
+                                    <img src="1.jpg" width="100%" height="190">
                                     <div class="card-body">
                                         <p class="card-text">중식 특유의 그 맛이 땡기는 날! 멀리 배달 기다릴 필요도 없음</p>
                                         <div class="d-flex justify-content-between align-items-center">
@@ -140,7 +141,8 @@
                     <div class="container">
                         <div class="row">
                             
-                     
+                       
+                        
                             <form action="#" class="selbox">    
                                 <div class="row row-cols-3 row-cols-lg-12 row-cols-md-12 row-cols-sm-12 g-12"">         
                                 <select class="select2">               
@@ -153,6 +155,17 @@
                             </div>
                             </form>
                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-12">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                  </ul>
+                            </div>
                         </div>
                     </div>
                 </article>
