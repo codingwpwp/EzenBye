@@ -51,17 +51,21 @@
             <div class="col-8">
                 <article id="mainSection">
                     <!-- 실질적인 메인 내용 -->
-                   <form>
-                        <div class="retitle">
-                            <h1>레시피 등록</h1>
-                        </div>
+                    <form>
+                       <div class="container">
+                           <div class="row retitle">
+                            <div class="col-md-4 col-10">
+                                <h1>레시피 등록</h1>
+                            </div>
+                           </div>
+                       </div>
                         <div class="container">
                           
                             <div class="row title">
                                 <div class="col-md-1 col-sm-3 col-3 ti">
                                  <strong>제목</strong>
                                 </div>
-                                <div class="col-md-6 col-sm-9 col-5">
+                                <div class="col-md-5 col-sm-9 col-5">
                                     <input type="text">
                                 </div>
                                
@@ -75,7 +79,7 @@
                             <div class="row">
                                 
                                 <div class="col-md-5 col-sm-6 col-xs-6 col-6 sumnail"><a href="#" 
-                                    onclick="window.open(this.href,'_blank','width=500,height=400,toolbars=no,scrollbrs=yes,top=300,left=600'); return false;"><svg xmlns="http://www.w3.org/2000/svg" width="200"
+                                    onclick="popup();"><svg xmlns="http://www.w3.org/2000/svg" width="200"
                                     height="200" fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">
                                     <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
                                     <path
@@ -86,25 +90,25 @@
                                 </div>
                             </div>
     
-                            <div class="col-sm-12 col-12"><strong>조합 상품</strong></div>
+                            <div class="col-sm-10 col-12"><strong>조합 상품</strong></div>
                             <div class="row hap">
                                
                             
-                                 <div class=" col-4 sel1"> 
+                                 <div class="col-md-3 col-4 sel1"> 
                                      <select name="" id="" class="select1">
                                     <option value="">상품1</option>
                                     <option value="">상품1</option>
                                     <option value="">상품1</option>
                                 </select>
                             </div>
-                                <div class=" col-4 sel2">
+                                <div class="col-md-3 col-4 sel2">
                                     <select name="" id="" class="select1">
                                         <option value="">상품2</option>
                                         <option value="">상품2</option>
                                         <option value="">상품2</option>
                                     </select>
                                 </div>
-                                <div class="col-4 sel3">
+                                <div class="col-md-3 col-4 sel3">
                                     <select name="" id="" class="select1">
                                         <option value="">상품3</option>
                                         <option value="">상품3</option>
@@ -113,9 +117,14 @@
                                 </div> 
                             
                             </div>
+                            <div class="row">
+                                <div class="col-md-12 col-12 bt">
+                                    <input type="button" value="등록" class="btn btn-primary">
+                                    <input type="button" value="취소" class="btn btn-primary" onclick="location.href='recipemain.do'">
+                                </div>
                             </div>
-                            <input type="button" value="등록" class="btn btn-primary">
-                            <input type="button" value="취소" class="btn btn-primary" onclick="location.href='recipemain.do'">
+                            </div>
+                           
                         </form>
                 </article>
             </div>
