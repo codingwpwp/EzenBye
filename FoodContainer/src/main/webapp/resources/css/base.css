@@ -1,0 +1,86 @@
+/* 폰트&커서 */
+body{
+    margin: 0px auto;
+    padding: 0px;
+    cursor: default;
+    max-width: 2200px;
+    overflow-x:hidden;
+    font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
+/* 헤더 */
+header #logo{
+    max-width: 170px;
+}
+header i{
+    cursor: pointer;
+    transition: all 0.2s;
+}
+header i:hover{
+    color:gray;
+}
+
+/* 네비게이션 메뉴들 글씨크기 */
+#navMenu{
+    font-size: 14px;
+}
+/* 네비게이션 메뉴확대하는 버튼 */
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+/* 네비게이션바의 회원부분*/
+#userLogin{
+    font-size: 14px;
+}
+nav #userLogin a{
+    color: black;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+nav #userLogin a:hover{
+    color: gray;
+}
+
+/* 오른쪽 사이드 메뉴 */
+#rightAside{
+    z-index: 100;
+    max-width: 110px;
+    position: fixed;
+    top:260px;
+}
+/* 상품이미지 */
+.productImg{
+    text-align: center;
+}
+.productImg img{
+	background: whitesmoke;
+}
+/* Top버튼 */
+#top{
+	width : 45px;
+	height : 45px;
+	color : white;
+    cursor : pointer;
+	margin-top : 5px;
+	font-weight : bold;
+	line-height : 44px;
+    text-align: center;
+	border-radius : 5px;
+    transition: all 0.3s;
+	background-color : black;
+}
+#top:hover{
+    background-color: gray;
+}
+/* 카카오톡 */
+#chatting{
+    cursor: pointer;
+    transition: all 0.3s;
+}
+#chatting:hover{
+    color : orange;
+}
+#chatting i{
+    font-size: 45px;
+}
