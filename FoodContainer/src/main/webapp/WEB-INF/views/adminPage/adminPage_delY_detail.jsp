@@ -50,11 +50,11 @@
 					<!-- 회원정보 -->
                     <div class="container" id="memberInfo">
 
-                    	<h3 class="fw-bold">회원 정보</h3>
-                        <div class="row" id="rows">
+                        <h3 class="fw-bold">회원 정보</h3>
+                        <div class="row rows">
 
                             <div class="col-4 col-md-2 mb-2">
-                                <span id="memberCol1">아이디</span>
+                                <span class="memberCol1">아이디</span>
                             </div>
 
                             <div class="col-8 col-md-4 mb-2">
@@ -62,7 +62,7 @@
                             </div>
                             
                             <div class="col-4 col-md-2 mb-2">
-                                <span id="memberCol1">탈퇴일</span>
+                                <span class="memberCol1">탈퇴일</span>
                             </div>
                             
                             <div class="col-8 col-md-4 mb-2">
@@ -71,11 +71,10 @@
 
                         </div>
 
-
-                        <div class="row" id="rows">
+                        <div class="row rows">
 
                             <div class="col-4 col-md-2">
-                                <span id="memberCol1"><span class="d-none d-sm-inline">탈퇴 </span>사유</span>
+                                <span class="memberCol1"><span class="d-none d-sm-inline">탈퇴 </span>사유</span>
                             </div>
 
                             <div class="col-8 col-md-10">
@@ -88,7 +87,7 @@
                     <div>
                         <button type="button" class="btn btn-outline-primary btn-sm">뒤로가기</button>
                     </div>
-                    
+
                 </article>
             </div>
 

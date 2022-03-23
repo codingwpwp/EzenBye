@@ -35,19 +35,16 @@
 }
 
 /* 회원관리 */
-#rows{
+.rows{
     display: flex;
     align-items: center;
     margin-bottom: 10px;
 }
-#memberCol1{
+.memberCol1{
     background-color: whitesmoke;
     border: 2px solid lightgray;
     border-radius: 7px;
     font-weight: bold;
-}
-#mainSection #memberInfo input{
-    overflow: auto;
 }
 #mainSection textarea{
     resize: none;
@@ -79,4 +76,9 @@
 }
 .reportId:hover .reportIdSubButton{
     display: inline-block;
+}
+
+/* 상품 등록 */
+#productManagerForm select, #productManagerForm button{
+    transition: all 0.3s;
 }

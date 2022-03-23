@@ -124,6 +124,45 @@
                         </div>
 
                     </div>
+                    
+                    <!-- 검색&페이징 -->
+                    <div id="searchMember" class="row container mt-3">
+
+                        <div class="col-12 col-lg-6">
+
+                            <form class="row" method="get" action="#">
+                                <select class="col-3 form-select form-select-sm py-1 px-1" style="-webkit-appearance:none;">
+                                    <option>상품이름</option>
+                                </select>
+
+                                <input type="text" class="col-6 form-control w-50" placeholder="상품이름을 입력" value="">
+                                
+                                <button type="submit" class="btn btn-outline-primary btn-sm col-3 col-sm-2">검색</button>
+                            </form>
+
+                        </div>
+
+                        <div class="col-12 col-lg-6 d-flex justify-content-center">
+
+                            <ul class="pagination mt-1">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                    </div>
 
                 </article>
             </div>
