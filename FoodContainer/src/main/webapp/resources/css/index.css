@@ -200,7 +200,7 @@
 }
 
 .viewStar{
-	max-width : 200px;
+	float : right;	
 }
 
 .productNum i:hover{
@@ -226,6 +226,11 @@
 	height : 100%;
 	max-width : 200px;
 	max-height : 150px;
+}
+
+/*서브 메뉴 그룹 모바일*/
+.subMenuGroupM{
+	display : none !important;
 }
 
 /*서브 메뉴*/
