@@ -23,16 +23,38 @@
 		$(".cartBack").css("display","none");
 	}
 	
+	//새로고침 대응 top
+	$(document).ready(function(){
+		var width = window.innerWidth;
+		
+		if(width < 575){
+			$(".topM").css("display","block");
+		}else{
+			$(".topM").css("display","none");
+		}
+		
+		//브라우저 사이즈 반응 top
+		window.addEventListener("resize",function(){
+			var width = window.innerWidth;
+		
+			if(width < 575){
+				$(".topM").css("display","block");
+			}else{
+				$(".topM").css("display","none");
+			}
+		})
+	})
+	
 /* lAside =======================================================================*/
 
 	//펼칠 때 아이콘 변경
 	function extend(obj){
-		var attr = $(obj).find("i").attr("class").indexOf("fill");
+		var expand = $(obj).attr("aria-expanded");
 		
-		if(attr > 0){
-			attr = $(obj).find("i").attr("class","bi bi-plus-circle-dotted");
-		}else {
-			attr = $(obj).find("i").attr("class","bi bi-dash-circle-fill");
+		if(expand == "true"){
+			$(obj).find("i").attr("class","bi bi-dash-circle-fill");
+		}else{
+			$(obj).find("i").attr("class","bi bi-plus-circle-dotted");
 		}
 	}
 	
@@ -272,16 +294,6 @@
 			}
 		}
 	})
-	
-	function mLAside(obj){
-		$(".mlAsideDiv").toggle();
-		var text = $(obj).html().indexOf("▶");
-		if($(obj).html().indexOf("▶") > 0){
-			$(obj).html("메<br>뉴<br>◀");
-		}else{
-			$(obj).html("메<br>뉴<br>▶");
-		}
-	}
 	
 /* productView =======================================================================*/
 	
