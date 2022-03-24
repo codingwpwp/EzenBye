@@ -63,17 +63,13 @@
 			        		<div class="col-sm-3">
 			        			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
 			        		</div>
-			        		<div class="col-sm-6">
-						    	<span>비비고 진한고기만두400g*2번들</span>
+			        		<div class="col-sm-6 d-flex align-items-start flex-column mb-3">
+						    	<div class="mb-auto p-2">비비고 진한고기만두400g*2번들</div>
+  								<div class="p-2">4580원 | 5개</div>
 			        		</div>
 			        		<div class="col-sm-3 interItem-icon">
 						    	<i class="bi bi-trash" style="font-size: 3rem;"></i>
 			        		</div>
-			        	</div>
-			        	
-			        	<div class=row>
-			        		<div class="col-sm-3"></div>
-			        		<div class="col-sm-8"><span>4580원 | 5개</span></div>
 			        	</div>
 			        	
 			        	<div class="d-grid gap-4 d-md-flex justify-content-md-center">
@@ -87,17 +83,13 @@
 			        		<div class="col-sm-3">
 			        			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
 			        		</div>
-			        		<div class="col-sm-6">
-						    	<span>비비고 진한고기만두400g*2번들</span>
+			        		<div class="col-sm-6 d-flex align-items-start flex-column mb-3">
+						    	<div class="mb-auto p-2">비비고 진한고기만두400g*2번들</div>
+  								<div class="p-2">4580원 | 5개</div>
 			        		</div>
 			        		<div class="col-sm-3 interItem-icon">
 						    	<i class="bi bi-trash" style="font-size: 3rem;"></i>
 			        		</div>
-			        	</div>
-			        	
-			        	<div class=row>
-			        		<div class="col-sm-3"></div>
-			        		<div class="col-sm-8"><span>4580원 | 5개</span></div>
 			        	</div>
 			        	
 			        	<div class="d-grid gap-4 d-md-flex justify-content-md-center">
@@ -111,17 +103,13 @@
 			        		<div class="col-sm-3">
 			        			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
 			        		</div>
-			        		<div class="col-sm-6">
-						    	<span>비비고 진한고기만두400g*2번들</span>
+			        		<div class="col-sm-6 d-flex align-items-start flex-column mb-3">
+						    	<div class="mb-auto p-2">비비고 진한고기만두400g*2번들</div>
+  								<div class="p-2">4580원 | 5개</div>
 			        		</div>
 			        		<div class="col-sm-3 interItem-icon">
 						    	<i class="bi bi-trash" style="font-size: 3rem;"></i>
 			        		</div>
-			        	</div>
-			        	
-			        	<div class=row>
-			        		<div class="col-sm-3"></div>
-			        		<div class="col-sm-8"><span>4580원 | 5개</span></div>
 			        	</div>
 			        	
 			        	<div class="d-grid gap-4 d-md-flex justify-content-md-center">
