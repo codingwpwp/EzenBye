@@ -47,10 +47,10 @@
                 	<!-- view 상단 -->
                 	<div class="col-12">
 				      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-				        <div class="col-auto d-flex d-lg-block">
+				        <div class="col-auto d-lg-block">
 				        	<img src="<%=request.getContextPath()%>/resources/img/CJ/컵밥,햇반/2.jpg" alt="d" class="img-fluid viewImg">
-				        	<div class="viewStar">
-				        		<span>평점 : 
+				        	<div>
+				        		<span class="viewStar">평점 : 
 				        		<span class="fs-4 ">
 				        			<i class="bi bi-star-fill"></i>
 				        			<i class="bi bi-star-fill"></i>
@@ -93,6 +93,21 @@
 					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio4">리뷰</label>
 					</div>
 					
+					<!-- subMenu 모바일 -->
+				    <div class="btn-group subMenuGroupM d-flex justify-content-center" role="group" aria-label="Basic radio toggle button group">
+					  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" onclick="location.href='#pView'">
+					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio1">상세</label>
+					
+					  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" onclick="location.href='#pDelivery'">
+					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio2">배송</label>
+					
+					  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" onclick="location.href='#pCancel'">
+					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio3">취소</label>
+					  
+					  <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off" onclick="location.href='#reviewTop'">
+					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio4">리뷰</label>
+					</div>
+					
 					<!-- 상세페이지 -->
 					<div class="d-flex justify-content-center" id="pView">
 						<img src="<%=request.getContextPath()%>/resources/img/CJ/볶음밥/1_1.jpg" alt="상세페이지" class="img-fluid">
@@ -115,7 +130,7 @@
 							<thead>
 								<tr>
 									<th scope="col">별점</th>
-									<th colspan="2" scope="col">리뷰</th>
+									<th scope="col">리뷰</th>
 									<th scope="col">닉네임</th>
 									<th scope="col">작성일</th>
 								</tr>
@@ -133,10 +148,26 @@
 							        		좋음
 									    </span>
 									</td>
-									<td id="reViewImg">
-										<img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid">
+									<td class="reviewContent">
+										<div class="row">
+											<div class="reViewImg col-3">
+												<img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid">
+											</div>
+											<div class="reviewTitle col">
+												좋아요
+											</div>
+											<div class="col-1">
+												<i class="bi bi-caret-down reviewDown" data-bs-toggle="collapse" href="#reviewExtend0" role="button" aria-expanded="false" aria-controls="collapseExample"></i>
+											</div>
+										</div>
+										<div class="collapse" id="reviewExtend0">
+											<div class="card card-body reviewCard">
+												<img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid" id="reviewCardImg">
+												<br>
+												좋아요
+											</div>
+										</div>
 									</td>
-									<td id="reviewContent">좋아요</td>
 									<td>홍길동</td>
 									<td>2022-03-22</td>
 								</tr>
@@ -152,10 +183,17 @@
 							        		좋음
 									    </span>
 									</td>
-									<td id="reViewImg">
-										<img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid">
+									<td id="reviewContent">
+										<div class="row">
+											<div class="reViewImg col-3">
+											</div>
+											<div class="col">
+												좋아요
+											</div>
+											<div class="col-1">
+											</div>
+										</div>
 									</td>
-									<td id="reviewContent">좋아요</td>
 									<td>홍길동</td>
 									<td>2022-03-22</td>
 								</tr>
@@ -171,9 +209,26 @@
 							        		좋음
 									    </span>
 									</td>
-									<td id="reViewImg">
+									<td class="reviewContent">
+										<div class="row">
+											<div class="reViewImg col-3">
+												<img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid">
+											</div>
+											<div class="col">
+												좋아요
+											</div>
+											<div class="col-1">
+												<i class="bi bi-caret-down reviewDown" data-bs-toggle="collapse" href="#reviewExtend0" role="button" aria-expanded="false" aria-controls="collapseExample"></i>
+											</div>
+										</div>
+										<div class="collapse" id="reviewExtend1">
+											<div class="card card-body reviewCard">
+												<img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid" id="reviewCardImg">
+												<br>
+												좋아요
+											</div>
+										</div>
 									</td>
-									<td id="reviewContent">좋아요</td>
 									<td>홍길동</td>
 									<td>2022-03-22</td>
 								</tr>
@@ -189,9 +244,17 @@
 							        		좋음
 									    </span>
 									</td>
-									<td id="reViewImg">
+									<td id="reviewContent">
+										<div class="row">
+											<div class="reViewImg col-3">
+											</div>
+											<div class="col">
+												좋아요
+											</div>
+											<div class="col-1">
+											</div>
+										</div>
 									</td>
-									<td id="reviewContent">좋아요</td>
 									<td>홍길동</td>
 									<td>2022-03-22</td>
 								</tr>
@@ -207,10 +270,26 @@
 							        		좋음
 									    </span>
 									</td>
-									<td id="reViewImg">
-										<img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid">
+									<td class="reviewContent">
+										<div class="row">
+											<div class="reViewImg col-3">
+												<img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid">
+											</div>
+											<div class="col">
+												좋아요
+											</div>
+											<div class="col-1">
+												<i class="bi bi-caret-down reviewDown" data-bs-toggle="collapse" href="#reviewExtend0" role="button" aria-expanded="false" aria-controls="collapseExample"></i>
+											</div>
+										</div>
+										<div class="collapse" id="reviewExtend2">
+											<div class="card card-body reviewCard">
+												<img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid" id="reviewCardImg">
+												<br>
+												좋아요
+											</div>
+										</div>
 									</td>
-									<td id="reviewContent">좋아요</td>
 									<td>홍길동</td>
 									<td>2022-03-22</td>
 								</tr>
@@ -238,6 +317,11 @@
     <!-- 장바구니 클릭 -->
     <div class="cartBack">
 	    <div class="message"></div>
+    </div>
+    
+    <!-- 모바일 top -->
+    <div class="topM" onclick="moveTop();">
+        ↑Top
     </div>
 
     <!-- 푸터 -->
