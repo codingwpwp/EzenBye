@@ -23,4 +23,16 @@ public class recipeController {
 	public String recipe2(Locale locale, Model model) {
 		return "recipe/recipewrite";
 	}
+	@RequestMapping(value = "/recipe/recipeview.do", method = RequestMethod.GET)
+	public String recipe3(Locale locale, Model model) {
+		return "recipe/recipeview";
+	}
+	@RequestMapping(value = "/recipe/recipeinsert.do", method = RequestMethod.GET)
+	public String recipe4(Locale locale, Model model) {
+		return "recipe/recipeinsert";
+	}
+	@RequestMapping(value = "/recipe/popup.do", method = RequestMethod.GET)
+	public String popup(Locale locale, Model model) {
+		return "recipe/popup";
+	}
 }
