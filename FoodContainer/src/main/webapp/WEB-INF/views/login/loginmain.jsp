@@ -43,72 +43,74 @@
             <div class="col-8">
                 <article id="mainSection">
                     <!-- 실질적인 메인 내용 -->
-                       <form action="#" name="frm">
-                 <div class="container">
-                   
-                        <div class="row">
-                            <div class="col-12 head">
-                                <h2>로그인</h2>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 md-1 id">
-                                <input type="text" placeholder="아이디 8~20 자리의 영문+숫자">
-                            </div>
-                            <div class="col-md-12 col-sm-12 mb-1 pw">
-                                <input type="text"  placeholder="비밀번호 8~20 자리의 영문+숫자">
-                            </div>
-                            <div class="col-md-12 col-sm-12 col-12">
-                                아래에 글자를 보이는대로  입력해주세요!
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 col-sm-6 col-12 mb-1 auto">       
-                              <input type="text"  name="output" placeholder="코드생성 버튼을 클릭하세요">
-                                                                               
-                              <input class="btn btn-secondary code" type="button" value="코드생성" onclick="populateform(this.form.thelength.value);">
-                                   
-                          </div>
-                        </div>
+                         <form action="#" name="frm" class="loginfrm">
+                        <div class="container">
 
-                          <div class="row">
-                             <div class="col-md-12 col-sm-6 col-12 mb-1 autoin">
-                                 <input type="text" name="che" placeholder="문자를 입력해주세요">             
-                                <input class="btn btn-secondary" type="button" value="코드확인"onclick="check();">
-                                <div hidden> <b>문자길이:</b> <input type="text" name="thelength" size="3" value="6"></div>      
-                          </div>
-                        </div>      
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-12 loginbtn">
-                                <button class="btn btn-secondary">로그인</button>
+                            <div class="row">
+                                <div class="col-12 head">
+                                    <h2>로그인</h2>
+                                </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 md-1 id">
+                                    <input type="text" placeholder="아이디 8~20 자리의 영문+숫자">
+                                </div>
+                                <div class="col-md-12 col-sm-12 mb-1 pw">
+                                    <input type="text" placeholder="비밀번호 8~20 자리의 영문+숫자">
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-12">
+                                    아래에 글자를 보이는대로 입력해주세요!
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-6 col-12 mb-1 auto">
+                                    <input type="text" name="output" placeholder="코드생성 버튼을 클릭하세요">
+
+                                    <input class="btn btn-secondary code" type="button" value="코드생성"
+                                        onclick="populateform(this.form.thelength.value);">
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 col-sm-6 col-12 mb-1 autoin">
+                                    <input type="text" name="che" placeholder="문자를 입력해주세요">
+                                    <input class="btn btn-secondary" type="button" value="코드확인" onclick="check();">
+                                    <div hidden> <b>문자길이:</b> <input type="text" name="thelength" size="3" value="6">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-12 loginbtn">
+                                    <button class="btn btn-secondary">로그인</button>
+                                </div>
+                            </div>
+
+                            <div class="row find">
+                                <div class="col-md-4 col-sm-3 col-4 idsave">
+                                    <input type="radio" name="radio" id="radio"><label>아이디 저장</label>
+                                </div>
+                                <div class="col-md-4 col-sm-3 col-4 idfind">
+                                    <a href="<%=request.getContextPath()%>/id_find.do">아이디 찾기</a>
+                                </div>
+                                <div class="col-md-4 col-sm-3 col-4 pwfind">
+                                   <a href="<%=request.getContextPath()%>/pw_find.do">비밀번호 찾기</a>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-12 loginbtn">
+                                    <button class="btn btn-dark">회원가입</button>
+                                </div>
+                            </div>
+                            <div class="row lookup">
+                                <div class="col-md-12 col-sm-12 col-12 loginbtn">
+                                    <button class="btn btn-dark">비회원 배송 조회</button>
+                                </div>
+                            </div>
+
                         </div>
-                        
-                        <div class="row find">
-                            <div class="col-md-4 col-sm-3 col-4 idsave">
-                                <input type="radio"><label>아이디 저장</label>
-                            </div>
-                            <div class="col-md-4 col-sm-3 col-4 idfind">
-                                    <a href="#">아이디 찾기</a>
-                            </div>
-                            <div class="col-md-4 col-sm-3 col-4 pwfind">
-                                 <a href="#">비밀번호 찾기</a>
-                            </div>
-                           
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-12 loginbtn">
-                                <button class="btn btn-dark">회원가입</button>
-                            </div>
-                        </div>
-                        <div class="row lookup">
-                            <div class="col-md-12 col-sm-12 col-12 loginbtn">
-                                <button class="btn btn-dark">비회원 배송 조회</button>
-                            </div>
-                        </div>
-                    
-                 </div>
-                </form>
+                    </form>
                 </article>
             </div>
 
