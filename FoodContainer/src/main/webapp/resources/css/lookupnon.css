@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+.lookupNon-fs4{
+	font-weight: bold;
+}
+.findT, .number-good{
+	text-align: right;
+}
+.cancle-btn{
+	margin-top: 40px; margin-bottom: 40px;
+}
+.card-good{
+	margin-bottom: 30px;
+}
+.card-good2{
+	margin-top: 60px;
+	margin-bottom: 30px;
+}
+.lookup-fs-6 {
+	font-weight: bold;
+	margin-top: 10px; margin-bottom: 10px;
+}
+.lookupView-infmoney{
+	margin-top: 20px;
+}
