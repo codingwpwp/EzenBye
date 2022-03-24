@@ -202,6 +202,10 @@
 			        	<div class="lookupView-infmoney">요청사항 : </div>
 			        </div>
 			        
+			        <div class="d-grid gap-5 d-md-flex justify-content-md-center lookupView-btn">
+					  <button class="btn btn-primary me-md-2 noteManageView-btn2" type="button">주문목록으로</button>
+					</div>
+			        
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
 			        	<ul>
 			        		<li>주문취소는 배송준비중 상태의 주문단위로만 가능합니다.</li>
