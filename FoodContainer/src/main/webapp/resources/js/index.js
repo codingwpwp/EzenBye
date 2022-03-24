@@ -327,136 +327,137 @@
 	
 	//서브메뉴그룹
 	window.addEventListener("scroll", function(){
-		var scrollLocation = document.documentElement.scrollTop;
-		var browserHeight = window.innerHeight;
-		var bodyHeight = document.body.scrollHeight;
+		var scrollLocation = window.scrollY;
+		var pViewTop = $("#pView").offset().top;
+			pViewTop = pViewTop - 40;
+		var pDeliveryTop = $("#pDelivery").offset().top;
+			pDeliveryTop = pDeliveryTop - 60;
+		var pCancelTop = $("#pCancel").offset().top;
+			pCancelTop = pCancelTop - 60;
+		var reviewTop = $("#review").offset().top;
+			reviewTop = reviewTop - 80;
 		
-		if(window.innerWidth < 991){
-			//장바구니
-			$(".viewButton:eq(0)").html("장바구니");
-			
-			if(scrollLocation > (browserHeight*1.2) && scrollLocation < (bodyHeight*0.8)){
-				$(".subMenuGroup").css({"position" : "fixed", 
-										"top" : "0px",
-										"left" : "0px",
-										"width" : "100%"
-										});
-				$("#btnradio1").prop("checked",true);
-			}else if(scrollLocation < (browserHeight*1.2)){
-				$(".subMenuGroup").css("position","static");
-				$("#btnradio1").prop("checked",false);
-			}else if(scrollLocation > (bodyHeight*0.8) && scrollLocation < (bodyHeight*0.84)){
-				$("#btnradio2").prop("checked",true);
-			}else if(scrollLocation > (bodyHeight*0.84) && scrollLocation < (bodyHeight*0.88)){
-				$("#btnradio3").prop("checked",true);
-			}else if(scrollLocation > (bodyHeight*0.88)){
-				$("#btnradio4").prop("checked",true);
-			}
-		}else{
-			//장바구니
-			$(".viewButton:eq(0)").html("장바구니 담기");
-			
-			if(scrollLocation > (browserHeight*0.7) && scrollLocation < (bodyHeight*0.81)){
-				$(".subMenuGroup").css({"position" : "fixed", 
-										"top" : "0px",
-										"left" : "0px",
-										"width" : "100%"
-										});
-				$("#btnradio1").prop("checked",true);
-			}else if(scrollLocation < (browserHeight*0.7)){
-				$(".subMenuGroup").css("position","static");
-				$("#btnradio1").prop("checked",false);
-			}else if(scrollLocation > (bodyHeight*0.81) && scrollLocation < (bodyHeight*0.86)){
-				$("#btnradio2").prop("checked",true);
-			}else if(scrollLocation > (bodyHeight*0.86) && scrollLocation < (bodyHeight*0.9)){
-				$("#btnradio3").prop("checked",true);
-			}else if(scrollLocation > (bodyHeight*0.9)){
-				$("#btnradio4").prop("checked",true);
-			}
+		if(scrollLocation >= pViewTop && scrollLocation < pDeliveryTop){
+			$(".subMenuGroup").css({"position" : "fixed", 
+									"top" : "0px",
+									"left" : "0px",
+									"width" : "100%"
+									});
+			$("#btnradio1").prop("checked",true);
+		}else if(scrollLocation < pViewTop){
+			$(".subMenuGroup").css("position","static");
+			$("#btnradio1").prop("checked",false);
+		}else if(scrollLocation >= (pDeliveryTop) && scrollLocation < pCancelTop){
+			$("#btnradio2").prop("checked",true);
+		}else if(scrollLocation >= pCancelTop && scrollLocation < reviewTop){
+			$("#btnradio3").prop("checked",true);
+		}else if(scrollLocation >= reviewTop){
+			$("#btnradio4").prop("checked",true);
 		}
 	})
-	
+
 	//새로고침 대응
 	$(document).ready(function(){
 		var width = window.innerWidth;
 			
-			if(width < 600){
-				$(".subMenuGroupM").attr("style", "display : flex !important");
-				$(".subMenuGroup").attr("style", "display : none !important");
-				
-				window.addEventListener("scroll", function(){
-					var scrollLocation = document.documentElement.scrollTop;
-					var browserHeight = window.innerHeight;
-					var bodyHeight = document.body.scrollHeight;
-					
-					if(window.innerWidth < 600){
-						if(scrollLocation > (browserHeight*1.2) && scrollLocation < (bodyHeight*0.72)){
-							$(".subMenuGroup").attr("style", "display : flex !important");
-							$(".subMenuGroupM").attr("style", "display : none !important");
-							
-							$(".subMenuGroup").css({"position" : "fixed", 
-													"top" : "0px",
-													"left" : "0px",
-													"width" : "100%"
-													});
-							$("#btnradio1").prop("checked",true);
-						}else if(scrollLocation < (browserHeight*1.2)){
-							$(".subMenuGroup").attr("style", "display : none !important");
-							$(".subMenuGroupM").attr("style", "display : flex !important");
-							
-							$(".subMenuGroup").css("position","static");
-							$("#btnradio1").prop("checked",false);
-						}else if(scrollLocation > (bodyHeight*0.72) && scrollLocation < (bodyHeight*0.76)){
-							$("#btnradio2").prop("checked",true);
-						}else if(scrollLocation > (bodyHeight*0.76) && scrollLocation < (bodyHeight*0.8)){
-							$("#btnradio3").prop("checked",true);
-						}else if(scrollLocation > (bodyHeight*0.8)){
-							$("#btnradio4").prop("checked",true);
-						}
-					}
-				})
+			if(width < 1100){
+				$(".viewButton:eq(0)").html("장바구니");
 			}else{
-				$(".subMenuGroupM").attr("style", "display : none !important");
-				$(".subMenuGroup").attr("style", "display : flex !important");
+				$(".viewButton:eq(0)").html("장바구니 담기");
 			}
-		
-		//모바일 서브메뉴 그룹
-		window.addEventListener("resize",function(){
-			var width = window.innerWidth;
 			
 			if(width < 600){
 				$(".subMenuGroupM").attr("style", "display : flex !important");
 				$(".subMenuGroup").attr("style", "display : none !important");
 				
 				window.addEventListener("scroll", function(){
-					var scrollLocation = document.documentElement.scrollTop;
-					var browserHeight = window.innerHeight;
-					var bodyHeight = document.body.scrollHeight;
+					var scrollLocation = window.scrollY;
+					var pViewTop = $("#pView").offset().top;
+						pViewTop = pViewTop - 40;
+					var pDeliveryTop = $("#pDelivery").offset().top;
+						pDeliveryTop = pDeliveryTop - 60;
+					var pCancelTop = $("#pCancel").offset().top;
+						pCancelTop = pCancelTop - 60;
+					var reviewTop = $("#review").offset().top;
+						reviewTop = reviewTop - 80;
+								
+					if(scrollLocation > pViewTop && scrollLocation < pDeliveryTop){
+						$(".subMenuGroupM").attr("style", "display : none !important");
+						$(".subMenuGroup").attr("style", "display : flex !important");
+						
+						$(".subMenuGroup").css({"position" : "fixed", 
+												"top" : "0px",
+												"left" : "0px",
+												"width" : "100%"
+												});
+						$("#btnradio1").prop("checked",true);
+					}else if(scrollLocation < pViewTop){
+						$(".subMenuGroupM").attr("style", "display : flex !important");
+						$(".subMenuGroup").attr("style", "display : none !important");
 					
-					if(window.innerWidth < 600){
-						if(scrollLocation > (browserHeight*1.2) && scrollLocation < (bodyHeight*0.72)){
-							$(".subMenuGroup").attr("style", "display : flex !important");
-							$(".subMenuGroupM").attr("style", "display : none !important");
-							
-							$(".subMenuGroup").css({"position" : "fixed", 
-													"top" : "0px",
-													"left" : "0px",
-													"width" : "100%"
-													});
-							$("#btnradio1").prop("checked",true);
-						}else if(scrollLocation < (browserHeight*1.2)){
-							$(".subMenuGroup").attr("style", "display : none !important");
-							$(".subMenuGroupM").attr("style", "display : flex !important");
-							
-							$(".subMenuGroup").css("position","static");
-							$("#btnradio1").prop("checked",false);
-						}else if(scrollLocation > (bodyHeight*0.72) && scrollLocation < (bodyHeight*0.76)){
-							$("#btnradio2").prop("checked",true);
-						}else if(scrollLocation > (bodyHeight*0.76) && scrollLocation < (bodyHeight*0.8)){
-							$("#btnradio3").prop("checked",true);
-						}else if(scrollLocation > (bodyHeight*0.8)){
-							$("#btnradio4").prop("checked",true);
-						}
+						$(".subMenuGroup").css("position","static");
+						$("#btnradio1").prop("checked",false);
+					}else if(scrollLocation > pDeliveryTop && scrollLocation < pCancelTop){
+						$("#btnradio2").prop("checked",true);
+					}else if(scrollLocation > pCancelTop && scrollLocation < reviewTop){
+						$("#btnradio3").prop("checked",true);
+					}else if(scrollLocation > reviewTop){
+						$("#btnradio4").prop("checked",true);
+					}
+				})	
+			}else{
+				$(".subMenuGroupM").attr("style", "display : none !important");
+				$(".subMenuGroup").attr("style", "display : flex !important");
+			}
+	})
+	
+		//모바일 서브메뉴 그룹
+		window.addEventListener("resize",function(){
+			var width = window.innerWidth;
+			
+			if(width < 1100){
+				$(".viewButton:eq(0)").html("장바구니");
+			}else{
+				$(".viewButton:eq(0)").html("장바구니 담기");
+			}
+			
+			if(width < 600){
+				$(".subMenuGroupM").attr("style", "display : flex !important");
+				$(".subMenuGroup").attr("style", "display : none !important");
+				
+				window.addEventListener("scroll", function(){
+					var scrollLocation = window.scrollY;
+					var pViewTop = $("#pView").offset().top;
+						pViewTop = pViewTop - 40;
+					var pDeliveryTop = $("#pDelivery").offset().top;
+						pDeliveryTop = pDeliveryTop - 60;
+					var pCancelTop = $("#pCancel").offset().top;
+						pCancelTop = pCancelTop - 60;
+					var reviewTop = $("#review").offset().top;
+						reviewTop = reviewTop - 80;
+					
+					if(scrollLocation > pViewTop && scrollLocation < pDeliveryTop){
+						$(".subMenuGroupM").attr("style", "display : none !important");
+						$(".subMenuGroup").attr("style", "display : flex !important");
+						
+						$(".subMenuGroup").css({"position" : "fixed", 
+												"top" : "0px",
+												"left" : "0px",
+												"width" : "100%"
+												});
+						$("#btnradio1").prop("checked",true);
+					}else if(scrollLocation < pViewTop){
+						$(".subMenuGroupM").attr("style", "display : flex !important");
+						$(".subMenuGroup").attr("style", "display : none !important");
+						
+						$(".subMenuGroup").css("position","static");
+						$("#btnradio1").prop("checked",false);
+					}else if(scrollLocation > pDeliveryTop && scrollLocation < pCancelTop){
+						$("#btnradio2").prop("checked",true);
+					}else if(scrollLocation > pCancelTop && scrollLocation < reviewTop){
+						$("#btnradio3").prop("checked",true);
+					}else if(scrollLocation > reviewTop){
+						$("#btnradio4").prop("checked",true);
 					}
 				})
 			}else{
@@ -464,5 +465,3 @@
 				$(".subMenuGroup").attr("style", "display : flex !important");
 			}
 		})
-	})
-
