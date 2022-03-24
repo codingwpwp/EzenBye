@@ -241,20 +241,33 @@
 }
 /* 배송지관리 부분 */
 
+#noteManageView-title {
+	width: 35%;
+}
+/* 쪽지관리 상세페이지 제목크기 */
 
+.noteManageView-btn{
+	margin-top: 30px;
+}
+.noteManageView-btn2{
+	width: 25%;
+}
+/* 쪽지관리 상세페이지 버튼 */
 
+.memberSecession-li{
+	margin-top: 20px; margin-bottom: 20px;
+}
+/* 회원탈퇴 li */
 
+.memberSecession-select{
+	width: 60%;
+}
+/* 회원탈퇴 셀렉트박스 */
 
-
-
-
-
-
-
-
-
-
-
+.lookupView-btn{
+	margin-bottom: 30px; margin-top: 30px;
+}
+/* 주문상세 버튼 */
 
 
 
