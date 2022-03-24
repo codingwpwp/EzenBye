@@ -114,7 +114,7 @@
 						<div class="container">
 							<div class="row">
 								<%for(int i=0; i<=2; i++){ %>
-								<div class="col-auto">
+								<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 popular d-flex justify-content-center">
 									<div class="card" style="width: 18rem;">
 									  <img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/1.png" class="card-img-top" alt="비비고만두">
 									  <%if(i==0){ %>
@@ -153,6 +153,11 @@
     <!-- 장바구니 클릭 -->
     <div class="cartBack">
 	    <div class="message"></div>
+    </div>
+    
+    <!-- 모바일 top -->
+    <div class="topM" onclick="moveTop();">
+        ↑Top
     </div>
 
     <!-- 푸터 -->

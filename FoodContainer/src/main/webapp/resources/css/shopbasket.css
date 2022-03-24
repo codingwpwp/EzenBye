@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+.shopbasket-fs4 {
+	font-weight: bold;
+}
+
+.shopbasket-icon {
+	border: 1px solid gray;
+}
+
+.shopbasket-card{
+	margin-bottom: 30px;
+}
+
+.shopbasket-sum{
+	color: green; font-weight: bold; margin-top: 40px;
+	font-size: 18px;
+}
+
+.shopbasket-btn2{
+	margin-top: 40px; margin-bottom: 30px;
+}
+
+.shopbasket-title{
+	border: 0.5px solid gray; padding: 20px;
+	margin-top: 30px;
+}

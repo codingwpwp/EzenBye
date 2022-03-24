@@ -74,4 +74,17 @@ public class MypageController {
 	public String home13(Locale locale, Model model) {
 		return "mypage/addressManage";
 	}
+	@RequestMapping(value = "mypage_noteManage.do", method = RequestMethod.GET)
+	public String home14(Locale locale, Model model) {
+		return "mypage/noteManage";
+	}
+	@RequestMapping(value = "mypage_noteManageView.do", method = RequestMethod.GET)
+	public String home15(Locale locale, Model model) {
+		return "mypage/noteManageView";
+	}
+	@RequestMapping(value = "mypage_memberSecession.do", method = RequestMethod.GET)
+	public String home16(Locale locale, Model model) {
+		return "mypage/memberSecession";
+	}
+	
 }
