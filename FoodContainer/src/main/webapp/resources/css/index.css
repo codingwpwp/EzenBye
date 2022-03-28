@@ -181,6 +181,18 @@
 	height : auto;
 }
 
+.recipeCardM{
+	height : auto;
+}
+
+.recipeMDiv{
+	height : 100px;
+	display : flex;
+	border : 1px solid #DCDCDC;
+	border-radius : 10px;
+	margin-top : 10px;
+}
+
 .recipeMImg{
 	margin : 0px;
 	max-width : 100px;

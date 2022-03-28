@@ -146,7 +146,7 @@
 					
 				<!-- 모바일 화면 -->	
 					<article class="bestMenuM">
-						<p>인기메뉴</p>
+						<p class="fs-5">인기메뉴</p>
 						<hr>
 						<div class="cardDivM">
 							<%for(int i=0; i<4; i++){ %>
@@ -171,15 +171,22 @@
 						</div>
 					</article>
 					<article class="bestRecipeM">
-						<p>베스트 레시피</p>
+						<p class="fs-5">베스트 레시피</p>
 						<hr>
 						<div class="recipeCardM">
-							<div class="recipeMImg">
-								<img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/1.png" class="img-fluid" alt="비비고만두">
+							<%for(int i=0; i<3; i++){ %>
+							<div class="recipeMDiv">
+								<div class="recipeMImg">
+									<img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/1.png" class="img-fluid" alt="비비고만두">
+								</div>
+								<div class="recipeMContent">
+									<div>[유저닉네임]</div>
+									<div>비비고왕교자</div>
+									<div>조회수</div>
+									<div>추천수</div>
+								</div>
 							</div>
-							<div class="recipeMContent">
-								내용내용내용
-							</div>
+							<%} %>
 						</div>
 					</article>
                 </article>
