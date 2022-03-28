@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!-- 조만간 회의를 통해 디자인을 전면 수정할 계획 -->
 <aside class="d-flex flex-column align-items-center border border-3 border-primary rounded-3 bg-primary bg-gradient bg-opacity-75 me-2" id="rightAside">
     <i class="bi bi-cart3 fs-1"></i>
     <span class="fw-bold fs-6">최근 상품</span>
