@@ -45,9 +45,9 @@
                 <article id="mainSection">
                 
                 	<!-- view 상단 -->
-                	<div class="col-12">
+                	<div class="pViewCard">
 				      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-				        <div class="col-auto d-lg-block">
+				        <div class="col-auto d-lg-block viewStarM">
 				        	<img src="<%=request.getContextPath()%>/resources/img/CJ/컵밥,햇반/2.jpg" alt="d" class="img-fluid viewImg">
 				        	<div>
 				        		<span class="viewStar">평점 : 
@@ -79,49 +79,42 @@
 				      </div>
 				    </div>
 				    <!-- subMenu -->
-				    <div class="btn-group subMenuGroup d-flex justify-content-center" role="group" aria-label="Basic radio toggle button group">
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" onclick="location.href='#pView'">
-					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio1">상세 정보</label>
+				    <div class="subMenuGroup">
+					  <input type="radio" class="subMenuCheck" name="subRadio" id="subRadio1" onclick="subRadio1()">
+					  <label class="subMenuButton" for="subRadio1">상세 정보</label>
 					
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" onclick="location.href='#pDelivery'">
-					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio2">배송 정보</label>
+					  <input type="radio" class="subMenuCheck" name="subRadio" id="subRadio2" onclick="subRadio2()">
+					  <label class="subMenuButton" for="subRadio2">배송 정보</label>
 					
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" onclick="location.href='#pCancel'">
-					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio3">취소 규정</label>
+					  <input type="radio" class="btn-check" name="subRadio" id="subRadio3" onclick="subRadio3()">
+					  <label class="subMenuButton" for="subRadio3">취소 규정</label>
 					  
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off" onclick="location.href='#reviewTop'">
-					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio4">리뷰</label>
+					  <input type="radio" class="subMenuCheck" name="subRadio" id="subRadio4" onclick="subRadio4()">
+					  <label class="subMenuButton" for="subRadio4">리뷰</label>
 					</div>
 					
-					<!-- subMenu 모바일 -->
-				    <div class="btn-group subMenuGroupM d-flex justify-content-center" role="group" aria-label="Basic radio toggle button group">
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" onclick="location.href='#pView'">
-					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio1">상세</label>
+					<!-- 펼치기 -->
+					<div class="unfold">
+						<!-- 상세페이지 -->
+						<div class="d-flex justify-content-center" id="pView">
+							<img src="<%=request.getContextPath()%>/resources/img/CJ/볶음밥/1_1.jpg" alt="상세페이지" class="img-fluid">
+						</div>
+						
+						<!-- 배송정보 -->
+						<div class="d-flex justify-content-center" id="pDelivery">
+							<img src="<%=request.getContextPath()%>/resources/img/배송.png" alt="배송안내" class="img-fluid">
+						</div>
 					
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" onclick="location.href='#pDelivery'">
-					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio2">배송</label>
-					
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" onclick="location.href='#pCancel'">
-					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio3">취소</label>
-					  
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off" onclick="location.href='#reviewTop'">
-					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio4">리뷰</label>
+						<!-- 취소 규정 -->
+						<div class="d-flex justify-content-center" id="pCancel">
+							<img src="<%=request.getContextPath()%>/resources/img/취소.png" alt="취소규정" class="img-fluid">
+						</div>
+					   
 					</div>
-					
-					<!-- 상세페이지 -->
-					<div class="d-flex justify-content-center" id="pView">
-						<img src="<%=request.getContextPath()%>/resources/img/CJ/볶음밥/1_1.jpg" alt="상세페이지" class="img-fluid">
-					</div>
-					
-					<!-- 배송정보 -->
-					<div class="d-flex justify-content-center" id="pDelivery">
-						<img src="<%=request.getContextPath()%>/resources/img/배송.png" alt="배송안내" class="img-fluid">
-					</div>
-					
-					<!-- 취소 규정 -->
-					<div class="d-flex justify-content-center" id="pCancel">
-						<img src="<%=request.getContextPath()%>/resources/img/취소.png" alt="취소규정" class="img-fluid">
-					</div>
+					    <!-- 상품 더보기 버튼 -->
+					    <div class="plusView" onclick="unfold()">
+					    	+ 자세히보기
+					    </div>
 					
 					<!-- 리뷰 -->
 					<div id="review">
@@ -393,6 +386,7 @@
     <div class="topM" onclick="moveTop();">
         ↑Top
     </div>
+    
 
     <!-- 푸터 -->
     <footer class="py-3 my-4">
@@ -404,5 +398,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/index.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/productView.js"></script>
 </body>
 </html>

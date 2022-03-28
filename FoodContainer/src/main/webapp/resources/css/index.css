@@ -213,8 +213,20 @@
 	max-width : 400px;
 }
 
+.pViewCard{
+	max-width : 900px;
+	margin : 0 auto;
+}
+
 .viewStar{
 	float : right;	
+}
+
+@media screen and (max-width : 600px){
+	.viewStar{
+		position : relative;
+		left : 10px;
+	}
 }
 
 .productNum i:hover{
@@ -242,18 +254,46 @@
 	max-height : 150px;
 }
 
-/*서브 메뉴 그룹 모바일*/
-.subMenuGroupM{
-	display : none !important;
+/*서브 메뉴*/
+.subMenuGroup{
+	display : flex;
+	justify-content : center;
+	
 }
 
-/*서브 메뉴*/
 .subMenuButton{
 	width : 100%;
 	height : 100%;
 	max-width : 200px;
 	max-height : 38px;
 	background-color : white;
+	border : 1px solid #6c757d;
+	border-radius : 3px;
+	color : #6c757d;
+	text-align : center;
+	font-size : 1.1rem;
+}
+
+.subMenuButton+label{
+	padding : 6px 12px;
+}
+
+.subMenuCheck{
+	display : none;
+}
+
+.subMenuButton:hover{
+	background-color : #6c757d;
+	color : white;
+	cursor : pointer;
+}
+
+@media screen and (min-width : 600px){
+	.subMenuButton:hover{
+		background-color : #6c757d !important;
+		color : white !important;
+		cursor : pointer;
+	}
 }
 
 #pView{
@@ -350,4 +390,29 @@
 	#reviewTable{
 		display : none;
 	}
+}
+
+.plusView{
+	margin : 0 auto;
+	padding : 20px 20px;
+	width : 150px;
+	height : 70px;
+	border-radius : 15px;
+	background-color : 	#BC8F8F;
+	color : white;
+	font-weight : bold;
+	font-size : 1.2rem;
+	text-align : center;
+	position : relative;
+	top : -85px;	
+}
+
+.plusView:hover{
+	cursor : pointer;
+	background-color : #E9967A;
+}
+
+.unfold{
+	overflow : hidden;
+	height : 500px;
 }
