@@ -31,34 +31,44 @@
 	</header>
 
     <!-- 네비게이션 바 -->
-    <nav class="navbar-expand-lg navbar-light bg-light fw-bold">
-        <%@include file="/WEB-INF/views/base/nav.jsp"%>
+   <nav class="navbar-expand-lg navbar-light bg-warning bg-gradient bg-opacity-25 fw-bold fs-5">
+        <div class="row">
+            <div class="col-lg-2 d-none d-lg-block"></div>
+
+            <!--
+                id="navLeftMenu"인 현재 주석 바로 아래의 태그는 페이지의 종류에 따른 왼쪽메뉴.
+                네비게이션 바가 펼쳐질 때 알아서 태그가 안보이도록 설정.
+                필요시에만 div태그 사이에 코드를 작성.
+                작성시 border border-dark는 구분용으로만 작성했기 때문에 알아서 지우고 작업.
+                작성하지 않는 경우는 절대 건들지 않음.
+                base.js에 id="navLeftMenu"와 관련된 코드가 작성되어있음.
+            -->
+            <div class="col-1 pe-0 d-lg-none border border-dark" id="navLeftMenu">d<!-- 여기에 작성 --></div>
+
+			<%@include file="/WEB-INF/views/base/nav.jsp"%>
+
+        </div>
     </nav>
 
     <!-- 섹션 -->
-    <section class="mt-3">
+    <section class="mt-1">
         <div class="row">
 
             <!-- 왼쪽 사이드메뉴 -->
-            <div class="col-2 pe-0" id="leftDiv">
+            <div class="col-lg-2 d-none d-lg-block">
                 <aside id="leftAside">
                     <!-- 실질적인 왼쪽 사이드메뉴 내용 -->
-                    왼쪽왼쪽왼쪽왼쪽왼쪽왼쪽왼쪽왼쪽왼쪽왼쪽왼쪽왼쪽
+                     
                 </aside>
             </div>
 
             <!-- 메인 -->
-            <div class="col-8">
+            <div class="col-12 col-sm-9 col-md-10 col-lg-8">
                 <article id="mainSection">
                     <!-- 실질적인 메인 내용 -->
+                     <div class="fs-5 my-2 fw-bold">레시피 수정</div>
                      <form>
-                        <div class="container">
-                            <div class="row retitle">
-                             <div class="col-md-4 col-10">
-                                 <h1>레시피 수정</h1>
-                             </div>
-                            </div>
-                        </div>
+                      
                         <div class="container">
                           
                             <div class="row title">
@@ -131,9 +141,8 @@
             </div>
 
             <!-- 오른쪽 사이드메뉴 -->
-            <div class="col-2 d-none d-sm-block">
-                <!-- 실질적인 오른쪽 사이드메뉴 내용 -->
-                <%@include file="/WEB-INF/views/base/rightAside.jsp"%>
+          <div class="col-sm-3 col-md-2 col-lg-2 d-none d-sm-block">
+            	<%@include file="/WEB-INF/views/base/rightAside.jsp"%>
             </div>
 
         </div>

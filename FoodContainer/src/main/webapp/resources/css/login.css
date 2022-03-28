@@ -83,6 +83,18 @@ form.loginfrm{
     max-width: 90px;
     height: 40px;
 }
+@media screen and (max-width:380px){
+    #codeinput{
+        width: 100%;
+        max-width:220px;
+    }    
+}
+@media screen and (max-width:380px){
+    #codebtn{
+        width: 100%;
+        max-width:220px;
+    }    
+}
 /* 자동 입력 방지 끝*/
 
 /*아이디 저장 찾기 시작 */
@@ -121,6 +133,26 @@ form.loginfrm{
 }
 
 /*<===================================아이디 찾기===================================>*/
+/*모바일버전*/
+@media screen and (max-width:380px){
+    .leftform{
+        padding-bottom: 5%;
+    }    
+}@media screen and (max-width:380px){
+    .rightform{
+        padding-bottom: 5%;
+    }    
+}
+@media screen and (min-width:576px){
+    .leftform{
+        padding-bottom: 3%;
+    }    
+}
+@media screen and (min-width:576px){
+    .rightform{
+        padding-bottom: 2%;
+    }    
+}
 .container.head{
     padding-top: 2%;
     padding-bottom: 2%;
@@ -142,8 +174,13 @@ form.easyfind{
     width:100%;
     max-width: 400px;
     height:100%;
-    
-   
+       
+}
+@media screen and (max-width:380px){
+    #emailinput{
+        width:100%;
+        max-width:157px;
+    }    
 }
 /*이메일 아이디 찾기 폼*/
 form.emailfind{
