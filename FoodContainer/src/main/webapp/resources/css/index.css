@@ -225,7 +225,7 @@
 @media screen and (max-width : 600px){
 	.viewStar{
 		position : relative;
-		left : 10px;
+		left : -35px;
 	}
 }
 
