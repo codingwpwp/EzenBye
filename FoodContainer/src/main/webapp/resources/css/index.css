@@ -310,7 +310,13 @@
 }
 
 .reviewCard{
-	max-width : 100%;
+	width : 100%;
+	margin-bottom : 30px;
+}
+
+.reviewCard div{
+	text-align : left;
+	text-indent : 50px;
 }
 
 .reviewCardImg{
@@ -319,5 +325,29 @@
 }
 
 .reviewTitle{
+	text-align : left;
+	text-indent : 10px;
+}
+
+#reviewTableM th{
+	text-align : center;
+}
+
+#reviewTableM td{
+	padding-top : 20px;
+	padding-bottom : 20px;
+}
+
+#reviewTableM{
+	display : none;
+}
+
+@media screen and (max-width : 991px){
+	#reviewTableM{
+		display : table;
+	}
 	
+	#reviewTable{
+		display : none;
+	}
 }
