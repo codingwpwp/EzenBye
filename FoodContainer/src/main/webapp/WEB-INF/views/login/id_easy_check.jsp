@@ -63,9 +63,9 @@
                                         </div>
                                         <div class="col-md-12 col-sm-3 col-12">
                                         
-                                         <input type="button" class="btn btn-secondary pwdfind" onclick="" value="비밀번호 찾기">
+                                         <input type="button" class="btn btn-secondary pwdfind" onclick="location.href='<%=request.getContextPath()%>/pw_find.do'" value="비밀번호 찾기">
                                          
-                                         <input type="button" class="btn btn-dark login" onclick="" value="로그인">
+                                         <input type="button" class="btn btn-dark login" onclick="location.href='<%=request.getContextPath()%>/loginmain.do'" value="로그인">
                                         </div>                                  
                                     </div>
                                 </div>
