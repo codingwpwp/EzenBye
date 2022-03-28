@@ -67,8 +67,8 @@
 	max-width : 50px;
 	z-index : 1;
 	position : absolute;
-	top : 175px;
-	left : 152px;
+	top : 50%;
+	left : 65%;
 }
 /*오른쪽 side 메뉴*/
 .rAside{
@@ -132,6 +132,69 @@
 	left : 80%;
 }
 
+@media screen and (max-width : 600px){
+	.bestMenu{
+		display : none;
+	}
+	
+	.bestRecipe{
+		display : none;
+	}
+	
+	.bestMenuM{
+		display : block;
+	}
+	
+	.bestRecipeM{
+		display : block;
+	}
+}
+
+@media screen and (min-width : 600px){
+	.bestMenu{
+		display : block;
+	}
+	
+	.bestRecipe{
+		display : block;
+	}
+	
+	.bestMenuM{
+		display : none;
+	}
+	
+	.bestRecipeM{
+		display : none;
+	}
+}
+
+.cardDivM{
+	text-align : center;
+}
+
+.cardM{
+	margin : 15px;
+	display : inline-block;
+	border : 1px solid #DCDCDC;
+	border-radius : 10px;
+	width : 150px;
+	height : auto;
+}
+
+.recipeMImg{
+	margin : 0px;
+	max-width : 100px;
+	height : 100px;
+	display : inline-block;
+}
+
+.recipeMContent{
+	margin : 0px;
+	width : 270px;
+	height : 100px;
+	display : inline-block;
+}
+
 /* productList ========================================================================================== */
 
 /*section title*/
@@ -139,15 +202,7 @@
 	text-align : center;
 	margin-top : 40px;
 }
-/*경로*/
-.topBar{
-	margin-top : 5px;
-	font-size : 0.8em;
-}
 
-.topHr{
-	margin-top : 0px;
-}
 /*상품 호버*/
 .productAll:hover .hoverHeart, .productAll:hover .hoverCart{
 	display:inline-block;
@@ -179,30 +234,8 @@
     z-index : 1;
 }
 
-.mlAsideDiv{
-	background-color : whitesmoke;
-	border-radius : 10px;
-	width : 150px;
-	position : fixed;
-	left : 130px;
-	top : 20px;
-	display : none;
-}
-
-.mMenu{
-	width : 50px;
-	height : 70px;
-	font-size : 1.2em;
-	text-align : center;
-	display : none;
-}
-
-.mlAside{
-	position : relative;
-	left : 10%;
-	top : 40px;
-	display : none;
-	
+.filter>i{
+	font-size : 30px;
 }
 
 /* productView ========================================================================================== */
@@ -415,4 +448,31 @@
 .unfold{
 	overflow : hidden;
 	height : 500px;
+}
+
+#pViewleft{
+	width : 300px;
+	height : 500px;
+	display : none;
+	border : 1px solid black;
+	position : relative;
+	top : 15%;
+	left : 100px;
+}
+
+#pViewleft>hr{
+	margin : 50px 0px 200px 0px;
+}
+
+.leftViewTotal{
+	height : 70px;
+	margin-top : 50px;
+}
+
+.leftViewButtonDiv{
+	text-align : center;
+}
+
+.leftViewButton{
+	width : 135px;
 }

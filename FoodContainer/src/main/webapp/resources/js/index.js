@@ -268,7 +268,7 @@
 	$(document).ready(function(){
 		var innerWidth = window.innerWidth;
 			
-			if(innerWidth < 850){
+			if(innerWidth < 991){
 				$(".lAsideDiv").css("display","none");
 				$(".mMenu").css("display","block");
 				$(".mlAside").css("display","block");
@@ -282,7 +282,7 @@
 		window.onresize = function(){
 			var innerWidth = window.innerWidth;
 			
-			if(innerWidth < 850){
+			if(innerWidth < 991){
 				$(".lAsideDiv").css("display","none");
 				$(".mMenu").css("display","block");
 				$(".mlAside").css("display","block");
@@ -295,3 +295,27 @@
 		}
 	})
 	
+	//스크롤 하강 대응
+	window.addEventListener("scroll", function(){
+		var yScroll = window.scrollY;
+		var navTop = $("#navBar").offset().top;
+				
+		if(yScroll >= navTop){
+			$(".filter").css({"position" : "fixed", 
+							  "top" : "15px",
+							  "left" : "0px",
+							  "width" : "100%",
+							  "background-color" : "#FFEFD5",
+							  "z-index" : "10",
+							  "width" : "30px",
+							  "height" : "40px",
+							  "border-radius" : "10px",
+							  "text-align" : "center;"
+							});
+		}else if(yScroll < navTop){
+			$(".filter").css({"position" : "static", 
+							  "background-color" : "transparent"
+							  
+							});
+		}
+	})

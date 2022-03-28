@@ -16,7 +16,6 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/base.css">
     <link href="<%=request.getContextPath()%>/resources/css/index.css" rel="stylesheet">
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <body>
 	<!-- 헤더 -->
 	<header class="border-bottom border-dark">
@@ -24,16 +23,20 @@
 	</header>
 
     <!-- 네비게이션 바 -->
-    <nav class="navbar-expand-lg navbar-light bg-light fw-bold">
-        <%@include file="/WEB-INF/views/base/nav.jsp"%>
+    <nav class="navbar-expand-lg navbar-light bg-warning bg-gradient bg-opacity-25 fw-bold fs-5">
+        <div class="row">
+            <div class="col-lg-2 d-none d-lg-block"></div>
+            <div class="col-1 pe-0 d-lg-none" id="navLeftMenu"></div>
+			<%@include file="/WEB-INF/views/base/nav.jsp"%>
+        </div>
     </nav>
 
     <!-- 섹션 -->
-    <section class="mt-3">
+    <section class="mt-1">
         <div class="row">
 
             <!-- 왼쪽 사이드메뉴 -->
-            <div class="col-2 pe-0" id="leftDiv">
+            <div class="col-lg-2 d-none d-lg-block" id="leftDiv">
                 <aside id="leftAside">
                     <!-- 실질적인 왼쪽 사이드메뉴 내용 -->
                    
@@ -41,7 +44,7 @@
             </div>
 
             <!-- 메인 -->
-            <div class="col-8">
+            <div class="col-12 col-sm-9 col-md-10 col-lg-8">
                 <article id="mainSection">
                    <!-- 배너 -->
                     <article>
@@ -73,8 +76,10 @@
 						</div>
 					</article>
 					<br>
+					
+				<!-- pc화면 -->
 					<!-- 인기메뉴 -->
-					<article>
+					<article class="bestMenu">
 						<p class="fs-3">인기메뉴</p>
 						<hr>
 							<div class="row">
@@ -108,7 +113,7 @@
 					</article>
 					<br>
 					<!-- 베스트 레시피 -->
-					<article>
+					<article class="bestRecipe">
 						<p class="fs-3">베스트 레시피</p>
 						<hr>
 						<div class="container">
@@ -138,11 +143,50 @@
 							</div>
 						</div>
 					</article>
+					
+				<!-- 모바일 화면 -->	
+					<article class="bestMenuM">
+						<p>인기메뉴</p>
+						<hr>
+						<div class="cardDivM">
+							<%for(int i=0; i<4; i++){ %>
+							<div class="cardM">
+								<img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/1.png" class="img-fluid" alt="비비고만두">
+								<div class="cardMContent">
+									<span style="color:red;">[인기]</span><br>
+									<span class="productName">비비고왕교자</span><br>
+									<span class="fs-4">10,000</span>원<br>
+									<span>
+										<i class="bi bi-star-fill"></i>
+							        	<i class="bi bi-star-fill"></i>
+							        	<i class="bi bi-star-fill"></i>
+							        	<i class="bi bi-star-fill"></i>
+							        	<i class="bi bi-star"></i>
+									</span>
+									<br>
+									배송비 3,000원
+								</div>
+							</div>
+							<%} %>
+						</div>
+					</article>
+					<article class="bestRecipeM">
+						<p>베스트 레시피</p>
+						<hr>
+						<div class="recipeCardM">
+							<div class="recipeMImg">
+								<img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/1.png" class="img-fluid" alt="비비고만두">
+							</div>
+							<div class="recipeMContent">
+								내용내용내용
+							</div>
+						</div>
+					</article>
                 </article>
             </div>
 
             <!-- 오른쪽 사이드메뉴 -->
-            <div class="col-2 d-none d-sm-block">
+            <div class="col-sm-3 col-md-2 col-lg-2 d-none d-sm-block">
                 <!-- 실질적인 오른쪽 사이드메뉴 내용 -->
                 <%@include file="/WEB-INF/views/base/rightAside.jsp"%>
             </div>
@@ -168,6 +212,7 @@
     <!-- 자바스크립트 -->
     <script src="https://kit.fontawesome.com/b30bc4e0a9.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+   	<script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/index.js"></script>
 </body>

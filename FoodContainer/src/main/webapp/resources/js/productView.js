@@ -76,6 +76,8 @@
 				
 			var check = $("input[name='subRadio']:checked");
 			var notCheck = $("input[name='subRadio']:not(:checked)");
+			
+			var width = window.innerWidth;
 				
 			check.next().css({
 								"background-color" : "#6c757d",
@@ -94,9 +96,16 @@
 											"width" : "100%"
 											});
 					$("#subRadio1").prop("checked",true);
+					
+					if(width > 1730){
+						$("#pViewleft").css("display","inline-block");
+					}else{
+						$("#pViewleft").css("display","none");
+					}
 				}else if(scrollLocation < pViewTop){
 					$(".subMenuGroup").css("position","static");
 					$("#subRadio1").prop("checked",false);
+					$("#pViewleft").css("display","none");
 				}else if(scrollLocation >= (pDeliveryTop) && scrollLocation < pCancelTop){
 					$("#subRadio2").prop("checked",true);
 				}else if(scrollLocation >= pCancelTop && scrollLocation < reviewTop){
@@ -106,7 +115,7 @@
 				}
 		}
 	})
-
+	
 	//새로고침 대응
 	$(document).ready(function(){
 		var width = window.innerWidth;
