@@ -19,5 +19,20 @@ public class loginController {
 	public String login(Locale locale, Model model) {
 		return "login/loginmain";
 	}
-	
+	@RequestMapping(value = "id_find.do", method = RequestMethod.GET)
+	public String login2(Locale locale, Model model) {
+		return "login/id_find";
+	}
+	@RequestMapping(value = "id_easy_check.do", method = RequestMethod.GET)
+	public String login3(Locale locale, Model model) {
+		return "login/id_easy_check";
+	}
+	@RequestMapping(value = "id_email_check.do", method = RequestMethod.GET)
+	public String login4(Locale locale, Model model) {
+		return "login/id_email_check";
+	}
+	@RequestMapping(value = "pw_find.do", method = RequestMethod.GET)
+	public String login5(Locale locale, Model model) {
+		return "login/pw_find";
+	}
 }
