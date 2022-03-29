@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-/* main ========================================================================================== */
+/* index ========================================================================================== */
 
 /*상품 카드*/
 .card{
@@ -9,29 +9,17 @@
 	max-width : 300px;
 	margin-bottom : 20px;
 }
+
 /*찜*/
 .hoverHeart{
 	margin : 0;
-	max-width : 35px;
-	z-index : 1;
-	position : absolute;
-	top : 30%;
-	left : 35%;
-	display:none;
+	max-width : 28px;
 }
+
 /*장바구니*/
 .hoverCart{
 	margin : 0;
 	max-width : 35px;
-	z-index : 1;
-	position : absolute;
-	top : 30%;
-	left : 55%;
-	display:none;
-}
-
-.popular:hover .hoverHeart, .popular:hover .hoverCart{
-	display:inline-block;
 }
 
 .popular:hover{
@@ -205,6 +193,10 @@
 	width : 270px;
 	height : 100px;
 	display : inline-block;
+}
+
+.discount{
+	color : red;
 }
 
 /* productList ========================================================================================== */

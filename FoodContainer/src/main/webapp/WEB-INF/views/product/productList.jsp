@@ -70,6 +70,7 @@
 							    		<span style="color:red;"></span><br>
 									   	<span class="productName">비비고왕교자</span><br>
 									   	<span class="fs-4">10,000</span>원<br>
+									   	<span class="discount">d</span>
 									   	<span>
 									   		<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star-fill"></i>
@@ -124,5 +125,6 @@
     <script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/index.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/productLAside.js"></script>
 </body>
 </html>
