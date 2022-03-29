@@ -2,70 +2,51 @@
 #mainSection a{
     font-weight: bold;
     text-decoration: none;
+    transition: all 0.3s;
 }
 
-/* 헤딩 */
-#gt{
-	display: none;
+/* 중앙정렬을 해주는 테이블 */
+.centerTable{
+    text-align: center;
 }
 
 /* 관리자메인 */
-#mainSection table{
-    text-align: center;
-}
-#mainSection .mainContent:nth-of-type(2) tbody > tr > td:nth-of-type(2){
-    font-size: 13px;
-}
-.more_content a{
-    transition: all 0.3s;
-}
-.more_content a:hover{
+.moreContent a:hover{
     color: gray;
 }
 
-/* 리스트 테이블이 있는 테이블 하단의 검색부분 */
-#searchMember form{
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
-}
-#searchMember form select{
+/* 테이블 하단의 검색부분(searchType) */
+#searchMember form select#searchType{
     max-width: 90px;
 }
 
-/* 회원관리 */
-.rows{
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-.memberCol1{
-    background-color: whitesmoke;
-    border: 2px solid lightgray;
-    border-radius: 7px;
+/* 소제목 */
+.infoTitle{
     font-weight: bold;
+    text-align: center;
+    background-color: whitesmoke;
+    border: 2px solid darkgray;
+    border-radius: 5px;
 }
+/* textarea */
 #mainSection textarea{
     resize: none;
-    overflow: auto;
-    text-indent: 3px;
-}
-.modal span{
-    font-size: small;
-}
-.modal input{
-    font-size: small;
 }
 
-/* 신고테이블 */
+/* 신고 리스트 페이지의 전체선택 하는 체크박스 */
+#reportCheckbox{
+    position: relative;
+    top: 3px;
+    left: 5px;
+}
+/* 신고 리스트 페이지의 신고내용 */
 .reportContent{
     cursor: pointer;
-    transition: all 0.4s;
 }
 .reportContent:hover{
     color: darkgray;
 }
+/* 신고 리스트 페이지의 쪽지버튼 */
 .reportIdSubButton{
     width: 60px;
     display: none;
@@ -81,4 +62,7 @@
 /* 상품 등록 */
 #productManagerForm select, #productManagerForm button{
     transition: all 0.3s;
+}
+#submitNo{
+    display: none;
 }

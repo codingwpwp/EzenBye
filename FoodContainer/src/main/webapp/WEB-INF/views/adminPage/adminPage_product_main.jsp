@@ -52,99 +52,80 @@
     
                     <!-- 헤딩 -->
                     <div class="fs-5 my-2 fw-bold">
-                        회원 리스트
+                        등록 상품
                     </div>
 
-					<!-- 회원 리스트 테이블 -->
-                    <div class="table-responsive">
-                        <table class="table table-hover centerTable" style="min-width: 550px;">
+                    <div>
 
-                            <colgroup></colgroup>
-
-                            <thead>
-                                <tr>
-                                    <th scope="col">회원 번호</th>
-                                    <th scope="col">아이디</th>
-                                    <th scope="col">닉네임</th>
-                                    <th scope="col">이름</th>
-                                    <th scope="col">가입일</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr>
-                                    <th>1</th>
-                                    <td><a href="#" class="link-primary">tester1</a></td>
-                                    <td>닉네임테스터</td>
-                                    <td>테스터일</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <td><a href="#" class="link-primary">tester23</a></td>
-                                    <td>듀강개또</td>
-                                    <td>테스터이</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>1</th>
-                                    <td><a href="#" class="link-primary">tester1</a></td>
-                                    <td>닉네임테스터</td>
-                                    <td>테스터일</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <td><a href="#" class="link-primary">tester23</a></td>
-                                    <td>듀강개또</td>
-                                    <td>테스터이</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>1</th>
-                                    <td><a href="#" class="link-primary">tester1</a></td>
-                                    <td>닉네임테스터</td>
-                                    <td>테스터일</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <td><a href="#" class="link-primary">tester23</a></td>
-                                    <td>듀강개또</td>
-                                    <td>테스터이</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>1</th>
-                                    <td><a href="#" class="link-primary">tester1</a></td>
-                                    <td>닉네임테스터</td>
-                                    <td>테스터일</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <td><a href="#" class="link-primary">tester23</a></td>
-                                    <td>듀강개또</td>
-                                    <td>테스터이</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>1</th>
-                                    <td><a href="#" class="link-primary">tester1</a></td>
-                                    <td>닉네임테스터</td>
-                                    <td>테스터일</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <td><a href="#" class="link-primary">tester23</a></td>
-                                    <td>듀강개또</td>
-                                    <td>테스터이</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                            </tbody>
+                        <!-- 체크박스&상품등록 버튼 -->
+                        <div class="form-check mt-2 mb-3">
+                            <input class="form-check-input border border-dark" type="checkbox" value="" id="productCheckbox">
+                            <label class="form-check-label me-3 text-dark fw-bold" for="productCheckbox">
+                                전체
+                            </label>
+                            <button type="button" class="btn btn-outline-danger btn-sm p-1 fw-bold">선택 삭제</button>
                             
-                        </table>
+                            <button type="button" class="btn btn-primary fw-bold float-end">상품<span class="d-none d-sm-inline"> </span>등록</button>
+                        </div>
+
+                        <!-- 상품 테이블 -->
+                        <div class="table-responsive">
+                            <table class="table table-hover centerTable" style="min-width: 600px;" id="productTable">
+
+                                <colgroup></colgroup>
+
+                                <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">상품 번호</th>
+                                        <th scope="col">상품 분류</th>
+                                        <th scope="col">브랜드</th>
+                                        <th scope="col">상품 이름</th>
+                                        <th scope="col">재고</th>
+                                        <th scope="col">관리</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+
+                                    <tr>
+                                        <th>
+                                            <input class="form-check-input border border-dark" type="checkbox" value="">
+                                        </th>
+                                        <th>1</th>
+                                        <td>냉동식품</td>
+                                        <td>CJ</td>
+                                        <td class="col5">
+                                            <a href="#" class="link-primary">무말랭이무말랭이무말랭이무말랭이무말랭이무말랭이무말랭이무말</a>
+                                        </td>
+                                        <td>3</td>
+                                        <td>
+                                            <button class="btn btn-outline-primary btn-sm px-1 py-0">수정</button>
+                                            <button class="btn btn-outline-dark btn-sm px-1 py-0">삭제</button>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th>
+                                            <input class="form-check-input border border-dark" type="checkbox" value="">
+                                        </th>
+                                        <th>1</th>
+                                        <td>냉동식품</td>
+                                        <td>CJ</td>
+                                        <td class="col5">
+                                            <a href="#" class="link-primary">건지산방사능맛수통 나무 다리어카센터</a>
+                                        </td>
+                                        <td>3</td>
+                                        <td>
+                                            <button class="btn btn-outline-primary btn-sm px-1 py-0">수정</button>
+                                            <button class="btn btn-outline-dark btn-sm px-1 py-0">삭제</button>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
 
                     <!-- 검색&페이징 -->
@@ -155,9 +136,7 @@
 
                             <div class="col-3 d-flex justify-content-end">
                                 <select class="form-select form-select-sm p-1" name="searchType" id="searchType">
-                                    <option value="id">아이디</option>
-                                    <option value="name">이름</option>
-                                    <option value="nickname">닉네임</option>
+                                    <option value="productName">상품 이름</option>
                                 </select>
                             </div>
 

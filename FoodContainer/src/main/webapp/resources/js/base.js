@@ -44,7 +44,7 @@ $(document).ready(function(){
 
         $("#navLeftMenu").addClass("d-none");
 
-        $("#navCenterMenuDiv").removeClass("col-6");
+        $("#navCenterMenuDiv").removeClass("col-5");
         $("#navCenterMenuDiv").removeClass("col-sm-5");
         $("#navCenterMenuDiv").removeClass("col-md-6");
 

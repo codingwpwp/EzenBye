@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!-- 네비게이션 바 -->
-<div class="col-6 col-sm-5 col-md-6 col-lg-8 col-xl-7 d-flex align-items-center" id="navCenterMenuDiv">
+<div class="col-5 col-sm-5 col-md-6 col-lg-8 col-xl-7" id="navCenterMenuDiv">
 
     <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navCenterMenu" aria-controls="navCenterMenu">
         <span class="navbar-toggler-icon"></span>

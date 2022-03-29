@@ -1,0 +1,33 @@
+/* 관리자 메뉴의 공통사항 */
+a.list-group-item-action:not(.selected){
+    transition: all 0.3s;
+}
+a.list-group-item-action:not(.selected):hover{
+    background-color: #fcc663;
+}
+a.selected{
+    background-color: #ffa600;
+}
+a.selected:hover{
+    background-color: #ffa600;
+    color: #212529;
+}
+
+/* <nav>태그의 오프캔버스로 꾸민 관리자 메뉴 */
+#navLeftMenuButon{
+    height: 40px;
+}
+#navLeftMenuIcon{
+    transition: all 0.3s;
+}
+#navAdminMenu{
+    width: 200px;
+    background-color: #dfdfdf;
+}
+
+/* 섹션안의 왼쪽 관리자 메뉴 */
+#leftAside{
+    width: 150px;
+    margin: 0px auto;
+    background-color: #dfdfdf;
+}

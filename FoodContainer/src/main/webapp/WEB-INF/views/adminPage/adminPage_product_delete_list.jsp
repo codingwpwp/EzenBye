@@ -52,98 +52,55 @@
     
                     <!-- 헤딩 -->
                     <div class="fs-5 my-2 fw-bold">
-                        회원 리스트
+                        삭제된 상품
                     </div>
 
-					<!-- 회원 리스트 테이블 -->
+                    <!-- 상품 테이블 -->
                     <div class="table-responsive">
-                        <table class="table table-hover centerTable" style="min-width: 550px;">
+                        <table class="table table-hover centerTable" style="min-width: 600px;" id="productTable">
 
                             <colgroup></colgroup>
 
                             <thead>
                                 <tr>
-                                    <th scope="col">회원 번호</th>
-                                    <th scope="col">아이디</th>
-                                    <th scope="col">닉네임</th>
-                                    <th scope="col">이름</th>
-                                    <th scope="col">가입일</th>
+                                    <th scope="col">상품 번호</th>
+                                    <th scope="col">상품 분류</th>
+                                    <th scope="col">브랜드</th>
+                                    <th scope="col">상품 이름</th>
+                                    <th scope="col">재고</th>
+                                    <th scope="col">관리</th>
                                 </tr>
                             </thead>
-
-                            <tbody>
-                                <tr>
-                                    <th>1</th>
-                                    <td><a href="#" class="link-primary">tester1</a></td>
-                                    <td>닉네임테스터</td>
-                                    <td>테스터일</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <td><a href="#" class="link-primary">tester23</a></td>
-                                    <td>듀강개또</td>
-                                    <td>테스터이</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>1</th>
-                                    <td><a href="#" class="link-primary">tester1</a></td>
-                                    <td>닉네임테스터</td>
-                                    <td>테스터일</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <td><a href="#" class="link-primary">tester23</a></td>
-                                    <td>듀강개또</td>
-                                    <td>테스터이</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>1</th>
-                                    <td><a href="#" class="link-primary">tester1</a></td>
-                                    <td>닉네임테스터</td>
-                                    <td>테스터일</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <td><a href="#" class="link-primary">tester23</a></td>
-                                    <td>듀강개또</td>
-                                    <td>테스터이</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>1</th>
-                                    <td><a href="#" class="link-primary">tester1</a></td>
-                                    <td>닉네임테스터</td>
-                                    <td>테스터일</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <td><a href="#" class="link-primary">tester23</a></td>
-                                    <td>듀강개또</td>
-                                    <td>테스터이</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>1</th>
-                                    <td><a href="#" class="link-primary">tester1</a></td>
-                                    <td>닉네임테스터</td>
-                                    <td>테스터일</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <td><a href="#" class="link-primary">tester23</a></td>
-                                    <td>듀강개또</td>
-                                    <td>테스터이</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                            </tbody>
                             
+                            <tbody>
+
+                                <tr>
+                                    <th>1</th>
+                                    <td>냉동식품</td>
+                                    <td>CJ</td>
+                                    <td class="col5">
+                                        <a href="#" class="link-primary">무말랭이무말랭이무말랭이무말랭이무말랭이무말랭이무말랭이무말</a>
+                                    </td>
+                                    <td>3</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-secondary py-0">복구</button>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>1</th>
+                                    <td>냉동식품</td>
+                                    <td>CJ</td>
+                                    <td class="col5">
+                                        <a href="#" class="link-primary">건지산방사능맛수통 나무 다리어카센터</a>
+                                    </td>
+                                    <td>3</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-secondary py-0">복구</button>
+                                    </td>
+                                </tr>
+                                
+                            </tbody>
                         </table>
                     </div>
 
@@ -155,9 +112,7 @@
 
                             <div class="col-3 d-flex justify-content-end">
                                 <select class="form-select form-select-sm p-1" name="searchType" id="searchType">
-                                    <option value="id">아이디</option>
-                                    <option value="name">이름</option>
-                                    <option value="nickname">닉네임</option>
+                                    <option value="productName">상품 이름</option>
                                 </select>
                             </div>
 
@@ -168,7 +123,7 @@
                             <div class="col-3 d-flex justify-content-start">
                                 <button type="submit" class="btn btn-outline-primary">검색</button>
                             </div>      
-
+                                       
                         </form>
 
                         <!-- 페이징 -->

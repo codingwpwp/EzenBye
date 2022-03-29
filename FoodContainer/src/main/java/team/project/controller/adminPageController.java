@@ -74,6 +74,16 @@ public class adminPageController {
 	
 	@RequestMapping(value = "admin10.do", method = RequestMethod.GET)
 	public String home10(Locale locale, Model model) {
-		return "adminPage/adminPage_product_manager";
+		return "adminPage/adminPage_product_main";
+	}
+	
+	@RequestMapping(value = "admin11.do", method = RequestMethod.GET)
+	public String home11(Locale locale, Model model) {
+		return "adminPage/adminPage_product_register";
+	}
+	
+	@RequestMapping(value = "admin12.do", method = RequestMethod.GET)
+	public String home12(Locale locale, Model model) {
+		return "adminPage/adminPage_product_modify";
 	}
 }
