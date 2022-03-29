@@ -16,7 +16,6 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/base.css">
     <link href="<%=request.getContextPath()%>/resources/css/index.css" rel="stylesheet">
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <body>
 	<!-- 헤더 -->
 	<header class="border-bottom border-dark">
@@ -24,30 +23,48 @@
 	</header>
 
     <!-- 네비게이션 바 -->
-    <nav class="navbar-expand-lg navbar-light bg-light fw-bold">
-        <%@include file="/WEB-INF/views/base/nav.jsp"%>
+    <nav class="navbar-expand-lg navbar-light bg-warning bg-gradient bg-opacity-25 fw-bold fs-5">
+        <div class="row">
+            <div class="col-lg-2 d-none d-lg-block"></div>
+            <div class="col-1 pe-0 d-lg-none" id="navLeftMenu"></div>
+			<%@include file="/WEB-INF/views/base/nav.jsp"%>
+        </div>
     </nav>
           
 	<!-- 섹션 -->
-    <section class="mt-3">
+    <section class="mt-1">
         <div class="row">
 
             <!-- 왼쪽 사이드메뉴 -->
-            <div class="col-2 pe-0" id="leftDiv">
+            <div class="col-lg-2 d-none d-lg-block" id="leftDiv">
                 <aside id="leftAside">
-                    <!-- 실질적인 왼쪽 사이드메뉴 내용 -->
-                   
+                   <div id="pViewleft">
+                		<p class="card-text mdName">
+                			[CJ] 햇반/컵반 버터장조림 비빔밥
+                			<br>
+                			<span class="mdPrice">10,000원</span>
+                		</p>
+                		<p class="card-text mb-auto productNum fs-4"><i class="bi bi-dash-square-fill" onclick="minusFn(this)"></i> 1 <i class="bi bi-plus-square-fill" onclick="plusFn(this)"></i></p>
+				        <hr>
+				        <div class="leftViewTotal">
+				        	<span class="fs-5 totalPrice">합계 : <span class="fs-3">10,000원</span></span>
+				        </div>
+				        <div class="leftViewButtonDiv">
+						   	<button class="leftViewButton btn btn-outline-success me-2">장바구니</button>
+						  	<button class="leftViewButton btn btn-success me-2">바로구매</button>
+				        </div>
+                	</div>
                 </aside>
             </div>
 
             <!-- 메인 -->
-            <div class="col-8">
+            <div class="col-12 col-sm-9 col-md-10 col-lg-8">
                 <article id="mainSection">
                 
                 	<!-- view 상단 -->
-                	<div class="col-12">
+                	<div class="pViewCard">
 				      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-				        <div class="col-auto d-lg-block">
+				        <div class="col-auto d-lg-block viewStarM">
 				        	<img src="<%=request.getContextPath()%>/resources/img/CJ/컵밥,햇반/2.jpg" alt="d" class="img-fluid viewImg">
 				        	<div>
 				        		<span class="viewStar">평점 : 
@@ -79,49 +96,42 @@
 				      </div>
 				    </div>
 				    <!-- subMenu -->
-				    <div class="btn-group subMenuGroup d-flex justify-content-center" role="group" aria-label="Basic radio toggle button group">
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" onclick="location.href='#pView'">
-					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio1">상세 정보</label>
+				    <div class="subMenuGroup">
+					  <input type="radio" class="subMenuCheck" name="subRadio" id="subRadio1" onclick="subRadio1()">
+					  <label class="subMenuButton" for="subRadio1">상세 정보</label>
 					
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" onclick="location.href='#pDelivery'">
-					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio2">배송 정보</label>
+					  <input type="radio" class="subMenuCheck" name="subRadio" id="subRadio2" onclick="subRadio2()">
+					  <label class="subMenuButton" for="subRadio2">배송 정보</label>
 					
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" onclick="location.href='#pCancel'">
-					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio3">취소 규정</label>
+					  <input type="radio" class="btn-check" name="subRadio" id="subRadio3" onclick="subRadio3()">
+					  <label class="subMenuButton" for="subRadio3">취소 규정</label>
 					  
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off" onclick="location.href='#reviewTop'">
-					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio4">리뷰</label>
+					  <input type="radio" class="subMenuCheck" name="subRadio" id="subRadio4" onclick="subRadio4()">
+					  <label class="subMenuButton" for="subRadio4">리뷰</label>
 					</div>
 					
-					<!-- subMenu 모바일 -->
-				    <div class="btn-group subMenuGroupM d-flex justify-content-center" role="group" aria-label="Basic radio toggle button group">
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" onclick="location.href='#pView'">
-					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio1">상세</label>
+					<!-- 펼치기 -->
+					<div class="unfold">
+						<!-- 상세페이지 -->
+						<div class="d-flex justify-content-center" id="pView">
+							<img src="<%=request.getContextPath()%>/resources/img/CJ/볶음밥/1_1.jpg" alt="상세페이지" class="img-fluid">
+						</div>
+						
+						<!-- 배송정보 -->
+						<div class="d-flex justify-content-center" id="pDelivery">
+							<img src="<%=request.getContextPath()%>/resources/img/배송.png" alt="배송안내" class="img-fluid">
+						</div>
 					
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" onclick="location.href='#pDelivery'">
-					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio2">배송</label>
-					
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" onclick="location.href='#pCancel'">
-					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio3">취소</label>
-					  
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off" onclick="location.href='#reviewTop'">
-					  <label class="btn btn-outline-secondary subMenuButton" for="btnradio4">리뷰</label>
+						<!-- 취소 규정 -->
+						<div class="d-flex justify-content-center" id="pCancel">
+							<img src="<%=request.getContextPath()%>/resources/img/취소.png" alt="취소규정" class="img-fluid">
+						</div>
+					   
 					</div>
-					
-					<!-- 상세페이지 -->
-					<div class="d-flex justify-content-center" id="pView">
-						<img src="<%=request.getContextPath()%>/resources/img/CJ/볶음밥/1_1.jpg" alt="상세페이지" class="img-fluid">
-					</div>
-					
-					<!-- 배송정보 -->
-					<div class="d-flex justify-content-center" id="pDelivery">
-						<img src="<%=request.getContextPath()%>/resources/img/배송.png" alt="배송안내" class="img-fluid">
-					</div>
-					
-					<!-- 취소 규정 -->
-					<div class="d-flex justify-content-center" id="pCancel">
-						<img src="<%=request.getContextPath()%>/resources/img/취소.png" alt="취소규정" class="img-fluid">
-					</div>
+					    <!-- 상품 더보기 버튼 -->
+					    <div class="plusView" onclick="unfold()">
+					    	+ 자세히보기
+					    </div>
 					
 					<!-- 리뷰 -->
 					<div id="review">
@@ -362,9 +372,6 @@
 								</tr>
 							</tbody>
 						</table>
-						
-						
-						
 					</div>
 					
                 </article>
@@ -375,7 +382,7 @@
 
 
              <!-- 오른쪽 사이드메뉴 -->
-            <div class="col-2 d-none d-sm-block">
+            <div class="col-sm-3 col-md-2 col-lg-2 d-none d-sm-block">
                 <!-- 실질적인 오른쪽 사이드메뉴 내용 -->
                 <%@include file="/WEB-INF/views/base/rightAside.jsp"%>
             </div>
@@ -393,6 +400,7 @@
     <div class="topM" onclick="moveTop();">
         ↑Top
     </div>
+    
 
     <!-- 푸터 -->
     <footer class="py-3 my-4">
@@ -402,7 +410,9 @@
     <!-- 자바스크립트 -->
     <script src="https://kit.fontawesome.com/b30bc4e0a9.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/index.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/productView.js"></script>
 </body>
 </html>

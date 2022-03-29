@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-/* main ========================================================================================== */
+/* index ========================================================================================== */
 
 /*상품 카드*/
 .card{
@@ -9,29 +9,17 @@
 	max-width : 300px;
 	margin-bottom : 20px;
 }
+
 /*찜*/
 .hoverHeart{
 	margin : 0;
-	max-width : 35px;
-	z-index : 1;
-	position : absolute;
-	top : 30%;
-	left : 35%;
-	display:none;
+	max-width : 28px;
 }
+
 /*장바구니*/
 .hoverCart{
 	margin : 0;
 	max-width : 35px;
-	z-index : 1;
-	position : absolute;
-	top : 30%;
-	left : 55%;
-	display:none;
-}
-
-.popular:hover .hoverHeart, .popular:hover .hoverCart{
-	display:inline-block;
 }
 
 .popular:hover{
@@ -67,8 +55,8 @@
 	max-width : 50px;
 	z-index : 1;
 	position : absolute;
-	top : 175px;
-	left : 152px;
+	top : 50%;
+	left : 65%;
 }
 /*오른쪽 side 메뉴*/
 .rAside{
@@ -132,6 +120,85 @@
 	left : 80%;
 }
 
+@media screen and (max-width : 600px){
+	.bestMenu{
+		display : none;
+	}
+	
+	.bestRecipe{
+		display : none;
+	}
+	
+	.bestMenuM{
+		display : block;
+	}
+	
+	.bestRecipeM{
+		display : block;
+	}
+}
+
+@media screen and (min-width : 600px){
+	.bestMenu{
+		display : block;
+	}
+	
+	.bestRecipe{
+		display : block;
+	}
+	
+	.bestMenuM{
+		display : none;
+	}
+	
+	.bestRecipeM{
+		display : none;
+	}
+}
+
+.cardDivM{
+	text-align : center;
+}
+
+.cardM{
+	margin : 15px;
+	display : inline-block;
+	border : 1px solid #DCDCDC;
+	border-radius : 10px;
+	width : 150px;
+	height : auto;
+}
+
+.recipeCardM{
+	height : auto;
+}
+
+.recipeMDiv{
+	height : 100px;
+	display : flex;
+	border : 1px solid #DCDCDC;
+	border-radius : 10px;
+	margin-top : 10px;
+}
+
+.recipeMImg{
+	margin : 0px;
+	max-width : 100px;
+	height : 100px;
+	display : inline-block;
+}
+
+.recipeMContent{
+	margin : 0px;
+	width : 270px;
+	height : 100px;
+	display : inline-block;
+}
+
+.discount{
+	color : red;
+}
+
 /* productList ========================================================================================== */
 
 /*section title*/
@@ -139,15 +206,7 @@
 	text-align : center;
 	margin-top : 40px;
 }
-/*경로*/
-.topBar{
-	margin-top : 5px;
-	font-size : 0.8em;
-}
 
-.topHr{
-	margin-top : 0px;
-}
 /*상품 호버*/
 .productAll:hover .hoverHeart, .productAll:hover .hoverCart{
 	display:inline-block;
@@ -179,30 +238,8 @@
     z-index : 1;
 }
 
-.mlAsideDiv{
-	background-color : whitesmoke;
-	border-radius : 10px;
-	width : 150px;
-	position : fixed;
-	left : 130px;
-	top : 20px;
-	display : none;
-}
-
-.mMenu{
-	width : 50px;
-	height : 70px;
-	font-size : 1.2em;
-	text-align : center;
-	display : none;
-}
-
-.mlAside{
-	position : relative;
-	left : 10%;
-	top : 40px;
-	display : none;
-	
+.filter>i{
+	font-size : 30px;
 }
 
 /* productView ========================================================================================== */
@@ -213,8 +250,20 @@
 	max-width : 400px;
 }
 
+.pViewCard{
+	max-width : 900px;
+	margin : 0 auto;
+}
+
 .viewStar{
 	float : right;	
+}
+
+@media screen and (max-width : 600px){
+	.viewStar{
+		position : relative;
+		left : -35px;
+	}
 }
 
 .productNum i:hover{
@@ -242,18 +291,46 @@
 	max-height : 150px;
 }
 
-/*서브 메뉴 그룹 모바일*/
-.subMenuGroupM{
-	display : none !important;
+/*서브 메뉴*/
+.subMenuGroup{
+	display : flex;
+	justify-content : center;
+	
 }
 
-/*서브 메뉴*/
 .subMenuButton{
 	width : 100%;
 	height : 100%;
 	max-width : 200px;
 	max-height : 38px;
 	background-color : white;
+	border : 1px solid #6c757d;
+	border-radius : 3px;
+	color : #6c757d;
+	text-align : center;
+	font-size : 1.1rem;
+}
+
+.subMenuButton+label{
+	padding : 6px 12px;
+}
+
+.subMenuCheck{
+	display : none;
+}
+
+.subMenuButton:hover{
+	background-color : #6c757d;
+	color : white;
+	cursor : pointer;
+}
+
+@media screen and (min-width : 600px){
+	.subMenuButton:hover{
+		background-color : #6c757d !important;
+		color : white !important;
+		cursor : pointer;
+	}
 }
 
 #pView{
@@ -350,4 +427,56 @@
 	#reviewTable{
 		display : none;
 	}
+}
+
+.plusView{
+	margin : 0 auto;
+	padding : 20px 20px;
+	width : 150px;
+	height : 70px;
+	border-radius : 15px;
+	background-color : 	#BC8F8F;
+	color : white;
+	font-weight : bold;
+	font-size : 1.2rem;
+	text-align : center;
+	position : relative;
+	top : -85px;	
+}
+
+.plusView:hover{
+	cursor : pointer;
+	background-color : #E9967A;
+}
+
+.unfold{
+	overflow : hidden;
+	height : 500px;
+}
+
+#pViewleft{
+	width : 300px;
+	height : 500px;
+	display : none;
+	border : 1px solid black;
+	position : relative;
+	top : 15%;
+	left : 100px;
+}
+
+#pViewleft>hr{
+	margin : 50px 0px 200px 0px;
+}
+
+.leftViewTotal{
+	height : 70px;
+	margin-top : 50px;
+}
+
+.leftViewButtonDiv{
+	text-align : center;
+}
+
+.leftViewButton{
+	width : 135px;
 }
