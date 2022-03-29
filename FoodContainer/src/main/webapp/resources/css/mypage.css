@@ -9,25 +9,19 @@
 .left-nav-text {
 	color: black;
 	font-size: 15px;
+	font-weight: normal;
 }
-#leftAside{
+.offcanvas-title2{
+	font-weight: bold; padding: 0.5rem 1rem;
+}
+#leftAside, #leftAside1{
     display: flex;
     border-radius: 5px;
     transition: all 0.5s;
     margin: 0 auto;
 }
-#leftAside #menu_size_up{
-    cursor: pointer;
-    font-size: large;
-    border-radius: 5px;
-    background-color: whitesmoke;
-}
-#leftAside #menu_size_down{
-    cursor: pointer;
-    font-size: large;
-    text-align: center;
-    border-radius: 5px;
-    background-color: whitesmoke;
+.mypage-nav-icon{
+	font-size: 20px; color: gray;
 }
 /* 왼쪽nav부분 */
 
@@ -102,7 +96,7 @@
 /* 리뷰 별점부분 */
 
 #result-star{
-	font-size: 1.5rem; font-weight: bold; color: blue;
+	font-size: 1.5rem; font-weight: bold; color: black;
 }
 /* 별점 옆에 텍스트 */
 
@@ -269,7 +263,12 @@
 }
 /* 주문상세 버튼 */
 
-
-
+.main-table{
+	width:100%;overflow:auto;
+}
+.main-table2{
+	white-space:nowrap;border-collapse:collapse;
+}
+/* 테이블 가로 넘치면 스크롤생겨버리기 */
 
 

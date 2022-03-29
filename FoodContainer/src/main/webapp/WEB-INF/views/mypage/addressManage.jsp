@@ -14,7 +14,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/base.css">
-	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/mypage.css" />
 	<script src="<%=request.getContextPath() %>/resources/js/jquery-3.6.0.min.js"></script>
 	<script src="<%=request.getContextPath() %>/resources/js/mypage.js"></script>
@@ -33,16 +32,25 @@
 	</header>
 
     <!-- 네비게이션 바 -->
-    <nav class="navbar-expand-lg navbar-light bg-light fw-bold">
-        <%@include file="/WEB-INF/views/base/nav.jsp"%>
+    <nav class="navbar-expand-lg navbar-light bg-warning bg-gradient bg-opacity-25 fw-bold fs-5">
+        <div class="row">
+            <div class="col-lg-2 d-none d-lg-block"></div>
+            
+            <div class="col-2 col-sm-1 pe-0 d-lg-none" id="navLeftMenu">
+            	<%@include file = "mypagenav2.jsp" %>
+            </div>
+
+			<%@include file="/WEB-INF/views/base/nav.jsp"%>
+
+        </div>
     </nav>
 
     <!-- 섹션 -->
-    <section class="mt-3">
+    <section class="mt-1">
         <div class="row">
 
             <!-- 왼쪽 사이드메뉴 -->
-            <div class="col-2 pe-0" id="leftDiv">
+            <div class="col-lg-2 d-none d-lg-block">
                 <aside id="leftAside">
                     <!-- 실질적인 왼쪽 사이드메뉴 내용 -->
                     <%@include file = "mypagenav.jsp" %>
@@ -50,7 +58,7 @@
             </div>
 
             <!-- 메인 -->
-            <div class="col-8">
+            <div class="col-12 col-sm-9 col-md-10 col-lg-8">
                 <article id="mainSection \">
                     <!-- 실질적인 메인 내용 -->
                     <div class="col-md-11">
@@ -101,7 +109,7 @@
             </div>
 
             <!-- 오른쪽 사이드메뉴 -->
-            <div class="col-2 d-none d-sm-block">
+            <div class="col-sm-3 col-md-2 col-lg-2 d-none d-sm-block">
                 <!-- 실질적인 오른쪽 사이드메뉴 내용 -->
                 <%@include file="/WEB-INF/views/base/rightAside.jsp"%>
             </div>
