@@ -80,7 +80,7 @@
 				<!-- pc화면 -->
 					<!-- 인기메뉴 -->
 					<article class="bestMenu">
-						<p class="fs-3">인기메뉴</p>
+						<p class="fs-5 my-2 fw-bold">인기메뉴</p>
 						<hr>
 							<div class="row">
 								<%for(int i=0; i<=3; i++){ %>
@@ -117,7 +117,7 @@
 					<br>
 					<!-- 베스트 레시피 -->
 					<article class="bestRecipe">
-						<p class="fs-3">베스트 레시피</p>
+						<p class="fs-5 my-2 fw-bold">베스트 레시피</p>
 						<hr>
 						<div class="container">
 							<div class="row">
@@ -149,7 +149,7 @@
 					
 				<!-- 모바일 화면 -->	
 					<article class="bestMenuM">
-						<p class="fs-5">인기메뉴</p>
+						<p class="fs-5 my-2 fw-bold">인기메뉴</p>
 						<hr>
 						<div class="cardDivM">
 							<%for(int i=0; i<4; i++){ %>
@@ -178,7 +178,7 @@
 						</div>
 					</article>
 					<article class="bestRecipeM">
-						<p class="fs-5">베스트 레시피</p>
+						<p class="fs-5 my-2 fw-bold">베스트 레시피</p>
 						<hr>
 						<div class="recipeCardM">
 							<%for(int i=0; i<3; i++){ %>
