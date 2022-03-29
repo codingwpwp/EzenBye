@@ -260,10 +260,11 @@
 							  "width" : "100%",
 							  "background-color" : "#FFEFD5",
 							  "z-index" : "10",
-							  "width" : "30px",
+							  "width" : "54px",
 							  "height" : "40px",
-							  "border-radius" : "10px",
-							  "text-align" : "center;"
+							  "border" : "1px soild #DCDCDC",
+							  "border-radius" : "5px",
+							  "text-align" : "center"
 							});
 		}else if(yScroll < navTop){
 			$(".filter").css({"position" : "static", 

@@ -75,7 +75,7 @@
 <div class="mlAside">
 
 	<!-- 모바일 -->
-	<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+	<div class="offcanvas offcanvas-start canvasM" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 		<div class="offcanvas-header">
 			<h5 class="offcanvas-title" id="offcanvasExampleLabel">메뉴</h5>
 		    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>

@@ -26,7 +26,7 @@
     <nav class="navbar-expand-lg navbar-light bg-warning bg-gradient bg-opacity-25 fw-bold fs-5">
         <div class="row">
             <div class="col-lg-2 d-none d-lg-block"></div>
-            <div class="col-1 pe-0 d-lg-none" id="navLeftMenu"></div>
+            <div class="col-2 col-sm-1 pe-0 d-lg-none" id="navLeftMenu"></div>
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
         </div>
     </nav>
@@ -87,8 +87,10 @@
 								<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 popular d-flex justify-content-center">
 									<div class="card" style="width: 18rem;">
 									  <img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/1.png" class="card-img-top" alt="비비고만두">
-									  <img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
-									  <img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="cart(this)">
+									  <div class="indexSubImg">
+									  	<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+										<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="cart(this)">
+									  </div>
 									  
 									  <div class="card-body">
 									    <p class="card-text">
@@ -153,6 +155,10 @@
 							<%for(int i=0; i<4; i++){ %>
 							<div class="cardM">
 								<img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/1.png" class="img-fluid" alt="비비고만두">
+								<div class="indexSubImgM">
+									<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+									<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="cart(this)">
+								</div>
 								<div class="cardMContent">
 									<span style="color:red;">[인기]</span><br>
 									<span class="productName">비비고왕교자</span><br>
@@ -181,6 +187,7 @@
 									<img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/1.png" class="img-fluid" alt="비비고만두">
 								</div>
 								<div class="recipeMContent">
+									<img src="<%=request.getContextPath()%>/resources/img/금메달.png" class="img-fluid medalM" alt="1등">
 									<div>[유저닉네임]</div>
 									<div>비비고왕교자</div>
 									<div>조회수</div>

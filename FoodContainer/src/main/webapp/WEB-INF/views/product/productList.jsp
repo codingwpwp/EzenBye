@@ -26,7 +26,7 @@
     <nav class="navbar-expand-lg navbar-light bg-warning bg-gradient bg-opacity-25 fw-bold fs-5" id="navBar">
         <div class="row">
             <div class="col-lg-2 d-none d-lg-block"></div>
-            <div class="col-1 pe-0 d-lg-none" id="navLeftMenu">
+            <div class="col-2 col-sm-1 pe-0 d-lg-none" id="navLeftMenu">
             	<div class="filter">
 	           		<i class="bi bi-funnel" data-bs-toggle="offcanvas" href="#offcanvasExample"></i>
 	           		<%@include file="lAside.jsp"%>
@@ -62,8 +62,10 @@
 							<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center">
 								<div class="card" style="width: 18rem;">
 								  <img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/2.jpg" class="card-img-top" alt="비비고만두" onclick="location.href='productView.do'">
-								  <img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
-								  <img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="cart(this)">
+								  <div class="indexSubImg">
+								 	 <img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+								 	 <img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="cart(this)">
+								  </div>
 									  
 								  <div class="card-body" onclick="location.href='productView.do'">
 								    <p class="card-text">

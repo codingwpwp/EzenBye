@@ -22,6 +22,18 @@
 	max-width : 35px;
 }
 
+.indexSubImg{
+	position : absolute;
+	left : 60%;
+	display : none;
+}
+
+@media screen and (min-width : 600px){
+	.popular:hover .indexSubImg{
+		display : block;
+	}
+}
+
 .popular:hover{
 	cursor:pointer;
 }
@@ -58,6 +70,14 @@
 	top : 50%;
 	left : 65%;
 }
+
+.medalM{
+	max-width : 50px;
+	position : absolute;
+	left : 290px;
+	margin-top : 18px;
+}
+
 /*오른쪽 side 메뉴*/
 .rAside{
 	width : 100px; 
@@ -208,12 +228,10 @@
 }
 
 /*상품 호버*/
-.productAll:hover .hoverHeart, .productAll:hover .hoverCart{
-	display:inline-block;
-}
-
-.productAll:hover{
-	cursor:pointer;
+@media screen and (min-width : 600px){
+	.productAll:hover .indexSubImg{
+		display : block;
+	}
 }
 
 /*왼쪽 aside*/
@@ -238,8 +256,27 @@
     z-index : 1;
 }
 
+.filter{
+	border : 1px solid 	#DCDCDC;
+	border-radius : 5px;
+	width : 54px;
+	height : 40px;
+	text-align : center;
+	color : #696969;
+}
+
+.mlAside{
+	text-align : left;
+}
+
+.canvasM{
+	max-width : 60%;
+}
+
 .filter>i{
 	font-size : 30px;
+	position : relative;
+	top : -2px;
 }
 
 /* productView ========================================================================================== */
