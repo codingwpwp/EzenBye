@@ -1,0 +1,368 @@
+a{
+	color:black;
+	text-decoration: none; 	
+}
+a:hover{
+	color:black;
+	
+}
+form.loginfrm{
+    width:100%;
+    height:100%;
+    margin:auto;
+    text-align: center;
+    border:1px solid black;
+    border-radius:5px;
+    max-width: 700px;
+}
+.col-12.head{
+    margin-top: 2%;
+    text-align: center;
+}
+
+/* 로그인 아이디 시작*/
+.col-md-12.col-sm-12.md-1.id{
+    padding-bottom: 2%;
+}
+.col-md-12.col-sm-12.md-1.id input[type=text]{
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    max-height: 60px;
+    margin-bottom: 3%;
+}
+/* 로그인 아이디 끝*/
+
+/* 로그인 패스워드 시작*/
+.col-md-12.col-sm-12.mb-1.pw{
+    padding-bottom: 2%;
+}
+.col-md-12.col-sm-12.mb-1.pw input[type=text]{
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    max-height: 60px;
+    margin-bottom: 3%;
+   
+}
+/* 로그인 패스워드 끝*/
+.col-md-12.col-sm-12.col-12.loginbtn{
+    padding-bottom: 2%;
+    margin-bottom: 1%;
+}
+/*로그인 버튼 시작*/
+.col-12.loginbtn button{
+    margin-top: 3%;
+    width: 100%;
+    height: 90%;
+    max-height: 50px;
+    max-width: 400px;
+
+}
+/*로그인 버튼 끝*/
+
+/* 자동 입력 방지 시작*/
+
+.col-md-12.col-sm-6.col-12.mb-1.auto input[type=text]{
+    width: 100%;
+    height: 40px;
+    max-width: 300px;
+}
+.col-md-12.col-sm-6.col-12.mb-1.auto input[type=button]{
+    width: 100%;
+    max-width: 90px;
+    height: 40px;
+}
+.col-md-12.col-sm-6.col-12.mb-1.autoin input[type=text]{
+    width: 100%;
+    height: 40px;
+    max-width: 300px;
+}
+.col-md-12.col-sm-6.col-12.mb-1.autoin input[type=button]{
+    width: 100%;
+    max-width: 90px;
+    height: 40px;
+}
+@media screen and (max-width:380px){
+    #codeinput{
+        width: 100%;
+        max-width:220px;
+    }    
+}
+@media screen and (max-width:380px){
+    #codebtn{
+        width: 100%;
+        max-width:220px;
+    }    
+}
+/* 자동 입력 방지 끝*/
+
+/*아이디 저장 찾기 시작 */
+.row.find{
+    display: inline;
+}
+.col-md-4.col-sm-3.col-4.idsave{
+    display: inline;
+}
+.col-md-4.col-sm-3.col-4.idfind{
+    display: inline;
+}
+.col-md-4.col-sm-3.col-4.pwfind{
+    display: inline;
+}
+
+/*아이디 저장 찾기 끝*/
+
+/* 회원가입 비회원 배송 조회 버튼*/
+.btn.btn-dark:hover{
+    background:rgb(248, 247, 246);
+    color:#050505;
+}
+
+.btn.btn-secondary.code:hover{
+    background: #4e4c4c;
+    color: #f5f7f2;
+    box-shadow: 0 0 5px #84898a,
+                0 0 10px #84898a,
+                0 0 20px #84898a,
+                0 0 80px #84898a;
+    
+}
+.row.lookup{
+    margin-bottom: 5%;
+}
+
+/*<===================================아이디 찾기===================================>*/
+/*모바일버전*/
+@media screen and (max-width:380px){
+    .leftform{
+        padding-bottom: 5%;
+    }    
+}@media screen and (max-width:380px){
+    .rightform{
+        padding-bottom: 5%;
+    }    
+}
+@media screen and (min-width:576px){
+    .leftform{
+        padding-bottom: 3%;
+    }    
+}
+@media screen and (min-width:576px){
+    .rightform{
+        padding-bottom: 2%;
+    }    
+}
+.container.head{
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+/* 아이디 찾기 헤드부분*/
+.row.head{
+    text-align: center;
+}
+
+.row.findform{
+    border:1px solid black;
+}
+/* 간편 아이디 찾기 폼*/
+form.easyfind{
+    padding-top: 14%;
+    padding-bottom: 10%;
+    margin:auto;
+    width:100%;
+    max-width: 400px;
+    height:100%;
+       
+}
+@media screen and (max-width:380px){
+    #emailinput{
+        width:100%;
+        max-width:157px;
+    }    
+}
+/*이메일 아이디 찾기 폼*/
+form.emailfind{
+    padding-top: 8%;
+    padding-bottom: 10%;
+    margin:auto;
+    width:100%;
+    height:100%;
+  
+    
+}
+strong{
+    color: red;
+}
+/* 모바일 버전 화면 시작 */
+@media screen and (max-width:380px){
+    #leftDiv{
+        display: none;
+    }    
+}
+@media screen and (max-width:380px){
+    #rightdiv{
+        display: none;
+    }    
+}
+@media screen and (max-width:380px){
+    #rightAside{
+        display: none;
+    }    
+}
+
+@media screen and (min-width:1500px){
+    #rightdiv{
+        display: none;
+    }    
+}
+@media screen and (min-width:1500px){
+    #rightAside{
+        display: none;
+    }    
+}
+/* 모바일 버전 화면 끝*/
+
+/*input부분*/
+input.findinput{
+    width: 100%;
+    max-width: 330px;
+    height: 40px;
+    margin-top: 2%;
+    
+}
+input.findbtn {
+    margin-top: 5%;
+    width: 100%;
+    max-width: 330px;
+    height: 60px;
+}
+input.pwfindbtn {
+    margin-top: 5%;
+    width: 100%;
+    max-width: 470px;
+    height: 60px;
+}
+button.btn.btn-secondary.emailbtn{
+    width: 100%;
+    max-width: 120px;
+}
+/*버튼 부분*/
+button.btn.btn-secondary.emailbtn:hover{
+    background: rgba(255,193,7,1);
+    background: -moz-linear-gradient(45deg, rgba(255,193,7,1) 0%, rgba(255,87,34,1) 100%);
+    background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(255,193,7,1)), color-stop(100%, rgba(255,87,34,1)));
+    background: -webkit-linear-gradient(45deg, rgba(255,193,7,1) 0%, rgba(255,87,34,1) 100%);
+    background: -o-linear-gradient(45deg, rgba(255,193,7,1) 0%, rgba(255,87,34,1) 100%);
+    background: -ms-linear-gradient(45deg, rgba(255,193,7,1) 0%, rgba(255,87,34,1) 100%);
+    background: linear-gradient(45deg, rgba(255,193,7,1) 0%, rgba(255,87,34,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc107', endColorstr='#ff5722', GradientType=1 );
+}
+button.btn.btn-secondary.emailbtn:before{
+    background: rgba(255,193,7,1);
+    background: -moz-linear-gradient(45deg, rgba(255,193,7,1) 0%, rgba(255,87,34,1) 100%);
+    background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(255,193,7,1)), color-stop(100%, rgba(255,87,34,1)));
+    background: -webkit-linear-gradient(45deg, rgba(255,193,7,1) 0%, rgba(255,87,34,1) 100%);
+    background: -o-linear-gradient(45deg, rgba(255,193,7,1) 0%, rgba(255,87,34,1) 100%);
+    background: -ms-linear-gradient(45deg, rgba(255,193,7,1) 0%, rgba(255,87,34,1) 100%);
+    background: linear-gradient(45deg, rgba(255,193,7,1) 0%, rgba(255,87,34,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc107', endColorstr='#ff5722', GradientType=1 );
+}
+
+.col-md-6.col-sm-6.col-12.mb-1.mail{
+    border-right: 1px solid;
+}
+.row.findform{
+
+    background-color: rgb(230, 228, 228);
+    
+}
+
+
+/*<====================================아이디 확인====================================>*/
+form.idcheck{
+    text-align: center;
+    padding-top: 8%;
+    padding-bottom: 10%;
+    margin:auto;
+    width:100%;
+    max-width: 800px;
+    height:100%;
+    background-color: rgb(230, 228, 228);
+}
+
+input.btn.btn-secondary.pwdfind{
+    margin-top: 1%;
+    max-width: 170px;
+    width: 100%;
+    height: 100%;
+    max-height: 50px;
+}
+input.btn.btn-dark.login{
+    margin-top: 1%;
+    margin-left: 1%;
+    max-width: 170px;
+    width: 100%;
+    height: 100%;
+    max-height: 50px;
+}
+@media screen and (max-width:380px){
+   input.btn.btn-dark.login{
+      width:100%;
+      max-width:120px;
+      height:40px;
+       margin-top: 2%;
+    }    
+}
+@media screen and (max-width:380px){
+   input.btn.btn-secondary.pwdfind{
+      width:100%;
+      max-width:120px;
+      height:40px;
+       margin-top: 2%;
+    }    
+}
+/*<====================================비밀번호 찾기====================================>*/
+form.pwfind{
+    text-align: center;
+    padding-top: 4%;
+    padding-bottom: 6%;
+    margin:auto;
+    width:100%;
+    max-width: 800px;
+    height:100%;
+    background-color: rgb(230, 228, 228);
+}
+
+
+@media screen and (max-width:380px){
+   input.findemailinput{
+      width:100%;
+      max-width:150px;
+      height:40px;
+    }    
+}
+
+
+@media screen and (min-width:570px){
+   input.findemailinput{
+      width:100%;
+      max-width:230px;
+      height:40px;
+       margin-top: 2%;
+    }    
+}
+@media screen and (min-width:865px){
+   input.findemailinput{
+      width:100%;
+      max-width:330px;
+      height:40px;
+       margin-top: 2%;
+    }    
+}
+@media screen and (max-width:380px){
+   ::placeholder{
+      font-size:0.9em;
+    }    
+}
