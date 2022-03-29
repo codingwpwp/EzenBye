@@ -110,7 +110,7 @@
 
 							</div>
 							<div class="col-sm-2  col-12">
-								<div class="sumnail" name="sumnailimg">
+								<div class="thumnail" name="thumnailimg">
 									<svg xmlns="http://www.w3.org/2000/svg" width="140"
 										height="140" fill="currentColor" class="bi bi-images"
 										viewBox="0 0 16 16">
@@ -139,10 +139,10 @@
 						<div class="row">
 							<div class="col-sm-12 col-12">
 								<div class="d-flex button">
-									<button onclick="locaiton.href='recipemain.do'" class="btn btn-primary">목록</button>
-									<button class="btn btn-secondary">수정</button>
-									<button class="btn btn-danger">삭제</button>
-								</div>
+								<input type="button" value="목록" class="btn btn-primary" onclick="location.href='recipemain.do'">
+								<input type="button" value="수정" class="btn btn-secondary" onclick="location.href='recipeinsert.do'">
+								<input type="button" value="삭제" class="btn btn-danger">
+								</div> 
 							</div>
 							<div class="col-sm-12 col-12">
 								<button onclick="best();" class="btn btn-success">베스트

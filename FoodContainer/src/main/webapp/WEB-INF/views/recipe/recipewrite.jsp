@@ -51,7 +51,7 @@
                 작성하지 않는 경우는 절대 건들지 않음.
                 base.js에 id="navLeftMenu"와 관련된 코드가 작성되어있음.
             -->
-			<div class="col-1 pe-0 d-lg-none border border-dark" id="navLeftMenu">
+			<div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark" id="navLeftMenu">
 				d
 				<!-- 여기에 작성 -->
 			</div>
@@ -98,7 +98,7 @@
 								<div class="px-0 col-md-6 col-sm-7 col-10 ">
 									<div class="px-0" id="summernote"></div>
 								</div>
-								<div class="col-md-3 col-sm-3  col-12 sumnail" id="sumnail">
+								<div class="col-md-3 col-sm-3  col-12 thumnail" id="thumnail">
 									<a href="#" onclick="popup();"><svg
 											xmlns="http://www.w3.org/2000/svg" width="200" height="200"
 											fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">

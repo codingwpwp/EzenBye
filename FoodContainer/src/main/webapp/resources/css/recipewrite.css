@@ -59,7 +59,7 @@ select.select1 {
 	margin-top: 4%;
 }
 /*썸네일 사진*/
-.sumnail {
+.thumnail {
 	border: 1px solid black;
 	width: 100%;
 	max-width: 280px;
@@ -97,7 +97,7 @@ input.btn.btn-primary {
 .row.title {
 	margin-top: 2%;
 }
-/*모바일버전*/
+/*모바일벚*/
 @media screen and (max-width:380px) {
 	#hap {
 		text-align: center;
@@ -145,7 +145,7 @@ input.btn.btn-primary {
 	}
 }
 @media (max-width :380px) {
-	#sumnail {
+	#thumnail {
 		width: 100%;
 		max-width: 250px;
 		height: 100%;
