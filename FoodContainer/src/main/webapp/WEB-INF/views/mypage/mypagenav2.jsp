@@ -1,8 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	<nav class="nav flex-column left-nav nav-light bg-light" id="leftAside">
-        <div id="asdieMenu">
-			<p class="fs-3 nav-mypage">마이<br>페이지</p>
+<a class="btn btn-link" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+  <i class="bi bi-three-dots-vertical mypage-nav-icon"></i>
+</a>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title offcanvas-title2" id="offcanvasExampleLabel">마이페이지</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+      <nav class="nav flex-column left-nav nav-light bg-light" id="leftAside1">
+        <div id="asdieMenu1">
 			<p class="fs-5 nav-title">쇼핑정보</p>
 	  		<a class="nav-link active nav1 left-nav-text" aria-current="page" href="mypage_lookup.do">주문배송조회</a>
 	  		<a class="nav-link nav2 left-nav-text" href="mypage_cancle.do">취소</a>
@@ -20,5 +29,6 @@
 	  		<a class="nav-link nav11 left-nav-text" href="mypage_memberSecession.do">회원탈퇴</a>
   		</div>
 	</nav>
-	
-	
+    </div>
+  </div>
+</div>
