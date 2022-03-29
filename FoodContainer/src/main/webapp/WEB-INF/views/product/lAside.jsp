@@ -75,11 +75,6 @@
 <div class="mlAside">
 
 	<!-- 모바일 -->
-	<a class="btn btn-secondary mMenu" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-		  메<br>
-		  뉴
-	</a>
-		
 	<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 		<div class="offcanvas-header">
 			<h5 class="offcanvas-title" id="offcanvasExampleLabel">메뉴</h5>
