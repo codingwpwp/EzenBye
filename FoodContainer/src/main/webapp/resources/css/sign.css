@@ -1,0 +1,150 @@
+
+/*로그인 폼*/
+form{
+    width: 100%;
+    max-width: 600px;
+    height: 100%;
+    margin: auto;
+    text-align: left;
+    border:1px solid gray;
+    border-radius:5px;
+
+}
+.check{
+    display:none;
+    margin:10px;
+    position:absolute;
+    height:30px;
+    font-size:9pt;
+}
+/* 회원가입 헤드*/
+.signhead{
+    text-align: center;
+    padding-top: 3%;
+}
+/*아이디*/
+.idinput{
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    max-height: 60px;
+}
+/*비밀번호*/
+.pwinput{
+    width: 100%;
+    max-width: 400px;
+    height: 40px;
+ 
+}
+/*핸드폰*/
+.phselect{
+    width: 100%;
+    max-width: 90px;
+   height: 40px;
+    
+}
+.phinput{
+    width: 100%;
+    max-width: 120px;
+    height: 40px;
+   
+}
+@media screen and (max-width:380px){
+    .phinput{
+        width: 100%;
+        max-width: 80px;
+    }    
+}@media screen and (max-width:380px){
+    .phselect{
+        width: 100%;
+        max-width: 80px;
+    }    
+}
+/*닉네임*/
+.nkinput{
+    width: 100%;
+    max-width: 400px;
+    height: 40px;
+    
+}
+/*이메일*/
+.emailinput{
+    width: 100%;
+    max-width: 400px;
+    height: 40px;
+    
+}
+/*추천인*/
+.recominput{
+    width: 100%;
+    max-width: 400px;
+    height: 40px;
+}
+/* 취소 회원가입 버튼*/
+input.btn.btn-secondary.can{
+    float:right;
+    width: 100%;
+    height: 50px;
+    max-width: 200px;
+    margin-top: 3%;
+}
+.btn.btn-dark{
+    width: 100%;
+    max-width: 200px;
+    height: 50px;
+    margin-top: 3%;
+    margin-bottom: 2%;
+}
+
+
+/* 모바일 버전 화면 끝*/
+
+
+.red{
+    color:red;
+}
+@media screen and (max-width:380px){
+    ::placeholder{
+       font-size:0.85em;
+     }    
+ }
+
+ /*버튼*/
+.btndiv{
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+ @media screen and (max-width:380px){
+    input.btn.btn-secondary.can{
+       margin-top: 6%;
+       margin-bottom: 6%;
+       height: 40px;
+     }    
+ }
+ @media screen and (max-width:380px){
+    input.btn.btn-dark{
+       margin-top: 6%;
+       margin-bottom: 6%;
+       height: 40px;
+     }    
+ }
+ /*이메일 전송 버튼*/
+
+ @media screen and (max-width:380px){
+    .mailnum{
+       width: 100%;
+       max-width: 120px;
+       height: 100%;
+       max-height: 50px;
+       font-size: 0.9em;
+        padding: none;
+     }    
+ }
+ /*폼 간견*/
+
+ .h4{
+     margin-top: 4%;
+ }
+ .tit{
+     margin-top: 3%;
+ }

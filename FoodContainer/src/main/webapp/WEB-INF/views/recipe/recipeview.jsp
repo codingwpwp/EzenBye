@@ -170,7 +170,7 @@
 							<div class="col-lg-2 col-md-2 col-sm-2 col-6 wday">2022.03.17 12:00
 							</div>
 							<div class="col-md-2 col-sm-2 col-3 report">
-								<a href="#">신고<i class="bi bi-lightbulb"></i></a>
+								<a href="#">신고<i class="bi bi-brightness-alt-high"></i></a>
 							</div>
 							<div name="replycontent" class="col-12 replycontent">정말
 								맛있어요~~</div>

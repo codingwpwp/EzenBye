@@ -21,7 +21,7 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/css/base.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/resources/css/login.css">
+	href="<%=request.getContextPath()%>/resources/css/notice.css">
 </head>
 <body>
 	<!-- 헤더 -->
@@ -44,7 +44,9 @@
                 base.js에 id="navLeftMenu"와 관련된 코드가 작성되어있음.
             -->
 			<div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark"
-				id="navLeftMenu"></div>
+				id="navLeftMenu">
+				<!-- 여기에 작성 -->
+			</div>
 
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
 
@@ -69,80 +71,85 @@
                         필요하지 않는 사람은 <div>태그를 삭제.
                         필요한 사람은 <div>태그에 작성.
                     -->
+					<div class="fs-5 my-2 fw-bold">공지사항</div>
+
+					<div class="maindiv">
+						<table class="table table-hover maintab">
+							<thead>
+								<tr>
+									<th scope="col" class="center">번호</th>
+									<th scope="col">제목</th>
+									<th scope="col" class="center">날짜</th>
+									<th scope="col" class="center">관리</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row" class="center">1</th>
+									<td class="left"><a href="<%=request.getContextPath()%>/notice_view.do"><span
+											class="d-inline-block text-truncate">
+												공지사항입니다~!!!!!!!!!! 공지사항입니다~!!!!!!!!!! 공지사항입니다~!!!!!!!!!!
+												공지사항입니다~!!!!!!!!!! 공지사항입니다~!!!!!!!!!! 공지사항입니다~!!!!!!!!!!
+												 </span></a></td>
+									<td class="center">2022-3-23</td>
+									<td class="center">10</td>
+								</tr>
+								<tr>
+									<th scope="row" class="center">1</th>
+									<td class="left"><a href="#"><span
+											class="d-inline-block text-truncate">
+												공지사항입니다~!!!!!!!!!! </span></a></td>
+									<td class="center">2022-3-23</td>
+									<td class="center">10</td>
+								</tr>
+								<tr>
+									<th scope="row" class="center">1</th>
+									<td class="left"><a href="#"><span
+											class="d-inline-block text-truncate">공지사항입니다~!!!!!!!!!!</span></a></td>
+									<td class="center">2022-3-23</td>
+									<td class="center">10</td>
+								</tr>
+								<tr>
+									<th scope="row" class="center">1</th>
+									<td class="left"><a href="#"><span
+											class="d-inline-block text-truncate">공지사항입니다~!!!!!!!!!!</span></a></td>
+									<td class="center">2022-3-23</td>
+									<td class="center">10</td>
+								</tr>
+								<tr>
+									<th scope="row" class="center">1</th>
+									<td class="left"><a href="#"><span
+											class="d-inline-block text-truncate">공지사항입니다~!!!!!!!!!!</span></a></td>
+									<td class="center">2022-3-23</td>
+									<td class="center">10</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="row">
+					<div class="col-md-11 col-sm-11 col-12">
+						<input value="등록" type="button" class="btn btn-primary insertbtn" onclick="location.href='notice_insert.do'">
+					</div>
+					<div class="col-12">
+						<nav aria-label="Page navigation example">
+
+							<ul class="pagination">
+								<li class="page-item"><a class="page-link" href="#"
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+								</a></li>
+								<li class="page-item"><a class="page-link" href="#">1</a></li>
+								<li class="page-item"><a class="page-link" href="#">2</a></li>
+								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								<li class="page-item"><a class="page-link" href="#"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+								</a></li>
+							</ul>
+						</nav>
+					</div>
+					</div>
 
 
-					<form action="#" name="frm" class="loginfrm">
-						<div class="container">
-
-							<div class="row">
-								<div class="col-12 head">
-									<h2>로그인</h2>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-12 col-sm-12 md-1 id">
-									<input type="text" placeholder="아이디 8~20 자리의 영문+숫자">
-								</div>
-								<div class="col-md-12 col-sm-12 mb-1 pw">
-									<input type="text" placeholder="비밀번호 8~20 자리의 영문+숫자">
-								</div>
-								<div class="col-md-12 col-sm-12 col-12">아래에 글자를 보이는대로
-									입력해주세요!</div>
-							</div>
-							<div class="row">
-								<div class="col-md-12 col-sm-6 col-12 mb-1 auto">
-									<input id="codeinput"type="text" name="output" placeholder="코드생성 버튼을 클릭하세요">
-
-									<input  class="btn btn-secondary code" type="button"
-										value="코드생성"
-										onclick="populateform(this.form.thelength.value);">
-
-								</div>
-							</div>
-
-							<div class="row">
-								<div class="col-md-12 col-sm-6 col-12 mb-1 autoin">
-									<input id="codeinput" type="text" name="che" placeholder="문자를 입력해주세요">
-									<input class="btn btn-secondary" type="button" value="코드확인"
-										onclick="check();">
-									<div hidden>
-										<b>문자길이:</b> <input type="text" name="thelength" size="3"
-											value="6">
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-12 col-sm-12 col-12 loginbtn">
-									<button class="btn btn-secondary">로그인</button>
-								</div>
-							</div>
-
-							<div class="row find">
-								<div class="col-md-4 col-sm-3 col-4 idsave">
-									<input type="radio" name="radio" id="radio"><label>아이디
-										저장</label>
-								</div>
-								<div class="col-md-4 col-sm-3 col-4 idfind">
-									<a href="<%=request.getContextPath()%>/id_find.do">아이디 찾기</a>
-								</div>
-								<div class="col-md-4 col-sm-3 col-4 pwfind">
-									<a href="<%=request.getContextPath()%>/pw_find.do">비밀번호 찾기</a>
-								</div>
-
-							</div>
-							<div class="row">
-								<div class="col-md-12 col-sm-12 col-12 loginbtn">
-									<button class="btn btn-dark">회원가입</button>
-								</div>
-							</div>
-							<div class="row lookup">
-								<div class="col-md-12 col-sm-12 col-12 loginbtn">
-									<button class="btn btn-dark">비회원 배송 조회</button>
-								</div>
-							</div>
-
-						</div>
-					</form>
 				</article>
 			</div>
 
