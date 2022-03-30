@@ -35,4 +35,8 @@ public class loginController {
 	public String login5(Locale locale, Model model) {
 		return "login/pw_find";
 	}
+	@RequestMapping(value = "pw_email_check.do", method = RequestMethod.GET)
+	public String login6(Locale locale, Model model) {
+		return "login/pw_email_check";
+	}
 }

@@ -1,0 +1,128 @@
+@charset "UTF-8";
+/*테이블 div*/
+.maindiv{
+   width:90%;
+   overflow:auto;
+    
+}
+@media (max-width:380px) {
+	.maindiv{
+	 width:100%;
+	 overflow:auto;
+	}
+}
+/*테이블 스크롤바*/
+.maintab{
+   white-space:nowrap;
+   border-collapse:collapse;
+}
+
+/*페이징*/
+.pagination{
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+/*테이블 글자 센터*/
+.center{
+	text-align: center;
+}
+/*모바일 제목 센터*/
+@media (max-width:380px) {
+	th{
+	text-align: center;
+	}
+}
+/*모바일 제목 내용 크기*/
+@media (max-width:380px) {
+	span.d-inline-block.text-truncate{
+	max-width: 100px;
+	}
+}
+/*제목내용크기*/
+.d-inline-block.text-truncate{
+	max-width: 500px;
+}
+/*버튼*/
+.insertbtn{
+	float: right;
+	width: 100%;
+	max-width: 120px;
+	margin-left: 5%;
+	}
+
+
+/*===========================공지사항 view=================================*/
+/*날짜,조회수*/
+td.right{
+	text-align: right;
+}
+.table th{
+	width: 80px;
+}
+textarea {
+	width: 100%;
+	max-width: 1030px;
+	height:500px;
+	 resize: none;
+	
+}
+/*모바일 글씨크기*/
+@media (max-width:380px){
+	table{
+		font-size: 0.75em;
+	}
+}
+@media (max-width:380px){
+	.title{
+		
+		width: 200px;
+	}
+}
+/*썸머노트 크기조절 막기*/
+.note-statusbar{
+	display: none;
+}
+
+/*버튼좌우크기*/
+.listbtn{
+	float: left;
+	width: 100%;
+	max-width: 120px;
+}
+@media (max-width:380px){
+	.listbtn{
+		
+		width: 100px;
+	}
+}
+.updatebtn{
+	float: right;
+	width: 100%;
+	max-width: 120px;
+	margin-left: 5%;
+	}
+@media (max-width:380px){
+	.updatebtn{
+		
+		width: 100px;
+	}
+}
+
+.delbtn{
+	float: right;
+	width: 100%;
+	max-width: 120px;
+	margin-left: 5%;
+	}
+@media (max-width:380px){
+	.delbtn{
+		
+		width: 100px;
+	}
+}	
+/*글등록페이지 제목 입력 란*/
+.tittext{
+	width: 100%;
+	max-width:200px;
+}

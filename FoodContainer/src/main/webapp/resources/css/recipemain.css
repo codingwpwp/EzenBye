@@ -106,3 +106,7 @@ input[type=button]{
 .d-flex.justify-content-between.align-items-center {
   height: 80px;
 }
+
+ul.pagination{
+	justify-content: center;
+}
