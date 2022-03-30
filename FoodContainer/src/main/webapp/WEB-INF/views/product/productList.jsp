@@ -110,13 +110,13 @@
 							</div>
 							<div class="productListContent">
 								<span style="color:red;">[인기]</span>
-								<div>비비고 메추리알 장조림</div>
+								<div class="productNameM">비비고 메추리알 장조림</div>
 								<div>10,000원</div>
 								<div class="discountM">할인가</div>
 								<div>배송비 3,000원</div>
-								<div class="indexSubImgM">
+								<div class="pListSubImgM">
 									<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
-									<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="cart(this)">
+									<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="pListCart(this)">
 								</div>
 							</div>
 						</div>

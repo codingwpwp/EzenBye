@@ -368,8 +368,8 @@
 	text-align : center;
 }
 
-/**/
-.indexSubImgM{
+/*모바일 찜, 장바구니 이미지*/
+.pListSubImgM{
 	width : 90px;
 	position : relative;
 	left : 180px;

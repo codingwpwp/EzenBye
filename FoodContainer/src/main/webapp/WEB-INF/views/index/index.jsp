@@ -157,11 +157,11 @@
 								<img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/1.png" class="img-fluid" alt="비비고만두">
 								<div class="indexSubImgM">
 									<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
-									<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="cart(this)">
+									<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="indexCart(this)">
 								</div>
 								<div class="cardMContent">
 									<span style="color:red;">[인기]</span><br>
-									<span class="productName">비비고왕교자</span><br>
+									<span class="productNameM">비비고왕교자</span><br>
 									<span class="fs-4">10,000</span>원<br>
 									<span>
 										<i class="bi bi-star-fill"></i>
