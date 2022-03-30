@@ -12,7 +12,7 @@
 	}
 	
 	window.onload = function(){
-	//pc화면 - 처음 또는 새로고침 시 전체선택
+	  //pc화면 - 처음 또는 새로고침 시 전체선택
 		//전체선택
 		var check = $("button[name='lAsideProductAll']").find("i").attr("class").indexOf("fill");
 		//냉동식품
@@ -33,7 +33,7 @@
 			
 		}
 		
-	//모바일 화면 - 처음 또는 새로고침 시 전체선택
+	  //모바일 화면 - 처음 또는 새로고침 시 전체선택
 		//전체선택
 		var checkM = $("button[name='lAsideProductAllM']").find("i").attr("class").indexOf("fill");
 		//냉동식품
@@ -64,6 +64,8 @@
 		var product = $("input[name='asideProductAll']");
 		//브랜드
 		var brand = $("input[name='asideBrandAll']");
+		//가격
+		var price = $("input[name='asidePriceAll']");
 		
 		if(check < 0){
 			$(obj).find("i").attr("class","bi bi-check-circle-fill");
@@ -80,6 +82,7 @@
 				brand.click();
 			}
 		}
+			price.click();
 	}
 	
 	//pc화면 - 모든 전체메뉴 체크일 때, 전체상품 변화
@@ -105,6 +108,8 @@
 		var product = $("input[name='asideProductAllM']");
 		//브랜드
 		var brand = $("input[name='asideBrandAllM']");
+		//가격
+		var price = $("input[name='asidePriceAllM']");
 		
 		if(check < 0){
 			$(obj).find("i").attr("class","bi bi-check-circle-fill");
@@ -121,6 +126,7 @@
 				brand.click();
 			}
 		}
+			price.click();
 	}
 	
 	//모바일 화면 - 모든 전체메뉴 체크일 때, 전체상품 변화
