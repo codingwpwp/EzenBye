@@ -11,3 +11,11 @@
 	}else{
 		$(".discountM").prev().css({"text-decoration-line" : "none"});
 	}
+	
+	var pListPopular = $(".productListContent").find("span:eq(0)").html();
+	
+	if(pListPopular == ""){
+		$(".indexSubImgM").css("top","-16px");
+	}else{
+		$(".indexSubImgM").css("top","-40px");
+	}

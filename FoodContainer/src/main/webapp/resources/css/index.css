@@ -367,6 +367,15 @@
 	border-radius : 10px;
 	text-align : center;
 }
+
+/**/
+.indexSubImgM{
+	width : 90px;
+	position : relative;
+	left : 180px;
+	top : -40px;
+}
+
 /* productView ========================================================================================== */
 
 /*상품 이미지*/
