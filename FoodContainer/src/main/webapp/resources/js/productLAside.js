@@ -11,26 +11,137 @@
 		}
 	}
 	
+	window.onload = function(){
+	  //pc화면 - 처음 또는 새로고침 시 전체선택
+		//전체선택
+		var check = $("button[name='lAsideProductAll']").find("i").attr("class").indexOf("fill");
+		//냉동식품
+		var ice = $("input[name='asideIceAll']");
+		//즉석식품
+		var product = $("input[name='asideProductAll']");
+		//브랜드
+		var brand = $("input[name='asideBrandAll']");
+		//가격
+		var price = $("input[name='asidePriceAll']");
+		
+		if(check > 0){
+			ice.click();
+			product.click();
+			brand.click();
+			price.parent().parent().parent().next().find("input").click();
+			price.parent().parent().parent().next().next().find("input").click();
+			
+		}
+		
+	  //모바일 화면 - 처음 또는 새로고침 시 전체선택
+		//전체선택
+		var checkM = $("button[name='lAsideProductAllM']").find("i").attr("class").indexOf("fill");
+		//냉동식품
+		var iceM = $("input[name='asideIceAllM']");
+		//즉석식품
+		var productM = $("input[name='asideProductAllM']");
+		//브랜드
+		var brandM = $("input[name='asideBrandAllM']");
+		//가격
+		var priceM = $("input[name='asidePriceAllM']");
+		
+		if(checkM > 0){
+			iceM.click();
+			productM.click();
+			brandM.click();
+			priceM.parent().parent().parent().next().find("input").click();
+			priceM.parent().parent().parent().next().next().find("input").click();
+			
+		}
+	}
+	
 	//전체메뉴
 	function allProduct(obj){
 		var check = $(obj).find("i").attr("class").indexOf("fill");
+		//냉동식품
+		var ice = $("input[name='asideIceAll']");
+		//즉석식품
+		var product = $("input[name='asideProductAll']");
+		//브랜드
+		var brand = $("input[name='asideBrandAll']");
+		//가격
+		var price = $("input[name='asidePriceAll']");
 		
-		if(check > 0){
-			$(obj).find("i").attr("class","bi bi-check-circle");
-		}else{
+		if(check < 0){
 			$(obj).find("i").attr("class","bi bi-check-circle-fill");
+			
+			if(!(ice.is(":checked"))){
+				ice.click();
+			}
+			
+			if(!(product.is(":checked"))){
+				product.click();
+			}
+			
+			if(!(brand.is(":checked"))){
+				brand.click();
+			}
 		}
+			price.click();
 	}
+	
+	//pc화면 - 모든 전체메뉴 체크일 때, 전체상품 변화
+	window.addEventListener("click",function(){
+		//냉동식품
+		var ice = $("input[name='asideIceAll']");
+		//즉석식품
+		var product = $("input[name='asideProductAll']");
+		//브랜드
+		var brand = $("input[name='asideBrandAll']");
+		
+		if(ice.is(":checked") && product.is(":checked") && brand.is(":checked")){
+			$("button[name='lAsideProductAll']").find("i").attr("class","bi bi-check-circle-fill");
+		}
+	})
+	
 	//전체메뉴 모바일
 	function allProductM(obj){
 		var check = $(obj).find("i").attr("class").indexOf("fill");
+		//냉동식품
+		var ice = $("input[name='asideIceAllM']");
+		//즉석식품
+		var product = $("input[name='asideProductAllM']");
+		//브랜드
+		var brand = $("input[name='asideBrandAllM']");
+		//가격
+		var price = $("input[name='asidePriceAllM']");
 		
-		if(check > 0){
-			$(obj).find("i").attr("class","bi bi-check-circle");
-		}else{
+		if(check < 0){
 			$(obj).find("i").attr("class","bi bi-check-circle-fill");
+			
+			if(!(ice.is(":checked"))){
+				ice.click();
+			}
+			
+			if(!(product.is(":checked"))){
+				product.click();
+			}
+			
+			if(!(brand.is(":checked"))){
+				brand.click();
+			}
 		}
+			price.click();
 	}
+	
+	//모바일 화면 - 모든 전체메뉴 체크일 때, 전체상품 변화
+	window.addEventListener("click",function(){
+		//냉동식품
+		var ice = $("input[name='asideIceAllM']");
+		//즉석식품
+		var product = $("input[name='asideProductAllM']");
+		//브랜드
+		var brand = $("input[name='asideBrandAllM']");
+		
+		if(ice.is(":checked") && product.is(":checked") && brand.is(":checked")){
+			$("button[name='lAsideProductAllM']").find("i").attr("class","bi bi-check-circle-fill");
+		}
+	})
 	
 	//냉동식품 체크박스
 	function asideIceAll(obj){
@@ -40,6 +151,10 @@
 		$.each(ice,function(){
 			ice.prop("checked",check);
 		})
+		
+		if(!(check)){
+			$("button[name='lAsideProductAll']").find("i").attr("class","bi bi-check-circle");
+		}
 	}
 	
 	function asideIce(obj){
@@ -51,6 +166,7 @@
 			iceAll.prop("checked", true);
 		}else{
 			iceAll.prop("checked", false);
+			$("button[name='lAsideProductAll']").find("i").attr("class","bi bi-check-circle");
 		}
 	}
 	//냉동식품 체크박스 모바일
@@ -61,6 +177,10 @@
 		$.each(ice,function(){
 			ice.prop("checked",check);
 		})
+		
+		if(!(check)){
+			$("button[name='lAsideProductAllM']").find("i").attr("class","bi bi-check-circle");
+		}
 	}
 	
 	function asideIceM(obj){
@@ -72,6 +192,7 @@
 			iceAll.prop("checked", true);
 		}else{
 			iceAll.prop("checked", false);
+			$("button[name='lAsideProductAllM']").find("i").attr("class","bi bi-check-circle");
 		}
 	}
 	
@@ -84,6 +205,9 @@
 			product.prop("checked",check);
 		})
 		
+		if(!(check)){
+			$("button[name='lAsideProductAll']").find("i").attr("class","bi bi-check-circle");
+		}
 	}
 	
 	function asideProduct(obj){
@@ -95,6 +219,7 @@
 			productAll.prop("checked", true);
 		}else{
 			productAll.prop("checked", false);
+			$("button[name='lAsideProductAll']").find("i").attr("class","bi bi-check-circle");
 		}
 	}
 	//즉석식품 체크박스 모바일
@@ -106,6 +231,9 @@
 			product.prop("checked",check);
 		})
 		
+		if(!(check)){
+			$("button[name='lAsideProductAllM']").find("i").attr("class","bi bi-check-circle");
+		}
 	}
 	
 	function asideProductM(obj){
@@ -117,6 +245,7 @@
 			productAll.prop("checked", true);
 		}else{
 			productAll.prop("checked", false);
+			$("button[name='lAsideProductAllM']").find("i").attr("class","bi bi-check-circle");
 		}
 	}
 		
@@ -129,6 +258,10 @@
 		$.each(brand,function(){
 			brand.prop("checked", check);
 		})
+		
+		if(!(check)){
+			$("button[name='lAsideProductAll']").find("i").attr("class","bi bi-check-circle");
+		}
 	}
 	
 	function asideBrand(obj){
@@ -140,6 +273,7 @@
 			brandAll.prop("checked",true);
 		}else{
 			brandAll.prop("checked",false);
+			$("button[name='lAsideProductAll']").find("i").attr("class","bi bi-check-circle");
 		}
 	}
 	//브랜드 체크박스 모바일
@@ -150,6 +284,10 @@
 		$.each(brand,function(){
 			brand.prop("checked", check);
 		})
+		
+		if(!(check)){
+			$("button[name='lAsideProductAllM']").find("i").attr("class","bi bi-check-circle");
+		}
 	}
 	
 	function asideBrandM(obj){
@@ -161,17 +299,20 @@
 			brandAll.prop("checked",true);
 		}else{
 			brandAll.prop("checked",false);
+			$("button[name='lAsideProductAllM']").find("i").attr("class","bi bi-check-circle");
 		}
 	}
 
 	//가격 체크박스
 	function asidePriceAll(obj){
+		$(obj).prop("checked",true);
+		
 		var price = $("input[name='asidePrice']");
-		var check = $(obj).is(":checked");
 		
 		$.each(price,function(){
-			price.prop("checked",check);
+			price.prop("checked",true);
 		})
+		
 	}
 	
 	function asidePrice(obj){
@@ -181,17 +322,21 @@
 		
 		if(price.length == checkPrice.length){
 			priceAll.prop("checked",true);
+		}else if(checkPrice.length == 0){
+			$(obj).prop("checked", true);
+			alert("최소 한 개는 선택해야 합니다.");
 		}else{
 			priceAll.prop("checked",false);
 		}
 	}
 	//가격 체크박스 모바일
 	function asidePriceAllM(obj){
+		$(obj).prop("checked",true);
+		
 		var price = $("input[name='asidePriceM']");
-		var check = $(obj).is(":checked");
 		
 		$.each(price,function(){
-			price.prop("checked",check);
+			price.prop("checked",true);
 		})
 	}
 	
@@ -199,9 +344,20 @@
 		var price = $("input[name='asidePriceM']");
 		var checkPrice = $("input[name='asidePriceM']:checked");
 		var priceAll = $("input[name='asidePriceAllM']");
-		
 		if(price.length == checkPrice.length){
 			priceAll.prop("checked",true);
+		}else if(checkPrice.length == 0){
+			$(obj).prop("checked",true);
+			$(".priceAlertM").css({"display" : "block",
+								   "z-index" : "10000"
+								});
+			$(".priceAlertMessageM").html("<br><br>최소 한 개는 선택해야 합니다.");
+			
+			setTimeout(function(){
+				$(".priceAlertM").css({"display" : "none",
+								  	   "z-index" : "0"
+								});
+			},800);
 		}else{
 			priceAll.prop("checked",false);
 		}
@@ -254,20 +410,39 @@
 		var navTop = $("#navBar").offset().top;
 				
 		if(yScroll >= navTop){
+			/*상단 고정
 			$(".filter").css({"position" : "fixed", 
 							  "top" : "15px",
 							  "left" : "0px",
 							  "width" : "100%",
 							  "background-color" : "#FFEFD5",
 							  "z-index" : "10",
-							  "width" : "30px",
+							  "width" : "54px",
 							  "height" : "40px",
-							  "border-radius" : "10px",
-							  "text-align" : "center;"
+							  "border" : "1px soild #DCDCDC",
+							  "border-radius" : "5px",
+							  "text-align" : "center"
+							});
+			*/
+			
+			//하단 고정
+			$(".filter").css({"position" : "fixed", 
+							  "bottom" : "5.3%",
+							  "width" : "100%",
+							  "background-color" : "black",
+							  "z-index" : "10",
+							  "width" : "54px",
+							  "height" : "40px",
+							  "border-radius" : "5px",
+							  "text-align" : "center",
+							  "color" : "white",
+							  "border" : "none"
 							});
 		}else if(yScroll < navTop){
 			$(".filter").css({"position" : "static", 
-							  "background-color" : "transparent"
+							  "background-color" : "transparent",
+							  "color" : "#696969",
+							  "border" : "1px solid #DCDCDC"
 							  
 							});
 		}
