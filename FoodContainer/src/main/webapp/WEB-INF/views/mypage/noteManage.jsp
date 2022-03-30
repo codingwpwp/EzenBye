@@ -66,23 +66,23 @@
 			        <hr />
 			        
 			        <div class="row">
-			        	<div class="col-sm-12 col-md-12 col-lg-2">
+			        	<div class="col-sm-12 col-md-3 col-lg-3 col-xl-2">
 			        		<div class="form-check form-check-inline">
-							  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+							  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="selectall" name="note" onclick="selectAll(this)">
 							  <label class="form-check-label" for="inlineCheckbox1">전체 선택</label>
 							</div>
 			        	</div>
-			        	<div class="col-sm-12 col-md-12 col-lg-4">
+			        	<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 noteManage-btn">
 			        		<button type="button" class="btn btn-secondary btn-sm">선택삭제</button>
 			        		<button type="button" class="btn btn-secondary btn-sm">선택읽음</button>
 			        	</div>
-			        	<div class="col-sm-12 col-md-12 col-lg-2">
+			        	<div class="col-4 col-sm-4 col-md-6 col-lg-6 col-xl-2">
 			        		<select class="form-select" aria-label="Default select example">
 							  <option selected value="title">제목</option>
 							  <option value="date">날짜</option>
 							</select>
 			        	</div>
-			        	<div class="col-sm-12 col-md-12 col-lg-4">
+			        	<div class="col-8 col-sm-8 col-md-6 col-lg-6 col-xl-4">
 			        		<div class="input-group mb-3">
 							  <input type="text" class="form-control" placeholder="내용을 입력해주세요." aria-label="Recipient's username" aria-describedby="basic-addon2">
 							  <button type="button" class="btn btn-secondary btn-sm">검색</button>
@@ -104,8 +104,8 @@
 						    <tr>
 						      <th scope="row">
 						      	<div class="form-check form-check-inline">
-								  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-								  <label class="form-check-label" for="inlineCheckbox1">1</label>
+								  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" name="note">
+								  <label class="form-check-label" for="inlineCheckbox2">1</label>
 								</div>
 						      </th>
 						      <td>
@@ -122,8 +122,8 @@
 						    <tr>
 						      <th scope="row">
 						      	<div class="form-check form-check-inline">
-								  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-								  <label class="form-check-label" for="inlineCheckbox1">2</label>
+								  <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" name="note">
+								  <label class="form-check-label" for="inlineCheckbox3">2</label>
 								</div>
 						      </th>
 						      <td>
@@ -140,8 +140,8 @@
 						    <tr>
 						      <th scope="row">
 						      	<div class="form-check form-check-inline">
-								  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-								  <label class="form-check-label" for="inlineCheckbox1">3</label>
+								  <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4" name="note">
+								  <label class="form-check-label" for="inlineCheckbox4">3</label>
 								</div>
 						      </th>
 						      <td>

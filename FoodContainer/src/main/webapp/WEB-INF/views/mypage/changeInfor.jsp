@@ -66,14 +66,12 @@
 			        <hr />
 			        
 			        <form action="mypage_changeInforOk.do">
-			         <div class="mb-3 row changeInfor">
-					    <label for="inputPassword" class="col-sm-3 col-md-3 col-lg-2 col-form-label changeInfor-label">비밀번호 : </label>
-					    <div class="col-sm-6 col-md-6 col-lg-5">
-					      <input type="password" class="form-control" id="inputPassword" placeholder="비밀번호를 입력해주세요.">
-					    </div>
-					    <div class="col-sm-3 col-md-3 col-lg-3">
-					    	<button type="submit" class="btn btn-primary mb-3">확인</button>
-					    </div>
+			         <div class="mb-3 row changeInfor d-flex justify-content-center">
+					    <div class="input-group mb-3 changeInfor-input">
+						  <span class="input-group-text changeInfor-label" id="inputGroup-sizing-default">비밀번호</span>
+						  <input type="password" id="inputPassword" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="비밀번호를 입력해주세요.">
+						  <button type="submit" class="btn btn-secondary btn-sm">확인</button>
+						</div>
 					 </div>
 					</form> 
 			        

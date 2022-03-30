@@ -14,7 +14,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/base.css">
-	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/lookupnon.css" />
 	<script src="<%=request.getContextPath() %>/resources/js/jquery-3.6.0.min.js"></script>
 	<script src="<%=request.getContextPath() %>/resources/js/lookupnon.js"></script>
@@ -68,7 +67,7 @@
 			        		<span>주문번호 : ADDF1325</span>
 			        	</div>
 			        	<div class="col-sm-3 findT">
-			        		<a href="#"><span>배송조회</span></a>
+			        		<a href="#" class="link-info"><span>배송조회</span></a>
 			        	</div>
 			        </div>
 			        
@@ -100,7 +99,7 @@
 			        		
 			        	</div>
 			        	<div class="col-sm-3 findT">
-			        		<a href="#"><span>배송조회</span></a>
+			        		<a href="#" class="link-info"><span>배송조회</span></a>
 			        	</div>
 			        </div>
 			        
@@ -132,7 +131,7 @@
 			        		
 			        	</div>
 			        	<div class="col-sm-3 findT">
-			        		<a href="#"><span>배송조회</span></a>
+			        		<a href="#" class="link-info"><span>배송조회</span></a>
 			        	</div>
 			        </div>
 			        
@@ -190,6 +189,7 @@
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
 			        	<div>상품가격 : </div>
 			        	<div class="lookupView-infmoney">배송비 : </div>
+			        	<div class="lookupView-infmoney">할인가격 : </div>
 			        	<div class="lookupView-infmoney">총 결제금액 : </div>
 			        </div>
 			        

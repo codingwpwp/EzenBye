@@ -75,7 +75,7 @@
 			        		<button type="button" class="btn btn-primary btn-sm order-btn" onclick="location.href='mypage_lookupView.do'">주문상세</button>
 			        	</div>
 			        	<div class="col-sm-3 col-6 findT">
-			        		<a href="#"><span>배송조회</span></a>
+			        		<a href="#" class="link-info"><span>배송조회</span></a>
 			        	</div>
 			        </div>
 			        
@@ -109,7 +109,7 @@
 			        	<div class="col-sm-6">			        		
 			        	</div>
 			        	<div class="col-sm-3 findT">
-			        		<a href="#"><span>배송조회</span></a>
+			        		<a href="#" class="link-info"><span>배송조회</span></a>
 			        	</div>
 			        </div>
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
@@ -203,7 +203,7 @@
 			        		<button type="button" class="btn btn-primary btn-sm order-btn">주문상세</button>
 			        	</div>
 			        	<div class="col-sm-3 col-6 findT">
-			        		<a href="#"><span>배송조회</span></a>
+			        		<a href="#" class="link-info"><span>배송조회</span></a>
 			        	</div>
 			        </div>
 			        
