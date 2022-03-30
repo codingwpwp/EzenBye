@@ -80,9 +80,9 @@
 			        		</div>
 			        	</div>
 			        	
-			        	<div class="d-grid gap-4 d-md-flex justify-content-md-center">
-						  <button class="btn btn-dark interItem-btn" type="button">장바구니 담기</button>
-						  <button class="btn btn-secondary interItem-btn" type="button">바로구매</button>
+			        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 interItem-btn">
+						  <button class="btn btn-dark col-lg-3 col-md-3" type="button">장바구니 담기</button>
+						  <button class="btn btn-secondary col-lg-3 col-md-3" type="button">바로구매</button>
 						</div>
 			        </div>
 			        
@@ -100,9 +100,9 @@
 			        		</div>
 			        	</div>
 			        	
-			        	<div class="d-grid gap-4 d-md-flex justify-content-md-center">
-						  <button class="btn btn-dark interItem-btn" type="button">장바구니 담기</button>
-						  <button class="btn btn-secondary interItem-btn" type="button">바로구매</button>
+			        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 interItem-btn">
+						  <button class="btn btn-dark col-lg-3 col-md-3" type="button">장바구니 담기</button>
+						  <button class="btn btn-secondary col-lg-3 col-md-3" type="button">바로구매</button>
 						</div>
 			        </div>
 			        
@@ -120,9 +120,9 @@
 			        		</div>
 			        	</div>
 			        	
-			        	<div class="d-grid gap-4 d-md-flex justify-content-md-center">
-						  <button class="btn btn-dark interItem-btn" type="button">장바구니 담기</button>
-						  <button class="btn btn-secondary interItem-btn" type="button">바로구매</button>
+			        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 interItem-btn">
+						  <button class="btn btn-dark col-lg-3 col-md-3" type="button">장바구니 담기</button>
+						  <button class="btn btn-secondary col-lg-3 col-md-3" type="button">바로구매</button>
 						</div>
 			        </div>
 			        

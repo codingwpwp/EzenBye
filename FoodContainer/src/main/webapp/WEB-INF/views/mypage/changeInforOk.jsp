@@ -66,44 +66,48 @@
 			        <hr />
 			        
 			        <form action="#">
-			         	<div class="input-group mb-3 changeInforOk-inputId">
-						  <span class="input-group-text" id="inputGroup-sizing-default">아이디</span>
-						  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
-						</div>
-						<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-						  비밀번호변경
-						</button>
-						<div class="input-group mb-3 changeInforOk-inputName">
-						  <span class="input-group-text" id="inputGroup-sizing-default">이름</span>
-						  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-						</div>
-						<div class="input-group changeInforOk-inputPhone">
-						  <span class="input-group-text">휴대전화</span>
-						  <select class="form-select" aria-label="Default select example">
-							  <option selected>010</option>
-							  <option value="1">011</option>
-							  <option value="2">018</option>
-							  <option value="3">016</option>
-						  </select>
-						  <span class="input-group-text">-</span>
-						  <input type="number" aria-label="Last name" class="form-control">
-						  <span class="input-group-text">-</span>
-						  <input type="number" aria-label="Last name" class="form-control">
-						</div>
-						<div class="input-group mb-3 changeInforOk-inputNicName">
-						  <span class="input-group-text" id="inputGroup-sizing-default">닉네임</span>
-						  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-						  <button type="button" class="btn btn-secondary btn-sm">중복확인</button>
-						</div>
-						<div class="input-group changeInforOk-inputEmail">
-						  <span class="input-group-text">이메일</span>
-						  <input type="text" aria-label="Last name" class="form-control" disabled>
-						  <span class="input-group-text">@</span>
-						  <input type="text" aria-label="Last name" class="form-control" disabled>
-						</div>
-						<div class="d-grid gap-3 d-md-flex justify-content-md-center">
-						  <button class="btn btn-info me-md-2 changeInforOk-btn" type="button" onclick="location.href='changeInfor.jsp'">취소</button>
-						  <button class="btn btn-success changeInforOk-btn" type="submit">수정</button>
+			        	<div>
+				         	<div class="input-group mb-3 changeInforOk-inputId">
+							  <span class="input-group-text" id="inputGroup-sizing-default">아이디</span>
+							  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
+							</div>
+							<div class="changeInforOk-btn">
+								<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+								  비밀번호변경
+								</button>
+							</div>
+							<div class="input-group mb-3 changeInforOk-inputName">
+							  <span class="input-group-text" id="inputGroup-sizing-default">이름</span>
+							  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+							</div>
+							<div class="input-group changeInforOk-inputPhone">
+							  <span class="input-group-text">휴대전화</span>
+							  <select class="form-select" aria-label="Default select example">
+								  <option selected>010</option>
+								  <option value="1">011</option>
+								  <option value="2">018</option>
+								  <option value="3">016</option>
+							  </select>
+							  <span class="input-group-text">-</span>
+							  <input type="number" aria-label="Last name" class="form-control">
+							  <span class="input-group-text">-</span>
+							  <input type="number" aria-label="Last name" class="form-control">
+							</div>
+							<div class="input-group mb-3 changeInforOk-inputNicName">
+							  <span class="input-group-text" id="inputGroup-sizing-default">닉네임</span>
+							  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+							  <button type="button" class="btn btn-secondary btn-sm">중복확인</button>
+							</div>
+							<div class="input-group changeInforOk-inputEmail">
+							  <span class="input-group-text">이메일</span>
+							  <input type="text" aria-label="Last name" class="form-control" disabled>
+							  <span class="input-group-text">@</span>
+							  <input type="text" aria-label="Last name" class="form-control" disabled>
+							</div>
+							<div class="d-grid gap-3 d-md-flex justify-content-md-center">
+							  <button class="btn btn-secondary col-lg-3 col-md-3 me-md-2" type="button" onclick="location.href='changeInfor.jsp'">취소</button>
+							  <button class="btn btn-dark col-lg-3 col-md-3" type="submit">수정</button>
+							</div>
 						</div>
 					</form> 
 			        
@@ -137,7 +141,7 @@
 						      </div>
 						      <div class="modal-footer">
 						        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-						        <button type="submit" class="btn btn-primary">변경</button>
+						        <button type="submit" class="btn btn-dark">변경</button>
 						      </div>
 						    </div>
 						  </div>

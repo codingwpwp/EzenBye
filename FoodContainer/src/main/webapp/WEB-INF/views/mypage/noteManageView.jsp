@@ -75,9 +75,9 @@
 			    	<textarea class="form-control" id="exampleFormControlTextarea1" rows="15" disabled>쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용
 			    	</textarea>
 			    	
-			    	<div class="d-grid gap-5 d-md-flex justify-content-md-center noteManageView-btn">
-					  <button class="btn btn-secondary me-md-2 noteManageView-btn2" type="button">뒤로</button>
-					  <button class="btn btn-secondary noteManageView-btn2" type="button">삭제</button>
+			    	<div class="d-flex justify-content-center mt-4 noteManageView-btn">
+					  <button class="btn btn-secondary me-3 noteManageView-btn2" type="button">뒤로</button>
+					  <button class="btn btn-dark noteManageView-btn2" type="button">삭제</button>
 					</div>
 			    	
       				</div>
