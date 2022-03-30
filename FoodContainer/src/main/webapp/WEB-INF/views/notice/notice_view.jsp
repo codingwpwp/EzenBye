@@ -14,7 +14,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/base.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/login.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/notice.css">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"rel="stylesheet">
+	
 </head>
 <body>
 	<!-- 헤더 -->
@@ -62,55 +64,49 @@
                         필요하지 않는 사람은 <div>태그를 삭제.
                         필요한 사람은 <div>태그에 작성.
                     -->
-                  
- <div class="container head">
-                    <div class="row head">
-                        <div class="col-12">
-                            <h2>비밀번호 찾기</h2>
-                        </div>
-                        <div class="col-12">
-                            비밀번호가 기억나지 않으세요? 원하시는 방법을 &nbsp;선택해 비밀번호를 확인하실 수 있습니다.
-                        </div>
-                    </div>
-                   </div>
-                   <div class="container from">
-                       <div class="row pwfindform">
-                        <div class="col-md-12 col-sm-12 col-12">
-                            <form class="pwfind">
-                                <div class="container">
-                                    <div class="row rows">
-                                        <div class="col-12">
-                                            <h4>임시 비밀번호 발급</h4>
-                                        </div>
-                                        <div class="col-md-12 col-sm-12 col-12">
-                                            <p>입력하신 정보는 <strong>임시 비밀번호</strong> 발급에만&nbsp; 사용되며 <strong>저장 되지 않습니다.</strong></p>
-                                        </div>
-                                        <div class="col-md-10 col-sm-10 col-12">
-                                            <input type="text" class="findinput" placeholder="이름를 입력해주세요">
-                                        </div>
-                                        <div class="col-md-10 col-sm-10 col-12">
-                                            <input type="text" class="findinput" placeholder="아이디 입력해주세요">
-                                        </div>
-                                        <div class="col-md-12 col-sm-12 col-12">
-                                            <input type="text" class="findemailinput" placeholder="이메일을 입력해주세요">
-                                            <button class="btn btn-secondary emailbtn">인증번호 발송</button>
-                                        </div>
-                                        <div class="col-md-10 col-sm-10 col-12 ">
-                                            <input type="text" class="findinput" placeholder="인증번호 입력해주세요">
-                                            
-                                        </div>
-                                        <div class="col-md-12 col-sm-12 col-12">
-                                            <input type="button" value="임시 비밀번호 발급" class="btn btn-secondary pwfindbtn" onclick="location.href='pw_email_check.do'">
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                       </div>
-                       
-                   </div>
+                    <div class="fs-5 my-2 fw-bold">공지사항</div>
 
-                </article>
+                 	<div class="maindiv">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">제목</th>
+									<td class="title">20220330공지사항입니다~!!!!!!!!!! 
+												
+											 </td>
+									<td class="right">2022-03-23</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row">작성자</th>
+									<td>관리자</td>
+									<td class="right">조회수10</td>
+								</tr>
+								<tr>
+									<td colspan="3">
+										<textarea readonly="readonly"></textarea>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="row">
+						<div class="col-md-2 col-sm-2 col-3 leftbtn">
+							<input value="목록" type="button" class="btn btn-primary listbtn">
+						</div>
+						<div class="col-md-10 col-sm-10 col-9 rightbtn">
+							<input value="삭제" type="button" class="btn btn-danger delbtn">
+							<input value="수정" type="button"
+								class="btn btn-secondary updatebtn">
+						</div>
+						</div>
+
+					</div>
+
+
+					
+
+				</article>
             </div>
 
             <!-- 오른쪽 사이드메뉴 -->
@@ -131,5 +127,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+        <script src="<%=request.getContextPath()%>/resources/js/notice.js"></script>
 </body>
 </html>

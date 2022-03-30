@@ -36,7 +36,7 @@
                 작성하지 않는 경우는 절대 건들지 않음.
                 base.js에 id="navLeftMenu"와 관련된 코드가 작성되어있음.
             -->
-            <div class="col-1 pe-0 d-lg-none border border-dark" id="navLeftMenu">d<!-- 여기에 작성 --></div>
+            <div class="col-1 pe-0 d-lg-none border border-dark" id="navLeftMenu"><!-- 여기에 작성 --></div>
 
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
 
@@ -170,7 +170,7 @@
                            
                         </div>
                         <div class="row">
-                            <div class="col-md-12 col-12">
+                            <div class="col-md-12 col-12 page">
                                 <ul class="pagination">
                                     <li class="page-item"><a class="page-link" href="#">Previous</a></li>
                                     <li class="page-item"><a class="page-link" href="#">1</a></li>
