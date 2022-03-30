@@ -343,7 +343,16 @@ form.pwfind{
       height:40px;
     }    
 }
-
+@media screen and (max-width:380px){
+   input.findemailinput{
+      margin-bottom: 5%;
+    }    
+}
+@media screen and (max-width:380px){
+   input.findinput{
+      margin-bottom: 5%;
+    }    
+}
 
 @media screen and (min-width:570px){
    input.findemailinput{
@@ -365,4 +374,10 @@ form.pwfind{
    ::placeholder{
       font-size:0.9em;
     }    
+}
+.pwlogin{
+	margin-top:5%;
+	width: 100%;
+	max-width: 200px;
+	height: 50px;
 }

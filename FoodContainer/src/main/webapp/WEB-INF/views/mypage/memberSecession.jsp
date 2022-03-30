@@ -88,7 +88,8 @@
 			    	
 			    	<p class="fs-6 lookup-fs-6">탈퇴사유</p>
 			        <hr />
-			        <select class="form-select mb-3 memberSecession-select" aria-label=".form-select-lg example">
+			        <div class="memberSecession-select2 mb-4">
+			        <select class="form-select memberSecession-select" aria-label=".form-select-lg example">
 					  <option selected>선택해주세요</option>
 					  <option value="1">배송 불만</option>
 					  <option value="2">취소 불만</option>
@@ -98,8 +99,9 @@
 					  <option value="3">실질적인 혜택 부족</option>
 					  <option value="3">개인정보 유출 우려</option>
 					</select>
-					<div class="d-grid gap-5 d-md-flex justify-content-md-center noteManageView-btn">
-					  <button class="btn btn-primary me-md-2 noteManageView-btn2" type="button">탈퇴하기</button>
+					</div>
+					<div class="d-flex justify-content-center noteManageView-btn">
+					  <button class="btn btn-dark noteManageView-btn2" type="button">탈퇴하기</button>
 					</div>
 			    	
       				</div>

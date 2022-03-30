@@ -14,7 +14,7 @@
 }
 
 .shopbasket-sum{
-	color: green; font-weight: bold; margin-top: 40px;
+	color: gray; font-weight: bold; margin-top: 40px;
 	font-size: 18px;
 }
 
@@ -23,6 +23,6 @@
 }
 
 .shopbasket-title{
-	border: 0.5px solid gray; padding: 20px;
-	margin-top: 30px;
+	padding: 20px;
+	margin-top: 25px;
 }

@@ -22,6 +22,19 @@
 	max-width : 35px;
 }
 
+/*장바구니, 찜 이미지 관리*/
+.indexSubImg{
+	position : absolute;
+	left : 60%;
+	display : none;
+}
+
+@media screen and (min-width : 600px){
+	.popular:hover .indexSubImg{
+		display : block;
+	}
+}
+
 .popular:hover{
 	cursor:pointer;
 }
@@ -58,6 +71,14 @@
 	top : 50%;
 	left : 65%;
 }
+
+.medalM{
+	max-width : 50px;
+	position : absolute;
+	left : 290px;
+	margin-top : 18px;
+}
+
 /*오른쪽 side 메뉴*/
 .rAside{
 	width : 100px; 
@@ -131,6 +152,7 @@
 	
 	.bestMenuM{
 		display : block;
+		margin-bottom : 20px;
 	}
 	
 	.bestRecipeM{
@@ -156,6 +178,7 @@
 	}
 }
 
+/*모바일 인기 상품 카드*/
 .cardDivM{
 	text-align : center;
 }
@@ -169,6 +192,7 @@
 	height : auto;
 }
 
+/*모바일 베스트 레시피 카드*/
 .recipeCardM{
 	height : auto;
 }
@@ -194,12 +218,32 @@
 	height : 100px;
 	display : inline-block;
 }
-
+/*할인가*/
 .discount{
 	color : red;
 }
 
 /* productList ========================================================================================== */
+
+@media screen and (max-width : 600px){
+	.pList{
+		display : none;
+	}
+	
+	.pListM{
+		display : block;
+	}
+}
+
+@media screen and (min-width : 600px){
+	.pList{
+		display : block;
+	}
+	
+	.pListM{
+		display : none;
+	}
+}
 
 /*section title*/
 .topText{
@@ -208,12 +252,10 @@
 }
 
 /*상품 호버*/
-.productAll:hover .hoverHeart, .productAll:hover .hoverCart{
-	display:inline-block;
-}
-
-.productAll:hover{
-	cursor:pointer;
+@media screen and (min-width : 600px){
+	.productAll:hover .indexSubImg{
+		display : block;
+	}
 }
 
 /*왼쪽 aside*/
@@ -238,8 +280,100 @@
     z-index : 1;
 }
 
+/*모바일 필터 메뉴*/
+.filter{
+	border : 1px solid 	#DCDCDC;
+	border-radius : 5px;
+	width : 54px;
+	height : 40px;
+	text-align : center;
+	color : #696969;
+}
+
+.mlAside{
+	text-align : left;
+}
+
+/*모바일 필터 펼침 크기*/
+.canvasM{
+	max-width : 60%;
+}
+
 .filter>i{
 	font-size : 30px;
+	position : relative;
+	top : -2px;
+}
+
+/*모바일 상품 카드*/
+.productListCardM{
+	height : auto;
+}
+
+.productListMDiv{
+	height : 120px;
+	display : flex;
+	border : 1px solid #DCDCDC;
+	border-radius : 10px;
+	margin-top : 10px;
+	margin-bottom : 10px;
+}
+
+.productListMImg{
+	margin : 0px;
+	max-width : 100px;
+	height : 100px;
+	display : inline-block;
+}
+
+.productListMImg>img{
+	border-radius : 10px;
+}
+
+.productListContent{
+	margin : 0px;
+	width : 270px;
+	height : 100px;
+	display : inline-block;
+	text-indent : 1em;
+}
+
+.productListStarM{
+	text-align : center;
+	font-size : 0.8rem;
+}
+
+/* 모바일 가격 메세지*/
+.priceAlertM{
+	margin : 0;
+	background-size : cover;
+	position : fixed;
+	top : 0;
+	left : 0;
+	width : 100%;
+	height : 100%;
+	z-index : 10;
+	background-color : rgba(0,0,0,0.7);
+	display : none;
+}
+
+.priceAlertMessageM{
+	width : 300px;
+	height : 150px;
+	margin : 0 auto;
+	position : relative;
+	top : 40%;
+	background-color : #FFEFD5;
+	border-radius : 10px;
+	text-align : center;
+}
+
+/*모바일 찜, 장바구니 이미지*/
+.pListSubImgM{
+	width : 90px;
+	position : relative;
+	left : 180px;
+	top : -40px;
 }
 
 /* productView ========================================================================================== */

@@ -26,7 +26,7 @@
     <nav class="navbar-expand-lg navbar-light bg-warning bg-gradient bg-opacity-25 fw-bold fs-5">
         <div class="row">
             <div class="col-lg-2 d-none d-lg-block"></div>
-            <div class="col-1 pe-0 d-lg-none" id="navLeftMenu"></div>
+            <div class="col-2 col-sm-1 pe-0 d-lg-none" id="navLeftMenu"></div>
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
         </div>
     </nav>

@@ -14,7 +14,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/base.css">
-	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/shopbasket.css" />
 	<script src="<%=request.getContextPath() %>/resources/js/jquery-3.6.0.min.js"></script>
 	<script src="<%=request.getContextPath() %>/resources/js/shopbasket.js"></script>
@@ -63,7 +62,7 @@
 			        <div class="row shopbasket-checkbox">
 			        	<div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4">
 			        		<div class="form-check form-check-inline">
-							  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+							  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="selectall" name="shopbasket" onclick="selectAll(this)">
 							  <label class="form-check-label" for="inlineCheckbox1">전체 선택</label>
 							</div>
 			        	</div>
@@ -72,11 +71,11 @@
 			        	</div>
 					</div>
 					
-					<div class="shopbasket-title">
-					<p class="fs-4 shopbasket-fs4">냉동식품</p>	
+					<div class="shopbasket-title border border-info border-1 rounded shadow-sm">
+					<p class="fs-4 shopbasket-fs4"><i class="bi bi-snow2"></i>냉동식품</p>	
 					<div class="row d-flex align-items-center shopbasket-card">
 						<div class="col-lg-2 col-md-2">
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" name="shopbasket">
 						</div>
 						<div class="col-lg-8 col-md-8">
 							<div class="h-100 p-2 bg-light border rounded-3 card-good">
@@ -90,20 +89,20 @@
 					        		</div>
 					        	</div>
 				        	
-					        	<div class="d-grid gap-4 d-md-flex justify-content-md-center">
-								  <button class="btn btn-dark shopbasket-btn" type="button">삭제</button>
-								  <button class="btn btn-secondary shopbasket-btn" type="button">바로 구매</button>
+					        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 shopbasket-btn">
+								  <button class="btn btn-secondary col-lg-3 col-md-4" type="button">삭제</button>
+								  <button class="btn btn-dark col-lg-3 col-md-4" type="button">바로 구매</button>
 								</div>
 				        	</div>
 						</div>
-						<div class="col-lg-2 col-md-2 d-flex justify-content-end">
+						<div class="col-lg-2 col-md-2 d-flex justify-content-end shopbasket-number">
 							<i class="bi bi-dash shopbasket-icon"></i>&nbsp; 1 &nbsp; <i class="bi bi-plus shopbasket-icon"></i>
 						</div>
 					</div>
 					
 					<div class="row d-flex align-items-center shopbasket-card">
 						<div class="col-lg-2 col-md-2">
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option2" name="shopbasket">
 						</div>
 						<div class="col-lg-8 col-md-8">
 							<div class="h-100 p-2 bg-light border rounded-3 card-good">
@@ -117,23 +116,23 @@
 					        		</div>
 					        	</div>
 				        	
-					        	<div class="d-grid gap-4 d-md-flex justify-content-md-center">
-								  <button class="btn btn-dark shopbasket-btn" type="button">삭제</button>
-								  <button class="btn btn-secondary shopbasket-btn" type="button">바로 구매</button>
+					        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 shopbasket-btn">
+								  <button class="btn btn-secondary col-lg-3 col-md-4" type="button">삭제</button>
+								  <button class="btn btn-dark col-lg-3 col-md-4" type="button">바로 구매</button>
 								</div>
 				        	</div>
 						</div>
-						<div class="col-lg-2 col-md-2 d-flex justify-content-end">
+						<div class="col-lg-2 col-md-2 d-flex justify-content-end shopbasket-number">
 							<i class="bi bi-dash shopbasket-icon"></i>&nbsp; 1 &nbsp; <i class="bi bi-plus shopbasket-icon"></i>
 						</div>
 					</div>
 					</div>
 					
-					<div class="shopbasket-title">
-					<p class="fs-4 shopbasket-fs4">즉석식품</p>	
+					<div class="shopbasket-title border border-success border-1 rounded shadow-sm">
+					<p class="fs-4 shopbasket-fs4"><i class="fa-solid fa-utensils"></i>즉석식품</p>	
 					<div class="row d-flex align-items-center shopbasket-card">
 						<div class="col-lg-2 col-md-2">
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option3" name="shopbasket">
 						</div>
 						<div class="col-lg-8 col-md-8">
 							<div class="h-100 p-2 bg-light border rounded-3 card-good">
@@ -147,20 +146,20 @@
 					        		</div>
 					        	</div>
 				        	
-					        	<div class="d-grid gap-4 d-md-flex justify-content-md-center">
-								  <button class="btn btn-dark shopbasket-btn" type="button">삭제</button>
-								  <button class="btn btn-secondary shopbasket-btn" type="button">바로 구매</button>
+					        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 shopbasket-btn">
+								  <button class="btn btn-secondary col-lg-3 col-md-4" type="button">삭제</button>
+								  <button class="btn btn-dark col-lg-3 col-md-4" type="button">바로 구매</button>
 								</div>
 				        	</div>
 						</div>
-						<div class="col-lg-2 col-md-2 d-flex justify-content-end">
+						<div class="col-lg-2 col-md-2 d-flex justify-content-end shopbasket-number">
 							<i class="bi bi-dash shopbasket-icon"></i>&nbsp; 1 &nbsp; <i class="bi bi-plus shopbasket-icon"></i>
 						</div>
 					</div>
 					
 					<div class="row d-flex align-items-center shopbasket-card">
 						<div class="col-lg-2 col-md-2">
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option4" name="shopbasket">
 						</div>
 						<div class="col-lg-8 col-md-8">
 							<div class="h-100 p-2 bg-light border rounded-3 card-good">
@@ -174,22 +173,22 @@
 					        		</div>
 					        	</div>
 				        	
-					        	<div class="d-grid gap-4 d-md-flex justify-content-md-center">
-								  <button class="btn btn-dark shopbasket-btn" type="button">삭제</button>
-								  <button class="btn btn-secondary shopbasket-btn" type="button">바로 구매</button>
+					        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 shopbasket-btn">
+								  <button class="btn btn-secondary col-lg-3 col-md-4" type="button">삭제</button>
+								  <button class="btn btn-dark col-lg-3 col-md-4" type="button">바로 구매</button>
 								</div>
 				        	</div>
 						</div>
-						<div class="col-lg-2 col-md-2 d-flex justify-content-end">
+						<div class="col-lg-2 col-md-2 d-flex justify-content-end shopbasket-number">
 							<i class="bi bi-dash shopbasket-icon"></i>&nbsp; 1 &nbsp; <i class="bi bi-plus shopbasket-icon"></i>
 						</div>
 					</div>
 					</div>
 					
-					<div class="d-flex justify-content-end shopbasket-sum">선택 상품 합계 : 40.000원</div>
+					<div class="d-flex justify-content-center shopbasket-sum">선택 상품 합계 : 40.000원</div>
 					
-					<div class="d-flex justify-content-end shopbasket-btn2">
-						<button type="button" class="btn btn-primary">구매하기</button>
+					<div class="d-flex justify-content-center shopbasket-btn2">
+						<button type="button" class="btn btn-outline-dark col-5">구매하기</button>
 					</div>
 						
       				</div>

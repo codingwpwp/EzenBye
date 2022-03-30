@@ -9,18 +9,70 @@ $(document).ready(function(){
     if(window.innerWidth <= 992){
         left_full_menu.hide();
     }
-
+	
+	if(window.innerWidth <= 576){
+			$(".findT").css("text-align","left");
+			$(".order-btn").addClass("mt-1 mb-1");
+			$(".cancle-seeVIew-btn").addClass("mt-2");
+			$(".number-good").css("text-align","left");
+			$(".cancleView-btn").attr("class","d-grid gap-2 d-md-flex justify-content-md-center cancleView-btn");
+			$(".interItem-icon").css({"text-align":"left", "margin-top":"0px"});
+			$(".interItem-btn").attr("class","d-grid gap-2 d-md-flex justify-content-md-center mt-2 interItem-btn");
+			$(".changeInfor-input").css("width","90%");
+			$(".changeInforOk-inputId, .changeInforOk-inputName, .changeInforOk-inputPhone, .changeInforOk-inputNicName, .changeInforOk-inputEmail").css("width","100%");
+			$(".changeInforOk-btn").attr("class","d-flex justify-content-center changeInforOk-btn");
+			$(".addressManage-1, .addressManage-2, .addressManage-3, .addressManage-4, .addressManage-5, .addressManage-6").css("width","100%");
+			$(".noteManage-btn").addClass("mb-3");
+			$("#noteManageView-title").css("width","23%");
+			$(".memberSecession-select2").addClass("d-flex justify-content-center");
+		}else {
+			$(".findT").css("text-align","right");
+			$(".order-btn").removeClass("mt-1 mb-1");
+			$(".cancle-seeVIew-btn").removeClass("mt-2");
+			$(".number-good").css("text-align","right");
+			$(".cancleView-btn").attr("class","d-grid gap-4 d-md-flex justify-content-md-center cancleView-btn");
+			$(".interItem-icon").css({"text-align":"right", "margin-top":"20px"});
+			$(".interItem-btn").attr("class","d-grid gap-4 d-md-flex justify-content-md-center mt-2 interItem-btn");
+			$(".changeInfor-input").css("width","70%");
+			$(".changeInforOk-inputId, .changeInforOk-inputName, .changeInforOk-inputPhone, .changeInforOk-inputNicName, .changeInforOk-inputEmail").css("width","90%");
+			$(".changeInforOk-btn").attr("class","changeInforOk-btn");
+			$(".addressManage-1, .addressManage-2, .addressManage-3, .addressManage-4, .addressManage-5, .addressManage-6").css("width","90%");
+			$(".noteManage-btn").removeClass("mb-3");
+			$("#noteManageView-title").css("width","35%");
+			$(".memberSecession-select2").removeClass("d-flex justify-content-center");
+		}
+	
     $(window).resize(function() {
 		if(window.innerWidth <= 576){
 			$(".findT").css("text-align","left");
 			$(".order-btn").addClass("mt-1 mb-1");
 			$(".cancle-seeVIew-btn").addClass("mt-2");
 			$(".number-good").css("text-align","left");
+			$(".cancleView-btn").attr("class","d-grid gap-2 d-md-flex justify-content-md-center cancleView-btn");
+			$(".interItem-icon").css({"text-align":"left", "margin-top":"0px"});
+			$(".interItem-btn").attr("class","d-grid gap-2 d-md-flex justify-content-md-center mt-2 interItem-btn");
+			$(".changeInfor-input").css("width","90%");
+			$(".changeInforOk-inputId, .changeInforOk-inputName, .changeInforOk-inputPhone, .changeInforOk-inputNicName, .changeInforOk-inputEmail").css("width","100%");
+			$(".changeInforOk-btn").attr("class","d-flex justify-content-center changeInforOk-btn");
+			$(".addressManage-1, .addressManage-2, .addressManage-3, .addressManage-4, .addressManage-5, .addressManage-6").css("width","100%");
+			$(".noteManage-btn").addClass("mb-3");
+			$("#noteManageView-title").css("width","23%");
+			$(".memberSecession-select2").addClass("d-flex justify-content-center");
 		}else {
 			$(".findT").css("text-align","right");
 			$(".order-btn").removeClass("mt-1 mb-1");
 			$(".cancle-seeVIew-btn").removeClass("mt-2");
 			$(".number-good").css("text-align","right");
+			$(".cancleView-btn").attr("class","d-grid gap-4 d-md-flex justify-content-md-center cancleView-btn");
+			$(".interItem-icon").css({"text-align":"right", "margin-top":"20px"});
+			$(".interItem-btn").attr("class","d-grid gap-4 d-md-flex justify-content-md-center mt-2 interItem-btn");
+			$(".changeInfor-input").css("width","70%");
+			$(".changeInforOk-inputId, .changeInforOk-inputName, .changeInforOk-inputPhone, .changeInforOk-inputNicName, .changeInforOk-inputEmail").css("width","90%");
+			$(".changeInforOk-btn").attr("class","changeInforOk-btn");
+			$(".addressManage-1, .addressManage-2, .addressManage-3, .addressManage-4, .addressManage-5, .addressManage-6").css("width","90%");
+			$(".noteManage-btn").removeClass("mb-3");
+			$("#noteManageView-title").css("width","35%");
+			$(".memberSecession-select2").removeClass("d-flex justify-content-center");
 		}
 		
 		if(window.innerWidth <= 992){
@@ -36,6 +88,7 @@ $(document).ready(function(){
 	
     });
     
+    // 리뷰작성 평점
     $(".star-rating input[type=radio]").click(function(){
 		var star_rating = $(".star-rating input[type=radio]:checked").val();
 		if(star_rating == 1){
@@ -49,11 +102,11 @@ $(document).ready(function(){
 		}else if(star_rating == 5){
 			$("#result-star").html("매우 좋아요");
 		}
-	});	
+	});
 	
 });
 
-
+// 배송지 관리 주소검색
 function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -101,3 +154,13 @@ function sample6_execDaumPostcode() {
             }
         }).open();
     }
+
+// 쪽지관리 전체선택
+function selectAll(obj)  {
+	  const checkboxes 
+	       = document.getElementsByName('note');
+	  
+	  checkboxes.forEach((checkbox) => {
+	    checkbox.checked = obj.checked;
+	  })
+}

@@ -7,8 +7,11 @@
 .findT, .number-good{
 	text-align: right;
 }
+.link-info{
+	text-decoration: none;
+}
 .cancle-btn{
-	margin-top: 40px; margin-bottom: 40px;
+	margin-top: 20px; margin-bottom: 20px;
 }
 .card-good{
 	margin-bottom: 30px;

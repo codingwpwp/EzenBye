@@ -26,10 +26,10 @@
     <nav class="navbar-expand-lg navbar-light bg-warning bg-gradient bg-opacity-25 fw-bold fs-5" id="navBar">
         <div class="row">
             <div class="col-lg-2 d-none d-lg-block"></div>
-            <div class="col-1 pe-0 d-lg-none" id="navLeftMenu">
+            <div class="col-2 col-sm-1 pe-0 d-lg-none" id="navLeftMenu">
             	<div class="filter">
 	           		<i class="bi bi-funnel" data-bs-toggle="offcanvas" href="#offcanvasExample"></i>
-	           		<%@include file="lAside.jsp"%>
+	           		<%@include file="lAsideM.jsp"%>
 	       		</div>
             </div>
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
@@ -44,16 +44,15 @@
             <div class="col-lg-2 d-none d-lg-block" id="leftDiv">
                 <aside id="leftAside">
                     <%@include file="lAside.jsp"%>
-                   
                 </aside>
             </div>
 
             <!-- 메인 -->
             <div class="col-12 col-sm-9 col-md-10 col-lg-8">
                 <article id="mainSection">
-               
-               	<article>
-					<p class="fs-3 topText">전체상품</p>
+               	<!-- pc버전 -->
+               	<article class="pList">
+					<div class="fs-5 my-2 fw-bold topText">전체상품</div>
 					<hr>
 					<!-- 전체상품 -->
 					<div class="container"> 
@@ -62,8 +61,10 @@
 							<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center">
 								<div class="card" style="width: 18rem;">
 								  <img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/2.jpg" class="card-img-top" alt="비비고만두" onclick="location.href='productView.do'">
-								  <img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
-								  <img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="cart(this)">
+								  <div class="indexSubImg">
+								 	 <img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+								 	 <img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="cart(this)">
+								  </div>
 									  
 								  <div class="card-body" onclick="location.href='productView.do'">
 								    <p class="card-text">
@@ -88,7 +89,40 @@
 						</div>
 					</div>
 				</article>
-					
+				
+				
+				<!-- 모바일 버전 -->	
+				<article class="pListM">
+					<div class="fs-5 my-2 fw-bold topText">전체상품</div>
+					<hr>
+					<div class="productListCardM">
+						<%for(int i=0; i<13; i++){ %>
+						<div class="productListMDiv">
+							<div class="productListMImg">
+								<img src="<%=request.getContextPath()%>/resources/img/CJ/반찬/3.png" class="img-fluid" alt="비비고 메추리알 장조림">
+								<div class="productListStarM">
+									<i class="bi bi-star-fill"></i>
+							        <i class="bi bi-star-fill"></i>
+							        <i class="bi bi-star-fill"></i>
+							      	<i class="bi bi-star-fill"></i>
+							       	<i class="bi bi-star"></i>
+								</div>
+							</div>
+							<div class="productListContent">
+								<span style="color:red;">[인기]</span>
+								<div class="productNameM">비비고 메추리알 장조림</div>
+								<div>10,000원</div>
+								<div class="discountM">할인가</div>
+								<div>배송비 3,000원</div>
+								<div class="pListSubImgM">
+									<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+									<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="pListCart(this)">
+								</div>
+							</div>
+						</div>
+						<%} %>
+					</div>
+				</article>
               	</article>
                 
            	</div>
@@ -109,6 +143,11 @@
 	    <div class="message"></div>
     </div>
     
+    <!-- 모바일 가격 메세지 -->
+    <div class="priceAlertM">
+	    <div class="priceAlertMessageM"></div>
+    </div>
+    
     <!-- 모바일 top -->
     <div class="topM" onclick="moveTop();">
         ↑Top
@@ -126,5 +165,6 @@
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/index.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/productLAside.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/productList.js"></script>
 </body>
 </html>

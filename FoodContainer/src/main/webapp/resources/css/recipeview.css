@@ -162,7 +162,11 @@ height: 100%;
     color: black;
 }
 .report i:hover{
-    color: rgb(184, 184, 4);
+    color:red;
+}
+.report i{
+	
+	font-size: 17px;
 }
 .replycontent{
     float: left;

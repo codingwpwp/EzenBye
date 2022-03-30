@@ -99,8 +99,8 @@
 						  <span class="input-group-text">참고항목</span>
 						  <input type="text" id="sample6_extraAddress" aria-label="Last name" class="form-control">
 						</div>
-						<div class="d-grid addressManage-btn col-6 mx-auto">
-						  <button class="btn btn-success" type="button">기본 배송지 변경</button>
+						<div class="d-grid addressManage-btn col-5 mx-auto">
+						  <button class="btn btn-dark" type="button">기본 배송지 변경</button>
 						</div>
 					</form>
 					

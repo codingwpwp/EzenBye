@@ -55,7 +55,7 @@
                 <article id="mainSection">
                     <!-- 실질적인 메인 내용 -->
                     <div class="col-md-11">
-			        <div class="h-100 p-5 bg-light border rounded-3">
+			        <div class="h-100 p-5 bg-light border rounded-pill">
 			          <p class="fs-2">홍길동님</p>
 			          	<div class="row point">
 				          <div class="col-sm-6">
@@ -85,7 +85,7 @@
 			        		<span>주문번호 : ADDF1325</span>
 			        	</div>
 			        	<div class="col-sm-3 findT">
-			        		<a href="#"><span>배송조회</span></a>
+			        		<a href="#" class="link-info"><span>배송조회</span></a>
 			        	</div>
 			        </div>
 			        
@@ -119,7 +119,7 @@
 			        	<div class="col-sm-6">			        		
 			        	</div>
 			        	<div class="col-sm-3 findT">
-			        		<a href="#"><span>배송조회</span></a>
+			        		<a href="#" class="link-info"><span>배송조회</span></a>
 			        	</div>
 			        </div>
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">

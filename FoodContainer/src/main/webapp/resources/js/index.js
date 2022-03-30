@@ -13,11 +13,21 @@
 	//장바구니
 	function cart(obj){
 		$(".cartBack").css("display","block");
-		var name = $(obj).next().find(".productName").html();
-		var html = "<br><br>"+name+" 상품이 장바구니에 담겼습니다.";
+		var name = $(".productName").html();
+		var html = "<br>&quot;"+name+"&quot;<br> 상품이 장바구니에 담겼습니다.";
 			html += "<br><br><button onclick='cartOk()''>확인</button>";
 		$(".message").html(html);
 	}
+	
+	//장바구니 모바일
+	function indexCart(obj){
+		$(".cartBack").css("display","block");
+		var name = $(".productNameM").html();
+		var html = "<br>&quot;"+name+"&quot;<br> 상품이 장바구니에 담겼습니다.";
+			html += "<br><br><button onclick='cartOk()''>확인</button>";
+		$(".message").html(html);
+	}
+	
 	//장바구니 확인 알림
 	function cartOk(){
 		$(".cartBack").css("display","none");
