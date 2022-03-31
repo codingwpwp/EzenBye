@@ -124,5 +124,5 @@ textarea {
 /*글등록페이지 제목 입력 란*/
 .tittext{
 	width: 100%;
-	max-width:200px;
+	max-width:500px;
 }

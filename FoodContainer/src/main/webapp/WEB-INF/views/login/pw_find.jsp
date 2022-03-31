@@ -86,17 +86,17 @@
                                             <p>입력하신 정보는 <strong>임시 비밀번호</strong> 발급에만&nbsp; 사용되며 <strong>저장 되지 않습니다.</strong></p>
                                         </div>
                                         <div class="col-md-10 col-sm-10 col-12">
-                                            <input type="text" class="findinput" placeholder="이름를 입력해주세요">
+                                            <input type="text" class="form-control findinput" placeholder="이름를 입력해주세요">
                                         </div>
                                         <div class="col-md-10 col-sm-10 col-12">
-                                            <input type="text" class="findinput" placeholder="아이디 입력해주세요">
+                                            <input type="text" class="form-control findinput" placeholder="아이디 입력해주세요">
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-12">
-                                            <input type="text" class="findemailinput" placeholder="이메일을 입력해주세요">
+                                            <input type="text" class="form-control findemailinput" placeholder="이메일을 입력해주세요">
                                             <button class="btn btn-secondary emailbtn">인증번호 발송</button>
                                         </div>
                                         <div class="col-md-10 col-sm-10 col-12 ">
-                                            <input type="text" class="findinput" placeholder="인증번호 입력해주세요">
+                                            <input type="text" class="form-control findinput" placeholder="인증번호 입력해주세요">
                                             
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-12">
