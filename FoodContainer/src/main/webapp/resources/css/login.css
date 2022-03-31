@@ -131,7 +131,10 @@ form.loginfrm{
 .row.lookup{
     margin-bottom: 5%;
 }
-
+/*로그인 입력폼*/
+.form-control{
+	display: initial;
+}
 /*<===================================아이디 찾기===================================>*/
 /*모바일버전*/
 @media screen and (max-width:380px){

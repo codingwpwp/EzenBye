@@ -81,17 +81,17 @@
 							</div>
 							<div class="row">
 								<div class="col-md-12 col-sm-12 md-1 id">
-									<input type="text" placeholder="아이디 8~20 자리의 영문+숫자">
+									<input type="text" placeholder="아이디 8~20 자리의 영문+숫자" class="form-control">
 								</div>
 								<div class="col-md-12 col-sm-12 mb-1 pw">
-									<input type="text" placeholder="비밀번호 8~20 자리의 영문+숫자">
+									<input type="text" placeholder="비밀번호 8~20 자리의 영문+숫자" class="form-control">
 								</div>
 								<div class="col-md-12 col-sm-12 col-12">아래에 글자를 보이는대로
 									입력해주세요!</div>
 							</div>
 							<div class="row">
 								<div class="col-md-12 col-sm-6 col-12 mb-1 auto">
-									<input id="codeinput"type="text" name="output" placeholder="코드생성 버튼을 클릭하세요">
+									<input id="codeinput"type="text" name="output" placeholder="코드생성 버튼을 클릭하세요" class="form-control">
 
 									<input  class="btn btn-secondary code" type="button"
 										value="코드생성"
@@ -102,7 +102,7 @@
 
 							<div class="row">
 								<div class="col-md-12 col-sm-6 col-12 mb-1 autoin">
-									<input id="codeinput" type="text" name="che" placeholder="문자를 입력해주세요">
+									<input id="codeinput" type="text" name="che" placeholder="문자를 입력해주세요" class="form-control">
 									<input class="btn btn-secondary" type="button" value="코드확인"
 										onclick="check();">
 									<div hidden>
