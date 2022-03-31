@@ -87,10 +87,10 @@
                                             <p>입력하신 정보는 <strong>아이디 찾기</strong>에만 사용되며 <strong>저장되지 않습니다.</strong></p>
                                         </div>
                                         <div class="col-12 leftform">
-                                            <input type="text" class="findinput" placeholder="이름를 입력해주세요">
+                                            <input type="text" class="form-control findinput" placeholder="이름를 입력해주세요">
                                         </div>
                                         <div class="col-12 leftform">
-                                            <input type="text" class="findinput" placeholder="핸드폰 뒤 7~8자리를 입력 해주세요">
+                                            <input type="text" class="form-control findinput" placeholder="핸드폰 뒤 7~8자리를 입력 해주세요">
                                         </div>
                                         <div class="col-12 leftform">
                                             <input type="submit" value="아이디 찾기" class="btn btn-secondary findbtn">
@@ -111,14 +111,14 @@
                                             <p>인증번호는 <strong>이메일로 발송되며,</strong> 인증 이외의 용도로 이용 또는 <strong>저장 되지 않습니다.</strong></p>
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-12 rightform">
-                                            <input type="text" class="findinput" placeholder="이름를 입력해주세요">
+                                            <input type="text" class="form-control findinput" placeholder="이름를 입력해주세요">
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-12 rightform">
-                                            <input type="text" class="findinput" placeholder="이메일을 입력해주세요" id="emailinput">
+                                            <input type="text" class="form-control findinput" placeholder="이메일을 입력해주세요" id="emailinput">
                                            <input class="btn btn-secondary emailbtn" type="button" value="인증번호 발송" id="emailbtn">
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-12 rightform">
-                                            <input type="text" class="findinput" placeholder="인증번호 입력해주세요">
+                                            <input type="text" class="form-control findinput" placeholder="인증번호 입력해주세요">
                                             
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-12 rightform">

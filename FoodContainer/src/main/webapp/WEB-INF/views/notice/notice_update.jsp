@@ -71,7 +71,7 @@
 							<thead>
 								<tr>
 									<th scope="col">제목</th>
-									<td class="title"><input type="text"></td>
+									<td class="title"><input type="text" class="tittext"></td>
 									<td class="right">2022-03-23</td>
 								</tr>
 							</thead>
@@ -92,12 +92,11 @@
 						</table>
 						<div class="row">
 						<div class="col-md-2 col-sm-2 col-3 leftbtn">
-							<input value="목록" type="button" class="btn btn-primary listbtn">
+							<input value="목록" type="button" class="btn btn-primary listbtn" onclick="location.href='notice_main.do'">
 						</div>
-						<div class="col-md-10 col-sm-10 col-9 rightbtn">
-							<input value="삭제" type="button" class="btn btn-danger delbtn">
-							<input value="수정" type="button"
-								class="btn btn-secondary insertbtn">
+						<div class="col-md-10 col-sm-10 col-8 rightbtn">
+							
+							<input value="등록" type="button" class="btn btn-secondary insertbtn">
 						</div>
 						</div>
 

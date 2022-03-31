@@ -52,7 +52,6 @@
                 base.js에 id="navLeftMenu"와 관련된 코드가 작성되어있음.
             -->
 			<div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark" id="navLeftMenu">
-				d
 				<!-- 여기에 작성 -->
 			</div>
 
@@ -88,7 +87,7 @@
 									<strong>제목</strong>
 								</div>
 								<div class="px-0 col-md-6 col-sm-6 col-10">
-									<input type="text">
+									<input type="text" class="form-control">
 								</div>
 							</div>
 							<div class="row content">

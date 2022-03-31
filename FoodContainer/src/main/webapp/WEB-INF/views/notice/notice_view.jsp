@@ -92,12 +92,11 @@
 						</table>
 						<div class="row">
 						<div class="col-md-2 col-sm-2 col-3 leftbtn">
-							<input value="목록" type="button" class="btn btn-primary listbtn">
+							<input value="목록" type="button" class="btn btn-primary listbtn" onclick="location.href='notice_main.do'">
 						</div>
 						<div class="col-md-10 col-sm-10 col-9 rightbtn">
 							<input value="삭제" type="button" class="btn btn-danger delbtn">
-							<input value="수정" type="button"
-								class="btn btn-secondary updatebtn">
+							<input value="수정" type="button" class="btn btn-secondary updatebtn" onclick="location.href='notice_update.do'">
 						</div>
 						</div>
 
