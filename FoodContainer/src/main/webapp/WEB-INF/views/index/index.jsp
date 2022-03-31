@@ -97,7 +97,7 @@
 									    	<span style="color:red;">[인기]</span><br>
 									    	<span class="productName">비비고왕교자</span><br>
 									    	<span class="fs-4">10,000</span>원<br>
-									    	<span class="discount">d</span>
+									    	<span class="discount">1</span>
 									    	<span>
 									    		<i class="bi bi-star-fill"></i>
 							        			<i class="bi bi-star-fill"></i>

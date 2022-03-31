@@ -1,4 +1,4 @@
-/* í˜ì´ì§€ ì „ì²´ ê¸°ë³¸ì„¤ì • */
+/* ÆäÀÌÁö ÀüÃ¼ ±âº»¼³Á¤ */
 body{
     padding: 0px;
     margin: 0px auto;
@@ -8,12 +8,12 @@ body{
     font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
-/* í—¤ë”ì˜ ë¡œê³  */
+/* Çì´õÀÇ ·Î°í */
 header #logo{
     max-width: 180px;
 }
 
-/* í—¤ë”ì˜ ì•„ì´ì½˜&ë„¤ë¹„ê²Œì´ì…˜ ë°”ì˜ íšŒì› */
+/* Çì´õÀÇ ¾ÆÀÌÄÜ&³×ºñ°ÔÀÌ¼Ç ¹ÙÀÇ È¸¿ø */
 header i, nav #userLogin a{
     cursor: pointer;
     transition: all 0.2s;
@@ -23,27 +23,27 @@ header i:hover, nav #userLogin a:hover{
     color:gray;
 }
 
-/* ë„¤ë¹„ê²Œì´ì…˜ ë°”ì˜ ì¤‘ì•™ë©”ë‰´ë¥¼ í™•ëŒ€í•˜ê³  ì¶•ì†Œí•˜ëŠ” ë²„íŠ¼ */
+/* ³×ºñ°ÔÀÌ¼Ç ¹ÙÀÇ Áß¾Ó¸Ş´º¸¦ È®´ëÇÏ°í Ãà¼ÒÇÏ´Â ¹öÆ° */
 .dropdown:hover .dropdown-menu {
     display: block;
     margin-top: 0;
 }
 
-/* ì˜¤ë¥¸ìª½ ì‚¬ì´ë“œ ë©”ë‰´ */
+/* ¿À¸¥ÂÊ »çÀÌµå ¸Ş´º */
 #rightAside{
     z-index: 100;
     width: 105px;
     position: fixed;
     top:260px;
 }
-/* ìƒí’ˆì´ë¯¸ì§€ */
+/* »óÇ°ÀÌ¹ÌÁö */
 .productImg{
     text-align: center;
 }
 .productImg img{
 	background: whitesmoke;
 }
-/* Topë²„íŠ¼ */
+/* Top¹öÆ° */
 #top{
 	width : 45px;
 	height : 45px;
@@ -60,7 +60,7 @@ header i:hover, nav #userLogin a:hover{
 #top:hover{
     background-color: gray;
 }
-/* ì¹´ì¹´ì˜¤í†¡ */
+/* Ä«Ä«¿ÀÅå */
 #chatting{
     cursor: pointer;
     transition: all 0.3s;
@@ -70,4 +70,13 @@ header i:hover, nav #userLogin a:hover{
 }
 #chatting i{
     font-size: 45px;
+}
+
+/* ¸ğ¹ÙÀÏ ÃÖ±Ù º» »óÇ°*/
+.rightAsideM{
+	
+}
+
+.rightAsideDivM{
+	display : flex;
 }
