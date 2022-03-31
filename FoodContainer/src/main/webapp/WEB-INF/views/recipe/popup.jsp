@@ -11,11 +11,11 @@
 
 	<h2>파일을 선택 해주세요!</h2>
 	<input type="file" id="sumnailimg" accept="image/*"
-		onchange="setThumbnail(event);">
+		onchange="setThumbnail(event,this);">
 		<div id="image_container">
 		</div>
 	<script>
-		function setThumbnail(event) {
+		function setThumbnail(event,obj) {
 			var reader = new FileReader();
 			reader.onload = function(event) {
 				var img = document.createElement("img");

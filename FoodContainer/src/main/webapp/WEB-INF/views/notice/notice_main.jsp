@@ -44,9 +44,7 @@
                 base.js에 id="navLeftMenu"와 관련된 코드가 작성되어있음.
             -->
 			<div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark"
-				id="navLeftMenu">
-				<!-- 여기에 작성 -->
-			</div>
+				id="navLeftMenu"><!-- 여기에 작성 --></div>
 
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
 
@@ -80,7 +78,7 @@
 									<th scope="col" class="center">번호</th>
 									<th scope="col">제목</th>
 									<th scope="col" class="center">날짜</th>
-									<th scope="col" class="center">관리</th>
+									<th scope="col" class="center">조회수</th>
 								</tr>
 							</thead>
 							<tbody>

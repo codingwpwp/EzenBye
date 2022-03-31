@@ -92,7 +92,7 @@
 						</table>
 						<div class="row">
 						<div class="col-md-2 col-sm-2 col-4 leftbtn">
-							<input value="목록" type="button" class="btn btn-primary listbtn">
+							<input value="목록" type="button" class="btn btn-primary listbtn" onclick="location.href='notice_main.do'">
 						</div>
 						<div class="col-md-10 col-sm-10 col-8 rightbtn">
 							

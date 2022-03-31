@@ -59,8 +59,9 @@
                     <!-- 실질적인 메인 내용 -->
                     <div class="fs-5 my-2 fw-bold">유저레시피</div>
                     <div style="border-bottom:1px solid black"> <strong>총123,456개의 레시피가 있습니다</strong></div>
-                    <button class="btnwr"><a href="<%=request.getContextPath()%>/recipe/recipewrite.do"><span>레시피 작성</span></a></button>
-                    <select class="select1" name="searchType">
+                    <button class="btnwr" onclick="location.href='recipewrite.do'"><span>레시피 작성</span></button>
+                  
+                    <select class="form-select sel1" name="searchType">
                         <option>정렬</option>
                         <option value="">추천순</option>
                         <option value="">최신순</option>
@@ -153,22 +154,20 @@
                     </div>
                     <div class="container">
                         <div class="row">
-                            
-                       
-                        
-                            <form action="#" class="selbox">    
-                                <div class="row row-cols-3 row-cols-lg-12 row-cols-md-12 row-cols-sm-12 g-12"">         
-                                <select class="select2">               
-                                    <option>검색</option>
-                                    <option>상품이름</option>
-                                    <option>작성자</option>
-                                </select>
-                                <input type="text" size="40px" >
-                                <input type="button" value="검색" class="btn btn-primary">
-                            </div>
-                            </form>
-                           
-                        </div>
+
+						<div class="col-12 seldiv">
+							<form action="#" class="selbox">
+								<select class="form-select">
+									<option>검색</option>
+									<option>상품이름</option>
+									<option>작성자</option>
+								</select> 
+								<input type="text" class="form-control seltext"> 
+								<input type="button" value="검색" class="btn btn-primary selbtn">
+							</form>
+						</div>
+
+						</div>
                         <div class="row">
                             <div class="col-md-12 col-12 page">
                                 <ul class="pagination">
