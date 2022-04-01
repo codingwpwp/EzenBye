@@ -1,0 +1,28 @@
+/* 결제 정보 */
+#purchaseDiv{
+    top: 20%;
+    max-width: 230px;
+    min-height: 400px;
+    max-height: 460px;
+    background-color: #fffdf5;
+    border: 1px solid black;
+}
+#purchaseNotMemberDiv{
+    top: 20%;
+    max-width: 230px;
+    max-height: 345px;
+    background-color: #fffdf5;
+    border: 1px solid black;
+
+}
+/* 서브약관 */
+.fontSmall{
+    font-size: small;
+}
+
+/* 메인내용의 링크들 */
+section a{
+    text-decoration: none;
+    transition: all 0.3s;
+    font-size: small;
+}
