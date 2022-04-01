@@ -1,6 +1,9 @@
 @charset "UTF-8";
 
+<<<<<<< HEAD
 /* 페이지 전체 기본설정 */
+=======
+>>>>>>> branch 'main' of https://github.com/Bono-Shin/EzenBye.git
 body{
     padding: 0px;
     margin: 0px auto;
@@ -10,12 +13,19 @@ body{
     font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
+<<<<<<< HEAD
 /* 헤더의 로고 */
+=======
+
+>>>>>>> branch 'main' of https://github.com/Bono-Shin/EzenBye.git
 header #logo{
     max-width: 180px;
 }
 
+<<<<<<< HEAD
 /* 헤더의 아이콘&네비게이션 바의 회원 */
+=======
+>>>>>>> branch 'main' of https://github.com/Bono-Shin/EzenBye.git
 header i, nav #userLogin a{
     cursor: pointer;
     transition: all 0.2s;
@@ -25,27 +35,46 @@ header i:hover, nav #userLogin a:hover{
     color:gray;
 }
 
+<<<<<<< HEAD
 /* 네비게이션 바의 중앙메뉴를 확대하고 축소하는 버튼 */
+=======
+
+>>>>>>> branch 'main' of https://github.com/Bono-Shin/EzenBye.git
 .dropdown:hover .dropdown-menu {
     display: block;
     margin-top: 0;
 }
 
+<<<<<<< HEAD
 /* 오른쪽 사이드 메뉴 */
+=======
+
+
+
+
+>>>>>>> branch 'main' of https://github.com/Bono-Shin/EzenBye.git
 #rightAside{
     z-index: 100;
     width: 105px;
     position: fixed;
     top:260px;
 }
+<<<<<<< HEAD
 /* 상품이미지 */
+=======
+
+>>>>>>> branch 'main' of https://github.com/Bono-Shin/EzenBye.git
 .productImg{
     text-align: center;
 }
 .productImg img{
 	background: whitesmoke;
 }
+<<<<<<< HEAD
 /* Top버튼 */
+=======
+
+>>>>>>> branch 'main' of https://github.com/Bono-Shin/EzenBye.git
 #top{
 	width : 45px;
 	height : 45px;
@@ -62,7 +91,11 @@ header i:hover, nav #userLogin a:hover{
 #top:hover{
     background-color: gray;
 }
+<<<<<<< HEAD
 /* 카카오톡 */
+=======
+
+>>>>>>> branch 'main' of https://github.com/Bono-Shin/EzenBye.git
 #chatting{
     cursor: pointer;
     transition: all 0.3s;
@@ -74,7 +107,11 @@ header i:hover, nav #userLogin a:hover{
     font-size: 45px;
 }
 
+<<<<<<< HEAD
 /* 모바일 최근 본 상품*/
+=======
+
+>>>>>>> branch 'main' of https://github.com/Bono-Shin/EzenBye.git
 .rightAsideDivM{
 	height : 120px;
 	width : 100%;
