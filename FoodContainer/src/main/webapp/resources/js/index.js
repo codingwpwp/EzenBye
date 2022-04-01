@@ -15,7 +15,7 @@
 		$(".cartBack").css("display","block");
 		var name = $(".productName").html();
 		var html = "<br>&quot;"+name+"&quot;<br> 상품이 장바구니에 담겼습니다.";
-			html += "<br><br><button onclick='cartOk()''>확인</button>";
+			html += "<br><br><button type='button' class='btn btn-secondary' onclick='cartOk()'>확인</button>";
 		$(".message").html(html);
 	}
 	
@@ -24,7 +24,7 @@
 		$(".cartBack").css("display","block");
 		var name = $(".productNameM").html();
 		var html = "<br>&quot;"+name+"&quot;<br> 상품이 장바구니에 담겼습니다.";
-			html += "<br><br><button onclick='cartOk()''>확인</button>";
+			html += "<br><br><button type='button' class='btn btn-secondary' onclick='cartOk()'>확인</button>";
 		$(".message").html(html);
 	}
 	

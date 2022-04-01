@@ -47,7 +47,7 @@
 	left : 0;
 	width : 100%;
 	height : 100%;
-	z-index : 10;
+	z-index : 150;
 	background-color : rgba(0,0,0,0.7);
 	display : none;
 }
@@ -187,7 +187,7 @@
 	margin : 15px;
 	display : inline-block;
 	border : 1px solid #DCDCDC;
-	border-radius : 10px;
+	border-radius : 5px;
 	width : 150px;
 	height : auto;
 }
@@ -221,6 +221,14 @@
 /*할인가*/
 .discount{
 	color : red;
+}
+
+.indexStar{
+	color : orange;
+}
+
+.indexStarM{
+	color : orange;
 }
 
 /* productList ========================================================================================== */
@@ -262,14 +270,15 @@
 .lAside{
 	background-color : whitesmoke;
 	border-radius : 10px;
-	width : 120px;
+	width : 180px;
 	position : relative;
 	left : 80px;
 }
 
 .lAsideDiv{
+	margin : 0 auto;
 	position : relative;
-	right : 7px;
+	right : -10px;
 }
 
 #leftAside{
@@ -338,9 +347,14 @@
 	text-indent : 1em;
 }
 
+.productListStar{
+	color : orange;
+}
+
 .productListStarM{
 	text-align : center;
 	font-size : 0.8rem;
+	color : orange;
 }
 
 /* 모바일 가격 메세지*/
@@ -390,13 +404,12 @@
 }
 
 .viewStar{
-	float : right;	
+	text-align : center;	
 }
 
 @media screen and (max-width : 600px){
 	.viewStar{
 		position : relative;
-		left : -35px;
 	}
 }
 
@@ -613,4 +626,16 @@
 
 .leftViewButton{
 	width : 135px;
+}
+
+.productViewStar{
+	color : orange;
+}
+
+.productViewReviewStar{
+	color : orange;
+}
+
+.productViewReviewStarM{
+	color : orange;
 }
