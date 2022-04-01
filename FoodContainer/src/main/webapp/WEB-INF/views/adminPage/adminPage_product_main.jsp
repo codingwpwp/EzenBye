@@ -65,7 +65,7 @@
                             </label>
                             <button type="button" class="btn btn-outline-danger btn-sm p-1 fw-bold">선택 삭제</button>
                             
-                            <button type="button" class="btn btn-primary fw-bold float-end">상품<span class="d-none d-sm-inline"> </span>등록</button>
+                            <button type="button" class="btn btn-primary fw-bold float-end" onclick="location.href='product_register.do'">상품 등록</button>
                         </div>
 
                         <!-- 상품 테이블 -->
@@ -96,11 +96,11 @@
                                         <td>냉동식품</td>
                                         <td>CJ</td>
                                         <td class="col5">
-                                            <a href="#" class="link-primary">무말랭이무말랭이무말랭이무말랭이무말랭이무말랭이무말랭이무말</a>
+                                            <a href="product_detail.do" class="link-primary">무말랭이무말랭이무말랭이무말랭이무말랭이무말랭이무말랭이무말</a>
                                         </td>
                                         <td>3</td>
                                         <td>
-                                            <button class="btn btn-outline-primary btn-sm px-1 py-0">수정</button>
+                                            <button class="btn btn-outline-primary btn-sm px-1 py-0" onclick="location.href='product_modify.do'">수정</button>
                                             <button class="btn btn-outline-dark btn-sm px-1 py-0">삭제</button>
                                         </td>
                                     </tr>
@@ -178,7 +178,6 @@
 
             <!-- 오른쪽 사이드메뉴 -->
             <div class="col-sm-3 col-md-2 col-lg-2 d-none d-sm-block">
-            	<%@include file="/WEB-INF/views/base/rightAside.jsp"%>
             </div>
             
         </div>

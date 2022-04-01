@@ -9,6 +9,10 @@
 .centerTable{
     text-align: center;
 }
+/* 수직정렬를 해주는 테이블 */
+.verticalAlignTable{
+    vertical-align: middle;
+}
 
 /* 관리자메인 */
 .moreContent a:hover{
@@ -22,11 +26,10 @@
 
 /* 소제목 */
 .infoTitle{
-    font-weight: bold;
     text-align: center;
     background-color: whitesmoke;
-    border: 2px solid darkgray;
-    border-radius: 5px;
+    border: 1px solid black;
+    border-radius: 3px;
 }
 /* textarea */
 #mainSection textarea{
@@ -65,4 +68,43 @@
 }
 #submitNo{
     display: none;
+}
+
+/* 메달 */
+.medal{
+    max-height: 35px;
+}
+
+/* 여기는 회원주문상세정보페이지입니다. */
+/* 회원 주문 상세조회 */
+.findT, .number-good{
+	text-align: right;
+}
+/* 배송조회, 상품주문번호 */
+.card-good{
+	margin-bottom: 30px;
+}
+/* 리뷰 내용작성 */
+.lookupView-infmoney, .cancle-text{
+	margin-top: 20px;
+}
+/* 회원탈퇴 셀렉트박스 */
+.lookupView-btn{
+	margin-bottom: 30px; margin-top: 30px;
+}
+/* 포인트, 할인쿠폰 합친거 */
+.lookup-fs-6{
+	font-weight: bold;
+	margin-top: 10px; margin-bottom: 10px;
+}
+/* 비회원 주의사항 */
+.card-good2{
+	margin-top: 60px;
+	margin-bottom: 30px;
+}
+
+/* 마지막 수정사항 조정 */
+/* 소제목 */
+.sameWidth{
+    width: 88px;
 }

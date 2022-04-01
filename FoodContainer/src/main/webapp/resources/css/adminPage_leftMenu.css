@@ -30,4 +30,6 @@ a.selected:hover{
     width: 150px;
     margin: 0px auto;
     background-color: #dfdfdf;
+    position: sticky;
+    top:50px;
 }

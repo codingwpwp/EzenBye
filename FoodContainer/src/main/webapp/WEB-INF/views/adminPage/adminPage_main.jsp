@@ -38,7 +38,7 @@
     </nav>
 
     <!-- 섹션 -->
-    <section class="mt-1">
+    <section class="mt-3">
         <div class="row">
 
             <!-- 왼쪽 사이드메뉴 -->
@@ -49,14 +49,7 @@
             <!-- 메인 -->
             <div class="col-12 col-sm-9 col-md-10 col-lg-8">
                 <article id="mainSection">
-    
-                    <!-- 헤딩 -->
-                    <div class="fs-5 my-2 fw-bold">
-                        관리자<i class="fa-solid fa-house"></i>
-                    </div>
-
                     <!-- 메인컨텐츠 -->
-                    <div>
 
                         <!-- 이달의 매출 -->
                         <div class="row mb-3">
@@ -225,14 +218,11 @@
                             
                         </div>
 
-                    </div>
-    
                 </article>
             </div>
 
             <!-- 오른쪽 사이드메뉴 -->
             <div class="col-sm-3 col-md-2 col-lg-2 d-none d-sm-block">
-            	<%@include file="/WEB-INF/views/base/rightAside.jsp"%>
             </div>
             
         </div>

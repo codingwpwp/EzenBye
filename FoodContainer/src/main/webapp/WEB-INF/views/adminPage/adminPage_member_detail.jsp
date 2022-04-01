@@ -63,7 +63,7 @@
                             <div class="col-12 col-sm-6 d-flex align-items-center px-4 px-sm-3 mb-3 mb-md-2">
 
                                 <div class="col-5 col-sm-6 col-md-4 d-flex justify-content-sm-end pe-sm-2">
-                                    <span class="infoTitle p-1">회원 번호</span>
+                                    <span class="infoTitle sameWidth p-1">회원 번호</span>
                                 </div>
 
                                 <div class="col-7 col-sm-6 col-md-8">
@@ -75,7 +75,7 @@
                             <div class="col-12 col-sm-6 d-flex align-items-center px-4 px-sm-1 mb-2">
 
                                 <div class="col-5 col-sm-3 d-flex justify-content-sm-end pe-sm-2">
-                                    <span class="infoTitle p-1">아이디</span>
+                                    <span class="infoTitle sameWidth p-1">아이디</span>
                                 </div>
 
                                 <div class="col-7 col-sm-9">
@@ -92,7 +92,7 @@
                             <div class="col-12 col-sm-6 d-flex align-items-center px-4 px-sm-3 mb-3 mb-md-2">
 
                                 <div class="col-5 col-sm-6 col-md-4 d-flex justify-content-sm-end pe-sm-2">
-                                    <span class="infoTitle p-1">닉네임</span>
+                                    <span class="infoTitle sameWidth p-1">닉네임</span>
                                 </div>
 
                                 <div class="col-7 col-sm-6 col-md-8">
@@ -104,7 +104,7 @@
                             <div class="col-12 col-sm-6 d-flex align-items-center px-4 px-sm-1 mb-2">
 
                                 <div class="col-5 col-sm-3 d-flex justify-content-sm-end pe-sm-2">
-                                    <span class="infoTitle p-1">가입일</span>
+                                    <span class="infoTitle sameWidth p-1">가입일</span>
                                 </div>
 
                                 <div class="col-7 col-sm-9">
@@ -121,7 +121,7 @@
                             <div class="col-12 col-sm-6 d-flex align-items-center px-4 px-sm-3 mb-3 mb-md-2">
 
                                 <div class="col-5 col-sm-6 col-md-4 d-flex justify-content-sm-end pe-sm-2">
-                                    <span class="infoTitle p-1">이름</span>
+                                    <span class="infoTitle sameWidth p-1">이름</span>
                                 </div>
 
                                 <div class="col-7 col-sm-6 col-md-8">
@@ -133,7 +133,7 @@
                             <div class="col-12 col-sm-6 d-flex align-items-center px-4 px-sm-1 mb-2">
 
                                 <div class="col-5 col-sm-3 d-flex justify-content-sm-end pe-sm-2">
-                                    <span class="infoTitle p-1">연락처</span>
+                                    <span class="infoTitle sameWidth p-1">연락처</span>
                                 </div>
 
                                 <div class="col-7 col-sm-9">
@@ -150,7 +150,7 @@
                             <div class="col-12 d-flex align-items-center px-4 px-sm-1 ps-md-2 pe-md-1 mb-2">
 
                                 <div class="col-5 col-sm-3 col-md-2 d-flex justify-content-sm-end px-0 pe-sm-2">
-                                    <span class="infoTitle p-1">이메일</span>
+                                    <span class="infoTitle sameWidth p-1">이메일</span>
                                 </div>
 
                                 <div class="col-7 col-sm-9 col-md-10 px-0">
@@ -166,7 +166,7 @@
                             <div class="col-12 d-flex align-items-center px-4 px-sm-1 ps-md-2 pe-md-1 mb-2">
 
                                 <div class="col-5 col-sm-3 col-md-2 d-flex justify-content-sm-end px-0 pe-sm-2">
-                                    <span class="infoTitle p-1">기본 배송지</span>
+                                    <span class="infoTitle sameWidth p-1">기본 배송지</span>
                                 </div>
 
                                 <div class="col-7 col-sm-9 col-md-10 px-0">
@@ -231,7 +231,7 @@
                                         <div class="col-12 d-flex align-items-center">
 
                                             <div class="col-3 col-sm-2">
-                                                <span class="infoTitle p-1">블랙사유</span>
+                                                <span class="infoTitle p-1">사유</span>
                                             </div>
             
                                             <div class="col-9 col-sm-10">
@@ -258,7 +258,6 @@
 
             <!-- 오른쪽 사이드메뉴 -->
             <div class="col-sm-3 col-md-2 col-lg-2 d-none d-sm-block">
-            	<%@include file="/WEB-INF/views/base/rightAside.jsp"%>
             </div>
             
         </div>
