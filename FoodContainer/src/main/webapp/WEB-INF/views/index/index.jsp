@@ -86,7 +86,7 @@
 								<%for(int i=0; i<=3; i++){ %>
 								<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 popular d-flex justify-content-center">
 									<div class="card" style="width: 18rem;">
-									  <img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/1.png" class="card-img-top" alt="비비고만두">
+									  <img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/매운 왕교자.png" class="card-img-top" alt="비비고만두">
 									  <div class="indexSubImg">
 									  	<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
 										<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="cart(this)">
@@ -98,7 +98,7 @@
 									    	<span class="productName">비비고왕교자</span><br>
 									    	<span class="fs-4">10,000</span>원<br>
 									    	<span class="discount">1</span>
-									    	<span>
+									    	<span class="indexStar">
 									    		<i class="bi bi-star-fill"></i>
 							        			<i class="bi bi-star-fill"></i>
 							        			<i class="bi bi-star-fill"></i>
@@ -124,7 +124,7 @@
 								<%for(int i=0; i<=2; i++){ %>
 								<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 popular d-flex justify-content-center">
 									<div class="card" style="width: 18rem;">
-									  <img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/1.png" class="card-img-top" alt="비비고만두">
+									  <img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/매운 왕교자.png" class="card-img-top" alt="비비고만두">
 									  <%if(i==0){ %>
 									  <img src="<%=request.getContextPath()%>/resources/img/금메달.png" class="img-fluid medal" alt="1등">
 									  <%}else if(i==1){ %>
@@ -154,7 +154,7 @@
 						<div class="cardDivM">
 							<%for(int i=0; i<4; i++){ %>
 							<div class="cardM">
-								<img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/1.png" class="img-fluid" alt="비비고만두">
+								<img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/매운 왕교자.png" class="img-fluid" alt="비비고만두">
 								<div class="indexSubImgM">
 									<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
 									<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="indexCart(this)">
@@ -163,7 +163,7 @@
 									<span style="color:red;">[인기]</span><br>
 									<span class="productNameM">비비고왕교자</span><br>
 									<span class="fs-4">10,000</span>원<br>
-									<span>
+									<span class="indexStarM">
 										<i class="bi bi-star-fill"></i>
 							        	<i class="bi bi-star-fill"></i>
 							        	<i class="bi bi-star-fill"></i>
@@ -184,7 +184,7 @@
 							<%for(int i=0; i<3; i++){ %>
 							<div class="recipeMDiv">
 								<div class="recipeMImg">
-									<img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/1.png" class="img-fluid" alt="비비고만두">
+									<img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/매운 왕교자.png" class="img-fluid" alt="비비고만두">
 								</div>
 								<div class="recipeMContent">
 									<img src="<%=request.getContextPath()%>/resources/img/금메달.png" class="img-fluid medalM" alt="1등">
@@ -217,6 +217,11 @@
     <!-- 모바일 top -->
     <div class="topM" onclick="moveTop();">
         ↑Top
+    </div>
+    
+    <!-- 모바일 최근본 상품 -->
+    <div class="rightAsideM">
+    	<%@ include file = "/WEB-INF/views/base/rightAsideM.jsp" %>
     </div>
 
     <!-- 푸터 -->

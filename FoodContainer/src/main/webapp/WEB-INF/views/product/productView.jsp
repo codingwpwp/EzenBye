@@ -65,10 +65,10 @@
                 	<div class="pViewCard">
 				      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 				        <div class="col-auto d-lg-block viewStarM">
-				        	<img src="<%=request.getContextPath()%>/resources/img/CJ/컵밥,햇반/2.jpg" alt="d" class="img-fluid viewImg">
-				        	<div>
-				        		<span class="viewStar">평점 : 
-				        		<span class="fs-4 ">
+				        	<img src="<%=request.getContextPath()%>/resources/img/CJ/컵밥,햇반/황태국밥.png" alt="d" class="img-fluid viewImg">
+				        	<div class="viewStar">
+				        		<span>평점 : 
+				        		<span class="fs-4 productViewStar">
 				        			<i class="bi bi-star-fill"></i>
 				        			<i class="bi bi-star-fill"></i>
 				        			<i class="bi bi-star-fill"></i>
@@ -90,7 +90,7 @@
 				          <div><span class="fs-5 totalPrice">합계 : <span class="fs-3">10,000원</span></span></div>
 				          <div class="d-flex justify-content-evenly">
 					          <button class="viewButton btn btn-outline-success me-2">장바구니 담기</button>
-					          <button class="viewButton btn btn-success me-2">바로구매</button>
+					          <button class="viewButton btn btn-success me-2" onclick="location.href='member_purchase.do'">바로구매</button>
 				          </div>
 				        </div>
 				      </div>
@@ -114,7 +114,7 @@
 					<div class="unfold">
 						<!-- 상세페이지 -->
 						<div class="d-flex justify-content-center" id="pView">
-							<img src="<%=request.getContextPath()%>/resources/img/CJ/볶음밥/1_1.jpg" alt="상세페이지" class="img-fluid">
+							<img src="<%=request.getContextPath()%>/resources/img/CJ/컵밥,햇반/황태국밥 상세.png" alt="상세페이지" class="img-fluid">
 						</div>
 						
 						<!-- 배송정보 -->
@@ -150,15 +150,15 @@
 							<tbody>
 								<tr>
 									<td>
-										<span>
+										<span class="productViewReviewStar">
 									    	<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star"></i>
 							        		<br>
-							        		좋음
 									    </span>
+							        	<div>좋음</div>
 									</td>
 									<td class="reviewContent">
 										<div class="row">
@@ -182,15 +182,15 @@
 								</tr>
 								<tr>
 									<td>
-										<span>
+										<span class="productViewReviewStar">
 									    	<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star"></i>
 							        		<br>
-							        		좋음
 									    </span>
+									    <div>좋음</div>
 									</td>
 									<td id="reviewContent">
 										<div class="row">
@@ -208,15 +208,15 @@
 								</tr>
 								<tr>
 									<td>
-										<span>
+										<span class="productViewReviewStar">
 									    	<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star"></i>
 							        		<br>
-							        		좋음
 									    </span>
+									    <div>좋음</div>
 									</td>
 									<td class="reviewContent">
 										<div class="row">
@@ -241,15 +241,15 @@
 								</tr>
 								<tr>
 									<td>
-										<span>
+										<span class="productViewReviewStar">
 									    	<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star"></i>
 							        		<br>
-							        		좋음
 									    </span>
+									    <div>좋음</div>
 									</td>
 									<td id="reviewContent">
 										<div class="row">
@@ -267,15 +267,15 @@
 								</tr>
 								<tr>
 									<td>
-										<span>
+										<span class="productViewReviewStar">
 									    	<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star"></i>
 							        		<br>
-							        		좋음
 									    </span>
+									    <div>좋음</div>
 									</td>
 									<td class="reviewContent">
 										<div class="row">
@@ -304,7 +304,7 @@
 						
 						
 						<!-- 리뷰 모바일 -->
-						<table id="reviewTableM" class="table table-sm">
+						<table id="reviewTableM" class="table table-sm border-dark">
 							<thead>
 								<tr>
 									<th>리뷰</th>
@@ -318,7 +318,7 @@
 										</div>
 										<div>
 											<span>홍길동 | 22.03.24</span>
-											<div>
+											<div class="productViewReviewStarM">
 												<i class="bi bi-star-fill"></i>
 								        		<i class="bi bi-star-fill"></i>
 								        		<i class="bi bi-star-fill"></i>
@@ -337,7 +337,7 @@
 										</div>
 										<div>
 											<span>홍길동 | 22.03.24</span>
-											<div>
+											<div class="productViewReviewStarM">
 												<i class="bi bi-star-fill"></i>
 								        		<i class="bi bi-star-fill"></i>
 								        		<i class="bi bi-star-fill"></i>
@@ -357,7 +357,7 @@
 										</div>
 										<div>
 											<span>홍길동 | 22.03.24</span>
-											<div>
+											<div class="productViewReviewStarM">
 												<i class="bi bi-star-fill"></i>
 								        		<i class="bi bi-star-fill"></i>
 								        		<i class="bi bi-star-fill"></i>
