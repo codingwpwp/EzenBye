@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/* 페이지 전체 기본설정 */
 body{
     padding: 0px;
     margin: 0px auto;
@@ -9,11 +10,12 @@ body{
     font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
-
+/* 헤더의 로고 */
 header #logo{
     max-width: 180px;
 }
 
+/* 헤더의 아이콘&네비게이션 바의 회원 */
 header i, nav #userLogin a{
     cursor: pointer;
     transition: all 0.2s;
@@ -23,30 +25,27 @@ header i:hover, nav #userLogin a:hover{
     color:gray;
 }
 
-
+/* 네비게이션 바의 중앙메뉴를 확대하고 축소하는 버튼 */
 .dropdown:hover .dropdown-menu {
     display: block;
     margin-top: 0;
 }
 
-
-
-
-
+/* 오른쪽 사이드 메뉴 */
 #rightAside{
     z-index: 100;
     width: 105px;
     position: fixed;
     top:260px;
 }
-
+/* 상품이미지 */
 .productImg{
     text-align: center;
 }
 .productImg img{
 	background: whitesmoke;
 }
-
+/* Top버튼 */
 #top{
 	width : 45px;
 	height : 45px;
@@ -63,7 +62,7 @@ header i:hover, nav #userLogin a:hover{
 #top:hover{
     background-color: gray;
 }
-
+/* 카카오톡 */
 #chatting{
     cursor: pointer;
     transition: all 0.3s;
@@ -75,7 +74,7 @@ header i:hover, nav #userLogin a:hover{
     font-size: 45px;
 }
 
-
+/* 모바일 최근 본 상품*/
 .rightAsideDivM{
 	height : 120px;
 	width : 100%;
