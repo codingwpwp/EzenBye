@@ -16,8 +16,4 @@
     <div id="top" onclick="moveTop();">
         ↑Top
     </div><br>
-    <div id="chatting" class="fw-bold">
-        <i class="fa-brands fa-weixin"></i><br>
-        카카오톡
-    </div>
 </aside>

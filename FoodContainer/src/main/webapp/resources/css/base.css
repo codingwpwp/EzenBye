@@ -73,10 +73,31 @@ header i:hover, nav #userLogin a:hover{
 }
 
 /* 모바일 최근 본 상품*/
-.rightAsideM{
-	
+.rightAsideDivM{
+	height : 120px;
+	width : 100%;
 }
 
-.rightAsideDivM{
-	display : flex;
+.rightAsideImgM{
+	width : 75px;
+	margin-top : 5px;
+}
+
+.mobileCart{
+	font-size : 40px;
+	margin-top : 12px;
+}
+
+.rightAsideM{
+	height : 40px;
+	position : fixed;
+	bottom : 5%;
+	left : 31.5%;
+	display : none;
+}
+
+@media screen and (max-width : 600px){
+	.rightAsideM{
+		display : block;
+	}
 }
