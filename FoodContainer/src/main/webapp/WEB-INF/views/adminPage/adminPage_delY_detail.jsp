@@ -114,7 +114,6 @@
 
             <!-- 오른쪽 사이드메뉴 -->
             <div class="col-sm-3 col-md-2 col-lg-2 d-none d-sm-block">
-            	<%@include file="/WEB-INF/views/base/rightAside.jsp"%>
             </div>
             
         </div>

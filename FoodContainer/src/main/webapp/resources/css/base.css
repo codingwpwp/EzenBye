@@ -1,4 +1,6 @@
-/* ÆäÀÌÁö ÀüÃ¼ ±âº»¼³Á¤ */
+@charset "UTF-8";
+
+/* í˜ì´ì§€ ì „ì²´ ê¸°ë³¸ì„¤ì • */
 body{
     padding: 0px;
     margin: 0px auto;
@@ -8,12 +10,12 @@ body{
     font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
-/* Çì´õÀÇ ·Î°í */
+/* í—¤ë”ì˜ ë¡œê³  */
 header #logo{
     max-width: 180px;
 }
 
-/* Çì´õÀÇ ¾ÆÀÌÄÜ&³×ºñ°ÔÀÌ¼Ç ¹ÙÀÇ È¸¿ø */
+/* í—¤ë”ì˜ ì•„ì´ì½˜&ë„¤ë¹„ê²Œì´ì…˜ ë°”ì˜ íšŒì› */
 header i, nav #userLogin a{
     cursor: pointer;
     transition: all 0.2s;
@@ -23,27 +25,27 @@ header i:hover, nav #userLogin a:hover{
     color:gray;
 }
 
-/* ³×ºñ°ÔÀÌ¼Ç ¹ÙÀÇ Áß¾Ó¸Ş´º¸¦ È®´ëÇÏ°í Ãà¼ÒÇÏ´Â ¹öÆ° */
+/* ë„¤ë¹„ê²Œì´ì…˜ ë°”ì˜ ì¤‘ì•™ë©”ë‰´ë¥¼ í™•ëŒ€í•˜ê³  ì¶•ì†Œí•˜ëŠ” ë²„íŠ¼ */
 .dropdown:hover .dropdown-menu {
     display: block;
     margin-top: 0;
 }
 
-/* ¿À¸¥ÂÊ »çÀÌµå ¸Ş´º */
+/* ì˜¤ë¥¸ìª½ ì‚¬ì´ë“œ ë©”ë‰´ */
 #rightAside{
     z-index: 100;
     width: 105px;
     position: fixed;
     top:260px;
 }
-/* »óÇ°ÀÌ¹ÌÁö */
+/* ìƒí’ˆì´ë¯¸ì§€ */
 .productImg{
     text-align: center;
 }
 .productImg img{
 	background: whitesmoke;
 }
-/* Top¹öÆ° */
+/* Topë²„íŠ¼ */
 #top{
 	width : 45px;
 	height : 45px;
@@ -60,7 +62,7 @@ header i:hover, nav #userLogin a:hover{
 #top:hover{
     background-color: gray;
 }
-/* Ä«Ä«¿ÀÅå */
+/* ì¹´ì¹´ì˜¤í†¡ */
 #chatting{
     cursor: pointer;
     transition: all 0.3s;
@@ -72,11 +74,32 @@ header i:hover, nav #userLogin a:hover{
     font-size: 45px;
 }
 
-/* ¸ğ¹ÙÀÏ ÃÖ±Ù º» »óÇ°*/
-.rightAsideM{
-	
+/* ëª¨ë°”ì¼ ìµœê·¼ ë³¸ ìƒí’ˆ*/
+.rightAsideDivM{
+	height : 120px;
+	width : 100%;
 }
 
-.rightAsideDivM{
-	display : flex;
+.rightAsideImgM{
+	width : 75px;
+	margin-top : 5px;
+}
+
+.mobileCart{
+	font-size : 40px;
+	margin-top : 12px;
+}
+
+.rightAsideM{
+	height : 40px;
+	position : fixed;
+	bottom : 5%;
+	left : 31.5%;
+	display : none;
+}
+
+@media screen and (max-width : 600px){
+	.rightAsideM{
+		display : block;
+	}
 }

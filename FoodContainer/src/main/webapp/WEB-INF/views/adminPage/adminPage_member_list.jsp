@@ -74,7 +74,7 @@
                             <tbody>
                                 <tr>
                                     <th>1</th>
-                                    <td><a href="#" class="link-primary">tester1</a></td>
+                                    <td><a href="member_detail.do" class="link-primary">tester1</a></td>
                                     <td>닉네임테스터</td>
                                     <td>테스터일</td>
                                     <td>2022-01-01</td>
@@ -199,7 +199,6 @@
 
             <!-- 오른쪽 사이드메뉴 -->
             <div class="col-sm-3 col-md-2 col-lg-2 d-none d-sm-block">
-            	<%@include file="/WEB-INF/views/base/rightAside.jsp"%>
             </div>
             
         </div>

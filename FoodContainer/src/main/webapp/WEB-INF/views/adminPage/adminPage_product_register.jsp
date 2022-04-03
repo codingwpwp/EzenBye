@@ -69,7 +69,7 @@
 
                             <!-- 대분류 -->
                             <div class="col-4 col-md-2 d-flex justify-content-end mb-3 mb-md-0">
-                                <span class="infoTitle p-1"><span class="text-danger">*</span>대분류</span>
+                                <span class="infoTitle p-1" style="width: 79px;"><span class="text-danger">*</span>대분류</span>
                             </div>
 
                             <div class="col-5 col-md-4 col-lg-3 mb-3 mb-md-0">
@@ -85,7 +85,7 @@
 
                             <!-- 중분류 -->
                             <div class="col-4 col-md-2 d-flex justify-content-end">
-                                <span class="infoTitle p-1"><span class="text-danger">*</span>중분류</span>
+                                <span class="infoTitle p-1" style="width: 79px;"><span class="text-danger">*</span>중분류</span>
                             </div>
 
                             <div class="col-5 col-md-4 col-lg-3">
@@ -111,7 +111,7 @@
                         <div class="row my-3">
 
                             <div class="col-4 col-md-2 d-flex justify-content-end">
-                                <span class="infoTitle p-1"><span class="text-danger">*</span>브랜드</span>
+                                <span class="infoTitle p-1" style="width: 79px;"><span class="text-danger">*</span>브랜드</span>
                             </div>
 
                             <div class="col-5 col-md-4 col-lg-3">
@@ -183,7 +183,7 @@
 
                             <!-- 재고 -->
                             <div class="col-4 col-md-2 d-flex justify-content-end mb-3 mb-md-0">
-                                <span class="infoTitle p-1"><span class="text-danger">*</span>재고</span>
+                                <span class="infoTitle p-1" style="width: 79px;"><span class="text-danger">*</span>재고</span>
                             </div>
 
                             <div class="col-5 col-md-4 col-lg-3 mb-3 mb-md-0">
@@ -200,7 +200,7 @@
 
                             <!-- 배송비 -->
                             <div class="col-4 col-md-2 d-flex justify-content-end mb-3 mb-md-0">
-                                <span class="infoTitle p-1"><span class="text-danger">*</span>배송비</span>
+                                <span class="infoTitle p-1" style="width: 79px;"><span class="text-danger">*</span>배송비</span>
                             </div>
 
                             <div class="col-5 col-md-4 col-lg-3 mb-3 mb-md-0">
@@ -257,47 +257,6 @@
                                 <!-- 파일 등록 -->
                                 <input class="form-control check" name="detailImage" type="file" accept="image/png" onchange="previewImage(event, this);">
                             </div>
-
-                        </div>
-
-                        <!-- 배송정보 -->
-                        <div class="row my-3 imageRow d-flex justify-content-center">
-
-                            <!-- 배송정보 문구 -->
-                            <div class="col-5 col-md-3 col-lg-2 d-flex justify-content-center">
-                                <span class="infoTitle p-1"><span class="text-danger">*</span>배송정보</span>
-                            </div>
-
-                            <div class="col-7 col-md-3 col-lg-2 d-flex justify-content-end imagePreview">
-                            <!-- 이미지 미리보기 -->
-                                <button type="button" class="btn btn-secondary previewButton" data-bs-toggle="modal" data-bs-target="#deliveryImageModal">미리보기</button>
-                            </div>
-                            
-                            <div class="col-11 col-md-6 col-lg-8 d-flex mt-2 inputImageFile">
-                                <!-- 파일 등록 -->
-                                <input class="form-control check" name="deliveryImage" type="file" accept="image/png" onchange="previewImage(event, this);">
-                            </div>
-
-                        </div>
-
-                        <!-- 취소규정-->
-                        <div class="row my-3 imageRow d-flex justify-content-center">
-
-                            <!-- 취소규정 문구 -->
-                            <div class="col-5 col-md-3 col-lg-2 d-flex justify-content-center">
-                                <span class="infoTitle p-1"><span class="text-danger">*</span>취소규정</span>
-                            </div>
-
-                            <div class="col-7 col-md-3 col-lg-2 d-flex justify-content-end imagePreview">
-                            <!-- 이미지 미리보기 -->
-                                <button type="button" class="btn btn-secondary previewButton" data-bs-toggle="modal" data-bs-target="#cancelImageModal">미리보기</button>
-                            </div>
-
-                            <div class="col-11 col-md-6 col-lg-8 d-flex mt-2 inputImageFile">
-                                <!-- 파일 등록 -->
-                                <input class="form-control check" name="cancelImage" type="file" accept="image/png" onchange="previewImage(event, this);">
-                            </div>
-
 
                         </div>
 
@@ -365,40 +324,6 @@
                             </div>
                         </div>
 
-                        <!-- 배송정보 미리보기 모달 -->
-                        <div class="modal fade" id="deliveryImageModal" tabindex="-1" aria-labelledby="deliveryImageModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="deliveryImageModalLabel">배송정보</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="imageContainer">
-                                            <span class="fs-5">이미지가 없습니다.</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 취소규정 미리보기 모달 -->
-                        <div class="modal fade" id="cancelImageModal" tabindex="-1" aria-labelledby="cancelImageModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="cancelImageModalLabel">취소규정</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="imageContainer">
-                                            <span class="fs-5">이미지가 없습니다.</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </form>
 
                 </article>
@@ -406,7 +331,6 @@
 
             <!-- 오른쪽 사이드메뉴 -->
             <div class="col-sm-3 col-md-2 col-lg-2 d-none d-sm-block">
-            	<%@include file="/WEB-INF/views/base/rightAside.jsp"%>
             </div>
             
         </div>

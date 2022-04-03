@@ -28,7 +28,7 @@
             <div class="col-lg-2 d-none d-lg-block"></div>
             <div class="col-2 col-sm-1 pe-0 d-lg-none" id="navLeftMenu">
             	<div class="filter">
-	           		<i class="bi bi-funnel" data-bs-toggle="offcanvas" href="#offcanvasExample"></i>
+	           		<i class="bi bi-funnel" data-bs-toggle="offcanvas" href="#offcanvasExample" onclick="filter()"></i>
 	           		<%@include file="lAsideM.jsp"%>
 	       		</div>
             </div>
@@ -60,7 +60,7 @@
 							<%for(int i=0; i<=15; i++){ %>
 							<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center">
 								<div class="card" style="width: 18rem;">
-								  <img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/2.jpg" class="card-img-top" alt="비비고만두" onclick="location.href='productView.do'">
+								  <img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/납작 군만두.png" class="card-img-top" alt="비비고만두" onclick="location.href='productView.do'">
 								  <div class="indexSubImg">
 								 	 <img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
 								 	 <img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="cart(this)">
@@ -72,7 +72,7 @@
 									   	<span class="productName">비비고왕교자</span><br>
 									   	<span class="fs-4">10,000</span>원<br>
 									   	<span class="discount">d</span>
-									   	<span>
+									   	<span class="productListStar">
 									   		<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star-fill"></i>
@@ -99,7 +99,7 @@
 						<%for(int i=0; i<13; i++){ %>
 						<div class="productListMDiv">
 							<div class="productListMImg">
-								<img src="<%=request.getContextPath()%>/resources/img/CJ/반찬/3.png" class="img-fluid" alt="비비고 메추리알 장조림">
+								<img src="<%=request.getContextPath()%>/resources/img/CJ/반찬/오징어채 볶음.png" class="img-fluid" alt="비비고 메추리알 장조림" onclick="location.href='productView.do'">
 								<div class="productListStarM">
 									<i class="bi bi-star-fill"></i>
 							        <i class="bi bi-star-fill"></i>
@@ -110,7 +110,7 @@
 							</div>
 							<div class="productListContent">
 								<span style="color:red;">[인기]</span>
-								<div class="productNameM">비비고 메추리알 장조림</div>
+								<div class="productNameM" onclick="location.href='productView.do'">비비고 메추리알 장조림</div>
 								<div>10,000원</div>
 								<div class="discountM">할인가</div>
 								<div>배송비 3,000원</div>
@@ -151,6 +151,11 @@
     <!-- 모바일 top -->
     <div class="topM" onclick="moveTop();">
         ↑Top
+    </div>
+    
+    <!-- 모바일 최근본 상품 -->
+    <div class="rightAsideM">
+    	<%@ include file = "/WEB-INF/views/base/rightAsideM.jsp" %>
     </div>
     
     <!-- 푸터 -->

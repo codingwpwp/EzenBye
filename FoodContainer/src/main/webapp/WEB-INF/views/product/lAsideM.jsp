@@ -65,7 +65,6 @@
 					</button>
 					<div class="collapse" id="orders-collapse">
 						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asidePriceAllM" onclick="asidePriceAllM(this)"> 전체</label></a></li>
 						    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asidePriceM" onclick="asidePriceM(this)"> 낮은 가격 순</label></a></li>
 						    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asidePriceM" onclick="asidePriceM(this)"> 높은 가격 순</label></a></li>
 						</ul>

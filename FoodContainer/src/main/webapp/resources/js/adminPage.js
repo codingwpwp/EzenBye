@@ -298,6 +298,15 @@ $(document).ready(function(){
             }
 
         }
+
+        if(window.innerWidth <= 576){
+			$(".findT").css("text-align","left");
+			$(".number-good").css("text-align","left");
+        }else{
+			$(".findT").css("text-align","right");
+			$(".number-good").css("text-align","right");
+        }
+
     });
 
 });
@@ -435,6 +444,7 @@ function previewImage(event, obj){
     }
 
 }
+// 처음부터 이미지 미리보기 함수만 작성하고 나머지는 따로 만들었으면 좋았을텐데 아쉽다. 내가 이 부분까지는 생각하지 않고 만들었다.
 
 // 상품등록페이지의 초기화 버튼
 function formReset(){
@@ -529,5 +539,78 @@ function checkProduct(){
     }
     
     return flag;
+
+}
+
+// 배너페이지의 이미지 미리보기
+function bannerPreviewImage(event, obj, formName){
+
+    // 확장자를 추출하는 과정
+    var valueArray = obj.value.split(".");
+    var extension = valueArray[valueArray.length-1];
+
+    // 해당폼을 추출하는 과정
+    var form = $("form[name='" + formName + "']");
+
+    if(extension == "png"){ // 확장자가 png일 경우
+
+        // 원래 있던 이미지는 삭제
+        $(form).find(".imageContainer").find("img").remove();
+
+        // 이미지가 없다는 문구를 삭제
+        $(form).find(".imageContainer").find("span").remove();
+
+        // 리더기 생성
+        var reader = new FileReader();
+
+        // 리더기 작동
+        reader.onload = function(event) {
+            var img = document.createElement("img");
+            $(img).attr("src", event.target.result);
+            $(img).addClass("w-100");
+            $(form).find(".imageContainer").append(img);
+        };
+
+        // 이미지를 인코딩
+        reader.readAsDataURL(event.target.files[0]);
+
+    }else{ // 확장자가 png가 아닐 경우
+
+        alert("확장자는 png만 가능합니다.");
+
+        // 이미지가 없다는 문구의 중복 방지를 위해 삭제
+        $(form).find(".imageContainer").find("span").remove();
+
+        // 파일input의 value값 초기화
+        $(obj).val("");
+
+        // 이미지가 있다면 삭제
+        $(form).find(".imageContainer").find("img").remove();
+
+        // 이미지가 없다는 문구를 생성하고 뿌리기
+        var span = document.createElement("span");
+        $(span).addClass("fs-5");
+        $(span).text("이미지가 없습니다.");
+        $(form).find(".imageContainer").append(span);
+
+    }
+
+}
+
+// 배너페이지의 링크를 입력했을때 링크유무를 조사
+function linkYNCheck(obj, formName){
+
+    // 해당폼을 추출하는 과정
+    var form = $("form[name='" + formName + "']");
+
+    // 링크유무를 확인하는 과정
+    var linkYN = $(form).find("input[name='linkYN']:checked").attr("id");
+    if(linkYN != "yes"){
+        var URLvalue = obj.value.substring(0, obj.value.length - 1);
+        obj.value = URLvalue;
+        $(form).find(".linkMessage").text("'있음'으로 체크하고 입력하세요");
+    }else{
+        $(form).find(".linkMessage").text("");
+    }
 
 }

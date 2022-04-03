@@ -85,21 +85,21 @@
     
                                     <tr>
 
-                                        <td class="col1">
+                                        <td>
                                             <input class="form-check-input border border-dark" type="checkbox" value="">
                                         </td>
 
-                                        <td class="col2">
+                                        <td>
                                             댓글
                                         </td>
 
-                                        <td class="col3">
+                                        <td>
                                             <a class="link-dark fw-bold reportContent" data-bs-toggle="modal" data-bs-target="#replyModal">
                                                 댓글신고경우
                                             </a>
                                         </td>
 
-                                        <td class="col4">
+                                        <td>
                                             <div class="position-relative">
                                                 <span class="reportId">testertester12345
                                                     <button type="button" class="reportIdSubButton position-absolute btn btn-outline-success p-1" data-bs-toggle="modal" data-bs-target="#messageModal">
@@ -109,7 +109,7 @@
                                             </div>
                                         </td>
 
-                                        <td class="col5">
+                                        <td>
                                             2022-01-01 12:10
                                         </td>
                                         
@@ -117,21 +117,21 @@
     
                                     <tr>
 
-                                        <td class="col1">
+                                        <td>
                                             <input class="form-check-input border border-dark" type="checkbox" value="">
                                         </td>
 
-                                        <td class="col2">
+                                        <td>
                                             리뷰
                                         </td>
 
-                                        <td class="col3">
+                                        <td>
                                             <a class="link-dark fw-bold reportContent" data-bs-toggle="modal" data-bs-target="#reviewModal">
                                                 리뷰신고경우
                                             </a>
                                         </td>
 
-                                        <td class="col4">
+                                        <td>
                                             <div class="position-relative">
                                                 <span class="reportId">tester2
                                                     <button type="button" class="reportIdSubButton position-absolute btn btn-outline-success p-1" data-bs-toggle="modal" data-bs-target="#messageModal">
@@ -141,7 +141,7 @@
                                             </div>
                                         </td>
 
-                                        <td class="col5">
+                                        <td>
                                             2022-01-01 12:10
                                         </td>
 
@@ -149,21 +149,21 @@
     
                                     <tr>
 
-                                        <td class="col1">
+                                        <td>
                                             <input class="form-check-input border border-dark" type="checkbox" value="">
                                         </td>
 
-                                        <td class="col2">
+                                        <td>
                                             레시피
                                         </td>
 
-                                        <td class="col3">
+                                        <td>
                                             <a class="link-dark fw-bold reportContent" data-bs-toggle="modal" data-bs-target="#recipeModal">
                                                 레시피신고경우
                                             </a>
                                         </td>
 
-                                        <td class="col4">
+                                        <td>
                                             <div class="position-relative">
                                                 <span class="reportId">tester2
                                                     <button type="button" class="reportIdSubButton position-absolute btn btn-outline-success p-1" data-bs-toggle="modal" data-bs-target="#messageModal">
@@ -173,7 +173,7 @@
                                             </div>
                                         </td>
 
-                                        <td class="col5">
+                                        <td>
                                             2022-01-01 12:10
                                         </td>
 
@@ -521,7 +521,6 @@
 
             <!-- 오른쪽 사이드메뉴 -->
             <div class="col-sm-3 col-md-2 col-lg-2 d-none d-sm-block">
-            	<%@include file="/WEB-INF/views/base/rightAside.jsp"%>
             </div>
             
         </div>

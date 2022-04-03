@@ -17,7 +17,7 @@
 
         <span class="fw-bold">회원 관리</span>
         <div class="list-group my-2">
-            <a href="#" class="list-group-item list-group-item-action fs-6">회원 리스트</a>
+            <a href="member_list.do" class="list-group-item list-group-item-action fs-6">회원 리스트</a>
             <a href="#" class="list-group-item list-group-item-action fs-6">블랙 리스트</a>
             <a href="#" class="list-group-item list-group-item-action fs-6">탈퇴 리스트</a>
             <a href="#" class="list-group-item list-group-item-action fs-6">신고 리스트</a>

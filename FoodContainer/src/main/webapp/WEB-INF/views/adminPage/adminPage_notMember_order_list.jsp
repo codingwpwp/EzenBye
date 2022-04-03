@@ -74,7 +74,7 @@
 
                                 <tr>
                                     <td>1</td>
-                                    <td><a href="#" class="link-primary">B01245151</a></td>
+                                    <td><a href="notMember_order_detail.do" class="link-primary">B01245151</a></td>
                                     <td>2022-02-30</td>
                                     <td >배송완료</td>
                                 </tr>

@@ -79,7 +79,7 @@
                                     <td>냉동식품</td>
                                     <td>CJ</td>
                                     <td class="col5">
-                                        <a href="#" class="link-primary">무말랭이무말랭이무말랭이무말랭이무말랭이무말랭이무말랭이무말</a>
+                                        <a href="product_delete_detail.do" class="link-primary">무말랭이무말랭이무말랭이무말랭이무말랭이무말랭이무말랭이무말</a>
                                     </td>
                                     <td>3</td>
                                     <td>
@@ -121,9 +121,9 @@
                             </div>
                             
                             <div class="col-3 d-flex justify-content-start">
-                                <button type="submit" class="btn btn-outline-primary">검색</button>
+                                <button type="submit" class="btn btn-outline-primary btn-sm">검색</button>
                             </div>      
-                                       
+
                         </form>
 
                         <!-- 페이징 -->
@@ -154,7 +154,6 @@
 
             <!-- 오른쪽 사이드메뉴 -->
             <div class="col-sm-3 col-md-2 col-lg-2 d-none d-sm-block">
-            	<%@include file="/WEB-INF/views/base/rightAside.jsp"%>
             </div>
             
         </div>
