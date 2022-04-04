@@ -1,19 +1,21 @@
 package team.project.controller;
 
 import java.util.Locale;
-import java.text.DateFormat;
-import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import team.project.service.MemberServiceImpl;
+import team.project.service.MemberService;
 import team.project.vo.MemberVO;
 
 @Controller
@@ -21,23 +23,32 @@ public class loginController {
 	private static final Logger logger = LoggerFactory.getLogger(loginController.class);
 
 	@Autowired
-	private MemberServiceImpl memberServiceImpl;
+	private MemberService memberService;
 	
 	@RequestMapping(value ="loginmain.do", method= RequestMethod.POST)
-	public String logingo(@RequestParam("id")String id
+	public String logingo(MemberVO vo,HttpServletRequest req,RedirectAttributes rttr,@RequestParam("id")String id
 							,@RequestParam("pw")String pw) throws Exception{
-		String path="";
-		MemberVO vo = new MemberVO();
 		
+		HttpSession session =req.getSession();
+		MemberVO login = memberService.Login(vo);
+		
+		String path="";
+		vo = new MemberVO();
+		System.out.println(id);
+		System.out.println(pw);
 		vo.setId(id);
 		vo.setPw(pw);
+		System.out.println(vo.getId()+","+vo.getPw());
 		
-		int result = memberServiceImpl.Login(vo);
 		
-		if(result ==1) {
+		
+		if(login ==null) {
+			session.setAttribute("member",null);
+			rttr.addFlashAttribute("msg",false);
 			path="home";
 		}else {
 			path="login/loginmain";
+			session.setAttribute(pw, path);
 		}
 		return path;
 			
@@ -45,7 +56,8 @@ public class loginController {
 	}
 	
 	@RequestMapping(value = "loginmain.do", method = RequestMethod.GET)
-	public String login(Locale locale, Model model) {
+	public String login(Locale locale, Model model,HttpSession session) throws Exception{
+		session.invalidate();
 		return "login/loginmain";
 	}
 	

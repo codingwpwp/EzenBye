@@ -67,7 +67,7 @@
                 <div class="container">
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-12">
-                                <form action="#" name="frm" method="post" onsubmit="checkFn();">
+                                <form action="member_sign.do" name="frm" method="post">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-12 signhead">
@@ -102,7 +102,7 @@
                                                 <label for="pw">비밀번호 확인<span class="red">*</span></label>
                                             </div>
                                             <div class="col-sm-9 col-12">
-                                                <input type="password" class="pwinput" name="pw2" id="pw2"
+                                                <input type="password" class="pwinput" name="password" id="password"
                                                     placeholder="8~20 영문+숫자+특수문자">
                                                 <span class="check"></span>
                                             </div>
@@ -120,15 +120,15 @@
                                                 <label for="ph">연락처</label>
                                             </div>
                                             <div class="col-sm-8 col-12">
-                                                <select name="phone1" id="phone1" class="phselect">
+                                                <select name="phone" id="phone1" class="phselect">
                                                     <option value="010">010</option>
                                                     <option value="011">011</option>
                                                     <option value="016">016</option>
                                                     <option value="017">017</option>
                                                 </select>&nbsp;-
-                                                <input onblur="fn6(this)" type="text" class="phinput" name="phone2"
-                                                    id="phone2" placeholder="연락처2" maxlength="4" >&nbsp;-
-                                                <input onblur="fn7(this)" type="text" class="phinput" name="phone3"
+                                                <input onblur="fn6(this)" type="text" class="phinput" name="phone"
+                                                    id="phone" placeholder="연락처2" maxlength="4" >&nbsp;-
+                                                <input onblur="fn7(this)" type="text" class="phinput" name="phone"
                                                     id="phone3" placeholder="연락처3" maxlength="4" >
                                                 <span class="check"></span>
                                             </div>
@@ -136,7 +136,7 @@
                                                 <label for="nick">닉네임<span class="red">*</span></label>
                                             </div>
                                             <div class="col-sm-9 col-8">
-                                                <input type="text" class="nkinput" name="nick" id="nick"
+                                                <input type="text" class="nkinput" name="nickname" id="nickname"
                                                     placeholder="2~8 한글+영문+숫자 중 선택" >
                                                 <span class="check"></span>
                                             </div>
@@ -155,7 +155,7 @@
                                                 <label for="recommender">추천인<span class="red">*</span></label>
                                             </div>
                                             <div class="col-sm-9 col-8">
-                                                <input type="text" class="recominput" name="recom" id="recom"
+                                                <input type="text" class="recominput" name="recommender" id="recom"
                                                     placeholder="추천인 아이디를 입력해주세요">
                                             </div>
                                             <div class="col-sm-3 col-4">

@@ -54,7 +54,8 @@
             <div class="col-12 col-sm-9 col-md-10 col-lg-8">
                 <article id="mainSection \">
                     <!-- 실질적인 메인 내용 -->
-                    <div class="col-md-11">
+                    
+                    <div class="col-md-12">
 				 
 			        <p class="fs-6 shopbasket-fs6">장바구니</p>
 			        <hr />
@@ -192,6 +193,7 @@
 					</div>
 						
       				</div>
+      				
                 </article>
             </div>
             

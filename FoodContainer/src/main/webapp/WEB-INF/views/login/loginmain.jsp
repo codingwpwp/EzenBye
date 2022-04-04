@@ -71,7 +71,7 @@
                     -->
 
 
-					<form action="Login" name="frm" class="loginfrm" method="post">
+					<form action="loginmain.do" name="frm" class="loginfrm" method="post">
 						<div class="container">
 
 							<div class="row">
@@ -81,10 +81,10 @@
 							</div>
 							<div class="row">
 								<div class="col-md-12 col-sm-12 md-1 id">
-									<input type="text" placeholder="아이디 8~20 자리의 영문+숫자" class="form-control">
+									<input type="text" placeholder="아이디 8~20 자리의 영문+숫자" class="form-control" name="id">
 								</div>
 								<div class="col-md-12 col-sm-12 mb-1 pw">
-									<input type="text" placeholder="비밀번호 8~20 자리의 영문+숫자" class="form-control">
+									<input type="password" placeholder="비밀번호 8~20 자리의 영문+숫자" class="form-control" name="pw">
 								</div>
 								
 							</div>
