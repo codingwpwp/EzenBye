@@ -49,24 +49,24 @@
                     상품 구매
                 </div>
 
-                <!-- 내용 -->
+                <!-- 구매정보입력 + 모바일 버전 최종 구매버튼 -->
                 <form class="col-12 col-sm-8 ps-4 ps-lg-2 mt-2" name="puchaseForm">
 
                     <!-- 전체약관 동의 -->
                     <div class="form-check fs-6 table-responsive" style="white-space: nowrap;">
-                        <input class="form-check-input border border-dark" type="checkbox" value="" id="AgreeAllCheckbox">
-                        <label class="form-check-label text-dark fw-bold" for="AgreeAllCheckbox">
-                            주문 및 결제대행 서비스 이용약관 동의<span class="text-danger">(필수)</span>
+                        <input class="form-check-input border border-dark" type="checkbox" id="agreeAllCheckbox" onchange="checkedAllCheckbox(this)">
+                        <label class="form-check-label text-dark fw-bold" for="agreeAllCheckbox">
+                            주문 및 결제대행 서비스 이용약관 동의
                         </label>
                     </div>
                     <hr>
 
                     <!-- 세부약관1 -->
-                    <div class="container my-3">
+                    <div class="container my-3 checkboxs">
                         <div class="form-check fs-6">
-                            <input class="form-check-input border border-dark" type="checkbox" value="" id="AgreeOneCheckbox">
-                            <label class="form-check-label text-dark fw-bold" for="AgreeOneCheckbox">
-                                주문 상품 정보에 대한 동의
+                            <input class="form-check-input border border-dark" type="checkbox" id="agreeOneCheckbox" onchange="checkedAgreeOneStatus(this)">
+                            <label class="form-check-label text-dark fw-bold" for="agreeOneCheckbox">
+                                주문 상품 정보에 대한 동의<span class="text-danger">(필수)</span>
                             </label>
                             <ul class="container pe-0">
                                 <li class="fontSmall" style="list-style-type: square;">
@@ -78,33 +78,33 @@
                     </div>
 
                     <!-- 세부약관2 -->
-                    <div class="container mb-5">
+                    <div class="container mb-5 checkboxs">
                         <div class="form-check fs-6">
 
-                            <input class="form-check-input border border-dark" type="checkbox" value="" id="AgreeTwoCheckbox">
-                            <label class="form-check-label text-dark fw-bold" for="AgreeTwoCheckbox">
-                                결제대행 서비스 이용약관 동의
+                            <input class="form-check-input border border-dark" type="checkbox" id="agreeTwoCheckbox" onchange="checkedAgreeTwoCheckbox(this)">
+                            <label class="form-check-label text-dark fw-bold" for="agreeTwoCheckbox">
+                                결제대행 서비스 이용약관 동의<span class="text-danger">(필수)</span>
                             </label>
 
-                            <div class="container">
-                                <input class="form-check-input border border-dark" type="checkbox" value="" id="AgreeTwo_OneCheckbox">
-                                <label class="form-check-label text-dark fontSmall" for="AgreeTwo_OneCheckbox">
+                            <div class="container agreeTwo">
+                                <input class="form-check-input border border-dark" type="checkbox" id="agreeTwo_OneCheckbox" onchange="checkedAgreeTwo_SubStatus(this)">
+                                <label class="form-check-label text-dark fontSmall" for="agreeTwo_OneCheckbox">
                                     전자금융거래 기본약관
                                 </label>
                                 <a class="link-info" href="#">약관보기</a>
                             </div>
 
-                            <div class="container">
-                                <input class="form-check-input border border-dark" type="checkbox" value="" id="AgreeTwo_TwoCheckbox">
-                                <label class="form-check-label text-dark fontSmall" for="AgreeTwo_TwoCheckbox">
+                            <div class="container agreeTwo">
+                                <input class="form-check-input border border-dark" type="checkbox" id="agreeTwo_TwoCheckbox" onchange="checkedAgreeTwo_SubStatus(this)">
+                                <label class="form-check-label text-dark fontSmall" for="agreeTwo_TwoCheckbox">
                                     개인정보 수집 및 이용동의
                                 </label>
                                 <a class="link-info" href="#">약관보기</a>
                             </div>
 
-                            <div class="container">
-                                <input class="form-check-input border border-dark" type="checkbox" value="" id="AgreeTwo_ThreeCheckbox">
-                                <label class="form-check-label text-dark fontSmall" for="AgreeTwo_ThreeCheckbox">
+                            <div class="container agreeTwo">
+                                <input class="form-check-input border border-dark" type="checkbox" id="agreeTwo_ThreeCheckbox" onchange="checkedAgreeTwo_SubStatus(this)">
+                                <label class="form-check-label text-dark fontSmall" for="agreeTwo_ThreeCheckbox">
                                     개인정보 제공 동의 (Food Container)
                                 </label>
                                 <br class="d-md-none">
@@ -116,18 +116,18 @@
 
                     <!-- 주문자 정보 -->
                     <div class="fs-3 fw-bold">
-                        주문자 정보 <span class="text-danger fs-6">*필수</span>
+                        주문자 정보
                     </div>
                     <hr>
 
                     <!-- 주문자명 -->
                     <div class="row mb-5">
                         <div class="col-4 col-md-3 col-xxl-2 fs-5 fw-bold d-flex align-items-center justify-content-start justify-content-lg-center">
-                            <span class="text-danger">*</span>주문자명
+                            주문자명
                         </div>
 
                         <div class="col-8 col-sm-7 col-md-6 col-lg-5 col-xxl-4">
-                            <input type="text" class="form-control fw-bold" name="name" value="홍길동" readonly>
+                            <input type="text" class="form-control fw-bold" id="name" name="name" value="홍길동" readonly>
                         </div>
                     </div>
 
@@ -165,15 +165,15 @@
                     <div class="row d-flex align-items-center mb-4">
 
                         <div class="col-3 col-xxl-2 fs-5 fw-bold d-flex align-items-center justify-content-start justify-content-lg-center">
-                            <span class="text-danger">*</span>받는분
+                            <span class="text-danger">*</span><span id="receiverSpan" class="checkResultSpan">받는분</span>
                         </div>
 
                         <div class="col-5 col-md-6 col-lg-5 col-xxl-4">
-                            <input type="text" class="form-control p-1 p-sm-2" value="" placeholder="이름을 입력하세요">
+                            <input type="text" class="form-control fw-bold p-1 p-sm-2" id="receiver" name="receiver" value="" placeholder="이름을 입력하세요" maxlength="5" onblur="checkName(this)">
                         </div>
 
                         <div class="col-4 col-md-3 col-xl-3">
-                            <input class="form-check-input border border-dark" type="checkbox" value="" id="sameNameCheckbox">
+                            <input class="form-check-input border border-dark" type="checkbox" value="" id="sameNameCheckbox" onchange="sameName(this)">
                             <label class="form-check-label text-dark fontSmall" for="sameNameCheckbox">
                                 주문자와 동일
                             </label>
@@ -185,7 +185,7 @@
                     <div class="row d-flex align-items-start mb-4">
 
                         <div class="col-3 col-xxl-2 fs-5 fw-bold d-flex justify-content-start justify-content-lg-center mt-3">
-                            <span class="text-danger">*</span>배송지
+                            <span class="text-danger">*</span><span id="deliverySpan" class="checkResultSpan">배송지</span>
                         </div>
 
                         <div class="col-9 col-lg-8">
@@ -201,7 +201,7 @@
                             </div>
                             <div class="input-group my-2">
                                 <span class="input-group-text">상세주소</span>
-                                <input type="text" id="detailAddress" class="form-control" readonly>
+                                <input type="text" id="detailAddress" class="form-control" readonly onblur="checkAddress(this)">
                             </div>
 
                         </div>
@@ -212,20 +212,20 @@
                     <div class="row mb-4">
 
                         <div class="col-3 col-xxl-2 fs-5 d-flex justify-content-lg-center fw-bold">
-                            <span class="text-danger">*</span>연락처
+                            <span class="text-danger">*</span><span id="phoneSpan" class="checkResultSpan">연락처</span>
                         </div>
 
                         <div class="col-9 col-lg-8 input-group w-75 phone">
-                            <select class="form-select" aria-label="Default select example">
+                            <select class="form-select">
                                 <option selected>010</option>
                                 <option value="1">011</option>
                                 <option value="2">016</option>
                                 <option value="3">018</option>
                             </select>
                             <span class="input-group-text">-</span>
-                            <input type="number" class="form-control">
+                            <input type="number" class="form-control" min="100" max="9999" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" oninput="phoneMaxLength(this)" onblur="phoneCheck(this, 3)">
                             <span class="input-group-text">-</span>
-                            <input type="number" class="form-control">
+                           <input type="number" class="form-control" min="1000" max="9999" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" oninput="phoneMaxLength(this)" onblur="phoneCheck(this, 4)">
                         </div>
 
                     </div>
@@ -248,43 +248,47 @@
 
                     <!-- 결제 상품 문구 -->
                     <div class="fs-3 fw-bold mt-2">
-                        결제 상품
+                        결제 상품<br>
+                        <span class="fs-6">배송비가 있어도 <span class="text-danger">50,000원</span> 이상은 <span class="text-danger">무료배송!!</span></span>
                     </div>
                     <hr>
 
                     <!-- 결제 상품들 -->
                     <div class="mt-4 mb-5" id="productItems">
 
-                        <div class="row bg-light border rounded-3 py-2 m-2">
+                        <div class="row bg-light border rounded-3 py-2 m-2 productItem">
                             <div class="col-6 col-sm-4">
                                 <img src="<%=request.getContextPath()%>/resources/img/good.png" class="img-thumbnail" alt="...">
                             </div>
 
                             <div class="col-6 col-sm-8 d-flex flex-column">
                                 <div class="mb-auto fw-bold pt-2">비비고 진한고기만두400g*2번들</div>
-                                <div class="fw-bold pb-2">4580원 | 5개</div>
+                                <div class="fw-bold pb-2"><span class="productPrice">4580</span>원 | <span class="productCount">5</span>개</div>
+                                <input type="hidden" class="productDeliveryPrice" value="3000">
                             </div>
                         </div>
 
-                        <div class="row bg-light border rounded-3 py-2 m-2">
+                        <div class="row bg-light border rounded-3 py-2 m-2 productItem">
                             <div class="col-6 col-sm-4">
                                 <img src="<%=request.getContextPath()%>/resources/img/good.png" class="img-thumbnail" alt="...">
                             </div>
 
                             <div class="col-6 col-sm-8 d-flex flex-column">
                                 <div class="mb-auto fw-bold pt-2">비비고 진한고기만두400g*2번들</div>
-                                <div class="fw-bold pb-2">4580원 | 5개</div>
+                                <div class="fw-bold pb-2"><span class="productPrice">4580</span>원 | <span class="productCount">5</span>개</div>
+                                <input type="hidden" class="productDeliveryPrice" value="3000">
                             </div>
                         </div>
 
-                        <div class="row bg-light border rounded-3 py-2 m-2">
+                        <div class="row bg-light border rounded-3 py-2 m-2 productItem">
                             <div class="col-6 col-sm-4">
                                 <img src="<%=request.getContextPath()%>/resources/img/good.png" class="img-thumbnail" alt="...">
                             </div>
 
                             <div class="col-6 col-sm-8 d-flex flex-column">
                                 <div class="mb-auto fw-bold pt-2">비비고 진한고기만두400g*2번들</div>
-                                <div class="fw-bold pb-2">4580원 | 5개</div>
+                                <div class="fw-bold pb-2"><span class="productPrice">4580</span>원 | <span class="productCount">5</span>개</div>
+                                <input type="hidden" class="productDeliveryPrice" value="3000">
                             </div>
                         </div>
 
@@ -303,7 +307,7 @@
                         </div>
 
                         <div class="col-8">
-                            <select class="form-select" name="coupon" required>
+                            <select class="form-select" name="coupon">
                                 <option value="" disabled selected style="display: none;">쿠폰이 없습니다.</option>
                                 <option value="쿠폰번호로 대체">10%할인쿠폰</option>
                             </select>
@@ -327,17 +331,22 @@
                     <div class="row mb-2 d-flex align-items-center">
 
                         <div class="col-5">
-                            <input class="form-check-input border border-dark" type="checkbox" value="" id="pointCheckbox" name="pointYN">
+                            <input class="form-check-input border border-dark" type="checkbox" value="" id="pointCheckbox" name="pointYN" onchange="checkedPoint(this)">
                             <label class="form-check-label text-dark" for="pointCheckbox">
-                                포인트 사용<br class="d-lg-none"> (최대 20,000p)
+                                포인트 사용<br class="d-lg-none"> (최대 <span id="availablePointCommaVer">20,000</span>p)
+                                <input type="hidden" id="availablePoint" value="20000">
                             </label>
                         </div>
 
                         <div class="col-6 pe-1">
-                            <input type="text" class="form-control" name="point" value="" placeholder="숫자만 입력하세요" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="text-align: right;">
+                            <input type="number" min="0" class="form-control p-1 fw-bold" id="point" name="point" value="0" placeholder="숫자만 입력하세요" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="text-align: right;" readonly>
                         </div>
                         
                         <div class="col-1 ps-0 fw-bold">p</div>
+                        
+                        <div class="col-1" id="pointLimit">
+                        	
+                        </div>
 
                     </div>
 
@@ -350,7 +359,7 @@
                         <div class="row my-2 d-flex align-items-center">
                             <div class="col-6 fs-6">총 금액</div>
                             <div class="col-6 text-danger fs-5 d-flex justify-content-end fw-bold price">
-                                <span id="productSumPrice">40,000</span>
+                                <span class="productSumPrice" id="productSumPrice">0</span>
                                 원
                             </div>
                         </div>
@@ -359,7 +368,7 @@
                         <div class="row my-2 d-flex align-items-center">
                             <div class="col-6 fs-6">배송비</div>
                             <div class="col-6 text-danger fs-5 d-flex justify-content-end fw-bold price">
-                                <span id="deliveryPrice">3,000</span>
+                                <span class="deliveryPrice" id="deliveryPrice">0</span>
                                 원
                             </div>
                         </div>
@@ -389,7 +398,7 @@
 
                         <!-- 최종 결제 가격 -->
                         <div class="text-danger mb-3 d-flex justify-content-end align-items-center fw-bold">
-                            <span class="fs-1" id="finalPrice">43,000</span>
+                            <span class="fs-1 totalPrice">0</span>
                             <span class="fs-4">&nbsp;원</span>
                         </div>
 
@@ -397,7 +406,7 @@
                         <div class="row my-2">
                             <div class="col-8 fs-6">적립 예정 포인트</div>
                             <div class="col-4 fs-5 fw-bold d-flex justify-content-end">
-                                <span class="price" id="pointPrice">111</span>
+                                <span class="price" id="expectedPoint">111</span>
                                 p
                             </div>
                         </div>
@@ -420,7 +429,7 @@
                     <div class="row my-2 d-flex align-items-center">
                         <div class="col-6 fs-6">총 금액</div>
                         <div class="col-6 text-danger fs-5 d-flex justify-content-end fw-bold price">
-                            <span id="productSumPrice">40,000</span>
+                            <span class="productSumPrice">0</span>
                             원
                         </div>
                     </div>
@@ -429,7 +438,7 @@
                     <div class="row my-2 d-flex align-items-center">
                         <div class="col-6 fs-6">배송비</div>
                         <div class="col-6 text-danger fs-5 d-flex justify-content-end fw-bold price">
-                            <span id="deliveryPrice">3,000</span>
+                            <span class="deliveryPrice">0</span>
                             원
                         </div>
                     </div>
@@ -459,15 +468,15 @@
 
                     <!-- 최종 결제 가격 -->
                     <div class="text-danger mb-3 d-flex justify-content-end align-items-center fw-bold">
-                        <span class="fs-1" id="finalPrice">43,000</span>
+                        <span class="fs-1 totalPrice">0</span>
                         <span class="fs-4">&nbsp;원</span>
                     </div>
 
-                    <!-- 적립 얘정 포인트 -->
+                    <!-- 적립 예정 포인트 -->
                     <div class="row my-2">
                         <div class="col-8 fs-6">적립 예정 포인트</div>
                         <div class="col-4 fs-5 fw-bold d-flex justify-content-end">
-                            <span class="price" id="pointPrice">111</span>
+                            <span class="price" id="expectedPoint">111</span>
                             p
                         </div>
                     </div>
@@ -494,7 +503,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/purchasePage.js"></script>
+    <script src="<%=request.getContextPath()%>/resources/js/purchase.js"></script>
 </body>
 </html>

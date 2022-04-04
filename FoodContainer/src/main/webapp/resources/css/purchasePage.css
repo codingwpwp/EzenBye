@@ -27,3 +27,8 @@ section a{
     transition: all 0.3s;
     font-size: small;
 }
+
+/* 유효성 검사 부분 */
+.checkResultSpan{
+	transition: all 0.3s;
+}

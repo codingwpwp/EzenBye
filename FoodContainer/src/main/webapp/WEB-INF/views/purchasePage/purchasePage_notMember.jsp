@@ -53,7 +53,7 @@
 
                     <!-- 전체약관 동의 -->
                     <div class="form-check fs-6 table-responsive" style="white-space: nowrap;">
-                        <input class="form-check-input border border-dark" type="checkbox" value="" id="AgreeAllCheckbox">
+                        <input class="form-check-input border border-dark" type="checkbox" value="" id="AgreeAllCheckbox" onchange="checkedAllCheckbox(this)">
                         <label class="form-check-label text-dark fw-bold" for="AgreeAllCheckbox">
                             주문 및 결제대행 서비스 이용약관 동의<span class="text-danger">(필수)</span>
                         </label>
@@ -61,7 +61,7 @@
                     <hr>
 
                     <!-- 세부약관1 -->
-                    <div class="container my-3 agreeDiv">
+                    <div class="container my-3 checkboxs">
                         <div class="form-check fs-6">
                             <input class="form-check-input border border-dark" type="checkbox" value="" id="AgreeOneCheckbox">
                             <label class="form-check-label text-dark fw-bold" for="AgreeOneCheckbox">
@@ -77,15 +77,15 @@
                     </div>
 
                     <!-- 세부약관2 -->
-                    <div class="container my-3 agreeDiv">
+                    <div class="container my-3 checkboxs">
                         <div class="form-check fs-6">
 
-                            <input class="form-check-input border border-dark" type="checkbox" value="" id="AgreeTwoCheckbox">
+                            <input class="form-check-input border border-dark" type="checkbox" value="" id="AgreeTwoCheckbox" onchange="checkedAgreeTwoCheckbox(this)">
                             <label class="form-check-label text-dark fw-bold" for="AgreeTwoCheckbox">
                                 결제대행 서비스 이용약관 동의
                             </label>
 
-                            <div class="container">
+                            <div class="container agreeTwo">
                                 <input class="form-check-input border border-dark" type="checkbox" value="" id="AgreeTwo_OneCheckbox">
                                 <label class="form-check-label text-dark fontSmall" for="AgreeTwo_OneCheckbox">
                                     전자금융거래 기본약관
@@ -93,7 +93,7 @@
                                 <a class="link-info" href="#">약관보기</a>
                             </div>
 
-                            <div class="container">
+                            <div class="container agreeTwo">
                                 <input class="form-check-input border border-dark" type="checkbox" value="" id="AgreeTwo_TwoCheckbox">
                                 <label class="form-check-label text-dark fontSmall" for="AgreeTwo_TwoCheckbox">
                                     개인정보 수집 및 이용동의
@@ -101,7 +101,7 @@
                                 <a class="link-info" href="#">약관보기</a>
                             </div>
 
-                            <div class="container">
+                            <div class="container agreeTwo">
                                 <input class="form-check-input border border-dark" type="checkbox" value="" id="AgreeTwo_ThreeCheckbox">
                                 <label class="form-check-label text-dark fontSmall" for="AgreeTwo_ThreeCheckbox">
                                     개인정보 제공 동의 (Food Container)
@@ -114,7 +114,7 @@
                     </div>
 
                     <!-- 세부약관3 -->
-                    <div class="container mb-5 agreeDiv">
+                    <div class="container mb-5 checkboxs">
                         <div class="form-check fs-6">
                             <input class="form-check-input border border-dark" type="checkbox" value="" id="AgreeThreeCheckbox">
                             <label class="form-check-label text-dark fw-bold" for="AgreeThreeCheckbox">

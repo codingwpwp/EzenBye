@@ -1,3 +1,138 @@
+var sumPrice;
+var deliveryPrice;
+var totalPrice;
+$(document).ready(function(){
+    if(window.innerWidth >= 992){
+        $(".phone").removeClass("w-75");
+        $(".phone").css("width", "67%");
+    }
+
+    $(window).resize(function(){
+        if(window.innerWidth >= 992){
+            $(".phone").removeClass("w-75");
+            $(".phone").css("width", "67%");
+        }else{
+            $(".phone").addClass("w-75");
+            $(".phone").css("width", "");
+
+        }
+    });
+    
+    // 총 금액 따지기
+    sumPrice = parseInt($("#productSumPrice").text());
+    $(".productItem").each(function(){
+		var price = $(this).find(".productPrice").text();
+		var count = $(this).find(".productCount").text();
+		sumPrice += price * count;
+		$(".productSumPrice").text(sumPrice.toLocaleString('ko-KR'));
+	});
+	
+	// 배송비 따지기
+	deliveryPrice = parseInt($("#deliveryPrice").text());
+	$(".productItem").each(function(){
+		if($(this).find(".productDeliveryPrice").val() != 0){
+			deliveryPrice = 3000;
+			return false;
+		}
+	});
+	if(sumPrice >= 50000){
+		deliveryPrice = 0;
+	}
+    $(".deliveryPrice").text(deliveryPrice.toLocaleString('ko-KR'));
+    
+    // 최종 결제 가격 따지기
+    totalPrice = sumPrice - deliveryPrice;
+	$(".totalPrice").text(totalPrice.toLocaleString('ko-KR'));
+
+    
+});
+var checkboxSw;
+// 전체약관 동의
+function checkedAllCheckbox(obj){
+	if($(obj).is(":checked")){
+		$(".checkboxs").find('input:checkbox').prop('checked',true);
+		checkboxSw = 1;
+	}else{
+		$(".checkboxs").find('input:checkbox').prop('checked',false);
+		checkboxSw = 0;
+	}
+}
+
+// 첫번째 약관 동의
+function checkedAgreeOneStatus(obj){
+	if(!$(obj).is(":checked")){
+		$("#agreeAllCheckbox").prop("checked",false);
+		checkboxSw = 0;
+	}else{
+		if($("#agreeTwoCheckbox").is(":checked")){
+			$("#agreeAllCheckbox").prop("checked",true);
+			checkboxSw = 1;
+		}
+	}
+}
+
+// 두번째 약관 동의
+function checkedAgreeTwoCheckbox(obj){
+	if($(obj).is(":checked")){
+		$(".agreeTwo").find('input:checkbox').prop('checked',true);
+		if($("#agreeOneCheckbox").is(":checked")){
+			$("#agreeAllCheckbox").prop("checked",true);
+			checkboxSw = 1;
+		}
+	}else{
+		$("#agreeAllCheckbox").prop("checked",false);
+		$(".agreeTwo").find('input:checkbox').prop('checked',false);
+		checkboxSw = 0;
+	}
+}
+
+// 두번째 약관 안의 서브 약관들
+function checkedAgreeTwo_SubStatus(obj){
+	
+}
+
+
+// 결제하기 버튼 누를 때 유효성 검사 체크 스위치들
+var receiverSw;
+var addressSw;
+var phoneSW;
+
+// 받는분 onblur 유효성검사
+function checkName(obj){
+	var namereg = /^[가-힣]{2,4}$/;
+	if(obj.value == "" || !namereg.test(obj.value)){
+		$("#receiverSpan").css("color", "red");
+		$("#receiverSpan").prev().text("*");
+		setTimeout(function(){
+            $("#receiverSpan").css("color", "black");
+        },500);
+	}else{
+		$("#receiverSpan").css("color", "green");
+		$("#receiverSpan").prev().text("");
+		setTimeout(function(){
+            $("#receiverSpan").css("color", "black");
+        },500);
+	}
+}
+
+// 주문자와 동일
+function sameName(obj){
+	if($(obj).is(":checked")){
+		$("#receiver").val($("#name").val());
+		$("#receiver").prop('readonly', true);
+		$("#receiverSpan").css("color", "green");
+		$("#receiverSpan").prev().text("");
+		setTimeout(function(){
+            $("#receiverSpan").css("color", "black");
+        },300);
+	}else{
+		$("#receiver").val("");
+		$("#receiver").prop('readonly', false);
+		$("#receiverSpan").prev().text("*");
+	}
+}
+
+// 카카오 주소지
 function deliveryAddress() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -48,20 +183,69 @@ function deliveryAddress() {
     }).open();
 }
 
-$(document).ready(function(){
-    if(window.innerWidth >= 992){
-        $(".phone").removeClass("w-75");
-        $(".phone").css("width", "67%");
-    }
+// 상세주소 onblur 유효성검사
+function checkAddress(obj){
+	if(obj.value == "" ){
+		$("#deliverySpan").css("color", "red");
+		$("#deliverySpan").prev().text("*");
+		setTimeout(function(){
+            $("#deliverySpan").css("color", "black");
+        },500);
+	}else{
+		$("#deliverySpan").css("color", "green");
+		$("#deliverySpan").prev().text("");
+		setTimeout(function(){
+            $("#deliverySpan").css("color", "black");
+        },500);
+	}
+}
 
-    $(window).resize(function(){
-        if(window.innerWidth >= 992){
-            $(".phone").removeClass("w-75");
-            $(".phone").css("width", "67%");
-        }else{
-            $(".phone").addClass("w-75");
-            $(".phone").css("width", "");
-
+// 연락처 최대길이 넘길때
+function phoneMaxLength(obj){
+	if($(obj).val().length > obj.maxLength){
+            $(obj).val(obj.value.slice(0, obj.maxLength));
         }
-    });
-})
+}
+
+// 연락처 onblur 유효성검사
+var phoneSwOne;
+var phoneSwTwo;
+function phoneCheck(obj, lengths){
+	if($(obj).val().length < lengths){
+		$("#phoneSpan").css("color", "red");
+		$("#phoneSpan").prev().text("*");
+		setTimeout(function(){
+            $("#phoneSpan").css("color", "black");
+        },500);
+        
+        if(lengths == 3){
+			phoneSwOne = 0;
+		}else{
+			phoneSwTwo = 0;
+		}
+	}else{
+		if(lengths == 3){
+			phoneSwOne = 1;
+		}else{
+			phoneSwTwo = 1;
+		}
+		
+	}
+	if(phoneSwOne + phoneSwTwo == 2){
+		$("#phoneSpan").css("color", "green");
+		$("#phoneSpan").prev().text("");
+		setTimeout(function(){
+            $("#phoneSpan").css("color", "black");
+        },500);
+	}
+}
+
+// 포인트 사용
+function checkedPoint(obj){
+	if($(obj).is(":checked")){
+		$("#point").prop('readonly', false);
+	}else{
+		$("#point").val("0");
+		$("#point").prop('readonly', true);
+	}
+}

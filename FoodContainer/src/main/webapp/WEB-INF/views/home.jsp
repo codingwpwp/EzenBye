@@ -11,7 +11,6 @@
 	<c:forEach items="${list}" var="list">
 	${list.name } <br>
 	${list.point } <br>
-	${list.roulette_ticket }
 	</c:forEach>
 </h1>
 </body>
