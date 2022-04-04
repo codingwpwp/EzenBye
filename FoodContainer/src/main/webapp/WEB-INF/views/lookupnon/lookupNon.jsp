@@ -60,24 +60,24 @@
 			        <hr />
 			        
 			        <div class="row">
-			        	<div class="col-sm-3">
-			        		<span>2022.3.15</span>
+			        	<div class="col-sm-4 col-6">
+			        		<span class="good-date">2022.3.15</span>
 			        	</div>
-			        	<div class="col-sm-6">
-			        		<span>주문번호 : ADDF1325</span>
+			        	<div class="col-sm-5 col-6">
+			        		<span class="good-date">주문번호 : ADDF1325</span>
 			        	</div>
-			        	<div class="col-sm-3 findT">
-			        		<a href="#" class="link-info"><span>배송조회</span></a>
+			        	<div class="col-sm-3 col-12 findT">
+			        		<a href="#" class="link-info fw-bold"><span>배송조회</span></a>
 			        	</div>
 			        </div>
 			        
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
 			        	<div class="row">
 			        		<div class="col-sm-4">
-			        			<span>배송준비중</span>
+			        			<span class="fw-bold">배송준비중</span>
 			        		</div>
 			        		<div class="col-sm-8 number-good">
-			        			<span>상품 주문번호 : DFSD5649</span>
+			        			<span class="fw-bold">상품 주문번호 : DFSD5649</span>
 			        		</div>
 			        	</div>
 			        	<div class="row">
@@ -99,17 +99,17 @@
 			        		
 			        	</div>
 			        	<div class="col-sm-3 findT">
-			        		<a href="#" class="link-info"><span>배송조회</span></a>
+			        		<a href="#" class="link-info fw-bold"><span>배송조회</span></a>
 			        	</div>
 			        </div>
 			        
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
 			        	<div class="row">
 			        		<div class="col-sm-4">
-			        			<span>배송준비중</span>
+			        			<span class="fw-bold">배송준비중</span>
 			        		</div>
 			        		<div class="col-sm-8 number-good">
-			        			<span>상품 주문번호 : DFSD5649</span>
+			        			<span class="fw-bold">상품 주문번호 : DFSD5649</span>
 			        		</div>
 			        	</div>
 			        	<div class="row">
@@ -131,17 +131,17 @@
 			        		
 			        	</div>
 			        	<div class="col-sm-3 findT">
-			        		<a href="#" class="link-info"><span>배송조회</span></a>
+			        		<a href="#" class="link-info fw-bold"><span>배송조회</span></a>
 			        	</div>
 			        </div>
 			        
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
 			        	<div class="row">
 			        		<div class="col-sm-4">
-			        			<span>배송준비중</span>
+			        			<span class="fw-bold">배송준비중</span>
 			        		</div>
 			        		<div class="col-sm-8 number-good">
-			        			<span>상품 주문번호 : DFSD5649</span>
+			        			<span class="fw-bold">상품 주문번호 : DFSD5649</span>
 			        		</div>
 			        	</div>
 			        	<div class="row">
@@ -187,27 +187,27 @@
 					<p class="fs-6 lookup-fs-6">결제정보</p>
 			        <hr />
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
-			        	<div>상품가격 : </div>
-			        	<div class="lookupView-infmoney">배송비 : </div>
-			        	<div class="lookupView-infmoney">할인가격 : </div>
-			        	<div class="lookupView-infmoney">총 결제금액 : </div>
+			        	<div><span class="fw-bold">상품가격 :</span> </div>
+			        	<div class="lookupView-infmoney"><span class="fw-bold">배송비 :</span> </div>
+			        	<div class="lookupView-infmoney"><span class="fw-bold">할인가격 :</span> </div>
+			        	<div class="lookupView-infmoney"><span class="fw-bold">총 결제금액 :</span> </div>
 			        </div>
 			        
 			        <p class="fs-6 lookup-fs-6">주문자정보</p>
 			        <hr />
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
-			        	<div>주문자명 : </div>
-			        	<div class="lookupView-infmoney">연락처 : </div>
-			        	<div class="lookupView-infmoney">이메일 : </div>
+			        	<div><span class="fw-bold">주문자명 :</span> </div>
+			        	<div class="lookupView-infmoney"><span class="fw-bold">연락처 :</span> </div>
+			        	<div class="lookupView-infmoney"><span class="fw-bold">이메일 :</span> </div>
 			        </div>
 			        
 			        <p class="fs-6 lookup-fs-6">배송지정보</p>
 			        <hr />
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
-			        	<div>받는분 : </div>
-			        	<div class="lookupView-infmoney">주소 : </div>
-			        	<div class="lookupView-infmoney">연락처 : 010 - 1234 - 5678 </div>
-			        	<div class="lookupView-infmoney">요청사항 : </div>
+			        	<div><span class="fw-bold">받는분 :</span> </div>
+			        	<div class="lookupView-infmoney"><span class="fw-bold">주소 :</span> </div>
+			        	<div class="lookupView-infmoney"><span class="fw-bold">연락처 :</span> 010 - 1234 - 5678 </div>
+			        	<div class="lookupView-infmoney"><span class="fw-bold">요청사항 :</span> </div>
 			        </div>
 			        
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good2">

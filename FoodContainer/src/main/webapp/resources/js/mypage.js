@@ -25,6 +25,9 @@ $(document).ready(function(){
 			$(".noteManage-btn").addClass("mb-3");
 			$("#noteManageView-title").css("width","23%");
 			$(".memberSecession-select2").addClass("d-flex justify-content-center");
+			$(".noteManageView-group1").hide();
+			$(".noteManageView-group2").show();
+			$(".noteManageView-group3").show();
 		}else {
 			$(".findT").css("text-align","right");
 			$(".order-btn").removeClass("mt-1 mb-1");
@@ -40,6 +43,9 @@ $(document).ready(function(){
 			$(".noteManage-btn").removeClass("mb-3");
 			$("#noteManageView-title").css("width","35%");
 			$(".memberSecession-select2").removeClass("d-flex justify-content-center");
+			$(".noteManageView-group1").show();
+			$(".noteManageView-group2").hide();
+			$(".noteManageView-group3").hide();
 		}
 	
     $(window).resize(function() {
@@ -58,6 +64,9 @@ $(document).ready(function(){
 			$(".noteManage-btn").addClass("mb-3");
 			$("#noteManageView-title").css("width","23%");
 			$(".memberSecession-select2").addClass("d-flex justify-content-center");
+			$(".noteManageView-group1").hide();
+			$(".noteManageView-group2").show();
+			$(".noteManageView-group3").show();
 		}else {
 			$(".findT").css("text-align","right");
 			$(".order-btn").removeClass("mt-1 mb-1");
@@ -73,6 +82,9 @@ $(document).ready(function(){
 			$(".noteManage-btn").removeClass("mb-3");
 			$("#noteManageView-title").css("width","35%");
 			$(".memberSecession-select2").removeClass("d-flex justify-content-center");
+			$(".noteManageView-group1").show();
+			$(".noteManageView-group2").hide();
+			$(".noteManageView-group3").hide();
 		}
 		
 		if(window.innerWidth <= 992){

@@ -74,7 +74,7 @@
 					<div class="shopbasket-title border border-info border-1 rounded shadow-sm">
 					<p class="fs-4 shopbasket-fs4"><i class="bi bi-snow2"></i>냉동식품</p>	
 					<div class="row d-flex align-items-center shopbasket-card">
-						<div class="col-lg-2 col-md-2">
+						<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-checkbox">
 							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" name="shopbasket">
 						</div>
 						<div class="col-lg-8 col-md-8">
@@ -95,13 +95,13 @@
 								</div>
 				        	</div>
 						</div>
-						<div class="col-lg-2 col-md-2 d-flex justify-content-end shopbasket-number">
+						<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-number">
 							<i class="bi bi-dash shopbasket-icon"></i>&nbsp; 1 &nbsp; <i class="bi bi-plus shopbasket-icon"></i>
 						</div>
 					</div>
 					
 					<div class="row d-flex align-items-center shopbasket-card">
-						<div class="col-lg-2 col-md-2">
+						<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-checkbox">
 							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option2" name="shopbasket">
 						</div>
 						<div class="col-lg-8 col-md-8">
@@ -122,7 +122,7 @@
 								</div>
 				        	</div>
 						</div>
-						<div class="col-lg-2 col-md-2 d-flex justify-content-end shopbasket-number">
+						<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-number">
 							<i class="bi bi-dash shopbasket-icon"></i>&nbsp; 1 &nbsp; <i class="bi bi-plus shopbasket-icon"></i>
 						</div>
 					</div>
@@ -131,7 +131,7 @@
 					<div class="shopbasket-title border border-success border-1 rounded shadow-sm">
 					<p class="fs-4 shopbasket-fs4"><i class="fa-solid fa-utensils"></i>즉석식품</p>	
 					<div class="row d-flex align-items-center shopbasket-card">
-						<div class="col-lg-2 col-md-2">
+						<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-checkbox">
 							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option3" name="shopbasket">
 						</div>
 						<div class="col-lg-8 col-md-8">
@@ -152,13 +152,13 @@
 								</div>
 				        	</div>
 						</div>
-						<div class="col-lg-2 col-md-2 d-flex justify-content-end shopbasket-number">
+						<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-number">
 							<i class="bi bi-dash shopbasket-icon"></i>&nbsp; 1 &nbsp; <i class="bi bi-plus shopbasket-icon"></i>
 						</div>
 					</div>
 					
 					<div class="row d-flex align-items-center shopbasket-card">
-						<div class="col-lg-2 col-md-2">
+						<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-checkbox">
 							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option4" name="shopbasket">
 						</div>
 						<div class="col-lg-8 col-md-8">
@@ -179,13 +179,13 @@
 								</div>
 				        	</div>
 						</div>
-						<div class="col-lg-2 col-md-2 d-flex justify-content-end shopbasket-number">
+						<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-number">
 							<i class="bi bi-dash shopbasket-icon"></i>&nbsp; 1 &nbsp; <i class="bi bi-plus shopbasket-icon"></i>
 						</div>
 					</div>
 					</div>
 					
-					<div class="d-flex justify-content-center shopbasket-sum">선택 상품 합계 : 40.000원</div>
+					<div class="d-flex justify-content-center shopbasket-sum">선택 상품 합계 : 40,000원</div>
 					
 					<div class="d-flex justify-content-center shopbasket-btn2">
 						<button type="button" class="btn btn-outline-dark col-5">구매하기</button>
@@ -194,7 +194,7 @@
       				</div>
                 </article>
             </div>
-
+            
             <!-- 오른쪽 사이드메뉴 -->
             <div class="col-sm-3 col-md-2 col-lg-2 d-none d-sm-block">
                 <!-- 실질적인 오른쪽 사이드메뉴 내용 -->
