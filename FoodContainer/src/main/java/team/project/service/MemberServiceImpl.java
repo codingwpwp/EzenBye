@@ -20,4 +20,9 @@ public class MemberServiceImpl implements MemberService {
 		
 		return list;
 	}
+	@Override
+	public int Login(MemberVO vo) throws Exception{
+		// TODO Auto-generated method stub
+		return memberDao.Login(vo);
+	}
 }
