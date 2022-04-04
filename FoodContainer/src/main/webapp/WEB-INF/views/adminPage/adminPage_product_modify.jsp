@@ -70,7 +70,7 @@
 
                             <!-- 대분류 -->
                             <div class="col-4 col-md-2 d-flex justify-content-end mb-3 mb-md-0">
-                                <span class="infoTitle p-1">대분류</span>
+                                <span class="infoTitle p-1" style="width: 79px;">대분류</span>
                             </div>
 
                             <div class="col-5 col-md-4 col-lg-3 mb-3 mb-md-0">
@@ -86,7 +86,7 @@
 
                             <!-- 중분류 -->
                             <div class="col-4 col-md-2 d-flex justify-content-end">
-                                <span class="infoTitle p-1">중분류</span>
+                                <span class="infoTitle p-1" style="width: 79px;">중분류</span>
                             </div>
 
                             <div class="col-5 col-md-4 col-lg-3">
@@ -112,7 +112,7 @@
                         <div class="row my-3">
 
                             <div class="col-4 col-md-2 d-flex justify-content-end">
-                                <span class="infoTitle p-1">브랜드</span>
+                                <span class="infoTitle p-1" style="width: 79px;">브랜드</span>
                             </div>
 
                             <div class="col-5 col-md-4 col-lg-3">
@@ -131,7 +131,7 @@
                         <div class="row my-3">
 
                             <div class="col-4 col-md-2 d-flex justify-content-end">
-                                <span class="infoTitle p-1">상품 이름</span>
+                                <span class="infoTitle p-1" style="width: 79px;">상품 이름</span>
                             </div>
 
                             <div class="col-8 col-md-10 col-lg-8">
@@ -145,7 +145,7 @@
 
                             <!-- 판매 가격 -->
                             <div class="col-4 col-md-2 d-flex justify-content-end mb-3 mb-md-0">
-                                <span class="infoTitle p-1">판매 가격</span>
+                                <span class="infoTitle p-1" style="width: 79px;">판매 가격</span>
                             </div>
 
                             <div class="col-5 col-md-4 col-lg-3 mb-3 mb-md-0">
@@ -162,7 +162,7 @@
 
                             <!-- 할인 가격 -->
                             <div class="col-4 col-md-2 d-flex justify-content-end mb-3 mb-md-0">
-                                <span class="infoTitle p-1">할인 가격</span>
+                                <span class="infoTitle p-1" style="width: 79px;">할인 가격</span>
                             </div>
 
                             <div class="col-5 col-md-4 col-lg-3 mb-3 mb-md-0">
@@ -184,7 +184,7 @@
 
                             <!-- 재고 -->
                             <div class="col-4 col-md-2 d-flex justify-content-end mb-3 mb-md-0">
-                                <span class="infoTitle p-1">재고</span>
+                                <span class="infoTitle p-1" style="width: 79px;">재고</span>
                             </div>
 
                             <div class="col-5 col-md-4 col-lg-3 mb-3 mb-md-0">
@@ -201,7 +201,7 @@
 
                             <!-- 배송비 -->
                             <div class="col-4 col-md-2 d-flex justify-content-end mb-3 mb-md-0">
-                                <span class="infoTitle p-1">배송비</span>
+                                <span class="infoTitle p-1" style="width: 79px;">배송비</span>
                             </div>
 
                             <div class="col-5 col-md-4 col-lg-3 mb-3 mb-md-0">
@@ -232,7 +232,7 @@
 
                             <div class="col-7 col-md-9 col-lg-4 col-xl-3 pe-0 d-flex justify-content-end imagePreview">
                             <!-- 이미지 미리보기 -->
-                                <button type="button" class="btn btn-secondary previewButton" data-bs-toggle="modal" data-bs-target="#sumnailImageModal" style="white-space: nowrap">미리보기</button>
+                                <button type="button" class="btn btn-secondary previewButton" data-bs-toggle="modal" data-bs-target="#sumnailImageModal">미리보기</button>
                             </div>
 
                             <div class="col-12 col-lg-6 col-xl-7 p-0 mt-2 inputImageFile">
@@ -242,7 +242,7 @@
 
                             <div class="px-0 mt-2 nowPreview">
                             <!-- 현재 대표이미지 -->
-                                <button type="button" class="col-12 btn btn-primary nowPreviewButton" data-bs-toggle="modal" data-bs-target="#nowSumnailImageModal" style="white-space: nowrap">
+                                <button type="button" class="col-12 btn btn-primary nowPreviewButton" data-bs-toggle="modal" data-bs-target="#nowSumnailImageModal">
                                     현재 <span class="imageSort">대표</span>이미지
                                 </button>
                             </div>
@@ -259,7 +259,7 @@
 
                             <div class="col-7 col-md-9 col-lg-4 col-xl-3 pe-0 d-flex justify-content-end imagePreview">
                             <!-- 이미지 미리보기 -->
-                                <button type="button" class="btn btn-secondary previewButton" data-bs-toggle="modal" data-bs-target="#detailImageModal" style="white-space: nowrap">미리보기</button>
+                                <button type="button" class="btn btn-secondary previewButton" data-bs-toggle="modal" data-bs-target="#detailImageModal">미리보기</button>
                             </div>
 
                             <div class="col-12 col-lg-6 col-xl-7 p-0 mt-2 inputImageFile">
@@ -269,62 +269,8 @@
 
                             <div class="px-0 mt-2 nowPreview">
                             <!-- 현재 상세이미지 -->
-                                <button type="button" class="col-12 btn btn-primary nowPreviewButton" data-bs-toggle="modal" data-bs-target="#nowDetailImageModal" style="white-space: nowrap">
+                                <button type="button" class="col-12 btn btn-primary nowPreviewButton" data-bs-toggle="modal" data-bs-target="#nowDetailImageModal">
                                     현재 <span class="imageSort">상세</span>이미지
-                                </button>
-                            </div>
-
-                        </div>
-
-                        <!-- 배송정보 -->
-                        <div class="row my-3 imageRow">
-
-                            <!-- 배송정보 문구 -->
-                            <div class="col-5 col-md-3 col-lg-2 d-flex justify-content-center p-0">
-                                <span class="infoTitle p-1">배송정보</span>
-                            </div>
-
-                            <div class="col-7 col-md-9 col-lg-4 col-xl-3 pe-0 d-flex justify-content-end imagePreview">
-                            <!-- 이미지 미리보기 -->
-                                <button type="button" class="btn btn-secondary previewButton" data-bs-toggle="modal" data-bs-target="#deliveryImageModal">미리보기</button>
-                            </div>
-                            
-                            <div class="col-12 col-lg-6 col-xl-7 p-0 mt-2 inputImageFile">
-                            <!-- 파일 등록 -->
-                                <input class="form-control" name="deliveryImage" type="file" accept="image/png" onchange="previewImage(event, this);">
-                            </div>
-
-                            <div class="px-0 mt-2 nowPreview">
-                            <!-- 현재 상세이미지 -->
-                                <button type="button" class="col-12 btn btn-primary nowPreviewButton" data-bs-toggle="modal" data-bs-target="#nowDeliveryImageModal">
-                                    현재 <span class="imageSort">배송</span>정보
-                                </button>
-                            </div>
-
-                        </div>
-
-                        <!-- 취소규정-->
-                        <div class="row my-3 imageRow">
-
-                            <!-- 취소규정 문구 -->
-                            <div class="col-5 col-md-3 col-lg-2 d-flex justify-content-center p-0">
-                                <span class="infoTitle p-1">취소규정</span>
-                            </div>
-
-                            <div class="col-7 col-md-9 col-lg-4 col-xl-3 pe-0 d-flex justify-content-end imagePreview">
-                            <!-- 이미지 미리보기 -->
-                                <button type="button" class="btn btn-secondary previewButton" data-bs-toggle="modal" data-bs-target="#cancelImageModal">미리보기</button>
-                            </div>
-
-                            <div class="col-12 col-lg-6 col-xl-7 p-0 mt-2 inputImageFile">
-                            <!-- 파일 등록 -->
-                                <input class="form-control" name="cancelImage" type="file" accept="image/png" onchange="previewImage(event, this);">
-                            </div>
-
-                            <div class="px-0 mt-2 nowPreview">
-                            <!-- 현재 상세이미지 -->
-                                <button type="button" class="col-12 btn btn-primary nowPreviewButton" data-bs-toggle="modal" data-bs-target="#nowCancelImageModal">
-                                    현재 <span class="imageSort">취소</span>정보
                                 </button>
                             </div>
 
@@ -395,40 +341,6 @@
                             </div>
                         </div>
 
-                        <!-- 배송정보 미리보기 모달 -->
-                        <div class="modal fade" id="deliveryImageModal" tabindex="-1" aria-labelledby="deliveryImageModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="deliveryImageModalLabel">배송정보</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="imageContainer">
-                                            <span class="fs-5">이미지가 없습니다.</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 취소정보 미리보기 모달 -->
-                        <div class="modal fade" id="cancelImageModal" tabindex="-1" aria-labelledby="cancelImageModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="cancelImageModalLabel">취소규정</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="imageContainer">
-                                            <span class="fs-5">이미지가 없습니다.</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <!-- 현재 대표이미지 모달 -->
                         <div class="modal fade" id="nowSumnailImageModal" tabindex="-1" aria-labelledby="nowSumnailImageModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -439,7 +351,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="imageContainer">
-                                            <img src="<%=request.getContextPath()%>/resources/img/금메달.png" class="img-fluid">
+                                            <img src="1_1.png" class="img-fluid">
                                         </div>
                                     </div>
                                 </div>
@@ -456,41 +368,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="imageContainer">
-                                            <img src="<%=request.getContextPath()%>/resources/img/금메달.png" class="img-fluid">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 현재 배송정보 모달 -->
-                        <div class="modal fade" id="nowDeliveryImageModal" tabindex="-1" aria-labelledby="nowDeliveryImageModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="nowDeliveryImageModalLabel">현재 배송정보</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="imageContainer">
-                                            <img src="<%=request.getContextPath()%>/resources/img/금메달.png" class="img-fluid">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 현재 취소정보 모달 -->
-                        <div class="modal fade" id="nowCancelImageModal" tabindex="-1" aria-labelledby="nowCancelImageModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="nowCancelImageModalLabel">현재 취소정보</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="imageContainer">
-                                            <img src="<%=request.getContextPath()%>/resources/img/금메달.png" class="img-fluid">
+                                            <img src="1_1.png" class="img-fluid">
                                         </div>
                                     </div>
                                 </div>
@@ -504,7 +382,6 @@
 
             <!-- 오른쪽 사이드메뉴 -->
             <div class="col-sm-3 col-md-2 col-lg-2 d-none d-sm-block">
-            	<%@include file="/WEB-INF/views/base/rightAside.jsp"%>
             </div>
             
         </div>

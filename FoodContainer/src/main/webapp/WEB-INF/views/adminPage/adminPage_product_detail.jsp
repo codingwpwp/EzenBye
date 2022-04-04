@@ -67,7 +67,7 @@
                         <div class="row my-3 d-flex align-items-center">
 
                             <div class="col-4 d-flex justify-content-center">
-                                <span class="infoTitle p-1">대분류</span>
+                                <span class="infoTitle p-1" style="width: 78px;">대분류</span>
                             </div>
                             <div class="col-8 col-md-6">
                                 <input type="text" class="bg-light form-control" value="냉동식품" disabled>
@@ -79,7 +79,7 @@
                         <div class="row my-3 d-flex align-items-center">
 
                             <div class="col-4 d-flex justify-content-center">
-                                <span class="infoTitle p-1">중분류</span>
+                                <span class="infoTitle p-1" style="width: 78px;">중분류</span>
                             </div>
                             <div class="col-8 col-md-6">
                                 <input type="text" class="bg-light form-control" value="볶음밥" disabled>
@@ -94,11 +94,24 @@
                             [상품 정보]
                         </div>
 
+                        <!-- 상품 번호 -->
+                        <div class="row my-3 d-flex align-items-center">
+
+                            <div class="col-4 d-flex justify-content-center">
+                                <span class="infoTitle p-1" style="width: 78px;">상품 번호</span>
+                            </div>
+
+                            <div class="col-3 col-lg-2">
+                                <input type="text" class="bg-light form-control" value="122" disabled>
+                            </div>
+
+                        </div>
+
                         <!-- 브랜드 -->
                         <div class="row my-3 d-flex align-items-center">
 
                             <div class="col-4 d-flex justify-content-center">
-                                <span class="infoTitle p-1">브랜드</span>
+                                <span class="infoTitle p-1" style="width: 78px;">브랜드</span>
                             </div>
 
                             <div class="col-8 col-md-6">
@@ -111,7 +124,7 @@
                         <div class="row my-3 d-flex align-items-center">
 
                             <div class="col-4 d-flex justify-content-center">
-                                <span class="infoTitle p-1">상품이름</span>
+                                <span class="infoTitle p-1" style="width: 78px;">상품이름</span>
                             </div>
 
                             <div class="col-8 col-md-6">
@@ -125,7 +138,7 @@
 
                             <!-- 판매 가격 -->
                             <div class="col-4 d-flex justify-content-center">
-                                <span class="infoTitle p-1">판매 가격</span>
+                                <span class="infoTitle p-1" style="width: 78px;">판매 가격</span>
                             </div>
 
                             <div class="col-8 col-md-2 mb-3 mb-md-0">
@@ -142,7 +155,7 @@
 
                             <!-- 할인 가격 -->
                             <div class="col-4 col-md-2 d-flex justify-content-center justify-content-md-end">
-                                <span class="infoTitle p-1">할인 가격</span>
+                                <span class="infoTitle p-1" style="width: 78px;">할인 가격</span>
                             </div>
 
                             <div class="col-8 col-md-2">
@@ -165,7 +178,7 @@
 
                             <!-- 재고 -->
                             <div class="col-4 d-flex justify-content-center">
-                                <span class="infoTitle p-1">재고</span>
+                                <span class="infoTitle p-1" style="width: 78px;">재고</span>
                             </div>
 
                             <div class="col-8 col-md-2 mb-3 mb-md-0">
@@ -182,7 +195,7 @@
 
                             <!-- 배송비 -->
                             <div class="col-4 col-md-2 d-flex justify-content-center justify-content-md-end">
-                                <span class="infoTitle p-1">배송비</span>
+                                <span class="infoTitle p-1" style="width: 78px;">배송비</span>
                             </div>
 
                             <div class="col-8 col-md-2">
@@ -203,7 +216,7 @@
                         <div class="row my-3 d-flex align-items-center">
 
                             <div class="col-4 d-flex justify-content-center">
-                                <span class="infoTitle p-1">판매 갯수</span>
+                                <span class="infoTitle p-1" style="width: 78px;">판매 갯수</span>
                             </div>
 
                             <div class="col-8 col-md-7">
@@ -255,8 +268,8 @@
                         <!-- 관리버튼들 -->
                         <div class="gap-3">
                             <button type="button" class="btn btn-secondary mx-3 fw-bold">뒤로가기</button>
-                            <button type="button" class="btn btn-primary mx-3 fw-bold" data-bs-toggle="modal" data-bs-target="#submitModal">상품수정</button>
-                            <button type="button" class="btn btn-dark mx-3 fw-bold" data-bs-toggle="modal" data-bs-target="#submitModal">상품삭제</button>
+                            <button type="button" class="btn btn-primary mx-3 fw-bold">상품수정</button>
+                            <button type="button" class="btn btn-dark mx-3 fw-bold">상품삭제</button>
                         </div>
 
                     </div>
@@ -334,7 +347,6 @@
 
             <!-- 오른쪽 사이드메뉴 -->
             <div class="col-sm-3 col-md-2 col-lg-2 d-none d-sm-block">
-            	<%@include file="/WEB-INF/views/base/rightAside.jsp"%>
             </div>
             
         </div>

@@ -22,15 +22,13 @@
 		//브랜드
 		var brand = $("input[name='asideBrandAll']");
 		//가격
-		var price = $("input[name='asidePriceAll']");
+		var price = $("input[name='asidePrice']");
 		
 		if(check > 0){
 			ice.click();
 			product.click();
 			brand.click();
-			price.parent().parent().parent().next().find("input").click();
-			price.parent().parent().parent().next().next().find("input").click();
-			
+			price.click();
 		}
 		
 	  //모바일 화면 - 처음 또는 새로고침 시 전체선택
@@ -43,15 +41,13 @@
 		//브랜드
 		var brandM = $("input[name='asideBrandAllM']");
 		//가격
-		var priceM = $("input[name='asidePriceAllM']");
+		var priceM = $("input[name='asidePriceM']");
 		
 		if(checkM > 0){
 			iceM.click();
 			productM.click();
 			brandM.click();
-			priceM.parent().parent().parent().next().find("input").click();
-			priceM.parent().parent().parent().next().next().find("input").click();
-			
+			priceM.click();
 		}
 	}
 	
@@ -64,8 +60,6 @@
 		var product = $("input[name='asideProductAll']");
 		//브랜드
 		var brand = $("input[name='asideBrandAll']");
-		//가격
-		var price = $("input[name='asidePriceAll']");
 		
 		if(check < 0){
 			$(obj).find("i").attr("class","bi bi-check-circle-fill");
@@ -82,7 +76,6 @@
 				brand.click();
 			}
 		}
-			price.click();
 	}
 	
 	//pc화면 - 모든 전체메뉴 체크일 때, 전체상품 변화
@@ -108,8 +101,6 @@
 		var product = $("input[name='asideProductAllM']");
 		//브랜드
 		var brand = $("input[name='asideBrandAllM']");
-		//가격
-		var price = $("input[name='asidePriceAllM']");
 		
 		if(check < 0){
 			$(obj).find("i").attr("class","bi bi-check-circle-fill");
@@ -126,7 +117,6 @@
 				brand.click();
 			}
 		}
-			price.click();
 	}
 	
 	//모바일 화면 - 모든 전체메뉴 체크일 때, 전체상품 변화
@@ -304,49 +294,21 @@
 	}
 
 	//가격 체크박스
-	function asidePriceAll(obj){
-		$(obj).prop("checked",true);
-		
-		var price = $("input[name='asidePrice']");
-		
-		$.each(price,function(){
-			price.prop("checked",true);
-		})
-		
-	}
 	
 	function asidePrice(obj){
-		var price = $("input[name='asidePrice']");
 		var checkPrice = $("input[name='asidePrice']:checked");
-		var priceAll = $("input[name='asidePriceAll']");
 		
-		if(price.length == checkPrice.length){
-			priceAll.prop("checked",true);
-		}else if(checkPrice.length == 0){
+		if(checkPrice.length == 0){
 			$(obj).prop("checked", true);
 			alert("최소 한 개는 선택해야 합니다.");
-		}else{
-			priceAll.prop("checked",false);
 		}
 	}
 	//가격 체크박스 모바일
-	function asidePriceAllM(obj){
-		$(obj).prop("checked",true);
-		
-		var price = $("input[name='asidePriceM']");
-		
-		$.each(price,function(){
-			price.prop("checked",true);
-		})
-	}
 	
 	function asidePriceM(obj){
-		var price = $("input[name='asidePriceM']");
 		var checkPrice = $("input[name='asidePriceM']:checked");
-		var priceAll = $("input[name='asidePriceAllM']");
-		if(price.length == checkPrice.length){
-			priceAll.prop("checked",true);
-		}else if(checkPrice.length == 0){
+		
+		if(checkPrice.length == 0){
 			$(obj).prop("checked",true);
 			$(".priceAlertM").css({"display" : "block",
 								   "z-index" : "10000"
@@ -358,8 +320,6 @@
 								  	   "z-index" : "0"
 								});
 			},800);
-		}else{
-			priceAll.prop("checked",false);
 		}
 	}
 	

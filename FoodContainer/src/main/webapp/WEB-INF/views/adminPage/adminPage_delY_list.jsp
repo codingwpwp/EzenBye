@@ -46,7 +46,6 @@
                <%@include file="/WEB-INF/views/adminPage/leftAside.jsp"%>
             </div>
 
-
             <!-- 메인 -->
             <div class="col-12 col-sm-9 col-md-10 col-lg-8">
                 <article id="mainSection">
@@ -74,7 +73,7 @@
 
                                 <tr>
                                     <td>tester1245</td>
-                                    <td><a href="#" class="link-primary">강의실컴퓨터는</a></td>
+                                    <td><a href="dely_detail.do" class="link-primary">강의실컴퓨터는</a></td>
                                     <td>2022-02-01</td>
                                 </tr>
                                 <tr>
@@ -126,7 +125,6 @@
 
             <!-- 오른쪽 사이드메뉴 -->
             <div class="col-sm-3 col-md-2 col-lg-2 d-none d-sm-block">
-            	<%@include file="/WEB-INF/views/base/rightAside.jsp"%>
             </div>
             
         </div>

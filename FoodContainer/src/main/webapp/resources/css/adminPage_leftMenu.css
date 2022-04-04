@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* 관리자 메뉴의 공통사항 */
 a.list-group-item-action:not(.selected){
     transition: all 0.3s;
@@ -30,4 +31,6 @@ a.selected:hover{
     width: 150px;
     margin: 0px auto;
     background-color: #dfdfdf;
+    position: sticky;
+    top:50px;
 }
