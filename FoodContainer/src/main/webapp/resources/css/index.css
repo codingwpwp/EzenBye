@@ -10,6 +10,10 @@
 	margin-bottom : 20px;
 }
 
+.card>img:first-child{
+	max-height : 300px;
+}
+
 /*찜*/
 .hoverHeart{
 	margin : 0;
@@ -386,8 +390,7 @@
 .pListSubImgM{
 	width : 90px;
 	position : relative;
-	left : 180px;
-	top : -40px;
+	top : 40px;
 }
 
 /* productView ========================================================================================== */
