@@ -6,4 +6,6 @@ import team.project.vo.MemberVO;
 
 public interface MemberService {
 	List<MemberVO> list(MemberVO vo) throws Exception;
+
+	public int Login(MemberVO vo) throws Exception;
 }

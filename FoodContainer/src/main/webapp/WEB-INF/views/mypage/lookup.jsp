@@ -65,27 +65,24 @@
 			        <p class="fs-6 lookup-fs-6">주문배송조회</p>
 			        <hr />
 			        <div class="row">
-			        	<div class="col-sm-3 col-6">
-			        		<span>2022.3.15</span>
+			        	<div class="col-sm-4 col-6">
+			        		<span class="good-date">2022.3.15</span>
 			        	</div>
-			        	<div class="col-sm-3 col-6">
-			        		<span>주문번호 : ADDF1325</span>
+			        	<div class="col-sm-5 col-6">
+			        		<span class="good-date">주문번호 : ADDF1325</span>
 			        	</div>
-			        	<div class="col-sm-3 col-12">
-			        		<button type="button" class="btn btn-primary btn-sm order-btn" onclick="location.href='mypage_lookupView.do'">주문상세</button>
-			        	</div>
-			        	<div class="col-sm-3 col-6 findT">
-			        		<a href="#" class="link-info"><span>배송조회</span></a>
+			        	<div class="col-sm-3 col-12 findT">
+			        		<button type="button" class="btn btn-primary btn-sm" onclick="location.href='mypage_lookupView.do'">주문상세</button>
 			        	</div>
 			        </div>
 			        
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
 			        	<div class="row">
 			        		<div class="col-sm-4">
-			        			<span>배송완료</span>
+			        			<span class="fw-bold">배송완료</span>
 			        		</div>
 			        		<div class="col-sm-8 number-good">
-			        			<span>상품 주문번호 : DFSD5649</span>
+			        			<span class="fw-bold">상품 주문번호 : DFSD5649</span>
 			        		</div>
 			        	</div>
 			        	<div class="row">
@@ -103,22 +100,13 @@
 						</div>
 			        </div>
 			        
-			        <div class="row">
-			        	<div class="col-sm-3">		        	
-			        	</div>
-			        	<div class="col-sm-6">			        		
-			        	</div>
-			        	<div class="col-sm-3 findT">
-			        		<a href="#" class="link-info"><span>배송조회</span></a>
-			        	</div>
-			        </div>
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
 			        	<div class="row">
 			        		<div class="col-sm-4">
-			        			<span>구매확정</span>
+			        			<span class="fw-bold">구매확정</span>
 			        		</div>
 			        		<div class="col-sm-8 number-good">
-			        			<span>상품 주문번호 : DFSD5649</span>
+			        			<span class="fw-bold">상품 주문번호 : DFSD5649</span>
 			        		</div>
 			        	</div>
 			        	<div class="row">
@@ -192,28 +180,27 @@
 						
 			        </div>
 			        
+			        <hr style="border: 1px solid gray;" />
+			        
 			        <div class="row">
-			        	<div class="col-sm-3 col-6">
-			        		<span>2022.3.15</span>
+			        	<div class="col-sm-4 col-6">
+			        		<span class="good-date">2022.3.15</span>
 			        	</div>
-			        	<div class="col-sm-3 col-6">
-			        		<span>주문번호 : ADDF1325</span>
+			        	<div class="col-sm-5 col-6">
+			        		<span class="good-date">주문번호 : ADDF1325</span>
 			        	</div>
-			        	<div class="col-sm-3 col-12">
-			        		<button type="button" class="btn btn-primary btn-sm order-btn">주문상세</button>
-			        	</div>
-			        	<div class="col-sm-3 col-6 findT">
-			        		<a href="#" class="link-info"><span>배송조회</span></a>
+			        	<div class="col-sm-3 col-12 findT">
+			        		<button type="button" class="btn btn-primary btn-sm" onclick="location.href='mypage_lookupView.do'">주문상세</button>
 			        	</div>
 			        </div>
 			        
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
 			        	<div class="row">
 			        		<div class="col-sm-4">
-			        			<span>배송준비중</span>
+			        			<span class="fw-bold">배송준비중</span>
 			        		</div>
 			        		<div class="col-sm-8 number-good">
-			        			<span>상품 주문번호 : DFSD5649</span>
+			        			<span class="fw-bold">상품 주문번호 : DFSD5649</span>
 			        		</div>
 			        	</div>
 			        	<div class="row">

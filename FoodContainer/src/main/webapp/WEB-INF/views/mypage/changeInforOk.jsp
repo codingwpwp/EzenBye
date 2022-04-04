@@ -68,20 +68,20 @@
 			        <form action="#">
 			        	<div>
 				         	<div class="input-group mb-3 changeInforOk-inputId">
-							  <span class="input-group-text" id="inputGroup-sizing-default">아이디</span>
+							  <span class="input-group-text fw-bold" id="inputGroup-sizing-default">아이디</span>
 							  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
 							</div>
 							<div class="changeInforOk-btn">
-								<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+								<button type="button" class="btn btn-secondary fw-bold" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 								  비밀번호변경
 								</button>
 							</div>
 							<div class="input-group mb-3 changeInforOk-inputName">
-							  <span class="input-group-text" id="inputGroup-sizing-default">이름</span>
+							  <span class="input-group-text fw-bold" id="inputGroup-sizing-default">이름</span>
 							  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
 							</div>
 							<div class="input-group changeInforOk-inputPhone">
-							  <span class="input-group-text">휴대전화</span>
+							  <span class="input-group-text fw-bold">휴대전화</span>
 							  <select class="form-select" aria-label="Default select example">
 								  <option selected>010</option>
 								  <option value="1">011</option>
@@ -94,14 +94,14 @@
 							  <input type="number" aria-label="Last name" class="form-control">
 							</div>
 							<div class="input-group mb-3 changeInforOk-inputNicName">
-							  <span class="input-group-text" id="inputGroup-sizing-default">닉네임</span>
+							  <span class="input-group-text fw-bold" id="inputGroup-sizing-default">닉네임</span>
 							  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-							  <button type="button" class="btn btn-secondary btn-sm">중복확인</button>
+							  <button type="button" class="btn btn-secondary btn-sm fw-bold">중복확인</button>
 							</div>
 							<div class="input-group changeInforOk-inputEmail">
-							  <span class="input-group-text">이메일</span>
+							  <span class="input-group-text fw-bold">이메일</span>
 							  <input type="text" aria-label="Last name" class="form-control" disabled>
-							  <span class="input-group-text">@</span>
+							  <span class="input-group-text fw-bold">@</span>
 							  <input type="text" aria-label="Last name" class="form-control" disabled>
 							</div>
 							<div class="d-grid gap-3 d-md-flex justify-content-md-center">
@@ -116,24 +116,24 @@
 						  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 						    <div class="modal-content">
 						      <div class="modal-header">
-						        <h5 class="modal-title" id="staticBackdropLabel">비밀번호 변경</h5>
+						        <h5 class="modal-title fw-bold" id="staticBackdropLabel">비밀번호 변경</h5>
 						        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						      </div>
 						      <div class="modal-body">
 						        <div class="mb-3 row">
-								    <label for="inputPassword" class="col-sm-3 col-form-label">현재비밀번호</label>
+								    <label for="inputPassword" class="col-sm-3 col-form-label fw-bold">현재비밀번호</label>
 								    <div class="col-sm-7">
 								      <input type="password" class="form-control" id="inputPassword">
 								    </div>
 								 </div>
 								 <div class="mb-3 row">
-								    <label for="inputPassword" class="col-sm-3 col-form-label">변경비밀번호</label>
+								    <label for="inputPassword" class="col-sm-3 col-form-label fw-bold">변경비밀번호</label>
 								    <div class="col-sm-7">
 								      <input type="password" class="form-control" id="inputPassword">
 								    </div>
 								 </div>
 								 <div class="mb-3 row">
-								    <label for="inputPassword" class="col-sm-3 col-form-label">비밀번호확인</label>
+								    <label for="inputPassword" class="col-sm-3 col-form-label fw-bold">비밀번호확인</label>
 								    <div class="col-sm-7">
 								      <input type="password" class="form-control" id="inputPassword">
 								    </div>
