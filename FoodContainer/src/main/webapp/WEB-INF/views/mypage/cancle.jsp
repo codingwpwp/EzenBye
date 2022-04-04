@@ -65,28 +65,28 @@
 			        <p class="fs-6 lookup-fs-6">취소 조회</p>
 			        <hr />
 		        	<div>
-		        		<span>2022.1.27</span>
+		        		<span class="fw-bold">2022.1.27</span>
 		        	</div>
 			        	
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
 			        	<div class="row">
 			        		<div class="col-sm-6">
-			        			<span>접수완료</span>
+			        			<span class="fw-bold">접수완료</span>
 			        		</div>
 			        		<div class="col-sm-6 number-good">
 			        			<button type="button" class="btn btn-primary btn-sm cancle-seeVIew-btn" onclick="location.href='mypage_cancleView.do'">상세보기</button>
 			        		</div>
 			        	</div>
 			    		<div class="cancle-text">
-			    			주문번호 : DFSF5649
+			    			<span class="fw-bold">주문번호 :</span> DFSF5649
 			    		</div>
 			    		<div class="cancle-text">
-			    			주문한 상품 : 비비고 진한고기만두400g*2번들
+			    			<span class="fw-bold">주문한 상품 :</span> 비비고 진한고기만두400g*2번들
 			    		</div>         	
 			        </div>
 			        
 			        <div>
-		        		<span>2022.1.6</span>
+		        		<span class="fw-bold">2022.1.6</span>
 		        	</div>
 			        	
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
@@ -99,10 +99,10 @@
 			        		</div>
 			        	</div>
 			    		<div class="cancle-text">
-			    			주문번호 : DFSF5649
+			    			<span class="fw-bold">주문번호 :</span> DFSF5649
 			    		</div>
 			    		<div class="cancle-text">
-			    			주문한 상품 : 비비고 진한고기만두400g*2번들
+			    			<span class="fw-bold">주문한 상품 :</span> 비비고 진한고기만두400g*2번들
 			    		</div>         	
 			        </div>
 

@@ -65,11 +65,21 @@
 			        <p class="fs-6 lookup-fs-6">쪽지 관리</p>
 			        <hr />
 			        
-			        <div class="input-group mb-3 noteManageView-group">
+			        <div class="input-group mb-3 noteManageView-group1">
 			          <button type="button" class="btn btn-secondary btn-sm" disabled>제목</button>
 					  <input type="text" class="form-control" id="noteManageView-title" value="쪽지인데요 읽거나 말거나 알아서 하세요." aria-label="Recipient's username" aria-describedby="basic-addon2" disabled>
 					  <button type="button" class="btn btn-secondary btn-sm" disabled>날짜</button>
 					  <input type="text" class="form-control" value="2022-3-26 15:26" aria-label="Recipient's username" aria-describedby="basic-addon2" disabled>
+					</div>
+					
+					<div class="input-group mb-3 noteManageView-group2">
+			          <button type="button" class="btn btn-secondary btn-sm" disabled>제목</button>
+					  <input type="text" class="form-control" id="noteManageView-title" value="쪽지인데요 읽거나 말거나 알아서 하세요." aria-label="Recipient's username" aria-describedby="basic-addon2" disabled>  
+					</div>
+					
+					<div class="input-group mb-3 noteManageView-group3">
+						<button type="button" class="btn btn-secondary btn-sm" disabled>날짜</button>
+						<input type="text" class="form-control" value="2022-3-26 15:26" aria-label="Recipient's username" aria-describedby="basic-addon2" disabled>
 					</div>
 					
 			    	<textarea class="form-control" id="exampleFormControlTextarea1" rows="15" disabled>쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용

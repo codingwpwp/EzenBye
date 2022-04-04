@@ -68,36 +68,34 @@
 			        
 			        <p class="fs-6 lookup-fs-6">기본 배송지</p>
 			        <div class="input-group mb-3 addressManage-1">
-					  <span class="input-group-text" id="inputGroup-sizing-default">우편번호</span>
+					  <span class="input-group-text fw-bold" id="inputGroup-sizing-default">우편번호</span>
 					  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
 					</div>
 			        <div class="input-group mb-3 addressManage-2">
-					  <span class="input-group-text" id="inputGroup-sizing-default">주소</span>
+					  <span class="input-group-text fw-bold" id="inputGroup-sizing-default">주소</span>
 					  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
 					</div>
 					<div class="input-group addressManage-3">
-					  <span class="input-group-text">상세주소</span>
+					  <span class="input-group-text fw-bold">상세주소</span>
 					  <input type="text" aria-label="Last name" class="form-control" disabled>
-					  <span class="input-group-text">참고항목</span>
-					  <input type="text" aria-label="Last name" class="form-control" disabled>
+					  <input type="hidden" aria-label="Last name" class="form-control" disabled>
 					</div>
 					
 					<form action="">
 						<p class="fs-6 lookup-fs-6">기본 배송지 변경</p>
 				        <div class="input-group mb-3 addressManage-4">
-						  <span class="input-group-text" id="inputGroup-sizing-default">우편번호</span>
+						  <span class="input-group-text fw-bold" id="inputGroup-sizing-default">우편번호</span>
 						  <input type="text" id="sample6_postcode" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-						  <button type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn btn-secondary btn-sm">주소검색</button>
+						  <button type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn btn-secondary btn-sm fw-bold">주소검색</button>
 						</div>
 				        <div class="input-group mb-3 addressManage-5">
-						  <span class="input-group-text" id="inputGroup-sizing-default">주소</span>
+						  <span class="input-group-text fw-bold" id="inputGroup-sizing-default">주소</span>
 						  <input type="text" id="sample6_address" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
 						</div>
 						<div class="input-group addressManage-6">
-						  <span class="input-group-text">상세주소</span>
+						  <span class="input-group-text fw-bold">상세주소</span>
 						  <input type="text" id="sample6_detailAddress" aria-label="Last name" class="form-control">
-						  <span class="input-group-text">참고항목</span>
-						  <input type="text" id="sample6_extraAddress" aria-label="Last name" class="form-control">
+						  <input type="hidden" id="sample6_extraAddress" aria-label="Last name" class="form-control">
 						</div>
 						<div class="d-grid addressManage-btn col-5 mx-auto">
 						  <button class="btn btn-dark" type="button">기본 배송지 변경</button>

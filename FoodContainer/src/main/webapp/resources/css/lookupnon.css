@@ -7,6 +7,9 @@
 .findT, .number-good{
 	text-align: right;
 }
+.good-date{
+	font-size: 18px; font-weight: bold;
+}
 .link-info{
 	text-decoration: none;
 }

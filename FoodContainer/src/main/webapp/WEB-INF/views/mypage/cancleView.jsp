@@ -65,24 +65,21 @@
 			        <p class="fs-6 lookup-fs-6">취소 상세조회</p>
 			        <hr />
 		        	<div>
-		        		<span>2022.1.27 13:26 접수</span>
+		        		<span class="fw-bold">2022.1.27 13:26 접수</span>
 		        	</div>
 			        	
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
 			        	<div>
-			        		접수완료
+			        		<span class="fw-bold">접수완료</span>
 			        	</div>
 			    		<div class="cancle-text">
-			    			주문번호 : DFSF5649
+			    			<span class="fw-bold">주문번호 :</span> DFSF5649
 			    		</div>
 			    		<div class="cancle-text">
-			    			주문한 상품 : 비비고 진한고기만두400g*2번들
+			    			<span class="fw-bold">주문한 상품 :</span> 비비고 진한고기만두400g*2번들
 			    		</div>      
 			    		<div class="cancle-text">
-			    			취소사유 : 
-			    		</div>
-			    		<div>
-			    			그냥
+			    			<span class="fw-bold">취소사유 :</span> 구냥구냥구냥구냥구냥구냥구냥구냥구냥구냥구냥구냥구냥구냥구냥구냥구냥구냥
 			    		</div>   	
 			        </div>
 			        <div class="d-grid gap-4 d-md-flex justify-content-md-center cancleView-btn">

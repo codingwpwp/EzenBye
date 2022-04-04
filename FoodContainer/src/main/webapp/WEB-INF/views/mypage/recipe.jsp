@@ -73,7 +73,7 @@
 					      <div class="card-body">
 					        <h6 class="card-title"> 	
 							  <div class="row">
-								  <div class="col-12 text-truncate">
+								  <div class="col-12 text-truncate fw-bold">
 								    중식 특유의 그 맛이 땡기는 날! 멀리 나가지 않아도, 배달기다릴 필요 없습니다.
 								  </div>
 							  </div> 
@@ -98,7 +98,7 @@
 					      <div class="card-body">
 					        <h6 class="card-title"> 	
 							  <div class="row">
-								  <div class="col-12 text-truncate">
+								  <div class="col-12 text-truncate fw-bold">
 								    중식 특유의 그 맛이 땡기는 날! 멀리 나가지 않아도, 배달기다릴 필요 없습니다.
 								  </div>
 							  </div> 
@@ -123,7 +123,7 @@
 					      <div class="card-body">
 					        <h6 class="card-title"> 	
 							  <div class="row">
-								  <div class="col-12 text-truncate">
+								  <div class="col-12 text-truncate fw-bold">
 								    중식 특유의 그 맛이 땡기는 날! 멀리 나가지 않아도, 배달기다릴 필요 없습니다.
 								  </div>
 							  </div> 
@@ -148,7 +148,7 @@
 					      <div class="card-body">
 					        <h6 class="card-title"> 	
 							  <div class="row">
-								  <div class="col-12 text-truncate">
+								  <div class="col-12 text-truncate fw-bold">
 								    중식 특유의 그 맛이 땡기는 날! 멀리 나가지 않아도, 배달기다릴 필요 없습니다.
 								  </div>
 							  </div> 
