@@ -14,6 +14,10 @@
 	max-height : 300px;
 }
 
+.card:hover{
+	cursor:pointer;
+}
+
 /*찜*/
 .hoverHeart{
 	margin : 0;
@@ -30,7 +34,6 @@
 .indexSubImg{
 	position : absolute;
 	left : 60%;
-	display : none;
 }
 
 @media screen and (min-width : 600px){
