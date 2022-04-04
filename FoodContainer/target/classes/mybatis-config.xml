@@ -6,6 +6,7 @@
  		
  		<typeAliases>
             <typeAlias type="team.project.vo.MemberVO" alias="memberVO"/>
+            <typeAlias type="team.project.vo.ProductVO" alias="ProductVO"/>
         </typeAliases>
         
     </configuration>
