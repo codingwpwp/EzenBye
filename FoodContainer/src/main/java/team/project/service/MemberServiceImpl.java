@@ -21,8 +21,18 @@ public class MemberServiceImpl implements MemberService {
 		return list;
 	}
 	@Override
-	public int Login(MemberVO vo) throws Exception{
+	public MemberVO Login(MemberVO vo) throws Exception{
 		// TODO Auto-generated method stub
-		return memberDao.Login(vo);
+		System.out.println(vo.getId()+"test"+vo.getPw());
+		MemberVO mvo= memberDao.Login(vo);
+		
+		return mvo;
+	}
+	@Override
+	public int insertMember(MemberVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return memberDao.insertMember(vo);
+		
 	}
 }
+ 

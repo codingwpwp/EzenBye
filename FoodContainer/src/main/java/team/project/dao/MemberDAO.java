@@ -20,11 +20,12 @@ public class MemberDAO {
 		
 		return sqlSession.selectList(Namespace+".selectMember",vo);
 	}
-	
-	 @Autowired
-	    private SqlSessionTemplate mybatis;
-
-	    public int Login(MemberVO vo) throws Exception {
-	        return mybatis.selectOne("Member.Login", vo);
+	public MemberVO Login(MemberVO vo) throws Exception {
+	        return sqlSession.selectOne(Namespace+".Login", vo);
 	    }
+	
+	public int insertMember(MemberVO vo) throws Exception{
+		return sqlSession.insert(Namespace+".insertMember",vo);	
+	}
+	
 }
