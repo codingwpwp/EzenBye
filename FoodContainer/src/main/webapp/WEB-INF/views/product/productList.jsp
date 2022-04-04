@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -57,10 +59,10 @@
 					<!-- 전체상품 -->
 					<div class="container"> 
 						<div class="row">
-							<%for(int i=0; i<=15; i++){ %>
+							<c:forEach items="${productListAll}" var="ProductVO">
 							<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center">
 								<div class="card" style="width: 18rem;">
-								  <img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/납작 군만두.png" class="card-img-top" alt="비비고만두" onclick="location.href='productView.do'">
+								  <img src="<%=request.getContextPath()%>/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="card-img-top" alt="${ProductVO.product_name }" onclick="location.href='productView.do'">
 								  <div class="indexSubImg">
 								 	 <img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
 								 	 <img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="cart(this)">
@@ -69,9 +71,15 @@
 								  <div class="card-body" onclick="location.href='productView.do'">
 								    <p class="card-text">
 							    		<span style="color:red;"></span><br>
-									   	<span class="productName">비비고왕교자</span><br>
-									   	<span class="fs-4">10,000</span>원<br>
-									   	<span class="discount">d</span>
+									   	<span class="productName">${ProductVO.product_name}</span><br>
+									   	<span class="fs-4">
+											<fmt:formatNumber value="${ProductVO.origin_price}" pattern="#,###"/>
+										</span>원<br>
+									   	<c:if test="${ProductVO.sale_price != ''}">
+									   	<span class="discount">
+									   		<fmt:formatNumber value="${ProductVO.sale_price}" pattern="#,###"/>
+									   	</span>
+									   	</c:if>
 									   	<span class="productListStar">
 									   		<i class="bi bi-star-fill"></i>
 							        		<i class="bi bi-star-fill"></i>
@@ -80,12 +88,21 @@
 							        		<i class="bi bi-star"></i>
 								    	</span>
 								    	<br>
-								    	배송비 3,000원
+								    	<c:set var="delivery" value="${ProductVO.delivery_free_YN}" />
+								    	<c:choose>
+								    		<c:when test="${delivery == 'n'}">
+								    			배송비 3,000원
+								    		</c:when>
+								    		
+								    		<c:when test="${delivery == 'y'}">
+								    			무료배송
+								    		</c:when>
+								    	</c:choose>
 								    </p>
 								  </div>
 								</div>
 							</div>
-							<%} %>
+							</c:forEach>
 						</div>
 					</div>
 				</article>
@@ -96,10 +113,10 @@
 					<div class="fs-5 my-2 fw-bold topText">전체상품</div>
 					<hr>
 					<div class="productListCardM">
-						<%for(int i=0; i<13; i++){ %>
+						<c:forEach items="${productListAll}" var="ProductVO">
 						<div class="productListMDiv">
 							<div class="productListMImg">
-								<img src="<%=request.getContextPath()%>/resources/img/CJ/반찬/오징어채 볶음.png" class="img-fluid" alt="비비고 메추리알 장조림" onclick="location.href='productView.do'">
+								<img src="<%=request.getContextPath()%>/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="img-fluid" alt="${ProductVO.product_name}" onclick="location.href='productView.do'">
 								<div class="productListStarM">
 									<i class="bi bi-star-fill"></i>
 							        <i class="bi bi-star-fill"></i>
@@ -109,18 +126,33 @@
 								</div>
 							</div>
 							<div class="productListContent">
-								<span style="color:red;">[인기]</span>
-								<div class="productNameM" onclick="location.href='productView.do'">비비고 메추리알 장조림</div>
-								<div>10,000원</div>
-								<div class="discountM">할인가</div>
-								<div>배송비 3,000원</div>
-								<div class="pListSubImgM">
-									<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
-									<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="pListCart(this)">
+								<span style="color:red;"></span>
+								<div class="productNameM" onclick="location.href='productView.do'">${ProductVO.product_name}</div>
+								<div>
+									<fmt:formatNumber value="${ProductVO.origin_price}" pattern="#,###"/>원
 								</div>
+								<c:if test="${ProductVO.sale_price != ''}">
+								<div class="discountM">
+									<fmt:formatNumber value="${ProductVO.sale_price}" pattern="#,###"/>
+								</div>
+								</c:if>
+								<c:set var="delivery" value="${ProductVO.delivery_free_YN}" />
+								    	<c:choose>
+								    		<c:when test="${delivery == 'n'}">
+								    			<div>배송비 3,000원</div>
+								    		</c:when>
+								    		
+								    		<c:when test="${delivery == 'y'}">
+								    			<div>무료배송</div>
+								    		</c:when>
+								    	</c:choose>
+							</div>
+							<div class="pListSubImgM">
+								<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+								<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="pListCart(this)">
 							</div>
 						</div>
-						<%} %>
+						</c:forEach>
 					</div>
 				</article>
               	</article>
