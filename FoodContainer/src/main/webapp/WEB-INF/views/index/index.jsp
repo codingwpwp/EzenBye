@@ -87,10 +87,6 @@
 								<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 popular d-flex justify-content-center">
 									<div class="card" style="width: 18rem;">
 									  <img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/매운 왕교자.png" class="card-img-top" alt="비비고만두">
-									  <div class="indexSubImg">
-									  	<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
-										<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="cart(this)">
-									  </div>
 									  
 									  <div class="card-body">
 									    <p class="card-text">
@@ -108,6 +104,10 @@
 									    	<br>
 									    	배송비 3,000원
 									    </p>
+									  </div>
+									  <div class="indexSubImg">
+									  	<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+										<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="cart(this)">
 									  </div>
 									</div>
 								</div>
