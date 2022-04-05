@@ -8,4 +8,6 @@ import team.project.vo.ProductVO;
 public interface ProductService {
 	
 	List<ProductVO> productListAll(ProductVO productVO) throws Exception;
+	
+	ProductVO view(String index) throws Exception;
 }

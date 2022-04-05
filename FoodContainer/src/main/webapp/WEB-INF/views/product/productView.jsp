@@ -42,9 +42,11 @@
                 <aside id="leftAside">
                    <div id="pViewleft">
                 		<p class="card-text mdName">
-                			[CJ] 햇반/컵반 버터장조림 비빔밥
+                			${view.brand} ${view.product_name}
                 			<br>
-                			<span class="mdPrice">10,000원</span>
+                			<span class="mdPrice">
+                				<fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>
+                			</span>
                 		</p>
                 		<p class="card-text mb-auto productNum fs-4"><i class="bi bi-dash-square-fill" onclick="minusFn(this)"></i> 1 <i class="bi bi-plus-square-fill" onclick="plusFn(this)"></i></p>
 				        <hr>
@@ -67,7 +69,7 @@
                 	<div class="pViewCard">
 				      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 				        <div class="col-auto d-lg-block viewStarM">
-				        	<img src="<%=request.getContextPath()%>/resources/img/CJ/컵밥,햇반/황태국밥.png" alt="d" class="img-fluid viewImg">
+				        	<img src="<%=request.getContextPath()%>/resources/img/${view.brand}/${view.middleSort}/${view.thumbnail_image}" alt="${view.product_name}" class="img-fluid viewImg">
 				        	<div class="viewStar">
 				        		<span>평점 : 
 				        		<span class="fs-4 productViewStar">
@@ -82,12 +84,20 @@
 				        </div>
 				        <div class="col p-4 d-flex flex-column position-static">
 				          <strong class="d-inline-block mb-2 text-danger">[인기]</strong>
-				          <p class="mb-0">[CJ] 햇반/컵반 버터장조림 비빔밥</p>
+				          <p class="mb-0">${view.brand} ${view.product_name}</p>
 				          <hr>
-				          <h3 class="viewPrice">10,000<small>원</small></h3>
+				          <h3 class="viewPrice">
+					          <fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>
+					          <small>원</small>
+				          </h3>
 				          <div class="text-muted">포인트 적립 1%</div>
 				          <hr>
-				          <p class="card-text mdName">[CJ] 햇반/컵반 버터장조림 비빔밥 <span class="mdPrice">10,000원</span></p>
+				          <p class="card-text mdName">${view.brand} ${view.product_name} 
+				          	<span class="mdPrice">
+				          	<fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>
+					        원
+				          	</span>
+				          </p>
 				          <p class="card-text mb-auto productNum fs-4"><i class="bi bi-dash-square-fill" onclick="minusFn(this)"></i> 1 <i class="bi bi-plus-square-fill" onclick="plusFn(this)"></i></p>
 				          <div><span class="fs-5 totalPrice">합계 : <span class="fs-3">10,000원</span></span></div>
 				          <div class="d-flex justify-content-evenly">
@@ -116,17 +126,17 @@
 					<div class="unfold">
 						<!-- 상세페이지 -->
 						<div class="d-flex justify-content-center" id="pView">
-							<img src="<%=request.getContextPath()%>/resources/img/CJ/컵밥,햇반/황태국밥 상세.png" alt="상세페이지" class="img-fluid">
+							<img src="<%=request.getContextPath()%>/resources/img/${view.brand}/${view.middleSort}/${view.detail_image}" alt="${view.product_name} 상세페이지" class="img-fluid">
 						</div>
 						
 						<!-- 배송정보 -->
 						<div class="d-flex justify-content-center" id="pDelivery">
-							<img src="<%=request.getContextPath()%>/resources/img/배송.png" alt="배송안내" class="img-fluid">
+							<img src="<%=request.getContextPath()%>/resources/img/${view.delivery_info_image}" alt="배송안내" class="img-fluid">
 						</div>
 					
 						<!-- 취소 규정 -->
 						<div class="d-flex justify-content-center" id="pCancel">
-							<img src="<%=request.getContextPath()%>/resources/img/취소.png" alt="취소규정" class="img-fluid">
+							<img src="<%=request.getContextPath()%>/resources/img/${view.cancel_image}" alt="취소규정" class="img-fluid">
 						</div>
 					   
 					</div>

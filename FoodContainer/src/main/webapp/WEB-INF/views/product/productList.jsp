@@ -55,14 +55,7 @@
                 <article id="mainSection">
                	<!-- pc버전 -->
                	<article class="pList">
-               	${fn:length(viewCookie)}
-               	<c:forEach items="${viewCookie}" var="viewCookie">
-               		<c:if test="${viewCookie != 'null'}">
-               			${viewCookie}
-               		</c:if>
-               	</c:forEach>
-               	 
-               	
+					
 					<div class="fs-5 my-2 fw-bold topText">전체상품</div>
 					<hr>
 					<!-- 전체상품 -->
@@ -71,7 +64,7 @@
 							<c:forEach items="${productListAll}" var="ProductVO">
 							<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center">
 								<div class="card" style="width: 18rem;">
-								<div onclick="productCookie(this); location.href='productView.do';">
+								<a href="productView.do?index=${ProductVO.product_index}" onclick="productCookie(this)">
 								  <img src="<%=request.getContextPath()%>/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="card-img-top" alt="${ProductVO.product_name }">
 								  <div class="card-body">
 								    <p class="card-text">
@@ -105,7 +98,7 @@
 								    	</c:choose>
 								    </p>
 								  </div>
-								</div>
+								</a>
 								  <input type="hidden" name="index" value="${ProductVO.product_index}">
 								  <div class="indexSubImg">
 								  	<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">

@@ -20,4 +20,9 @@ public class ProductDAO {
 	public List<ProductVO> productListAll(ProductVO productVO) throws Exception{
 		return sqlSession.selectList(Namespace+".ProductListAll",productVO);
 	}
+
+	public ProductVO view(String index) {
+		
+		return sqlSession.selectOne(Namespace+".view",index);
+	}
 }
