@@ -23,43 +23,57 @@ public class loginController {
 	private static final Logger logger = LoggerFactory.getLogger(loginController.class);
 
 	@Autowired
-	private MemberService memberService;
-	
-	@RequestMapping(value ="loginmain.do", method= RequestMethod.POST)
-	public String logingo(MemberVO vo,HttpServletRequest req,RedirectAttributes rttr,@RequestParam("id")String id
-							,@RequestParam("pw")String pw) throws Exception{
-		
-		HttpSession session =req.getSession();
-		MemberVO login = memberService.Login(vo);
-		
-		String path="";
-		vo = new MemberVO();
-		System.out.println(id);
-		System.out.println(pw);
-		vo.setId(id);
-		vo.setPw(pw);
-		System.out.println(vo.getId()+","+vo.getPw());
-		
-		
-		
-		if(login ==null) {
-			session.setAttribute("member",null);
-			rttr.addFlashAttribute("msg",false);
-			path="home";
-		}else {
-			
-			session.setAttribute("member", login);
-		}
-		return "index/index";
-			
-		
-	}
+	   private MemberService memberService;
+	   
+	   @RequestMapping(value ="loginmain.do", method= RequestMethod.POST)
+	   public String logingo(MemberVO vo,HttpServletRequest req,RedirectAttributes rttr,@RequestParam("id")String id
+	                     ,@RequestParam("pw")String pw) throws Exception{
+	      
+	      HttpSession session =req.getSession();
+	      MemberVO login = memberService.Login(vo);
+	      
+	      String path="";
+	      vo = new MemberVO();
+	      System.out.println(id);
+	      System.out.println(pw);
+	      vo.setId(id);
+	      vo.setPw(pw);
+	      System.out.println(vo.getId()+","+vo.getPw());
+	      
+	      
+	      
+	      if(login ==null) {
+	         session.setAttribute("member",null);
+	         rttr.addFlashAttribute("msg",false);
+	         path="home";
+	      }else {
+	         
+	         session.setAttribute("member", login);
+	      }
+	      return "index/index";
+	         
+	      
+	   }
 	
 	@RequestMapping(value = "loginmain.do", method = RequestMethod.GET)
 	public String login(Locale locale, Model model,HttpSession session) throws Exception{
 		session.invalidate();
 		return "login/loginmain";
 	}
+	
+	@RequestMapping(value = "logout.do", method = RequestMethod.GET)
+	public String loginout(HttpServletRequest request) throws Exception{
+		logger.info("로그아웃");
+		HttpSession session = request.getSession();
+		session.invalidate();
+		return "redirect:index.do";
+	}
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value = "id_find.do", method = RequestMethod.GET)
 	public String login2(Locale locale, Model model) {

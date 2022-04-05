@@ -78,14 +78,15 @@
                                         <div class="row">
                                             <div class="col-12 tit">
                                                 <label for="id">아이디<span class="red">*</span></label>
+                                         
                                             </div>
                                             <div class="col-sm-9 col-8">
                                                 <input type="text" class="idinput" name="id" id="id"
                                                     placeholder="8~20 영문+숫자" >
-                                               
+                                              
                                             </div>
                                             <div class="col-sm-3 col-4">
-                                                <input type="button" class="btn btn-secondary ckinput" value="중복확인">
+                                                <input type="button" class="btn btn-secondary ckinput" value="중복확인" onclick="duplicate(); return false;">
                                                 <span class="check"></span>
                                             </div>
                                         </div>
@@ -102,7 +103,7 @@
                                                 <label for="pw">비밀번호 확인<span class="red">*</span></label>
                                             </div>
                                             <div class="col-sm-9 col-12">
-                                                <input type="password" class="pwinput" name="password" id="password"
+                                                <input type="password" class="pwinput" name="password" id="pw"
                                                     placeholder="8~20 영문+숫자+특수문자">
                                                 <span class="check"></span>
                                             </div>
@@ -162,10 +163,11 @@
                                                 <input type="button" class="btn btn-secondary ckinput" value="추천인확인">
                                             </div>
                                             <div class="col-sm-6 col-6 btndiv">
-                                                <input type="button" value="취소" class="btn btn-secondary can">
+                                                <input type="button" value="취소" class="btn btn-secondary can" onclick="location.href='index.do'">
                                             </div>
                                             <div class="col-sm-6 col-6 btndiv">
-                                                <input type="submit" value="회원가입" class="btn btn-dark">
+                                               
+                                                <button class="btn btn-dark" name="signok_btn" onclick="signbtn(); return false;">회원가입</button>
                                             </div>
                                         </div>
                                     </div>
@@ -195,5 +197,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
+      <script src="<%=request.getContextPath()%>/resources/js/sign.js"></script>
 </body>
 </html>
