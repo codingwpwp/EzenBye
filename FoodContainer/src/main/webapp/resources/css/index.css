@@ -14,6 +14,10 @@
 	max-height : 300px;
 }
 
+.card:hover{
+	cursor:pointer;
+}
+
 /*찜*/
 .hoverHeart{
 	margin : 0;
@@ -29,7 +33,8 @@
 /*장바구니, 찜 이미지 관리*/
 .indexSubImg{
 	position : absolute;
-	left : 60%;
+	left : 70%;
+	top : 63%;
 	display : none;
 }
 

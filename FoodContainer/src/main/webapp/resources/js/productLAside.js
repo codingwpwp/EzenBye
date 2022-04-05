@@ -28,7 +28,7 @@
 			ice.click();
 			product.click();
 			brand.click();
-			price.click();
+			price.prop("checked",true);
 		}
 		
 	  //모바일 화면 - 처음 또는 새로고침 시 전체선택
@@ -47,7 +47,7 @@
 			iceM.click();
 			productM.click();
 			brandM.click();
-			priceM.click();
+			priceM.prop("checked",true);
 		}
 	}
 	

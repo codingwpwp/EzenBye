@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -56,13 +57,13 @@
                     <!-- 실질적인 메인 내용 -->
                     <div class="col-md-11">
 			        <div class="col-7 h-80 p-5 bg-secondary bg-gradient bg-opacity-25 border mx-auto rounded-3">
-			          <p class="fs-2">홍길동님</p>
+			          <p class="fs-2">${member.name }님</p>
 			          	<div class="row point">
 				          <div class="col-sm-8">
 				          	<span class="text-point">포인트</span>
 				          </div>
 				          <div class="col-sm-4">
-				          	<span class="number-point">0P</span>
+				          	<span class="number-point">${member.point }P</span>
 				          </div>
 			          	</div>
 			          	<div class="row">
@@ -159,24 +160,14 @@
 						    </tr>
 						  </thead>
 						  <tbody>
+						  <c:forEach items="${list}" var="list">
 						    <tr>
-						      <th scope="row">처리중</th>
-						      <td>음식이 이상해요</td>
-						      <td>상품</td>
-						      <td>2022.1.24</td>
+						      <th scope="row">${list.progress }</th>
+						      <td>${list.title }</td>
+						      <td>${list.sort2 }</td>
+						      <td>${list.write_date }</td>
 						    </tr>
-						    <tr>
-						      <th scope="row">처리중</th>
-						      <td>음식이 터졌어요</td>
-						      <td>상품</td>
-						      <td>2022.1.20</td>
-						    </tr>
-						    <tr>
-						      <th scope="row">처리완료</th>
-						      <td>한개가 덜왔어요</td>
-						      <td>상품</td>
-						      <td>2022.1.8</td>
-						    </tr>
+					      </c:forEach>
 						  </tbody>
 						</table>
 					</div>

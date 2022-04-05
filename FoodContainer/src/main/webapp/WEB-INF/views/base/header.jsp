@@ -23,7 +23,7 @@
                 <div class="d-flex justify-content-evenly">
                     <i class="bi bi-truck fs-1"></i>
                     <i class="bi bi-cart3 fs-1" onclick="location.href='shopBasket_main.do'"></i>
-                    <i class="bi bi-person fs-1" onclick="location.href='mypage_main.do'"></i>
+                    <i class="bi bi-person fs-1" onclick="location.href='mypage_main.do?member_index=${member.member_index}'"></i>
                 </div>
             </div>
 

@@ -47,10 +47,10 @@ public class loginController {
 			rttr.addFlashAttribute("msg",false);
 			path="home";
 		}else {
-			path="login/loginmain";
-			session.setAttribute(pw, path);
+			
+			session.setAttribute("member", login);
 		}
-		return path;
+		return "index/index";
 			
 		
 	}

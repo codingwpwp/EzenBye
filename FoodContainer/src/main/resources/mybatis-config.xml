@@ -7,7 +7,11 @@
  		<typeAliases>
             <typeAlias type="team.project.vo.MemberVO" alias="memberVO"/>
             <typeAlias type="team.project.vo.ProductVO" alias="ProductVO"/>
+<<<<<<< HEAD
             <typeAlias type="team.project.vo.CouponVO" alias="CouponVO"/>
+=======
+            <typeAlias type="team.project.vo.ServiceCenterVO" alias="ServiceCenterVO"/>
+>>>>>>> branch 'main' of https://github.com/codingwpwp/EzenBye.git
         </typeAliases>
         
     </configuration>
