@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -54,6 +55,14 @@
                 <article id="mainSection">
                	<!-- pc버전 -->
                	<article class="pList">
+               	${fn:length(viewCookie)}
+               	<c:forEach items="${viewCookie}" var="viewCookie">
+               		<c:if test="${viewCookie != 'null'}">
+               			${viewCookie}
+               		</c:if>
+               	</c:forEach>
+               	 
+               	
 					<div class="fs-5 my-2 fw-bold topText">전체상품</div>
 					<hr>
 					<!-- 전체상품 -->
@@ -61,7 +70,8 @@
 						<div class="row">
 							<c:forEach items="${productListAll}" var="ProductVO">
 							<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center">
-								<div class="card" style="width: 18rem;" onclick="location.href='productView.do'; productCookie(this);">
+								<div class="card" style="width: 18rem;">
+								<div onclick="productCookie(this); location.href='productView.do';">
 								  <img src="<%=request.getContextPath()%>/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="card-img-top" alt="${ProductVO.product_name }">
 								  <div class="card-body">
 								    <p class="card-text">
@@ -96,10 +106,11 @@
 								    </p>
 								  </div>
 								</div>
-								<input type="hidden" name="index" value="${ProductVO.product_index}">
-								<div class="indexSubImg">
-									<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+								  <input type="hidden" name="index" value="${ProductVO.product_index}">
+								  <div class="indexSubImg">
+								  	<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
 									<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="cart(this)">
+								  </div>
 								</div>
 							</div>
 							</c:forEach>

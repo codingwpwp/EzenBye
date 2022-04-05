@@ -1,6 +1,7 @@
 package team.project.controller;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -42,11 +43,12 @@ public class mainController {
 	}
 	
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
-	public String productList(Locale locale, Model model, ProductVO productVO, @CookieValue(value="viewProduct", required=false) Cookie cookie) throws Exception {
+	public String productList(Locale locale, Model model, ProductVO productVO) throws Exception {
 		
 		List<ProductVO> ProductListAll = productService.productListAll(productVO);
 		
 		model.addAttribute("productListAll",ProductListAll);
+		
 		
 		return "product/productList";
 	}
@@ -59,12 +61,19 @@ public class mainController {
 	}
 
 	@RequestMapping(value = "viewProductCookie.do", method = RequestMethod.GET)
-	public String viewProductCookie(Locale locale, Model model, ProductVO productVO, HttpServletResponse response, HttpServletRequest request) {
+	public void viewProductCookie(Locale locale, Model model, ProductVO productVO, HttpServletRequest request, HttpServletResponse response) {
 		
-		Cookie viewProductCookie = new Cookie("viewProduct",productVO.getProduct_index());
-		viewProductCookie.setMaxAge(60*60*24);
-		response.addCookie(viewProductCookie);
+		String cookieValue = request.getParameter("name");
 		
-		return "base/rightAside";
+		Cookie cookie = new Cookie("viewProduct",cookieValue);
+		
+		cookie.setMaxAge(60*60*24);
+		
+		Cookie[] cookies = request.getCookies();
+		
+		for(Cookie cookie1 : cookies) {
+			
+		}
+		
 	}
 }

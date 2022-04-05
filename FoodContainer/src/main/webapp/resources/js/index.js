@@ -13,7 +13,7 @@
 	//장바구니
 	function cart(obj){
 		$(".cartBack").css("display","block");
-		var name = $(obj).parent().next().find(".productName").html();
+		var name = $(obj).parent().prev().prev().find(".productName").html();
 		var html = "<br>&quot;"+name+"&quot;<br> 상품이 장바구니에 담겼습니다.";
 			html += "<br><br><button type='button' class='btn btn-secondary' onclick='cartOk()'>확인</button>";
 		$(".message").html(html);
@@ -71,15 +71,19 @@
 	
 	//쿠키데이터
 	function productCookie(obj){
-		var name=$(obj).next().val();
+		var name=$(obj).next("input[name='index']").val();
 		console.log(name);
 		
-		/*
+		
 		$.ajax({
 			url : "viewProductCookie.do",
-			data : 
+			type : "get",
+			data : "name="+name,
+			success : function(data){
+				
+			}
 		});
-		*/
+		
 	}
 	
 	
