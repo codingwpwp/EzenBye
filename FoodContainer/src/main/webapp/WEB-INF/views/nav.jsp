@@ -63,12 +63,14 @@
                             </div>
 
                         </div>
-
+						
                         <div class="col-3 col-sm-3 col-xs-11 p-0 d-flex align-items-center d-flex justify-content-end">
                             <div id="userLogin" class="fs-6">
-                                <a href="#">로그인</a> <a>|</a> <a href="#">회원가입</a>
+                                <a href="<%=request.getContextPath()%>/loginmain.do">로그인</a> <a>|</a> <a href="<%=request.getContextPath()%>/member_sign.do">회원가입</a>
                             </div>
                         </div>
+                       
+                      
                     </div>
 
                 </div>

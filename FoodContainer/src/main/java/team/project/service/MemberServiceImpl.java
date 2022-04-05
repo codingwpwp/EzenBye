@@ -9,7 +9,7 @@ import team.project.dao.MemberDAO;
 import team.project.vo.MemberVO;
 
 @Service
-public class MemberServiceImpl implements MemberService {
+public class MemberServiceImpl implements MemberService{
 	@Autowired
 	private MemberDAO memberDao;
 	

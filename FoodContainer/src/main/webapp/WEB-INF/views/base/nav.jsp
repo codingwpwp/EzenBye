@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!-- 네비게이션 바 -->
 <div class="col-5 col-sm-5 col-md-6 col-lg-8 col-xl-7" id="navCenterMenuDiv">
 
@@ -57,8 +58,15 @@
 </div>
 
 <!-- 회원 -->
+<c:if test="${member==null}">
 <div class="col-5 col-sm-3 col-lg-2 col-xl-3 d-flex align-items-lg-center justify-content-end justify-content-sm-center justify-content-lg-start pe-4 pe-sm-2 fs-6" id="userLogin">
-    <a href="#" class="link-dark">로그인</a>&nbsp;|&nbsp;<a href="#" class="link-dark">회원가입</a>
+    <a href="<%=request.getContextPath()%>/loginmain.do" class="link-dark">로그인</a>&nbsp;|&nbsp;<a href="<%=request.getContextPath()%>/member_sign.do" class="link-dark">회원가입</a>
 </div>
+</c:if>
+<c:if test="${member!=null}">
+<div class="col-5 col-sm-3 col-lg-2 col-xl-3 d-flex align-items-lg-center justify-content-end justify-content-sm-center justify-content-lg-start pe-4 pe-sm-2 fs-6" id="userLogin">
+    <a>${member.name}님 환영합니다.</a>&nbsp;|&nbsp;<a href="<%=request.getContextPath()%>/logout.do" class="link-dark">로그아웃</a>
+</div>
+</c:if>
 
 <div class="col-sm-3 col-md-2 d-none d-sm-block d-lg-none"></div>

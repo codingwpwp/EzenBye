@@ -81,10 +81,10 @@
 							</div>
 							<div class="row">
 								<div class="col-md-12 col-sm-12 md-1 id">
-									<input type="text" placeholder="아이디 8~20 자리의 영문+숫자" class="form-control" name="id">
+									<input type="text" placeholder="아이디 8~20 자리의 영문+숫자" class="form-control" name="id" autocomplete="off">
 								</div>
 								<div class="col-md-12 col-sm-12 mb-1 pw">
-									<input type="password" placeholder="비밀번호 8~20 자리의 영문+숫자" class="form-control" name="pw">
+									<input type="password" placeholder="비밀번호 8~20 자리의 영문+숫자" class="form-control" name="pw" autocomplete="off">
 								</div>
 								
 							</div>
@@ -111,7 +111,8 @@
 							</div>
 							<div class="row">
 								<div class="col-md-12 col-sm-12 col-12 loginbtn">
-									<button class="btn btn-secondary">로그인</button>
+									
+									<input type="submit" class="btn btn-secondary" value="로그인">
 								</div>
 							</div>
 
@@ -138,9 +139,10 @@
 									<button class="btn btn-dark">비회원 배송 조회</button>
 								</div>
 							</div>
-
+							
 						</div>
 					</form>
+				
 				</article>
 			</div>
 
