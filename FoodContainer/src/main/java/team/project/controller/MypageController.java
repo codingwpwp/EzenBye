@@ -1,15 +1,19 @@
 package team.project.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import team.project.service.ServiceCenterService;
+import team.project.vo.MemberVO;
+import team.project.vo.ServiceCenterVO;
 
 /**
  * Handles requests for the application home page.
@@ -17,15 +21,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MypageController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(MypageController.class);
+	@Autowired
+	private ServiceCenterService serviceCenterService;
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "mypage_main.do", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Locale locale, Model model, int member_index) throws Exception {
+		
+		List<ServiceCenterVO> list = serviceCenterService.list(member_index);
+		
+		model.addAttribute("list",list);
+		
 		return "mypage/main";
 	}
+	
 	@RequestMapping(value = "mypage_lookup.do", method = RequestMethod.GET)
 	public String home2(Locale locale, Model model) {
 		return "mypage/lookup";
