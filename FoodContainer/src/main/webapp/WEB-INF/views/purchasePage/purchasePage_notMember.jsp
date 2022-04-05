@@ -49,13 +49,13 @@
                 </div>
 
                 <!-- 내용 -->
-                <form class="col-12 col-sm-8 ps-4 ps-lg-2 mt-2" name="puchaseForm">
+                <div class="col-12 col-sm-8 ps-4 ps-lg-2 mt-2" name="puchaseForm">
 
                     <!-- 전체약관 동의 -->
                     <div class="form-check fs-6 table-responsive" style="white-space: nowrap;">
-                        <input class="form-check-input border border-dark" type="checkbox" value="" id="AgreeAllCheckbox" onchange="checkedAllCheckbox(this)">
-                        <label class="form-check-label text-dark fw-bold" for="AgreeAllCheckbox">
-                            주문 및 결제대행 서비스 이용약관 동의<span class="text-danger">(필수)</span>
+                        <input class="form-check-input border border-dark" type="checkbox" id="agreeAllCheckbox" onchange="checkedAll(this)">
+                        <label class="form-check-label text-dark fw-bold" for="agreeAllCheckbox">
+                            주문 및 결제대행 서비스 이용약관 동의
                         </label>
                     </div>
                     <hr>
@@ -63,9 +63,9 @@
                     <!-- 세부약관1 -->
                     <div class="container my-3 checkboxs">
                         <div class="form-check fs-6">
-                            <input class="form-check-input border border-dark" type="checkbox" value="" id="AgreeOneCheckbox">
-                            <label class="form-check-label text-dark fw-bold" for="AgreeOneCheckbox">
-                                주문 상품 정보에 대한 동의
+                            <input class="form-check-input border border-dark" type="checkbox" id="agreeOneCheckbox" onchange="checkedOne(this)">
+                            <label class="form-check-label text-dark fw-bold" for="agreeOneCheckbox">
+                                주문 상품 정보에 대한 동의<span class="text-danger">(필수)</span>
                             </label>
                             <ul class="container pe-0">
                                 <li class="fontSmall" style="list-style-type: square;">
@@ -80,30 +80,30 @@
                     <div class="container my-3 checkboxs">
                         <div class="form-check fs-6">
 
-                            <input class="form-check-input border border-dark" type="checkbox" value="" id="AgreeTwoCheckbox" onchange="checkedAgreeTwoCheckbox(this)">
-                            <label class="form-check-label text-dark fw-bold" for="AgreeTwoCheckbox">
-                                결제대행 서비스 이용약관 동의
+                            <input class="form-check-input border border-dark" type="checkbox" id="agreeTwoCheckbox" onchange="checkedTwo(this)">
+                            <label class="form-check-label text-dark fw-bold" for="agreeTwoCheckbox">
+                                결제대행 서비스 이용약관 동의<span class="text-danger">(필수)</span>
                             </label>
 
                             <div class="container agreeTwo">
-                                <input class="form-check-input border border-dark" type="checkbox" value="" id="AgreeTwo_OneCheckbox">
-                                <label class="form-check-label text-dark fontSmall" for="AgreeTwo_OneCheckbox">
+                                <input class="form-check-input border border-dark" type="checkbox" id="agreeTwo_OneCheckbox" onchange="checkedTwoSub()">
+                                <label class="form-check-label text-dark fontSmall" for="agreeTwo_OneCheckbox">
                                     전자금융거래 기본약관
                                 </label>
                                 <a class="link-info" href="#">약관보기</a>
                             </div>
 
                             <div class="container agreeTwo">
-                                <input class="form-check-input border border-dark" type="checkbox" value="" id="AgreeTwo_TwoCheckbox">
-                                <label class="form-check-label text-dark fontSmall" for="AgreeTwo_TwoCheckbox">
+                                <input class="form-check-input border border-dark" type="checkbox" id="agreeTwo_TwoCheckbox" onchange="checkedTwoSub()">
+                                <label class="form-check-label text-dark fontSmall" for="agreeTwo_TwoCheckbox">
                                     개인정보 수집 및 이용동의
                                 </label>
                                 <a class="link-info" href="#">약관보기</a>
                             </div>
 
                             <div class="container agreeTwo">
-                                <input class="form-check-input border border-dark" type="checkbox" value="" id="AgreeTwo_ThreeCheckbox">
-                                <label class="form-check-label text-dark fontSmall" for="AgreeTwo_ThreeCheckbox">
+                                <input class="form-check-input border border-dark" type="checkbox" id="agreeTwo_ThreeCheckbox" onchange="checkedTwoSub()">
+                                <label class="form-check-label text-dark fontSmall" for="agreeTwo_ThreeCheckbox">
                                     개인정보 제공 동의 (Food Container)
                                 </label>
                                 <br class="d-md-none">
@@ -116,9 +116,9 @@
                     <!-- 세부약관3 -->
                     <div class="container mb-5 checkboxs">
                         <div class="form-check fs-6">
-                            <input class="form-check-input border border-dark" type="checkbox" value="" id="AgreeThreeCheckbox">
-                            <label class="form-check-label text-dark fw-bold" for="AgreeThreeCheckbox">
-                                비회원 개인정보 수집 및 이용 동의
+                            <input class="form-check-input border border-dark" type="checkbox" value="." id="agreeThreeCheckbox" onchange="checkedThree(this)">
+                            <label class="form-check-label text-dark fw-bold" for="agreeThreeCheckbox">
+                                비회원 개인정보 수집 및 이용 동의<span class="text-danger">(필수)</span>
                             </label>
                             <a class="link-info" href="#">약관보기</a>
                         </div>
@@ -133,32 +133,32 @@
                     <!-- 주문자명 -->
                     <div class="row my-4">
                         <div class="col-4 col-md-3 col-xxl-2 fs-5 fw-bold d-flex align-items-center justify-content-start justify-content-lg-center">
-                            <span class="text-danger">*</span>주문자명
+                            <span class="text-danger">*</span><span id="orderNameSpan" class="checkResultSpan">주문자명</span>
                         </div>
 
-                        <div class="col-8 col-md-6 col-lg-5 col-xxl-3">
-                            <input type="text" class="form-control fw-bold" name="name" value="홍길동">
+                        <div class="col-8 col-md-6 col-lg-5 col-xxl-4">
+                            <input type="text" class="form-control fw-bold" id="orderName" name="orderName" value="" placeholder="이름을 입력하세요" maxlength="5" onblur="checkName(this)">
                         </div>
                     </div>
 
-                    <!-- 연락처 -->
+                    <!-- 주문자 연락처 -->
                     <div class="row my-4">
 
                         <div class="col-3 col-xxl-2 fs-5 d-flex justify-content-lg-center fw-bold">
-                            <span class="text-danger">*</span>연락처
+                            <span class="text-danger">*</span><span id="orderPhoneSpan" class="checkResultSpan">연락처</span>
                         </div>
 
                         <div class="col-9 input-group w-75 phone">
-                            <select class="form-select">
+                            <select class="form-select" name="orderPhone1">
                                 <option selected>010</option>
-                                <option value="1">011</option>
-                                <option value="2">016</option>
-                                <option value="3">018</option>
+                                <option value="011">011</option>
+                                <option value="016">016</option>
+                                <option value="018">018</option>
                             </select>
                             <span class="input-group-text">-</span>
-                            <input type="number" class="form-control" maxlength="4" min="0">
+                            <input type="number" class="form-control" name="orderPhone2" min="100" max="9999" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" oninput="phoneMaxLength(this)" onblur="orderPhoneCheck(this, 3)">
                             <span class="input-group-text">-</span>
-                            <input type="number" class="form-control" maxlength="4">
+                           <input type="number" class="form-control" name="orderPhone3" min="1000" max="9999" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" oninput="phoneMaxLength(this)" onblur="orderPhoneCheck(this, 4)">
                         </div>
 
                     </div>
@@ -166,11 +166,11 @@
                     <!-- 이메일 -->
                     <div class="row my-4">
                         <div class="col-3 col-xxl-2 fs-5 d-flex justify-content-lg-center fw-bold">
-                            <span class="text-danger">*</span>이메일
+                            이메일
                         </div>
 
                         <div class="col-9 col-lg-8">
-                            <input class="form-control pe-1" type="email" value="tester1@naver.com" maxlength="30" readonly>
+                            <input class="form-control pe-1" type="email" name="email" id="email" value="tester1@naver.com" maxlength="30" readonly>
                         </div>
                     </div>
 
@@ -180,22 +180,22 @@
                         <!-- 주문 비밀번호 -->
                         <div class="row col-12 col-xl-6 mb-3 mb-xl-0">
                             <div class="col-5 col-md-4 col-xl-6 col-xxl-5 fs-5 d-flex justify-content-lg-center fw-bold pe-0">
-                                <span class="text-danger">*</span>주문 비밀번호
+                                <span class="text-danger">*</span><span id="passwordOneSpan" class="checkResultSpan">주문 비밀번호</span>
                             </div>
 
                             <div class="col-7 col-md-8 col-xl-6">
-                                <input class="form-control pe-1" type="password" value="" maxlength="30">
+                                <input class="form-control pe-1" type="password" id="password" name="password" value="" placeholder="비밀번호를 입력" maxlength="15" onclick="passwordAlert()" onblur="passwordCheck(this, 'passwordOne')">
                             </div>
                         </div>
 
                         <!-- 비밀번호 확인 -->
                         <div class="row col-12 col-xl-6">
                             <div class="col-5 col-md-4 col-xl-6 col-xxl-5 fs-5 d-flex justify-content-lg-center fw-bold pe-0">
-                                <span class="text-danger">*</span>비밀번호 확인
+                                <span class="text-danger">*</span><span id="passwordTwoSpan" class="checkResultSpan">비밀번호 확인</span>
                             </div>
 
                             <div class="col-7 col-md-8 col-xl-6">
-                                <input class="form-control pe-1" type="password" value="" maxlength="30">
+                                <input class="form-control pe-1" type="password" id="passwordOk" name="passwordOk" value="" placeholder="한번더 입력하세요" maxlength="15" onblur="passwordCheck(this, 'passwordTwo')">
                             </div>
                         </div>
 
@@ -211,13 +211,19 @@
                     <div class="row d-flex align-items-center mb-4">
 
                         <div class="col-3 col-xxl-2 fs-5 fw-bold d-flex align-items-center justify-content-start justify-content-lg-center">
-                            <span class="text-danger">*</span>받는분
+                            <span class="text-danger">*</span><span id="receiverSpan" class="checkResultSpan">받는분</span>
                         </div>
 
                         <div class="col-9 col-md-6 col-lg-5 col-xxl-4">
-                            <input type="text" class="form-control p-1 p-sm-2" value="" placeholder="이름을 입력하세요">
+                            <input type="text" class="form-control fw-bold p-1 p-sm-2" id="receiver" name="receiver" value="" placeholder="이름을 입력하세요" maxlength="5" onblur="checkName(this)">
                         </div>
-
+                        
+                        <div class="col-4 col-md-3 col-xl-3">
+                            <input class="form-check-input border border-dark" type="checkbox" value="" id="sameNameCheckbox" onchange="sameName(this)">
+                            <label class="form-check-label text-dark fontSmall" for="sameNameCheckbox">
+                                주문자와 동일
+                            </label>
+                        </div>
 
                     </div>
 
@@ -225,7 +231,7 @@
                     <div class="row d-flex align-items-start mb-4">
 
                         <div class="col-3 col-xxl-2 fs-5 fw-bold d-flex justify-content-start justify-content-lg-center mt-3">
-                            <span class="text-danger">*</span>배송지
+                            <span class="text-danger">*</span><span id="deliverySpan" class="checkResultSpan">배송지</span>
                         </div>
 
                         <div class="col-9 col-lg-8">
@@ -241,31 +247,31 @@
                             </div>
                             <div class="input-group my-2">
                                 <span class="input-group-text">상세주소</span>
-                                <input type="text" id="detailAddress" class="form-control" readonly>
+                                <input type="text" id="detailAddress" class="form-control" readonly onblur="checkAddress(this)">
                             </div>
 
                         </div>
 
                     </div>
 
-                    <!-- 연락처 -->
+                    <!-- 받는 사람 연락처 -->
                     <div class="row mb-4">
 
                         <div class="col-3 col-xxl-2 fs-5 d-flex justify-content-lg-center fw-bold">
-                            <span class="text-danger">*</span>연락처
+                            <span class="text-danger">*</span><span id="receiverPhoneSpan" class="checkResultSpan">연락처</span>
                         </div>
 
                         <div class="col-9 col-lg-8 input-group w-75 phone">
-                            <select class="form-select">
+                            <select class="form-select" name="receiverPhone1">
                                 <option selected>010</option>
                                 <option value="1">011</option>
                                 <option value="2">016</option>
                                 <option value="3">018</option>
                             </select>
                             <span class="input-group-text">-</span>
-                            <input type="number" class="form-control">
+                            <input type="number" class="form-control" name="receiverPhone2" min="100" max="9999" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" oninput="phoneMaxLength(this)" onblur="receiverPhoneCheck(this, 3)">
                             <span class="input-group-text">-</span>
-                            <input type="number" class="form-control">
+                           <input type="number" class="form-control" name="receiverPhone3" min="1000" max="9999" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" oninput="phoneMaxLength(this)" onblur="receiverPhoneCheck(this, 4)">
                         </div>
 
                     </div>
@@ -288,43 +294,44 @@
 
                     <!-- 결제 상품 문구 -->
                     <div class="fs-3 fw-bold mt-2">
-                        결제 상품
+                        결제 상품<br>
+                        <span class="fs-6">배송비가 있어도 <span class="text-danger">50,000원</span> 이상은 <span class="text-danger">무료배송!!</span></span>
                     </div>
                     <hr>
 
                     <!-- 결제 상품들 -->
                     <div class="mt-4 mb-5" id="productItems">
 
-                        <div class="row bg-light border rounded-3 py-2 m-2">
+                        <div class="row bg-light border rounded-3 py-2 m-2 productItem">
                             <div class="col-6 col-sm-4">
                                 <img src="<%=request.getContextPath()%>/resources/img/good.png" class="img-thumbnail" alt="...">
                             </div>
 
                             <div class="col-6 col-sm-8 d-flex flex-column">
                                 <div class="mb-auto fw-bold pt-2">비비고 진한고기만두400g*2번들</div>
-                                <div class="fw-bold pb-2">4580원 | 5개</div>
+                                <div class="fw-bold pb-2"><span class="productPrice">4580</span>원 | <span class="productCount">5</span>개</div>
                             </div>
                         </div>
 
-                        <div class="row bg-light border rounded-3 py-2 m-2">
+                        <div class="row bg-light border rounded-3 py-2 m-2 productItem">
                             <div class="col-6 col-sm-4">
                                 <img src="<%=request.getContextPath()%>/resources/img/good.png" class="img-thumbnail" alt="...">
                             </div>
 
                             <div class="col-6 col-sm-8 d-flex flex-column">
                                 <div class="mb-auto fw-bold pt-2">비비고 진한고기만두400g*2번들</div>
-                                <div class="fw-bold pb-2">4580원 | 5개</div>
+                                <div class="fw-bold pb-2"><span class="productPrice">4580</span>원 | <span class="productCount">5</span>개</div>
                             </div>
                         </div>
 
-                        <div class="row bg-light border rounded-3 py-2 m-2">
+                        <div class="row bg-light border rounded-3 py-2 m-2 productItem">
                             <div class="col-6 col-sm-4">
                                 <img src="<%=request.getContextPath()%>/resources/img/good.png" class="img-thumbnail" alt="...">
                             </div>
 
                             <div class="col-6 col-sm-8 d-flex flex-column">
                                 <div class="mb-auto fw-bold pt-2">비비고 진한고기만두400g*2번들</div>
-                                <div class="fw-bold pb-2">4580원 | 5개</div>
+                                <div class="fw-bold pb-2"><span class="productPrice">4580</span>원 | <span class="productCount">5</span>개</div>
                             </div>
                         </div>
 
@@ -339,7 +346,7 @@
                         <div class="row my-2 d-flex align-items-center">
                             <div class="col-6 fs-6">총 금액</div>
                             <div class="col-6 text-danger fs-5 d-flex justify-content-end fw-bold price">
-                                <span id="productSumPrice">40,000</span>
+                                <span class="productSumPrice" id="productSumPrice">0</span>
                                 원
                             </div>
                         </div>
@@ -348,7 +355,7 @@
                         <div class="row my-2 d-flex align-items-center">
                             <div class="col-6 fs-6">배송비</div>
                             <div class="col-6 text-danger fs-5 d-flex justify-content-end fw-bold price">
-                                <span id="deliveryPrice">3,000</span>
+                                <span class="deliveryPrice" id="deliveryPrice">0</span>
                                 원
                             </div>
                         </div>
@@ -360,17 +367,17 @@
 
                         <!-- 최종 결제 가격 -->
                         <div class="text-danger mb-3 d-flex justify-content-end align-items-center fw-bold">
-                            <span class="fs-1" id="finalPrice">43,000</span>
+                            <span class="fs-1 totalPrice" id="finalPrice">43,000</span>
                             <span class="fs-4">&nbsp;원</span>
                         </div>
 
                         <!-- 결제버튼 -->
                         <div class="row mt-2 mb-1">
-                            <button type="button" class="btn btn-primary btn-lg fw-bold fs-4">결제하기</button>
+                            <button type="button" class="btn btn-primary btn-lg fw-bold fs-4" onclick="requestPay()">결제하기</button>
                         </div>
                     </div>
 
-                </form>
+                </div>
 
                 <!-- pc버전 최종 결제 정보 -->
                 <div class="col-4 d-none d-sm-block position-sticky p-3 ms-md-3 notMemberFinalPurchase" id="purchaseNotMemberDiv">
@@ -382,7 +389,7 @@
                     <div class="row my-2 d-flex align-items-center">
                         <div class="col-6 fs-6">총 금액</div>
                         <div class="col-6 text-danger fs-5 d-flex justify-content-end fw-bold price">
-                            <span id="productSumPrice">40,000</span>
+                            <span class="productSumPrice">0</span>
                             원
                         </div>
                     </div>
@@ -391,7 +398,7 @@
                     <div class="row my-2 d-flex align-items-center">
                         <div class="col-6 fs-6">배송비</div>
                         <div class="col-6 text-danger fs-5 d-flex justify-content-end fw-bold price">
-                            <span id="deliveryPrice">3,000</span>
+                            <span class="deliveryPrice">0</span>
                             원
                         </div>
                     </div>
@@ -404,13 +411,13 @@
 
                     <!-- 최종 결제 가격 -->
                     <div class="text-danger mb-3 d-flex justify-content-end align-items-center fw-bold">
-                        <span class="fs-1" id="finalPrice">43,000</span>
+                        <span class="fs-1 totalPrice">0</span>
                         <span class="fs-4">&nbsp;원</span>
                     </div>
 
                     <!-- 결제버튼 -->
                     <div class="row mt-2 mb-1">
-                        <button type="button" class="btn btn-primary btn-lg fw-bold fs-4">결제하기</button>
+                        <button type="button" class="btn btn-primary btn-lg fw-bold fs-4" onclick="requestPay()">결제하기</button>
                     </div>
 
                 </div>

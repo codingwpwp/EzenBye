@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -50,11 +51,11 @@
                 </div>
 
                 <!-- 구매정보입력 + 모바일 버전 최종 구매버튼 -->
-                <form class="col-12 col-sm-8 ps-4 ps-lg-2 mt-2" name="puchaseForm">
+                <div class="col-12 col-sm-8 ps-4 ps-lg-2 mt-2" name="puchaseForm">
 
                     <!-- 전체약관 동의 -->
                     <div class="form-check fs-6 table-responsive" style="white-space: nowrap;">
-                        <input class="form-check-input border border-dark" type="checkbox" id="agreeAllCheckbox" onchange="checkedAllCheckbox(this)">
+                        <input class="form-check-input border border-dark" type="checkbox" id="agreeAllCheckbox" onchange="checkedAll(this)">
                         <label class="form-check-label text-dark fw-bold" for="agreeAllCheckbox">
                             주문 및 결제대행 서비스 이용약관 동의
                         </label>
@@ -64,7 +65,7 @@
                     <!-- 세부약관1 -->
                     <div class="container my-3 checkboxs">
                         <div class="form-check fs-6">
-                            <input class="form-check-input border border-dark" type="checkbox" id="agreeOneCheckbox" onchange="checkedAgreeOneStatus(this)">
+                            <input class="form-check-input border border-dark" type="checkbox" id="agreeOneCheckbox" onchange="checkedOne(this)">
                             <label class="form-check-label text-dark fw-bold" for="agreeOneCheckbox">
                                 주문 상품 정보에 대한 동의<span class="text-danger">(필수)</span>
                             </label>
@@ -81,13 +82,13 @@
                     <div class="container mb-5 checkboxs">
                         <div class="form-check fs-6">
 
-                            <input class="form-check-input border border-dark" type="checkbox" id="agreeTwoCheckbox" onchange="checkedAgreeTwoCheckbox(this)">
+                            <input class="form-check-input border border-dark" type="checkbox" id="agreeTwoCheckbox" onchange="checkedTwo(this)">
                             <label class="form-check-label text-dark fw-bold" for="agreeTwoCheckbox">
                                 결제대행 서비스 이용약관 동의<span class="text-danger">(필수)</span>
                             </label>
 
                             <div class="container agreeTwo">
-                                <input class="form-check-input border border-dark" type="checkbox" id="agreeTwo_OneCheckbox" onchange="checkedAgreeTwo_SubStatus(this)">
+                                <input class="form-check-input border border-dark" type="checkbox" id="agreeTwo_OneCheckbox" onchange="checkedTwoSub()">
                                 <label class="form-check-label text-dark fontSmall" for="agreeTwo_OneCheckbox">
                                     전자금융거래 기본약관
                                 </label>
@@ -95,7 +96,7 @@
                             </div>
 
                             <div class="container agreeTwo">
-                                <input class="form-check-input border border-dark" type="checkbox" id="agreeTwo_TwoCheckbox" onchange="checkedAgreeTwo_SubStatus(this)">
+                                <input class="form-check-input border border-dark" type="checkbox" id="agreeTwo_TwoCheckbox" onchange="checkedTwoSub()">
                                 <label class="form-check-label text-dark fontSmall" for="agreeTwo_TwoCheckbox">
                                     개인정보 수집 및 이용동의
                                 </label>
@@ -103,7 +104,7 @@
                             </div>
 
                             <div class="container agreeTwo">
-                                <input class="form-check-input border border-dark" type="checkbox" id="agreeTwo_ThreeCheckbox" onchange="checkedAgreeTwo_SubStatus(this)">
+                                <input class="form-check-input border border-dark" type="checkbox" id="agreeTwo_ThreeCheckbox" onchange="checkedTwoSub()">
                                 <label class="form-check-label text-dark fontSmall" for="agreeTwo_ThreeCheckbox">
                                     개인정보 제공 동의 (Food Container)
                                 </label>
@@ -127,8 +128,12 @@
                         </div>
 
                         <div class="col-8 col-sm-7 col-md-6 col-lg-5 col-xxl-4">
-                            <input type="text" class="form-control fw-bold" id="name" name="name" value="홍길동" readonly>
+                            <input type="text" class="form-control fw-bold" id="orderName" name="orderName" value="홍길동" readonly>
                         </div>
+                        <!-- 주문자 이메일(히든) -->
+                        <input class="form-control pe-1" type="hidden" name="email" id="email" value="tester1@naver.com" maxlength="30" readonly>
+                        <!-- 주문자 연락처(히든) -->
+                        <input class="form-control pe-1" type="hidden" name="orderPhone" id="orderPhone" value="010-3222-1111" maxlength="30" readonly>
                     </div>
 
                     <!-- 배송지 설정 -->
@@ -212,20 +217,20 @@
                     <div class="row mb-4">
 
                         <div class="col-3 col-xxl-2 fs-5 d-flex justify-content-lg-center fw-bold">
-                            <span class="text-danger">*</span><span id="phoneSpan" class="checkResultSpan">연락처</span>
+                            <span class="text-danger">*</span><span id="receiverPhoneSpan" class="checkResultSpan">연락처</span>
                         </div>
 
                         <div class="col-9 col-lg-8 input-group w-75 phone">
-                            <select class="form-select">
+                            <select class="form-select" name="receiverPhone1">
                                 <option selected>010</option>
                                 <option value="1">011</option>
                                 <option value="2">016</option>
                                 <option value="3">018</option>
                             </select>
                             <span class="input-group-text">-</span>
-                            <input type="number" class="form-control" min="100" max="9999" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" oninput="phoneMaxLength(this)" onblur="phoneCheck(this, 3)">
+                            <input type="number" class="form-control" name="receiverPhone2" min="100" max="9999" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" oninput="phoneMaxLength(this)" onblur="receiverPhoneCheck(this, 3)">
                             <span class="input-group-text">-</span>
-                           <input type="number" class="form-control" min="1000" max="9999" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" oninput="phoneMaxLength(this)" onblur="phoneCheck(this, 4)">
+                           <input type="number" class="form-control" name="receiverPhone3" min="1000" max="9999" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" oninput="phoneMaxLength(this)" onblur="receiverPhoneCheck(this, 4)">
                         </div>
 
                     </div>
@@ -303,13 +308,20 @@
                     <!-- 쿠폰 -->
                     <div class="row mb-3">
                         <div class="col-4 fs-5">
-                            적용 가능 쿠폰
+                            적용 가능 쿠폰(${list.size()}개)
                         </div>
 
                         <div class="col-8">
-                            <select class="form-select" name="coupon">
-                                <option value="" disabled selected style="display: none;">쿠폰이 없습니다.</option>
-                                <option value="쿠폰번호로 대체">10%할인쿠폰</option>
+                            <select class="form-select" name="coupon" onchange="checkedCoupon(this)">
+                            	<c:if test="${list == null}">
+                            		<option value="" disabled selected style="display: none;">쿠폰이 없습니다.</option>
+                            	</c:if>
+                            	<c:if test="${list != null}">
+                                	<option id="notUsed" value="0" disabled selected style="display: none;">쿠폰이 있습니다.</option>
+	                            	<c:forEach items="${list}" var="vo">
+                                		<option value="${vo.coupon_index}">${vo.coupon_title}</option>
+									</c:forEach>
+                            	</c:if>
                             </select>
                         </div>
                     </div>
@@ -318,11 +330,13 @@
                     <div class="row mb-5 bg-info bg-opacity-25 d-flex align-items-center py-2">
 
                         <div class="col-9">
-                            10%할인 쿠폰이 적용 되었습니다.
+                            <span id="couponUsedSpan" class="checkResultSpan fw-bold">적용한 쿠폰이 없습니다.</span>
                         </div>
 
                         <div class="col-3 d-flex justify-content-end">
-                            <button type="button" class="btn btn-sm btn-warning text-dark fw-bold">초기화</button>
+                        	<c:if test="${list != null}">
+                            	<button type="button" class="btn btn-sm btn-warning text-dark fw-bold" id="couponResetbutton" onclick="couponResetbutton()">초기화</button>
+                            </c:if>
                         </div>
 
                     </div>
@@ -333,20 +347,20 @@
                         <div class="col-5">
                             <input class="form-check-input border border-dark" type="checkbox" value="" id="pointCheckbox" name="pointYN" onchange="checkedPoint(this)">
                             <label class="form-check-label text-dark" for="pointCheckbox">
-                                포인트 사용<br class="d-lg-none"> (최대 <span id="availablePointCommaVer">20,000</span>p)
+                                포인트 사용<br class="d-lg-none"> (최대 <span id="availablePointCommaVer" class="checkResultSpan">20,000</span>p)
                                 <input type="hidden" id="availablePoint" value="20000">
                             </label>
                         </div>
 
                         <div class="col-6 pe-1">
-                            <input type="number" min="0" class="form-control p-1 fw-bold" id="point" name="point" value="0" placeholder="숫자만 입력하세요" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="text-align: right;" readonly>
+                            <input type="number" min="0" max="20000" class="form-control p-1 fw-bold" id="point" name="point" value="0" placeholder="숫자만 입력하세요" onKeyup="pointReg(this)" onblur="usePoint(this)" oninput="pointMax(this)" style="text-align: right;" readonly>
                         </div>
                         
                         <div class="col-1 ps-0 fw-bold">p</div>
                         
-                        <div class="col-1" id="pointLimit">
+                      	<!-- <div class="col-1" id="pointLimit">
                         	
-                        </div>
+                        </div> -->
 
                     </div>
 
@@ -377,7 +391,7 @@
                         <div class="row my-2 d-flex align-items-center">
                             <div class="col-6 fs-6">쿠폰 적용</div>
                             <div class="col-6 text-primary fs-5 d-flex justify-content-end fw-bold price">
-                                -<span id="couponPrice">0</span>
+                                -<span class="couponPrice">0</span>
                                 원
                             </div>
                         </div>
@@ -386,7 +400,7 @@
                         <div class="row my-2 d-flex align-items-center">
                             <div class="col-7 fs-6">포인트 적용</div>
                             <div class="col-5 text-primary fs-5 d-flex justify-content-end fw-bold price">
-                                -<span id="pointPrice">0</span>
+                                -<span class="pointPrice">0</span>
                                 원
                             </div>
                         </div>
@@ -398,7 +412,7 @@
 
                         <!-- 최종 결제 가격 -->
                         <div class="text-danger mb-3 d-flex justify-content-end align-items-center fw-bold">
-                            <span class="fs-1 totalPrice">0</span>
+                            <span class="fs-1 totalPrice checkResultSpan" id="totalPrice">0</span>
                             <span class="fs-4">&nbsp;원</span>
                         </div>
 
@@ -406,18 +420,18 @@
                         <div class="row my-2">
                             <div class="col-8 fs-6">적립 예정 포인트</div>
                             <div class="col-4 fs-5 fw-bold d-flex justify-content-end">
-                                <span class="price" id="expectedPoint">111</span>
+                                <span class="price expectedPoint" id="expectedPoint">111</span>
                                 p
                             </div>
                         </div>
 
                         <!-- 결제버튼 -->
                         <div class="row mt-2 mb-1">
-                            <button type="button" class="btn btn-primary btn-lg fw-bold fs-4">결제하기</button>
+                            <button type="button" class="btn btn-primary btn-lg fw-bold fs-4" onclick="requestPay()">결제하기</button>
                         </div>
                     </div>
 
-                </form>
+                </div>
 
                 <!-- pc버전 최종 결제 정보 -->
                 <div class="col-4 d-none d-sm-block position-sticky p-3 ms-md-3 memberFinalPurchase" id="purchaseDiv">
@@ -447,7 +461,7 @@
                     <div class="row my-2 d-flex align-items-center">
                         <div class="col-6 fs-6">쿠폰 적용</div>
                         <div class="col-6 text-primary fs-5 d-flex justify-content-end fw-bold price">
-                            -<span id="couponPrice">0</span>
+                            -<span class="couponPrice">0</span>
                             원
                         </div>
                     </div>
@@ -456,7 +470,7 @@
                     <div class="row my-2 d-flex align-items-center">
                         <div class="col-7 fs-6">포인트 적용</div>
                         <div class="col-5 text-primary fs-5 d-flex justify-content-end fw-bold price">
-                            -<span id="pointPrice">0</span>
+                            -<span class="pointPrice">0</span>
                             원
                         </div>
                     </div>
@@ -468,7 +482,7 @@
 
                     <!-- 최종 결제 가격 -->
                     <div class="text-danger mb-3 d-flex justify-content-end align-items-center fw-bold">
-                        <span class="fs-1 totalPrice">0</span>
+                        <span class="fs-1 totalPrice checkResultSpan">0</span>
                         <span class="fs-4">&nbsp;원</span>
                     </div>
 
@@ -476,14 +490,14 @@
                     <div class="row my-2">
                         <div class="col-8 fs-6">적립 예정 포인트</div>
                         <div class="col-4 fs-5 fw-bold d-flex justify-content-end">
-                            <span class="price" id="expectedPoint">111</span>
+                            <span class="price expectedPoint">111</span>
                             p
                         </div>
                     </div>
 
                     <!-- 결제버튼 -->
                     <div class="row mt-2 mb-1">
-                        <button type="button" class="btn btn-primary btn-lg fw-bold fs-4">결제하기</button>
+                        <button type="button" class="btn btn-primary btn-lg fw-bold fs-4" onclick="requestPay()">결제하기</button>
                     </div>
                     
 
@@ -506,6 +520,5 @@
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/purchasePage.js"></script>
-    <script src="<%=request.getContextPath()%>/resources/js/purchase.js"></script>
 </body>
 </html>
