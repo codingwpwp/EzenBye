@@ -22,5 +22,11 @@ public class ProductServiceImpl implements ProductService {
 		
 		return prodcutListAll;
 	}
+
+	@Override
+	public ProductVO view(String index) throws Exception {
+		
+		return productDAO.view(index);
+	}
 	
 }

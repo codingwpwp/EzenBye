@@ -8,5 +8,7 @@ public interface CouponService {
 	List<CouponVO> couponList(int member_index) throws Exception;
 	
 	CouponVO couponSelectOne(int coupon_index) throws Exception;
+	
+	int mypageCouponCount(int member_index) throws Exception;
 
 }

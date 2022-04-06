@@ -3,16 +3,22 @@ package team.project.controller;
 import java.util.List;
 import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import team.project.service.CouponService;
+import team.project.service.OrderProductService;
+import team.project.service.OrdersService;
 import team.project.service.ServiceCenterService;
 import team.project.vo.MemberVO;
+import team.project.vo.OrderProductVO;
+import team.project.vo.OrdersVO;
 import team.project.vo.ServiceCenterVO;
 
 /**
@@ -21,15 +27,39 @@ import team.project.vo.ServiceCenterVO;
 @Controller
 public class MypageController {
 	
+	@RequestMapping(value = "memberSessionCheck.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String memberSessionCheck(HttpSession session) throws Exception {
+
+		MemberVO sessionMember = (MemberVO) session.getAttribute("member");
+		if(sessionMember == null) {
+			return "false";
+		}else {
+			return "true";
+		}
+	
+	}
+	
 	@Autowired
 	private ServiceCenterService serviceCenterService;
+	@Autowired
+	private CouponService couponService;
+	@Autowired
+	private OrdersService ordersService;
+	@Autowired
+	private OrderProductService orderProductService;
 	
-	@RequestMapping(value = "mypage_main.do", method = RequestMethod.GET)
-	public String home(Locale locale, Model model, int member_index) throws Exception {
-		
-		List<ServiceCenterVO> list = serviceCenterService.list(member_index);
-		
+	@RequestMapping(value = "mypage_main.do", method = RequestMethod.POST)
+	public String latelyServiceCenter(Locale locale, Model model, int member_index, OrderProductVO opVO) throws Exception {
+
+		List<ServiceCenterVO> list = serviceCenterService.latelyServiceCenter(member_index);
+		List<OrdersVO> ordersList = ordersService.ordersList(member_index);
+		List<OrderProductVO> opList = orderProductService.orderProductList(opVO);
+		int couponvo = couponService.mypageCouponCount(member_index);
 		model.addAttribute("list",list);
+		model.addAttribute("couponvo",couponvo);
+		model.addAttribute("ordersList",ordersList);
+		model.addAttribute("opList",opList);
 		
 		return "mypage/main";
 	}

@@ -54,26 +54,36 @@ public class mainController {
 	}
 	
 	@RequestMapping(value = "productView.do", method = RequestMethod.GET)
-	public String productView(Locale locale, Model model) {
+	public String productView(Locale locale, Model model, String index) throws Exception {
 		
+		ProductVO vo = productService.view(index);
+		
+		model.addAttribute("view",vo);
 		
 		return "product/productView";
 	}
 
 	@RequestMapping(value = "viewProductCookie.do", method = RequestMethod.GET)
-	public void viewProductCookie(Locale locale, Model model, ProductVO productVO, HttpServletRequest request, HttpServletResponse response) {
+	public String viewProductCookie(Locale locale, Model model, ProductVO productVO, HttpServletRequest request, HttpServletResponse response) {
 		
 		String cookieValue = request.getParameter("name");
 		
-		Cookie cookie = new Cookie("viewProduct",cookieValue);
-		
-		cookie.setMaxAge(60*60*24);
-		
 		Cookie[] cookies = request.getCookies();
 		
-		for(Cookie cookie1 : cookies) {
-			
+		int cookieCnt = request.getCookies().length;
+		
+		if(cookies == null) {
+			Cookie cookie = new Cookie("productView",cookieValue);
+			response.addCookie(cookie);
+		}else {
+			Cookie cookie = new Cookie("productView"+cookieCnt,cookieValue);
+			response.addCookie(cookie);
 		}
 		
+		
+		
+		return "base/rightAside";
+		
 	}
+
 }

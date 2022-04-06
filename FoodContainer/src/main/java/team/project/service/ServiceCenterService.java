@@ -5,5 +5,5 @@ import java.util.List;
 import team.project.vo.ServiceCenterVO;
 
 public interface ServiceCenterService {
-	List<ServiceCenterVO> list(int member_index) throws Exception;
+	List<ServiceCenterVO> latelyServiceCenter(int member_index) throws Exception;
 }
