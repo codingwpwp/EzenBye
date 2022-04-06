@@ -35,18 +35,18 @@ public class signController {
 		logger.info("post member_sign");
 //		int result = memberService.insertMember(vo);
 		int result = memberService.idChk(vo);
-//		int result2 = memberService.nickChk(vo);
+		int result2 = memberService.nickChk(vo);
 		try {
 			if(result==1) {
 				return "member_sigin.do";
 			}else if(result==0){
 				memberService.insertMember(vo);
 			}
-//			if(result2==1) {
-//				return "member_sign.do";
-//			}else if(result2==0) {
-//				memberService.insertMember(vo);
-//			}
+			if(result2==1) {
+				return "member_sign.do";
+			}else if(result2==0) {
+				memberService.insertMember(vo);
+			}
 		}catch(Exception e){
 			throw new RuntimeException();
 		}
@@ -60,11 +60,11 @@ public class signController {
 		return result;
 	}
 	
-//	@RequestMapping(value="nickChk", method = RequestMethod.POST)
-//	public int nickChk(MemberVO vo) throws Exception {
-//		int result = memberService.nickChk(vo);
-//		return result;
-//	}
+	@RequestMapping(value="nickChk", method = RequestMethod.POST)
+	public int nickChk(MemberVO vo) throws Exception {
+		int result = memberService.nickChk(vo);
+		return result;
+	}
 	
 	@RequestMapping(value = "no_member_sign.do", method = RequestMethod.GET)
 	public String sign2(Locale locale, Model model) {
