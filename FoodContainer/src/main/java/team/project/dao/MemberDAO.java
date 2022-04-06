@@ -20,12 +20,24 @@ public class MemberDAO {
 		
 		return sqlSession.selectList(Namespace+".selectMember",vo);
 	}
+	
+	//로그인
 	public MemberVO Login(MemberVO vo) throws Exception {
 	        return sqlSession.selectOne(Namespace+".Login", vo);
 	    }
 	
+	//회원가입
 	public int insertMember(MemberVO vo) throws Exception{
 		return sqlSession.insert(Namespace+".insertMember",vo);	
 	}
 	
+	public int idChk(MemberVO vo) throws Exception{
+		int result =sqlSession.selectOne(".idChk",vo);
+		return result;
+	}
+	
+//	public int nickChk(MemberVO vo) throws Exception{
+//		int result =sqlSession.selectOne(".nickChk",vo);
+//		return result;
+//	}
 }

@@ -6,8 +6,17 @@
 <mapper namespace="team.project.mapper.memberMapper" >
  	
  	<select id="Login" resultType="MemberVO" parameterType="MemberVO">
-        SELECT * FROM member where id=#{id} and pw=#{pw}
+        SELECT * FROM member where id=#{id} and name=#{name}
     </select>
+    
+    <select id="idChk" resultType="MemberVO" parameterType="MemberVO">
+   		SELECT COUNT(*) FROM member where id=#{id}
+   </select>
+  <!--   <select id="nickChk" resultType="MemberVO" parameterType="MemberVO">
+   		SELECT COUNT(*) FROM member where nickname=#{nickname}
+   </select> -->
+   
+    
     <insert id="insertMember" parameterType="MemberVO"> 
     INSERT INTO member(
     id,

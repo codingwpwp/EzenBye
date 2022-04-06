@@ -131,7 +131,7 @@
 							</div>
 							<div class="row">
 								<div class="col-md-12 col-sm-12 col-12 loginbtn">
-									<button class="btn btn-dark">회원가입</button>
+									<button class="btn btn-dark" onclick="location.href='/member_sign.do'">회원가입</button>
 								</div>
 							</div>
 							<div class="row lookup">

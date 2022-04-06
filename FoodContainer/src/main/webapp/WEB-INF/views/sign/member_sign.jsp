@@ -67,7 +67,7 @@
                 <div class="container">
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-12">
-                                <form action="member_sign.do" name="frm" method="post">
+                                <form action="member_sign.do" name="frm" method="post" onsubmit="return checkAll();">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-12 signhead">
@@ -81,12 +81,12 @@
                                          
                                             </div>
                                             <div class="col-sm-9 col-8">
-                                                <input type="text" class="idinput" name="id" id="id"
+                                                <input type="text" class="idinput" name="id" id="test"
                                                     placeholder="8~20 영문+숫자" >
                                               
                                             </div>
                                             <div class="col-sm-3 col-4">
-                                                <input type="button" class="btn btn-secondary ckinput" value="중복확인" onclick="duplicate(); return false;">
+                                                <input type="button" class="btn btn-secondary ckinput" value="중복확인" onclick="fn_idChk(); return false;">
                                                 <span class="check"></span>
                                             </div>
                                         </div>
@@ -97,15 +97,15 @@
                                             <div class="col-sm-9 col-12">
                                                 <input type="password" class="pwinput" name="pw" id="pw"
                                                     placeholder="8~20 영문+숫자+특수문자" >
-                                                <span class="check"></span>
+                                                
                                             </div>
                                             <div class="col-sm-12 col-12 tit">
                                                 <label for="pw">비밀번호 확인<span class="red">*</span></label>
                                             </div>
                                             <div class="col-sm-9 col-12">
-                                                <input type="password" class="pwinput" name="password" id="pw"
+                                                <input type="password" class="pwinput" name="password" id="pwchk"
                                                     placeholder="8~20 영문+숫자+특수문자">
-                                                <span class="check"></span>
+                                                  
                                             </div>
                                         </div>
                                         <div class="row">
@@ -115,7 +115,7 @@
                                             <div class="col-sm-9 col-12">
                                                 <input type="text" class="pwinput" name="name" id="name"
                                                     placeholder="이름를 입력하세요" >
-                                                <span class="check"></span>
+                                               
                                             </div>
                                             <div class="col-sm-12 col-12 tit">
                                                 <label for="ph">연락처</label>
@@ -128,7 +128,7 @@
                                                     <option value="017">017</option>
                                                 </select>&nbsp;-
                                                 <input onblur="fn6(this)" type="text" class="phinput" name="phone"
-                                                    id="phone" placeholder="연락처2" maxlength="4" >&nbsp;-
+                                                    id="phone2" placeholder="연락처2" maxlength="4" >&nbsp;-
                                                 <input onblur="fn7(this)" type="text" class="phinput" name="phone"
                                                     id="phone3" placeholder="연락처3" maxlength="4" >
                                                 <span class="check"></span>
@@ -139,7 +139,7 @@
                                             <div class="col-sm-9 col-8">
                                                 <input type="text" class="nkinput" name="nickname" id="nickname"
                                                     placeholder="2~8 한글+영문+숫자 중 선택" >
-                                                <span class="check"></span>
+                                              
                                             </div>
                                             <div class="col-sm-3 col-4">
                                                 <input type="button" class="btn btn-secondary ckinput" value="중복확인">
@@ -150,10 +150,10 @@
                                             <div class="col-sm-9 col-12">
                                                 <input type="text" class="emailinput" name="email" id="email"
                                                     placeholder="이메일을 입력해주세요" >
-                                                <span class="check"></span>
+                                              
                                             </div>
                                             <div class="col-12 tit">
-                                                <label for="recommender">추천인<span class="red">*</span></label>
+                                                <label for="recommender">추천인</label>
                                             </div>
                                             <div class="col-sm-9 col-8">
                                                 <input type="text" class="recominput" name="recommender" id="recom"
@@ -166,8 +166,8 @@
                                                 <input type="button" value="취소" class="btn btn-secondary can" onclick="location.href='index.do'">
                                             </div>
                                             <div class="col-sm-6 col-6 btndiv">
-                                               
-                                                <button class="btn btn-dark" name="signok_btn" onclick="signbtn(); return false;">회원가입</button>
+                                                <input type="submit" value="회원가입" class="btn btn-dark"  >
+                                               <!--  <button class="btn btn-dark" name="signok" id="signok" onclick="signbtn(); return false;">회원가입</button> -->
                                             </div>
                                         </div>
                                     </div>
