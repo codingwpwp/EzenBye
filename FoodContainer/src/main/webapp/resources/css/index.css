@@ -398,6 +398,18 @@
 	top : 40px;
 }
 
+a:link{
+	color : black;
+}
+
+a:visited{
+	color : black;
+}
+
+a{
+	text-decoration-line : none;
+}
+
 /* productView ========================================================================================== */
 
 /*상품 이미지*/
