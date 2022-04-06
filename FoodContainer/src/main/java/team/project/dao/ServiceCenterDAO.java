@@ -16,7 +16,7 @@ public class ServiceCenterDAO {
 	
 	private static final String Namespace = "team.project.mapper.serviceCenterMapper";
 	
-	public List<ServiceCenterVO> list(int member_index) throws Exception {
+	public List<ServiceCenterVO> latelyServiceCenter(int member_index) throws Exception {
 		
 		return sqlSession.selectList(Namespace+".latelyServiceCenter",member_index);
 	}

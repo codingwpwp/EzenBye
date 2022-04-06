@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -71,48 +72,58 @@
 				          	<span class="text-point">할인쿠폰</span>
 				          </div>
 				          <div class="col-sm-4">
-				          	<span class="number-point">0장</span>
+				          	<span class="number-point">${couponvo }장</span>
 				          </div>
 			          	</div>
 			        </div>
 			        
 			        <p class="fs-6 lookup-fs-6">최근주문</p>
 			        <hr />
-			        <div class="row">
-			        	<div class="col-sm-4 col-6">
-			        		<span class="good-date">2022.3.15</span>
-			        	</div>
-			        	<div class="col-sm-5 col-6">
-			        		<span class="good-date">주문번호 : ADDF1325</span>
-			        	</div>
-			        	<div class="col-sm-3 col-12 findT">
-			        		<a href="#" class="link-info"><span class="fw-bold">배송조회</span></a>
-			        	</div>
-			        </div>
-			        
-			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
+			        <c:forEach items="${ordersList}" var="list">
 			        	<div class="row">
-			        		<div class="col-sm-4">
-			        			<span class="fw-bold">배송완료</span>
-			        		</div>
-			        		<div class="col-sm-8 number-good">
-			        			<span class="fw-bold">상품 주문번호 : DFSD5649</span>
-			        		</div>
-			        	</div>
-			        	<div class="row">
-			        		<div class="col-sm-3">
-			        			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
-			        		</div>
-			        		<div class="col-sm-8 d-flex align-items-start flex-column mb-3">
-						    	<div class="mb-auto p-2">비비고 진한고기만두400g*2번들</div>
-  								<div class="p-2">4580원 | 5개</div>
-			        		</div>
-			        	</div>
+				        	<div class="col-sm-12 col-md-12 col-lg-5">
+				        		<span class="good-date">${list.order_date}</span>
+				        	</div>
+				        	<div class="col-sm-12 col-md-12 col-lg-5">
+				        		<span class="good-date">주문번호 : ${list.member_order_index }</span>
+				        	</div>
+				        	<div class="col-sm-12 col-lg-2 findT">
+				        		<a href="#" class="link-info"><span class="fw-bold">배송조회</span></a>
+				        	</div>
+				        </div>
+				        
+				        	<c:forEach items="${opList}" var="opList">
+				        	<c:if test="${list.member_order_index eq opList.member_order_index}"> 
+					        	<div class="h-100 p-2 bg-light border rounded-3 card-good">
+						        	<div class="row">
+						        		<div class="col-sm-4">
+						        			<span class="fw-bold">${opList.order_status }</span>
+						        		</div>
+						        		<div class="col-sm-8 number-good">
+						        			<span class="fw-bold">상품 주문번호 : ${opList.orderItem_index }</span>
+						        		</div>
+						        	</div>
+						        	<div class="row">
+						        		<div class="col-sm-3">
+						        			<img src="<%=request.getContextPath() %>/resources/img/${opList.brand}/${opList.middleSort}/${opList.thumbnail_image}" class="img-fluid img-thumbnail" alt="상품사진">
+						        		</div>
+						        		<div class="col-sm-8 d-flex align-items-start flex-column mb-3">
+									    	<div class="mb-auto p-2">${opList.product_name}</div>
+			  								<div class="p-2"><fmt:formatNumber value="${opList.origin_price }" pattern="#,###" />원 | ${opList.quantity }개</div>
+						        		</div>
+						        	</div>
+						        	
+						        	<div class="d-grid gap-2 col-6 mx-auto">
+									  <button class="btn btn-outline-secondary" type="button">구매확정</button>
+									</div>
+						        </div>
+						        </c:if> 
+				        	</c:forEach>
 			        	
-			        	<div class="d-grid gap-2 col-6 mx-auto">
-						  <button class="btn btn-outline-secondary" type="button">구매확정</button>
-						</div>
-			        </div>
+			        </c:forEach>
+			        
+			        
+			        
 			        
 			        <div class="row">
 			        	<div class="col-sm-4 col-6">		        	

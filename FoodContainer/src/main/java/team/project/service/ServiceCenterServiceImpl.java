@@ -14,9 +14,9 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 	private ServiceCenterDAO serviceCenterDAO;
 	
 	@Override
-	public List<ServiceCenterVO> list(int member_index) throws Exception {
+	public List<ServiceCenterVO> latelyServiceCenter(int member_index) throws Exception {
 		
-		List<ServiceCenterVO> list = serviceCenterDAO.list(member_index);
+		List<ServiceCenterVO> list = serviceCenterDAO.latelyServiceCenter(member_index);
 		
 		return list;
 	}
