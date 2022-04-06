@@ -87,8 +87,26 @@
                                 </thead>
                                 
                                 <tbody>
+                                	<c:forEach items="${productListAll}" var="product">
+                                		<tr>
+	                                        <th>
+	                                            <input class="form-check-input border border-dark" type="checkbox" value="">
+	                                        </th>
+	                                        <th>${product.product_index}</th>
+	                                        <td>${product.bigSort}</td>
+	                                        <td>${product.brand}</td>
+	                                        <td class="col5">
+	                                            <a href="product_detail.do?product_index=${product.product_index}" class="link-primary">${product.product_name}</a>
+	                                        </td>
+	                                        <td>${product.inventory}</td>
+	                                        <td>
+	                                            <button class="btn btn-outline-primary btn-sm px-1 py-0" onclick="location.href='product_modify.do?product_index=${product.product_index}'">수정</button>
+	                                            <button class="btn btn-outline-dark btn-sm px-1 py-0">삭제</button>
+	                                        </td>
+                                    	</tr>
+									</c:forEach>
 
-                                    <tr>
+                                    <!-- <tr>
                                         <th>
                                             <input class="form-check-input border border-dark" type="checkbox" value="">
                                         </th>
@@ -120,7 +138,7 @@
                                             <button class="btn btn-outline-primary btn-sm px-1 py-0">수정</button>
                                             <button class="btn btn-outline-dark btn-sm px-1 py-0">삭제</button>
                                         </td>
-                                    </tr>
+                                    </tr> -->
                                     
                                 </tbody>
                             </table>

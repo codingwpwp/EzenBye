@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -70,7 +72,7 @@
                                 <span class="infoTitle p-1" style="width: 78px;">대분류</span>
                             </div>
                             <div class="col-8 col-md-6">
-                                <input type="text" class="bg-light form-control" value="냉동식품" disabled>
+                                <input type="text" class="bg-light form-control" value="${productvo.bigsort}" disabled>
                             </div>
 
                         </div>
@@ -82,7 +84,7 @@
                                 <span class="infoTitle p-1" style="width: 78px;">중분류</span>
                             </div>
                             <div class="col-8 col-md-6">
-                                <input type="text" class="bg-light form-control" value="볶음밥" disabled>
+                                <input type="text" class="bg-light form-control" value="${productvo.middleSort}" disabled>
                             </div>
 
                         </div>
@@ -102,7 +104,7 @@
                             </div>
 
                             <div class="col-3 col-lg-2">
-                                <input type="text" class="bg-light form-control" value="122" disabled>
+                                <input type="text" class="bg-light form-control" value="${productvo.product_index}" disabled>
                             </div>
 
                         </div>
@@ -115,7 +117,7 @@
                             </div>
 
                             <div class="col-8 col-md-6">
-                                <input type="text" class="bg-light form-control" value="CJ" disabled>
+                                <input type="text" class="bg-light form-control" value="${productvo.brand}" disabled>
                             </div>
 
                         </div>
@@ -128,7 +130,7 @@
                             </div>
 
                             <div class="col-8 col-md-6">
-                                <input type="text" class="bg-light form-control" value="아몰라상품" disabled>
+                                <input type="text" class="bg-light form-control" value="${productvo.product_name}" disabled>
                             </div>
 
                         </div>
@@ -145,7 +147,7 @@
                                 <div class="row">
 
                                     <div class="col-11 pe-0">
-                                        <input type="text" class="form-control bg-light" style="text-align: right;" value="30,000" disabled>
+                                        <input type="text" class="form-control bg-light" style="text-align: right;" value="<fmt:formatNumber type='currency' value='${productvo.origin_price}' currencySymbol=''/>" disabled>
                                     </div>
 
                                     <div class="col-1 d-flex align-items-center fw-bold px-0">원</div>
@@ -162,10 +164,19 @@
                                 <div class="row">
 
                                     <div class="col-11 pe-0">
-                                        <input type="text" class="form-control bg-light" style="text-align: right;" value="23,000" disabled>
+<!--<c:choose>
+	<c:when test="${productvo.sale_price > 0}">
+		${productvo.sale_price}
+	</c:when>
+	<c:when test="${test == 0}">
+		-
+	</c:when>
+</c:choose> -->
+                                        <input type="text" class="form-control bg-light" style="text-align: right;"
+											   value="<c:choose><c:when test="${productvo.sale_price > 0}"><fmt:formatNumber type='currency' value='${productvo.sale_price}' currencySymbol=''/></c:when><c:otherwise>할인없음</c:otherwise></c:choose>" disabled>
                                     </div>
 
-                                    <div class="col-1 d-flex align-items-center fw-bold px-0">원</div>
+                                    <div class="col-1 d-flex align-items-center fw-bold px-0"><c:if test="${productvo.sale_price > 0}">원</c:if></div>
 
                                 </div>
                             </div>
@@ -185,7 +196,7 @@
                                 <div class="row">
 
                                     <div class="col-11 pe-0">
-                                        <input type="text" class="bg-light form-control" style="text-align: right;" value="1,350" disabled>
+                                        <input type="text" class="bg-light form-control" style="text-align: right;" value="<fmt:formatNumber type='currency' value='${productvo.inventory}' currencySymbol=''/>" disabled>
                                     </div>
 
                                     <div class="col-1 d-flex align-items-center fw-bold px-0">개</div>
@@ -202,7 +213,7 @@
                                 <div class="row">
 
                                     <div class="col-11 pe-0">
-                                        <input type="text" class="bg-light form-control" style="text-align: right;" value="3,000" disabled>
+                                        <input type="text" class="bg-light form-control" style="text-align: right;" value="<c:choose><c:when test="${productvo.delivery_free_YN eq 'N'}">3,000</c:when><c:otherwise>0</c:otherwise></c:choose>" disabled>
                                     </div>
 
                                     <div class="col-1 d-flex align-items-center fw-bold px-0">원</div>
@@ -223,7 +234,7 @@
                                 <div class="row">
 
                                     <div class="col-11 col-md-10 pe-0">
-                                        <input type="text" class="bg-light text-danger fw-bold form-control" style="text-align: right;" value="3,212" disabled>
+                                        <input type="text" class="bg-light text-danger fw-bold form-control" style="text-align: right;" value="<fmt:formatNumber type='currency' value='${productvo.quantity}' currencySymbol=''/>" disabled>
                                     </div>
 
                                     <div class="col-1 d-flex align-items-center fw-bold px-0">개</div>

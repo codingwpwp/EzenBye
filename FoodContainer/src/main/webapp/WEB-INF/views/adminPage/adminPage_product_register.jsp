@@ -56,7 +56,7 @@
                     </div>
 
                     <!-- 상품등록하는 폼 -->
-                    <form name="productRegisterForm" method="post" id="productManagerForm" onsubmit="return checkProduct()">
+                    <form name="productRegisterForm" action="product_register.do" method="post" id="productManagerForm" enctype="multipart/form-data" onsubmit="return checkProduct()">
                         
                         <!-- 상품 분류 -->
                         <div class="h3 my-4 fw-bold ps-3">
@@ -91,10 +91,10 @@
                             <div class="col-5 col-md-4 col-lg-3">
                                 <select class="bg-opacity-25 form-select fw-bold" id="middleSort" name="middleSort">
                                     <option class="bg-primary bg-opacity-25 fw-bold frozen" value="볶음밥" selected>볶음밥</option>
-                                    <option class="bg-primary bg-opacity-25 fw-bold frozen" value="치킨/만두">치킨/만두</option>
+                                    <option class="bg-primary bg-opacity-25 fw-bold frozen" value="치킨,만두">치킨/만두</option>
                                     <option class="bg-success bg-opacity-25 fw-bold instant" value="국물">국물</option>
                                     <option class="bg-success bg-opacity-25 fw-bold instant" value="반찬">반찬</option>
-                                    <option class="bg-success bg-opacity-25 fw-bold instant" value="컵밥">컵밥</option>
+                                    <option class="bg-success bg-opacity-25 fw-bold instant" value="컵밥,햇반">컵밥</option>
                                 </select>
                             </div>
 
@@ -134,7 +134,7 @@
                             </div>
 
                             <div class="col-8 col-md-10 col-lg-8">
-                                <input type="text" class="form-control check" name="productName" placeholder="ex)왕교자" maxlength="30" autocomplete="off">
+                                <input type="text" class="form-control check" name="product_name" placeholder="ex)왕교자" maxlength="30" autocomplete="off">
                             </div>
 
                         </div>
@@ -151,7 +151,7 @@
                                 <div class="row">
 
                                     <div class="col-11 pe-0">
-                                        <input type="text" class="form-control" name="productPrice" style="text-align: right;" value="30000">
+                                        <input type="text" class="form-control" name="origin_price" style="text-align: right;" value="" maxlength="7" onKeyup="priceReg(this)">
                                     </div>
 
                                     <div class="col-1 d-flex align-items-center fw-bold px-0">원</div>
@@ -161,14 +161,14 @@
 
                             <!-- 할인 가격 -->
                             <div class="col-4 col-md-2 d-flex justify-content-end mb-3 mb-md-0">
-                                <span class="infoTitle p-1"><span class="text-danger">*</span>할인 가격</span>
+                                <span class="infoTitle p-1">할인 가격</span>
                             </div>
 
                             <div class="col-5 col-md-4 col-lg-3 mb-3 mb-md-0">
                                 <div class="row">
 
                                     <div class="col-11 pe-0">
-                                        <input type="text" class="form-control" name="salePrice" style="text-align: right;" value="30000">
+                                        <input type="text" class="form-control" name="sale_price" style="text-align: right;" value="" maxlength="7" onKeyup="priceReg(this)" onblur="priceReg2(this)">
                                     </div>
 
                                     <div class="col-1 d-flex align-items-center fw-bold px-0">원</div>
@@ -190,7 +190,7 @@
                                 <div class="row">
 
                                     <div class="col-11 pe-0">
-                                        <input type="text" class="form-control" name="inventory" style="text-align: right;" value="30000">
+                                        <input type="text" class="form-control" name="inventory" style="text-align: right;" value="" maxlength="12" onKeyup="priceReg(this)">
                                     </div>
 
                                     <div class="col-1 d-flex align-items-center fw-bold px-0">개</div>
@@ -204,9 +204,9 @@
                             </div>
 
                             <div class="col-5 col-md-4 col-lg-3 mb-3 mb-md-0">
-                                <select class="form-select" name="deliveryPrice" style="text-align: right;">
-                                    <option value="3000" selected>3,000원</option>
-                                    <option value="0">무료배송</option>
+                                <select class="form-select" name="delivery_free_YN" style="text-align: right;">
+                                    <option value="N" selected>3,000원</option>
+                                    <option value="Y">무료배송</option>
                                 </select>
                             </div>
 
@@ -230,12 +230,12 @@
 
                             <div class="col-7 col-md-3 col-lg-2 d-flex justify-content-end imagePreview">
                             <!-- 이미지 미리보기 -->
-                                <button type="button" class="btn btn-secondary previewButton" data-bs-toggle="modal" data-bs-target="#sumnailImageModal">미리보기</button>
+                                <button type="button" class="btn btn-secondary previewButton" data-bs-toggle="modal" data-bs-target="#tumnailImageModal">미리보기</button>
                             </div>
 
                             <div class="col-11 col-md-6 col-lg-8 d-flex mt-2 inputImageFile">
                             <!-- 파일 등록 -->
-                                <input class="form-control check" name="sumnailImage" type="file" accept="image/png" onchange="previewImage(event, this);">
+                                <input class="form-control check" name="tumnailImage" type="file" accept="image/png" onchange="previewImage(event, this);">
                             </div>
 
                         </div>
@@ -291,11 +291,11 @@
                         </div>
 
                         <!-- 대표이미지 미리보기 모달 -->
-                        <div class="modal fade" id="sumnailImageModal" tabindex="-1" aria-labelledby="sumnailImageModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="tumnailImageModal" tabindex="-1" aria-labelledby="tumnailImageModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="sumnailImageModalLabel">대표이미지</h5>
+                                        <h5 class="modal-title" id="tumnailImageModalLabel">대표이미지</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">

@@ -22,5 +22,29 @@ public class ProductServiceImpl implements ProductService {
 		
 		return prodcutListAll;
 	}
+
+	@Override
+	public ProductVO ProductSelectOne(ProductVO productVO) throws Exception {
+		
+		ProductVO productOne = productDAO.ProductSelectOne(productVO);
+		return productOne;
+	}
+
+	@Override
+	public void insertProduct(ProductVO productVO) throws Exception {
+		
+		/*
+		 *  상품번호 생성하는 구간 String ProductIndex = "P";
+		 * 
+		 * // 대분류&중분류 if(productVO.getBigSort().equals("냉동식품")) { ProductIndex += "I";
+		 * if(productVO.getMiddleSort().equals("볶음밥")) { ProductIndex += "01"; }else
+		 * if(productVO.getMiddleSort().equals("치킨,만두")) { ProductIndex += "02"; } }else
+		 * { ProductIndex += "R"; if(productVO.getMiddleSort().equals("국물")) {
+		 * ProductIndex += "01"; }else if(productVO.getMiddleSort().equals("치킨,만두")) {
+		 * ProductIndex += "02"; }else if(productVO.getMiddleSort().equals("치킨,만두")) {
+		 * ProductIndex += "02"; } }
+		 */
+		//productDAO.insertProduct(productVO);
+	}
 	
 }

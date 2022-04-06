@@ -391,6 +391,7 @@ function previewImage(event, obj){
     var extension = valueArray[valueArray.length-1];
 
     var id = $(obj).attr("name") + "Modal";
+    console.log(id);
 
     if(extension == "png"){ // 확장자가 png일 경우
 
@@ -477,6 +478,32 @@ function registerButton(){
     }
 }
 
+// 가격&재고 입력하는 중에 유효성 검사
+function priceReg(obj){
+	var priceReg = /^$|^[0-9]$|^[1-9][0-9]*$/g;
+	if(!priceReg.test(obj.value)){
+		obj.value = "";
+	}
+	
+	// 할인 가격 입력의 경우 추가로 판매 가격과 비교
+	if($(obj).attr("name") == "sale_price"){
+		if($("input[name='origin_price']").val() == ""){
+			alert("먼저 판매 가격을 입력하세요");
+			obj.value = "";
+		}
+	}
+}
+
+// 할인가격 onblur 판매 가격과 비교하는 함수
+function priceReg2(obj){
+	// console.log(obj.value);
+	// console.log($("input[name='origin_price']").val());
+	if(obj.value > $("input[name='origin_price']").val()){
+		alert("판매 가격을 넘길 수는 없습니다");
+		obj.value = "";
+	}
+}
+
 // 상품등록&수정페이지의 유효성검사
 function checkProduct(){
 
@@ -488,14 +515,14 @@ function checkProduct(){
     $(".check").each(function(index,item){
         value = $(item).val();
 
-        if($(item).attr("name") == "productPrice" || $(item).attr("name") == "inventory"){
+        if($(item).attr("name") == "origin_price" || $(item).attr("name") == "inventory"){
 
-            checkreg = /^[^0]\d*/g;
+            checkreg = /^$|^[0-9]$|^[1-9][0-9]*$/g;
             if(value == ""){
                 flag = false;
                 focusFormArray[index] = $(item);
             }else if(!checkreg.test(value)){
-                console.log($(item).attr("name"));
+                // console.log($(item).attr("name"));
                 flag = false;
                 focusFormArray[index] = $(item);
             }
@@ -509,11 +536,11 @@ function checkProduct(){
 
     });
     
-    if($("input[name='salePrice']").val() != ""){
-        checkreg = /^[^0]\d*/g;
-        if(!checkreg.test($("input[name='salePrice']").val())){
+    if($("input[name='sale_price']").val() != ""){
+        checkreg = /^$|^[0-9]$|^[1-9][0-9]*$/g;
+        if(!checkreg.test($("input[name='sale_price']").val())){
             flag = false;
-            focusFormArray[focusFormArray.length] = $("input[name='salePrice']");
+            focusFormArray[focusFormArray.length] = $("input[name='sale_price']");
         }
     }
 
@@ -536,7 +563,11 @@ function checkProduct(){
             }
         },800);
 
-    }
+    }else{
+		if($("input[name='sale_price']").val() == ""){
+			$("input[name='sale_price']").val("-1");
+		}
+	}
     
     return flag;
 

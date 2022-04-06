@@ -8,4 +8,8 @@ import team.project.vo.ProductVO;
 public interface ProductService {
 	
 	List<ProductVO> productListAll(ProductVO productVO) throws Exception;
+	
+	ProductVO ProductSelectOne(ProductVO productVO) throws Exception;
+	
+	void insertProduct(ProductVO productVO) throws Exception;
 }

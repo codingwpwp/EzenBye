@@ -48,8 +48,8 @@
                     비회원 상품 구매
                 </div>
 
-                <!-- 내용 -->
-                <div class="col-12 col-sm-8 ps-4 ps-lg-2 mt-2" name="puchaseForm">
+                <!-- 비회원 구매정보입력 + 모바일 버전 최종 구매버튼 -->
+                <form class="col-12 col-sm-8 ps-4 ps-lg-2 mt-2" id="puchaseForm" name="puchaseForm">
 
                     <!-- 전체약관 동의 -->
                     <div class="form-check fs-6 table-responsive" style="white-space: nowrap;">
@@ -150,7 +150,7 @@
 
                         <div class="col-9 input-group w-75 phone">
                             <select class="form-select" name="orderPhone1">
-                                <option selected>010</option>
+                                <option selected value="010">010</option>
                                 <option value="011">011</option>
                                 <option value="016">016</option>
                                 <option value="018">018</option>
@@ -238,16 +238,16 @@
 
                             <div class="input-group my-2">
                                 <span class="input-group-text">우편번호</span>
-                                <input type="text" id="postcode" class="form-control" readonly>
+                                <input type="text" id="postcode" name="postcode" class="form-control" readonly>
                                 <button type="button" onclick="deliveryAddress()" value="우편번호 찾기" class="btn btn-secondary">주소검색</button>
                             </div>
                             <div class="input-group my-2">
                                 <span class="input-group-text">주소</span>
-                                <input type="text" id="address" class="form-control" readonly>
+                                <input type="text" id="address" name="address" class="form-control" readonly>
                             </div>
                             <div class="input-group my-2">
                                 <span class="input-group-text">상세주소</span>
-                                <input type="text" id="detailAddress" class="form-control" readonly onblur="checkAddress(this)">
+                                <input type="text" id="detailAddress" name="detailAddress" class="form-control" readonly onblur="checkAddress(this)">
                             </div>
 
                         </div>
@@ -263,10 +263,10 @@
 
                         <div class="col-9 col-lg-8 input-group w-75 phone">
                             <select class="form-select" name="receiverPhone1">
-                                <option selected>010</option>
-                                <option value="1">011</option>
-                                <option value="2">016</option>
-                                <option value="3">018</option>
+                                <option selected value="010">010</option>
+                                <option value="011">011</option>
+                                <option value="016">016</option>
+                                <option value="018">018</option>
                             </select>
                             <span class="input-group-text">-</span>
                             <input type="number" class="form-control" name="receiverPhone2" min="100" max="9999" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" oninput="phoneMaxLength(this)" onblur="receiverPhoneCheck(this, 3)">
@@ -283,7 +283,7 @@
                         </div>
 
                         <div class="col-9 col-lg-8">
-                            <input class="form-control pe-1" list="requestOptions" placeholder="ex)부재시 경비실에 맡겨 주세요." maxlength="30">
+                            <input class="form-control pe-1" name="requestOptions" list="requestOptions" placeholder="ex)부재시 경비실에 맡겨 주세요." maxlength="30">
                             <datalist id="requestOptions">
                                 <option value="배송 전에 미리 연락 바랍니다.">
                                 <option value="부재시 경비실에 맡겨 주세요.">
@@ -348,6 +348,7 @@
                             <div class="col-6 text-danger fs-5 d-flex justify-content-end fw-bold price">
                                 <span class="productSumPrice" id="productSumPrice">0</span>
                                 원
+                                <input type="hidden" name="productSumPrice" value="">
                             </div>
                         </div>
 
@@ -357,6 +358,7 @@
                             <div class="col-6 text-danger fs-5 d-flex justify-content-end fw-bold price">
                                 <span class="deliveryPrice" id="deliveryPrice">0</span>
                                 원
+                                <input type="hidden" name="deliveryPrice" value="">
                             </div>
                         </div>
 
@@ -377,7 +379,7 @@
                         </div>
                     </div>
 
-                </div>
+                </form>
 
                 <!-- pc버전 최종 결제 정보 -->
                 <div class="col-4 d-none d-sm-block position-sticky p-3 ms-md-3 notMemberFinalPurchase" id="purchaseNotMemberDiv">
@@ -436,6 +438,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/purchasePage.js"></script>
 </body>

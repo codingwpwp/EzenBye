@@ -50,8 +50,8 @@
                     상품 구매
                 </div>
 
-                <!-- 구매정보입력 + 모바일 버전 최종 구매버튼 -->
-                <div class="col-12 col-sm-8 ps-4 ps-lg-2 mt-2" name="puchaseForm">
+                <!-- 회원 구매정보입력 + 모바일 버전 최종 구매버튼 -->
+                <form class="col-12 col-sm-8 ps-4 ps-lg-2 mt-2" id="puchaseForm" name="puchaseForm">
 
                     <!-- 전체약관 동의 -->
                     <div class="form-check fs-6 table-responsive" style="white-space: nowrap;">
@@ -197,16 +197,16 @@
 
                             <div class="input-group my-2">
                                 <span class="input-group-text">우편번호</span>
-                                <input type="text" id="postcode" class="form-control" readonly>
+                                <input type="text" id="postcode" name="postcode" class="form-control" readonly>
                                 <button type="button" onclick="deliveryAddress()" value="우편번호 찾기" class="btn btn-secondary">주소검색</button>
                             </div>
                             <div class="input-group my-2">
                                 <span class="input-group-text">주소</span>
-                                <input type="text" id="address" class="form-control" readonly>
+                                <input type="text" id="address" name="address" class="form-control" readonly>
                             </div>
                             <div class="input-group my-2">
                                 <span class="input-group-text">상세주소</span>
-                                <input type="text" id="detailAddress" class="form-control" readonly onblur="checkAddress(this)">
+                                <input type="text" id="detailAddress" name="detailAddress" class="form-control" readonly onblur="checkAddress(this)">
                             </div>
 
                         </div>
@@ -222,10 +222,10 @@
 
                         <div class="col-9 col-lg-8 input-group w-75 phone">
                             <select class="form-select" name="receiverPhone1">
-                                <option selected>010</option>
-                                <option value="1">011</option>
-                                <option value="2">016</option>
-                                <option value="3">018</option>
+                                <option selected value="010">010</option>
+                                <option value="011">011</option>
+                                <option value="016">016</option>
+                                <option value="018">018</option>
                             </select>
                             <span class="input-group-text">-</span>
                             <input type="number" class="form-control" name="receiverPhone2" min="100" max="9999" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" oninput="phoneMaxLength(this)" onblur="receiverPhoneCheck(this, 3)">
@@ -242,7 +242,7 @@
                         </div>
 
                         <div class="col-9 col-lg-8">
-                            <input class="form-control pe-1" list="requestOptions" placeholder="ex)부재시 경비실에 맡겨 주세요." maxlength="30">
+                            <input class="form-control pe-1" name="requestOptions" list="requestOptions" placeholder="ex)부재시 경비실에 맡겨 주세요." maxlength="30">
                             <datalist id="requestOptions">
                                 <option value="배송 전에 미리 연락 바랍니다.">
                                 <option value="부재시 경비실에 맡겨 주세요.">
@@ -308,18 +308,18 @@
                     <!-- 쿠폰 -->
                     <div class="row mb-3">
                         <div class="col-4 fs-5">
-                            적용 가능 쿠폰(${list.size()}개)
+                            적용 가능 쿠폰(${couponList.size()}개)
                         </div>
 
                         <div class="col-8">
                             <select class="form-select" name="coupon" onchange="checkedCoupon(this)">
-                            	<c:if test="${list == null}">
+                            	<c:if test="${couponList == null}">
                             		<option value="" disabled selected style="display: none;">쿠폰이 없습니다.</option>
                             	</c:if>
-                            	<c:if test="${list != null}">
+                            	<c:if test="${couponList != null}">
                                 	<option id="notUsed" value="0" disabled selected style="display: none;">쿠폰이 있습니다.</option>
-	                            	<c:forEach items="${list}" var="vo">
-                                		<option value="${vo.coupon_index}">${vo.coupon_title}</option>
+	                            	<c:forEach items="${couponList}" var="couponVO">
+                                		<option value="${couponVO.coupon_index}">${couponVO.coupon_title}</option>
 									</c:forEach>
                             	</c:if>
                             </select>
@@ -334,8 +334,8 @@
                         </div>
 
                         <div class="col-3 d-flex justify-content-end">
-                        	<c:if test="${list != null}">
-                            	<button type="button" class="btn btn-sm btn-warning text-dark fw-bold" id="couponResetbutton" onclick="couponResetbutton()">초기화</button>
+                        	<c:if test="${couponList != null}">
+                            	<button type="button" class="btn btn-sm btn-warning text-dark fw-bold" id="couponResetbutton" onclick="couponResetbuttonFn()">초기화</button>
                             </c:if>
                         </div>
 
@@ -375,6 +375,7 @@
                             <div class="col-6 text-danger fs-5 d-flex justify-content-end fw-bold price">
                                 <span class="productSumPrice" id="productSumPrice">0</span>
                                 원
+                                <input type="hidden" name="productSumPrice" value="">
                             </div>
                         </div>
 
@@ -384,6 +385,7 @@
                             <div class="col-6 text-danger fs-5 d-flex justify-content-end fw-bold price">
                                 <span class="deliveryPrice" id="deliveryPrice">0</span>
                                 원
+                                <input type="hidden" name="deliveryPrice" value="">
                             </div>
                         </div>
 
@@ -393,6 +395,7 @@
                             <div class="col-6 text-primary fs-5 d-flex justify-content-end fw-bold price">
                                 -<span class="couponPrice">0</span>
                                 원
+                                <input type="hidden" name="couponPrice" value="">
                             </div>
                         </div>
 
@@ -402,6 +405,7 @@
                             <div class="col-5 text-primary fs-5 d-flex justify-content-end fw-bold price">
                                 -<span class="pointPrice">0</span>
                                 원
+                                <input type="hidden" name="pointPrice" value="">
                             </div>
                         </div>
 
@@ -414,6 +418,7 @@
                         <div class="text-danger mb-3 d-flex justify-content-end align-items-center fw-bold">
                             <span class="fs-1 totalPrice checkResultSpan" id="totalPrice">0</span>
                             <span class="fs-4">&nbsp;원</span>
+                            <input type="hidden" name="totalPrice" value="">
                         </div>
 
                         <!-- 적립 얘정 포인트 -->
@@ -422,6 +427,7 @@
                             <div class="col-4 fs-5 fw-bold d-flex justify-content-end">
                                 <span class="price expectedPoint" id="expectedPoint">111</span>
                                 p
+                                <input type="hidden" name="expectedPoint" value="">
                             </div>
                         </div>
 
@@ -431,7 +437,7 @@
                         </div>
                     </div>
 
-                </div>
+                </form>
 
                 <!-- pc버전 최종 결제 정보 -->
                 <div class="col-4 d-none d-sm-block position-sticky p-3 ms-md-3 memberFinalPurchase" id="purchaseDiv">

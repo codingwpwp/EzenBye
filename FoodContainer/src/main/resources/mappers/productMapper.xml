@@ -8,7 +8,37 @@
     <select id="ProductListAll" resultType="ProductVO">
     	SELECT *
     	FROM product
-    	WHERE del_YN != 'y'
+    	WHERE del_YN = 'N'
+    	ORDER BY product_date DESC
     </select>
+    
+    <select id="ProductSelectOne" resultType="ProductVO" parameterType="String">
+    	SELECT *
+    	FROM product
+    	WHERE product_index = #{product_index}
+    </select>
+    
+    
+    <!-- 상품번호만 조회 -->
+    <select id="ProductList" resultType="ProductVO" parameterType="ProductVO">
+    	SELECT product_index
+    	FROM product
+    	WHERE bigSort = #{bigSort}
+    	AND middleSort = #{middleSort}
+    </select>
+    
+    
+    <!-- 상품등록(할인가가 있는 경우) -->
+    <!--<insert id="insertBoard" parameterType="ProductVO">
+    	INSERT INTO board(
+    		bidx, subject, contents, writer, midx
+    	) VALUES (
+    		bidx_seq.nextval,
+    		#{subject},
+    		#{contents},
+    		#{writer},
+    		82
+    	)
+    </insert>-->
     
 </mapper>

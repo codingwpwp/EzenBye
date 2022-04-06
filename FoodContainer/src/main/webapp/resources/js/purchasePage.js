@@ -332,7 +332,6 @@ function phoneMaxLength(obj){
 var orderPhoneSwOne;
 var orderPhoneSwTwo;
 function orderPhoneCheck(obj, lengths){
-	console.log(obj.value);
 	if($(obj).val().length < lengths){
 		$("#orderPhoneSpan").css("color", "red");
 		$("#orderPhoneSpan").prev().text("*");
@@ -484,6 +483,7 @@ function checkedCoupon(obj){
 		data: "coupon_index=" + coupon_index,
 		success: function(data){
 			var discount_percent = parseInt(data.trim());
+			// console.log(discount_percent);
 			if(totalPrice > 0){
 				couponPrice = (sumPrice + deliveryPrice) * (discount_percent * 0.01);
 				totalPrice = sumPrice + deliveryPrice - couponPrice - pointPrice;
@@ -507,7 +507,7 @@ function checkedCoupon(obj){
 }
 
 // 쿠폰 적용 초기화 버튼
-function couponResetbutton(){
+function couponResetbuttonFn(){
 	couponPrice = 0;
 	
 	$(".couponPrice").text(couponPrice.toLocaleString('ko-KR'));
@@ -541,7 +541,7 @@ function checkedPoint(obj){
 
 // 포인트 입력하는 중에 유효성 검사
 function pointReg(obj){
-	var pointReg = /[1-9]\d*/g;
+	var pointReg = /^$|^[0-9]$|^[1-9][0-9]*$/g;
 	if(!pointReg.test(obj.value)){
 		obj.value = "";
 	}
@@ -589,6 +589,7 @@ function usePoint(obj){
 
 
 function requestPay(){
+
 	var requiredSw = 0;
 	/*
 	console.log("addressSw :" + addressSw);
@@ -608,39 +609,87 @@ function requestPay(){
 	}
 	
 	if(totalSw == requiredSw){
+		var order_index = "";
 		
-		var order_index;
-		var orderPhone;
+		var now = new Date();
+		
+		var year = "";
+		year += now.getFullYear();
+		year = year.substr(2, 2);
+		var month = ('0' + (now.getMonth() + 1)).slice(-2);
+		var day = ('0' + now.getDate()).slice(-2);
+		var hours = ('0' + now.getHours()).slice(-2); 
+		var minutes = ('0' + now.getMinutes()).slice(-2);
+		var seconds = now.getSeconds();
+		
+		var keylist="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
+		var temp="";
+		
+	    for(i=0;i<3;i++){
+	        temp += keylist.charAt(Math.floor(Math.random()*keylist.length));
+	    }
+	    
+	    // console.log(temp);
+		
+		order_index = year + month + day + hours + minutes + seconds + temp;
+		
+		// console.log(order_index);
+		
+		var orderPhone = "";
 		if($("#agreeThreeCheckbox").val() == undefined){
 			orderPhone = $("#orderPhone").val();
 		}else{
-			orderPhone = $("select[name='orderPhone1']:selected").val() + "-" + "" + "-" + "";
+			orderPhone = $("select[name='orderPhone1']").val() + "-" + $("input[name='orderPhone2']").val() + "-" + $("input[name='orderPhone2']").val();
 		}
 		
-		var IMP = window.IMP;
+		// console.log(orderPhone);
+		
+		// 결제하고나서 DB에 등록하는 페이지
+		$.ajax({
+			url: "purchaseOk.do",
+			type: "post",
+			data: $("#puchaseForm").serialize(),
+			datatype: 'json',
+			success: function(data){
+        		alert("결제성공");
+        		// 걍 index로 이동 시키자.
+			}
+		});
+		
+		/*var IMP = window.IMP;
 	    IMP.init("imp13071934");
 	    
 	    IMP.request_pay({ // param
-	        pg: "html5_inicis",                    // pg사 선택
-	        pay_method: "card",                    // 지불 수단
-	        merchant_uid: "ORD20180131-0000011",   // 주문번호
-	        name: "푸드컨테이너 상품",              		   // 상품이름
-	        amount: totalPrice,                          // 가격
-	        buyer_email: $("#email").val(),      // 구매자 이메일
-	        buyer_name: $("#orderName").val(),                   // 구매자 이름
-	        buyer_tel: "010-4242-4242",            // 구매자 번호
-	        buyer_addr: "서울특별시 강남구 신사동",   // 구매자 주소
-	        buyer_postcode: "01181",               // 구매자 우편번호
-	        m_redirect_url: "https://naver.com"     //  결제 후에 이동 될 주소
+	        pg: "html5_inicis",                     // pg사 선택
+	        pay_method: "card",                     // 지불 수단
+	        merchant_uid: order_index,   			// 주문번호
+	        name: "푸드컨테이너 상품",              	    // 상품이름
+	        amount: 100,                    		// 가격
+	        buyer_email: $("#email").val(),      	// 구매자 이메일
+	        buyer_name: $("#orderName").val(),   	// 구매자 이름
+	        buyer_tel: orderPhone,           		// 구매자 번호
+	        buyer_addr: $("#address").val() + "|" + $("#detailAddress").val(),   // 구매자 주소
+	        buyer_postcode: $("#postcode").val(),   // 구매자 우편번호
 	    }, function (rsp) { // callback
 	    
 	        if (rsp.success) {
-	            alert("결제성공");
+		
+				// 결제하고나서 DB에 등록하는 페이지
+				$.ajax({
+					url: "purchaseOk.do",
+					type: "post",
+					data: $("form").serialize(),
+					success: function(data){
+	            		alert("결제성공");
+	            		// 걍 index로 이동 시키자.
+					}
+				});
+				
 	        } else {
 	            alert("결제에 실패하였습니다 (" +  rsp.error_msg + ")");
 	        }
 	        
-	    });
+	    });*/
 		
 	}else{
 		alert("입력부족");

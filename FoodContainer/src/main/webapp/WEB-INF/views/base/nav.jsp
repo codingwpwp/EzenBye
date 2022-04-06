@@ -32,7 +32,7 @@
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">국물</a></li>
                     <li><a class="dropdown-item" href="#">반찬</a></li>
-                    <li><a class="dropdown-item" href="#">컵밥</a></li>
+                    <li><a class="dropdown-item" href="#">컵밥/햇반</a></li>
                 </ul>
             </li>
 

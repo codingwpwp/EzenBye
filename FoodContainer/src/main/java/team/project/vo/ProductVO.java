@@ -1,9 +1,10 @@
 package team.project.vo;
 
+
 public class ProductVO {
 
 	private String product_index;
-	private String bigsort;
+	private String bigSort;
 	private String middleSort;
 	private String product_name;
 	private int origin_price;
@@ -20,18 +21,17 @@ public class ProductVO {
 	private String modify_YN;
 	private String modify_date;
 	private String del_YN;
-	
 	public String getProduct_index() {
 		return product_index;
 	}
 	public void setProduct_index(String product_index) {
 		this.product_index = product_index;
 	}
-	public String getBigsort() {
-		return bigsort;
+	public String getBigSort() {
+		return bigSort;
 	}
-	public void setBigsort(String bigsort) {
-		this.bigsort = bigsort;
+	public void setBigSort(String bigSort) {
+		this.bigSort = bigSort;
 	}
 	public String getMiddleSort() {
 		return middleSort;
@@ -129,10 +129,6 @@ public class ProductVO {
 	public void setDel_YN(String del_YN) {
 		this.del_YN = del_YN;
 	}
-	
-	
-	
-	
 	
 	
 }
