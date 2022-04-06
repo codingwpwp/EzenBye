@@ -24,7 +24,6 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public ProductVO ProductSelectOne(ProductVO productVO) throws Exception {
 		
 		ProductVO productOne = productDAO.ProductSelectOne(productVO);
@@ -46,11 +45,10 @@ public class ProductServiceImpl implements ProductService {
 		 * ProductIndex += "02"; } }
 		 */
 		//productDAO.insertProduct(productVO);
-=======
+	}
 	public ProductVO view(String index) throws Exception {
 		
 		return productDAO.view(index);
->>>>>>> branch 'main' of https://github.com/codingwpwp/EzenBye.git
 	}
 	
 }
