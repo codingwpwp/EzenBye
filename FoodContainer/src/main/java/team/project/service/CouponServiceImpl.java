@@ -24,5 +24,11 @@ public class CouponServiceImpl implements CouponService {
 		CouponVO couponvo = couponDao.couponSelectOne(coupon_index);
 		return couponvo;
 	}
+
+	@Override
+	public int mypageCouponCount(int member_index) throws Exception {
+		int couponvo = couponDao.mypageCouponCount(member_index);
+		return couponvo;
+	}
 }
  

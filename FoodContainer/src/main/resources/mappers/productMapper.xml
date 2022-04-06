@@ -12,6 +12,7 @@
     	ORDER BY product_date DESC
     </select>
     
+<<<<<<< HEAD
     <select id="ProductSelectOne" resultType="ProductVO" parameterType="String">
     	SELECT *
     	FROM product
@@ -40,5 +41,22 @@
     		82
     	)
     </insert>-->
+=======
+    <select id="view" resultType="ProductVO">
+    	SELECT product_name,
+    		   bigsort,
+    		   middleSort,
+    		   origin_price,
+    		   sale_price,
+    		   brand,
+    		   delivery_free_YN,
+    		   thumbnail_image,
+    		   detail_image,
+    		   delivery_info_image,
+    		   cancel_image 
+    	FROM product
+    	WHERE del_YN != 'y' and product_index = #{index}
+    </select>
+>>>>>>> branch 'main' of https://github.com/codingwpwp/EzenBye.git
     
 </mapper>

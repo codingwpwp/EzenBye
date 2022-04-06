@@ -8,7 +8,7 @@
  	<select id="latelyServiceCenter" resultType="ServiceCenterVO" parameterType="int">
         SELECT * 
         FROM 
-        servicecenter where member_index = #{member_index} 
+        servicecenter WHERE member_index = #{member_index} and del_YN = 'N' 
         order by write_date desc limit 3
     </select>
   

@@ -34,5 +34,19 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.insertMember(vo);
 		
 	}
+	
+	@Override
+	public int idChk(MemberVO vo) throws Exception{
+		int result = memberDao.idChk(vo);
+		return result;
+	}
+	
+//	@Override
+//	public int nickChk(MemberVO vo)throws Exception{
+//		int result =memberDao.nickChk(vo);
+//		return result;
+//	}
+	
+	
 }
  

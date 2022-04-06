@@ -10,4 +10,8 @@ public interface MemberService {
 	public MemberVO Login(MemberVO vo) throws Exception;
 	
 	int insertMember(MemberVO vo) throws Exception;
+	
+	int idChk(MemberVO vo) throws Exception;
+	
+//	int nickChk(MemberVO vo)throws Exception;
 }
