@@ -176,3 +176,23 @@ function selectAll(obj)  {
 	    checkbox.checked = obj.checked;
 	  })
 }
+
+//세션이 만료됬을때 메인으로 나가짐
+	setInterval(function sessionCheck(){
+		var sessionMember = '';
+		$.ajax({
+			type : 'POST',
+			datatype : 'json',
+			url : 'memberSessionCheck.do',
+			success : function(result){
+				sessionMember = result;
+				if(sessionMember == 'false'){
+					alert('로그아웃 되었습니다.');
+					location.href = 'index.do';
+				}
+			},
+			error : function(xhr, status, error) {
+				alert('ajax error');
+			}
+		});
+	}, 60000);

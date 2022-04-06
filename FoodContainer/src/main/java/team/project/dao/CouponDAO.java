@@ -24,4 +24,8 @@ public class CouponDAO {
 		return sqlSession.selectOne(Namespace+".couponSelectOne", coupon_index);
 	}
 	
+	public int mypageCouponCount(int member_index) throws Exception {
+		return sqlSession.selectOne(Namespace+".mypageCouponCount", member_index);
+	}
+	
 }

@@ -14,5 +14,11 @@
         SELECT * FROM coupon
 		WHERE coupon_index=#{coupon_index}
     </select>
+    
+    <select id="mypageCouponCount" resultType="int" parameterType="int">
+        SELECT count(*)
+        FROM 
+        coupon WHERE member_index=#{member_index} and used_yn='N'
+    </select>
    
 </mapper>
