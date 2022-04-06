@@ -27,7 +27,7 @@ public class loginController {
 	   
 	   @RequestMapping(value ="loginmain.do", method= RequestMethod.POST)
 	   public String logingo(MemberVO vo,HttpServletRequest req,RedirectAttributes rttr,@RequestParam("id")String id
-	                     ,@RequestParam("pw")String pw) throws Exception{
+	                     ,@RequestParam("name")String name) throws Exception{
 	      
 	      HttpSession session =req.getSession();
 	      MemberVO login = memberService.Login(vo);
@@ -35,10 +35,10 @@ public class loginController {
 	      String path="";
 	      vo = new MemberVO();
 	      System.out.println(id);
-	      System.out.println(pw);
+	      System.out.println(name);
 	      vo.setId(id);
-	      vo.setPw(pw);
-	      System.out.println(vo.getId()+","+vo.getPw());
+	      vo.setName(name);
+	      System.out.println(vo.getId()+","+vo.getName());
 	      
 	      
 	      
