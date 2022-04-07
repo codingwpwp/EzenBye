@@ -57,7 +57,7 @@
                 <article id="mainSection">
                     <!-- 실질적인 메인 내용 -->
                     <div class="col-md-11">
-			        <div class="col-7 h-80 p-5 bg-secondary bg-gradient bg-opacity-25 border mx-auto rounded-3">
+			        <div class="col-7 h-80 p-5 bg-secondary bg-gradient bg-opacity-25 border mx-auto rounded-3 main-card">
 			          <p class="fs-2">${member.name }님</p>
 			          	<div class="row point">
 				          <div class="col-sm-8">
@@ -79,7 +79,9 @@
 			        
 			        <p class="fs-6 lookup-fs-6">최근주문</p>
 			        <hr />
+			        
 			        <c:forEach items="${ordersList}" var="list">
+			        <div class="lookupBorder">
 			        	<div class="row">
 				        	<div class="col-sm-12 col-md-12 col-lg-5">
 				        		<span class="good-date">${list.order_date}</span>
@@ -88,7 +90,7 @@
 				        		<span class="good-date">주문번호 : ${list.member_order_index }</span>
 				        	</div>
 				        	<div class="col-sm-12 col-lg-2 findT">
-				        		<a href="#" class="link-info"><span class="fw-bold">배송조회</span></a>
+				        		<button type="button" class="btn btn-primary btn-sm" onclick="location.href='mypage_lookupView.do?member_order_index=${list.member_order_index}'">주문상세</button>
 				        	</div>
 				        </div>
 				        
@@ -105,11 +107,11 @@
 						        	</div>
 						        	<div class="row">
 						        		<div class="col-sm-3">
-						        			<img src="<%=request.getContextPath() %>/resources/img/${opList.brand}/${opList.middleSort}/${opList.thumbnail_image}" class="img-fluid img-thumbnail" alt="상품사진">
+						        			<img src="<%=request.getContextPath() %>/resources/img/${opList.brand}/${opList.middleSort}/${opList.thumbnail_image}" class="img-thumbnail" alt="상품사진">
 						        		</div>
 						        		<div class="col-sm-8 d-flex align-items-start flex-column mb-3">
 									    	<div class="mb-auto p-2">${opList.product_name}</div>
-			  								<div class="p-2"><fmt:formatNumber value="${opList.origin_price }" pattern="#,###" />원 | ${opList.quantity }개</div>
+			  								<div class="p-2"><fmt:formatNumber value="${opList.origin_price }" pattern="#,###" />원 | ${opList.order_quantity }개</div>
 						        		</div>
 						        	</div>
 						        	
@@ -119,44 +121,8 @@
 						        </div>
 						        </c:if> 
 				        	</c:forEach>
-			        	
+			        	</div>
 			        </c:forEach>
-			        
-			        
-			        
-			        
-			        <div class="row">
-			        	<div class="col-sm-4 col-6">		        	
-			        	</div>
-			        	<div class="col-sm-5 col-6">			        		
-			        	</div>
-			        	<div class="col-sm-3 col-12 findT">
-			        		<a href="#" class="link-info"><span class="fw-bold">배송조회</span></a>
-			        	</div>
-			        </div>
-			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
-			        	<div class="row">
-			        		<div class="col-sm-4">
-			        			<span class="fw-bold">구매확정</span>
-			        		</div>
-			        		<div class="col-sm-8 number-good">
-			        			<span class="fw-bold">상품 주문번호 : DFSD5649</span>
-			        		</div>
-			        	</div>
-			        	<div class="row">
-			        		<div class="col-sm-3">
-			        			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
-			        		</div>
-			        		<div class="col-sm-8 d-flex align-items-start flex-column mb-3">
-						    	<div class="mb-auto p-2">비비고 진한고기만두400g*2번들</div>
-  								<div class="p-2">4580원 | 5개</div>
-			        		</div>
-			        	</div>
-			        	
-			        	<div class="d-grid gap-2 col-6 mx-auto">
-						  <button class="btn btn-outline-secondary" type="button">리뷰작성</button>
-						</div>
-			        </div>
 			        
 			        <p class="fs-6 lookup-fs-6">최근 문의내역</p>
 			        <hr />

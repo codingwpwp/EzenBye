@@ -5,12 +5,18 @@ public class OrderProductVO extends ProductVO{
 	private String no_member_order_index;
 	private String orderItem_index;
 	private String product_index;
-	private int quantity;
+	private int order_quantity;
 	private int price;
 	private String order_status;
 	private int point;
 	private String buy_YN;
 	
+	public int getOrder_quantity() {
+		return order_quantity;
+	}
+	public void setOrder_quantity(int order_quantity) {
+		this.order_quantity = order_quantity;
+	}
 	public String getMember_order_index() {
 		return member_order_index;
 	}
@@ -34,12 +40,6 @@ public class OrderProductVO extends ProductVO{
 	}
 	public void setProduct_index(String product_index) {
 		this.product_index = product_index;
-	}
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
 	}
 	public int getPrice() {
 		return price;

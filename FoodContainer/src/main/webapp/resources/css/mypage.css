@@ -55,6 +55,12 @@
 }
 /* 두번째타이틀 */
 
+.lookupBorder{
+	border-style: groove;
+	border-width: 4px;
+	padding: 8px; margin-bottom: 20px;
+}
+
 .findT, .number-good {
 	text-align: right;
 }
