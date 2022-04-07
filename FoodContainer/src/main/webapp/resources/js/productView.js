@@ -157,3 +157,8 @@
 			$(".subMenuGroup").find("input:eq(2)").next("label").html("취소 규정");
 		}
 	})
+	
+	//페이지 접속 시 rightside 새로고침
+	window.onload(function(){
+		$('#rightSide').load(location.href+' #rightSide');
+	});
