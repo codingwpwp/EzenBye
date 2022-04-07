@@ -74,7 +74,6 @@
 		var name=$(obj).next("input[name='index']").val();
 		console.log(name);
 		
-		
 		$.ajax({
 			url : "viewProductCookie.do",
 			type : "get",

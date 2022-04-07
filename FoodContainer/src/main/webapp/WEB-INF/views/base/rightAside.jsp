@@ -8,8 +8,8 @@
     <i class="bi bi-cart3 fs-1"></i>
     <span class="fw-bold fs-6">최근 본 상품</span>
     
-    <c:forEach items="${viewProduct}">
-    	${viewProduct}
+    <c:forEach items="${viewCookie}" var="product">
+    	${product}
     </c:forEach>
     
     <div class="productImg">

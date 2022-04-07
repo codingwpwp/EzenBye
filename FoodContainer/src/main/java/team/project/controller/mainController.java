@@ -66,21 +66,27 @@ public class mainController {
 	@RequestMapping(value = "viewProductCookie.do", method = RequestMethod.GET)
 	public String viewProductCookie(Locale locale, Model model, ProductVO productVO, HttpServletRequest request, HttpServletResponse response) {
 		
-		String cookieValue = request.getParameter("name");
+		String viewProduct = request.getParameter("name");
 		
 		Cookie[] cookies = request.getCookies();
 		
-		int cookieCnt = request.getCookies().length;
+		Cookie cookieValue = null;
 		
-		if(cookies == null) {
-			Cookie cookie = new Cookie("productView",cookieValue);
-			response.addCookie(cookie);
-		}else {
-			Cookie cookie = new Cookie("productView"+cookieCnt,cookieValue);
-			response.addCookie(cookie);
+		for(Cookie cookie : cookies) {
+			if(cookie.getName().equals("pIndex")) {
+				cookieValue = cookie;
+				break;
+			}
 		}
 		
-		
+		if(cookieValue != null) {
+			String tempCookie = cookieValue.getValue();
+			
+			
+		}else{
+			Cookie viewCookie = new Cookie("pIndex", viewProduct);
+			response.addCookie(viewCookie);
+		}
 		
 		return "base/rightAside";
 		
