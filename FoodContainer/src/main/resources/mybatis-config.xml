@@ -11,6 +11,7 @@
             <typeAlias type="team.project.vo.ServiceCenterVO" alias="ServiceCenterVO"/>
             <typeAlias type="team.project.vo.OrdersVO" alias="OrdersVO"/>
             <typeAlias type="team.project.vo.OrderProductVO" alias="OrderProductVO"/>
+            <typeAlias type="team.project.vo.BannerVO" alias="BannerVO"/>
         </typeAliases>
         
     </configuration>

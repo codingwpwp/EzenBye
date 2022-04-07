@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import team.project.service.BannerService;
 import team.project.service.ProductService;
+import team.project.vo.BannerVO;
 import team.project.vo.ProductVO;
 
 /**
@@ -24,8 +26,11 @@ import team.project.vo.ProductVO;
  */
 @Controller
 public class AdminPageController {
+	
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private BannerService bannerService;
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminPageController.class);
 
@@ -171,10 +176,23 @@ public class AdminPageController {
 	}
 
 	@RequestMapping(value = "banner.do", method = RequestMethod.GET)
-	public String banner(Locale locale, Model model) {
+	public String banner(Locale locale, Model model) throws Exception {
+		
+		List<BannerVO> bannerList = bannerService.bannerList();
+		model.addAttribute("bannerList", bannerList);
+		
 		return "adminPage/adminPage_banner";
 	}
-
+	@RequestMapping(value = "bannerRegister.do", method = RequestMethod.POST)
+	public String bannerRegister(Locale locale, Model model, BannerVO bannervo,
+								@RequestParam("bannerFile") MultipartFile bannerFile,
+								HttpServletRequest request) throws Exception {
+		
+		bannerService.bannerInsert(bannervo, bannerFile, request);
+		
+		
+		return "redirect:banner.do";
+	}
 	@RequestMapping(value = "bestRecipe.do", method = RequestMethod.GET)
 	public String bestRecipe(Locale locale, Model model) {
 		return "adminPage/adminPage_bestRecipe";

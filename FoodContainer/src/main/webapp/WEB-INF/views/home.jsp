@@ -8,10 +8,10 @@
 </head>
 <body>
 <h1>
-	<c:forEach items="${list}" var="list">
+	<%-- <c:forEach items="${list}" var="list">
 	${list.name } <br>
 	${list.point } <br>
-	</c:forEach>
+	</c:forEach> --%>
 </h1>
 </body>
 </html>

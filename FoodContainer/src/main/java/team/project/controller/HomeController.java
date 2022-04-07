@@ -42,9 +42,9 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate);
 		
-		List<MemberVO> list = memberService.list(vo);
+		//List<MemberVO> list = memberService.list(vo);
 		
-		model.addAttribute("list",list);
+		//model.addAttribute("list",list);
 		
 		return "home";
 	}

@@ -38,7 +38,7 @@ $(document).ready(function(){
 			return false;
 		}
 	});
-	if(sumPrice >= 50000){
+	if(sumPrice >= 40000){
 		deliveryPrice = 0;
 	}
     $(".deliveryPrice").text(deliveryPrice.toLocaleString('ko-KR'));
@@ -48,8 +48,7 @@ $(document).ready(function(){
 	$(".totalPrice").text(totalPrice.toLocaleString('ko-KR'));
 	
 	// 적립 예정 포인트 따지기
-	expectedPoint = Math.floor(totalPrice * 0.05);
-	// console.log(expectedPoint);
+	expectedPoint = Math.floor(sumPrice * 0.01);
 	$(".expectedPoint").text(expectedPoint);
 
     
@@ -67,7 +66,6 @@ var orderNameSw = 0;
 var orderPhoneSw = 0;
 
 
-// 회원 비회원 공통 유효성 검사
 // 전체약관 동의
 function checkedAll(obj){
 	if($(obj).is(":checked")){
@@ -213,8 +211,6 @@ function checkName(obj){
 	        receiverSw = 1;
 		}
 	}
-	// console.log(receiverSw);
-	// console.log(orderNameSw);
 }
 
 // 주문자와 동일
@@ -493,9 +489,7 @@ function checkedCoupon(obj){
 				
 				$(".couponPrice").text(couponPrice.toLocaleString('ko-KR'));
 				$(".totalPrice").text(totalPrice.toLocaleString('ko-KR'));
-				
-				expectedPoint = Math.floor(totalPrice * 0.05);
-				$(".expectedPoint").text(expectedPoint);
+
 				
 				$("#couponUsedSpan").text($(obj).find("option:selected").text());
 			}else{
@@ -516,8 +510,6 @@ function couponResetbuttonFn(){
 	totalPrice = sumPrice + deliveryPrice - couponPrice - pointPrice;
 	
 	$(".totalPrice").text(totalPrice.toLocaleString('ko-KR'));
-	expectedPoint = Math.floor(totalPrice * 0.05);
-	$(".expectedPoint").text(expectedPoint);
 	
 	$("select[name='coupon']").find("option[id='notUsed']").prop("selected", true);
 }
@@ -533,9 +525,6 @@ function checkedPoint(obj){
 		$("#point").prop('readonly', true);
 		totalPrice = sumPrice + deliveryPrice - couponPrice - pointPrice;
 		$(".totalPrice").text(totalPrice.toLocaleString('ko-KR'));
-		
-		expectedPoint = Math.floor(totalPrice * 0.05);
-		$(".expectedPoint").text(expectedPoint);
 	}
 }
 
@@ -573,9 +562,6 @@ function usePoint(obj){
 			$(".pointPrice").text(point.toLocaleString('ko-KR'));
 			totalPrice = sumPrice + deliveryPrice - couponPrice - point;
 			$(".totalPrice").text(totalPrice.toLocaleString('ko-KR'));
-			
-			expectedPoint = Math.floor(totalPrice * 0.05);
-			$(".expectedPoint").text(expectedPoint);
 		}else{
 			$(obj).val("");
 			$(".totalPrice").css("color", "#0d6efd");

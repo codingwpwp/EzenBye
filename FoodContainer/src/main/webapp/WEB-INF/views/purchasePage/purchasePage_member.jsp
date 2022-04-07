@@ -254,7 +254,7 @@
                     <!-- 결제 상품 문구 -->
                     <div class="fs-3 fw-bold mt-2">
                         결제 상품<br>
-                        <span class="fs-6">배송비가 있어도 <span class="text-danger">50,000원</span> 이상은 <span class="text-danger">무료배송!!</span></span>
+                        <span class="fs-6">배송비가 있어도 <span class="text-danger">40,000원</span> 이상은 <span class="text-danger">무료배송!!</span></span>
                     </div>
                     <hr>
 

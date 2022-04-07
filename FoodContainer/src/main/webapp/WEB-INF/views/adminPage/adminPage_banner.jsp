@@ -1,3 +1,4 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -83,35 +84,40 @@
                             </thead>
 
                             <tbody>
-
-                                <tr>
-                                    <td>
-                                        <input class="form-check-input border border-dark" type="checkbox" value="">
-                                    </td>
-
-                                    <td>
-                                        1
-                                    </td>
-
-                                    <td class="text-center"  width="25%">
-                                        <img src="<%=request.getContextPath()%>/resources/img/배너3.png" class="img-fluid rounded d-none d-md-inline">
-                                        <button class="btn btn-outline-info py-0 px-1 d-md-none" data-bs-toggle="modal" data-bs-target="#nowBannerModal">배너보기</button>
-                                    </td>
-
-                                    <td style="text-align: start;">
-                                        배너이름예시
-                                    </td>
-
-                                    <td>
-                                        2022-02-30
-                                    </td>
+                            <c:if test="${not empty bannerList}">
+								<c:forEach items = "${bannerList}" var = "bList">
+								<tr class="bannerTr">
+									<!-- 체크박스 -->
+                                    <td><input class="form-check-input border border-dark bannerCheckboxs" type="checkbox" value=""></td>
+									
+									<!-- 배너 번호 -->
+                                    <td>${bList.banner_index}</td>
                                     
+                                    <!-- 배너 이미지 -->
+                                    <td class="text-center"  width="25%">
+                                        <img src="<%=request.getContextPath()%>/resources/img/배너/${bList.image}" class="img-fluid rounded d-none d-md-inline">
+                                        <button class="btn btn-outline-info py-0 px-1 d-md-none" data-bs-toggle="modal" data-bs-target="#nowBannerModal" onclick="nowBanner(this)">배너보기</button>
+                                    </td>
+
+									<!-- 배너 이름 -->
+                                    <td style="text-align: start;">${bList.name}</td>
+
+									<!-- 배너 등록 날짜 -->
+                                    <td>${fn:substring(bList.register_date, 0,10)}</td>
+                                    
+                                    <!-- 해당 배너의 수정&삭제버튼 -->
                                     <td>
                                         <button class="btn btn-outline-primary btn-sm py-0" data-bs-toggle="modal" data-bs-target="#modifyBannerModal">수정</button>
                                         <button class="btn btn-outline-dark btn-sm py-0">삭제</button>
                                     </td>
                                 </tr>
-
+								</c:forEach>
+							</c:if>
+							<c:if test="${empty bannerList}">
+								<td colspan="6" class="display-1 fw-bold p-3">
+									등록된 배너가 없습니다.
+								</td>
+							</c:if>
                             </tbody>
 
                         </table>
@@ -128,7 +134,7 @@
                                 </div>
 
                                 <div class="modal-body">
-                                    <img src="<%=request.getContextPath()%>/resources/img/배너3.png" class="img-fluid rounded">
+                                    <img src="" class="img-fluid rounded" id="nowBannerImg">
                                 </div>
                                 
                                 <div class="modal-footer d-flex justify-content-start">
@@ -151,7 +157,7 @@
                                 </div>
 
                                 <div class="modal-body">
-                                    <form name="bannerRegisterForm" id="111" method="get" action="">
+                                    <form name="bannerRegisterForm" method="post" action="bannerRegister.do" enctype="multipart/form-data">
 
                                         <!-- 배너이름 -->
                                         <div class="row mb-3 d-flex align-items-center">
@@ -161,20 +167,19 @@
                                             </div>
 
                                             <div class="col-8 col-sm-9">
-                                                <input type="text" class="form-control" name="bannerName" value="" placeholder="툴팁용(20자 이내)">
+                                                <input type="text" class="form-control" name="name" value="" placeholder="툴팁용(20자 이내)" autocomplete="off">
                                             </div>
 
                                         </div>
 
                                         <!-- 사진첨부 -->
-
                                         <div class="row mb-3 d-flex align-items-center">
                                             <div class="col-4 col-sm-3 d-flex justify-content-center justify-content-sm-end">
                                                 <span class="infoTitle p-1"><span class="text-danger">*</span>사진첨부</span>
                                             </div>
 
                                             <div class="col-8 col-sm-9">
-                                                <input class="form-control" type="file" name="bannerFile" accept="image/png" onchange="bannerPreviewImage(event, this, 'bannerRegisterForm');">
+                                                <input class="form-control" type="file" name="bannerFile" accept="image/png, image/PNG" onchange="bannerPreviewImage(event, this, 'bannerRegisterForm');">
                                             </div>
 
                                         </div>
@@ -192,12 +197,10 @@
                                             </div>
 
                                             <div class="col-8 col-sm-9 row">
-                                                
-                                                <div class="col-12 d-flex justify-content-center linkMessage text-danger fw-bold" style="white-space: nowrap;"></div>
 
                                                 <div class="col-6 d-flex justify-content-center">
 
-                                                    <input class="form-check-input" type="radio" name="linkYN" id="registerLinkYes" checked>
+                                                    <input class="form-check-input" type="radio" name="link_YN" value="Y" id="registerLinkYes" onchange="linkYNCheck('bannerRegisterForm')" checked>
                                                     <label class="form-check-label fw-bold" for="registerLinkYes">
                                                         &nbsp;있음
                                                     </label>
@@ -206,7 +209,7 @@
 
                                                 <div class="col-6 d-flex justify-content-center">
 
-                                                    <input class="form-check-input" type="radio" name="linkYN" id="registerLinkNo">
+                                                    <input class="form-check-input" type="radio" name="link_YN" value="N" id="registerLinkNo" onchange="linkYNCheck('bannerRegisterForm')">
                                                     <label class="form-check-label fw-bold" for="registerLinkNo">
                                                         &nbsp;없음
                                                     </label>
@@ -225,7 +228,7 @@
                                             </div>
 
                                             <div class="col-8 col-sm-9">
-                                                <input type="text" class="form-control" name="bannerURL" value="http://" placeholder="주소를 입력하세요" onkeyup="linkYNCheck(this, 'bannerRegisterForm')" autocomplete="off">
+                                                <input type="text" class="form-control" name="link" value="http://" placeholder="주소를 입력하세요" autocomplete="off">
                                             </div>
 
                                         </div>
@@ -235,7 +238,7 @@
                                 
                                 <div class="modal-footer d-flex justify-content-start">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                                    <button type="button" class="btn btn-primary">등록</button>
+                                    <button type="button" class="btn btn-primary" onclick="bannerSumbit(this, 'bannerRegisterForm');">등록</button>
                                 </div>
 
                             </div>
@@ -254,7 +257,7 @@
                                 </div>
 
                                 <div class="modal-body">
-                                    <form name="bannerModifyrForm" id="111" method="get" action="">
+                                    <form name="bannerModifyrForm" method="get" action="">
 
                                         <!-- 배너이름 -->
                                         <div class="row mb-3 d-flex align-items-center">
@@ -329,7 +332,7 @@
                                             </div>
 
                                             <div class="col-8 col-sm-9">
-                                                <input type="text" class="form-control" name="bannerURL" value="http://" placeholder="주소를 입력하세요" onkeyup="linkYNCheck(this, 'bannerRegisterForm')" autocomplete="off">
+                                                <input type="text" class="form-control" name="bannerURL" value="http://" placeholder="주소를 입력하세요" onkeyup="linkYNCheck(this, 'bannerModifyrForm')" autocomplete="off">
                                             </div>
 
                                         </div>

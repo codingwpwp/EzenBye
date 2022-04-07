@@ -583,7 +583,7 @@ function bannerPreviewImage(event, obj, formName){
     // 해당폼을 추출하는 과정
     var form = $("form[name='" + formName + "']");
 
-    if(extension == "png"){ // 확장자가 png일 경우
+    if(extension == "png" || extension == "PNG"){ // 확장자가 png일 경우
 
         // 원래 있던 이미지는 삭제
         $(form).find(".imageContainer").find("img").remove();
@@ -629,19 +629,55 @@ function bannerPreviewImage(event, obj, formName){
 }
 
 // 배너페이지의 링크를 입력했을때 링크유무를 조사
-function linkYNCheck(obj, formName){
+function linkYNCheck(formName){
 
     // 해당폼을 추출하는 과정
     var form = $("form[name='" + formName + "']");
-
+    
     // 링크유무를 확인하는 과정
-    var linkYN = $(form).find("input[name='linkYN']:checked").attr("id");
-    if(linkYN != "yes"){
-        var URLvalue = obj.value.substring(0, obj.value.length - 1);
-        obj.value = URLvalue;
-        $(form).find(".linkMessage").text("'있음'으로 체크하고 입력하세요");
+    var linkYN = $(form).find("input[name='link_YN']:checked").val();
+    var link = $(form).find("input[name='link']");
+    if(linkYN == "N"){
+		link.val("");
+		link.attr('placeholder', "");
+		link.attr('disabled', true);
     }else{
-        $(form).find(".linkMessage").text("");
+		link.val("http://");
+		link.attr('placeholder', "주소를 입력하세요");
+		link.attr('disabled', false);
     }
 
+}
+
+// 배너페이지의 배너 등록&수정 submit
+function bannerSumbit(obj, formName){
+	var flag = true;
+	var form = $("form[name='" + formName + "']")
+	var urlReg = /(http(s)?:\/\/)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}/gi;
+	
+	if($(form).find("input[name='name']").val() == ""){
+		flag = false;
+	}else if($(form).find("input[name='bannerFile']").val() == ""){
+		flag = false;
+	}else if($(form).find("input[name='link_YN']:checked").val() == "Y"){
+		if($(form).find("input[name='link']").val() == ""){
+			flag = false;
+		}else if(!urlReg.test($(form).find("input[name='link']").val())){
+			flag = false;
+		}
+	}
+	
+	if(flag == false){
+		alert('형식 오류입니다');
+	}else{
+		alert('배너 등록이 완료되었습니다');
+		$(obj).parent().prev().find("form").submit();;
+	}
+	
+}
+
+// 배너페이지의 배너보기
+function nowBanner(obj){
+	var img = $(obj).prev().attr("src");
+	$("#nowBannerImg").attr("src", img);
 }
