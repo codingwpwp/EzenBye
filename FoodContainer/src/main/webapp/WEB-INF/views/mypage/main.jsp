@@ -57,7 +57,7 @@
                 <article id="mainSection">
                     <!-- 실질적인 메인 내용 -->
                     <div class="col-md-11">
-			        <div class="col-7 h-80 p-5 bg-secondary bg-gradient bg-opacity-25 border mx-auto rounded-3">
+			        <div class="col-7 h-80 p-5 bg-secondary bg-gradient bg-opacity-25 border mx-auto rounded-3 main-card">
 			          <p class="fs-2">${member.name }님</p>
 			          	<div class="row point">
 				          <div class="col-sm-8">
@@ -79,7 +79,9 @@
 			        
 			        <p class="fs-6 lookup-fs-6">최근주문</p>
 			        <hr />
+			        
 			        <c:forEach items="${ordersList}" var="list">
+			        <div class="lookupBorder">
 			        	<div class="row">
 				        	<div class="col-sm-12 col-md-12 col-lg-5">
 				        		<span class="good-date">${list.order_date}</span>
@@ -109,7 +111,7 @@
 						        		</div>
 						        		<div class="col-sm-8 d-flex align-items-start flex-column mb-3">
 									    	<div class="mb-auto p-2">${opList.product_name}</div>
-			  								<div class="p-2"><fmt:formatNumber value="${opList.origin_price }" pattern="#,###" />원 | ${opList.quantity }개</div>
+			  								<div class="p-2"><fmt:formatNumber value="${opList.origin_price }" pattern="#,###" />원 | ${opList.order_quantity }개</div>
 						        		</div>
 						        	</div>
 						        	
@@ -119,7 +121,7 @@
 						        </div>
 						        </c:if> 
 				        	</c:forEach>
-			        	<hr>
+			        	</div>
 			        </c:forEach>
 			        
 			        <p class="fs-6 lookup-fs-6">최근 문의내역</p>

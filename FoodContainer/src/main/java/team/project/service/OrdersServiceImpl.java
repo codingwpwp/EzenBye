@@ -19,4 +19,10 @@ public class OrdersServiceImpl implements OrdersService{
 		return list;
 	}
 
+	@Override
+	public OrdersVO ordersDetail(String member_order_index) throws Exception {
+		OrdersVO ordersDetail = ordersDAO.ordersDetail(member_order_index);
+		return ordersDetail;
+	}
+
 }

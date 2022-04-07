@@ -21,8 +21,6 @@ public class ProductServiceImpl implements ProductService {
 		return prodcutListAll;
 	}
 
-	@Override
-
 	public ProductVO ProductSelectOne(ProductVO productVO) throws Exception {
 		
 		ProductVO productOne = productDAO.ProductSelectOne(productVO);
@@ -48,7 +46,6 @@ public class ProductServiceImpl implements ProductService {
 	public ProductVO view(String index) throws Exception {
 		
 		return productDAO.view(index);
-
 	}
 	
 }

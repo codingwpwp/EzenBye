@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -64,69 +66,50 @@
 				 
 			        <p class="fs-6 lookup-fs-6">주문배송조회</p>
 			        <hr />
-			        <div class="row">
-			        	<div class="col-sm-4 col-6">
-			        		<span class="good-date">2022.3.15</span>
-			        	</div>
-			        	<div class="col-sm-5 col-6">
-			        		<span class="good-date">주문번호 : ADDF1325</span>
-			        	</div>
-			        	<div class="col-sm-3 col-12 findT">
-			        		<a href="#" class="link-info"><span>배송조회</span></a>
-			        	</div>
-			        </div>
 			        
-			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
 			        	<div class="row">
-			        		<div class="col-sm-4">
-			        			<span class="fw-bold">배송완료</span>
-			        		</div>
-			        		<div class="col-sm-8 number-good">
-			        			<span class="fw-bold">상품 주문번호 : DFSD5649</span>
-			        		</div>
-			        	</div>
-			        	<div class="row">
-			        		<div class="col-sm-3">
-			        			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
-			        		</div>
-			        		<div class="col-sm-8 d-flex align-items-start flex-column mb-3">
-						    	<div class="mb-auto p-2">비비고 진한고기만두400g*2번들</div>
-  								<div class="p-2">4580원 | 5개</div>
-			        		</div>
+				        	<div class="col-sm-12 col-md-12 col-lg-5">
+				        		<span class="good-date">${ordersDetail.order_date }</span>
+				        	</div>
+				        	<div class="col-sm-12 col-md-12 col-lg-5">
+				        		<span class="good-date">주문번호 : ${ordersDetail.member_order_index }</span>
+				        	</div>
+				        	<div class="col-sm-12 col-lg-2 findT">
+				        		<a href="#" class="link-info fw-bold"><span>배송조회</span></a>
+				        	</div>
 			        	</div>
 			        	
-			        	<div class="d-grid gap-2 col-6 mx-auto">
-						  <button class="btn btn-outline-secondary" type="button">구매확정</button>
-						</div>
-			        </div>
-			        
-			        <div class="row">
-			        	<div class="col-sm-3">		        	
-			        	</div>
-			        	<div class="col-sm-6">			        		
-			        	</div>
-			        	<div class="col-sm-3 findT">
-			        		<a href="#" class="link-info"><span>배송조회</span></a>
-			        	</div>
-			        </div>
+			        	<c:set var="totalPrice" value="0" />
+			        	<c:forEach items="${opList}" var="opList">
+				        	<c:if test="${ordersDetail.member_order_index eq opList.member_order_index}"> 
+					        	<div class="h-100 p-2 bg-light border rounded-3 card-good">
+						        	<div class="row">
+						        		<div class="col-sm-4">
+						        			<span class="fw-bold">${opList.order_status }</span>
+						        		</div>
+						        		<div class="col-sm-8 number-good">
+						        			<span class="fw-bold">상품 주문번호 : ${opList.orderItem_index }</span>
+						        		</div>
+						        	</div>
+						        	<div class="row">
+						        		<div class="col-sm-3">
+						        			<img src="<%=request.getContextPath() %>/resources/img/${opList.brand}/${opList.middleSort}/${opList.thumbnail_image}" class="img-thumbnail" alt="상품사진">
+						        		</div>
+						        		<div class="col-sm-8 d-flex align-items-start flex-column mb-3">
+									    	<div class="mb-auto p-2">${opList.product_name}</div>
+			  								<div class="p-2"><fmt:formatNumber value="${opList.origin_price }" pattern="#,###" />원 | ${opList.order_quantity }개</div>
+			  								<c:set var="totalPrice" value="${totalPrice + opList.price}" />
+						        		</div>
+						        	</div>
+						        	
+						        	<div class="d-grid gap-2 col-6 mx-auto">
+									  <button class="btn btn-outline-secondary" type="button">구매확정</button>
+									</div>
+						        </div>
+						        </c:if> 
+				        	</c:forEach>
+				        	
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
-			        	<div class="row">
-			        		<div class="col-sm-4">
-			        			<span class="fw-bold">구매확정</span>
-			        		</div>
-			        		<div class="col-sm-8 number-good">
-			        			<span class="fw-bold">상품 주문번호 : DFSD5649</span>
-			        		</div>
-			        	</div>
-			        	<div class="row">
-			        		<div class="col-sm-3">
-			        			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
-			        		</div>
-			        		<div class="col-sm-8 d-flex align-items-start flex-column mb-3">
-						    	<div class="mb-auto p-2">비비고 진한고기만두400g*2번들</div>
-  								<div class="p-2">4580원 | 5개</div>
-			        		</div>
-			        	</div>
 			        	
 			        	<div class="d-grid gap-2 col-6 mx-auto">			  
 						  <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">리뷰작성</button>
@@ -188,23 +171,34 @@
 			        <p class="fs-6 lookup-fs-6">결제정보</p>
 			        <hr />
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
-			        	<div><span class="fw-bold">상품가격 :</span> </div>
-			        	<div class="lookupView-infmoney"><span class="fw-bold">배송비 :</span> </div>
-			        	<div class="lookupView-infmoney"><span class="fw-bold">할인가격 :</span> </div>
-			        	<div class="lookupView-infmoney"><span class="fw-bold">총 결제금액 :</span> </div>
+			        	<div><span class="fw-bold">상품가격 :</span>
+			        		<fmt:formatNumber value="${totalPrice}" pattern="#,###" />원
+			        	</div>
+			        	
+			        	<div class="lookupView-infmoney"><span class="fw-bold">배송비 :</span>
+			        		<c:if test="${ordersDetail.delivery_free_YN eq 'Y' }">
+			        			없음
+			        		</c:if>
+			        		<c:if test="${ordersDetail.delivery_free_YN eq 'N' }">
+			        			<fmt:formatNumber value="3000" pattern="#,###" />원
+			        		</c:if>
+			        	 </div>
+			        	 <div class="lookupView-infmoney"><span class="fw-bold">쿠폰적용 :</span></div>
+			        	 <div class="lookupView-infmoney"><span class="fw-bold">포인트 사용 :</span> <fmt:formatNumber value="${ordersDetail.used_point }" pattern="#,###" />원</div>
+			        	 <div class="lookupView-infmoney"><span class="fw-bold">총 결제금액 :</span> <fmt:formatNumber value="${ordersDetail.pay_price }" pattern="#,###" />원 / <span class="fw-bold">포인트 적립 :</span></div>
 			        </div>
 			        
 			        <p class="fs-6 lookup-fs-6">배송지정보</p>
 			        <hr />
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
-			        	<div><span class="fw-bold">받는분 :</span> </div>
-			        	<div class="lookupView-infmoney"><span class="fw-bold">주소 :</span> </div>
-			        	<div class="lookupView-infmoney"><span class="fw-bold">연락처 :</span> 010 - 1234 - 5678 </div>
-			        	<div class="lookupView-infmoney"><span class="fw-bold">요청사항 :</span> </div>
+			        	<div><span class="fw-bold">받는분 :</span> ${ordersDetail.reciever }</div>
+			        	<div class="lookupView-infmoney"><span class="fw-bold">주소 :</span> ${ordersDetail.address }</div>
+			        	<div class="lookupView-infmoney"><span class="fw-bold">연락처 :</span> ${ordersDetail.phone }</div>
+			        	<div class="lookupView-infmoney"><span class="fw-bold">요청사항 :</span> ${ordersDetail.request }</div>
 			        </div>
 			       
     			    <div class="d-grid gap-2 col-4 mx-auto lookupView-btn">
-					  <button class="btn btn-secondary" type="button">주문목록으로</button>
+					  <button class="btn btn-secondary" onclick="location.href='mypage_lookup.do'" type="button">주문목록으로</button>
 					</div>
 			        
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">

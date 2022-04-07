@@ -36,8 +36,8 @@ public class MemberDAO {
 		return result;
 	}
 	
-//	public int nickChk(MemberVO vo) throws Exception{
-//		int result =sqlSession.selectOne(".nickChk",vo);
-//		return result;
-//	}
+	public int nickChk(MemberVO vo) throws Exception{
+		int result =sqlSession.selectOne(".nickChk",vo);
+		return result;
+	}
 }

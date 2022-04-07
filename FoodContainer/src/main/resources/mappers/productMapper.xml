@@ -57,6 +57,5 @@
     	FROM product
     	WHERE del_YN != 'y' and product_index = #{index}
     </select>
-
     
 </mapper>

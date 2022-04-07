@@ -41,11 +41,11 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 	
-//	@Override
-//	public int nickChk(MemberVO vo)throws Exception{
-//		int result =memberDao.nickChk(vo);
-//		return result;
-//	}
+	@Override
+	public int nickChk(MemberVO vo)throws Exception{
+		int result =memberDao.nickChk(vo);
+		return result;
+	}
 	
 	
 }

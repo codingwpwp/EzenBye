@@ -28,6 +28,7 @@ $(document).ready(function(){
 			$(".noteManageView-group1").hide();
 			$(".noteManageView-group2").show();
 			$(".noteManageView-group3").show();
+			$(".main-card").attr("class","col-11 h-80 p-5 bg-secondary bg-gradient bg-opacity-25 border mx-auto rounded-3 main-card");
 		}else {
 			$(".findT").css("text-align","right");
 			$(".order-btn").removeClass("mt-1 mb-1");
@@ -46,6 +47,7 @@ $(document).ready(function(){
 			$(".noteManageView-group1").show();
 			$(".noteManageView-group2").hide();
 			$(".noteManageView-group3").hide();
+			$(".main-card").attr("class","col-7 h-80 p-5 bg-secondary bg-gradient bg-opacity-25 border mx-auto rounded-3 main-card");
 		}
 	
     $(window).resize(function() {
@@ -67,6 +69,7 @@ $(document).ready(function(){
 			$(".noteManageView-group1").hide();
 			$(".noteManageView-group2").show();
 			$(".noteManageView-group3").show();
+			$(".main-card").attr("class","col-11 h-80 p-5 bg-secondary bg-gradient bg-opacity-25 border mx-auto rounded-3 main-card");
 		}else {
 			$(".findT").css("text-align","right");
 			$(".order-btn").removeClass("mt-1 mb-1");
@@ -85,6 +88,7 @@ $(document).ready(function(){
 			$(".noteManageView-group1").show();
 			$(".noteManageView-group2").hide();
 			$(".noteManageView-group3").hide();
+			$(".main-card").attr("class","col-7 h-80 p-5 bg-secondary bg-gradient bg-opacity-25 border mx-auto rounded-3 main-card");
 		}
 		
 		if(window.innerWidth <= 992){

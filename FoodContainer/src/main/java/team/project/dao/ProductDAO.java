@@ -28,6 +28,8 @@ public class ProductDAO {
 		List<ProductVO> ProductIndexList =  sqlSession.selectList(Namespace+".ProductIndexList", productVO);
 
 	}
+
+	
 	public ProductVO view(String index) {
 		
 		return sqlSession.selectOne(Namespace+".view",index);
