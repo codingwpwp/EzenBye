@@ -1,6 +1,6 @@
 package team.project.vo;
 
-public class OrdersVO {
+public class OrdersVO extends CouponVO{
 	private String member_order_index;
 	private int member_index;
 	private String address;
