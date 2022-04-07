@@ -81,12 +81,12 @@
                                          
                                             </div>
                                             <div class="col-sm-9 col-8">
-                                                <input type="text" class="idinput" name="id" id="test"
+                                                <input type="text" class="idinput" name="id" id="id"
                                                     placeholder="8~20 영문+숫자" >
                                               
                                             </div>
                                             <div class="col-sm-3 col-4">
-                                                <input type="button" class="btn btn-secondary ckinput" value="중복확인" onclick="fn_idChk(); return false;">
+                                                <input type="button" class="btn btn-secondary ckinput" value="중복확인" onclick="return fn_idChk(); ">
                                                 <span class="check"></span>
                                             </div>
                                         </div>

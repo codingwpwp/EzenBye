@@ -1,10 +1,8 @@
 function fn_idChk(){
 	var id =$("#id").val();
-	
 	$.ajax({
 		url:"idChk",
 		type:"post",
-		dataType:"text",
 		data:id,
 		success:function(data){
 			if(data==1){

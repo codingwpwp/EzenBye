@@ -98,7 +98,7 @@
                                     </div>
                                 </div>
                             </form>
-                           
+                          
                         </div>
                         <div class="col-md-6 col-sm-6 col-12 mb-1">
                             <form class="emailfind" action="<%=request.getContextPath()%>/id_email_check.do" method="get">
@@ -115,7 +115,7 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-12 rightform">
                                             <input type="text" class="form-control findinput" placeholder="이메일을 입력해주세요" id="emailinput">
-                                           <input class="btn btn-secondary emailbtn" type="button" value="인증번호 발송" id="emailbtn">
+                                           <input class="btn btn-secondary emailbtn" type="button" value="인증번호 발송" id="emailbtn" onclick="emailFn();">
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-12 rightform">
                                             <input type="text" class="form-control findinput" placeholder="인증번호 입력해주세요">

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.project.service.MemberService;
 import team.project.vo.MemberVO;
@@ -17,11 +18,11 @@ import team.project.vo.MemberVO;
  * Handles requests for the application home page.
  */
 @Controller
-public class signController {
+public class SignController {
 	@Autowired
 	private MemberService memberService;
 	
-	private static final Logger logger = LoggerFactory.getLogger(signController.class);
+	private static final Logger logger = LoggerFactory.getLogger(SignController.class);
 	
 
 	
@@ -30,6 +31,8 @@ public class signController {
 		return "sign/member_sign";
 	}
 
+	
+	@ResponseBody
 	@RequestMapping(value = "member_sign.do", method = RequestMethod.POST)
 	public String sign(Locale locale, Model model,MemberVO vo) throws Exception{
 		logger.info("post member_sign");
@@ -54,18 +57,19 @@ public class signController {
 		return "sign/member_sign";
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="idChk", method = RequestMethod.POST)
 	public int idChk(MemberVO vo) throws Exception {
 		int result = memberService.idChk(vo);
 		return result;
 	}
 	
-	@RequestMapping(value="nickChk", method = RequestMethod.POST)
-	public int nickChk(MemberVO vo) throws Exception {
-		int result = memberService.nickChk(vo);
-		return result;
-	}
-	
+//	@RequestMapping(value="nickChk", method = RequestMethod.POST)
+//	public int nickChk(MemberVO vo) throws Exception {
+//		int result = memberService.nickChk(vo);
+//		return result;
+//	}
+//	
 	@RequestMapping(value = "no_member_sign.do", method = RequestMethod.GET)
 	public String sign2(Locale locale, Model model) {
 		return "sign/no_member_sign";

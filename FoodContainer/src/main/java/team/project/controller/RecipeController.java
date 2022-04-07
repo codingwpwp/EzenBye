@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class recipeController {
-	private static final Logger logger = LoggerFactory.getLogger(recipeController.class);
+public class RecipeController {
+	private static final Logger logger = LoggerFactory.getLogger(RecipeController.class);
 
 	
 	@RequestMapping(value = "/recipe/recipemain.do", method = RequestMethod.GET)
