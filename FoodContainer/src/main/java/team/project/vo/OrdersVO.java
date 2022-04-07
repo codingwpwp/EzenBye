@@ -4,10 +4,17 @@ public class OrdersVO {
 	private String member_order_index;
 	private int member_index;
 	private String address;
-	private String receiver;
+	private String reciever;
 	private String phone;
 	private String request;
 	private String delivery_free_YN;
+	private int used_point;
+	public int getUsed_point() {
+		return used_point;
+	}
+	public void setUsed_point(int used_point) {
+		this.used_point = used_point;
+	}
 	private int coupon_index;
 	private int pay_price;
 	private String order_date;
@@ -31,11 +38,11 @@ public class OrdersVO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getReceiver() {
-		return receiver;
+	public String getReciever() {
+		return reciever;
 	}
-	public void setReceiver(String receiver) {
-		this.receiver = receiver;
+	public void setReciever(String reciever) {
+		this.reciever = reciever;
 	}
 	public String getPhone() {
 		return phone;

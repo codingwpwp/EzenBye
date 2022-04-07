@@ -50,7 +50,7 @@ public class MypageController {
 	private OrderProductService orderProductService;
 	
 	@RequestMapping(value = "mypage_main.do", method = RequestMethod.POST)
-	public String latelyServiceCenter(Locale locale, Model model, int member_index, OrderProductVO opVO) throws Exception {
+	public String main(Locale locale, Model model, int member_index, OrderProductVO opVO) throws Exception {
 
 		List<ServiceCenterVO> list = serviceCenterService.latelyServiceCenter(member_index);
 		List<OrdersVO> ordersList = ordersService.ordersList(member_index);
@@ -68,10 +68,18 @@ public class MypageController {
 	public String home2(Locale locale, Model model) {
 		return "mypage/lookup";
 	}
+	
 	@RequestMapping(value = "mypage_lookupView.do", method = RequestMethod.GET)
-	public String home3(Locale locale, Model model) {
+	public String lookupDetail(Locale locale, Model model, String member_order_index, OrderProductVO opVO) throws Exception {
+		
+		OrdersVO ordersDetail = ordersService.ordersDetail(member_order_index);
+		List<OrderProductVO> opList = orderProductService.orderProductList(opVO);
+		model.addAttribute("ordersDetail",ordersDetail);
+		model.addAttribute("opList",opList);
+		
 		return "mypage/lookupView";
 	}
+	
 	@RequestMapping(value = "mypage_cancle.do", method = RequestMethod.GET)
 	public String home4(Locale locale, Model model) {
 		return "mypage/cancle";

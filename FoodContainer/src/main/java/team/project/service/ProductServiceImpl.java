@@ -5,9 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import team.project.dao.MemberDAO;
 import team.project.dao.ProductDAO;
-import team.project.vo.MemberVO;
 import team.project.vo.ProductVO;
 
 @Service
@@ -23,7 +21,6 @@ public class ProductServiceImpl implements ProductService {
 		return prodcutListAll;
 	}
 
-	@Override
 	public ProductVO ProductSelectOne(ProductVO productVO) throws Exception {
 		
 		ProductVO productOne = productDAO.ProductSelectOne(productVO);

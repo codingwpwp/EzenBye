@@ -18,5 +18,8 @@ public class OrdersDAO {
 	public List<OrdersVO> ordersList(int member_index) throws Exception {
 		return sqlSession.selectList(Namespace+".ordersList", member_index);
 	}
-
+	
+	public OrdersVO ordersDetail(String member_order_index) throws Exception {
+		return sqlSession.selectOne(Namespace+".ordersDetail", member_order_index);
+	}
 }
