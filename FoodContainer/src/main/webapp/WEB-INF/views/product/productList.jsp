@@ -55,7 +55,6 @@
                 <article id="mainSection">
                	<!-- pc버전 -->
                	<article class="pList">
-					
 					<div class="fs-5 my-2 fw-bold topText">전체상품</div>
 					<hr>
 					<!-- 전체상품 -->
@@ -65,7 +64,7 @@
 							<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center">
 								<div class="card" style="width: 18rem;">
 								<a href="productView.do?index=${ProductVO.product_index}" onclick="productCookie(this)">
-								  <img src="<%=request.getContextPath()%>/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="card-img-top" alt="${ProductVO.product_name }">
+								  <img src="<%=request.getContextPath()%>/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="card-img-top cardImg" alt="${ProductVO.product_name }">
 								  <div class="card-body">
 								    <p class="card-text">
 							    		<span style="color:red;"></span><br>
@@ -88,11 +87,11 @@
 								    	<br>
 								    	<c:set var="delivery" value="${ProductVO.delivery_free_YN}" />
 								    	<c:choose>
-								    		<c:when test="${delivery == 'n'}">
+								    		<c:when test="${delivery == 'N'}">
 								    			배송비 3,000원
 								    		</c:when>
 								    		
-								    		<c:when test="${delivery == 'y'}">
+								    		<c:when test="${delivery == 'Y'}">
 								    			무료배송
 								    		</c:when>
 								    	</c:choose>
@@ -142,11 +141,11 @@
 								</c:if>
 								<c:set var="delivery" value="${ProductVO.delivery_free_YN}" />
 								    	<c:choose>
-								    		<c:when test="${delivery == 'n'}">
+								    		<c:when test="${delivery == 'N'}">
 								    			<div>배송비 3,000원</div>
 								    		</c:when>
 								    		
-								    		<c:when test="${delivery == 'y'}">
+								    		<c:when test="${delivery == 'Y'}">
 								    			<div>무료배송</div>
 								    		</c:when>
 								    	</c:choose>
