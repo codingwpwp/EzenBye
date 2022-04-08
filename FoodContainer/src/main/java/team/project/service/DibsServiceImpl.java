@@ -15,8 +15,16 @@ public class DibsServiceImpl implements DibsService {
 	@Override
 	public int dibsInsert(DibsVO dibsVO) throws Exception {
 		
-		return dibsDAO.dibsInsert(dibsVO) ;
+		return dibsDAO.dibsInsert(dibsVO);
 	}
+
+	@Override
+	public DibsVO dibsSelect(DibsVO dibsVO) throws Exception {
+		
+		return dibsDAO.dibsSelect(dibsVO);
+	}
+
+	
 
 
 

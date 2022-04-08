@@ -36,7 +36,14 @@ public class DibsController {
 	@RequestMapping(value = "dibsInsert.do", method = RequestMethod.GET)
 	public String dbisInsert(Locale locale, Model model, DibsVO dibsVO) throws Exception {
 		
-		dibsService.dibsInsert(dibsVO);
+		DibsVO overlap = dibsService.dibsSelect(dibsVO);
+		
+		if(overlap == null) {
+
+			dibsService.dibsInsert(dibsVO);
+			
+		}
+		
 		
 		return "mypage/interItem";
 	}

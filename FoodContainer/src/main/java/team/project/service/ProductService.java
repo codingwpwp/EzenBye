@@ -1,5 +1,6 @@
 package team.project.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ public interface ProductService {
 	
 	ProductVO view(String index) throws Exception;
 	
+	List<ProductVO> cookieList(ArrayList<String> cookieArr) throws Exception;
 	
 	/*여기서 부터는 관리자페이지*/
 	

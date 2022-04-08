@@ -35,6 +35,14 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.view(index);
 	}
 
+	@Override
+	public List<ProductVO> cookieList(ArrayList<String> cookieArr) throws Exception {
+		
+		List<ProductVO> cookieListArr = productDao.cookieList(cookieArr);
+		
+		return cookieListArr;
+	}
+	
 	
 	/*여기서 부터는 관리자페이지*/
 	
@@ -134,7 +142,7 @@ public class ProductServiceImpl implements ProductService {
 				productIndex += alphbetList.substring(alphbetList.indexOf(alpha) + 1, alphbetList.indexOf(alpha) + 2);
 				product.setProduct_index(productIndex);
 			}else {
-				System.out.println("이정도면 등록하지마라");
+				System.out.println("�������� �����������");
 				return 0;
 			}
 		}
@@ -142,5 +150,7 @@ public class ProductServiceImpl implements ProductService {
 		
 		return productDao.adminProductInsert(product);
 	}
+
+	
 	
 }
