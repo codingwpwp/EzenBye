@@ -56,7 +56,7 @@
                     </div>
 
                     <!-- 상품등록하는 폼 -->
-                    <form name="productRegisterForm" action="product_register.do" method="post" id="productManagerForm" enctype="multipart/form-data" onsubmit="return checkProduct()">
+                    <form name="productRegisterForm" action="product_register.do" method="post" id="productManagerForm" enctype="multipart/form-data" onsubmit="return checkProduct(this)">
                         
                         <!-- 상품 분류 -->
                         <div class="h3 my-4 fw-bold ps-3">
@@ -91,10 +91,10 @@
                             <div class="col-5 col-md-4 col-lg-3">
                                 <select class="bg-opacity-25 form-select fw-bold" id="middleSort" name="middleSort">
                                     <option class="bg-primary bg-opacity-25 fw-bold frozen" value="볶음밥" selected>볶음밥</option>
-                                    <option class="bg-primary bg-opacity-25 fw-bold frozen" value="치킨,만두">치킨/만두</option>
-                                    <option class="bg-success bg-opacity-25 fw-bold instant" value="국물">국물</option>
+                                    <option class="bg-primary bg-opacity-25 fw-bold frozen" value="치킨,만두">치킨,만두</option>
+                                    <option class="bg-success bg-opacity-25 fw-bold instant" value="국">국</option>
                                     <option class="bg-success bg-opacity-25 fw-bold instant" value="반찬">반찬</option>
-                                    <option class="bg-success bg-opacity-25 fw-bold instant" value="컵밥,햇반">컵밥</option>
+                                    <option class="bg-success bg-opacity-25 fw-bold instant" value="컵밥,햇반">컵밥,햇반</option>
                                 </select>
                             </div>
 
@@ -109,7 +109,6 @@
 
                         <!-- 브랜드 -->
                         <div class="row my-3">
-
                             <div class="col-4 col-md-2 d-flex justify-content-end">
                                 <span class="infoTitle p-1" style="width: 79px;"><span class="text-danger">*</span>브랜드</span>
                             </div>
@@ -123,20 +122,16 @@
                                     <option class="bg-light" value="기타">기타</option>
                                 </select>
                             </div>
-
                         </div>
 
                         <!-- 상품 이름 -->
                         <div class="row my-3">
-
                             <div class="col-4 col-md-2 d-flex justify-content-end">
                                 <span class="infoTitle p-1"><span class="text-danger">*</span>상품 이름</span>
                             </div>
-
                             <div class="col-8 col-md-10 col-lg-8">
                                 <input type="text" class="form-control check" name="product_name" placeholder="ex)왕교자" maxlength="30" autocomplete="off">
                             </div>
-
                         </div>
 
                         <!-- 판매&할인 가격 -->
@@ -146,16 +141,12 @@
                             <div class="col-4 col-md-2 d-flex justify-content-end mb-3 mb-md-0">
                                 <span class="infoTitle p-1"><span class="text-danger">*</span>판매 가격</span>
                             </div>
-
                             <div class="col-5 col-md-4 col-lg-3 mb-3 mb-md-0">
                                 <div class="row">
-
                                     <div class="col-11 pe-0">
-                                        <input type="text" class="form-control" name="origin_price" style="text-align: right;" value="" maxlength="7" onKeyup="priceReg(this)">
+                                        <input type="text" class="form-control check" name="origin_price" style="text-align: right;" value="" maxlength="7" onKeyup="priceReg(this)" autocomplete="off">
                                     </div>
-
                                     <div class="col-1 d-flex align-items-center fw-bold px-0">원</div>
-
                                 </div>
                             </div>
 
@@ -163,16 +154,12 @@
                             <div class="col-4 col-md-2 d-flex justify-content-end mb-3 mb-md-0">
                                 <span class="infoTitle p-1">할인 가격</span>
                             </div>
-
                             <div class="col-5 col-md-4 col-lg-3 mb-3 mb-md-0">
                                 <div class="row">
-
                                     <div class="col-11 pe-0">
-                                        <input type="text" class="form-control" name="sale_price" style="text-align: right;" value="" maxlength="7" onKeyup="priceReg(this)" onblur="priceReg2(this)">
+                                        <input type="text" class="form-control" name="sale_price" style="text-align: right;" value="" maxlength="7" onfocus="beforeOriginPriceCheck(this)" onKeyup="priceReg(this)" onblur="comparePrice(this)" autocomplete="off">
                                     </div>
-
                                     <div class="col-1 d-flex align-items-center fw-bold px-0">원</div>
-
                                 </div>
                             </div>
 
@@ -185,16 +172,12 @@
                             <div class="col-4 col-md-2 d-flex justify-content-end mb-3 mb-md-0">
                                 <span class="infoTitle p-1" style="width: 79px;"><span class="text-danger">*</span>재고</span>
                             </div>
-
                             <div class="col-5 col-md-4 col-lg-3 mb-3 mb-md-0">
                                 <div class="row">
-
                                     <div class="col-11 pe-0">
-                                        <input type="text" class="form-control" name="inventory" style="text-align: right;" value="" maxlength="12" onKeyup="priceReg(this)">
+                                        <input type="text" class="form-control check" name="inventory" style="text-align: right;" value="" maxlength="12" onKeyup="priceReg(this)" autocomplete="off">
                                     </div>
-
                                     <div class="col-1 d-flex align-items-center fw-bold px-0">개</div>
-
                                 </div>
                             </div>
 
@@ -265,7 +248,7 @@
 
                             <div class="col-12 d-flex justify-content-center">
                                 <button type="reset" class="btn btn-secondary mx-3 fw-bold" onclick="formReset()">초기화</button>
-                                <button type="button" class="btn btn-primary mx-3 fw-bold" data-bs-toggle="modal" data-bs-target="#submitModal" onclick="registerButton()">등록하기</button>
+                                <button type="button" class="btn btn-primary mx-3 fw-bold" data-bs-toggle="modal" data-bs-target="#submitModal" onclick="productSubmitButton('productRegisterForm')">등록하기</button>
                             </div>
 
                             <!-- 등록 모달 -->

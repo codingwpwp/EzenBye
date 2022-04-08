@@ -21,7 +21,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">볶음밥</a></li>
-                    <li><a class="dropdown-item" href="#">치킨/만두</a></li>
+                    <li><a class="dropdown-item" href="#">치킨,만두</a></li>
                 </ul>
             </li>
 
@@ -30,9 +30,9 @@
                     <i class="fa-solid fa-utensils"></i>즉석식품
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">국물</a></li>
+                    <li><a class="dropdown-item" href="#">국</a></li>
                     <li><a class="dropdown-item" href="#">반찬</a></li>
-                    <li><a class="dropdown-item" href="#">컵밥/햇반</a></li>
+                    <li><a class="dropdown-item" href="#">컵밥,햇반</a></li>
                 </ul>
             </li>
 

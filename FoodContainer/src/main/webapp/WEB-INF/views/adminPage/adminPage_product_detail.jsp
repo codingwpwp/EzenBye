@@ -67,26 +67,23 @@
 
                         <!-- 대분류 -->
                         <div class="row my-3 d-flex align-items-center">
-
                             <div class="col-4 d-flex justify-content-center">
                                 <span class="infoTitle p-1" style="width: 78px;">대분류</span>
                             </div>
                             <div class="col-8 col-md-6">
-                                <input type="text" class="bg-light form-control" value="${productvo.bigsort}" disabled>
+                                <input type="text" class="bg-light form-control" value="${product.bigSort}" disabled>
                             </div>
-
                         </div>
 
                         <!-- 중분류 -->
                         <div class="row my-3 d-flex align-items-center">
-
                             <div class="col-4 d-flex justify-content-center">
                                 <span class="infoTitle p-1" style="width: 78px;">중분류</span>
                             </div>
                             <div class="col-8 col-md-6">
-                                <input type="text" class="bg-light form-control" value="${productvo.middleSort}" disabled>
+                                <input type="text" class="bg-light form-control"
+                                	   value="${product.middleSort}" disabled>
                             </div>
-
                         </div>
 
                         <hr>
@@ -98,41 +95,32 @@
 
                         <!-- 상품 번호 -->
                         <div class="row my-3 d-flex align-items-center">
-
                             <div class="col-4 d-flex justify-content-center">
                                 <span class="infoTitle p-1" style="width: 78px;">상품 번호</span>
                             </div>
-
                             <div class="col-3 col-lg-2">
-                                <input type="text" class="bg-light form-control" value="${productvo.product_index}" disabled>
+                                <input type="text" class="bg-light form-control" value="${product.product_index}" disabled>
                             </div>
-
                         </div>
 
                         <!-- 브랜드 -->
                         <div class="row my-3 d-flex align-items-center">
-
                             <div class="col-4 d-flex justify-content-center">
                                 <span class="infoTitle p-1" style="width: 78px;">브랜드</span>
                             </div>
-
                             <div class="col-8 col-md-6">
-                                <input type="text" class="bg-light form-control" value="${productvo.brand}" disabled>
+                                <input type="text" class="bg-light form-control" value="${product.brand}" disabled>
                             </div>
-
                         </div>
 
                         <!-- 상품 이름 -->
                         <div class="row my-3 d-flex align-items-center">
-
                             <div class="col-4 d-flex justify-content-center">
                                 <span class="infoTitle p-1" style="width: 78px;">상품이름</span>
                             </div>
-
                             <div class="col-8 col-md-6">
-                                <input type="text" class="bg-light form-control" value="${productvo.product_name}" disabled>
+                                <input type="text" class="bg-light form-control" value="${product.product_name}" disabled>
                             </div>
-
                         </div>
 
                         <!-- 판매&할인 가격 -->
@@ -142,14 +130,11 @@
                             <div class="col-4 d-flex justify-content-center">
                                 <span class="infoTitle p-1" style="width: 78px;">판매 가격</span>
                             </div>
-
                             <div class="col-8 col-md-2 mb-3 mb-md-0">
                                 <div class="row">
-
                                     <div class="col-11 pe-0">
-                                        <input type="text" class="form-control bg-light" style="text-align: right;" value="<fmt:formatNumber type='currency' value='${productvo.origin_price}' currencySymbol=''/>" disabled>
+                                        <input type="text" class="form-control bg-light" style="text-align: right;" value="<fmt:formatNumber value='${product.origin_price}' pattern="#,###"/>" disabled>
                                     </div>
-
                                     <div class="col-1 d-flex align-items-center fw-bold px-0">원</div>
 
                                 </div>
@@ -159,25 +144,13 @@
                             <div class="col-4 col-md-2 d-flex justify-content-center justify-content-md-end">
                                 <span class="infoTitle p-1" style="width: 78px;">할인 가격</span>
                             </div>
-
                             <div class="col-8 col-md-2">
                                 <div class="row">
-
                                     <div class="col-11 pe-0">
-<!--<c:choose>
-	<c:when test="${productvo.sale_price > 0}">
-		${productvo.sale_price}
-	</c:when>
-	<c:when test="${test == 0}">
-		-
-	</c:when>
-</c:choose> -->
                                         <input type="text" class="form-control bg-light" style="text-align: right;"
-											   value="<c:choose><c:when test="${productvo.sale_price > 0}"><fmt:formatNumber type='currency' value='${productvo.sale_price}' currencySymbol=''/></c:when><c:otherwise>할인없음</c:otherwise></c:choose>" disabled>
+											   value="<c:choose><c:when test="${productvo.sale_price >= 0}"><fmt:formatNumber value='${product.sale_price}' pattern="#,###"/></c:when><c:otherwise>할인없음</c:otherwise></c:choose>" disabled>
                                     </div>
-
                                     <div class="col-1 d-flex align-items-center fw-bold px-0"><c:if test="${productvo.sale_price > 0}">원</c:if></div>
-
                                 </div>
                             </div>
 
@@ -191,16 +164,12 @@
                             <div class="col-4 d-flex justify-content-center">
                                 <span class="infoTitle p-1" style="width: 78px;">재고</span>
                             </div>
-
                             <div class="col-8 col-md-2 mb-3 mb-md-0">
                                 <div class="row">
-
                                     <div class="col-11 pe-0">
-                                        <input type="text" class="bg-light form-control" style="text-align: right;" value="<fmt:formatNumber type='currency' value='${productvo.inventory}' currencySymbol=''/>" disabled>
+                                        <input type="text" class="bg-light form-control" style="text-align: right;" value="<fmt:formatNumber value='${product.inventory}' pattern="#,###"/>" disabled>
                                     </div>
-
                                     <div class="col-1 d-flex align-items-center fw-bold px-0">개</div>
-
                                 </div>
                             </div>
 
@@ -211,13 +180,10 @@
 
                             <div class="col-8 col-md-2">
                                 <div class="row">
-
                                     <div class="col-11 pe-0">
-                                        <input type="text" class="bg-light form-control" style="text-align: right;" value="<c:choose><c:when test="${productvo.delivery_free_YN eq 'N'}">3,000</c:when><c:otherwise>0</c:otherwise></c:choose>" disabled>
+                                        <input type="text" class="bg-light form-control" style="text-align: right;" value="<c:choose><c:when test="${product.delivery_free_YN eq 'N'}">3,000</c:when><c:otherwise>0</c:otherwise></c:choose>" disabled>
                                     </div>
-
                                     <div class="col-1 d-flex align-items-center fw-bold px-0">원</div>
-
                                 </div>
                             </div>
 
@@ -232,13 +198,10 @@
 
                             <div class="col-8 col-md-7">
                                 <div class="row">
-
                                     <div class="col-11 col-md-10 pe-0">
-                                        <input type="text" class="bg-light text-danger fw-bold form-control" style="text-align: right;" value="<fmt:formatNumber type='currency' value='${productvo.quantity}' currencySymbol=''/>" disabled>
+                                        <input type="text" class="bg-light text-danger fw-bold form-control" style="text-align: right;" value="<fmt:formatNumber value='${product.quantity}' pattern="#,###"/>" disabled>
                                     </div>
-
                                     <div class="col-1 d-flex align-items-center fw-bold px-0">개</div>
-
                                 </div>
                             </div>
 
@@ -278,8 +241,8 @@
 
                         <!-- 관리버튼들 -->
                         <div class="gap-3">
-                            <button type="button" class="btn btn-secondary mx-3 fw-bold">뒤로가기</button>
-                            <button type="button" class="btn btn-primary mx-3 fw-bold">상품수정</button>
+                            <button type="button" class="btn btn-secondary mx-3 fw-bold" onclick="location.href='product_main.do?searchValue=${paging.searchValue}&nowPage=${paging.nowPage}'">뒤로가기</button>
+                            <button type="button" class="btn btn-primary mx-3 fw-bold" onclick="location.href='product_modify.do?product_index=${product.product_index}'">상품수정</button>
                             <button type="button" class="btn btn-dark mx-3 fw-bold">상품삭제</button>
                         </div>
 
@@ -295,7 +258,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="imageContainer">
-                                        <img src="1_1.png" class="img-fluid">
+                                        <img src="<%=request.getContextPath()%>/resources/img/${product.brand}/${product.middleSort}/${product.thumbnail_image}" class="img-fluid">
                                     </div>
                                 </div>
                             </div>
@@ -312,7 +275,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="imageContainer">
-                                        <img src="1_1.png" class="img-fluid">
+                                        <img src="<%=request.getContextPath()%>/resources/img/${product.brand}/${product.middleSort}/${product.detail_image}" class="img-fluid">
                                     </div>
                                 </div>
                             </div>
@@ -329,7 +292,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="imageContainer">
-                                        <img src="1_1.png" class="img-fluid">
+                                        <img src="<%=request.getContextPath()%>/resources/img/배송.png" class="img-fluid">
                                     </div>
                                 </div>
                             </div>
@@ -346,7 +309,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="imageContainer">
-                                        <img src="1_1.png" class="img-fluid">
+                                        <img src="<%=request.getContextPath()%>/resources/img/취소.png" class="img-fluid">
                                     </div>
                                 </div>
                             </div>

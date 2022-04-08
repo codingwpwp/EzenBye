@@ -1,6 +1,7 @@
 package team.project.service;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +39,18 @@ public class BannerServiceImpl implements BannerService {
 		if (!bannerFile.getOriginalFilename().isEmpty()) bannerFile.transferTo(new File(path, bannerFile.getOriginalFilename()));
 		
 		bannerDao.bannerInsert(bannervo);
+	}
+
+	@Override
+	public int bannerDelete(int[] bannerIndexArr) throws Exception {
+		
+		// list타입으로 변환하는 과정
+		List<Integer> bannerIndexList = new ArrayList<Integer>();
+		for(int i = 0; i < bannerIndexArr.length; i++){
+			bannerIndexList.add(bannerIndexArr[i]);
+		}
+		
+		return bannerDao.bannerDelete(bannerIndexList);
 	}
 
 }

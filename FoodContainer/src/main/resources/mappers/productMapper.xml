@@ -11,36 +11,6 @@
     	WHERE del_YN = 'N'
     	ORDER BY product_date DESC
     </select>
-    
-
-    <select id="ProductSelectOne" resultType="ProductVO" parameterType="String">
-    	SELECT *
-    	FROM product
-    	WHERE product_index = #{product_index}
-    </select>
-    
-    
-    <!-- 상품번호만 조회 -->
-    <select id="ProductList" resultType="ProductVO" parameterType="ProductVO">
-    	SELECT product_index
-    	FROM product
-    	WHERE bigSort = #{bigSort}
-    	AND middleSort = #{middleSort}
-    </select>
-    
-    
-    <!-- 상품등록(할인가가 있는 경우) -->
-    <!--<insert id="insertBoard" parameterType="ProductVO">
-    	INSERT INTO board(
-    		bidx, subject, contents, writer, midx
-    	) VALUES (
-    		bidx_seq.nextval,
-    		#{subject},
-    		#{contents},
-    		#{writer},
-    		82
-    	)
-    </insert>-->
 
     <select id="view" resultType="ProductVO">
     	SELECT product_name,
@@ -57,5 +27,69 @@
     	FROM product
     	WHERE del_YN != 'y' and product_index = #{index}
     </select>
+    
+    
+    
+    <!-- 여기서 부터는 관리자페이지 -->
+    
+    <!-- 상품 조회할때 먼저 총 글의 총 갯수를 구하는 쿼리  -->
+    <select id="adminProductListCount" resultType="int" parameterType="SearchVO">
+    	SELECT COUNT(*)
+    	FROM product
+    	WHERE del_YN = #{del_YN}
+        <if test="searchValue != null">
+        	AND product_name LIKE CONCAT('%',#{searchValue},'%')
+        </if>
+    </select>
+    
+    <!-- 상품 조회 -->
+    <select id="adminProductList" resultType="ProductVO" parameterType="PagingUtil">
+    	SELECT *
+    	FROM product
+    	WHERE del_YN = #{del_YN}
+    	<if test="searchValue != null">
+        	AND product_name LIKE CONCAT('%',#{searchValue},'%')
+        </if>
+    	ORDER BY product_date DESC
+    	LIMIT #{start}, #{perPage}
+    </select>
+    
+    <!-- 상품 삭제 -->
+    <update id="adminProductDelYNisY" parameterType="list">
+    	update product SET del_YN = "Y"
+    	WHERE
+		<foreach collection="list" item="item" separator=" OR ">
+			product_index = #{item}
+		</foreach>
+    </update>
+    
+    <!-- 상품 상세 조회 -->
+	<select id="adminProductSelectOne" resultType="ProductVO" parameterType="String">
+    	SELECT *
+    	FROM product
+    	WHERE product_index = #{product_index}
+    </select>
+    
+    <!-- 상품 등록 전에 상품 번호를 조회하는 과정 -->
+    <select id="adminProductIndexSelectList" resultType="ProductVO" parameterType="String">
+    	SELECT product_index
+    	FROM product
+    	WHERE product_index LIKE CONCAT(#{productIndex},'%')
+    	ORDER BY product_index DESC
+    </select>
+    
+    <!-- 상품 등록 -->
+    <insert id="adminProductInsert" parameterType="ProductVO">
+    	INSERT INTO product (
+    		product_index, bigSort, middleSort, product_name,
+    		origin_price,<if test="sale_price > -1"> sale_price,</if> brand, inventory,
+    		delivery_free_YN, thumbnail_image, detail_image
+    	)VALUES (
+    		#{product_index}, #{bigSort}, #{middleSort}, #{product_name},
+    		#{origin_price},<if test="sale_price > -1"> #{sale_price},</if> #{brand}, #{inventory},
+    		#{delivery_free_YN}, #{thumbnail_image}, #{detail_image}
+    	)
+    </insert>
+    
     
 </mapper>

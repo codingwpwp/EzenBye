@@ -59,17 +59,17 @@
 
                         <!-- 체크박스&상품등록 버튼 -->
                         <div class="form-check mt-2 mb-3">
-                            <input class="form-check-input border border-dark" type="checkbox" value="" id="productCheckbox">
+                            <input class="form-check-input border border-dark" type="checkbox" value="" id="productCheckbox" onchange = "selectAllProducts(this)">
                             <label class="form-check-label me-3 text-dark fw-bold" for="productCheckbox">
                                 전체
                             </label>
-                            <button type="button" class="btn btn-outline-danger btn-sm p-1 fw-bold">선택 삭제</button>
+                            <button type="button" class="btn btn-outline-danger btn-sm p-1 fw-bold" onclick="checkedProductsDelete()">선택 삭제</button>
                             
                             <button type="button" class="btn btn-primary fw-bold float-end" onclick="location.href='product_register.do'">상품 등록</button>
                         </div>
 
                         <!-- 상품 테이블 -->
-                        <div class="table-responsive">
+                        <form class="table-responsive" name="checkedProductIndexForm">
                             <table class="table table-hover centerTable" style="min-width: 600px;" id="productTable">
 
                                 <colgroup></colgroup>
@@ -87,62 +87,31 @@
                                 </thead>
                                 
                                 <tbody>
-                                	<c:forEach items="${productListAll}" var="product">
-                                		<tr>
-	                                        <th>
-	                                            <input class="form-check-input border border-dark" type="checkbox" value="">
-	                                        </th>
-	                                        <th>${product.product_index}</th>
-	                                        <td>${product.bigSort}</td>
-	                                        <td>${product.brand}</td>
-	                                        <td class="col5">
-	                                            <a href="product_detail.do?product_index=${product.product_index}" class="link-primary">${product.product_name}</a>
-	                                        </td>
-	                                        <td>${product.inventory}</td>
-	                                        <td>
-	                                            <button class="btn btn-outline-primary btn-sm px-1 py-0" onclick="location.href='product_modify.do?product_index=${product.product_index}'">수정</button>
-	                                            <button class="btn btn-outline-dark btn-sm px-1 py-0">삭제</button>
-	                                        </td>
-                                    	</tr>
-									</c:forEach>
-
-                                    <!-- <tr>
+                                <c:forEach items="${productList}" var="product">
+                               		<tr>
                                         <th>
-                                            <input class="form-check-input border border-dark" type="checkbox" value="">
+                                            <input class="form-check-input border border-dark productCheckboxs" type="checkbox" id="${product.product_index}" name="product_index" value="${product.product_index}" onclick="changeProductCheckbox()">
                                         </th>
-                                        <th>1</th>
-                                        <td>냉동식품</td>
-                                        <td>CJ</td>
-                                        <td class="col5">
-                                            <a href="product_detail.do" class="link-primary">무말랭이무말랭이무말랭이무말랭이무말랭이무말랭이무말랭이무말</a>
-                                        </td>
-                                        <td>3</td>
-                                        <td>
-                                            <button class="btn btn-outline-primary btn-sm px-1 py-0" onclick="location.href='product_modify.do'">수정</button>
-                                            <button class="btn btn-outline-dark btn-sm px-1 py-0">삭제</button>
-                                        </td>
-                                    </tr>
-                                    
-                                    <tr>
                                         <th>
-                                            <input class="form-check-input border border-dark" type="checkbox" value="">
+                                        	<label for="${product.product_index}">
+                                        		${product.product_index}
+                                        	</label>
                                         </th>
-                                        <th>1</th>
-                                        <td>냉동식품</td>
-                                        <td>CJ</td>
+                                        <td>${product.bigSort}</td>
+                                        <td>${product.brand}</td>
                                         <td class="col5">
-                                            <a href="#" class="link-primary">건지산방사능맛수통 나무 다리어카센터</a>
+                                            <a href="product_detail.do?product_index=${product.product_index}" class="link-primary">${product.product_name}</a>
                                         </td>
-                                        <td>3</td>
+                                        <td>${product.inventory}</td>
                                         <td>
-                                            <button class="btn btn-outline-primary btn-sm px-1 py-0">수정</button>
-                                            <button class="btn btn-outline-dark btn-sm px-1 py-0">삭제</button>
+                                            <button type="button" class="btn btn-outline-primary btn-sm px-1 py-0" onclick="location.href='product_modify.do?product_index=${product.product_index}'">수정</button>
+                                            <button type="button" class="btn btn-outline-dark btn-sm px-1 py-0" onclick="deleteProduct(this)">삭제</button>
                                         </td>
-                                    </tr> -->
-                                    
+                                   	</tr>
+								</c:forEach>
                                 </tbody>
                             </table>
-                        </div>
+                        </form>
 
                     </div>
 
@@ -151,42 +120,67 @@
 
                         <!-- 검색 -->
                         <form method="get" action="#" class="col-12 col-md-8 row d-flex align-items-center justify-content-center">
-
+							<!-- 상품 이름 -->	
                             <div class="col-3 d-flex justify-content-end">
                                 <select class="form-select form-select-sm p-1" name="searchType" id="searchType">
                                     <option value="productName">상품 이름</option>
                                 </select>
                             </div>
-
+							<!-- 입력창 -->
                             <div class="col-6">
                                 <input type="text" class="form-control" name="searchValue" placeholder="검색어를 입력하세요" value="">
                             </div>
-                            
+                            <!-- 검색버튼 -->
                             <div class="col-3 d-flex justify-content-start">
                                 <button type="submit" class="btn btn-outline-primary">검색</button>
-                            </div>      
-
+                            </div>
                         </form>
 
                         <!-- 페이징 -->
                         <ul class="col-12 col-md-4 d-flex align-items-center justify-content-center pagination mt-2 my-md-0">
-
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&lt;</span>
-                                </a>
-                            </li>
-
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&gt;</span>
-                                </a>
-                            </li>
-
+	                        <!-- <부분 -->
+							<c:if test="${paging.startPage > 1}">
+	                            <li class="page-item">
+	                                <a class="page-link" href="product_main.do?searchValue=${paging.searchValue}&nowPage=${paging.startPage - 1}" aria-label="Previous">
+	                                    <span aria-hidden="true">&lt;</span>
+	                                </a>
+	                            </li>
+	                        </c:if>
+	                        <c:if test="${paging.startPage <= 1}">
+	                            <li class="page-item" style="visibility: hidden">
+	                                <a class="page-link" href="#" aria-label="Previous">
+	                                    <span aria-hidden="true"></span>
+	                                </a>
+	                            </li>
+	                        </c:if>
+	                        <!-- 각 페이지 -->
+							<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i" step="1">
+								<c:if test="${i != paging.nowPage}">
+									<li class="page-item">
+										<a class="page-link" href="product_main.do?searchValue=${paging.searchValue}&nowPage=${i}">${i}</a>
+									</li>
+								</c:if>
+								<c:if test="${i == paging.nowPage}">
+									<li class="page-item active" aria-current="page">
+										<span class="page-link fw-bold">${i}</span>
+									</li>
+								</c:if>
+							</c:forEach>
+							<!-- >부분 -->
+							<c:if test="${paging.endPage != paging.lastPage}">
+	                            <li class="page-item">
+	                                <a class="page-link" href="product_main.do?searchValue=${paging.searchValue}&nowPage=${paging.endPage + 1}" aria-label="Next">
+	                                    <span aria-hidden="true">&gt;</span>
+	                                </a>
+	                            </li>
+	                        </c:if>
+	                        <c:if test="${paging.startPage == paging.lastPage}">
+	                            <li class="page-item" style="visibility: hidden">
+	                                <a class="page-link" href="#" aria-label="Next">
+	                                    <span aria-hidden="true">&gt;</span>
+	                                </a>
+	                            </li>
+	                        </c:if>
                         </ul>
 
                     </div>

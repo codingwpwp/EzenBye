@@ -11,7 +11,15 @@
 	
 	<insert id="bannerInsert" parameterType="BannerVO">
 		INSERT INTO banner(name, image, link_YN, link)
-		VALUES(#{name}, #{image}, #{link_YN}, #{link});
+		VALUES(#{name}, #{image}, #{link_YN}, #{link})
 	</insert>
-
+	
+	<delete id="bannerDelete" parameterType="list">
+		DELETE FROM banner
+		WHERE
+		<foreach collection="list" item="item" separator=" OR ">
+			banner_index = #{item}
+		</foreach>
+	</delete>
+	
 </mapper>

@@ -24,4 +24,7 @@ public class BannerDAO {
 		sqlSession.insert(Namespace + ".bannerInsert", bannervo);
 	}
 	
+	public int bannerDelete(List<Integer> bannerIndexList) throws Exception {
+		return sqlSession.delete(Namespace + ".bannerDelete", bannerIndexList);
+	}
 }

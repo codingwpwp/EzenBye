@@ -92,10 +92,10 @@
                             <div class="col-5 col-md-4 col-lg-3">
                                 <select class="bg-opacity-25 form-select fw-bold" id="middleSort" name="middleSort">
                                     <option class="bg-primary bg-opacity-25 fw-bold frozen" value="볶음밥">볶음밥</option>
-                                    <option class="bg-primary bg-opacity-25 fw-bold frozen" value="치킨/만두">치킨/만두</option>
-                                    <option class="bg-success bg-opacity-25 fw-bold instant" value="국물">국물</option>
+                                    <option class="bg-primary bg-opacity-25 fw-bold frozen" value="치킨,만두">치킨,만두</option>
+                                    <option class="bg-success bg-opacity-25 fw-bold instant" value="국">국</option>
                                     <option class="bg-success bg-opacity-25 fw-bold instant" value="반찬" selected>반찬</option>
-                                    <option class="bg-success bg-opacity-25 fw-bold instant" value="컵밥">컵밥</option>
+                                    <option class="bg-success bg-opacity-25 fw-bold instant" value="컵밥,햇반">컵밥,햇반</option>
                                 </select>
                             </div>
 

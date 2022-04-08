@@ -58,18 +58,20 @@
 
                         <!-- 체크박스&상품등록 버튼 -->
                         <div class="form-check mt-2 mb-3">
-                            <input class="form-check-input border border-dark" type="checkbox" value="" id="productCheckbox">
+                        <c:if test="${not empty bannerList}">
+                            <input class="form-check-input border border-dark" type="checkbox" value="" id="productCheckbox" onchange="checkBanners(this)">
                             <label class="form-check-label me-3 text-dark fw-bold" for="productCheckbox">
                                 전체
                             </label>
-                            <button type="button" class="btn btn-dark btn-sm p-1">선택 삭제</button>
-                            
+                            <button type="button" class="btn btn-dark btn-sm p-1" onclick="checkedBannersDelete()">선택 삭제</button>
+                        </c:if>    
                             <button type="button" class="btn btn-primary fw-bold float-end" data-bs-toggle="modal" data-bs-target="#registerBannerModal">배너 등록</button>
                         </div>
 
                     <!-- 테이블 -->
                     <div class="table-responsive">
-                        <table class="table table-hover centerTable verticalAlignTable" style="white-space: nowrap;">
+					<form name="checkedBannerIndexForm">
+                        <table class="table table-hover centerTable verticalAlignTable" id="bannerTable" style="white-space: nowrap;">
 
                             <colgroup></colgroup>
 
@@ -88,7 +90,7 @@
 								<c:forEach items = "${bannerList}" var = "bList">
 								<tr class="bannerTr">
 									<!-- 체크박스 -->
-                                    <td><input class="form-check-input border border-dark bannerCheckboxs" type="checkbox" value=""></td>
+                                    <td><input class="form-check-input border border-dark bannerCheckboxs" type="checkbox" name="banner_index" value="${bList.banner_index}"></td>
 									
 									<!-- 배너 번호 -->
                                     <td>${bList.banner_index}</td>
@@ -119,8 +121,8 @@
 								</td>
 							</c:if>
                             </tbody>
-
                         </table>
+                    </form>
                     </div>
 
                     <!-- 현재배너 모달 -->
