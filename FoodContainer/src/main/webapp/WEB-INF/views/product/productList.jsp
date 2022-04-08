@@ -106,6 +106,7 @@
 								</div>
 							</div>
 							</c:forEach>
+							<input type="hidden" id="pListLoginCheck" value="${member.member_index}">
 						</div>
 					</div>
 				</article>

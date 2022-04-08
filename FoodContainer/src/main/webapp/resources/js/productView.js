@@ -158,7 +158,3 @@
 		}
 	})
 	
-	//페이지 접속 시 rightside 새로고침
-	window.onload(function(){
-		$('#rightSide').load(location.href+' #rightSide');
-	});

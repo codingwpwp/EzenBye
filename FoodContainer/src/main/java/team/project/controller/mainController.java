@@ -58,11 +58,23 @@ public class mainController {
 		
 		model.addAttribute("view",vo);
 		
+		Cookie[] cookies = request.getCookies();
+		
+		String currentCookie = null;
+		
+		for(Cookie cookie : cookies) {
+			if(cookie.getName().equals("pIndex")) {
+				currentCookie = URLDecoder.decode(cookie.getValue(),"UTF-8");
+			}
+		}
+		
+		model.addAttribute("viewCookie", currentCookie);
+		
 		return "product/productView";
 	}
 
 	@RequestMapping(value = "viewProductCookie.do", method = RequestMethod.GET)
-	public String viewProductCookie(Locale locale, Model model, ProductVO productVO, HttpServletRequest request, 
+	public void viewProductCookie(Locale locale, Model model, ProductVO productVO, HttpServletRequest request, 
 									HttpServletResponse response) throws UnsupportedEncodingException {
 		
 		String viewProduct = request.getParameter("name");
@@ -114,7 +126,6 @@ public class mainController {
 			response.addCookie(viewCookie);
 		}
 		
-		return "base/rightAside";
 		
 	}
 
