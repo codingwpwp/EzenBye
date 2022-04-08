@@ -46,8 +46,10 @@ public class BannerServiceImpl implements BannerService {
 		
 		// list타입으로 변환하는 과정
 		List<Integer> bannerIndexList = new ArrayList<Integer>();
-		for(int i = 0; i < bannerIndexArr.length; i++){
-			bannerIndexList.add(bannerIndexArr[i]);
+		if(bannerIndexArr.length != 0) {
+			for(int i = 0; i < bannerIndexArr.length; i++){
+				bannerIndexList.add(bannerIndexArr[i]);
+			}
 		}
 		
 		return bannerDao.bannerDelete(bannerIndexList);
