@@ -19,8 +19,8 @@ import team.project.service.MemberService;
 import team.project.vo.MemberVO;
 
 @Controller
-public class loginController {
-	private static final Logger logger = LoggerFactory.getLogger(loginController.class);
+public class LoginController {
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 	@Autowired
 	   private MemberService memberService;

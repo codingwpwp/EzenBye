@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Handles requests for the application home page.
  */
 @Controller
-public class noticeController {
+public class NoticeController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(noticeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
 	
 	
 	@RequestMapping(value = "notice_main.do", method = RequestMethod.GET)

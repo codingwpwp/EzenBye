@@ -17,11 +17,11 @@ import team.project.vo.MemberVO;
  * Handles requests for the application home page.
  */
 @Controller
-public class signController {
+public class SignController {
 	@Autowired
 	private MemberService memberService;
 	
-	private static final Logger logger = LoggerFactory.getLogger(signController.class);
+	private static final Logger logger = LoggerFactory.getLogger(SignController.class);
 	
 
 	
