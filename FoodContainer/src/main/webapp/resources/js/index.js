@@ -3,12 +3,28 @@
 	//찜
 	function heart(obj){
 		var hCheck = obj.getAttribute("src").indexOf("빈하트");
-			
-		if(hCheck > 0){
-			obj.setAttribute("src","/controller/resources/img/찬하트.png");
-		}else if(hCheck < 0){
-			obj.setAttribute("src","/controller/resources/img/빈하트.png");
-		}	
+		var logingCheck = $("#pListLoginCheck").val();
+		var pIndex = $(obj).parent().prev().val();
+		
+		if(logingCheck == ""){
+			alert("로그인 후 사용 가능합니다.");
+		}else{
+			if(hCheck > 0){
+				obj.setAttribute("src","/controller/resources/img/찬하트.png");
+				
+				$.ajax({
+					url : "dibsInsert.do",
+					type : "get",
+					data : "member_index="+logingCheck+"&product_index="+pIndex,
+					succese : function(){
+						
+					}
+				});
+				
+			}else if(hCheck < 0){
+				obj.setAttribute("src","/controller/resources/img/빈하트.png");
+			}	
+		}
 	}
 	//장바구니
 	function cart(obj){
@@ -74,7 +90,6 @@
 		var name=$(obj).next("input[name='index']").val();
 		console.log(name);
 		
-		
 		$.ajax({
 			url : "viewProductCookie.do",
 			type : "get",
@@ -84,6 +99,7 @@
 			}
 		});
 		
+		$('#rightSide').load(location.href+' #rightSide');
 	}
 	
 	
