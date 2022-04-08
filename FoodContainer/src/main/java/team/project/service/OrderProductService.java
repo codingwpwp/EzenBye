@@ -6,5 +6,6 @@ import team.project.vo.OrderProductVO;
 
 public interface OrderProductService {
 	List<OrderProductVO> orderProductList(OrderProductVO vo) throws Exception;
-
+	
+	int buyOk(String orderItem_index) throws Exception;
 }

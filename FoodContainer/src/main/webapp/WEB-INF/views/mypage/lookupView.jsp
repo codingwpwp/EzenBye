@@ -80,6 +80,7 @@
 			        	</div>
 			        	
 			        	<c:set var="totalPrice" value="0" />
+			        	<c:set var="getPoint" value="0" />
 			        	<c:forEach items="${opList}" var="opList">
 				        	<c:if test="${ordersDetail.member_order_index eq opList.member_order_index}"> 
 					        	<div class="h-100 p-2 bg-light border rounded-3 card-good">
@@ -101,7 +102,9 @@
 			  								<c:set var="totalPrice" value="${totalPrice + opList.price}" />
 						        		</div>
 						        	</div>
-						        	
+						        	<c:if test="${opList.buy_YN eq 'Y'}">
+						        		<c:set var="getPoint" value="${getPoint + opList.point}" />
+						        	</c:if>
 						        	<div class="d-grid gap-2 col-6 mx-auto">
 									  <button class="btn btn-outline-secondary" type="button">구매확정</button>
 									</div>
@@ -183,9 +186,23 @@
 			        			<fmt:formatNumber value="3000" pattern="#,###" />원
 			        		</c:if>
 			        	 </div>
-			        	 <div class="lookupView-infmoney"><span class="fw-bold">쿠폰적용 :</span></div>
-			        	 <div class="lookupView-infmoney"><span class="fw-bold">포인트 사용 :</span> <fmt:formatNumber value="${ordersDetail.used_point }" pattern="#,###" />원</div>
-			        	 <div class="lookupView-infmoney"><span class="fw-bold">총 결제금액 :</span> <fmt:formatNumber value="${ordersDetail.pay_price }" pattern="#,###" />원 / <span class="fw-bold">포인트 적립 :</span></div>
+			        	 
+			        	 <div class="lookupView-infmoney"><span class="fw-bold">쿠폰적용 :</span>
+			        	 	<c:if test="${ordersDetailJoin eq null}">
+			        	 		없음
+		        	 		</c:if>
+		        	 		<c:if test="${ordersDetailJoin ne null}">
+		        	 			${ordersDetailJoin.coupon_title}
+		        	 		</c:if>
+			        	 </div>
+			        	 
+			        	 <div class="lookupView-infmoney"><span class="fw-bold">포인트 사용 :</span> 
+			        	 	<fmt:formatNumber value="${ordersDetail.used_point }" pattern="#,###" />원
+	        	    	 </div>
+			        	 
+			        	 <div class="lookupView-infmoney"><span class="fw-bold">총 결제금액 :</span> <fmt:formatNumber value="${ordersDetail.pay_price }" pattern="#,###" />원 / 
+			        	 	<span class="fw-bold">포인트 적립 :</span> <fmt:formatNumber value="${getPoint}" pattern="#,###" />원
+			        	 </div>
 			        </div>
 			        
 			        <p class="fs-6 lookup-fs-6">배송지정보</p>
