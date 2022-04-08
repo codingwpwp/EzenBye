@@ -19,4 +19,10 @@ public class OrderProductServiceImpl implements OrderProductService{
 		return opVO;
 	}
 
+	@Override
+	public int buyOk(String orderItem_index) throws Exception {
+		int buyOk = orderProductDAO.buyOk(orderItem_index);
+		return buyOk;
+	}
+
 }

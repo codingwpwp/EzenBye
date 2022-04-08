@@ -106,17 +106,17 @@ $(document).ready(function(){
     
     // 리뷰작성 평점
     $(".star-rating input[type=radio]").click(function(){
-		var star_rating = $(".star-rating input[type=radio]:checked").val();
+		var star_rating = $(this).val();
 		if(star_rating == 1){
-			$("#result-star").html("매우 나빠요");
+			$(this).parent().parent().next().find(".result-star").html("매우 나빠요");
 		}else if(star_rating == 2){
-			$("#result-star").html("나빠요");
+			$(this).parent().parent().next().find(".result-star").html("나빠요");
 		}else if(star_rating == 3){
-			$("#result-star").html("보통");
+			$(this).parent().parent().next().find(".result-star").html("보통");
 		}else if(star_rating == 4){
-			$("#result-star").html("좋아요");
+			$(this).parent().parent().next().find(".result-star").html("좋아요");
 		}else if(star_rating == 5){
-			$("#result-star").html("매우 좋아요");
+			$(this).parent().parent().next().find(".result-star").html("매우 좋아요");
 		}
 	});
 	
@@ -200,3 +200,24 @@ function selectAll(obj)  {
 			}
 		});
 	}, 60000);
+	
+//구매확정버튼 함수
+function buyOk(obj) {
+	var YN = confirm("정말 구매확정 하시겠습니까?");
+	if(YN){
+		var orderItem_index = $(obj).parent().find("input[name=orderItem_index]").val();
+		$.ajax({
+			url: "buyOk.do",
+			type: "post",
+			data: "orderItem_index="+orderItem_index,
+			success: function(){
+				window.location.reload();
+			}
+		});
+	}
+}
+
+
+
+
+

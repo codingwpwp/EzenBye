@@ -22,4 +22,9 @@ public class OrdersDAO {
 	public OrdersVO ordersDetail(String member_order_index) throws Exception {
 		return sqlSession.selectOne(Namespace+".ordersDetail", member_order_index);
 	}
+	
+	public OrdersVO ordersDetailJoin(String member_order_index) throws Exception {
+		return sqlSession.selectOne(Namespace+".ordersDetailJoin", member_order_index);
+	}
+	
 }

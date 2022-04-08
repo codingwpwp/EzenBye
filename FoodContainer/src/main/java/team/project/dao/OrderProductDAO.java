@@ -18,5 +18,8 @@ public class OrderProductDAO {
 	public List<OrderProductVO> orderProductList(OrderProductVO vo) throws Exception {
 		return sqlSession.selectList(Namespace+".orderProductList", vo);
 	}
-
+	
+	public int buyOk(String orderItem_index) throws Exception {
+		return sqlSession.update(Namespace+".buyOk",orderItem_index);
+	}
 }

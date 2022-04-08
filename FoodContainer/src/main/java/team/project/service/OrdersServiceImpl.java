@@ -25,4 +25,10 @@ public class OrdersServiceImpl implements OrdersService{
 		return ordersDetail;
 	}
 
+	@Override
+	public OrdersVO ordersDetailJoin(String member_order_index) throws Exception {
+		OrdersVO ordersDetailJoin = ordersDAO.ordersDetailJoin(member_order_index);
+		return ordersDetailJoin;
+	}
+
 }
