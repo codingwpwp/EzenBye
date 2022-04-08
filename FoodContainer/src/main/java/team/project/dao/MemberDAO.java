@@ -31,13 +31,22 @@ public class MemberDAO {
 		return sqlSession.insert(Namespace+".insertMember",vo);	
 	}
 	
-	public int idChk(MemberVO vo) throws Exception{
-		int result =sqlSession.selectOne(".idChk",vo);
-		return result;
+	public String idChk(String id) throws Exception{
+		int result =sqlSession.selectOne(Namespace+".idChk",id);
+		
+		System.out.println(result);
+		return Integer.toString(result);
 	}
 	
-	public int nickChk(MemberVO vo) throws Exception{
-		int result =sqlSession.selectOne(".nickChk",vo);
-		return result;
+	public String nickChk(String nickname) throws Exception{
+		int result =sqlSession.selectOne(Namespace+".nickChk",nickname);
+		System.out.println(result);
+		return Integer.toString(result);
+	}
+	
+	public String recomChk(String id) throws Exception{
+		int result =sqlSession.selectOne(Namespace+".recomChk",id);
+		System.out.println(result);
+		return Integer.toString(result);
 	}
 }

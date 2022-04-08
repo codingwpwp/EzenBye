@@ -11,7 +11,11 @@ public interface MemberService {
 	
 	int insertMember(MemberVO vo) throws Exception;
 	
-	int idChk(MemberVO vo) throws Exception;
+	String idChk(String id) throws Exception;
 	
-	int nickChk(MemberVO vo)throws Exception;
+	String nickChk(String nickname)throws Exception;
+	
+	String recomChk(String id) throws Exception;
+
+	
 }
