@@ -18,7 +18,7 @@
 					<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
 						<li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideIceAll" onclick="asideIceAll(this)"> 전체</label></a></li>
 					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideIce" onclick="asideIce(this)"> 볶음밥</label></a></li>
-					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideIce" onclick="asideIce(this)"> 치킨 / 만두</label></a></li>
+					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideIce" onclick="asideIce(this)"> 치킨,만두</label></a></li>
 					</ul>
 				</div>
 			</li>
@@ -30,9 +30,9 @@
 				<div class="collapse" id="home-collapse">
 					<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
 						<li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideProductAll" onclick="asideProductAll(this)"> 전체</label></a></li>
-					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideProduct" onclick="asideProduct(this)"> 국 / 찌개</label></a></li>
+					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideProduct" onclick="asideProduct(this)"> 국</label></a></li>
 					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideProduct" onclick="asideProduct(this)"> 반찬</label></a></li>
-					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideProduct" onclick="asideProduct(this)"> 컵밥</label></a></li>
+					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideProduct" onclick="asideProduct(this)"> 컵밥,햇반</label></a></li>
 					</ul>
 				</div>
 			</li>

@@ -394,7 +394,7 @@
 
 
              <!-- 오른쪽 사이드메뉴 -->
-            <div class="col-sm-3 col-md-2 col-lg-2 d-none d-sm-block">
+            <div class="col-sm-3 col-md-2 col-lg-2 d-none d-sm-block" id="rightSide">
                 <!-- 실질적인 오른쪽 사이드메뉴 내용 -->
                 <%@include file="/WEB-INF/views/base/rightAside.jsp"%>
             </div>

@@ -157,3 +157,4 @@
 			$(".subMenuGroup").find("input:eq(2)").next("label").html("취소 규정");
 		}
 	})
+	
