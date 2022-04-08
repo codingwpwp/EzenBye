@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -88,6 +89,7 @@
 								</div>
 								
 							</div>
+							
 							<div class="row code" style="display: none">
 								<div class="col-md-12 col-sm-12 col-12">아래에 글자를 보이는대로
 									입력해주세요!</div>
@@ -109,6 +111,7 @@
 									</div>
 								</div>
 							</div>
+							
 							<div class="row">
 								<div class="col-md-12 col-sm-12 col-12 loginbtn">
 									

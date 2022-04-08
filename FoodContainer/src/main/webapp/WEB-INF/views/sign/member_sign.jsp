@@ -67,7 +67,7 @@
                 <div class="container">
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-12">
-                                <form action="member_sign.do" name="frm" method="post" onsubmit="return checkAll();">
+                                <form action="member_sign.do" name="frm" id="frm" method="post" onsubmit="return checkAll();">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-12 signhead">
@@ -81,13 +81,14 @@
                                          
                                             </div>
                                             <div class="col-sm-9 col-8">
-                                                <input type="text" class="idinput" name="id" id="test"
+                                                <input type="text" class="idinput" name="id" id="id"
                                                     placeholder="8~20 영문+숫자" >
                                               
                                             </div>
                                             <div class="col-sm-3 col-4">
-                                                <input type="button" class="btn btn-secondary ckinput" value="중복확인" onclick="fn_idChk(); return false;">
-                                                <span class="check"></span>
+                                             <!--    <input type="button" class="btn btn-secondary ckinput" value="중복확인" onclick="return fn_idChk();"> -->
+                                                <button type="button" class="btn btn-secondary ckinput" value="N" onclick="fn_idChk();" id="idChk">중복확인</button>
+                                               
                                             </div>
                                         </div>
                                         <div class="row">
@@ -139,10 +140,11 @@
                                             <div class="col-sm-9 col-8">
                                                 <input type="text" class="nkinput" name="nickname" id="nickname"
                                                     placeholder="2~8 한글+영문+숫자 중 선택" >
-                                              
+                                           
                                             </div>
                                             <div class="col-sm-3 col-4">
-                                                <input type="button" class="btn btn-secondary ckinput" value="중복확인">
+                                               <!--  <input type="button" class="btn btn-secondary ckinput" value="중복확인"> -->
+                                                 <button type="button" class="btn btn-secondary ckinput" value="N" onclick="fn_nickChk();" id="nickChk">중복확인</button>
                                             </div>
                                             <div class="col-sm-12 col-12 tit">
                                                 <label for="email">이메일<span class="red">*</span></label>
@@ -160,14 +162,15 @@
                                                     placeholder="추천인 아이디를 입력해주세요">
                                             </div>
                                             <div class="col-sm-3 col-4">
-                                                <input type="button" class="btn btn-secondary ckinput" value="추천인확인">
+                                               <!--  <input type="button" class="btn btn-secondary ckinput" value="추천인확인"> -->
+                                                 <button type="button" class="btn btn-secondary ckinput" value="N" onclick="fn_recomChk();" id="recomChk">추천인 확인</button>
                                             </div>
                                             <div class="col-sm-6 col-6 btndiv">
                                                 <input type="button" value="취소" class="btn btn-secondary can" onclick="location.href='index.do'">
                                             </div>
                                             <div class="col-sm-6 col-6 btndiv">
-                                                <input type="submit" value="회원가입" class="btn btn-dark"  >
-                                               <!--  <button class="btn btn-dark" name="signok" id="signok" onclick="signbtn(); return false;">회원가입</button> -->
+                                                <!-- <input type="submit" value="회원가입" class="btn btn-dark"  > -->
+												<button class="btn btn-dark" name="signok" id="signok">회원가입</button>
                                             </div>
                                         </div>
                                     </div>

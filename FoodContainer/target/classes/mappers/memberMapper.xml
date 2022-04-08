@@ -9,12 +9,17 @@
         SELECT * FROM member where id=#{id} and pw=#{pw}
     </select>
     
-<!--     <select id="idChk" resultType="MemberVO" parameterType="MemberVO">
+    <select id="idChk" resultType="int" parameterType="String">
    		SELECT COUNT(*) FROM member where id=#{id}
    </select>
-     <select id="nickChk" resultType="MemberVO" parameterType="MemberVO">
-   		SELECT COUNT(*) FROM member where nickname=#{nickname}
-   </select> -->
+   
+	<select id="nickChk" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM member where nickname=#{nickname}
+	</select>
+
+	<select id="recomChk" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM member where id=#{id}
+	</select>
    
     
     <insert id="insertMember" parameterType="MemberVO"> 
