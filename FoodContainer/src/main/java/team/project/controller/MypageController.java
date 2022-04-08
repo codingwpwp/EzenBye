@@ -3,6 +3,7 @@ package team.project.controller;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,15 @@ public class MypageController {
 	@Autowired
 	private OrderProductService orderProductService;
 	
+	@RequestMapping(value = "buyOk.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String buyOk(String orderItem_index) throws Exception {
+		
+		int buyOk = orderProductService.buyOk(orderItem_index);
+		
+		return "true";
+	}
+	
 	@RequestMapping(value = "mypage_main.do", method = RequestMethod.POST)
 	public String main(Locale locale, Model model, int member_index, OrderProductVO opVO) throws Exception {
 
@@ -60,12 +70,19 @@ public class MypageController {
 		model.addAttribute("couponvo",couponvo);
 		model.addAttribute("ordersList",ordersList);
 		model.addAttribute("opList",opList);
+		model.addAttribute("opListSize",opList.size());
 		
 		return "mypage/main";
 	}
 	
 	@RequestMapping(value = "mypage_lookup.do", method = RequestMethod.GET)
-	public String home2(Locale locale, Model model) {
+	public String home2(Locale locale, Model model, HttpServletRequest request) {
+		
+		//1.세션 얻어옴
+		//2.로그인 정보 추출
+		//3.service(session정보)
+		
+		
 		return "mypage/lookup";
 	}
 	
@@ -73,8 +90,12 @@ public class MypageController {
 	public String lookupDetail(Locale locale, Model model, String member_order_index, OrderProductVO opVO) throws Exception {
 		
 		OrdersVO ordersDetail = ordersService.ordersDetail(member_order_index);
+		OrdersVO ordersDetailJoin = ordersService.ordersDetailJoin(member_order_index);
 		List<OrderProductVO> opList = orderProductService.orderProductList(opVO);
 		model.addAttribute("ordersDetail",ordersDetail);
+		
+		model.addAttribute("ordersDetailJoin",ordersDetailJoin);
+		
 		model.addAttribute("opList",opList);
 		
 		return "mypage/lookupView";

@@ -10,7 +10,14 @@ public class OrderProductVO extends ProductVO{
 	private String order_status;
 	private int point;
 	private String buy_YN;
+	private String review_YN;
 	
+	public String getReview_YN() {
+		return review_YN;
+	}
+	public void setReview_YN(String review_YN) {
+		this.review_YN = review_YN;
+	}
 	public int getOrder_quantity() {
 		return order_quantity;
 	}
