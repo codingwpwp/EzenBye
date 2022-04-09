@@ -18,7 +18,6 @@ public class OrdersVO extends CouponVO{
 	private int coupon_index;
 	private int pay_price;
 	private String order_date;
-	private String cancel_YN;
 	
 	public String getMember_order_index() {
 		return member_order_index;
@@ -80,11 +79,6 @@ public class OrdersVO extends CouponVO{
 	public void setOrder_date(String order_date) {
 		this.order_date = order_date;
 	}
-	public String getCancel_YN() {
-		return cancel_YN;
-	}
-	public void setCancel_YN(String cancel_YN) {
-		this.cancel_YN = cancel_YN;
-	}
+	
 	
 }

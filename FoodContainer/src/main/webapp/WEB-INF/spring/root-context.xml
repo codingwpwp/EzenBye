@@ -18,7 +18,7 @@
         class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
         <property name="url"
-            value="jdbc:log4jdbc:mysql://jjezen.cafe24.com:3307/mysql?useSSL=false&amp;serverTimezone=UTC"></property>
+            value="jdbc:log4jdbc:mysql://jjezen.cafe24.com:3307/ezenbye?useSSL=false&amp;serverTimezone=UTC"></property>
         <property name="username" value="ezenbye"></property>
         <property name="password" value="ezenbye1234!!"></property>
     </bean>
