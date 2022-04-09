@@ -105,7 +105,6 @@ public class ProductServiceImpl implements ProductService {
 		if(!tumnailImage.getOriginalFilename().isEmpty()) tumnailImage.transferTo(new File(path, product.getThumbnail_image()));
 		if(!detailImage.getOriginalFilename().isEmpty()) detailImage.transferTo(new File(path, product.getDetail_image()));
 		
-
 		
 		// 상품 번호를 생성하는 과정
 		String alphbetList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -142,7 +141,6 @@ public class ProductServiceImpl implements ProductService {
 				productIndex += alphbetList.substring(alphbetList.indexOf(alpha) + 1, alphbetList.indexOf(alpha) + 2);
 				product.setProduct_index(productIndex);
 			}else {
-				System.out.println("�������� �����������");
 				return 0;
 			}
 		}

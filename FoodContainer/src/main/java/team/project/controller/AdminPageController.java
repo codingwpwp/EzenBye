@@ -23,7 +23,7 @@ import team.project.vo.SearchVO;
 
 @Controller
 public class AdminPageController {
-	
+
 	@Autowired
 	private ProductService productService;
 	@Autowired
@@ -94,22 +94,24 @@ public class AdminPageController {
 		return "adminPage/adminPage_order_cancel_list";
 	}
 
-	// 등록 상품 조회 페이지
+	// 등록 상품 조회 페이지로 이동
 	@RequestMapping(value = "product_main.do", method = RequestMethod.GET)
-	public String product_main(Locale locale, Model model, SearchVO searchvo, String nowPage) throws Exception {
+	public String product_main(Locale locale, Model model, SearchVO searchvo, int nowPage) throws Exception {
 
 		// 사전 작업
 		searchvo.setDel_YN("N");
 		int realnowPage = 1;
-		if(nowPage != null && nowPage.equals("")) realnowPage = Integer.parseInt(nowPage);
+		if(nowPage != 0 ) realnowPage = nowPage;
 		
 		// 리스트 출력
 		List<ProductVO> productList = productService.adminProductList(searchvo, realnowPage);
 		model.addAttribute("productList", productList);
 		
-		// 페이징 출력
+		// 검색값 + 페이징 출력
 		PagingUtil paging = productService.adminProductPaging(searchvo, realnowPage);
+		if(searchvo.getSearchValue() != null) paging.setSearchValue(searchvo.getSearchValue());
 		model.addAttribute("paging", paging);
+		model.addAttribute("nowPage", realnowPage);
 
 		return "adminPage/adminPage_product_main";
 	}
@@ -130,7 +132,7 @@ public class AdminPageController {
 		
 	}
 
-	// 등록 상품 상세조회 페이지
+	// 등록 상품 상세조회 페이지로 이동
 	@RequestMapping(value = "product_detail.do", method = RequestMethod.GET)
 	public String product_detail(Locale locale, Model model, String product_index) throws Exception {
 		
@@ -140,7 +142,7 @@ public class AdminPageController {
 		return "adminPage/adminPage_product_detail";
 	}
 
-	// 상품 등록 페이지
+	// 상품 등록 페이지로 이동
 	@RequestMapping(value = "product_register.do", method = RequestMethod.GET)
 	public String product_register(Locale locale, Model model) {
 		return "adminPage/adminPage_product_register";
@@ -166,15 +168,26 @@ public class AdminPageController {
 		
 	}
 
-	// 상품 수정 페이지
+	// 상품 수정 페이지로 이동
 	@RequestMapping(value = "product_modify.do", method = RequestMethod.GET)
-	public String product_modify(Locale locale, Model model, String product_index) throws Exception {
+	public String modifyRouteOne(Locale locale, Model model, String product_index, int route) throws Exception {
 		
 		ProductVO product = productService.adminProductSelectOne(product_index);
 		model.addAttribute("product", product);
+		model.addAttribute("route", route);
 		
 		return "adminPage/adminPage_product_modify";
 	}
+	/*
+	 * @RequestMapping(value = "product_modifyTwo.do", method = RequestMethod.GET)
+	 * public String modifyRouteTwo(Locale locale, Model model, String
+	 * product_index, int route) throws Exception {
+	 * 
+	 * ProductVO product = productService.adminProductSelectOne(product_index);
+	 * model.addAttribute("product", product); model.addAttribute("route", route);
+	 * 
+	 * return "adminPage/adminPage_product_modify"; }
+	 */
 
 	@RequestMapping(value = "product_delete_detail.do", method = RequestMethod.GET)
 	public String product_delete_detail(Locale locale, Model model) {
@@ -236,4 +249,5 @@ public class AdminPageController {
 	public String settlement(Locale locale, Model model) {
 		return "adminPage/adminPage_settlement";
 	}
+	
 }

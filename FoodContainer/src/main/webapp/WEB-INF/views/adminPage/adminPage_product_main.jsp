@@ -29,7 +29,7 @@
             <div class="col-lg-2 d-none d-lg-block"></div>
 
             <div class="col-2 col-sm-1 pe-0 d-lg-none" id="navLeftMenu">
-				<%@include file="/WEB-INF/views/adminPage/adminPage_nav_leftMenu.jsp"%>
+				<%@include file="/WEB-INF/views/adminPage/nav_leftMenu.jsp"%>
             </div>
 
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
@@ -43,7 +43,7 @@
 
             <!-- 왼쪽 사이드메뉴 -->
             <div class="col-lg-2 d-none d-lg-block">
-               <%@include file="/WEB-INF/views/adminPage/leftAside.jsp"%>
+               <%@include file="/WEB-INF/views/adminPage/leftMenu.jsp"%>
             </div>
 
             <!-- 메인 -->
@@ -59,12 +59,13 @@
 
                         <!-- 체크박스&상품등록 버튼 -->
                         <div class="form-check mt-2 mb-3">
-                            <input class="form-check-input border border-dark" type="checkbox" value="" id="productCheckbox" onchange = "selectAllProducts(this)">
+                        <c:if test="${not empty productList}">
+                        	<input class="form-check-input border border-dark" type="checkbox" value="" id="productCheckbox" onchange="checkAllCheckbox(this, 'productTable')">
                             <label class="form-check-label me-3 text-dark fw-bold" for="productCheckbox">
                                 전체
                             </label>
-                            <button type="button" class="btn btn-outline-danger btn-sm p-1 fw-bold" onclick="checkedProductsDelete()">선택 삭제</button>
-                            
+                            <button type="button" class="btn btn-dark btn-sm p-1" onclick="checkedDelete('productTable', 'product')">선택 삭제</button>
+                        </c:if>
                             <button type="button" class="btn btn-primary fw-bold float-end" onclick="location.href='product_register.do'">상품 등록</button>
                         </div>
 
@@ -87,10 +88,11 @@
                                 </thead>
                                 
                                 <tbody>
-                                <c:forEach items="${productList}" var="product">
+                                <c:if test="${not empty productList}">
+	                                <c:forEach items="${productList}" var="product">
                                		<tr>
                                         <th>
-                                            <input class="form-check-input border border-dark productCheckboxs" type="checkbox" id="${product.product_index}" name="product_index" value="${product.product_index}" onclick="changeProductCheckbox()">
+                                            <input class="form-check-input border border-dark" type="checkbox" id="${product.product_index}" name="product_index" value="${product.product_index}" onclick="changeCheckbox('productCheckbox', 'productTable')">
                                         </th>
                                         <th>
                                         	<label for="${product.product_index}">
@@ -104,11 +106,17 @@
                                         </td>
                                         <td>${product.inventory}</td>
                                         <td>
-                                            <button type="button" class="btn btn-outline-primary btn-sm px-1 py-0" onclick="location.href='product_modify.do?product_index=${product.product_index}'">수정</button>
-                                            <button type="button" class="btn btn-outline-dark btn-sm px-1 py-0" onclick="deleteProduct(this)">삭제</button>
+                                            <button type="button" class="btn btn-outline-primary btn-sm px-1 py-0" onclick="location.href='product_modify.do?product_index=${product.product_index}&route=1'">수정</button>
+                                            <button type="button" class="btn btn-outline-dark btn-sm px-1 py-0" onclick="deleteThisCheckbox('productTable', 'product', this)">삭제</button>
                                         </td>
                                    	</tr>
-								</c:forEach>
+									</c:forEach>
+								</c:if>
+								<c:if test="${empty productList}">
+									<td colspan="7" class="display-2 fw-bold p-3">
+										관련 상품이 없습니다.
+									</td>                                
+                                </c:if>
                                 </tbody>
                             </table>
                         </form>
@@ -128,8 +136,10 @@
                             </div>
 							<!-- 입력창 -->
                             <div class="col-6">
-                                <input type="text" class="form-control" name="searchValue" placeholder="검색어를 입력하세요" value="">
+                                <input type="text" class="form-control" name="searchValue" placeholder="검색어를 입력하세요" value='<c:if test="${not empty paging.searchValue and paging.searchValue ne ''}">${paging.searchValue}</c:if>'>
                             </div>
+                            <!-- 페이지(히든) -->
+                            <input type="hidden" name="nowPage" value="1">
                             <!-- 검색버튼 -->
                             <div class="col-3 d-flex justify-content-start">
                                 <button type="submit" class="btn btn-outline-primary">검색</button>

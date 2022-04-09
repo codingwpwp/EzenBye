@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    // 상품관리페이지 - 페이지가 로드되었을때 브라우저 크기를 기준으로 상품 이름을 조절
+    // 등록상품조회페이지 - 페이지가 로드되었을때 브라우저 크기를 기준으로 상품 이름을 조절
     var prouductArray = new Array();
     if($("#productTable").html() != undefined){
 
@@ -111,14 +111,16 @@ $(document).ready(function(){
 
     });
 
-    // 상품등록&수정페이지 - 페이지가 로드되었을때 브라우저 크기를 기준으로 이미지파일태그의 위치를 조절
+    // 상품수정페이지 - 사전작업
     var modifyhtml;
     if($("#imageDivs").html() != undefined){
         modifyhtml = $("#imageDivs").html();
     }
+    
+    // 상품등록&수정페이지 - 페이지가 로드되었을때 브라우저 크기를 기준으로 이미지파일태그의 위치를 조절
     if($(".imageRow").length != 0){
 
-        if($("form:eq(0)").attr("name") == "productRegisterForm"){// 상품등록페이지의 경우
+        if($("section").find("form").attr("name") == "productRegisterForm"){// 상품등록페이지의 경우
 
             if(window.innerWidth >= 768){
 
@@ -184,7 +186,7 @@ $(document).ready(function(){
 
         if($(".imageRow").length != 0){
 
-            if($("form:eq(0)").attr("name") == "productRegisterForm"){
+            if($("section").find("form").attr("name") == "productRegisterForm"){// 상품등록페이지의 경우
 
                 if(window.innerWidth >= 768){
 
@@ -222,7 +224,7 @@ $(document).ready(function(){
 
                 }
 
-            }else{
+            }else{// 상품수정페이지의 경우
 
                 if(window.innerWidth >= 576){
 
@@ -280,19 +282,6 @@ $(document).ready(function(){
                     $("#imageDivs").html("");
                     $("#imageDivs").html(modifyhtml);
 
-                    // $(".imageSort").show();
-                    // $(".nowPreviewButton").addClass("col-12");
-                    // $(".nowPreview").addClass("mt-2");
-                    // $(".nowPreview").removeClass("ms-1");
-
-                    // $(".imageRow").each(function(){
-
-                    //     var nowPreview = $(this).find(".nowPreview");
-                    //     $(this).find(".nowPreview").remove();
-                    //     $(this).append(nowPreview);
-
-                    // })
-
                 }
 
             }
@@ -318,58 +307,6 @@ function selectAllProducts(obj){
 	}else{
 		$("table").find(".productCheckboxs").prop("checked", false);
 	}
-}
-
-// 등록상품조회페이지에서 선택 삭제
-function checkedProductsDelete(){
-	if($("table").find(".productCheckboxs").is(':checked')){
-		deleteProductAjax();
-	}else{
-		alert("선택된 상품이 없습니다.");
-	}
-}
-
-// 등록상품페이지에서 체크박스 관련 함수
-function changeProductCheckbox(){
-	var trTotalCnt = $("table").find("tbody").find("tr").length;
-	var trCnt = 0;
-	$("table").find(".productCheckboxs").each(function(){
-		if(!$(this).is(":checked")){
-			$("#productCheckbox").prop("checked", false);
-			return false;
-		}else{
-			trCnt++;
-		}
-	});
-	if(trCnt == trTotalCnt){
-		$("#productCheckbox").prop("checked", true);
-	}
-}
-
-function deleteProduct(obj){
-	$("#productCheckbox").prop("checked", false);
-	$("table").find(".productCheckboxs").prop("checked", false);
-	$(obj).parent().parent().find("input[type='checkbox']").prop("checked", true);
-	deleteProductAjax();
-}
-
-// 등록상품페이지에서 삭제관련 ajax
-function deleteProductAjax(){
-	console.log($("form[name='checkedProductIndexForm']").serialize());
-	$.ajax({
-		url : "productDelete.do",
-		type : "post",
-		data : $("form[name='checkedProductIndexForm']").serialize(),
-		success : function(data){
-			var result = data.trim();
-			if(result == "deleteSuccess") {
-				alert("선택된 상품이 삭제되었습니다");
-				location.href = "product_main.do";
-			} else {
-				alert("삭제 실패");
-			}
-		}
-	});
 }
 
 // 상품등록페이지의 중분류 초기설정&select박스 색상
@@ -743,35 +680,97 @@ function nowBanner(obj){
 	$("#nowBannerImg").attr("src", img);
 }
 
-// 배너페이지의 전체 선택
-function checkBanners(obj){
+// 배녀페이지의 수정버튼
+function modifyStartBanner(obj){
+	var form = $("form[name='bannerModifyrForm']");
+	form.find("input[name='bannerName']").val();
+}
+
+
+// 테이블 안의 체크박스들 전체 선택(등록상품조회페이지&배너페이지)
+function checkAllCheckbox(obj, tableName){
 	if($(obj).is(":checked")){
-		$("#bannerTable").find(".bannerCheckboxs").prop("checked", true);
+		$("table#" + tableName).find("input[type='checkbox']").prop("checked", true);
 	}else{
-		$("#bannerTable").find(".bannerCheckboxs").prop("checked", false);
+		$("table#" + tableName).find("input[type='checkbox']").prop("checked", false);
 	}
 }
 
-// 배너페이지의 선택 삭제
-function checkedBannersDelete(){
-	if($("#bannerTable").find(".bannerCheckboxs").is(':checked')){
-		
-		$.ajax({
-			url : "bannerDelete.do",
-			type : "post",
-			data : $("form[name='checkedBannerIndexForm']").serialize(),
-			success : function(data){
-				var result = data.trim();
-				if(result == "deleteSuccess") {
-					alert("선택된 배너가 삭제되었습니다");
-					location.href = "banner.do";
-				} else {
-					alert("삭제 실패");
-				}
-			}
-		});
-		
-	}else{
-		alert("선택된 배너가 없습니다.");
+// 테이블 안에 체크박스를 체크 했을때 전체 체크박스 관련 함수(등록상품조회페이지&배너페이지)
+function changeCheckbox(checkbox, tableName){
+	var trTotalCnt = $("table#" + tableName).find("tbody").find("tr").length;
+	var trCnt = 0;
+	$("table#" + tableName).find("input[type='checkbox']").each(function(){
+		if(!$(this).is(":checked")){
+			$("#" + checkbox).prop("checked", false);
+			return false;
+		}else{
+			trCnt++;
+		}
+	});
+	if(trCnt == trTotalCnt){
+		$("#" + checkbox).prop("checked", true);
 	}
+}
+
+// 체크된 것들 선택 삭제(등록상품조회페이지&배너페이지)
+function checkedDelete(tableName, sort){
+	if($("table#" + tableName).find("input[type='checkbox']").is(':checked')){
+		deleteSort(sort);
+	}else{
+		alert("체크된 것이 없습니다");
+	}
+}
+
+// 하나만 체크된 것 삭제(등록상품조회페이지&배너페이지)
+function deleteThisCheckbox(tableName, sort, obj){
+	$("#" + sort + "Checkbox").prop("checked", false);
+	$("table#" + tableName).find("input[type='checkbox']").prop("checked", false);
+	$(obj).parent().parent().find("input[type='checkbox']").prop("checked", true);
+	deleteSort(sort);
+}
+
+// 삭제할 때 종류 나누기
+function deleteSort(sort){
+	if(sort == 'banner'){
+		deleteBannerAjax();
+	}else if(sort == 'product'){
+		deleteProductAjax();
+	}
+}
+
+// 등록상품페이지에서 삭제관련 ajax
+function deleteProductAjax(){
+	$.ajax({
+		url : "productDelete.do",
+		type : "post",
+		data : $("form[name='checkedProductIndexForm']").serialize(),
+		success : function(data){
+			var result = data.trim();
+			if(result == "deleteSuccess") {
+				alert("선택된 상품이 삭제되었습니다");
+				location.href = "product_main.do?nowPage=1";
+			} else {
+				alert("삭제 실패");
+			}
+		}
+	});
+}
+
+// 배너페이지에서 삭제관련 ajax
+function deleteBannerAjax(){
+	$.ajax({
+		url : "bannerDelete.do",
+		type : "post",
+		data : $("form[name='checkedBannerIndexForm']").serialize(),
+		success : function(data){
+			var result = data.trim();
+			if(result == "deleteSuccess") {
+				alert("선택된 배너가 삭제되었습니다");
+				location.href = "banner.do";
+			} else {
+				alert("삭제 실패");
+			}
+		}
+	});
 }
