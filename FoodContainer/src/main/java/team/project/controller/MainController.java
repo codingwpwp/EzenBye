@@ -3,6 +3,7 @@ package team.project.controller;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -10,10 +11,12 @@ import java.util.Locale;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -41,26 +44,30 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
-	public String productList(Locale locale, Model model, ProductVO productVO) throws Exception {
+	public String productList(Locale locale, Model model, ProductVO productVO, HttpServletRequest request) throws Exception {
 		
 		List<ProductVO> ProductListAll = productService.productListAll(productVO);
 		
 		model.addAttribute("productListAll",ProductListAll);
 		
-		
 		return "product/productList";
 	}
 	
 	@RequestMapping(value = "productView.do", method = RequestMethod.GET)
-	public String productView(Locale locale, Model model, String index, HttpServletRequest request) throws Exception {
+	public String productView(Locale locale, Model model, HttpServletRequest request) throws Exception {
 		
-		ProductVO vo = productService.view(index);
+		String product_index = request.getParameter("product_index");
+		
+		ProductVO vo = productService.view(product_index);
 		
 		model.addAttribute("view",vo);
 		
+		//쿠키 사용
 		Cookie[] cookies = request.getCookies();
 		
 		String currentCookie = null;
+	
+		ArrayList<String> cookieArr = new ArrayList<>();
 		
 		for(Cookie cookie : cookies) {
 			if(cookie.getName().equals("pIndex")) {
@@ -68,7 +75,21 @@ public class MainController {
 			}
 		}
 		
-		model.addAttribute("viewCookie", currentCookie);
+		if(currentCookie != null) {
+			
+			
+			String[] CookieList = currentCookie.split(",");
+			
+			
+			for(int i=0; i < CookieList.length; i++) {
+				cookieArr.add(CookieList[i]);
+			}
+			
+		}
+		
+		List<ProductVO> cookieListArr = productService.cookieList(cookieArr);
+		
+		model.addAttribute("viewCookie", cookieListArr);
 		
 		return "product/productView";
 	}
@@ -76,16 +97,16 @@ public class MainController {
 	@RequestMapping(value = "viewProductCookie.do", method = RequestMethod.GET)
 	public void viewProductCookie(Locale locale, Model model, ProductVO productVO, HttpServletRequest request, 
 									HttpServletResponse response) throws UnsupportedEncodingException {
-		
+		//쿠키 value
 		String viewProduct = request.getParameter("name");
-		
+		//모든 쿠키 호출
 		Cookie[] cookies = request.getCookies();
 		
 		Cookie cookieValue = null;
 		Cookie viewCookie;
 		
 		boolean overlap = false;
-		
+		//쿠키가 있을 경우
 		for(Cookie cookie : cookies) {
 			if(cookie.getName().equals("pIndex")) {
 				System.out.println("1");
@@ -93,12 +114,12 @@ public class MainController {
 				break;
 			}
 		}
-		
+		//찾는 쿠키가 존재할 때
 		if(cookieValue != null) {
 			System.out.println("3");
 			String tempCookie = URLDecoder.decode(cookieValue.getValue(),"UTF-8");
 			String[] tempCookieArr = tempCookie.split(",");
-			
+			//중복방지
 			for(int i=0; i<tempCookieArr.length; i++) {
 				if(tempCookieArr[i].equals(viewProduct)) {
 					System.out.println("6");
@@ -108,6 +129,7 @@ public class MainController {
 			}
 			
 			if(!(overlap)) {
+				//쿠키가 한 개
 				if(tempCookieArr.length < 2) {
 					System.out.println("4");
 					String setCookie = URLEncoder.encode(viewProduct + "," + tempCookieArr[0],"UTF-8");
@@ -120,6 +142,7 @@ public class MainController {
 					response.addCookie(viewCookie);
 				}
 			}
+		//찾는 쿠키가 없을 때
 		}else{
 			System.out.println("2");
 			viewCookie = new Cookie("pIndex", viewProduct);

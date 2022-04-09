@@ -19,7 +19,12 @@ public class DibsDAO {
 	
 	public int dibsInsert(DibsVO dibsVO) throws Exception{
 		
-		return sqlSession.selectOne(Namespace+".dibsProduct",dibsVO);
+		return sqlSession.insert(Namespace+".dibsProduct",dibsVO);
+	}
+
+	public DibsVO dibsSelect(DibsVO dibsVO) {
+	
+		return sqlSession.selectOne(Namespace+".dibsOverlap",dibsVO);
 	}
 	
 	

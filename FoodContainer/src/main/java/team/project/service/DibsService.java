@@ -9,5 +9,7 @@ import team.project.vo.DibsVO;
 public interface DibsService {
 	
 	int dibsInsert(DibsVO dibsVO) throws Exception;
+	
+	DibsVO dibsSelect(DibsVO dibsVO) throws Exception;
 
 }
