@@ -4,7 +4,6 @@ public class MemberVO {
 	private int member_index;
 	private String id;
 	private String pw;
-	private String password;
 	private String name;
 	private String nickname;
 	private String phone;
@@ -16,12 +15,6 @@ public class MemberVO {
 	private String address;
 	
 	
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
 	public int getMember_index() {
 		return member_index;
 	}

@@ -7,7 +7,6 @@ public class ServiceCenterVO {
 	private String sort2;
 	private String title;
 	private String contents;
-	private String pw;
 	private String write_date;
 	private String del_YN;
 	private String progress;
@@ -53,12 +52,6 @@ public class ServiceCenterVO {
 	}
 	public void setContents(String contents) {
 		this.contents = contents;
-	}
-	public String getPw() {
-		return pw;
-	}
-	public void setPw(String pw) {
-		this.pw = pw;
 	}
 	public String getWrite_date() {
 		return write_date;

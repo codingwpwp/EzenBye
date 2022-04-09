@@ -27,6 +27,7 @@ public class SignController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(SignController.class);
 	
+	
 //	@Inject
 //	BCryptPasswordEncoder pwdEncoder;
 	
@@ -62,7 +63,7 @@ public class SignController {
 //		
 //		return "sign/member_sign";
 //	}
-	
+	//회원가입 post
 	@RequestMapping(value = "member_sign.do", method = RequestMethod.POST)
 	public String sign(Locale locale, Model model,MemberVO vo) throws Exception{
 		
@@ -104,7 +105,7 @@ public class SignController {
 		String result = memberService.recomChk(id);
 		return result;
 	}
-	
+	//
 	@RequestMapping(value = "no_member_sign.do", method = RequestMethod.GET)
 	public String sign2(Locale locale, Model model) {
 		return "sign/no_member_sign";

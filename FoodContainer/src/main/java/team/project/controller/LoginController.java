@@ -43,6 +43,7 @@ public class LoginController {
 	      
 	      
 	      
+	      
 	      if(login ==null) {
 	         session.setAttribute("member",null);
 	         rttr.addFlashAttribute("msg",false);
