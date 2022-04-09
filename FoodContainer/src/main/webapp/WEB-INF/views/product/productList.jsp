@@ -63,7 +63,7 @@
 							<c:forEach items="${productListAll}" var="ProductVO">
 							<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center">
 								<div class="card" style="width: 18rem;">
-								<a href="productView.do?index=${ProductVO.product_index}" onclick="productCookie(this)">
+								<a href="productView.do?product_index=${ProductVO.product_index}" onclick="productCookie(this)">
 								  <img src="<%=request.getContextPath()%>/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="card-img-top cardImg" alt="${ProductVO.product_name }">
 								  <div class="card-body">
 								    <p class="card-text">

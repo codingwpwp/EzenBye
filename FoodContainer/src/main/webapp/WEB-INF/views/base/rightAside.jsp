@@ -7,16 +7,13 @@
 <aside class="d-flex flex-column align-items-center border border-3 rounded-3 bg-gradient bg-opacity-75 me-2" id="rightAside">
     <i class="bi bi-cart3 fs-1"></i>
     <span class="fw-bold fs-6">최근 본 상품</span>
-    ${viewCookie}
-    <div class="productImg">
-        <a href="#"><img src="<%=request.getContextPath()%>/resources/img/로고.png" class="w-75 img-fluid mt-2 mb-3 border"></img></a>
-    </div>
-    <div class="productImg">
-        <a href="#"><img src="<%=request.getContextPath()%>/resources/img/로고.png" class="w-75 img-fluid mb-3 border"></img></a>
-    </div>
-    <div class="productImg">
-        <a href="#"><img src="<%=request.getContextPath()%>/resources/img/로고.png" class="w-75 img-fluid mb-3 border"></img></a>
-    </div>
+ 	<c:forEach items="${viewCookie}" var="viewCookie">
+	    <div class="productImg">
+	        <a href="productView.do?product_index=${viewCookie.product_index}">
+	        	<img src="<%=request.getContextPath()%>/resources/img/${viewCookie.brand}/${viewCookie.middleSort}/${viewCookie.thumbnail_image}" class="w-75 img-fluid mt-2 mb-3 border"></img>
+	        </a>
+	    </div>
+    </c:forEach>
     <div id="top" onclick="moveTop();">
         ↑Top
     </div><br>

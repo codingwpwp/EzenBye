@@ -29,11 +29,11 @@ public class BannerServiceImpl implements BannerService {
 	@Override
 	public void bannerInsert(BannerVO bannervo, MultipartFile bannerFile, HttpServletRequest request) throws Exception {
 		
-		// íŒŒì¼ëª…ì„ voì— ë‹´ê¸°
+		// ÆÄÀÏ¸íÀ» vo¿¡ ´ã±â
 		bannervo.setImage(bannerFile.getOriginalFilename());
 		
-		// íŒŒì¼ì„ ì—…ë¡œë“œ í•˜ëŠ” ê³¼ì •
-		String path = request.getSession().getServletContext().getRealPath("/resources/img/ë°°ë„ˆ");
+		// ÆÄÀÏÀ» ¾÷·Îµå ÇÏ´Â °úÁ¤
+		String path = request.getSession().getServletContext().getRealPath("C:\\Users\\311\\git\\EzenBye\\FoodContainer\\src\\main\\webapp\\resources\\img\\¹è³Ê");
 		File dir = new File(path);
 		if (!dir.exists()) dir.mkdirs();
 		if (!bannerFile.getOriginalFilename().isEmpty()) bannerFile.transferTo(new File(path, bannerFile.getOriginalFilename()));
@@ -44,7 +44,7 @@ public class BannerServiceImpl implements BannerService {
 	@Override
 	public int bannerDelete(int[] bannerIndexArr) throws Exception {
 		
-		// listíƒ€ì…ìœ¼ë¡œ ë³€í™˜í•˜ëŠ” ê³¼ì •
+		// listÅ¸ÀÔÀ¸·Î º¯È¯ÇÏ´Â °úÁ¤
 		List<Integer> bannerIndexList = new ArrayList<Integer>();
 		if(bannerIndexArr.length != 0) {
 			for(int i = 0; i < bannerIndexArr.length; i++){

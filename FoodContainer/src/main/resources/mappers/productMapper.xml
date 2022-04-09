@@ -28,6 +28,13 @@
     	WHERE del_YN != 'y' and product_index = #{index}
     </select>
     
+    <select id="cookiList" resultType="ProductVO" parameterType="list">
+    	SELECT *
+    	FROM product
+    	WHERE product_index in (<foreach collection="list" item='test' separator=','>#{test}</foreach>) 
+    	ORDER BY FIELD(product_index,<foreach collection="list" item='test' separator=','>#{test}</foreach>)
+    </select>
+    
     
     
     <!-- 여기서 부터는 관리자페이지 -->

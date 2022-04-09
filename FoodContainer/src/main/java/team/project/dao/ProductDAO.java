@@ -1,5 +1,6 @@
 package team.project.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -25,6 +26,10 @@ public class ProductDAO {
 		
 		return sqlSession.selectOne(Namespace+".view",index);
 
+	}
+	
+	public List<ProductVO> cookieList(ArrayList<String> cookieArr) throws Exception{
+		return sqlSession.selectList(Namespace+".cookiList",cookieArr);
 	}
 	
 	/*여기서 부터는 관리자페이지*/
