@@ -6,6 +6,14 @@ public class CouponVO {
 	private String make_date;
 	private String coupon_title;
 	private int discount_percent;
+	private String used_yn;
+	
+	public String getUsed_yn() {
+		return used_yn;
+	}
+	public void setUsed_yn(String used_yn) {
+		this.used_yn = used_yn;
+	}
 	public int getCoupon_index() {
 		return coupon_index;
 	}
