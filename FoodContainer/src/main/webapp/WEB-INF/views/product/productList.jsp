@@ -55,7 +55,7 @@
                 <article id="mainSection">
                	<!-- pc버전 -->
                	<article class="pList">
-					<div class="fs-5 my-2 fw-bold topText">전체상품</div>
+					<div class="fs-5 my-2 fw-bold topText">전체상품</div>${userDibsList}
 					<hr>
 					<!-- 전체상품 -->
 					<div class="container"> 
@@ -100,7 +100,21 @@
 								</a>
 								  <input type="hidden" name="index" value="${ProductVO.product_index}">
 								  <div class="indexSubImg">
-								  	<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+								 	 <c:if test="${member.member_index == null}">
+								  		<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+								  	 </c:if>
+								  	 
+								  	 <c:if test="${member.member_index != null}">
+									 	 <c:choose>
+									  		<c:when test="${overlap.product_index == null}">
+										 	 	<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+									  		</c:when>
+									  	
+									 	 	<c:when test="${ProductVO.product_index}">
+											  	<img src="<%=request.getContextPath()%>/resources/img/찬하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+										  	</c:when>
+										  </c:choose>
+									 </c:if>
 									<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="cart(this)">
 								  </div>
 								</div>

@@ -1,5 +1,7 @@
 package team.project.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,20 @@ public class DibsServiceImpl implements DibsService {
 	public DibsVO dibsSelect(DibsVO dibsVO) throws Exception {
 		
 		return dibsDAO.dibsSelect(dibsVO);
+	}
+
+	@Override
+	public int dibsDelete(DibsVO dibsVO) throws Exception {
+		
+		return dibsDAO.dibsDelete(dibsVO);
+	}
+
+	@Override
+	public List<DibsVO> dibsListAll(DibsVO dibsVO) throws Exception {
+		
+		List<DibsVO> dibsListAll = dibsDAO.dibsListAll(dibsVO);
+		
+		return dibsListAll;
 	}
 
 	

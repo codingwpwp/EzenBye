@@ -44,9 +44,20 @@ public class DibsController {
 			
 		}
 		
-		
-		return "mypage/interItem";
+		return "prodcut/productList";
 	}
 
+	@RequestMapping(value = "dibsDelete.do", method = RequestMethod.GET)
+	public String dbisDelete(Locale locale, Model model, DibsVO dibsVO) throws Exception {
+		
+		DibsVO overlap = dibsService.dibsSelect(dibsVO);
+		
+		if(overlap != null) {
 
+			dibsService.dibsDelete(dibsVO);
+			
+		}
+		
+		return "prodcut/productList";
+	}
 }

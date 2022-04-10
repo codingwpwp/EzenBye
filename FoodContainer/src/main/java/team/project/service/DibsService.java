@@ -11,5 +11,9 @@ public interface DibsService {
 	int dibsInsert(DibsVO dibsVO) throws Exception;
 	
 	DibsVO dibsSelect(DibsVO dibsVO) throws Exception;
+	
+	int dibsDelete(DibsVO dibsVO) throws Exception;
+	
+	List<DibsVO> dibsListAll(DibsVO dibsVO) throws Exception;
 
 }
