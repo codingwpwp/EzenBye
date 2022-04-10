@@ -55,12 +55,12 @@
                 <article id="mainSection">
                	<!-- pc버전 -->
                	<article class="pList">
-					<div class="fs-5 my-2 fw-bold topText">전체상품</div>${userDibsList}
+					<div class="fs-5 my-2 fw-bold topText">전체상품</div>
 					<hr>
 					<!-- 전체상품 -->
 					<div class="container"> 
 						<div class="row">
-							<c:forEach items="${productListAll}" var="ProductVO">
+							<c:forEach items="${productListAll}" var="ProductVO" varStatus="status">
 							<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center">
 								<div class="card" style="width: 18rem;">
 								<a href="productView.do?product_index=${ProductVO.product_index}" onclick="productCookie(this)">
@@ -100,6 +100,18 @@
 								</a>
 								  <input type="hidden" name="index" value="${ProductVO.product_index}">
 								  <div class="indexSubImg">
+								  	<c:if test="${member.id != null }">
+									  	<c:forEach items="${userDibsList}" var="userDibsList">
+									  		<c:if test="${userDibsList.member_index == member.member_index && ProductVO.product_index == userDibsList.product_index}">
+									  			<img src="<%=request.getContextPath()%>/resources/img/찬하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+									  		</c:if>
+									  	</c:forEach>
+									  	
+								  	</c:if>
+								  	<c:if test="${member.id == null}">
+									  	<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+								  	</c:if>
+								  <%-- 
 								 	 <c:if test="${member.member_index == null}">
 								  		<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
 								  	 </c:if>
@@ -109,12 +121,13 @@
 									  		<c:when test="${overlap.product_index == null}">
 										 	 	<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
 									  		</c:when>
-									  	
-									 	 	<c:when test="${ProductVO.product_index}">
+									  		
+									 	 	<c:when test="${member.member_index == userDibsList[status.index].member_index}">
 											  	<img src="<%=request.getContextPath()%>/resources/img/찬하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
 										  	</c:when>
 										  </c:choose>
 									 </c:if>
+								  --%>
 									<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="cart(this)">
 								  </div>
 								</div>

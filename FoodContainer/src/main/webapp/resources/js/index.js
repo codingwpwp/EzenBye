@@ -3,10 +3,10 @@
 	//찜
 	function heart(obj){
 		var hCheck = obj.getAttribute("src").indexOf("빈하트");
-		var logingCheck = $("#pListLoginCheck").val();
+		var loginCheck = $("#pListLoginCheck").val();
 		var pIndex = $(obj).parent().prev().val();
 		
-		if(logingCheck == ""){
+		if(loginCheck == ""){
 			alert("로그인 후 사용 가능합니다.");
 		}else{
 			if(hCheck > 0){
@@ -15,7 +15,7 @@
 				$.ajax({
 					url : "dibsInsert.do",
 					type : "get",
-					data : "member_index="+logingCheck+"&product_index="+pIndex,
+					data : "member_index="+loginCheck+"&product_index="+pIndex,
 					succese : function(){
 						
 					}
@@ -37,11 +37,28 @@
 	}
 	//장바구니
 	function cart(obj){
-		$(".cartBack").css("display","block");
-		var name = $(obj).parent().prev().prev().find(".productName").html();
-		var html = "<br>&quot;"+name+"&quot;<br> 상품이 장바구니에 담겼습니다.";
-			html += "<br><br><button type='button' class='btn btn-secondary' onclick='cartOk()'>확인</button>";
-		$(".message").html(html);
+		
+		var loginCheck = $("#pListLoginCheck").val();
+		var pIndex = $(obj).parent().prev().val();
+		console.log(loginCheck);
+		console.log(pIndex);
+		if(loginCheck == ""){
+			$(".cartBack").css("display","block");
+			var name = $(obj).parent().prev().prev().find(".productName").html();
+			var html = "<br>&quot;"+name+"&quot;<br> 상품이 장바구니에 담겼습니다.";
+				html += "<br><br><button type='button' class='btn btn-secondary' onclick='cartOk()'>확인</button>";
+			$(".message").html(html);
+			
+			$.ajax({
+				url : "noMemberCartCookie.do",
+				type : "get",
+				data : "product_index="+pIndex,
+				succese : function(){
+							
+				}
+			});
+		}
+		
 	}
 	
 	//장바구니 모바일
