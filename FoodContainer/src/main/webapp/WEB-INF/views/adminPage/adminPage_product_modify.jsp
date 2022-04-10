@@ -57,12 +57,13 @@
                     <br>
 
                     <!-- 상품수정하는 폼 -->
-                    <form class="container" name="productModifyForm"  method="post" id="productManagerForm" onsubmit="return checkProduct()">
+                    <form class="container" name="productModifyForm" action="product_modify.do" method="post" id="productManagerForm" enctype="multipart/form-data" onsubmit="return checkProduct(this)">
                         
                         <!-- 상품 분류 -->
                         <div class="h3 my-4 fw-bold ps-3">
                             [상품 분류]
                             <span class="text-primary bg-opacity-50 fw-bold">냉동</span><span class="fw-bold">&</span><span class="text-success bg-opacity-50 fw-bold">즉석</span>
+                            <input type="hidden" name="product_index" value="${product.product_index}">
                         </div>
 
                         <!-- 대분류&중분류 -->
@@ -75,10 +76,10 @@
 
                             <div class="col-5 col-md-4 col-lg-3 mb-3 mb-md-0">
                                 <select class="bg-opacity-75 form-select fw-bold" id="bigSort" name="bigSort" onchange="changeBigSort(this)">
-                                    <option class="bg-primary bg-opacity-75 fw-bold" value="냉동식품">
-                                        냉동식품
+                                    <option class="bg-primary bg-opacity-75 fw-bold" value="냉동식품"<c:if test="${product.bigSort eq '냉동식품'}"> selected</c:if>>
+                                    	냉동식품
                                     </option>
-                                    <option class="bg-success fw-bold" value="즉석식품" selected>
+                                    <option class="bg-success fw-bold" value="즉석식품"<c:if test="${product.bigSort eq '즉석식품'}"> selected</c:if>>
                                         즉석식품
                                     </option>
                                 </select>
@@ -91,11 +92,11 @@
 
                             <div class="col-5 col-md-4 col-lg-3">
                                 <select class="bg-opacity-25 form-select fw-bold" id="middleSort" name="middleSort">
-                                    <option class="bg-primary bg-opacity-25 fw-bold frozen" value="볶음밥">볶음밥</option>
-                                    <option class="bg-primary bg-opacity-25 fw-bold frozen" value="치킨,만두">치킨,만두</option>
-                                    <option class="bg-success bg-opacity-25 fw-bold instant" value="국">국</option>
-                                    <option class="bg-success bg-opacity-25 fw-bold instant" value="반찬" selected>반찬</option>
-                                    <option class="bg-success bg-opacity-25 fw-bold instant" value="컵밥,햇반">컵밥,햇반</option>
+                                    <option class="bg-primary bg-opacity-25 fw-bold frozen" value="볶음밥"<c:if test="${product.middleSort eq '볶음밥'}"> selected</c:if>>볶음밥</option>
+                                    <option class="bg-primary bg-opacity-25 fw-bold frozen" value="치킨,만두"<c:if test="${product.middleSort eq '치킨,만두'}"> selected</c:if>>치킨,만두</option>
+                                    <option class="bg-success bg-opacity-25 fw-bold instant" value="국"<c:if test="${product.middleSort eq '국'}"> selected</c:if>>국</option>
+                                    <option class="bg-success bg-opacity-25 fw-bold instant" value="반찬"<c:if test="${product.middleSort eq '반찬'}"> selected</c:if>>반찬</option>
+                                    <option class="bg-success bg-opacity-25 fw-bold instant" value="컵밥,햇반"<c:if test="${product.middleSort eq '컵밥,햇반'}"> selected</c:if>>컵밥,햇반</option>
                                 </select>
                             </div>
 
@@ -117,11 +118,11 @@
 
                             <div class="col-5 col-md-4 col-lg-3">
                                 <select class="bg-opacity-25 form-select" name="brand" id="brand">
-                                    <option class="bg-opacity-100" value="CJ">CJ</option>
-                                    <option class="bg-opacity-75" value="오뚜기">오뚜기</option>
-                                    <option class="bg-opacity-50" value="청정원">청정원</option>
-                                    <option class="bg-opacity-25" value="하림">하림</option>
-                                    <option class="bg-light" value="기타">기타</option>
+                                    <option class="bg-opacity-100" value="CJ"<c:if test="${product.brand eq 'CJ'}"> selected</c:if>>CJ</option>
+                                    <option class="bg-opacity-75" value="오뚜기"<c:if test="${product.brand eq '오뚜기'}"> selected</c:if>>오뚜기</option>
+                                    <option class="bg-opacity-50" value="청정원"<c:if test="${product.brand eq '청정원'}"> selected</c:if>>청정원</option>
+                                    <option class="bg-opacity-25" value="하림"<c:if test="${product.brand eq '하림'}"> selected</c:if>>하림</option>
+                                    <option class="bg-light" value="기타"<c:if test="${product.brand eq '기타'}"> selected</c:if>>기타</option>
                                 </select>
                             </div>
 
@@ -135,7 +136,7 @@
                             </div>
 
                             <div class="col-8 col-md-10 col-lg-8">
-                                <input type="text" class="form-control check" name="productName" placeholder="ex)왕교자" maxlength="30" autocomplete="off">
+                                <input type="text" class="form-control check" name="product_name" value="${product.product_name}" placeholder="상품이름을 입력하세요" maxlength="30" autocomplete="off">
                             </div>
 
                         </div>
@@ -152,7 +153,7 @@
                                 <div class="row">
 
                                     <div class="col-11 pe-0">
-                                        <input type="text" class="form-control" name="productPrice" style="text-align: right;" value="30000">
+                                        <input type="text" class="form-control check" name="origin_price" style="text-align: right;" value="${product.origin_price}" maxlength="7" onKeyup="priceReg(this)" autocomplete="off">
                                     </div>
 
                                     <div class="col-1 d-flex align-items-center fw-bold px-0">원</div>
@@ -169,7 +170,7 @@
                                 <div class="row">
 
                                     <div class="col-11 pe-0">
-                                        <input type="text" class="form-control" name="salePrice" style="text-align: right;" value="30000">
+                                        <input type="text" class="form-control" name="sale_price" style="text-align: right;" value="<c:if test="${product.sale_price > -1}">${product.sale_price}</c:if>" onfocus="beforeOriginPriceCheck(this)" onKeyup="priceReg(this)" onblur="comparePrice(this)" autocomplete="off">
                                     </div>
 
                                     <div class="col-1 d-flex align-items-center fw-bold px-0">원</div>
@@ -191,7 +192,7 @@
                                 <div class="row">
 
                                     <div class="col-11 pe-0">
-                                        <input type="text" class="form-control" name="inventory" style="text-align: right;" value="30000">
+                                        <input type="text" class="form-control check" name="inventory" style="text-align: right;" value="${product.inventory}"  maxlength="12" onKeyup="priceReg(this)" autocomplete="off">
                                     </div>
 
                                     <div class="col-1 d-flex align-items-center fw-bold px-0">개</div>
@@ -205,9 +206,9 @@
                             </div>
 
                             <div class="col-5 col-md-4 col-lg-3 mb-3 mb-md-0">
-                                <select class="form-select" name="deliveryPrice" style="text-align: right;">
-                                    <option value="3000" selected>3,000원</option>
-                                    <option value="0">무료배송</option>
+                                <select class="form-select" name="delivery_free_YN" style="text-align: right;">
+                                    <option value="3000"<c:if test="${product.delivery_free_YN eq 'N'}"> selected</c:if>>3,000원</option>
+                                    <option value="0"<c:if test="${product.delivery_free_YN eq 'Y'}"> selected</c:if>>무료배송</option>
                                 </select>
                             </div>
 
@@ -217,72 +218,76 @@
 
                         <!-- 이미지 등록&확장자 주의사항 -->
                         <div class="h3 my-4 fw-bold  ps-3">
-                            [이미지 등록]
+                            [이미지 수정]
                             <span class="fs-6 text-danger">*png확장자만 가능합니다.</span>
                         </div>
 
-                    <div id="imageDivs">
-                        <!-- 대표이미지 -->
-                        <div class="row my-3 imageRow">
+	                    <div id="imageDivs">
+	                    
+	                        <!-- 대표이미지 -->
+	                        <div class="row my-3 imageRow">
+	
+	                            <!-- 대표이미지 문구 -->
+	                            <div class="col-5 col-md-3 col-lg-2 d-flex justify-content-center p-0">
+	                                <span class="infoTitle p-1">대표이미지</span>
+	                            </div>
+	
+	                            <div class="col-7 col-md-9 col-lg-4 col-xl-3 pe-0 d-flex justify-content-end imagePreview">
+	                            <!-- 이미지 미리보기 -->
+	                                <button type="button" class="btn btn-secondary previewButton" data-bs-toggle="modal" data-bs-target="#tumnailImageModal">미리보기</button>
+	                            </div>
+	
+	                            <div class="col-12 col-lg-6 col-xl-7 p-0 mt-2 inputImageFile">
+	                            <!-- 파일 등록 -->
+	                                <input class="form-control" name="tumnailImage" type="file" accept="image/png" onchange="previewImage(event, this);">
+	                            </div>
+	
+	                            <div class="px-0 mt-2 nowPreview">
+	                            <!-- 현재 대표이미지 -->
+	                                <button type="button" class="col-12 btn btn-primary nowPreviewButton" data-bs-toggle="modal" data-bs-target="#nowTumnailImageModal">
+	                                    현재 <span class="imageSort">대표</span>이미지
+	                                </button>
+	                            </div>
+	
+	                        </div>
 
-                            <!-- 대표이미지 문구 -->
-                            <div class="col-5 col-md-3 col-lg-2 d-flex justify-content-center p-0">
-                                <span class="infoTitle p-1">대표이미지</span>
-                            </div>
+	                        <!-- 상세이미지 -->
+	                        <div class="row my-3 imageRow">
 
-                            <div class="col-7 col-md-9 col-lg-4 col-xl-3 pe-0 d-flex justify-content-end imagePreview">
-                            <!-- 이미지 미리보기 -->
-                                <button type="button" class="btn btn-secondary previewButton" data-bs-toggle="modal" data-bs-target="#sumnailImageModal">미리보기</button>
-                            </div>
+	                            <!-- 상세이미지 문구 -->
+	                            <div class="col-5 col-md-3 d-flex justify-content-center col-lg-2 p-0">
+	                                <span class="infoTitle p-1">상세이미지</span>
+	                            </div>
+	
+	                            <div class="col-7 col-md-9 col-lg-4 col-xl-3 pe-0 d-flex justify-content-end imagePreview">
+	                            <!-- 이미지 미리보기 -->
+	                                <button type="button" class="btn btn-secondary previewButton" data-bs-toggle="modal" data-bs-target="#detailImageModal">미리보기</button>
+	                            </div>
+	
+	                            <div class="col-12 col-lg-6 col-xl-7 p-0 mt-2 inputImageFile">
+	                            <!-- 파일 등록 -->
+	                                <input class="form-control" name="detailImage" type="file" accept="image/png" onchange="previewImage(event, this);">
+	                            </div>
+	
+	                            <div class="px-0 mt-2 nowPreview">
+	                            <!-- 현재 상세이미지 -->
+	                                <button type="button" class="col-12 btn btn-primary nowPreviewButton" data-bs-toggle="modal" data-bs-target="#nowDetailImageModal">
+	                                    현재 <span class="imageSort">상세</span>이미지
+	                                </button>
+	                            </div>
+	
+	                        </div>
+	                        
+                   		</div>
 
-                            <div class="col-12 col-lg-6 col-xl-7 p-0 mt-2 inputImageFile">
-                            <!-- 파일 등록 -->
-                                <input class="form-control" name="sumnailImage" type="file" accept="image/png" onchange="previewImage(event, this);">
-                            </div>
-
-                            <div class="px-0 mt-2 nowPreview">
-                            <!-- 현재 대표이미지 -->
-                                <button type="button" class="col-12 btn btn-primary nowPreviewButton" data-bs-toggle="modal" data-bs-target="#nowSumnailImageModal">
-                                    현재 <span class="imageSort">대표</span>이미지
-                                </button>
-                            </div>
-
-                        </div>
-
-                        <!-- 상세이미지 -->
-                        <div class="row my-3 imageRow">
-
-                            <!-- 상세이미지 문구 -->
-                            <div class="col-5 col-md-3 d-flex justify-content-center col-lg-2 p-0">
-                                <span class="infoTitle p-1">상세이미지</span>
-                            </div>
-
-                            <div class="col-7 col-md-9 col-lg-4 col-xl-3 pe-0 d-flex justify-content-end imagePreview">
-                            <!-- 이미지 미리보기 -->
-                                <button type="button" class="btn btn-secondary previewButton" data-bs-toggle="modal" data-bs-target="#detailImageModal">미리보기</button>
-                            </div>
-
-                            <div class="col-12 col-lg-6 col-xl-7 p-0 mt-2 inputImageFile">
-                            <!-- 파일 등록 -->
-                                <input class="form-control" name="detailImage" type="file" accept="image/png" onchange="previewImage(event, this);">
-                            </div>
-
-                            <div class="px-0 mt-2 nowPreview">
-                            <!-- 현재 상세이미지 -->
-                                <button type="button" class="col-12 btn btn-primary nowPreviewButton" data-bs-toggle="modal" data-bs-target="#nowDetailImageModal">
-                                    현재 <span class="imageSort">상세</span>이미지
-                                </button>
-                            </div>
-
-                        </div>
-                    </div>
-
-                        <!-- 리셋&등록 -->
+                        <!-- 뒤로가기&수정하기 버튼 -->
                         <div class="row mt-5">
 
                             <div class="col-12 d-flex justify-content-center">
-                                <button type="reset" class="btn btn-secondary mx-3" onclick="backPage(${route})">뒤로가기</button>
-                                <button type="button" class="btn btn-primary mx-3 fw-bold" data-bs-toggle="modal" data-bs-target="#submitModal" onclick="registerButton()">수정하기</button>
+                           		<input type="hidden" name="searchValue" value="${searchValue}">
+                           		<input type="hidden" name="nowPage" value="${nowPage}">
+                                <button type="button" class="btn btn-secondary mx-3" name="route" value="${route}" onclick="backWherePage(this)">뒤로가기</button>
+                                <button type="button" class="btn btn-primary mx-3 fw-bold" data-bs-toggle="modal" data-bs-target="#submitModal" onclick="productSubmitButton('productModifyForm')">수정하기</button>
                             </div>
 
                             <!-- 수정 모달 -->
@@ -308,11 +313,11 @@
                         </div>
 
                         <!-- 대표이미지 미리보기 모달 -->
-                        <div class="modal fade" id="sumnailImageModal" tabindex="-1" aria-labelledby="sumnailImageModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="tumnailImageModal" tabindex="-1" aria-labelledby="tumnailImageModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="sumnailImageModalLabel">대표이미지</h5>
+                                        <h5 class="modal-title" id="tumnailImageModalLabel">대표이미지</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -342,16 +347,16 @@
                         </div>
 
                         <!-- 현재 대표이미지 모달 -->
-                        <div class="modal fade" id="nowSumnailImageModal" tabindex="-1" aria-labelledby="nowSumnailImageModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="nowTumnailImageModal" tabindex="-1" aria-labelledby="nowTumnailImageModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="nowSumnailImageModalLabel">현재 대표이미지</h5>
+                                        <h5 class="modal-title" id="nowTumnailImageModalLabel">현재 대표이미지</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="imageContainer">
-                                            <img src="1_1.png" class="img-fluid">
+                                            <img src="<%=request.getContextPath()%>/resources/img/${product.brand}/${product.middleSort}/${product.thumbnail_image}" class="img-fluid">
                                         </div>
                                     </div>
                                 </div>
@@ -368,7 +373,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="imageContainer">
-                                            <img src="1_1.png" class="img-fluid">
+                                            <img src="<%=request.getContextPath()%>/resources/img/${product.brand}/${product.middleSort}/${product.detail_image}" class="img-fluid">
                                         </div>
                                     </div>
                                 </div>
@@ -399,14 +404,5 @@
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/adminPage.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/adminPage_leftMenu.js"></script>
-    <script>
-    	function backPage(route){
-    		if(route == 1){
-    			location.href='product_main.do?searchValue=' + ${paging.searchValue} + '&nowPage=' + ${paging.nowPage};
-    		}else if(route == 2){
-    			location.href='product_detail.do?product_index=' + ${product.product_index};
-    		}
-    	}
-    </script>
 </body>
 </html>

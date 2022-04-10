@@ -37,4 +37,11 @@ public interface ProductService {
 						   MultipartFile detailImage,
 						   HttpServletRequest request
 						  ) throws Exception;
+	
+	// 상품 수정
+	int adminProductUpdate(ProductVO product,
+						   MultipartFile tumnailImage,
+						   MultipartFile detailImage,
+						   HttpServletRequest request
+						  ) throws Exception;
 }

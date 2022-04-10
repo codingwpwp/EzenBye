@@ -463,7 +463,16 @@ function formReset(){
 
 }
 
-// 상품등록&수정페이지의 하단의 파란버튼 눌렀을때 텍스트
+// 상품수정페이지의 뒤로가기 버튼
+function backWherePage(obj){
+	if(obj.value == 1){
+		location.href='product_main.do?searchValue=' + $("input[name='searchValue']").val() + "&nowPage=" + $("input[name='nowPage']").val();
+	}else{
+		location.href='product_detail.do?product_index=' + $("input[name='product_index']").val();
+	}
+}
+
+// 상품등록&수정페이지의 최하단의 파란버튼(등록하기&수정하기) 눌렀을때 텍스트
 function productSubmitButton(formName){
     $("#submitNo").hide();
     $("#submitModal").find("button").not("#submitNo").show();
@@ -541,7 +550,7 @@ function checkProduct(obj){
             focusFormArray[focusFormArray.length] = $("input[name='sale_price']");
         }
     }
-
+    
     if(flag == false){
 
         $("#submitModal").find("button").not("#submitNo").hide();
@@ -555,16 +564,18 @@ function checkProduct(obj){
             document.getElementById("submitNo").click();
             for(i = 0; i < focusFormArray.length; i++){
                 if(focusFormArray[i] != null){
-                focusFormArray[i].focus();
-                break;
+                	focusFormArray[i].focus();
+               		break;
                 }
             }
         },800);
+        
 
     }else{
 		if($("input[name='sale_price']").val() == ""){
 			$("input[name='sale_price']").val("-1");
 		}
+		alert('수정이 완료되었습니다.');
 	}
     
     return flag;
@@ -739,7 +750,7 @@ function deleteSort(sort){
 	}
 }
 
-// 등록상품페이지에서 삭제관련 ajax
+// 등록상품조회&상세조회페이지에서 삭제관련 ajax
 function deleteProductAjax(){
 	$.ajax({
 		url : "productDelete.do",
@@ -749,7 +760,7 @@ function deleteProductAjax(){
 			var result = data.trim();
 			if(result == "deleteSuccess") {
 				alert("선택된 상품이 삭제되었습니다");
-				location.href = "product_main.do?nowPage=1";
+				location.href = "product_main.do?&nowPage=1";
 			} else {
 				alert("삭제 실패");
 			}

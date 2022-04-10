@@ -34,7 +34,7 @@ public class ProductDAO {
 	
 	/*여기서 부터는 관리자페이지*/
 	
-	// 상품 조회할때 페이징
+	// 상품 조회할때 글의 갯수(페이징)
 	public int adminProductListCount(SearchVO searchvo) throws Exception{
 		return sqlSession.selectOne(Namespace + ".adminProductListCount", searchvo);
 	}
@@ -54,7 +54,7 @@ public class ProductDAO {
 		return sqlSession.selectOne(Namespace + ".adminProductSelectOne", product_index);
 	}
 	
-	// 상품 등록 전에 상품 번호를 조회하는 과정
+	// 상품 등록&수정 전에 상품 번호를 조회하는 과정
 	public List<ProductVO> adminProductIndexSelectList(String productIndex) throws Exception{
 		return sqlSession.selectList(Namespace + ".adminProductIndexSelectList", productIndex);
 	}

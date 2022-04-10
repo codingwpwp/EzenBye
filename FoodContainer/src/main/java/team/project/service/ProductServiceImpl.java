@@ -49,10 +49,12 @@ public class ProductServiceImpl implements ProductService {
 	// 상품 조회(페이징 + 리스트 출력)
 	@Override
 	public List<ProductVO> adminProductList(SearchVO searchvo, int nowPage) throws Exception {
+
 		
+		// 페이징 처리
 		PagingUtil paging = adminProductPaging(searchvo, nowPage);
 		
-		// 검색 값과 해당 페이지에 대한 목록을 출력하는 과정
+		// 페이징 내부 값 세팅
 		paging.setDel_YN(searchvo.getDel_YN());
 		paging.setSearchValue(searchvo.getSearchValue());
 		paging.setStart(paging.getStart() - 1);
@@ -64,8 +66,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public PagingUtil adminProductPaging(SearchVO searchvo, int nowPage) throws Exception {
 		int cnt = productDao.adminProductListCount(searchvo);
-		PagingUtil paging = new PagingUtil(cnt, nowPage, 10, 5);
-		return paging;
+		return new PagingUtil(cnt, nowPage, 10, 5);
 	}
 	
 	// 상품 삭제
@@ -76,7 +77,6 @@ public class ProductServiceImpl implements ProductService {
 		for(int i = 0; i < productIndexArr.length; i++) {
 			deleteIndexList.add(productIndexArr[i]);
 		}
-		System.out.println(deleteIndexList.size());
 		
 		return productDao.adminProductDelYNisY(deleteIndexList);
 	}
@@ -92,8 +92,33 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int adminProductInsert(ProductVO product, MultipartFile tumnailImage, MultipartFile detailImage,
 			HttpServletRequest request) throws Exception {
+
+		product.setThumbnail_image(tumnailImage.getOriginalFilename());
+		product.setDetail_image(detailImage.getOriginalFilename());
 		
-		// 다음은 이미지 업로드 하는 과정이다. 참고로 주석은 내가 직접 어느정도 이해하면서 작성하였다.
+		imageUpload(product, tumnailImage, detailImage, request);
+		
+		return productDao.adminProductInsert(productIndex(product, tumnailImage, detailImage, request));
+	}
+
+	// 상품 수정
+	@Override
+	public int adminProductUpdate(ProductVO product, MultipartFile tumnailImage, MultipartFile detailImage,
+			HttpServletRequest request) throws Exception {
+		
+		if(!tumnailImage.getOriginalFilename().isEmpty()) product.setThumbnail_image(tumnailImage.getOriginalFilename());
+		if(!detailImage.getOriginalFilename().isEmpty()) product.setDetail_image(detailImage.getOriginalFilename());
+		
+		imageUpload(product, tumnailImage, detailImage, request);
+		
+		return 0;
+	}
+	
+	public void imageUpload(ProductVO product,
+			MultipartFile tumnailImage, MultipartFile detailImage,
+			HttpServletRequest request) throws Exception {
+		
+		// 이미지 업로드 하는 과정
 		// 경로 설정
 		String path = request.getSession().getServletContext().getRealPath("/resources/img/" + product.getBrand() + "/" + product.getMiddleSort());
 		
@@ -105,9 +130,16 @@ public class ProductServiceImpl implements ProductService {
 		if(!tumnailImage.getOriginalFilename().isEmpty()) tumnailImage.transferTo(new File(path, product.getThumbnail_image()));
 		if(!detailImage.getOriginalFilename().isEmpty()) detailImage.transferTo(new File(path, product.getDetail_image()));
 		
-		
+	}
+	
+	// 상품 등록&수정 과정에서 상품번호를 올바르게 생성하는 과정
+	private ProductVO productIndex(ProductVO product, MultipartFile tumnailImage, MultipartFile detailImage,
+			HttpServletRequest request) throws Exception {
+
+		// 상품 번호 과정
 		// 상품 번호를 생성하는 과정
-		String alphbetList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		String alphabetList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		String alphabetIndex = "";
 		String productIndex = "P";
 		if(product.getBigSort().equals("냉동식품")) {
 			productIndex += "I";
@@ -118,37 +150,36 @@ public class ProductServiceImpl implements ProductService {
 			}	
 		}else {
 			productIndex += "R";
-			if(product.getMiddleSort().equals("국문")) {
+			if(product.getMiddleSort().equals("국")) {
 				productIndex += "01";
 			}else if(product.getMiddleSort().equals("반찬")) {
 				productIndex += "02";
-			}else {
+			}else if(product.getMiddleSort().equals("컵밥,햇반")){
 				productIndex += "03";
 			}
 		}
-		
-		
+
 		// 생성한 상품 번호를 DB와 대조하고 입력하는 과정
 		List<ProductVO> productIndexList = productDao.adminProductIndexSelectList(productIndex);
-		
-		if(productIndexList.size() == 0) {
-			productIndex += "A";
-			product.setProduct_index(productIndex);
-		}else {
-			String lastIndex = productIndexList.get(0).getProduct_index();
-			String alpha = lastIndex.substring(4);
-			if(alphbetList.indexOf(alpha) < 25) {
-				productIndex += alphbetList.substring(alphbetList.indexOf(alpha) + 1, alphbetList.indexOf(alpha) + 2);
+		if(product.getProduct_index() == null) {	// 상품 등록의 경우
+			if(productIndexList.size() == 0) {
+				productIndex += "A";
 				product.setProduct_index(productIndex);
 			}else {
-				return 0;
+				for(ProductVO alphabet : productIndexList) {
+					alphabetIndex += alphabet.getProduct_index();
+				}
+			}
+		}else {	// 상품 수정의 경우
+			if(!productIndex.equals(product.getProduct_index().substring(0, 4))) {
+				
 			}
 		}
 		
 		
-		return productDao.adminProductInsert(product);
+		
+		
+		return product;
 	}
-
-	
 	
 }

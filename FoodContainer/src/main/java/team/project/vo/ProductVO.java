@@ -8,7 +8,7 @@ public class ProductVO {
 	private String middleSort;
 	private String product_name;
 	private int origin_price;
-	private int sale_price;
+	private int sale_price = -1;
 	private String brand;
 	private int inventory;
 	private int quantity;

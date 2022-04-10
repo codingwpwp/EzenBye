@@ -106,7 +106,7 @@
                                         </td>
                                         <td>${product.inventory}</td>
                                         <td>
-                                            <button type="button" class="btn btn-outline-primary btn-sm px-1 py-0" onclick="location.href='product_modify.do?product_index=${product.product_index}&route=1'">수정</button>
+                                            <button type="button" class="btn btn-outline-primary btn-sm px-1 py-0" onclick="location.href='product_modify.do?product_index=${product.product_index}'">수정</button>
                                             <button type="button" class="btn btn-outline-dark btn-sm px-1 py-0" onclick="deleteThisCheckbox('productTable', 'product', this)">삭제</button>
                                         </td>
                                    	</tr>
@@ -127,16 +127,16 @@
                     <div id="searchMember" class="row">
 
                         <!-- 검색 -->
-                        <form method="get" action="#" class="col-12 col-md-8 row d-flex align-items-center justify-content-center">
+                        <form method="get" action="product_main.do" class="col-12 col-md-8 row d-flex align-items-center justify-content-center">
 							<!-- 상품 이름 -->	
                             <div class="col-3 d-flex justify-content-end">
-                                <select class="form-select form-select-sm p-1" name="searchType" id="searchType">
-                                    <option value="productName">상품 이름</option>
+                                <select class="form-select form-select-sm p-1" id="searchType">
+                                    <option>상품 이름</option>
                                 </select>
                             </div>
 							<!-- 입력창 -->
                             <div class="col-6">
-                                <input type="text" class="form-control" name="searchValue" placeholder="검색어를 입력하세요" value='<c:if test="${not empty paging.searchValue and paging.searchValue ne ''}">${paging.searchValue}</c:if>'>
+                                <input type="text" class="form-control" name="searchValue" placeholder="검색어를 입력하세요" maxlength="9" value='<c:if test="${not empty paging.searchValue and paging.searchValue ne ''}">${paging.searchValue}</c:if>'>
                             </div>
                             <!-- 페이지(히든) -->
                             <input type="hidden" name="nowPage" value="1">
