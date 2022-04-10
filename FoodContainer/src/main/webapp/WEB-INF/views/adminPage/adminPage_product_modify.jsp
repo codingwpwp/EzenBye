@@ -29,7 +29,7 @@
             <div class="col-lg-2 d-none d-lg-block"></div>
 
             <div class="col-2 col-sm-1 pe-0 d-lg-none" id="navLeftMenu">
-				<%@include file="/WEB-INF/views/adminPage/adminPage_nav_leftMenu.jsp"%>
+				<%@include file="/WEB-INF/views/adminPage/nav_leftMenu.jsp"%>
             </div>
 
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
@@ -43,7 +43,7 @@
 
             <!-- 왼쪽 사이드메뉴 -->
             <div class="col-lg-2 d-none d-lg-block">
-               <%@include file="/WEB-INF/views/adminPage/leftAside.jsp"%>
+               <%@include file="/WEB-INF/views/adminPage/leftMenu.jsp"%>
             </div>
 
             <!-- 메인 -->
@@ -281,7 +281,7 @@
                         <div class="row mt-5">
 
                             <div class="col-12 d-flex justify-content-center">
-                                <button type="reset" class="btn btn-secondary mx-3" onclick="formReset()">초기화</button>
+                                <button type="reset" class="btn btn-secondary mx-3" onclick="backPage(${route})">뒤로가기</button>
                                 <button type="button" class="btn btn-primary mx-3 fw-bold" data-bs-toggle="modal" data-bs-target="#submitModal" onclick="registerButton()">수정하기</button>
                             </div>
 
@@ -399,5 +399,14 @@
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/adminPage.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/adminPage_leftMenu.js"></script>
+    <script>
+    	function backPage(route){
+    		if(route == 1){
+    			location.href='product_main.do?searchValue=' + ${paging.searchValue} + '&nowPage=' + ${paging.nowPage};
+    		}else if(route == 2){
+    			location.href='product_detail.do?product_index=' + ${product.product_index};
+    		}
+    	}
+    </script>
 </body>
 </html>
