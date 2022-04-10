@@ -5,7 +5,7 @@
  
 <mapper namespace="team.project.mapper.dibsMapper">
 
-    <select id="dibsProduct" resultType="team.project.vo.DibsVO">
+    <select id="dibsInsert" resultType="team.project.vo.DibsVO">
     	INSERT INTO  
     	dibs(product_index, member_index) 
     	values(#{product_index}, #{member_index})
@@ -17,5 +17,14 @@
     	WHERE product_index = #{product_index}
     </select>
 
+	<select id="dibsDelete" resultType="team.project.vo.DibsVO">
+    	DELETE FROM dibs 
+    	WHERE product_index = #{product_index}
+    </select>
   
+  	<select id="dibsListAll" resultType="team.project.vo.DibsVO">
+  		SELECT *
+  		FROM dibs
+  		WHERE member_index = #{member_index}
+  	</select>
 </mapper>

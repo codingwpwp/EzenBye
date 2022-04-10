@@ -20,7 +20,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import team.project.service.DibsService;
 import team.project.service.ProductService;
+import team.project.vo.DibsVO;
+import team.project.vo.MemberVO;
 import team.project.vo.ProductVO;
 
 /**
@@ -31,6 +34,8 @@ public class MainController {
 	
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private DibsService dibsService;
 	
 	
 	/**
@@ -44,11 +49,25 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
-	public String productList(Locale locale, Model model, ProductVO productVO, HttpServletRequest request) throws Exception {
+	public String productList(Locale locale, Model model, ProductVO productVO, HttpServletRequest request, DibsVO dibsVO) throws Exception {
 		
 		List<ProductVO> ProductListAll = productService.productListAll(productVO);
 		
 		model.addAttribute("productListAll",ProductListAll);
+		
+		HttpSession session = request.getSession();
+		
+		//ArrayList<String> a = (ArrayList<String>) session.getAttribute("member");
+		
+		if(session.getAttribute("member") != null) {
+			System.out.println(1);
+		}else {
+			System.out.println(2);
+		}
+		
+		List<DibsVO> dibsListAll = dibsService.dibsListAll(dibsVO);
+		
+		model.addAttribute("userDibsList", dibsListAll);
 		
 		return "product/productList";
 	}

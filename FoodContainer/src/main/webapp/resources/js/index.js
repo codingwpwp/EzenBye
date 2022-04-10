@@ -23,6 +23,15 @@
 				
 			}else if(hCheck < 0){
 				obj.setAttribute("src","/controller/resources/img/빈하트.png");
+				
+				$.ajax({
+					url : "dibsDelete.do",
+					type : "get",
+					data : "member_index="+logingCheck+"&product_index="+pIndex,
+					succese : function(){
+						
+					}
+				});
 			}	
 		}
 	}
