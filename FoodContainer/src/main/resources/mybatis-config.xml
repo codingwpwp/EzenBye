@@ -13,6 +13,7 @@
             <typeAlias type="team.project.vo.OrderProductVO" alias="OrderProductVO"/>
             <typeAlias type="team.project.vo.BannerVO" alias="BannerVO"/>
             <typeAlias type="team.project.vo.SearchVO" alias="SearchVO"/>
+            <typeAlias type="team.project.vo.ReviewVO" alias="ReviewVO"/>
             <typeAlias type="team.project.util.PagingUtil" alias="PagingUtil"/>
         </typeAliases>
         
