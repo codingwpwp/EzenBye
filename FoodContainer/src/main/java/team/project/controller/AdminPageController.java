@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ import team.project.vo.SearchVO;
 
 @Controller
 public class AdminPageController {
-	
+
 	@Autowired
 	private ProductService productService;
 	@Autowired
@@ -94,22 +95,34 @@ public class AdminPageController {
 		return "adminPage/adminPage_order_cancel_list";
 	}
 
-	// 등록 상품 조회 페이지
+	// 등록 상품 조회 페이지로 이동
 	@RequestMapping(value = "product_main.do", method = RequestMethod.GET)
-	public String product_main(Locale locale, Model model, SearchVO searchvo, String nowPage) throws Exception {
+	public String productList(Locale locale, Model model, HttpServletRequest request, SearchVO searchvo, int nowPage) throws Exception {
 
-		// 사전 작업
+		// del_YN = "N"
 		searchvo.setDel_YN("N");
+		// 현재페이지
 		int realnowPage = 1;
-		if(nowPage != null && nowPage.equals("")) realnowPage = Integer.parseInt(nowPage);
+		if(nowPage != 0) realnowPage = nowPage;
 		
 		// 리스트 출력
 		List<ProductVO> productList = productService.adminProductList(searchvo, realnowPage);
 		model.addAttribute("productList", productList);
 		
-		// 페이징 출력
+		// 검색값 + 페이징 출력
 		PagingUtil paging = productService.adminProductPaging(searchvo, realnowPage);
+		if(searchvo.getSearchValue() != null) paging.setSearchValue(searchvo.getSearchValue());
 		model.addAttribute("paging", paging);
+		
+		// 검색값과 페이지를 세션에 저장하여 어느경로에서든 상풍 수정 페이지로 이동하고 다시 돌아왔을 때 입력값과 페이지가 온전하게 들어가게 하기 위한 세션 
+		HttpSession session = request.getSession();
+		session.setAttribute("nowPage", nowPage);
+		if(searchvo.getSearchValue() != null) {
+			session.setAttribute("searchValue", searchvo.getSearchValue());
+		}else {
+			session.setAttribute("searchValue", "");
+		}
+		session.setAttribute("route", 1);
 
 		return "adminPage/adminPage_product_main";
 	}
@@ -130,50 +143,66 @@ public class AdminPageController {
 		
 	}
 
-	// 등록 상품 상세조회 페이지
+	// 등록 상품 상세조회 페이지로 이동
 	@RequestMapping(value = "product_detail.do", method = RequestMethod.GET)
-	public String product_detail(Locale locale, Model model, String product_index) throws Exception {
+	public String productOne(Locale locale, Model model, HttpServletRequest request,String product_index) throws Exception {
 		
 		ProductVO product = productService.adminProductSelectOne(product_index);
 		model.addAttribute("product", product);
 		
+		HttpSession session = request.getSession();
+		session.setAttribute("route", 2);
+		
 		return "adminPage/adminPage_product_detail";
 	}
 
-	// 상품 등록 페이지
+	// 상품 등록 페이지로 이동
 	@RequestMapping(value = "product_register.do", method = RequestMethod.GET)
-	public String product_register(Locale locale, Model model) {
+	public String productRegister(Locale locale, Model model) {
 		return "adminPage/adminPage_product_register";
 	}
 
 	// 상품을 실제로 DB에 등록하는 과정
 	@RequestMapping(value = "product_register.do", method = RequestMethod.POST)
-	public String product_registerOk(Locale locale, Model model, ProductVO product,
+	public String productInsert(Locale locale, Model model, ProductVO product,
 									 @RequestParam("tumnailImage") MultipartFile tumnailImage,
 									 @RequestParam("detailImage") MultipartFile detailImage,
 									 HttpServletRequest request) throws Exception {
-
-		product.setThumbnail_image(tumnailImage.getOriginalFilename());
-		product.setDetail_image(detailImage.getOriginalFilename());
 		
 		int result = productService.adminProductInsert(product, tumnailImage, detailImage, request);
 		
 		if(result == 1) {
-			return "redirect:admin.do";
+			return "redirect:product_main.do";
 		}else {
 			return "redirect:product_register.do";
 		}
 		
 	}
 
-	// 상품 수정 페이지
+	// 상품 수정 페이지로 이동
 	@RequestMapping(value = "product_modify.do", method = RequestMethod.GET)
-	public String product_modify(Locale locale, Model model, String product_index) throws Exception {
+	public String productModify(Locale locale, Model model, String product_index) throws Exception {
 		
 		ProductVO product = productService.adminProductSelectOne(product_index);
 		model.addAttribute("product", product);
 		
 		return "adminPage/adminPage_product_modify";
+	}
+	
+	// 상품을 실제로 DB에 수정하는 과정
+	@RequestMapping(value = "product_modify.do", method = RequestMethod.POST)
+	public String productUpdate(Locale locale, Model model, ProductVO product,
+			 @RequestParam("tumnailImage") MultipartFile tumnailImage,
+			 @RequestParam("detailImage") MultipartFile detailImage,
+			 HttpServletRequest request) throws Exception {
+		
+		int result = productService.adminProductUpdate(product, tumnailImage, detailImage, request);
+		
+		if(result == 1) {
+			return "redirect:admin.do";
+		}else {
+			return "redirect:product_modify.do?product_inex=" + product.getProduct_index();
+		}
 	}
 
 	@RequestMapping(value = "product_delete_detail.do", method = RequestMethod.GET)
@@ -236,4 +265,5 @@ public class AdminPageController {
 	public String settlement(Locale locale, Model model) {
 		return "adminPage/adminPage_settlement";
 	}
+	
 }

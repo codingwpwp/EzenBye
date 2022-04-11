@@ -7,19 +7,19 @@
  	
  	<select id="ordersList" resultType="OrdersVO" parameterType="int">
         SELECT * FROM orders
-		WHERE member_index=#{member_index} and cancel_YN='N'
+		WHERE member_index=#{member_index}
 		order by order_date desc limit 3
     </select>
     
     <select id="ordersDetail" resultType="OrdersVO" parameterType="String">
         SELECT * FROM orders
-		WHERE member_order_index=#{member_order_index} and cancel_YN='N'
+		WHERE member_order_index=#{member_order_index}
     </select>
     
     <select id="ordersDetailJoin" resultType="OrdersVO" parameterType="String">
         SELECT * FROM orders AS orde JOIN coupon AS cou
         ON orde.coupon_index = cou.coupon_index
-		WHERE member_order_index=#{member_order_index} and cancel_YN='N'
+		WHERE member_order_index=#{member_order_index}
     </select>
    
 </mapper>

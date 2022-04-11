@@ -31,7 +31,7 @@
             <div class="col-lg-2 d-none d-lg-block"></div>
 
             <div class="col-2 col-sm-1 pe-0 d-lg-none" id="navLeftMenu">
-				<%@include file="/WEB-INF/views/adminPage/adminPage_nav_leftMenu.jsp"%>
+				<%@include file="/WEB-INF/views/adminPage/nav_leftMenu.jsp"%>
             </div>
 
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
@@ -45,7 +45,7 @@
 
             <!-- 왼쪽 사이드메뉴 -->
             <div class="col-lg-2 d-none d-lg-block">
-               <%@include file="/WEB-INF/views/adminPage/leftAside.jsp"%>
+               <%@include file="/WEB-INF/views/adminPage/leftMenu.jsp"%>
             </div>
 
             <!-- 메인 -->
@@ -71,7 +71,8 @@
                                 <span class="infoTitle p-1" style="width: 78px;">대분류</span>
                             </div>
                             <div class="col-8 col-md-6">
-                                <input type="text" class="bg-light form-control" value="${product.bigSort}" disabled>
+                                <input type="text" class="form-control fw-bold bg-opacity-75 <c:if test="${product.bigSort eq '냉동식품'}">bg-primary</c:if><c:if test="${product.bigSort eq '즉석식품'}">bg-success</c:if>"
+                                value="${product.bigSort}" disabled>
                             </div>
                         </div>
 
@@ -81,7 +82,7 @@
                                 <span class="infoTitle p-1" style="width: 78px;">중분류</span>
                             </div>
                             <div class="col-8 col-md-6">
-                                <input type="text" class="bg-light form-control"
+                                <input type="text" class="form-control fw-bold bg-opacity-25 <c:if test="${product.bigSort eq '냉동식품'}">bg-primary</c:if><c:if test="${product.bigSort eq '즉석식품'}">bg-success</c:if>"
                                 	   value="${product.middleSort}" disabled>
                             </div>
                         </div>
@@ -98,9 +99,9 @@
                             <div class="col-4 d-flex justify-content-center">
                                 <span class="infoTitle p-1" style="width: 78px;">상품 번호</span>
                             </div>
-                            <div class="col-3 col-lg-2">
-                                <input type="text" class="bg-light form-control" value="${product.product_index}" disabled>
-                            </div>
+                            <form class="col-3 col-lg-2" name="checkedProductIndexForm">
+                                <input type="text" class="bg-light form-control" name="product_index" value="${product.product_index}" readonly>
+                            </form>
                         </div>
 
                         <!-- 브랜드 -->
@@ -148,9 +149,9 @@
                                 <div class="row">
                                     <div class="col-11 pe-0">
                                         <input type="text" class="form-control bg-light" style="text-align: right;"
-											   value="<c:choose><c:when test="${productvo.sale_price >= 0}"><fmt:formatNumber value='${product.sale_price}' pattern="#,###"/></c:when><c:otherwise>할인없음</c:otherwise></c:choose>" disabled>
+											   value="<c:if test="${product.sale_price > -1}">${product.sale_price}</c:if><c:if test="${product.sale_price <= -1}">할인없음</c:if>" disabled>
                                     </div>
-                                    <div class="col-1 d-flex align-items-center fw-bold px-0"><c:if test="${productvo.sale_price > 0}">원</c:if></div>
+                                    <div class="col-1 d-flex align-items-center fw-bold px-0"><c:if test="${product.sale_price > -1}">원</c:if></div>
                                 </div>
                             </div>
 
@@ -181,9 +182,9 @@
                             <div class="col-8 col-md-2">
                                 <div class="row">
                                     <div class="col-11 pe-0">
-                                        <input type="text" class="bg-light form-control" style="text-align: right;" value="<c:choose><c:when test="${product.delivery_free_YN eq 'N'}">3,000</c:when><c:otherwise>0</c:otherwise></c:choose>" disabled>
+                                        <input type="text" class="bg-light form-control" style="text-align: right;" value="<c:choose><c:when test="${product.delivery_free_YN eq 'N'}">3,000</c:when><c:otherwise>무료배송</c:otherwise></c:choose>" disabled>
                                     </div>
-                                    <div class="col-1 d-flex align-items-center fw-bold px-0">원</div>
+                                    <div class="col-1 d-flex align-items-center fw-bold px-0"><c:if test="${product.delivery_free_YN eq 'N'}">원</c:if></div>
                                 </div>
                             </div>
 
@@ -241,9 +242,9 @@
 
                         <!-- 관리버튼들 -->
                         <div class="gap-3">
-                            <button type="button" class="btn btn-secondary mx-3 fw-bold" onclick="location.href='product_main.do?searchValue=${paging.searchValue}&nowPage=${paging.nowPage}'">뒤로가기</button>
+                            <button type="button" class="btn btn-secondary mx-3 fw-bold" onclick="location.href='product_main.do?searchValue=${searchValue}&nowPage=${nowPage}'">뒤로가기</button>
                             <button type="button" class="btn btn-primary mx-3 fw-bold" onclick="location.href='product_modify.do?product_index=${product.product_index}'">상품수정</button>
-                            <button type="button" class="btn btn-dark mx-3 fw-bold">상품삭제</button>
+							<button type="button" class="btn btn-dark mx-3 fw-bold" onclick="deleteProductAjax()">상품삭제</button>
                         </div>
 
                     </div>

@@ -29,7 +29,7 @@
             <div class="col-lg-2 d-none d-lg-block"></div>
 
             <div class="col-2 col-sm-1 pe-0 d-lg-none" id="navLeftMenu">
-				<%@include file="/WEB-INF/views/adminPage/adminPage_nav_leftMenu.jsp"%>
+				<%@include file="/WEB-INF/views/adminPage/nav_leftMenu.jsp"%>
             </div>
 
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
@@ -43,7 +43,7 @@
 
             <!-- 왼쪽 사이드메뉴 -->
             <div class="col-lg-2 d-none d-lg-block">
-               <%@include file="/WEB-INF/views/adminPage/leftAside.jsp"%>
+               <%@include file="/WEB-INF/views/adminPage/leftMenu.jsp"%>
             </div>
             
             <!-- 메인 -->

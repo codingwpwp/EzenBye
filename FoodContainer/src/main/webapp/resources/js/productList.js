@@ -44,6 +44,7 @@
 		var html = "<br>&quot;"+name+"&quot;<br> 상품이 장바구니에 담겼습니다.";
 			html += "<br><br><button onclick='cartOk()''>확인</button>";
 		$(".message").html(html);
+		
 	}
 	//장바구니 확인 알림
 	function cartOk(){

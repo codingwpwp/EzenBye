@@ -20,7 +20,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import team.project.service.DibsService;
 import team.project.service.ProductService;
+import team.project.vo.DibsVO;
+import team.project.vo.MemberVO;
 import team.project.vo.ProductVO;
 
 /**
@@ -31,6 +34,8 @@ public class MainController {
 	
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private DibsService dibsService;
 	
 	
 	/**
@@ -44,11 +49,15 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
-	public String productList(Locale locale, Model model, ProductVO productVO, HttpServletRequest request) throws Exception {
+	public String productList(Locale locale, Model model, ProductVO productVO, HttpServletRequest request, DibsVO dibsVO) throws Exception {
 		
 		List<ProductVO> ProductListAll = productService.productListAll(productVO);
 		
 		model.addAttribute("productListAll",ProductListAll);
+		
+		List<DibsVO> dibsListAll = dibsService.dibsListAll(dibsVO);
+		
+		model.addAttribute("userDibsList", dibsListAll);
 		
 		return "product/productList";
 	}
@@ -152,4 +161,55 @@ public class MainController {
 		
 	}
 
+	@RequestMapping(value = "noMemberCartCookie.do", method = RequestMethod.GET)
+	public void noMemberCartCookie(Locale locale, Model model, ProductVO productVO, HttpServletRequest request, 
+									HttpServletResponse response) throws UnsupportedEncodingException {
+		//쿠키 value
+		String viewProduct = request.getParameter("product_index");
+		//모든 쿠키 호출
+		Cookie[] cookies = request.getCookies();
+		
+		Cookie cookieValue = null;
+		Cookie noMemberCartCookie;
+		
+		boolean overlap = false;
+		//쿠키가 있을 경우
+		for(Cookie cookie : cookies) {
+			if(cookie.getName().equals("noMemberCart")) {
+				System.out.println("1");
+				cookieValue = cookie;
+				break;
+			}
+		}
+		//찾는 쿠키가 존재할 때
+		if(cookieValue != null) {
+			System.out.println("3");
+			String tempCookie = URLDecoder.decode(cookieValue.getValue(),"UTF-8");
+			String[] tempCookieArr = tempCookie.split(",");
+			//중복방지
+			for(int i=0; i<tempCookieArr.length; i++) {
+				if(tempCookieArr[i].equals(viewProduct)) {
+					System.out.println("5");
+					overlap = true;
+					break;
+				}
+			}
+			
+			if(!(overlap)) {
+				//기존 쿠키에 결합
+				System.out.println("4");
+				String setCookie = URLEncoder.encode(tempCookie.toString() + "," + viewProduct,"UTF-8");
+				System.out.println(setCookie);
+				noMemberCartCookie = new Cookie("noMemberCart", setCookie);
+				response.addCookie(noMemberCartCookie);
+			}
+		//찾는 쿠키가 없을 때
+		}else{
+			System.out.println("2");
+			noMemberCartCookie = new Cookie("noMemberCart", viewProduct);
+			response.addCookie(noMemberCartCookie);
+		}
+		
+		
+	}
 }

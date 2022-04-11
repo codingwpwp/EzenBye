@@ -30,7 +30,7 @@
             <div class="col-lg-2 d-none d-lg-block"></div>
 
             <div class="col-2 col-sm-1 pe-0 d-lg-none" id="navLeftMenu">
-				<%@include file="/WEB-INF/views/adminPage/adminPage_nav_leftMenu.jsp"%>
+				<%@include file="/WEB-INF/views/adminPage/nav_leftMenu.jsp"%>
             </div>
 
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
@@ -44,7 +44,7 @@
 
             <!-- 왼쪽 사이드메뉴 -->
             <div class="col-lg-2 d-none d-lg-block">
-               <%@include file="/WEB-INF/views/adminPage/leftAside.jsp"%>
+               <%@include file="/WEB-INF/views/adminPage/leftMenu.jsp"%>
             </div>
 
             <!-- 메인 -->
@@ -59,11 +59,11 @@
                         <!-- 체크박스&상품등록 버튼 -->
                         <div class="form-check mt-2 mb-3">
                         <c:if test="${not empty bannerList}">
-                            <input class="form-check-input border border-dark" type="checkbox" value="" id="productCheckbox" onchange="checkBanners(this)">
-                            <label class="form-check-label me-3 text-dark fw-bold" for="productCheckbox">
+                            <input class="form-check-input border border-dark" type="checkbox" value="" id="bannerCheckbox" onchange="checkAllCheckbox(this, 'bannerTable')">
+                            <label class="form-check-label me-3 text-dark fw-bold" for="bannerCheckbox">
                                 전체
                             </label>
-                            <button type="button" class="btn btn-dark btn-sm p-1" onclick="checkedBannersDelete()">선택 삭제</button>
+                            <button type="button" class="btn btn-dark btn-sm p-1" onclick="checkedDelete('bannerTable', 'banner')">선택 삭제</button>
                         </c:if>    
                             <button type="button" class="btn btn-primary fw-bold float-end" data-bs-toggle="modal" data-bs-target="#registerBannerModal">배너 등록</button>
                         </div>
@@ -90,15 +90,17 @@
 								<c:forEach items = "${bannerList}" var = "bList">
 								<tr class="bannerTr">
 									<!-- 체크박스 -->
-                                    <td><input class="form-check-input border border-dark bannerCheckboxs" type="checkbox" name="banner_index" value="${bList.banner_index}"></td>
+                                    <td><input class="form-check-input border border-dark" type="checkbox" name="banner_index" id="${bList.banner_index}" value="${bList.banner_index}" onclick="changeCheckbox('bannerCheckbox', 'bannerTable')"></td>
 									
 									<!-- 배너 번호 -->
-                                    <td>${bList.banner_index}</td>
+                                    <td>
+                                    	<label for="${bList.banner_index}">${bList.banner_index}</label>
+                                    </td>
                                     
                                     <!-- 배너 이미지 -->
                                     <td class="text-center"  width="25%">
                                         <img src="<%=request.getContextPath()%>/resources/img/배너/${bList.image}" class="img-fluid rounded d-none d-md-inline">
-                                        <button class="btn btn-outline-info py-0 px-1 d-md-none" data-bs-toggle="modal" data-bs-target="#nowBannerModal" onclick="nowBanner(this)">배너보기</button>
+                                        <button type="button" class="btn btn-outline-info py-0 px-1 d-md-none" data-bs-toggle="modal" data-bs-target="#nowBannerModal" onclick="nowBanner(this)">배너보기</button>
                                     </td>
 
 									<!-- 배너 이름 -->
@@ -109,8 +111,10 @@
                                     
                                     <!-- 해당 배너의 수정&삭제버튼 -->
                                     <td>
-                                        <button class="btn btn-outline-primary btn-sm py-0" data-bs-toggle="modal" data-bs-target="#modifyBannerModal">수정</button>
-                                        <button class="btn btn-outline-dark btn-sm py-0">삭제</button>
+                                        <button type="button" class="btn btn-outline-primary btn-sm py-0" data-bs-toggle="modal" data-bs-target="#modifyBannerModal" onclick="modifyStartBanner(this)">수정</button>
+                                        <button type="button" class="btn btn-outline-dark btn-sm py-0" onclick="deleteThisCheckbox('bannerTable', 'banner', this)">삭제</button>
+                                        <input type="hidden" id="link_YN" value="${bList.link_YN}">
+                                        <input type="hidden" id="link" value="${bList.link}">
                                     </td>
                                 </tr>
 								</c:forEach>
@@ -259,7 +263,7 @@
                                 </div>
 
                                 <div class="modal-body">
-                                    <form name="bannerModifyrForm" method="get" action="">
+                                    <form name="bannerModifyrForm" method="post" action="" enctype="multipart/form-data">
 
                                         <!-- 배너이름 -->
                                         <div class="row mb-3 d-flex align-items-center">

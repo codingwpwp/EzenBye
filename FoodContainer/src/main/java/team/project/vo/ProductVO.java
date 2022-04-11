@@ -8,15 +8,13 @@ public class ProductVO {
 	private String middleSort;
 	private String product_name;
 	private int origin_price;
-	private int sale_price;
+	private int sale_price = -1;
 	private String brand;
 	private int inventory;
 	private int quantity;
 	private String delivery_free_YN;
 	private String thumbnail_image;
 	private String detail_image;
-	private String delivery_info_image;
-	private String cancel_image;
 	private String product_date;
 	private String modify_YN;
 	private String modify_date;
@@ -92,18 +90,6 @@ public class ProductVO {
 	}
 	public void setDetail_image(String detail_image) {
 		this.detail_image = detail_image;
-	}
-	public String getDelivery_info_image() {
-		return delivery_info_image;
-	}
-	public void setDelivery_info_image(String delivery_info_image) {
-		this.delivery_info_image = delivery_info_image;
-	}
-	public String getCancel_image() {
-		return cancel_image;
-	}
-	public void setCancel_image(String cancel_image) {
-		this.cancel_image = cancel_image;
 	}
 	public String getProduct_date() {
 		return product_date;

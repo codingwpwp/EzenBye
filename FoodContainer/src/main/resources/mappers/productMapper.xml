@@ -14,16 +14,14 @@
 
     <select id="view" resultType="ProductVO">
     	SELECT product_name,
-    		   bigsort,
+    		   bigSort,
     		   middleSort,
     		   origin_price,
     		   sale_price,
     		   brand,
     		   delivery_free_YN,
     		   thumbnail_image,
-    		   detail_image,
-    		   delivery_info_image,
-    		   cancel_image 
+    		   detail_image
     	FROM product
     	WHERE del_YN != 'y' and product_index = #{index}
     </select>
@@ -77,7 +75,7 @@
     	WHERE product_index = #{product_index}
     </select>
     
-    <!-- 상품 등록 전에 상품 번호를 조회하는 과정 -->
+    <!-- 상품 등록&수정 전에 상품 번호를 조회하는 과정 -->
     <select id="adminProductIndexSelectList" resultType="ProductVO" parameterType="String">
     	SELECT product_index
     	FROM product
