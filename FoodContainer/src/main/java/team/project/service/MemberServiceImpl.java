@@ -2,7 +2,10 @@ package team.project.service;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import team.project.dao.MemberDAO;
@@ -13,6 +16,9 @@ import team.project.vo.MemberVO;
 public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDAO memberDao;
+	
+//	@Inject
+//    PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private MemberMapper memberMapper;
@@ -26,15 +32,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 	@Override
 	public MemberVO Login(MemberVO vo) throws Exception{
-		// TODO Auto-generated method stub
-		System.out.println(vo.getId()+"test"+vo.getPw());
 		MemberVO mvo= memberDao.Login(vo);
 		
 		return mvo;
 	}
 	@Override
 	public int insertMember(MemberVO vo) throws Exception {
-		// TODO Auto-generated method stub
+//		String encPassword = passwordEncoder.encode(vo.getPw());
 		return memberDao.insertMember(vo);
 		
 	}
@@ -55,6 +59,12 @@ public class MemberServiceImpl implements MemberService {
 		String result = memberDao.recomChk(id);
 		return result;
 	}
+	
+	public String pwChk(String pw)throws Exception{
+		String result = memberDao.pwChk(pw);
+		return result;
+	}
+	
 	@Override
 	public MemberVO memberInfor(int member_index) throws Exception {
 		MemberVO memberInfor = memberDao.memberInfor(member_index);

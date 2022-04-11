@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +30,7 @@ public class SignController {
 	
 //	@Inject
 //	BCryptPasswordEncoder pwdEncoder;
-	
+//	
 
 	@RequestMapping(value = "member_sign.do", method = RequestMethod.GET)
 	public String sign(Locale locale, Model model){
@@ -66,8 +66,10 @@ public class SignController {
 	//회원가입 post
 	@RequestMapping(value = "member_sign.do", method = RequestMethod.POST)
 	public String sign(Locale locale, Model model,MemberVO vo) throws Exception{
-		
-		int result = memberService.insertMember(vo);
+//		String inputPw= vo.getPw();
+//		String pwd=pwdEncoder.encode(inputPw);
+//		vo.setPw(pwd);
+		memberService.insertMember(vo);
 		
 		return "sign/member_sign";
 	}
