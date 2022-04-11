@@ -18,33 +18,52 @@ public class BannerServiceImpl implements BannerService {
 	
 	@Autowired
 	private BannerDAO bannerDao;
-
+	
+	// ë°°ë„ˆ ì¡°íšŒ
 	@Override
 	public List<BannerVO> bannerList() throws Exception {
 		List<BannerVO> bList = bannerDao.bannerList();
 		
 		return bList;
 	}
-
+	
+	// ë°°ë„ˆ ë“±ë¡
 	@Override
-	public void bannerInsert(BannerVO bannervo, MultipartFile bannerFile, HttpServletRequest request) throws Exception {
+	public int bannerInsert(BannerVO bannervo, MultipartFile bannerFile, HttpServletRequest request) throws Exception {
 		
-		// ÆÄÀÏ¸íÀ» vo¿¡ ´ã±â
+		// íŒŒì¼ëª…ì„ VOì— ë‹´ê¸°
 		bannervo.setImage(bannerFile.getOriginalFilename());
 		
-		// ÆÄÀÏÀ» ¾÷·Îµå ÇÏ´Â °úÁ¤
-		String path = request.getSession().getServletContext().getRealPath("C:\\Users\\311\\git\\EzenBye\\FoodContainer\\src\\main\\webapp\\resources\\img\\¹è³Ê");
+		// íŒŒì¼ì„ ì—…ë¡œë“œ í•˜ëŠ” ê³¼ì •
+		String path = request.getSession().getServletContext().getRealPath("/resources/img/ë°°ë„ˆ");
 		File dir = new File(path);
 		if (!dir.exists()) dir.mkdirs();
 		if (!bannerFile.getOriginalFilename().isEmpty()) bannerFile.transferTo(new File(path, bannerFile.getOriginalFilename()));
 		
-		bannerDao.bannerInsert(bannervo);
+		return bannerDao.bannerInsert(bannervo);
 	}
 
+	// ë°°ë„ˆ ìˆ˜ì •
+	@Override
+	public int bannerModify(BannerVO bannervo, MultipartFile bannerFile, HttpServletRequest request) throws Exception {
+		
+		// íŒŒì¼ëª…ì„ VOì— ë‹´ê¸°
+		bannervo.setImage(bannerFile.getOriginalFilename());
+		
+		// íŒŒì¼ì„ ì—…ë¡œë“œ í•˜ëŠ” ê³¼ì •
+		String path = request.getSession().getServletContext().getRealPath("/resources/img/ë°°ë„ˆ");
+		File dir = new File(path);
+		if (!dir.exists()) dir.mkdirs();
+		if (!bannerFile.getOriginalFilename().isEmpty()) bannerFile.transferTo(new File(path, bannerFile.getOriginalFilename()));
+		
+		return bannerDao.bannerUpdate(bannervo);
+	}
+
+	// ë°°ë„ˆ ì‚­ì œ
 	@Override
 	public int bannerDelete(int[] bannerIndexArr) throws Exception {
 		
-		// listÅ¸ÀÔÀ¸·Î º¯È¯ÇÏ´Â °úÁ¤
+		// listíƒ€ì…ìœ¼ë¡œ ë³€í™˜í•˜ëŠ” ê³¼ì •
 		List<Integer> bannerIndexList = new ArrayList<Integer>();
 		if(bannerIndexArr.length != 0) {
 			for(int i = 0; i < bannerIndexArr.length; i++){

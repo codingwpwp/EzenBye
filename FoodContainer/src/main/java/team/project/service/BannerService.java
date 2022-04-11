@@ -12,7 +12,9 @@ public interface BannerService {
 	
 	List<BannerVO> bannerList() throws Exception;
 	
-	void bannerInsert(BannerVO bannervo, MultipartFile bannerFile, HttpServletRequest request) throws Exception;
+	int bannerInsert(BannerVO bannervo, MultipartFile bannerFile, HttpServletRequest request) throws Exception;
+	
+	int bannerModify(BannerVO bannervo, MultipartFile bannerFile, HttpServletRequest request) throws Exception;
 	
 	int bannerDelete(int[] bannerIndexArr) throws Exception;
 	

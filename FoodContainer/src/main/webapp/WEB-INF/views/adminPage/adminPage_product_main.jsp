@@ -113,9 +113,11 @@
 									</c:forEach>
 								</c:if>
 								<c:if test="${empty productList}">
-									<td colspan="7" class="display-2 fw-bold p-3">
-										관련 상품이 없습니다.
-									</td>                                
+									<tr>
+										<td colspan="7" class="display-2 fw-bold p-3">
+											관련 상품이 없습니다.
+										</td>
+									</tr>
                                 </c:if>
                                 </tbody>
                             </table>

@@ -16,9 +16,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import team.project.service.BannerService;
+import team.project.service.MemberService;
+import team.project.service.OrderProductService;
+import team.project.service.OrdersService;
 import team.project.service.ProductService;
 import team.project.util.PagingUtil;
 import team.project.vo.BannerVO;
+import team.project.vo.OrderProductVO;
+import team.project.vo.OrdersVO;
 import team.project.vo.ProductVO;
 import team.project.vo.SearchVO;
 
@@ -29,9 +34,15 @@ public class AdminPageController {
 	private ProductService productService;
 	@Autowired
 	private BannerService bannerService;
+	@Autowired
+	private OrdersService ordersService;
+	@Autowired
+	private OrderProductService orderProductService;
 
 	@RequestMapping(value = "admin.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
+		//String springVersion = org.springframework.core.SpringVersion.getVersion();
+		//System.out.println("스프링 프레임워크 버전 : " + springVersion);
 		return "adminPage/adminPage_main";
 	}
 
@@ -70,24 +81,51 @@ public class AdminPageController {
 		return "adminPage/adminPage_report_list";
 	}
 
+	// 회원 주문 조회
 	@RequestMapping(value = "member_order_list.do", method = RequestMethod.GET)
-	public String member_order_list(Locale locale, Model model) {
+	public String mOrderList(Locale locale, Model model, HttpServletRequest request, SearchVO searchvo, int nowPage) throws Exception {
+		
+
+		// 현재페이지
+		int realnowPage = 1;
+		if(nowPage != 0) realnowPage = nowPage;
+		
+		// 리스트 출력
+		List<OrdersVO> memberOrdersList = ordersService.adminMemberOrdersList(searchvo, realnowPage);
+		model.addAttribute("memberOrdersList", memberOrdersList);
+ 
+		// 검색값 + 페이징 출력
+		PagingUtil paging = ordersService.adminMemberOrdersPaging(searchvo, realnowPage);
+		if(searchvo.getSearchValue() != null) paging.setSearchValue(searchvo.getSearchValue());
+		model.addAttribute("paging", paging);	
+		
 		return "adminPage/adminPage_member_order_list";
 	}
 
+	// 회원 주문 상세조회페이지로 이동
 	@RequestMapping(value = "member_order_detail.do", method = RequestMethod.GET)
-	public String member_order_detail(Locale locale, Model model) {
+	public String member_order_detail(Locale locale, Model model,
+			OrderProductVO orderProductvo,
+			@RequestParam(value="searchValue") String searchValue,
+			@RequestParam(value="nowPage") int nowPage) throws Exception{
+		
+		// 회원 주문 상세조회
+		List<OrderProductVO> memberOrder = orderProductService.orderProductList(orderProductvo);
+		model.addAttribute("memberOrder", memberOrder);
+		model.addAttribute("searchValue", searchValue);
+		model.addAttribute("nowPage", nowPage);
+		
 		return "adminPage/adminPage_member_order_detail";
 	}
 
-	@RequestMapping(value = "notMember_order_list.do", method = RequestMethod.GET)
+	@RequestMapping(value = "noMember_order_list.do", method = RequestMethod.GET)
 	public String notMember_order_list(Locale locale, Model model) {
-		return "adminPage/adminPage_notMember_order_list";
+		return "adminPage/adminPage_noMember_order_list";
 	}
 
-	@RequestMapping(value = "notMember_order_detail.do", method = RequestMethod.GET)
+	@RequestMapping(value = "noMember_order_detail.do", method = RequestMethod.GET)
 	public String notMember_order_detail(Locale locale, Model model) {
-		return "adminPage/adminPage_notMember_order_detail";
+		return "adminPage/adminPage_noMember_order_detail";
 	}
 
 	@RequestMapping(value = "cancel_list.do", method = RequestMethod.GET)
@@ -199,7 +237,7 @@ public class AdminPageController {
 		int result = productService.adminProductUpdate(product, tumnailImage, detailImage, request);
 		
 		if(result == 1) {
-			return "redirect:admin.do";
+			return "redirect:product_main.do";
 		}else {
 			return "redirect:product_modify.do?product_inex=" + product.getProduct_index();
 		}
@@ -231,9 +269,29 @@ public class AdminPageController {
 								@RequestParam("bannerFile") MultipartFile bannerFile,
 								HttpServletRequest request) throws Exception {
 		
-		bannerService.bannerInsert(bannervo, bannerFile, request);
+		int result = bannerService.bannerInsert(bannervo, bannerFile, request);
 		
-		return "redirect:banner.do";
+		if(result > 0) {
+			return "redirect:banner.do";
+		}else {
+			return "redirect:admin.do";
+		}
+		
+	}
+	
+	// 배너 수정
+	@RequestMapping(value = "bannerModify.do", method = RequestMethod.POST)
+	public String bannerModify(Locale locale, Model model, BannerVO bannervo,
+								@RequestParam("bannerFile") MultipartFile bannerFile,
+								HttpServletRequest request) throws Exception {
+		
+		int result = bannerService.bannerModify(bannervo, bannerFile, request);
+		
+		if(result > 0) {
+			return "redirect:banner.do";
+		}else {
+			return "redirect:admin.do";
+		}
 	}
 	
 	// 배너 삭제

@@ -20,8 +20,12 @@ public class BannerDAO {
 		return sqlSession.selectList(Namespace + ".bannerList");
 	}
 	
-	public void bannerInsert(BannerVO bannervo) throws Exception {
-		sqlSession.insert(Namespace + ".bannerInsert", bannervo);
+	public int bannerInsert(BannerVO bannervo) throws Exception {
+		return sqlSession.insert(Namespace + ".bannerInsert", bannervo);
+	}
+	
+	public int bannerUpdate(BannerVO bannervo) throws Exception {
+		return sqlSession.update(Namespace + ".bannerUpdate", bannervo);
 	}
 	
 	public int bannerDelete(List<Integer> bannerIndexList) throws Exception {

@@ -192,7 +192,8 @@
 
                                         <!-- 사진미리보기 -->
                                         <div class="imageContainer border border-dark mb-3" style="min-height: 100px;">
-                                            <span class="fs-5">이미지가 없습니다.</span>
+                                            <span class="position-absolute fw-bold fs-5 bannerMessage">이미지가 없습니다.</span>
+                                            <img src="" class="w-100">
                                         </div>
 
                                         <!-- 링크 유무 -->
@@ -263,8 +264,9 @@
                                 </div>
 
                                 <div class="modal-body">
-                                    <form name="bannerModifyrForm" method="post" action="" enctype="multipart/form-data">
-
+                                    <form name="bannerModifyrForm" method="post" action="bannerModify.do" enctype="multipart/form-data">
+                                    
+                                    	<input type="hidden" name="banner_index" value="">
                                         <!-- 배너이름 -->
                                         <div class="row mb-3 d-flex align-items-center">
 
@@ -273,7 +275,7 @@
                                             </div>
 
                                             <div class="col-8 col-sm-9">
-                                                <input type="text" class="form-control" name="bannerName" value="" placeholder="툴팁용(20자 이내)">
+                                                <input type="text" class="form-control" name="name" value="" placeholder="툴팁용(20자 이내)">
                                             </div>
 
                                         </div>
@@ -286,15 +288,15 @@
                                             </div>
 
                                             <div class="col-8 col-sm-9">
-                                                <input class="form-control" type="file" name="bannerFile" accept="image/png" onchange="bannerPreviewImage(event, this, 'bannerModifyrForm');">
+                                                <input class="form-control" type="file" name="bannerFile" accept="image/png, image/PNG" onchange="bannerPreviewImage(event, this, 'bannerModifyrForm');">
                                             </div>
 
                                         </div>
 
                                         <!-- 사진미리보기 -->
                                         <div class="imageContainer border border-dark mb-3 position-relative" style="min-height: 100px;">
-                                            <span class="position-absolute fw-bold">현재 배너</span>
-                                            <img src="<%=request.getContextPath()%>/resources/img/배너1.png" class="w-100">
+                                            <span class="position-absolute fw-bold fs-5 bannerMessage">현재 배너</span>
+                                            <img src="" class="w-100">
                                         </div>
 
                                         <!-- 링크 유무 -->
@@ -310,7 +312,7 @@
 
                                                 <div class="col-6 d-flex justify-content-center">
 
-                                                    <input class="form-check-input" type="radio" name="linkYN" id="modifyLinkYes">
+                                                    <input class="form-check-input" type="radio" name="link_YN" value="Y" id="modifyLinkYes" onchange="linkYNCheck('bannerModifyrForm')">
                                                     <label class="form-check-label fw-bold" for="modifyLinkYes">
                                                         &nbsp;있음
                                                     </label>
@@ -319,7 +321,7 @@
 
                                                 <div class="col-6 d-flex justify-content-center">
 
-                                                    <input class="form-check-input" type="radio" name="linkYN" id="modifyLinkNo">
+                                                    <input class="form-check-input" type="radio" name="link_YN" value="N" id="modifyLinkNo" onchange="linkYNCheck('bannerModifyrForm')">
                                                     <label class="form-check-label fw-bold" for="modifyLinkNo">
                                                         &nbsp;없음
                                                     </label>
@@ -338,7 +340,7 @@
                                             </div>
 
                                             <div class="col-8 col-sm-9">
-                                                <input type="text" class="form-control" name="bannerURL" value="http://" placeholder="주소를 입력하세요" onkeyup="linkYNCheck(this, 'bannerModifyrForm')" autocomplete="off">
+                                                <input type="text" class="form-control" name="link" value="http://" placeholder="주소를 입력하세요" onkeyup="linkYNCheck(this, 'bannerModifyrForm')" autocomplete="off">
                                             </div>
 
                                         </div>
@@ -348,7 +350,7 @@
                                 
                                 <div class="modal-footer d-flex justify-content-start">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                    <button type="button" class="btn btn-primary">저장</button>
+                                    <button type="button" class="btn btn-primary" onclick="bannerSumbit(this, 'bannerModifyrForm');">저장</button>
                                 </div>
 
                             </div>

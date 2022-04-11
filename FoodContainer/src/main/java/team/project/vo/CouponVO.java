@@ -1,6 +1,6 @@
 package team.project.vo;
 
-public class CouponVO {
+public class CouponVO extends MemberVO{
 	private int coupon_index;
 	private int member_index;
 	private String make_date;

@@ -14,6 +14,15 @@
 		VALUES(#{name}, #{image}, #{link_YN}, #{link})
 	</insert>
 	
+	<update id="bannerUpdate" parameterType="BannerVO">
+		UPDATE banner SET
+		name = #{name},
+		image = #{image},
+		link_YN = #{link_YN},
+		link = #{link}
+		WHERE banner_index = #{banner_index}
+	</update>
+	
 	<delete id="bannerDelete" parameterType="list">
 		DELETE FROM banner
 		WHERE

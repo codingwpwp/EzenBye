@@ -440,8 +440,7 @@ function previewImage(event, obj){
 
     }
 
-}
-// 처음부터 이미지 미리보기 함수만 작성하고 나머지는 따로 만들었으면 좋았을텐데 아쉽다. 내가 이 부분까지는 생각하지 않고 만들었다.
+}	// 처음부터 이미지 미리보기 함수만 작성하고 나머지는 따로 만들었으면 좋았을텐데 아쉽다. 내가 이 부분까지는 생각하지 않고 만들었다.
 
 // 상품등록페이지의 초기화 버튼
 function formReset(){
@@ -594,21 +593,18 @@ function bannerPreviewImage(event, obj, formName){
 
     if(extension == "png" || extension == "PNG"){ // 확장자가 png일 경우
 
-        // 원래 있던 이미지는 삭제
-        $(form).find(".imageContainer").find("img").remove();
+        // 원래 있던 이미지는 초기화
+        $(form).find(".imageContainer").find("img").attr("src", "");
 
-        // 이미지가 없다는 문구를 삭제
-        $(form).find(".imageContainer").find("span").remove();
+        // 이미지가 없다는 문구를 숨기기
+        $(form).find(".bannerMessage").hide();
 
         // 리더기 생성
         var reader = new FileReader();
 
         // 리더기 작동
         reader.onload = function(event) {
-            var img = document.createElement("img");
-            $(img).attr("src", event.target.result);
-            $(img).addClass("w-100");
-            $(form).find(".imageContainer").append(img);
+            $(form).find(".imageContainer").find("img").attr("src", event.target.result);
         };
 
         // 이미지를 인코딩
@@ -618,25 +614,22 @@ function bannerPreviewImage(event, obj, formName){
 
         alert("확장자는 png만 가능합니다.");
 
-        // 이미지가 없다는 문구의 중복 방지를 위해 삭제
-        $(form).find(".imageContainer").find("span").remove();
-
         // 파일input의 value값 초기화
         $(obj).val("");
 
-        // 이미지가 있다면 삭제
-        $(form).find(".imageContainer").find("img").remove();
+        // 원래 있던 이미지는 초기화
+        $(form).find(".imageContainer").find("img").attr("src", "");
 
-        // 이미지가 없다는 문구를 생성하고 뿌리기
-        var span = document.createElement("span");
-        $(span).addClass("fs-5");
-        $(span).text("이미지가 없습니다.");
-        $(form).find(".imageContainer").append(span);
-
+        // 이미지가 없다는 문구를 보이기
+       	$(form).find(".bannerMessage").show();
+        if(formName != "bannerRegisterForm"){
+			$(form).find(".bannerMessage").text("이미지가 없습니다.");
+		}
+		
     }
 
 }
-
+var bannerModifyrFormLink = "";
 // 배너페이지의 링크를 입력했을때 링크유무를 조사
 function linkYNCheck(formName){
 
@@ -651,7 +644,11 @@ function linkYNCheck(formName){
 		link.attr('placeholder', "");
 		link.attr('disabled', true);
     }else{
-		link.val("http://");
+		if(formName != "bannerModifyrForm"){
+			link.val("http://");	
+		}else{
+			link.val(bannerModifyrFormLink);	
+		}
 		link.attr('placeholder', "주소를 입력하세요");
 		link.attr('disabled', false);
     }
@@ -679,8 +676,12 @@ function bannerSumbit(obj, formName){
 	if(flag == false){
 		alert('형식 오류입니다');
 	}else{
-		alert('배너 등록이 완료되었습니다');
-		$(obj).parent().prev().find("form").submit();;
+		if(formName == "bannerRegisterForm"){
+			alert('배너 등록이 완료되었습니다');
+		}else{
+			alert('배너 수정이 완료되었습니다');
+		}
+		$(obj).parent().prev().find("form").submit();
 	}
 	
 }
@@ -691,12 +692,30 @@ function nowBanner(obj){
 	$("#nowBannerImg").attr("src", img);
 }
 
-// 배녀페이지의 수정버튼
+// 배녀페이지의 수정버튼 클릭했을 때 현재배너 나타내기
 function modifyStartBanner(obj){
+	var link_YN = $(obj).next().next().val();
+	var tr = $(obj).closest("tr.bannerTr");
 	var form = $("form[name='bannerModifyrForm']");
-	form.find("input[name='bannerName']").val();
+	form.find("input[name='banner_index']").val(tr.find("td:eq(0)").find("input[name='banner_index']").val());
+	form.find("input[name='name']").val(tr.find("td:eq(3)").html());
+	form.find(".bannerMessage").text("현재 배너");
+	form.find(".bannerMessage").show();
+	form.find("img.w-100").attr("src", tr.find("td:eq(2)").find("img").attr("src"));
+	bannerModifyrFormLink  = form.find("input[name='link']").val();
+	if(link_YN == "Y"){
+		form.find("input:radio[name='link_YN']:radio[value='Y']").prop('checked', true);
+		form.find("input:radio[name='link_YN']:radio[value='N']").prop('checked', false);
+		form.find("input[name='link']").val($(obj).next().next().next().val());
+	}else if(link_YN == "N"){
+		form.find("input:radio[name='link_YN']:radio[value='Y']").prop('checked', false);
+		form.find("input:radio[name='link_YN']:radio[value='N']").prop('checked', true);
+		form.find("input[name='link']").val("");
+		form.find("input[name='link']").attr('disabled', true);
+	}
+	
+	
 }
-
 
 // 테이블 안의 체크박스들 전체 선택(등록상품조회페이지&배너페이지)
 function checkAllCheckbox(obj, tableName){

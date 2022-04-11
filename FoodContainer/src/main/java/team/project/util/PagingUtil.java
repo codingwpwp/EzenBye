@@ -38,7 +38,6 @@ public class PagingUtil extends SearchVO{
 		
 		//한 화면의 게시글 종료 번호
 		int end1 = start + perPage - 1;
-		System.out.println(end1);
 		if (end1 > getTotal()) {
 			setEnd(getTotal());
 		} else {
