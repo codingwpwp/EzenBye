@@ -79,11 +79,13 @@
 			        
 			        <p class="fs-6 lookup-fs-6">최근주문</p>
 			        <hr />
-			        <c:if test="${ordersList eq null }">
+			        <c:if test="${empty ordersList}">
+			        <div class="lookupBorder">
 			        	<p class="fs-6 lookup-fs-6">주문한 내역이 없습니다.</p>
+		        	</div>
 			        </c:if>
 			        
-			        <c:if test="${ordersList ne null }">
+			        <c:if test="${!empty ordersList}">
 			        <c:forEach items="${ordersList}" var="list">
 			        <div class="lookupBorder">
 			        	<div class="row">
@@ -147,7 +149,7 @@
 							        	<div class="d-grid gap-2 col-6 mx-auto">			  
 										  <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop${i}">리뷰작성</button>
 										</div>
-										<form action="#">
+										<form name="bannerRegisterForm" method="post" action="writeReview.do" enctype="multipart/form-data">
 											<div class="modal fade" id="staticBackdrop${i}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 											  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 											    <div class="modal-content">
@@ -184,11 +186,17 @@
 										        			<div class="result-star"></div>
 										        		</div>
 										        	</div>
-													<textarea class="reviewTextarea" name="content" id="" cols="50" rows="10"></textarea>
+													<textarea class="reviewTextarea" name="contents" id="" cols="50" rows="10"></textarea>
+													<input type="hidden" name="product_index" value="${opList.product_index }" />
+													<input type="hidden" name="member_index" value="${memberInfor.member_index }" />
 													<p class="fs-6 lookup-fs-6">리뷰 썸네일 등록</p>
 													<div class="input-group mb-3">
-													  <input type="file" class="form-control" id="inputGroupFile02">
+													  <input type="file" class="form-control" name="reviewImage" accept="image/png, image/PNG" id="inputGroupFile02" onchange="bannerPreviewImage(event, this, 'bannerRegisterForm');">
 													</div>
+													<div class="imageContainer border border-dark mb-3" style="min-height: 100px;">
+			                                            <span class="position-absolute fw-bold fs-5 bannerMessage">이미지가 없습니다.</span>
+			                                            <img src="" class="w-100">
+			                                        </div>
 											      </div>
 											      <div class="modal-footer">
 											        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
@@ -211,10 +219,13 @@
 			        
 			        <p class="fs-6 lookup-fs-6">최근 문의내역</p>
 			        <hr />
-			        <c:if test="${list eq null }">
+			        <c:if test="${empty list}">
+			        <div class="lookupBorder">
 			        	<p class="fs-6 lookup-fs-6">문의한 내역이 없습니다.</p>
+		        	</div>
+		        	
 			        </c:if>
-			        <c:if test="${list ne null }">
+			        <c:if test="${!empty list}">
 			        <div class="main-table">
 				        <table class="table table-hover main-table2">
 						  <thead>

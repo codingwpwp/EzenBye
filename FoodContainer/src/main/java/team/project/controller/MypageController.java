@@ -11,13 +11,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import team.project.service.CouponService;
 import team.project.service.MemberService;
 import team.project.service.OrderProductService;
 import team.project.service.OrdersService;
+import team.project.service.ReviewService;
 import team.project.service.ServiceCenterService;
+import team.project.vo.BannerVO;
 import team.project.vo.MemberVO;
 import team.project.vo.OrderProductVO;
 import team.project.vo.OrdersVO;
@@ -52,6 +56,24 @@ public class MypageController {
 	private OrderProductService orderProductService;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private ReviewService reviewService;
+	
+	// 리뷰 등록
+	/*
+	 * @RequestMapping(value = "bannerRegister.do", method = RequestMethod.POST)
+	 * public String bannerRegister(Locale locale, Model model, BannerVO bannervo,
+	 * 
+	 * @RequestParam("bannerFile") MultipartFile bannerFile, HttpServletRequest
+	 * request) throws Exception {
+	 * 
+	 * int result = reviewService.reviewInsert(bannervo, bannerFile, request);
+	 * 
+	 * if(result > 0) { return "redirect:banner.do"; }else { return
+	 * "redirect:admin.do"; }
+	 * 
+	 * }
+	 */
 	
 	@RequestMapping(value = "buyOk.do", method = RequestMethod.POST)
 	@ResponseBody

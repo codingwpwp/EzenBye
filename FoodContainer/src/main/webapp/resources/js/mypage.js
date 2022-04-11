@@ -220,6 +220,83 @@ function buyOk(obj) {
 	}
 }
 
+function bannerPreviewImage(event, obj, formName){
+
+    // 확장자를 추출하는 과정
+    var valueArray = obj.value.split(".");
+    var extension = valueArray[valueArray.length-1];
+
+    // 해당폼을 추출하는 과정
+    var form = $(obj).closest('form');
+
+    if(extension == "png" || extension == "PNG"){ // 확장자가 png일 경우
+
+        // 원래 있던 이미지는 초기화
+        $(form).find(".imageContainer").find("img").attr("src", "");
+
+        // 이미지가 없다는 문구를 숨기기
+        $(form).find(".bannerMessage").hide();
+
+        // 리더기 생성
+        var reader = new FileReader();
+
+        // 리더기 작동
+        reader.onload = function(event) {
+            $(form).find(".imageContainer").find("img").attr("src", event.target.result);
+        };
+
+        // 이미지를 인코딩
+        reader.readAsDataURL(event.target.files[0]);
+
+    }else{ // 확장자가 png가 아닐 경우
+
+        alert("확장자는 png만 가능합니다.");
+
+        // 파일input의 value값 초기화
+        $(obj).val("");
+
+        // 원래 있던 이미지는 초기화
+        $(form).find(".imageContainer").find("img").attr("src", "");
+
+        // 이미지가 없다는 문구를 보이기
+       	$(form).find(".bannerMessage").show();
+        if(formName != "bannerRegisterForm"){
+			$(form).find(".bannerMessage").text("이미지가 없습니다.");
+		}
+		
+    }
+
+}
+
+function bannerSumbit(obj, formName){
+	var flag = true;
+	var form = $(obj).closest('form');
+	
+	if($(form).find("input[name='name']").val() == ""){
+		flag = false;
+	}else if($(form).find("input[name='bannerFile']").val() == ""){
+		flag = false;
+	}else if($(form).find("input[name='link_YN']:checked").val() == "Y"){
+		if($(form).find("input[name='link']").val() == ""){
+			flag = false;
+		}else if(!urlReg.test($(form).find("input[name='link']").val())){
+			flag = false;
+		}
+	}
+	
+	if(flag == false){
+		alert('형식 오류입니다');
+	}else{
+		if(formName == "bannerRegisterForm"){
+			alert('배너 등록이 완료되었습니다');
+		}else{
+			alert('배너 수정이 완료되었습니다');
+		}
+		$(obj).parent().prev().find("form").submit();
+	}
+	
+}
+
 
 
 
