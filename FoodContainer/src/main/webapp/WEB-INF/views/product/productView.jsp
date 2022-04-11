@@ -101,7 +101,7 @@
 				          <div><span class="fs-5 totalPrice">합계 : <span class="fs-3">10,000원</span></span></div>
 				          <div class="d-flex justify-content-evenly">
 					          <button class="viewButton btn btn-outline-success me-2">장바구니 담기</button>
-					          <button class="viewButton btn btn-success me-2" onclick="location.href='member_purchase.do'">바로구매</button>
+					          <button class="viewButton btn btn-success me-2" onclick="location.href='purchase/notMember.do'">바로구매</button>
 				          </div>
 				        </div>
 				      </div>
@@ -130,12 +130,12 @@
 						
 						<!-- 배송정보 -->
 						<div class="d-flex justify-content-center" id="pDelivery">
-							<img src="<%=request.getContextPath()%>/resources/img/${view.delivery_info_image}" alt="배송안내" class="img-fluid">
+							<img src="<%=request.getContextPath()%>/resources/img/배송.png" alt="배송안내" class="img-fluid">
 						</div>
 					
 						<!-- 취소 규정 -->
 						<div class="d-flex justify-content-center" id="pCancel">
-							<img src="<%=request.getContextPath()%>/resources/img/${view.cancel_image}" alt="취소규정" class="img-fluid">
+							<img src="<%=request.getContextPath()%>/resources/img/취소.png" alt="취소규정" class="img-fluid">
 						</div>
 					   
 					</div>
