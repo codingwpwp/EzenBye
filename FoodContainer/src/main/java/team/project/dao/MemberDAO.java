@@ -2,8 +2,8 @@ package team.project.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +14,7 @@ public class MemberDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	private static final String Namespace = "team.project.mapper.memberMapper";
+	private static final String Namespace = "team.project.mapper.MemberMapper";
 	
 	public List<MemberVO> list(MemberVO vo) throws Exception {
 		
@@ -49,4 +49,9 @@ public class MemberDAO {
 		System.out.println(result);
 		return Integer.toString(result);
 	}
+	
+	public MemberVO memberInfor(int member_index) throws Exception{
+		return sqlSession.selectOne(Namespace+".memberInfor",member_index);
+	}
+	
 }

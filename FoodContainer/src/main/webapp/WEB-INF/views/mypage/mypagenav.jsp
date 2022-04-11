@@ -5,7 +5,6 @@
 			<p class="fs-3 nav-mypage">마이<br>페이지</p>
 			<p class="fs-5 nav-title">쇼핑정보</p>
 	  		<a class="nav-link active nav1 left-nav-text" aria-current="page" href="mypage_lookup.do">주문배송조회</a>
-	  		<a class="nav-link nav2 left-nav-text" href="mypage_cancle.do">취소</a>
 	  		<a class="nav-link nav3 left-nav-text" href="mypage_interItem.do">관심상품</a>
 	  		<p class="fs-5 nav-title">혜택정보</p>
 	  		<a class="nav-link active nav4 left-nav-text" aria-current="page" href="mypage_coupon.do">할인쿠폰</a>

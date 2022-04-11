@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.project.service.CouponService;
+import team.project.service.MemberService;
 import team.project.service.OrderProductService;
 import team.project.service.OrdersService;
 import team.project.service.ServiceCenterService;
@@ -49,19 +50,23 @@ public class MypageController {
 	private OrdersService ordersService;
 	@Autowired
 	private OrderProductService orderProductService;
+	@Autowired
+	private MemberService memberService;
 	
 	@RequestMapping(value = "buyOk.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String buyOk(String orderItem_index) throws Exception {
+	public String buyOk(String orderItem_index, int point, int member_index) throws Exception {
 		
 		int buyOk = orderProductService.buyOk(orderItem_index);
+		memberService.updatePoint(point, member_index);
 		
 		return "true";
 	}
 	
 	@RequestMapping(value = "mypage_main.do", method = RequestMethod.POST)
 	public String main(Locale locale, Model model, int member_index, OrderProductVO opVO) throws Exception {
-
+		
+		MemberVO memberInfor = memberService.memberInfor(member_index);
 		List<ServiceCenterVO> list = serviceCenterService.latelyServiceCenter(member_index);
 		List<OrdersVO> ordersList = ordersService.ordersList(member_index);
 		List<OrderProductVO> opList = orderProductService.orderProductList(opVO);
@@ -71,6 +76,7 @@ public class MypageController {
 		model.addAttribute("ordersList",ordersList);
 		model.addAttribute("opList",opList);
 		model.addAttribute("opListSize",opList.size());
+		model.addAttribute("memberInfor",memberInfor);
 		
 		return "mypage/main";
 	}
