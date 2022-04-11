@@ -11,12 +11,6 @@
     	values(#{product_index}, #{member_index})
     </select>
     
-     <select id="dibsOverlap" resultType="team.project.vo.DibsVO">
-    	SELECT product_index 
-    	FROM dibs 
-    	WHERE product_index = #{product_index}
-    </select>
-
 	<select id="dibsDelete" resultType="team.project.vo.DibsVO">
     	DELETE FROM dibs 
     	WHERE product_index = #{product_index}

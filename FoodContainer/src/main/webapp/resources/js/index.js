@@ -5,7 +5,8 @@
 		var hCheck = obj.getAttribute("src").indexOf("빈하트");
 		var loginCheck = $("#pListLoginCheck").val();
 		var pIndex = $(obj).parent().prev().val();
-		
+		console.log(loginCheck);
+		console.log(pIndex);
 		if(loginCheck == ""){
 			alert("로그인 후 사용 가능합니다.");
 		}else{
@@ -27,7 +28,7 @@
 				$.ajax({
 					url : "dibsDelete.do",
 					type : "get",
-					data : "member_index="+logingCheck+"&product_index="+pIndex,
+					data : "member_index="+loginCheck+"&product_index="+pIndex,
 					succese : function(){
 						
 					}
