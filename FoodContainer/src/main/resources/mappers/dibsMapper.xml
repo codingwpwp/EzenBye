@@ -25,6 +25,5 @@
   	<select id="dibsListAll" resultType="team.project.vo.DibsVO">
   		SELECT *
   		FROM dibs
-  		WHERE member_index = #{member_index}
   	</select>
 </mapper>
