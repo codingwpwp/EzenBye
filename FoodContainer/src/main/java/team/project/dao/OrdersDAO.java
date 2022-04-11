@@ -40,4 +40,8 @@ public class OrdersDAO {
 	public List<OrdersVO> adminMemberOrdersList(PagingUtil paging) throws Exception{
 		return sqlSession.selectList(Namespace + ".adminMemberOrdersList", paging);
 	}
+	// 회원 주문 상세조회 할때 대략적인 정보를 불러오는 쿼리
+	public OrdersVO adminMemberOrder(OrdersVO ordersvo) throws Exception{
+		return sqlSession.selectOne(Namespace + ".adminMemberOrder", ordersvo);
+	}
 }

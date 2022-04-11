@@ -8,14 +8,8 @@ public class OrdersVO extends CouponVO{
 	private String phone;
 	private String request;
 	private String delivery_free_YN;
-	private int used_point;
-	public int getUsed_point() {
-		return used_point;
-	}
-	public void setUsed_point(int used_point) {
-		this.used_point = used_point;
-	}
 	private int coupon_index;
+	private int used_point;
 	private int pay_price;
 	private String order_date;
 	
@@ -67,6 +61,12 @@ public class OrdersVO extends CouponVO{
 	public void setCoupon_index(int coupon_index) {
 		this.coupon_index = coupon_index;
 	}
+	public int getUsed_point() {
+		return used_point;
+	}
+	public void setUsed_point(int used_point) {
+		this.used_point = used_point;
+	}
 	public int getPay_price() {
 		return pay_price;
 	}
@@ -79,6 +79,4 @@ public class OrdersVO extends CouponVO{
 	public void setOrder_date(String order_date) {
 		this.order_date = order_date;
 	}
-	
-	
 }

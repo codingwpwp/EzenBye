@@ -35,13 +35,21 @@
     
     <!-- 회원 주문 조회 -->
     <select id="adminMemberOrdersList" resultType="OrdersVO" parameterType="PagingUtil">
-		SELECT * FROM orders as a, member as b
-		WHERE a.member_order_index = b.member_index
+		SELECT a.member_order_index, b.id, a.order_date FROM orders as a, member as b
+		WHERE a.member_index = b.member_index
 		<if test="searchValue != null">
-			AND member_index IN (SELECT member_index FROM member WHERE id LIKE CONCAT('%',#{searchValue},'%'))
+			AND a.member_index IN (SELECT member_index FROM member WHERE id LIKE CONCAT('%',#{searchValue},'%'))
 		</if>
 	    ORDER BY order_date DESC
     	LIMIT #{start}, #{perPage}
+    </select>
+    
+    <!-- 회원 주문 상세조회 할때 대략적인 정보를 불러오는 쿼리 -->
+    <select id="adminMemberOrder" resultType="OrdersVO" parameterType="OrdersVO">
+    	SELECT a.*, b.id
+    	FROM orders as a, member as b
+    	WHERE a.member_index = b.member_index
+    	AND a.member_order_index = #{member_order_index}
     </select>
    
 </mapper>

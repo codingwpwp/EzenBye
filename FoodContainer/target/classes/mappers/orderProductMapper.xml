@@ -16,5 +16,14 @@
     	SET order_status = '구매확정', buy_YN = 'Y'
     	WHERE orderItem_index = #{orderItem_index}
     </update>
+    
+    <!-- 관리자페이지 -->
+    <!-- 회원 주문 상세조회할때 주문들 불러오기 -->
+    <select id="adminMemberOrderProductList" resultType="OrderProductVO" parameterType="OrdersVO">
+    	SELECT *
+    	FROM order_product as a, product as b
+    	WHERE a.product_index = b.product_index
+    	AND a.member_order_index = #{member_order_index}
+    </select>
    
 </mapper>

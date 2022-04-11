@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import team.project.service.BannerService;
-import team.project.service.MemberService;
 import team.project.service.OrderProductService;
 import team.project.service.OrdersService;
 import team.project.service.ProductService;
@@ -105,13 +104,19 @@ public class AdminPageController {
 	// 회원 주문 상세조회페이지로 이동
 	@RequestMapping(value = "member_order_detail.do", method = RequestMethod.GET)
 	public String member_order_detail(Locale locale, Model model,
-			OrderProductVO orderProductvo,
+			OrdersVO ordersvo,
 			@RequestParam(value="searchValue") String searchValue,
 			@RequestParam(value="nowPage") int nowPage) throws Exception{
 		
-		// 회원 주문 상세조회
-		List<OrderProductVO> memberOrder = orderProductService.orderProductList(orderProductvo);
-		model.addAttribute("memberOrder", memberOrder);
+		// 회원 주문 상세조회할때 주문들 불러오기
+		List<OrderProductVO> adminMemberOrderProductList = orderProductService.adminMemberOrderProductList(ordersvo);
+		model.addAttribute("opList", adminMemberOrderProductList);
+		
+		// 회원 주문 상세조회 할때 대략적인 정보
+		OrdersVO order = ordersService.adminMemberOrder(ordersvo);
+		model.addAttribute("order", order);
+		
+		// 검색값&페이징
 		model.addAttribute("searchValue", searchValue);
 		model.addAttribute("nowPage", nowPage);
 		

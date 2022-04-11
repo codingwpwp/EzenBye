@@ -1,6 +1,6 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -77,9 +77,9 @@
 									<c:forEach items="${memberOrdersList}" var="orders" step="1">
 	                                <tr>
 	                                    <td>${cnt}</td>
-	                                    <td><a href="member_order_detail.do?searchValue=${paging.searchValue}&nowPage=${paging.nowPage}&member_order_index=${orders.member_order_index}" class="link-primary">${orders.id}</a></td>
+	                                    <td><a href="member_order_detail.do?searchValue=${paging.searchValue}&nowPage=${paging.nowPage}&member_order_index=${orders.member_order_index}" class="link-primary">${orders.member_order_index}</a></td>
 	                                    <td>${orders.id}</td>
-	                                    <td><fmt:formatDate value="${orders.order_date}" type="date" pattern="yyyy-MM-dd"/><br></td>
+	                                    <td>${fn:substring(orders.order_date, 0,10)}<br></td>
 	                                    <c:set var="cnt" value="${cnt - 1}"/>
 	                                </tr>
 									</c:forEach>

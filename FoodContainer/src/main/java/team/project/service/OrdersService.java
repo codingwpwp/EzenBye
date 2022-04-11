@@ -3,6 +3,7 @@ package team.project.service;
 import java.util.List;
 
 import team.project.util.PagingUtil;
+import team.project.vo.OrderProductVO;
 import team.project.vo.OrdersVO;
 import team.project.vo.SearchVO;
 
@@ -18,4 +19,7 @@ public interface OrdersService {
 	// 회원 주문 조회
 	List<OrdersVO> adminMemberOrdersList(SearchVO searchvo, int nowPage) throws Exception;
 	PagingUtil adminMemberOrdersPaging(SearchVO searchvo, int nowPage) throws Exception;
+	
+	// 회원 주문 상세조회 할때 대략적인 정보
+	OrdersVO adminMemberOrder(OrdersVO ordersvo) throws Exception;
 }

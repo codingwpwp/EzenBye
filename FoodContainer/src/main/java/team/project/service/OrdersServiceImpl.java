@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import team.project.dao.OrdersDAO;
 import team.project.util.PagingUtil;
+import team.project.vo.OrderProductVO;
 import team.project.vo.OrdersVO;
 import team.project.vo.SearchVO;
 
@@ -34,7 +35,7 @@ public class OrdersServiceImpl implements OrdersService{
 	}
 
 	/* 여기서 부터는 관리자페이지 */
-	// 리스트 출력
+	// 회원 주문 조회 리스트 출력
 	@Override
 	public List<OrdersVO> adminMemberOrdersList(SearchVO searchvo, int nowPage) throws Exception {
 		
@@ -47,11 +48,18 @@ public class OrdersServiceImpl implements OrdersService{
 		return ordersDAO.adminMemberOrdersList(paging);
 	}
 	
+	// 회원 주문 조회 페이징
 	@Override
 	public PagingUtil adminMemberOrdersPaging(SearchVO searchvo, int nowPage) throws Exception{
 		int cnt = ordersDAO.adminMemberOrdersCount(searchvo);
 		return new PagingUtil(cnt, nowPage, 10, 5);
 		
+	}
+	
+	// 회원 주문 상세조회 할때 대략적인 정보
+	@Override
+	public OrdersVO adminMemberOrder(OrdersVO ordersvo) throws Exception {
+		return ordersDAO.adminMemberOrder(ordersvo);
 	}
 
 }
