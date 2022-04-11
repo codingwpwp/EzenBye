@@ -206,11 +206,14 @@ function buyOk(obj) {
 	var YN = confirm("정말 구매확정 하시겠습니까?");
 	if(YN){
 		var orderItem_index = $(obj).parent().find("input[name=orderItem_index]").val();
+		var member_index = $(obj).parent().find("input[name=member_index]").val();
+		var point = $(obj).parent().find("input[name=point]").val();
 		$.ajax({
 			url: "buyOk.do",
 			type: "post",
-			data: "orderItem_index="+orderItem_index,
+			data: "orderItem_index="+orderItem_index+"&member_index="+member_index+"&point="+point,
 			success: function(){
+				alert('포인트가 적립되었습니다.');
 				window.location.reload();
 			}
 		});

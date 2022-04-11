@@ -58,13 +58,13 @@
                     <!-- 실질적인 메인 내용 -->
                     <div class="col-md-11">
 			        <div class="col-7 h-80 p-5 bg-secondary bg-gradient bg-opacity-25 border mx-auto rounded-3 main-card">
-			          <p class="fs-2">${member.name }님</p>
+			          <p class="fs-2">${memberInfor.name }님</p>
 			          	<div class="row point">
 				          <div class="col-sm-8">
 				          	<span class="text-point">포인트</span>
 				          </div>
 				          <div class="col-sm-4">
-				          	<span class="number-point">${member.point }P</span>
+				          	<span class="number-point"><fmt:formatNumber value="${memberInfor.point }" pattern="#,###" />P</span>
 				          </div>
 			          	</div>
 			          	<div class="row">
@@ -79,7 +79,11 @@
 			        
 			        <p class="fs-6 lookup-fs-6">최근주문</p>
 			        <hr />
-			       
+			        <c:if test="${ordersList eq null }">
+			        	<p class="fs-6 lookup-fs-6">주문한 내역이 없습니다.</p>
+			        </c:if>
+			        
+			        <c:if test="${ordersList ne null }">
 			        <c:forEach items="${ordersList}" var="list">
 			        <div class="lookupBorder">
 			        	<div class="row">
@@ -113,19 +117,28 @@
 						        			<span class="fw-bold">상품 주문번호 : ${opList.orderItem_index }</span>
 						        		</div>
 						        	</div>
+						        	<a href="productView.do?product_index=${opList.product_index }" class="productHref">
 						        	<div class="row">
 						        		<div class="col-sm-3">
 						        			<img src="<%=request.getContextPath() %>/resources/img/${opList.brand}/${opList.middleSort}/${opList.thumbnail_image}" class="img-thumbnail" alt="상품사진">
 						        		</div>
 						        		<div class="col-sm-8 d-flex align-items-start flex-column mb-3">
 									    	<div class="mb-auto p-2">${opList.product_name}</div>
+									    	<c:if test="${opList.sale_price eq -1 }" >
 			  								<div class="p-2"><fmt:formatNumber value="${opList.origin_price }" pattern="#,###" />원 | ${opList.order_quantity }개</div>
+			  								</c:if>
+			  								<c:if test="${opList.sale_price ne -1 }" >
+			  								<div class="p-2"><fmt:formatNumber value="${opList.sale_price }" pattern="#,###" />원 | ${opList.order_quantity }개</div>
+			  								</c:if>
 						        		</div>
 						        	</div>
+						        	</a>
 						        	
 						        	<c:if test="${opList.order_status eq '배송완료'}">
 							        	<div class="d-grid gap-2 col-6 mx-auto">
 							        	  <input type="hidden" name="orderItem_index" value="${opList.orderItem_index}"/>
+							        	  <input type="hidden" name="member_index" value="${member.member_index}"/>
+							        	  <input type="hidden" name="point" value="${opList.point}"/>
 										  <button class="btn btn-outline-secondary" type="button" onclick="buyOk(this)">구매확정</button>
 										</div>
 									</c:if>
@@ -192,10 +205,16 @@
 						        </c:if> 
 				        	</c:forEach>
 			        	</div>
+			        	
 			        </c:forEach>
+			        </c:if>
 			        
 			        <p class="fs-6 lookup-fs-6">최근 문의내역</p>
 			        <hr />
+			        <c:if test="${list eq null }">
+			        	<p class="fs-6 lookup-fs-6">문의한 내역이 없습니다.</p>
+			        </c:if>
+			        <c:if test="${list ne null }">
 			        <div class="main-table">
 				        <table class="table table-hover main-table2">
 						  <thead>
@@ -218,7 +237,7 @@
 						  </tbody>
 						</table>
 					</div>
-			        
+			        </c:if>
       			</div>
                 </article>
             </div>
