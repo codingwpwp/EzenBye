@@ -55,7 +55,7 @@
                 <article id="mainSection">
                	<!-- pc버전 -->
                	<article class="pList">
-					<div class="fs-5 my-2 fw-bold topText">전체상품</div>
+					<div class="fs-5 my-2 fw-bold topText">전체상품</div>${test }
 					<hr>
 					<!-- 전체상품 -->
 					<div class="container"> 
@@ -101,9 +101,11 @@
 								  <input type="hidden" name="index" value="${ProductVO.product_index}">
 								  <div class="indexSubImg">
 								  	<c:if test="${member.id != null }">
+								  		<c:set var="heartCheck" value="0" />
 									  	<c:forEach items="${userDibsList}" var="userDibsList">
 									  		<c:if test="${userDibsList.member_index == member.member_index && ProductVO.product_index == userDibsList.product_index}">
 									  			<img src="<%=request.getContextPath()%>/resources/img/찬하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+									  			<c:set var="heartCheck" value="1" />
 									  		</c:if>
 									  	</c:forEach>
 									  	

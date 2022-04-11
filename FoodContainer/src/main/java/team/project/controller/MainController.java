@@ -44,6 +44,7 @@ public class MainController {
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
 	public String index(Locale locale, Model model) {
 		
+		model.addAttribute("test","test");
 		
 		return "index/index";
 	}

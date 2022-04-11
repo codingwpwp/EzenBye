@@ -101,7 +101,7 @@
 				          <div><span class="fs-5 totalPrice">합계 : <span class="fs-3">10,000원</span></span></div>
 				          <div class="d-flex justify-content-evenly">
 					          <button class="viewButton btn btn-outline-success me-2">장바구니 담기</button>
-					          <button class="viewButton btn btn-success me-2" onclick="location.href='notMember.do'">바로구매</button>
+					          <button class="viewButton btn btn-success me-2" onclick="location.href='purchase/notMember.do'">바로구매</button>
 				          </div>
 				        </div>
 				      </div>
