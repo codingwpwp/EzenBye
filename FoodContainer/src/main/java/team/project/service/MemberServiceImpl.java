@@ -6,12 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import team.project.dao.MemberDAO;
+import team.project.mapper.MemberMapper;
 import team.project.vo.MemberVO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDAO memberDao;
+	
+	@Autowired
+	private MemberMapper memberMapper;
 	
 	@Override
 	public List<MemberVO> list(MemberVO vo) throws Exception {
@@ -51,7 +55,15 @@ public class MemberServiceImpl implements MemberService {
 		String result = memberDao.recomChk(id);
 		return result;
 	}
-	
+	@Override
+	public MemberVO memberInfor(int member_index) throws Exception {
+		MemberVO memberInfor = memberDao.memberInfor(member_index);
+		return memberInfor;
+	}
+	@Override
+	public void updatePoint(int point, int member_index) {
+		memberMapper.updatePoint(point, member_index);
+	}
 	
 }
  

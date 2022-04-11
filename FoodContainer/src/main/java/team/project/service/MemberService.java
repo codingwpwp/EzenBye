@@ -2,6 +2,8 @@ package team.project.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import team.project.vo.MemberVO;
 
 public interface MemberService {
@@ -16,6 +18,8 @@ public interface MemberService {
 	String nickChk(String nickname)throws Exception;
 	
 	String recomChk(String id) throws Exception;
-
 	
+	MemberVO memberInfor(int member_index) throws Exception;
+	
+	public void updatePoint(int point, int member_index);
 }

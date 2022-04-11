@@ -276,4 +276,17 @@
 }
 /* 테이블 가로 넘치면 스크롤생겨버리기 */
 
+.productHref{
+	text-decoration: none; color: black;
+}
+.productHref:hover {
+	font-style: italic; color: orange;
+	font-weight: bold;
+}
+
+
+
+
+
+
 
