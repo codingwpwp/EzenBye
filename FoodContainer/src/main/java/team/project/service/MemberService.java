@@ -21,5 +21,7 @@ public interface MemberService {
 	
 	MemberVO memberInfor(int member_index) throws Exception;
 	
+	String pwChk(String pw) throws Exception;
+	
 	public void updatePoint(int point, int member_index);
 }

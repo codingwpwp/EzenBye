@@ -2,17 +2,20 @@ package team.project.controller;
 
 import java.util.Locale;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import team.project.service.MemberService;
@@ -21,7 +24,9 @@ import team.project.vo.MemberVO;
 @Controller
 public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
-
+	@Inject
+	BCryptPasswordEncoder pwdEncoder;
+	
 	@Autowired
 	   private MemberService memberService;
 	   
@@ -31,6 +36,8 @@ public class LoginController {
 	      
 	      HttpSession session =req.getSession();
 	      MemberVO login = memberService.Login(vo);
+//	      boolean pwMatch =pwdEncoder.matches(vo.getPw(),login.getPw());
+	      
 	      
 	      String path="";
 	      vo = new MemberVO();
@@ -40,23 +47,46 @@ public class LoginController {
 	      vo.setPw(pw);
 	      System.out.println(vo.getId()+","+vo.getPw());
 	      
+	        
+	      if(login !=null) {
+	    	   session.setAttribute("member", login);
+		        
+		      }else {
+					session.setAttribute("member", null);
+					rttr.addFlashAttribute("msg", false);
+		      
+		      }
+//	      if(login !=null&&pwMatch==true) {
+//	    	  session.setAttribute("member", login);
+//		      }else {
+//		    	  session.setAttribute("member",null);
+//			         rttr.addFlashAttribute("msg",false);
+//			         path="home";
+//		        
+//		      }
 	      
 	      
-	      
-	      
-	      if(login ==null) {
-	         session.setAttribute("member",null);
-	         rttr.addFlashAttribute("msg",false);
-	         path="home";
-	      }else {
-	         
-	         session.setAttribute("member", login);
-	      }
+//	      if(login ==null) {
+//	         session.setAttribute("member",null);
+//	         rttr.addFlashAttribute("msg",false);
+//	         path="home";
+//	      }else if(){
+//	         
+//	         session.setAttribute("member", login);
+//	      }
 	      return "index/index";
 	         
 	      
 	   }
-	
+	   //비밀번호확인
+		@ResponseBody
+		@RequestMapping(value = "pwChk", method = RequestMethod.POST)
+		public boolean pwChk(MemberVO vo) throws Exception {
+			
+			MemberVO login =memberService.Login(vo);
+			boolean pwChk = pwdEncoder.matches(vo.getPw(), login.getPw());
+			return pwChk;
+		}
 	@RequestMapping(value = "loginmain.do", method = RequestMethod.GET)
 	public String login(Locale locale, Model model,HttpSession session) throws Exception{
 		session.invalidate();
