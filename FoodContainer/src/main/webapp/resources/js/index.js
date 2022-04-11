@@ -98,10 +98,7 @@
 	})
 	
 	//할인 적용
-	var discount = $(".discount").html();
-	
-	if(discount != ""){
-		$(".discount").html("<i class='bi bi-arrow-return-right'></i> " + discount + "원<br>");
+	if($(".discount").html() != -1){
 		$(".discount").prev().prev().css({"text-decoration-line" : "line-through",
 										  "text-decoration-color" : "red"
 										});
@@ -124,8 +121,13 @@
 				
 			}
 		});
-		
-		$('#rightSide').load(location.href+' #rightSide');
 	}
+	
+	window.onpageshow = function(e){ 
+		if(event.persisted || (window.performance && window.performance.navigation.type == 2)){ //뒤로가기 눌렀을때 로직실행 
+			
+		} 
+	}
+
 	
 	

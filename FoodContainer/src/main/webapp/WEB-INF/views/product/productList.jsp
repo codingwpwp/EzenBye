@@ -55,12 +55,12 @@
                 <article id="mainSection">
                	<!-- pc버전 -->
                	<article class="pList">
-					<div class="fs-5 my-2 fw-bold topText">전체상품</div>${test }
+					<div class="fs-5 my-2 fw-bold topText">전체상품</div>
 					<hr>
 					<!-- 전체상품 -->
 					<div class="container"> 
 						<div class="row">
-							<c:forEach items="${productListAll}" var="ProductVO" varStatus="status">
+							<c:forEach items="${productListAll}" var="ProductVO">
 							<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center">
 								<div class="card" style="width: 18rem;">
 								<a href="productView.do?product_index=${ProductVO.product_index}" onclick="productCookie(this)">
@@ -72,9 +72,9 @@
 									   	<span class="fs-4">
 											<fmt:formatNumber value="${ProductVO.origin_price}" pattern="#,###"/>
 										</span>원<br>
-									   	<c:if test="${ProductVO.sale_price != ''}">
+									   	<c:if test="${ProductVO.sale_price != -1}">
 									   	<span class="discount">
-									   		<fmt:formatNumber value="${ProductVO.sale_price}" pattern="#,###"/>
+									   		<fmt:formatNumber value="${ProductVO.sale_price}" pattern="#,###"/>원<br>
 									   	</span>
 									   	</c:if>
 									   	<span class="productListStar">
@@ -108,28 +108,14 @@
 									  			<c:set var="heartCheck" value="1" />
 									  		</c:if>
 									  	</c:forEach>
+									  	<c:if test="${heartCheck == '0'}">
+									  		<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+									  	</c:if>
 									  	
 								  	</c:if>
 								  	<c:if test="${member.id == null}">
 									  	<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
 								  	</c:if>
-								  <%-- 
-								 	 <c:if test="${member.member_index == null}">
-								  		<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
-								  	 </c:if>
-								  	 
-								  	 <c:if test="${member.member_index != null}">
-									 	 <c:choose>
-									  		<c:when test="${overlap.product_index == null}">
-										 	 	<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
-									  		</c:when>
-									  		
-									 	 	<c:when test="${member.member_index == userDibsList[status.index].member_index}">
-											  	<img src="<%=request.getContextPath()%>/resources/img/찬하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
-										  	</c:when>
-										  </c:choose>
-									 </c:if>
-								  --%>
 									<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="cart(this)">
 								  </div>
 								</div>

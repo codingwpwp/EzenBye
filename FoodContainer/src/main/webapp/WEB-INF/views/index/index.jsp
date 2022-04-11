@@ -46,7 +46,6 @@
             <!-- 메인 -->
             <div class="col-12 col-sm-9 col-md-10 col-lg-8">
                 <article id="mainSection">
-                ${test }
                    <!-- 배너 -->
                     <article>
 						<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">

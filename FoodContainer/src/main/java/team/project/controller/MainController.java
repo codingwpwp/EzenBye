@@ -42,9 +42,35 @@ public class MainController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
-	public String index(Locale locale, Model model) {
+	public String index(Locale locale, Model model, HttpServletRequest request) throws Exception {
 		
-		model.addAttribute("test","test");
+		//쿠키 사용
+		Cookie[] cookies = request.getCookies();
+										
+		String currentCookie = null;
+									
+		ArrayList<String> cookieArr = new ArrayList<>();
+				
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				if(cookie.getName().equals("pIndex")) {
+					currentCookie = URLDecoder.decode(cookie.getValue(),"UTF-8");
+				}
+			}
+		}
+										
+	if(currentCookie != null) {
+											
+			String[] CookieList = currentCookie.split(",");
+											
+			for(int i=0; i < CookieList.length; i++) {
+				cookieArr.add(CookieList[i]);
+			}
+					
+			List<ProductVO> cookieListArr = productService.cookieList(cookieArr);
+					
+			model.addAttribute("viewCookie", cookieListArr);
+		}
 		
 		return "index/index";
 	}
@@ -60,6 +86,35 @@ public class MainController {
 		
 		model.addAttribute("userDibsList", dibsListAll);
 		
+		//쿠키 사용
+		Cookie[] cookies = request.getCookies();
+								
+		String currentCookie = null;
+							
+		ArrayList<String> cookieArr = new ArrayList<>();
+		
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				if(cookie.getName().equals("pIndex")) {
+					currentCookie = URLDecoder.decode(cookie.getValue(),"UTF-8");
+				}
+			}
+		}
+								
+		if(currentCookie != null) {
+									
+			String[] CookieList = currentCookie.split(",");
+									
+			for(int i=0; i < CookieList.length; i++) {
+				cookieArr.add(CookieList[i]);
+			}
+			
+			List<ProductVO> cookieListArr = productService.cookieList(cookieArr);
+			
+			model.addAttribute("viewCookie", cookieListArr);
+		}
+								
+		
 		return "product/productList";
 	}
 	
@@ -74,39 +129,39 @@ public class MainController {
 		
 		//쿠키 사용
 		Cookie[] cookies = request.getCookies();
-		
+						
 		String currentCookie = null;
-	
+					
 		ArrayList<String> cookieArr = new ArrayList<>();
 		
-		for(Cookie cookie : cookies) {
-			if(cookie.getName().equals("pIndex")) {
-				currentCookie = URLDecoder.decode(cookie.getValue(),"UTF-8");
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				if(cookie.getName().equals("pIndex")) {
+					currentCookie = URLDecoder.decode(cookie.getValue(),"UTF-8");
+				}
 			}
 		}
-		
+						
 		if(currentCookie != null) {
-			
-			
+							
 			String[] CookieList = currentCookie.split(",");
-			
-			
+							
 			for(int i=0; i < CookieList.length; i++) {
 				cookieArr.add(CookieList[i]);
 			}
 			
+			List<ProductVO> cookieListArr = productService.cookieList(cookieArr);
+			
+			model.addAttribute("viewCookie", cookieListArr);
 		}
-		
-		List<ProductVO> cookieListArr = productService.cookieList(cookieArr);
-		
-		model.addAttribute("viewCookie", cookieListArr);
+						
 		
 		return "product/productView";
 	}
 
 	@RequestMapping(value = "viewProductCookie.do", method = RequestMethod.GET)
 	public void viewProductCookie(Locale locale, Model model, ProductVO productVO, HttpServletRequest request, 
-									HttpServletResponse response) throws UnsupportedEncodingException {
+									HttpServletResponse response) throws Exception {
 		//쿠키 value
 		String viewProduct = request.getParameter("name");
 		//모든 쿠키 호출
@@ -117,11 +172,13 @@ public class MainController {
 		
 		boolean overlap = false;
 		//쿠키가 있을 경우
-		for(Cookie cookie : cookies) {
-			if(cookie.getName().equals("pIndex")) {
-				System.out.println("1");
-				cookieValue = cookie;
-				break;
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				if(cookie.getName().equals("pIndex")) {
+					System.out.println("1");
+					cookieValue = cookie;
+					break;
+				}
 			}
 		}
 		//찾는 쿠키가 존재할 때
@@ -133,8 +190,17 @@ public class MainController {
 			for(int i=0; i<tempCookieArr.length; i++) {
 				if(tempCookieArr[i].equals(viewProduct)) {
 					System.out.println("6");
-					overlap = true;
-					break;
+					if(i==0) {
+						overlap = true;
+						break;
+					}else {
+						tempCookie = tempCookie.replace(","+tempCookieArr[i],"");
+						String setCookie = URLEncoder.encode(tempCookieArr[i] + "," + tempCookie,"UTF-8");
+						viewCookie = new Cookie("pIndex", setCookie);
+						response.addCookie(viewCookie);
+						overlap = true;
+						break;
+					}
 				}
 			}
 			
@@ -159,8 +225,8 @@ public class MainController {
 			response.addCookie(viewCookie);
 		}
 		
-		
 	}
+		
 
 	@RequestMapping(value = "noMemberCartCookie.do", method = RequestMethod.GET)
 	public void noMemberCartCookie(Locale locale, Model model, ProductVO productVO, HttpServletRequest request, 
