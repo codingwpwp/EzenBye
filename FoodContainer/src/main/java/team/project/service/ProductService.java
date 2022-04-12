@@ -20,6 +20,8 @@ public interface ProductService {
 	List<ProductVO> cookieList(ArrayList<String> cookieArr) throws Exception;
 	//비회원 장바구니
 	List<ProductVO> noMemberCartList(ArrayList<String> noMemberCartArr) throws Exception;
+	//메인 - 인기상품
+	List<ProductVO> popularList(ProductVO productVO) throws Exception;
 	
 	/*여기서 부터는 관리자페이지*/
 	
