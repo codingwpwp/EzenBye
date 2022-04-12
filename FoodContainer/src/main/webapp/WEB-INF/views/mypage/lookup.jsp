@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -64,184 +66,144 @@
 				 
 			        <p class="fs-6 lookup-fs-6">주문배송조회</p>
 			        <hr />
-			        <div class="row">
-			        	<div class="col-sm-4 col-6">
-			        		<span class="good-date">2022.3.15</span>
-			        	</div>
-			        	<div class="col-sm-5 col-6">
-			        		<span class="good-date">주문번호 : ADDF1325</span>
-			        	</div>
-			        	<div class="col-sm-3 col-12 findT">
-			        		<button type="button" class="btn btn-primary btn-sm" onclick="location.href='mypage_lookupView.do'">주문상세</button>
-			        	</div>
-			        </div>
+			        <c:if test="${empty ordersList}">
+			        <div class="lookupBorder">
+			        	<p class="fs-6 lookup-fs-6">주문한 내역이 없습니다.</p>
+		        	</div>
+			        </c:if>
 			        
-			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
+			        <c:if test="${!empty ordersList}">
+			        <c:forEach items="${ordersList}" var="list">
+			        <div class="lookupBorder">
 			        	<div class="row">
-			        		<div class="col-sm-4">
-			        			<span class="fw-bold">배송완료</span>
-			        		</div>
-			        		<div class="col-sm-8 number-good">
-			        			<span class="fw-bold">상품 주문번호 : DFSD5649</span>
-			        		</div>
-			        	</div>
-			        	<div class="row">
-			        		<div class="col-sm-3">
-			        			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
-			        		</div>
-			        		<div class="col-sm-8 d-flex align-items-start flex-column mb-3">
-						    	<div class="mb-auto p-2">비비고 진한고기만두400g*2번들</div>
-  								<div class="p-2">4580원 | 5개</div>
-			        		</div>
-			        	</div>
-			        	
-			        	<div class="d-grid gap-2 col-6 mx-auto">
-						  <button class="btn btn-outline-secondary" type="button">구매확정</button>
-						</div>
-			        </div>
-			        
-			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
-			        	<div class="row">
-			        		<div class="col-sm-4">
-			        			<span class="fw-bold">구매확정</span>
-			        		</div>
-			        		<div class="col-sm-8 number-good">
-			        			<span class="fw-bold">상품 주문번호 : DFSD5649</span>
-			        		</div>
-			        	</div>
-			        	<div class="row">
-			        		<div class="col-sm-3">
-			        			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
-			        		</div>
-			        		<div class="col-sm-8 d-flex align-items-start flex-column mb-3">
-						    	<div class="mb-auto p-2">비비고 진한고기만두400g*2번들</div>
-  								<div class="p-2">4580원 | 5개</div>
-			        		</div>
-			        	</div>
-			        	
-			        	<div class="d-grid gap-2 col-6 mx-auto">			  
-						  <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#writeRivew">리뷰작성</button>
-						</div>
-						
-						<form action="#">
-							<div class="modal fade" id="writeRivew" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-							  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-							    <div class="modal-content">
-							      <div class="modal-header">
-							        <h5 class="modal-title" id="staticBackdropLabel">리뷰 작성</h5>
-							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-							      </div>
-							      <div class="modal-body">
-							        <div class="row">
-						        		<div class="col-sm-3">
-						        			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
-						        		</div>
-						        		<div class="col-sm-8">
-									    	<span>비비고 진한고기만두400g*2번들</span>
-						        		</div>
-						        	</div>
-						        	<p class="fs-6 lookup-fs-6">이 상품의 품질에 대해 얼마나 만족하시나요?</p>
-						        	
+				        	<div class="col-sm-12 col-md-12 col-lg-5">
+				        		<span class="good-date">${list.order_date}</span>
+				        	</div>
+				        	<div class="col-sm-12 col-md-12 col-lg-5">
+				        		<span class="good-date">주문번호 : ${list.member_order_index }</span>
+				        	</div>
+				        	<div class="col-sm-12 col-lg-2 findT">
+				        		<button type="button" class="btn btn-primary btn-sm" onclick="location.href='mypage_lookupView.do?member_order_index=${list.member_order_index}'">주문상세</button>
+				        	</div>
+				        </div>
+				        	
+				        	<c:forEach items="${opList}" var="opList">
+				       
+				        	<c:set var="i" value="${i+1}" /> 
+				        	<c:set var="a" value="${a+1}" />
+				        	<c:set var="b" value="${a+opListSize}" />
+				        	<c:set var="c" value="${b+opListSize}" />
+				        	<c:set var="d" value="${c+opListSize}" />
+				        	<c:set var="e" value="${d+opListSize}" />	
+				        	
+				        	<c:if test="${list.member_order_index eq opList.member_order_index}"> 
+					        	<div class="h-100 p-2 bg-light border rounded-3 card-good">
 						        	<div class="row">
-						        		<div class="col">
-						        			<div class="star-rating space-x-4">						        		
-												<input type="radio" id="5-stars" name="rating" value="5" v-model="ratings"/>
-												<label for="5-stars" class="star pr-4">★</label>
-												<input type="radio" id="4-stars" name="rating" value="4" v-model="ratings"/>
-												<label for="4-stars" class="star">★</label>
-												<input type="radio" id="3-stars" name="rating" value="3" v-model="ratings"/>
-												<label for="3-stars" class="star">★</label>
-												<input type="radio" id="2-stars" name="rating" value="2" v-model="ratings"/>
-												<label for="2-stars" class="star">★</label>
-												<input type="radio" id="1-star" name="rating" value="1" v-model="ratings" />
-												<label for="1-star" class="star">★</label>
-											</div>
+						        		<div class="col-sm-4">
+						        			<span class="fw-bold">${opList.order_status }</span>
 						        		</div>
-						        		<div class="col">
-						        			<div id="result-star"></div>
+						        		<div class="col-sm-8 number-good">
+						        			<span class="fw-bold">상품 주문번호 : ${opList.orderItem_index }</span>
 						        		</div>
 						        	</div>
+						        	<a href="productView.do?product_index=${opList.product_index }" class="productHref">
+						        	<div class="row">
+						        		<div class="col-sm-3">
+						        			<img src="<%=request.getContextPath() %>/resources/img/${opList.brand}/${opList.middleSort}/${opList.thumbnail_image}" class="img-thumbnail" alt="상품사진">
+						        		</div>
+						        		<div class="col-sm-8 d-flex align-items-start flex-column mb-3">
+									    	<div class="mb-auto p-2">${opList.product_name}</div>
+									    	<c:if test="${opList.sale_price eq -1 }" >
+			  								<div class="p-2"><fmt:formatNumber value="${opList.origin_price }" pattern="#,###" />원 | ${opList.order_quantity }개</div>
+			  								</c:if>
+			  								<c:if test="${opList.sale_price ne -1 }" >
+			  								<div class="p-2"><fmt:formatNumber value="${opList.sale_price }" pattern="#,###" />원 | ${opList.order_quantity }개</div>
+			  								</c:if>
+						        		</div>
+						        	</div>
+						        	</a>
 						        	
-									<textarea class="reviewTextarea" name="content" id="" cols="50" rows="10" placeholder="내용을 입력해주세요."></textarea>
-									<p class="fs-6 lookup-fs-6">리뷰 썸네일 등록</p>
-									<div class="input-group mb-3">
-									  <input type="file" class="form-control" id="inputGroupFile02">
-									</div>
-							      </div>
-							      
-							      <div class="modal-footer">
-							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-							        <button type="submit" class="btn btn-primary">작성완료</button>
-							      </div>
-							    </div>
-							  </div>
-							</div>
-						</form>
-						
-			        </div>
-			        
-			        <hr style="border: 1px solid gray;" />
-			        
-			        <div class="row">
-			        	<div class="col-sm-4 col-6">
-			        		<span class="good-date">2022.3.15</span>
-			        	</div>
-			        	<div class="col-sm-5 col-6">
-			        		<span class="good-date">주문번호 : ADDF1325</span>
-			        	</div>
-			        	<div class="col-sm-3 col-12 findT">
-			        		<button type="button" class="btn btn-primary btn-sm" onclick="location.href='mypage_lookupView.do'">주문상세</button>
-			        	</div>
-			        </div>
-			        
-			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
-			        	<div class="row">
-			        		<div class="col-sm-4">
-			        			<span class="fw-bold">배송준비중</span>
-			        		</div>
-			        		<div class="col-sm-8 number-good">
-			        			<span class="fw-bold">상품 주문번호 : DFSD5649</span>
-			        		</div>
-			        	</div>
-			        	<div class="row">
-			        		<div class="col-sm-3">
-			        			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
-			        		</div>
-			        		<div class="col-sm-8 d-flex align-items-start flex-column mb-3">
-						    	<div class="mb-auto p-2">비비고 진한고기만두400g*2번들</div>
-  								<div class="p-2">4580원 | 5개</div>
-			        		</div>
-			        	</div> 
-			        </div>
-			        
-			        <div class="d-grid gap-2 col-6 mx-auto">
-					  <button class="btn btn-secondary cancle-btn" type="button" data-bs-toggle="modal" data-bs-target="#cancle-good">취소신청</button>
-					</div>
-					<form action="#">
-							<div class="modal fade" id="cancle-good" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-							  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-							    <div class="modal-content">
-							      <div class="modal-header">
-							        <h5 class="modal-title" id="staticBackdropLabel">주문 취소</h5>
-							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-							      </div>
-							      <div class="modal-body">
-						        	<p class="fs-6 lookup-fs-6">주문날짜 : </p>
-						        	<p class="fs-6 lookup-fs-6">주문번호 : </p>
-						        	<p class="fs-6 lookup-fs-6">주문한 상품 : </p>
-						        	<p class="fs-6 lookup-fs-6">취소 사유를 입력해 주세요.</p>
-						        	
-									<textarea class="cancleTextarea" name="content" id="" cols="50" rows="10" placeholder="내용을 입력해주세요."></textarea>
+						        	<c:if test="${opList.order_status eq '배송완료'}">
+							        	<div class="d-grid gap-2 col-6 mx-auto">
+							        	  <input type="hidden" name="orderItem_index" value="${opList.orderItem_index}"/>
+							        	  <input type="hidden" name="member_index" value="${member.member_index}"/>
+							        	  <input type="hidden" name="point" value="${opList.point}"/>
+										  <button class="btn btn-outline-secondary" type="button" onclick="buyOk(this)">구매확정</button>
+										</div>
+									</c:if>
 									
-							      </div>
-							      <div class="modal-footer">
-							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-							        <button type="submit" class="btn btn-primary">상품취소</button>
-							      </div>
-							    </div>
-							  </div>
-							</div>
-						</form>
+									<c:if test="${opList.order_status eq '구매확정' and opList.review_YN ne 'Y'}">
+							        	<div class="d-grid gap-2 col-6 mx-auto">			  
+										  <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop${i}">리뷰작성</button>
+										</div>
+										<form name="bannerRegisterForm" method="post" action="writeReview.do" enctype="multipart/form-data">
+											<div class="modal fade" id="staticBackdrop${i}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+											  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+											    <div class="modal-content">
+											      <div class="modal-header">
+											        <h5 class="modal-title" id="staticBackdropLabel">리뷰 작성</h5>
+											        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+											      </div>
+											      <div class="modal-body">
+											        <div class="row">
+										        		<div class="col-sm-3">
+										        			<img src="<%=request.getContextPath() %>/resources/img/${opList.brand}/${opList.middleSort}/${opList.thumbnail_image}" class="img-thumbnail" alt="...">
+										        		</div>
+										        		<div class="col-sm-8">
+													    	<span>${opList.product_name}</span>
+										        		</div>
+										        	</div>
+										        	<p class="fs-6 lookup-fs-6">이 상품의 품질에 대해 얼마나 만족하시나요?</p>
+										        	<div class="row">
+										        		<div class="col">
+										        			<div class="star-rating space-x-4">						        		
+																<input type="radio" id="${e}-stars" name="rating" value="5" v-model="ratings"/>
+																<label for="${e}-stars" class="star pr-4">★</label>
+																<input type="radio" id="${d}-stars" name="rating" value="4" v-model="ratings"/>
+																<label for="${d}-stars" class="star">★</label>
+																<input type="radio" id="${c}-stars" name="rating" value="3" v-model="ratings"/>
+																<label for="${c}-stars" class="star">★</label>
+																<input type="radio" id="${b}-stars" name="rating" value="2" v-model="ratings"/>
+																<label for="${b}-stars" class="star">★</label>
+																<input type="radio" id="${a}-star" name="rating" value="1" v-model="ratings" />
+																<label for="${a}-star" class="star">★</label>
+															</div>
+										        		</div>
+										        		<div class="col">
+										        			<div class="result-star"></div>
+										        		</div>
+										        	</div>
+													<textarea class="reviewTextarea" name="contents" id="" cols="50" rows="10"></textarea>
+													<input type="hidden" name="product_index" value="${opList.product_index }" />
+													<input type="hidden" name="member_index" value="${memberInfor.member_index }" />
+													<input type="hidden" name="orderItem_index" value="${opList.orderItem_index }" />
+													<p class="fs-6 lookup-fs-6">리뷰 썸네일 등록</p>
+													<div class="input-group mb-3">
+													  <input type="file" class="form-control" name="reviewImage" accept="image/png, image/PNG" id="inputGroupFile02" onchange="bannerPreviewImage(event, this, 'bannerRegisterForm');">
+													</div>
+													<div class="imageContainer border border-dark mb-3" style="min-height: 100px;">
+			                                            <span class="position-absolute fw-bold fs-5 bannerMessage">이미지가 없습니다.</span>
+			                                            <img src="" class="w-100">
+			                                        </div>
+											      </div>
+											      <div class="modal-footer">
+											        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+											        <button type="button" class="btn btn-primary" onclick="reviewSumbit(this, 'bannerRegisterForm');">작성완료</button>
+											      </div>
+											    </div>
+											  </div>
+											</div>
+										</form>
+												
+									</c:if> 
+									
+						        </div>
+						        </c:if> 
+				        	</c:forEach>
+			        	</div>
+			        	
+			        </c:forEach>
+			        </c:if>
 			        
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
 			        	<ul>

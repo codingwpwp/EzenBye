@@ -15,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import team.project.service.CartService;
 import team.project.service.CouponService;
+import team.project.service.DibsService;
 import team.project.service.MemberService;
 import team.project.service.OrderProductService;
 import team.project.service.OrdersService;
 import team.project.service.ReviewService;
 import team.project.service.ServiceCenterService;
+import team.project.vo.CartVO;
+import team.project.vo.DibsVO;
 import team.project.vo.MemberVO;
 import team.project.vo.OrderProductVO;
 import team.project.vo.OrdersVO;
@@ -33,6 +37,7 @@ import team.project.vo.ServiceCenterVO;
 @Controller
 public class MypageController {
 	
+	//로그인 세션 만료시 메인페이지로 이동
 	@RequestMapping(value = "memberSessionCheck.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String memberSessionCheck(HttpSession session) throws Exception {
@@ -58,6 +63,10 @@ public class MypageController {
 	private MemberService memberService;
 	@Autowired
 	private ReviewService reviewService;
+	@Autowired
+	private DibsService dibsService;
+	@Autowired
+	private CartService cartService;
 	
 	 // 리뷰 등록
 	 @RequestMapping(value = "writeReview.do", method = RequestMethod.POST)
@@ -76,19 +85,46 @@ public class MypageController {
 		  }
 	  }
 	 
-	
+	// 구매확정버튼 클릭시 구매확정으로 바꾸고, 멤버 포인트 쌓임
 	@RequestMapping(value = "buyOk.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String buyOk(String orderItem_index, int point, int member_index) throws Exception {
+	public String buyOk(String orderItem_index, int point, HttpSession session) throws Exception {
 		
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		int member_index = member.getMember_index();
 		int buyOk = orderProductService.buyOk(orderItem_index);
 		memberService.updatePoint(point, member_index);
 		
 		return "true";
 	}
 	
-	@RequestMapping(value = "mypage_main.do", method = RequestMethod.POST)
-	public String main(Locale locale, Model model, int member_index, OrderProductVO opVO) throws Exception {
+	// 마이페이지 관심상품 삭제
+	/*
+	@RequestMapping(value = "cartInsert.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String cartInsert(Locale locale, Model model, CartVO cartVO) throws Exception {
+		
+		
+		
+		return "true";
+	}
+	*/
+	
+	// 관심상품 -> 장바구니 추가
+	@RequestMapping(value = "dibsDeleteMypage.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String dbisDeleteMypage(Locale locale, Model model, DibsVO dibsVO) throws Exception {
+		
+		dibsService.dibsDelete(dibsVO);
+		
+		return "true";
+	}
+	
+	@RequestMapping(value = "mypage_main.do", method = RequestMethod.GET)
+	public String main(Locale locale, Model model, OrderProductVO opVO, HttpSession session) throws Exception {
+		
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		int member_index = member.getMember_index();
 		
 		MemberVO memberInfor = memberService.memberInfor(member_index);
 		List<ServiceCenterVO> list = serviceCenterService.latelyServiceCenter(member_index);
@@ -106,41 +142,64 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value = "mypage_lookup.do", method = RequestMethod.GET)
-	public String home2(Locale locale, Model model, HttpServletRequest request) {
+	public String lookup(Locale locale, Model model, HttpSession session, OrderProductVO opVO) throws Exception {
 		
-		//1.세션 얻어옴
-		//2.로그인 정보 추출
-		//3.service(session정보)
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		int member_index = member.getMember_index();
+		MemberVO memberInfor = memberService.memberInfor(member_index);
 		
+		List<OrdersVO> ordersList = ordersService.ordersListAll(member_index);
+		
+		List<OrderProductVO> opList = orderProductService.orderProductList(opVO);
+		
+		model.addAttribute("ordersList",ordersList);
+		
+		model.addAttribute("opList",opList);
+		model.addAttribute("opListSize",opList.size());
+		
+		model.addAttribute("memberInfor",memberInfor);
 		
 		return "mypage/lookup";
 	}
 	
 	@RequestMapping(value = "mypage_lookupView.do", method = RequestMethod.GET)
-	public String lookupDetail(Locale locale, Model model, String member_order_index, OrderProductVO opVO) throws Exception {
+	public String lookupDetail(Locale locale, Model model, String member_order_index, OrderProductVO opVO, HttpSession session) throws Exception {
+		
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		int member_index = member.getMember_index();
+		MemberVO memberInfor = memberService.memberInfor(member_index);
 		
 		OrdersVO ordersDetail = ordersService.ordersDetail(member_order_index);
+		
 		OrdersVO ordersDetailJoin = ordersService.ordersDetailJoin(member_order_index);
+		
 		List<OrderProductVO> opList = orderProductService.orderProductList(opVO);
+		
 		model.addAttribute("ordersDetail",ordersDetail);
 		
 		model.addAttribute("ordersDetailJoin",ordersDetailJoin);
 		
 		model.addAttribute("opList",opList);
 		
+		model.addAttribute("opListSize",opList.size());
+		
+		model.addAttribute("memberInfor",memberInfor);
+		
 		return "mypage/lookupView";
 	}
 	
-	@RequestMapping(value = "mypage_cancle.do", method = RequestMethod.GET)
-	public String home4(Locale locale, Model model) {
-		return "mypage/cancle";
-	}
-	@RequestMapping(value = "mypage_cancleView.do", method = RequestMethod.GET)
-	public String home5(Locale locale, Model model) {
-		return "mypage/cancleView";
-	}
 	@RequestMapping(value = "mypage_interItem.do", method = RequestMethod.GET)
-	public String home6(Locale locale, Model model) {
+	public String dibsListAllJoin(Locale locale, Model model, HttpSession session) throws Exception {
+		
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		int member_index = member.getMember_index();
+		List<DibsVO> dibsListAllJoin = dibsService.dibsListAllJoin(member_index);
+		
+		int dibsListCount = dibsService.dibsListCount(member_index); 
+		
+		model.addAttribute("dibsListAllJoin",dibsListAllJoin);
+		model.addAttribute("dibsListCount",dibsListCount);
+		
 		return "mypage/interItem";
 	}
 	@RequestMapping(value = "mypage_coupon.do", method = RequestMethod.GET)

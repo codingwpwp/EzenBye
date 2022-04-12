@@ -15,5 +15,8 @@ public interface DibsService {
 	int dibsDelete(DibsVO dibsVO) throws Exception;
 	
 	List<DibsVO> dibsListAll(DibsVO dibsVO) throws Exception;
-
+	
+	List<DibsVO> dibsListAllJoin(int member_index) throws Exception;
+	
+	int dibsListCount(int member_index) throws Exception;
 }

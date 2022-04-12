@@ -144,6 +144,9 @@
 .interItem-icon{
 	text-align: right; margin-top: 20px;
 }
+.bi-trash:hover{
+	color: red; cursor: pointer;
+}
 /* 관심상품 상품삭제 아이콘 */
 
 .coupon-table{

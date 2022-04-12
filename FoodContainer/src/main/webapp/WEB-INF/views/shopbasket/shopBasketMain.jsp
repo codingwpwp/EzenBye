@@ -111,7 +111,7 @@
 						</c:if>
 						</c:forEach>
 					</c:if>
-					
+					</div>
 					
 					
 					<div class="shopbasket-title border border-success border-1 rounded shadow-sm">
@@ -161,7 +161,7 @@
 						<button type="button" class="btn btn-outline-dark col-5">구매하기</button>
 					</div>
 						
-      				</div>
+      				
       				
                 </article>
             </div>

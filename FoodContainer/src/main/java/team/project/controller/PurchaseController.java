@@ -10,11 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.project.service.CouponService;
+import team.project.service.EmailService;
 import team.project.vo.CouponVO;
+import team.project.vo.EmailVO;
 
 @RequestMapping(value = "/purchase/")
 @Controller
@@ -22,6 +23,9 @@ public class PurchaseController {
 	
 	@Autowired
 	private CouponService couponService;
+	
+	@Autowired
+	private EmailService emailService;
 	
 	// 회원 구매페이지
 	@RequestMapping(value = "member.do", method = RequestMethod.GET)
@@ -34,14 +38,27 @@ public class PurchaseController {
 	}
 	
 	// 비회원 구매페이지
-	@RequestMapping(value = "notMember.do", method = RequestMethod.GET)
+	@RequestMapping(value = "noMember.do", method = RequestMethod.GET)
 	public String nomember_purchase(Locale locale, Model model) {
-		return "purchasePage/purchasePage_notMember";
+		return "purchasePage/purchasePage_noMember";
 	}
 	// 비회원 이메일 인증
 	@RequestMapping(value = "certification.do", method = RequestMethod.GET)
 	public String nomember_certification(Locale locale, Model model) {
-		return "purchasePage/purchasePage_notMember_Certification";
+		return "purchasePage/purchasePage_certification";
+	}
+	
+	// 비회원 이메일 보내기
+	@RequestMapping(value = "certification.do", method = RequestMethod.POST)
+	public String SendEmail(Locale locale, Model model, EmailVO emailvo) throws Exception {
+		
+		System.out.println(emailvo.getReceiveMail());
+		emailvo.setSubject("테스트제목");
+		emailvo.setMessage("테스트입니다.");
+		
+		emailService.sendEmail(emailvo);
+		
+		return "success";
 	}
 	
 	// 회원 구매페이지 내에서 쿠폰 적용하는 비동기
