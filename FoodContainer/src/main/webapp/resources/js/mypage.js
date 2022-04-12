@@ -120,6 +120,24 @@ $(document).ready(function(){
 		}
 	});
 	
+	$('.bi-trash').on('click',function(){
+	var YN = confirm("정말 삭제하시겠습니까?");
+	if(YN){
+		var product_index = $(this).parent().find("input[name='product_index']").val();
+		var member_index = $(this).parent().find("input[name='member_index']").val();
+		
+		$.ajax({
+				url : "dibsDeleteMypage.do",
+				type : "post",
+				data : "product_index="+product_index+"&member_index="+member_index,
+				success : function(){
+					alert('삭제가 완료되었습니다.');
+					window.location.reload();
+				}
+			});
+		}
+	});
+	
 });
 
 // 배송지 관리 주소검색
@@ -296,6 +314,28 @@ function reviewSumbit(obj, formName){
 	}
 	
 }
+
+//관심상품 장바구니 추가
+function cartInsert(obj) {
+	var YN = confirm("장바구니에 추가 하시겠습니까?");
+	if(YN){
+		var product_index = $(obj).parent().parent().find("input[name='product_index']").val();
+		var member_index = $(obj).parent().parent().find("input[name='member_index']").val();
+		
+		$.ajax({
+				url : "cartInsert.do",
+				type : "post",
+				data : "product_index="+product_index+"&member_index="+member_index,
+				success : function(){
+					alert('장바구니 추가 완료되었습니다.');
+					window.location.reload();
+				}
+			});
+	}
+}
+
+
+	
 
 
 

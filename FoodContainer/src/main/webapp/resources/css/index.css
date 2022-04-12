@@ -10,7 +10,7 @@
 	margin-bottom : 20px;
 }
 
-.cardImg{
+#cardImg{
 	max-height : 250px;
 }
 
@@ -198,8 +198,17 @@
 	display : inline-block;
 	border : 1px solid #DCDCDC;
 	border-radius : 5px;
-	width : 150px;
+	width : 155px;
 	height : auto;
+}
+
+.productNameM{
+	font-size : 15px;
+}
+
+#cardMimg{
+	width : 150px;
+	height : 180px;
 }
 
 /*모바일 베스트 레시피 카드*/
@@ -242,6 +251,10 @@
 }
 
 /* productList ========================================================================================== */
+
+.cardImg{
+	max-height : 190px;
+}
 
 @media screen and (max-width : 600px){
 	.pList{

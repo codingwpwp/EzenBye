@@ -20,8 +20,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import team.project.service.BannerService;
 import team.project.service.DibsService;
 import team.project.service.ProductService;
+import team.project.vo.BannerVO;
 import team.project.vo.DibsVO;
 import team.project.vo.MemberVO;
 import team.project.vo.ProductVO;
@@ -36,13 +38,23 @@ public class MainController {
 	private ProductService productService;
 	@Autowired
 	private DibsService dibsService;
+	@Autowired
+	private BannerService bannerService;
 	
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
-	public String index(Locale locale, Model model, HttpServletRequest request) throws Exception {
+	public String index(Locale locale, Model model, HttpServletRequest request, ProductVO productVO, BannerVO bannerVO) throws Exception {
+		
+		List<ProductVO> popularList = productService.popularList(productVO);
+		
+		model.addAttribute("popularList", popularList);
+		
+		List<BannerVO> mainBannerList = bannerService.mainBannerList(bannerVO);
+		
+		model.addAttribute("mainBannerList",mainBannerList);
 		
 		//쿠키 사용
 		Cookie[] cookies = request.getCookies();
