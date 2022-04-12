@@ -40,6 +40,20 @@ public class DibsServiceImpl implements DibsService {
 		return dibsListAll;
 	}
 
+	@Override
+	public List<DibsVO> dibsListAllJoin(int member_index) throws Exception {
+		
+		List<DibsVO> dibsListAllJoin = dibsDAO.dibsListAllJoin(member_index);
+		
+		return dibsListAllJoin;
+	}
+
+	@Override
+	public int dibsListCount(int member_index) throws Exception {
+		int dibsListCount = dibsDAO.dibsListCount(member_index);
+		return dibsListCount;
+	}
+
 	
 
 

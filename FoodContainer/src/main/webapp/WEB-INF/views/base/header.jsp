@@ -25,7 +25,7 @@
                     <i class="bi bi-truck fs-1"></i>
                     <i class="bi bi-cart3 fs-1" onclick="location.href='shopBasket_main.do'"></i>
                     <c:if test="${not empty member }">
-                    <i class="bi bi-person fs-1" onclick="javascript:document.frm.submit();"></i>
+                    <i class="bi bi-person fs-1" onclick="location.href='mypage_main.do'"></i>
                     </c:if>
                     <c:if test="${empty member }">
                     <i class="bi bi-person fs-1" onclick="alert('로그인이 필요합니다!!');"></i>
@@ -33,11 +33,6 @@
                  	
                 </div>
             </div>
-            
-            <form name="frm" action="mypage_main.do" method="POST">
-				<input type="hidden" name="member_index" value="${member.member_index }">
-			</form>
-
         </div>
     </div>
 

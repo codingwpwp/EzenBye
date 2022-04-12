@@ -11,6 +11,12 @@
 		order by order_date desc limit 3
     </select>
     
+    <select id="ordersListAll" resultType="OrdersVO" parameterType="int">
+        SELECT * FROM orders
+		WHERE member_index=#{member_index}
+		order by order_date desc
+    </select>
+    
     <select id="ordersDetail" resultType="OrdersVO" parameterType="String">
         SELECT * FROM orders
 		WHERE member_order_index=#{member_order_index}
