@@ -12,12 +12,14 @@ import team.project.vo.ProductVO;
 import team.project.vo.SearchVO;
 
 public interface ProductService {
-	
+	//상품조회
 	List<ProductVO> productListAll(ProductVO productVO) throws Exception;
-	
+	//상세보기
 	ProductVO view(String index) throws Exception;
-	
+	//최근 본 상품
 	List<ProductVO> cookieList(ArrayList<String> cookieArr) throws Exception;
+	//비회원 장바구니
+	List<ProductVO> noMemberCartList(ArrayList<String> noMemberCartArr) throws Exception;
 	
 	/*여기서 부터는 관리자페이지*/
 	
