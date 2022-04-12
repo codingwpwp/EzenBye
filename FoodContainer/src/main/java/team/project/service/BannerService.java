@@ -17,5 +17,7 @@ public interface BannerService {
 	int bannerModify(BannerVO bannervo, MultipartFile bannerFile, HttpServletRequest request) throws Exception;
 	
 	int bannerDelete(int[] bannerIndexArr) throws Exception;
+	//메인
+	List<BannerVO> mainBannerList(BannerVO bannerVO) throws Exception;
 	
 }

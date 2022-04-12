@@ -51,7 +51,14 @@ public class ProductServiceImpl implements ProductService {
 		
 		return noMemberCartList;
 	}
-	
+	//메인 - 인기상품
+	@Override
+	public List<ProductVO> popularList(ProductVO productVO) throws Exception {
+		
+		List<ProductVO> popularList = productDao.popularList(productVO);
+		
+		return popularList;
+	}
 	
 	/*여기서 부터는 관리자페이지*/
 	

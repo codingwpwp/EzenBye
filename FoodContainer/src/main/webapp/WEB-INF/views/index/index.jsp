@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -50,20 +53,42 @@
                     <article>
 						<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
 						  <div class="carousel-indicators">
-						    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-						    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-						    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+						  <c:forEach items="${mainBannerList }" var="mainBannerList" varStatus="status">
+						  	<c:if test="${status.index == 0 }">
+							    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide${status.index }"></button>
+							</c:if> 
+							<c:if test="${status.index != 0 }">   
+							    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${status.index }" aria-label="Slide${status.index }"></button>
+							</c:if>  
+						  </c:forEach>
 						  </div>
 						  <div class="carousel-inner">
-						    <div class="carousel-item active">
-						      <img src="<%=request.getContextPath()%>/resources/img/배너1.png" class="card-img-top" class="d-block w-100" alt="배너1">
-						    </div>
-						    <div class="carousel-item">
-						      <img src="<%=request.getContextPath()%>/resources/img/배너2.png" class="d-block w-100" alt="하림 삼각밥">
-						    </div>
-						    <div class="carousel-item">
-						      <img src="<%=request.getContextPath()%>/resources/img/배너3.png" class="d-block w-100" alt="오뚜기 고추참치">
-						    </div>
+						  <c:forEach items="${mainBannerList }" var="mainBannerList" varStatus="status">
+						  	<c:if test="${status.index == 0}">
+							    <div class="carousel-item active">
+							      <c:if test="${mainBannerList.link_YN == 'Y' }">
+							      	<a href="${mainBannerList.link }">
+							      		<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.name}.png" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }">
+							      	</a>
+							      </c:if>
+							      <c:if test="${mainBannerList.link_YN == 'N' }">
+							      	<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.name}.png" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }">
+							      </c:if>
+							    </div>
+							</c:if>
+							<c:if test="${status.index != 0}">
+							    <div class="carousel-item">
+							      <c:if test="${mainBannerList.link_YN == 'Y' }">
+							      	<a href="${mainBannerList.link }">
+							      		<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.name}.png" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }">
+							      	</a>
+							      </c:if>
+							      <c:if test="${mainBannerList.link_YN == 'N' }">
+							      	<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.name}.png" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }">
+							      </c:if>
+							    </div>
+							</c:if>
+						  </c:forEach>
 						  </div>
 						  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
 						    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -83,17 +108,24 @@
 						<p class="fs-5 my-2 fw-bold">인기메뉴</p>
 						<hr>
 							<div class="row">
-								<%for(int i=0; i<=3; i++){ %>
+								<c:set var="ran"><%= java.lang.Math.round(java.lang.Math.random() * 10) %></c:set>
+								<c:forEach items="${popularList}" var="popularList" begin="${ran}" end="${ran+3}">
 								<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 popular d-flex justify-content-center">
 									<div class="card" style="width: 18rem;">
-									  <img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/매운 왕교자.png" class="card-img-top" alt="비비고만두">
+									  <img src="<%=request.getContextPath()%>/resources/img/${popularList.brand}/${popularList.middleSort }/${popularList.thumbnail_image}" class="card-img-top" id="cardImg" alt="${popularList.product_name }">
 									  
 									  <div class="card-body">
 									    <p class="card-text">
 									    	<span style="color:red;">[인기]</span><br>
-									    	<span class="productName">비비고왕교자</span><br>
-									    	<span class="fs-4">10,000</span>원<br>
-									    	<span class="discount">1</span>
+									    	<span class="productName">[${popularList.brand }] ${popularList.product_name }</span><br>
+									    	<span class="fs-4">
+									    		<fmt:formatNumber value="${popularList.origin_price}" pattern="#,###"/>
+									    	</span>원<br>
+									    	<c:if test="${popularList.sale_price != -1 }">
+									    		<span class="discount">
+									    			<fmt:formatNumber value="${popularList.sale_price}" pattern="#,###"/>원<br>
+									    		</span>
+									    	</c:if>
 									    	<span class="indexStar">
 									    		<i class="bi bi-star-fill"></i>
 							        			<i class="bi bi-star-fill"></i>
@@ -102,16 +134,42 @@
 							        			<i class="bi bi-star"></i>
 									    	</span>
 									    	<br>
-									    	배송비 3,000원
+									    	<c:set var="delivery" value="${popularList.delivery_free_YN}" />
+									    	<c:choose>
+									    		<c:when test="${delivery == 'N'}">
+									    			배송비 3,000원
+									    		</c:when>
+									    		
+									    		<c:when test="${delivery == 'Y'}">
+									    			무료배송
+									    		</c:when>
+									    	</c:choose>
 									    </p>
 									  </div>
+									  <input type="hidden" name="index" value="${popularList.product_index}">
 									  <div class="indexSubImg">
-									  	<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+									  	<c:if test="${member.id != null }">
+								  		<c:set var="heartCheck" value="0" />
+										  	<c:forEach items="${userDibsList}" var="userDibsList">
+										  		<c:if test="${userDibsList.member_index == member.member_index && ProductVO.product_index == userDibsList.product_index}">
+										  			<img src="<%=request.getContextPath()%>/resources/img/찬하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+										  			<c:set var="heartCheck" value="1" />
+										  		</c:if>
+										  	</c:forEach>
+										  	<c:if test="${heartCheck == '0'}">
+										  		<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+										  	</c:if>
+									  	
+								  		</c:if>
+									  	<c:if test="${member.id == null}">
+										  	<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+									  	</c:if>
 										<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="cart(this)">
 									  </div>
 									</div>
 								</div>
-								<%} %>
+								</c:forEach>
+								<input type="hidden" id="pListLoginCheck" value="${member.member_index}">
 							</div>
 					</article>
 					<br>
@@ -152,29 +210,46 @@
 						<p class="fs-5 my-2 fw-bold">인기메뉴</p>
 						<hr>
 						<div class="cardDivM">
-							<%for(int i=0; i<4; i++){ %>
-							<div class="cardM">
-								<img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/매운 왕교자.png" class="img-fluid" alt="비비고만두">
-								<div class="indexSubImgM">
-									<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
-									<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="indexCart(this)">
+							<c:set var="ran"><%= java.lang.Math.round(java.lang.Math.random() * 10) %></c:set>
+							<c:forEach items="${popularList}" var="popularList" begin="${ran}" end="${ran+3}">
+								<div class="cardM">
+									<img src="<%=request.getContextPath()%>/resources/img/${popularList.brand}/${popularList.middleSort }/${popularList.thumbnail_image}" class="img-fluid" id="cardMimg" alt="${popularList.product_name }">
+									<div class="indexSubImgM">
+										<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+										<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="indexCart(this)">
+									</div>
+									<div class="cardMContent">
+										<span style="color:red;">[인기]</span><br>
+										<span class="productNameM">[${popularList.brand }] ${popularList.product_name }</span><br>
+										<span class="fs-4">
+											<c:if test="${popularList.sale_price == -1 }">
+												<fmt:formatNumber value="${popularList.origin_price}" pattern="#,###"/>
+											</c:if>
+											<c:if test="${popularList.sale_price != -1 }">
+												<fmt:formatNumber value="${popularList.sale_price}" pattern="#,###"/>
+											</c:if>
+										</span>원<br>
+										<span class="indexStarM">
+											<i class="bi bi-star-fill"></i>
+								        	<i class="bi bi-star-fill"></i>
+								        	<i class="bi bi-star-fill"></i>
+								        	<i class="bi bi-star-fill"></i>
+								        	<i class="bi bi-star"></i>
+										</span>
+										<br>
+										<c:set var="delivery" value="${popularList.delivery_free_YN}" />
+									    	<c:choose>
+									    		<c:when test="${delivery == 'N'}">
+									    			배송비 3,000원
+									    		</c:when>
+									    		
+									    		<c:when test="${delivery == 'Y'}">
+									    			무료배송
+									    		</c:when>
+									    	</c:choose>
+									</div>
 								</div>
-								<div class="cardMContent">
-									<span style="color:red;">[인기]</span><br>
-									<span class="productNameM">비비고왕교자</span><br>
-									<span class="fs-4">10,000</span>원<br>
-									<span class="indexStarM">
-										<i class="bi bi-star-fill"></i>
-							        	<i class="bi bi-star-fill"></i>
-							        	<i class="bi bi-star-fill"></i>
-							        	<i class="bi bi-star-fill"></i>
-							        	<i class="bi bi-star"></i>
-									</span>
-									<br>
-									배송비 3,000원
-								</div>
-							</div>
-							<%} %>
+							</c:forEach>
 						</div>
 					</article>
 					<article class="bestRecipeM">
