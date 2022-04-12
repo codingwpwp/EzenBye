@@ -26,11 +26,6 @@ public class SignController {
 	private MemberService memberService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(SignController.class);
-	
-	
-//	@Inject
-//	BCryptPasswordEncoder pwdEncoder;
-//	
 
 	@RequestMapping(value = "member_sign.do", method = RequestMethod.GET)
 	public String sign(Locale locale, Model model){

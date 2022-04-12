@@ -11,9 +11,12 @@ public class MemberVO {
 	private int point;
 	private String join_date;
 	private String recommender;
+	private int event_ticket;
 	private String position;
 	private String address;
-	
+	private String del_yn;
+	private String del_date;
+	private String del_reason;
 	
 	public int getMember_index() {
 		return member_index;
@@ -75,6 +78,12 @@ public class MemberVO {
 	public void setRecommender(String recommender) {
 		this.recommender = recommender;
 	}
+	public int getEvent_ticket() {
+		return event_ticket;
+	}
+	public void setEvent_ticket(int event_ticket) {
+		this.event_ticket = event_ticket;
+	}
 	public String getPosition() {
 		return position;
 	}
@@ -87,8 +96,22 @@ public class MemberVO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
-	
-	
-	
+	public String getDel_yn() {
+		return del_yn;
+	}
+	public void setDel_yn(String del_yn) {
+		this.del_yn = del_yn;
+	}
+	public String getDel_date() {
+		return del_date;
+	}
+	public void setDel_date(String del_date) {
+		this.del_date = del_date;
+	}
+	public String getDel_reason() {
+		return del_reason;
+	}
+	public void setDel_reason(String del_reason) {
+		this.del_reason = del_reason;
+	}
 }

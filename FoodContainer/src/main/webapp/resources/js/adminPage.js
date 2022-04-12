@@ -300,6 +300,29 @@ $(document).ready(function(){
 
 });
 
+// 탈퇴 아닌 회원 상세조회페이지에서 추방기능
+function changeMemberDelyn(member_index, id){
+	if(confirm('정말로 ' + id + '님을 추방시키겠습니까?')){
+		$.ajax({
+			url : "memberDely.do",
+			type : "post",
+			data : "member_index=" + member_index,
+			success : function(data){
+				var result = data.trim();
+				if(result == "Success") {
+					alert("" + id + "님을 추방했습니다. 탈퇴 리스트에서 확인할 수 있습니다.");
+					location.href = "member_list.do?&nowPage=1";
+				} else {
+					alert("추방 실패");
+				}
+			}
+		})
+	}else{
+		
+	}
+}
+
+
 // 등록상품조회페이지에서 전체 선택
 function selectAllProducts(obj){
 	if($(obj).is(":checked")){

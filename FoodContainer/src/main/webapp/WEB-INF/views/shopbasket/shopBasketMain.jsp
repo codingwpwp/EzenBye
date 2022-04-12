@@ -74,116 +74,85 @@
 					
 					<div class="shopbasket-title border border-info border-1 rounded shadow-sm">
 					<p class="fs-4 shopbasket-fs4"><i class="bi bi-snow2"></i>냉동식품</p>	
-					<div class="row d-flex align-items-center shopbasket-card">
-						<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-checkbox">
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" name="shopbasket">
-						</div>
-						<div class="col-lg-8 col-md-8">
-							<div class="h-100 p-2 bg-light border rounded-3 card-good">
-					        	<div class="row">
-					        		<div class="col-sm-3">
-					        			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
-					        		</div>
-					        		<div class="col-sm-9 d-flex align-items-start flex-column mb-3">
-								    	<div class="mb-auto p-2">비비고 진한고기만두400g*2번들</div>
-		  								<div class="p-2">4580원</div>
-					        		</div>
-					        	</div>
-				        	
-					        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 shopbasket-btn">
-								  <button class="btn btn-secondary col-lg-3 col-md-4" type="button">삭제</button>
-								  <button class="btn btn-dark col-lg-3 col-md-4" type="button">바로 구매</button>
+					<c:if test="${member.member_index == null}">
+						<c:forEach items="${noMemberCart}" var="noMemberCart" varStatus="status">
+							<c:if test="${noMemberCart.bigSort == '냉동식품'}">
+							<div class="row d-flex align-items-center shopbasket-card">
+								<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-checkbox">
+									<input class="form-check-input" type="checkbox" id="iceCheckbox${status.index}" value="option${status.index}" name="shopbasket">
 								</div>
-				        	</div>
-						</div>
-						<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-number">
-							<i class="bi bi-dash shopbasket-icon"></i>&nbsp; 1 &nbsp; <i class="bi bi-plus shopbasket-icon"></i>
-						</div>
-					</div>
+								<div class="col-lg-8 col-md-8">
+									<div class="h-100 p-2 bg-light border rounded-3 card-good">
+							        	<div class="row">
+							        		<div class="col-sm-3">
+							        			<img src="<%=request.getContextPath() %>/resources/img/${noMemberCart.brand}/${noMemberCart.middleSort}/${noMemberCart.thumbnail_image}" class="img-thumbnail" alt="${noMemberCart.product_name}">
+							        		</div>
+							        		<div class="col-sm-9 d-flex align-items-start flex-column mb-3">
+										    	<div class="mb-auto p-2">${noMemberCart.brand} ${noMemberCart.product_name}</div>
+				  								<c:if test="${noMemberCart.sale_price == -1}">
+				  									<div class="p-2">${noMemberCart.origin_price}원</div>
+				  								</c:if>
+				  								<c:if test="${noMemberCart.sale_price != -1}">
+				  									<div class="p-2">${noMemberCart.sale_price}원</div>
+				  								</c:if>
+							        		</div>
+							        	</div>
+						        	
+							        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 shopbasket-btn">
+										  <button class="btn btn-secondary col-lg-3 col-md-4" type="button">삭제</button>
+										  <button class="btn btn-dark col-lg-3 col-md-4" type="button">바로 구매</button>
+										</div>
+						        	</div>
+								</div>
+								<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-number">
+									<i class="bi bi-dash shopbasket-icon"></i>&nbsp; 1 &nbsp; <i class="bi bi-plus shopbasket-icon"></i>
+								</div>
+							</div>
+						</c:if>
+						</c:forEach>
+					</c:if>
 					
-					<div class="row d-flex align-items-center shopbasket-card">
-						<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-checkbox">
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option2" name="shopbasket">
-						</div>
-						<div class="col-lg-8 col-md-8">
-							<div class="h-100 p-2 bg-light border rounded-3 card-good">
-					        	<div class="row">
-					        		<div class="col-sm-3">
-					        			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
-					        		</div>
-					        		<div class="col-sm-9 d-flex align-items-start flex-column mb-3">
-								    	<div class="mb-auto p-2">비비고 진한고기만두400g*2번들</div>
-		  								<div class="p-2">4580원</div>
-					        		</div>
-					        	</div>
-				        	
-					        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 shopbasket-btn">
-								  <button class="btn btn-secondary col-lg-3 col-md-4" type="button">삭제</button>
-								  <button class="btn btn-dark col-lg-3 col-md-4" type="button">바로 구매</button>
-								</div>
-				        	</div>
-						</div>
-						<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-number">
-							<i class="bi bi-dash shopbasket-icon"></i>&nbsp; 1 &nbsp; <i class="bi bi-plus shopbasket-icon"></i>
-						</div>
-					</div>
-					</div>
+					
 					
 					<div class="shopbasket-title border border-success border-1 rounded shadow-sm">
-					<p class="fs-4 shopbasket-fs4"><i class="fa-solid fa-utensils"></i>즉석식품</p>	
-					<div class="row d-flex align-items-center shopbasket-card">
-						<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-checkbox">
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option3" name="shopbasket">
-						</div>
-						<div class="col-lg-8 col-md-8">
-							<div class="h-100 p-2 bg-light border rounded-3 card-good">
-					        	<div class="row">
-					        		<div class="col-sm-3">
-					        			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
-					        		</div>
-					        		<div class="col-sm-9 d-flex align-items-start flex-column mb-3">
-								    	<div class="mb-auto p-2">비비고 진한고기만두400g*2번들</div>
-		  								<div class="p-2">4580원</div>
-					        		</div>
-					        	</div>
-				        	
-					        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 shopbasket-btn">
-								  <button class="btn btn-secondary col-lg-3 col-md-4" type="button">삭제</button>
-								  <button class="btn btn-dark col-lg-3 col-md-4" type="button">바로 구매</button>
+					<p class="fs-4 shopbasket-fs4"><i class="fa-solid fa-utensils"></i>즉석식품</p>
+					<c:if test="${member.member_index == null}">
+						<c:forEach items="${noMemberCart}" var="noMemberCart" varStatus="status">	
+						<c:if test="${noMemberCart.bigSort == '즉석식품'}">
+							<div class="row d-flex align-items-center shopbasket-card">
+								<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-checkbox">
+									<input class="form-check-input" type="checkbox" id="inlineCheckbox${status.index}" value="option${status.index}" name="shopbasket">
 								</div>
-				        	</div>
-						</div>
-						<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-number">
-							<i class="bi bi-dash shopbasket-icon"></i>&nbsp; 1 &nbsp; <i class="bi bi-plus shopbasket-icon"></i>
-						</div>
-					</div>
-					
-					<div class="row d-flex align-items-center shopbasket-card">
-						<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-checkbox">
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option4" name="shopbasket">
-						</div>
-						<div class="col-lg-8 col-md-8">
-							<div class="h-100 p-2 bg-light border rounded-3 card-good">
-					        	<div class="row">
-					        		<div class="col-sm-3">
-					        			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
-					        		</div>
-					        		<div class="col-sm-9 d-flex align-items-start flex-column mb-3">
-								    	<div class="mb-auto p-2">비비고 진한고기만두400g*2번들</div>
-		  								<div class="p-2">4580원</div>
-					        		</div>
-					        	</div>
-				        	
-					        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 shopbasket-btn">
-								  <button class="btn btn-secondary col-lg-3 col-md-4" type="button">삭제</button>
-								  <button class="btn btn-dark col-lg-3 col-md-4" type="button">바로 구매</button>
+								<div class="col-lg-8 col-md-8">
+									<div class="h-100 p-2 bg-light border rounded-3 card-good">
+							        	<div class="row">
+							        		<div class="col-sm-3">
+							        			<img src="<%=request.getContextPath() %>/resources/img/${noMemberCart.brand}/${noMemberCart.middleSort}/${noMemberCart.thumbnail_image}" class="img-thumbnail" alt="${noMemberCart.product_name}">
+							        		</div>
+							        		<div class="col-sm-9 d-flex align-items-start flex-column mb-3">
+										    	<div class="mb-auto p-2">${noMemberCart.brand} ${noMemberCart.product_name}</div>
+				  								<c:if test="${noMemberCart.sale_price == -1}">
+				  									<div class="p-2">${noMemberCart.origin_price}원</div>
+				  								</c:if>
+				  								<c:if test="${noMemberCart.sale_price != -1}">
+				  									<div class="p-2">${noMemberCart.sale_price}원</div>
+				  								</c:if>
+							        		</div>
+							        	</div>
+						        	
+							        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 shopbasket-btn">
+										  <button class="btn btn-secondary col-lg-3 col-md-4" type="button">삭제</button>
+										  <button class="btn btn-dark col-lg-3 col-md-4" type="button">바로 구매</button>
+										</div>
+						        	</div>
 								</div>
-				        	</div>
-						</div>
-						<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-number">
-							<i class="bi bi-dash shopbasket-icon"></i>&nbsp; 1 &nbsp; <i class="bi bi-plus shopbasket-icon"></i>
-						</div>
-					</div>
+								<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-number">
+									<i class="bi bi-dash shopbasket-icon"></i>&nbsp; 1 &nbsp; <i class="bi bi-plus shopbasket-icon"></i>
+								</div>
+							</div>
+						</c:if>
+						</c:forEach>
+					</c:if>
 					</div>
 					
 					<div class="d-flex justify-content-center shopbasket-sum">선택 상품 합계 : 40,000원</div>

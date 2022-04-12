@@ -67,7 +67,7 @@
                                 </div>
 
                                 <div class="col-7 col-sm-6 col-md-8">
-                                    <input type="text" class="form-control" value="testertester12345" disabled>
+                                    <input type="text" class="form-control" value="${member.id}" disabled>
                                 </div>
 
                             </div>
@@ -79,7 +79,7 @@
                                 </div>
 
                                 <div class="col-7 col-sm-9">
-                                    <input type="text" class="form-control" value="2022-02-02" disabled>
+                                    <input type="text" class="form-control" value="${member.del_date}" disabled>
                                 </div>
 
                             </div>
@@ -95,7 +95,7 @@
                                 </div>
 
                                 <div class="col-7 col-sm-9 col-md-10 px-0">
-                                    <textarea class="form-control" rows="4" disabled>탈퇴사유입니다.</textarea>
+                                    <textarea class="form-control" rows="4" disabled>${member.del_reason}</textarea>
                                 </div>
 
                             </div>
@@ -106,7 +106,7 @@
 
                     <!-- 버튼 -->
                     <div class="ps-2">
-                        <button type="button" class="btn btn-outline-primary btn-sm">뒤로가기</button>
+                        <button type="button" class="btn btn-outline-primary btn-sm" onclick="location.href='dely_list.do?nowPage=${nowPage}'">뒤로가기</button>
                     </div>
 
                 </article>

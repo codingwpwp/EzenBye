@@ -1,3 +1,4 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -68,55 +69,66 @@
                                     <th scope="col">탈퇴일</th>
                                 </tr>
                             </thead>
-
                             <tbody>
-
-                                <tr>
-                                    <td>tester1245</td>
-                                    <td><a href="dely_detail.do" class="link-primary">강의실컴퓨터는</a></td>
-                                    <td>2022-02-01</td>
-                                </tr>
-                                <tr>
-                                    <td>tester1245</td>
-                                    <td><a href="#" class="link-primary">강의실컴퓨터는</a></td>
-                                    <td>2022-02-01</td>
-                                </tr>
-                                <tr>
-                                    <td>tester1245</td>
-                                    <td><a href="#" class="link-primary">강의실컴퓨터는</a></td>
-                                    <td>2022-02-01</td>
-                                </tr>
-                                <tr>
-                                    <td>tester1245</td>
-                                    <td><a href="#" class="link-primary">강의실컴퓨터는</a></td>
-                                    <td>2022-02-01</td>
-                                </tr>
-                                
+								<c:if test="${not empty memberList}">
+								<c:forEach items="${memberList}" var="member">
+	                                <tr>
+	                                    <td>${member.id}</td>
+	                                    <td><a href="dely_detail.do?nowPage=1&nowPage=1&member_index=${member.member_index}" class="link-primary">${member.del_reason}</a></td>
+	                                    <td>${fn:substring(member.del_date, 0,10)}</td>
+	                                </tr>
+								</c:forEach>
+                                </c:if>
+								<c:if test="${empty memberList}">
+									<tr>
+										<td colspan="5" class="display-3 fw-bold p-3">
+											탈퇴한 회원이 존재하지 않습니다.
+										</td>
+									</tr>
+                                </c:if>
                             </tbody>
-                            
                         </table>
                     </div>
     
                     <!-- 페이징 -->
                     <div class="row mt-2">
                         <ul class="col-12 d-flex align-items-center justify-content-center pagination">
-
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&lt;</span>
-                                </a>
-                            </li>
-
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&gt;</span>
-                                </a>
-                            </li>
-
+	                        <!-- <부분 -->
+							<c:if test="${paging.startPage > 1}">
+	                            <li class="page-item">
+	                                <a class="page-link" href="member_list.do?nowPage=${paging.startPage - 1}" aria-label="Previous">
+	                                    <span aria-hidden="true">&lt;</span>
+	                                </a>
+	                            </li>
+	                        </c:if>
+	                        <!-- 각 페이지 -->
+							<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i" step="1">
+								<c:if test="${i != paging.nowPage}">
+									<li class="page-item">
+										<a class="page-link" href="dely_list.do?nowPage=${i}">${i}</a>
+									</li>
+								</c:if>
+								<c:if test="${i == paging.nowPage}">
+									<li class="page-item active" aria-current="page">
+										<span class="page-link fw-bold">${i}</span>
+									</li>
+								</c:if>
+							</c:forEach>
+							<!-- >부분 -->
+							<c:if test="${paging.endPage != paging.lastPage}">
+	                            <li class="page-item">
+	                                <a class="page-link" href="dely_list.do?nowPage=${paging.endPage + 1}" aria-label="Next">
+	                                    <span aria-hidden="true">&gt;</span>
+	                                </a>
+	                            </li>
+	                        </c:if>
+	                        <c:if test="${paging.startPage == paging.lastPage}">
+	                            <li class="page-item" style="visibility: hidden">
+	                                <a class="page-link" href="#" aria-label="Next">
+	                                    <span aria-hidden="true">&gt;</span>
+	                                </a>
+	                            </li>
+	                        </c:if>
                         </ul>
                     </div>
 
