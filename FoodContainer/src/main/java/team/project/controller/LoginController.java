@@ -42,7 +42,7 @@ public class LoginController {
 		if(login !=null) {// 로그인 검증 통과의 경우
 			// 세션에 로그인 정보를 저장(member_index, id, name 만 저정해놨음)
 			session.setAttribute("member", login);
-			return "index/index";
+			return "redirect:index.do";
 		}else {// 로그인 검증 실패의 경우
 			session.setAttribute("member", null);
 			return "login/loginFail";

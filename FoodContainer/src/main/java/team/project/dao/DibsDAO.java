@@ -36,4 +36,16 @@ public class DibsDAO {
 		
 		return sqlSession.selectList(Namespace+".dibsListAll",dibsVO);
 	}
+	
+	public List<DibsVO> dibsListAllJoin(int member_index) throws Exception{
+		
+		return sqlSession.selectList(Namespace+".dibsListAllJoin",member_index);
+	}
+	
+	
+	public int dibsListCount(int member_index) throws Exception{
+		
+		return sqlSession.selectOne(Namespace+".dibsListCount",member_index);
+	}
+	
 }

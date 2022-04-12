@@ -1,6 +1,6 @@
 package team.project.vo;
 
-public class DibsVO {
+public class DibsVO extends ProductVO {
 
 	private String product_index;
 	private int member_index;

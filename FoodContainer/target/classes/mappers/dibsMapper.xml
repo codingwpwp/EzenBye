@@ -13,11 +13,23 @@
     
 	<select id="dibsDelete" resultType="team.project.vo.DibsVO">
     	DELETE FROM dibs 
-    	WHERE product_index = #{product_index}
+    	WHERE product_index = #{product_index} and member_index = #{member_index}
     </select>
   
   	<select id="dibsListAll" resultType="team.project.vo.DibsVO">
   		SELECT *
   		FROM dibs
+  	</select>
+  	
+  	<select id="dibsListAllJoin" resultType="team.project.vo.DibsVO" parameterType="int">
+  		SELECT * FROM dibs AS d
+		JOIN product AS p
+		ON d.product_index = p.product_index
+		WHERE member_index = #{member_index} 
+  	</select>
+  	
+  	<select id="dibsListCount" resultType="int" parameterType="int">
+  		SELECT count(*) FROM dibs
+  		WHERE member_index = #{member_index} 
   	</select>
 </mapper>

@@ -44,8 +44,8 @@ public class AdminPageController {
 
 	@RequestMapping(value = "admin.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		//String springVersion = org.springframework.core.SpringVersion.getVersion();
-		//System.out.println("스프링 프레임워크 버전 : " + springVersion);
+		String springVersion = org.springframework.core.SpringVersion.getVersion();
+		System.out.println("스프링 프레임워크 버전 : " + springVersion);
 		return "adminPage/adminPage_main";
 	}
 

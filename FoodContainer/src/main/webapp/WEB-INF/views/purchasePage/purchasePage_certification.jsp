@@ -47,7 +47,7 @@
                 <article id="mainSection">
 
                     <!-- 메인컨텐츠 -->
-                    <form id="emailCertificationForm" action="#" name="frm" method="post">
+                    <form class="p-3" id="emailCertificationForm" action="#" name="emailCertificationForm" method="post">
                         <div class="container">
 
                             <div class="row">
@@ -72,11 +72,11 @@
                                 </div>
 
                                 <div class="col-sm-9 col-8">
-                                    <input type="text" class="form-control recominput" name="email" id="email" placeholder="이메일을 입력해주세요"  autocomplete="off">
+                                    <input type="text" class="form-control recominput" name="receiveMail" id="email" placeholder="이메일을 입력해주세요"  autocomplete="off" oninput="emailCheck(this)">
                                 </div>
 
                                 <div class="col-sm-3 col-4 px-0">
-                                    <input type="button" class="btn btn-secondary mailnum fw-bold" value="인증번호 발송">
+                                    <input type="button" class="btn btn-secondary mailnum fw-bold" id="emailCheckBtn" value="인증번호 발송" onclick="sendEmail()">
                                 </div>
 
                                 <div class="col-sm-12 col-12 tit mb-1 fw-bold fs-5">
@@ -87,13 +87,15 @@
                                     <input type="text" class="form-control emailinput" name="email" id="email" placeholder="인증번호를 입력해주세요" autocomplete="off">
                                 </div>
 
-                                <div class="col-sm-6 col-6 btndiv">
-                                    <input type="button" value="취소" class="btn btn-secondary can fw-bold">
-                                </div>
-
-                                <div class="col-sm-6 col-6 btndiv">
-                                    <input type="submit" value="구매하러가기" class="btn btn-primary fw-bold">
-                                </div>
+								<div class="row mt-5">
+	                                <div class="col-sm-6 col-6 d-flex justify-content-center">
+	                                    <input type="button" value="취소" class="btn btn-secondary fw-bold w-75">
+	                                </div>
+	
+	                                <div class="col-sm-6 col-6 d-flex justify-content-center">
+	                                    <input type="submit" value="구매하러가기" class="btn btn-primary fw-bold w-75">
+	                                </div>
+								</div>
 
                             </div>
 
@@ -120,5 +122,6 @@
     <script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/purchasePage.js"></script>
+    <script src="<%=request.getContextPath()%>/resources/js/purchasePage_certification.js"></script>
 </body>
 </html>

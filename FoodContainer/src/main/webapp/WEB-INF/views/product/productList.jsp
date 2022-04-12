@@ -67,8 +67,10 @@
 								  <img src="<%=request.getContextPath()%>/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="card-img-top cardImg" alt="${ProductVO.product_name }">
 								  <div class="card-body">
 								    <p class="card-text">
-							    		<span style="color:red;"></span><br>
-									   	<span class="productName">${ProductVO.product_name}</span><br>
+								    	<c:if test="${ProductVO.quantity >= 500}">
+							    			<span style="color:red;">[인기]</span><br>
+							    		</c:if>
+									   	<span class="productName">[${ProductVO.brand}] ${ProductVO.product_name}</span><br>
 									   	<span class="fs-4">
 											<fmt:formatNumber value="${ProductVO.origin_price}" pattern="#,###"/>
 										</span>원<br>
