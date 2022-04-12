@@ -36,13 +36,7 @@ public class DibsController {
 	@RequestMapping(value = "dibsInsert.do", method = RequestMethod.GET)
 	public String dbisInsert(Locale locale, Model model, DibsVO dibsVO) throws Exception {
 		
-		DibsVO overlap = dibsService.dibsSelect(dibsVO);
-		
-		if(overlap == null) {
-
-			dibsService.dibsInsert(dibsVO);
-			
-		}
+		dibsService.dibsInsert(dibsVO);
 		
 		return "prodcut/productList";
 	}
@@ -50,13 +44,7 @@ public class DibsController {
 	@RequestMapping(value = "dibsDelete.do", method = RequestMethod.GET)
 	public String dbisDelete(Locale locale, Model model, DibsVO dibsVO) throws Exception {
 		
-		DibsVO overlap = dibsService.dibsSelect(dibsVO);
-		
-		if(overlap != null) {
-
-			dibsService.dibsDelete(dibsVO);
-			
-		}
+		dibsService.dibsDelete(dibsVO);
 		
 		return "prodcut/productList";
 	}
