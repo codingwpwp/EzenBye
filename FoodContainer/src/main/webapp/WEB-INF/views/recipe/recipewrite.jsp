@@ -109,6 +109,23 @@
 									<div>
 										<strong>사진을 등록해주세요</strong>
 									</div>
+									
+								</div>
+								<div class="row my-3 imageRow d-flex justify-left-left">
+								<div class="col-5 col-md-2 col-lg-2 d-flex justify-left-left">
+                                <span class="infoTitle p-1"><span class="text-danger">*</span>이미지</span>
+                            </div>
+									<div class="col-11 col-md-6 col-lg-4">
+										<!-- 파일 등록 -->
+										<input class="form-control" name="tumnailImage" type="file" accept="image/png" onchange="previewImage(event, this);">
+									</div>
+									<div
+										class="col-7 col-md-3 col-lg-3 ">
+										<!-- 이미지 미리보기 -->
+										<button type="button" class="btn btn-secondary previewButton"
+											data-bs-toggle="modal" data-bs-target="#tumnailImageModal">미리보기</button>
+									</div>
+
 								</div>
 							</div>
 

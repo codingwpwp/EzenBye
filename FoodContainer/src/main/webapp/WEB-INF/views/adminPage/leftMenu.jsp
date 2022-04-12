@@ -4,14 +4,13 @@
 <aside class="border border-dark rounded-2 fw-bold" id="leftAside">
 
     <div class="h2 ms-3 mt-2 fw-bold">
-        관리자<br>페이지
+        <a class="link-secondary" href="admin.do" style="text-decoration: none">관리자<br>페이지</a>
     </div>
 
     <span class="h5 ps-2 fw-bold">회원 관리</span>
     <div class="list-group px-1 my-2">
-        <a href="member_list.do" class="list-group-item list-group-item-action fs-6">회원 리스트</a>
-        <a href="black_list.do" class="list-group-item list-group-item-action fs-6">블랙 리스트</a>
-        <a href="dely_list.do" class="list-group-item list-group-item-action fs-6">탈퇴 리스트</a>
+        <a href="member_list.do?nowPage=1" class="list-group-item list-group-item-action fs-6">회원 리스트</a>
+        <a href="dely_list.do?nowPage=1" class="list-group-item list-group-item-action fs-6">탈퇴 리스트</a>
         <a href="report.do" class="list-group-item list-group-item-action fs-6">신고 리스트</a>
         <a href="#" class="list-group-item list-group-item-action fs-6">고객 센터</a>
     </div>

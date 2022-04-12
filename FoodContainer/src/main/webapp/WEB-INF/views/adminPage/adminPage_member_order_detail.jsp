@@ -61,14 +61,17 @@
 
                         <!-- 날짜&주문번호 -->
                         <div class="row fs-4 fw-bold">
-                            <div class="col-sm-3 col-5">
+                            <div class="col-6 fs-5">
                                 <span>${fn:substring(order.order_date, 0,16)}</span>
                             </div>
-                            <div class="col-sm-6 col-7">
-                                <span>주문번호 : ${order.member_order_index}</span>
+                            <div class="col-6" style="font-size: 19px;">
+                                <span class="float-end">주문번호 : ${order.member_order_index}</span>
                             </div>
                         </div>
                         
+                        <!-- 상품가격&포인트 -->
+                        <c:set var="totalPrice" value="0"/>
+                        <c:set var="totalPoint" value="0"/>
                         <!-- 각 주문들 -->
                         <c:forEach items="${opList}" var="list">
 							<div class="findT">
@@ -93,6 +96,8 @@
 	                                <div class="col-sm-8 d-flex align-items-start flex-column mb-3">
 	                                    <div class="mb-auto p-2">${list.product_name}</div>
 	                                    <div class="p-2">${list.price}원 | ${list.order_quantity}개</div>
+	                                    <c:set var="totalPrice" value="${totalPrice + list.price}" />
+	                                    <c:set var="totalPoint" value="${totalPoint + list.point}" />
 	                                </div>
 	                            </div>
 	                            
@@ -100,50 +105,56 @@
                         </c:forEach>
 
 				        <p class="fs-6 lookup-fs-6">결제정보</p>
-				        <hr />
+				        
+				        <hr>
+				        
 				        <div class="h-100 p-2 bg-light border rounded-3 card-good">
 				        	<div><span class="fw-bold">상품가격 :</span>
-				        		<fmt:formatNumber value="${order.}" pattern="#,###" />원
+				        		<fmt:formatNumber value="${totalPrice}" pattern="#,###" />원
 				        	</div>
 				        	
 				        	<div class="lookupView-infmoney"><span class="fw-bold">배송비 :</span>
-				        		<c:if test="${ordersDetail.delivery_free_YN eq 'Y' }">
+				        		<c:if test="${order.delivery_free_YN eq 'Y'}">
 				        			없음
 				        		</c:if>
-				        		<c:if test="${ordersDetail.delivery_free_YN eq 'N' }">
+				        		<c:if test="${order.delivery_free_YN eq 'N'}">
 				        			<fmt:formatNumber value="3000" pattern="#,###" />원
 				        		</c:if>
 				        	 </div>
 				        	 
-				        	 <div class="lookupView-infmoney"><span class="fw-bold">쿠폰적용 :</span>
-				        	 	<c:if test="${ordersDetailJoin eq null}">
+				        	<div class="lookupView-infmoney"><span class="fw-bold">쿠폰적용 :</span>
+				        	 	<c:if test="${orderCoupon eq null}">
 				        	 		없음
 			        	 		</c:if>
-			        	 		<c:if test="${ordersDetailJoin ne null}">
-			        	 			${ordersDetailJoin.coupon_title}
+			        	 		<c:if test="${orderCoupon ne null}">
+			        	 			${orderCoupon.coupon_title}
 			        	 		</c:if>
 				        	 </div>
 				        	 
 				        	 <div class="lookupView-infmoney"><span class="fw-bold">포인트 사용 :</span> 
-				        	 	<fmt:formatNumber value="${ordersDetail.used_point }" pattern="#,###" />원
+				        	 	<fmt:formatNumber value="${order.used_point}" pattern="#,###"/>p
 		        	    	 </div>
 				        	 
-				        	 <div class="lookupView-infmoney"><span class="fw-bold">총 결제금액 :</span> <fmt:formatNumber value="${ordersDetail.pay_price }" pattern="#,###" />원 / 
-				        	 	<span class="fw-bold">포인트 적립 :</span> <fmt:formatNumber value="${getPoint}" pattern="#,###" />원
+				        	 <div class="lookupView-infmoney">
+				        	 	<span class="fw-bold">총 결제금액 :</span> <fmt:formatNumber value="${order.pay_price}" pattern="#,###"/>원
+				        	 	<span class="fw-bold fs-5">/</span> 
+				        	 	<span class="fw-bold">예상 포인트 적립 :</span> <fmt:formatNumber value="${totalPoint}" pattern="#,###"/>p
 				        	 </div>
 				        </div>
 				        
 				        <p class="fs-6 lookup-fs-6">배송지정보</p>
-				        <hr />
+				        
+				        <hr>
+				        
 				        <div class="h-100 p-2 bg-light border rounded-3 card-good">
-				        	<div><span class="fw-bold">받는분 :</span> ${ordersDetail.reciever }</div>
-				        	<div class="lookupView-infmoney"><span class="fw-bold">주소 :</span> ${ordersDetail.address }</div>
-				        	<div class="lookupView-infmoney"><span class="fw-bold">연락처 :</span> ${ordersDetail.phone }</div>
-				        	<div class="lookupView-infmoney"><span class="fw-bold">요청사항 :</span> ${ordersDetail.request }</div>
+				        	<div><span class="fw-bold">받는분 :</span> ${order.reciever}</div>
+				        	<div class="lookupView-infmoney"><span class="fw-bold">주소 :</span> ${order.address}</div>
+				        	<div class="lookupView-infmoney"><span class="fw-bold">연락처 :</span> ${order.phone}</div>
+				        	<div class="lookupView-infmoney"><span class="fw-bold">요청사항 :</span> ${order.request}</div>
 				        </div>
 				       
 	    			    <div class="d-grid gap-2 col-4 mx-auto lookupView-btn">
-						  <button class="btn btn-secondary" onclick="location.href='mypage_lookup.do'" type="button">주문목록으로</button>
+						  <button type="button" class="btn btn-secondary" onclick="location.href='member_order_list.do?searchValue=${searchValue}&nowPage=${nowPage}'">주문목록으로</button>
 						</div>
 
                     </div>

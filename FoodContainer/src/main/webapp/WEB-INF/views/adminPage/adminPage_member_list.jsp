@@ -1,3 +1,4 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -72,76 +73,24 @@
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <th>1</th>
-                                    <td><a href="member_detail.do" class="link-primary">tester1</a></td>
-                                    <td>닉네임테스터</td>
-                                    <td>테스터일</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <td><a href="#" class="link-primary">tester23</a></td>
-                                    <td>듀강개또</td>
-                                    <td>테스터이</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>1</th>
-                                    <td><a href="#" class="link-primary">tester1</a></td>
-                                    <td>닉네임테스터</td>
-                                    <td>테스터일</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <td><a href="#" class="link-primary">tester23</a></td>
-                                    <td>듀강개또</td>
-                                    <td>테스터이</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>1</th>
-                                    <td><a href="#" class="link-primary">tester1</a></td>
-                                    <td>닉네임테스터</td>
-                                    <td>테스터일</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <td><a href="#" class="link-primary">tester23</a></td>
-                                    <td>듀강개또</td>
-                                    <td>테스터이</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>1</th>
-                                    <td><a href="#" class="link-primary">tester1</a></td>
-                                    <td>닉네임테스터</td>
-                                    <td>테스터일</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <td><a href="#" class="link-primary">tester23</a></td>
-                                    <td>듀강개또</td>
-                                    <td>테스터이</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>1</th>
-                                    <td><a href="#" class="link-primary">tester1</a></td>
-                                    <td>닉네임테스터</td>
-                                    <td>테스터일</td>
-                                    <td>2022-01-01</td>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <td><a href="#" class="link-primary">tester23</a></td>
-                                    <td>듀강개또</td>
-                                    <td>테스터이</td>
-                                    <td>2022-01-01</td>
-                                </tr>
+								<c:if test="${not empty memberList}">
+								<c:forEach items="${memberList}" var="member">
+	                                <tr>
+	                                    <td>${member.member_index}</td>
+	                                    <td><a href="member_detail.do?searchType=${paging.searchType}&searchValue=${paging.searchValue}&nowPage=${paging.nowPage}&member_index=${member.member_index}" class="link-primary">${member.id}</a></td>
+	                                    <td>${member.nickname}</td>
+	                                    <td>${member.name}</td>
+	                                    <td>${fn:substring(member.join_date, 0,10)}<br></td>
+	                                </tr>
+								</c:forEach>
+                                </c:if>                            
+								<c:if test="${empty memberList}">
+								<tr>
+									<td colspan="5" class="display-3 fw-bold p-3">
+										관련 회원이 존재하지 않습니다.
+									</td>
+								</tr>
+                                </c:if>
                             </tbody>
                             
                         </table>
@@ -151,20 +100,23 @@
                     <div id="searchMember" class="row">
 
                         <!-- 검색 -->
-                        <form method="get" action="#" class="col-12 col-md-8 row d-flex align-items-center justify-content-center">
+                        <form method="get" action="member_list.do" class="col-12 col-md-8 row d-flex align-items-center justify-content-center">
 
+							<!-- 검색종류 -->
                             <div class="col-3 d-flex justify-content-end">
                                 <select class="form-select form-select-sm p-1" name="searchType" id="searchType">
-                                    <option value="id">아이디</option>
-                                    <option value="name">이름</option>
-                                    <option value="nickname">닉네임</option>
+                                    <option value="id" <c:if test="${not empty paging.searchType and paging.searchType eq 'id'}"> selected</c:if>>아이디</option>
+                                    <option value="name" <c:if test="${not empty paging.searchType and paging.searchType eq 'name'}"> selected</c:if>>이름</option>
+                                    <option value="nickname" <c:if test="${not empty paging.searchType and paging.searchType eq 'nickname'}"> selected</c:if>>닉네임</option>
                                 </select>
                             </div>
-
+							<!-- 검색값 -->
                             <div class="col-6">
-                                <input type="text" class="form-control" name="searchValue" placeholder="검색어를 입력하세요" value="">
+                                <input type="text" class="form-control" name="searchValue" placeholder="검색어를 입력하세요" value='<c:if test="${not empty paging.searchValue and paging.searchValue ne ''}">${paging.searchValue}</c:if>'>
                             </div>
-                            
+                            <!-- 페이지(히든) -->
+                            <input type="hidden" name="nowPage" value="1">
+                            <!-- 검색버튼 -->
                             <div class="col-3 d-flex justify-content-start">
                                 <button type="submit" class="btn btn-outline-primary">검색</button>
                             </div>      
@@ -173,23 +125,49 @@
 
                         <!-- 페이징 -->
                         <ul class="col-12 col-md-4 d-flex align-items-center justify-content-center pagination mt-2 my-md-0">
-
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&lt;</span>
-                                </a>
-                            </li>
-
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&gt;</span>
-                                </a>
-                            </li>
-
+	                        <!-- <부분 -->
+							<c:if test="${paging.startPage > 1}">
+	                            <li class="page-item">
+	                                <a class="page-link" href="member_list.do?searchType=${paging.searchType}&searchValue=${paging.searchValue}&nowPage=${paging.startPage - 1}" aria-label="Previous">
+	                                    <span aria-hidden="true">&lt;</span>
+	                                </a>
+	                            </li>
+	                        </c:if>
+	                        <c:if test="${paging.startPage <= 1}">
+	                            <li class="page-item" style="visibility: hidden">
+	                                <a class="page-link" href="#" aria-label="Previous">
+	                                    <span aria-hidden="true"></span>
+	                                </a>
+	                            </li>
+	                        </c:if>
+	                        <!-- 각 페이지 -->
+							<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i" step="1">
+								<c:if test="${i != paging.nowPage}">
+									<li class="page-item">
+										<a class="page-link" href="member_list.do?searchType=${paging.searchType}&searchValue=${paging.searchValue}&nowPage=${i}">${i}</a>
+									</li>
+								</c:if>
+								<c:if test="${i == paging.nowPage}">
+									<li class="page-item active" aria-current="page">
+										<span class="page-link fw-bold">${i}</span>
+									</li>
+								</c:if>
+							</c:forEach>
+							<!-- >부분 -->
+							<c:if test="${paging.endPage != paging.lastPage}">
+	                            <li class="page-item">
+	                                <a class="page-link" href="member_list.do?searchType=${paging.searchType}&searchValue=${paging.searchValue}&nowPage=${paging.endPage + 1}" aria-label="Next">
+	                                    <span aria-hidden="true">&gt;</span>
+	                                </a>
+	                            </li>
+	                        </c:if>
+	                        <c:if test="${paging.startPage == paging.lastPage}">
+	                            <li class="page-item" style="visibility: hidden">
+	                                <a class="page-link" href="#" aria-label="Next">
+	                                    <span aria-hidden="true">&gt;</span>
+	                                </a>
+	                            </li>
+	                        </c:if>
                         </ul>
 
                     </div>

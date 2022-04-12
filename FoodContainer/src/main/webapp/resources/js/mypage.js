@@ -213,13 +213,14 @@ function buyOk(obj) {
 			type: "post",
 			data: "orderItem_index="+orderItem_index+"&member_index="+member_index+"&point="+point,
 			success: function(){
-				alert('포인트가 적립되었습니다.');
+				alert("포인트 "+point+"원이 적립되었습니다.");
 				window.location.reload();
 			}
 		});
 	}
 }
 
+//png만 처리가능하게 하는 함수
 function bannerPreviewImage(event, obj, formName){
 
     // 확장자를 추출하는 과정
@@ -268,31 +269,30 @@ function bannerPreviewImage(event, obj, formName){
 
 }
 
-function bannerSumbit(obj, formName){
+//리뷰작성 submit
+function reviewSumbit(obj, formName){
 	var flag = true;
 	var form = $(obj).closest('form');
 	
-	if($(form).find("input[name='name']").val() == ""){
+	if($(obj).parent().parent().find("input[name=rating]:radio:checked").length < 1){
 		flag = false;
-	}else if($(form).find("input[name='bannerFile']").val() == ""){
+	}else if($(obj).parent().parent().find(".reviewTextarea").val() == ""){
+		$(obj).parent().parent().find(".reviewTextarea").focus();
 		flag = false;
-	}else if($(form).find("input[name='link_YN']:checked").val() == "Y"){
-		if($(form).find("input[name='link']").val() == ""){
-			flag = false;
-		}else if(!urlReg.test($(form).find("input[name='link']").val())){
-			flag = false;
-		}
 	}
 	
 	if(flag == false){
-		alert('형식 오류입니다');
+		alert('별점과 내용은 필수 사항입니다.');
 	}else{
-		if(formName == "bannerRegisterForm"){
-			alert('배너 등록이 완료되었습니다');
-		}else{
-			alert('배너 수정이 완료되었습니다');
+		var YN = confirm("정말 리뷰작성 하시겠습니까?");
+		if(YN){
+			if(formName == "bannerRegisterForm"){
+				alert('리뷰 작성이 완료되었습니다');
+			}else{
+				alert('리뷰 등록이 실패되었습니다');
+			}
+			form.submit();
 		}
-		$(obj).parent().prev().find("form").submit();
 	}
 	
 }
