@@ -39,6 +39,12 @@
     	WHERE product_index in (<foreach collection="list" item='test' separator=','>#{test}</foreach>) 
     </select>
     
+    <select id="popularList" resultType="ProductVO">
+    	SELECT *
+    	FROM product
+    	WHERE del_YN = 'N' and quantity > 500
+    </select>
+    
     
     
     <!-- 여기서 부터는 관리자페이지 -->

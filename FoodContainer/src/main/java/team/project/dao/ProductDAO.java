@@ -36,6 +36,11 @@ public class ProductDAO {
 	public List<ProductVO> noMemberCartList(ArrayList<String> noMemberCartArr) throws Exception{
 		return sqlSession.selectList(Namespace+".noMemberCart",noMemberCartArr);
 	}
+	//메인 - 인기상품
+	public List<ProductVO> popularList(ProductVO productVO) throws Exception{
+		return sqlSession.selectList(Namespace+".popularList",productVO);
+	}
+	
 	/*여기서 부터는 관리자페이지*/
 	
 	// 상품 조회할때 글의 갯수(페이징)

@@ -31,4 +31,9 @@ public class BannerDAO {
 	public int bannerDelete(List<Integer> bannerIndexList) throws Exception {
 		return sqlSession.delete(Namespace + ".bannerDelete", bannerIndexList);
 	}
+	
+	//메인
+	public List<BannerVO> mainBannerList(BannerVO bannerVO) throws Exception {
+		return sqlSession.selectList(Namespace + ".bannerList", bannerVO);
+	}
 }

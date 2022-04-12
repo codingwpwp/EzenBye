@@ -73,6 +73,13 @@ public class BannerServiceImpl implements BannerService {
 		
 		return bannerDao.bannerDelete(bannerIndexList);
 	}
+	
+	//메인
+	@Override
+	public List<BannerVO> mainBannerList(BannerVO bannerVO) throws Exception {
+		List<BannerVO> mainBannerList = bannerDao.mainBannerList(bannerVO);
+		return mainBannerList;
+	}
 
 }
  
