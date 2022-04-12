@@ -51,23 +51,6 @@
                 <article id="mainSection">
                     <!-- 메인컨텐츠 -->
 
-                        <!-- 이달의 매출 -->
-                        <div class="row mb-3">
-                            <div class="col-12">
-
-                                <div class="bg-primary bg-gradient bg-opacity-75 border rounded-top border-2 border-dark p-2">
-                                    <span class="h4 fw-bold">이달의 매출</span><span class="moreContent"><a href="#" class="link-dark fw-bold float-end">[더보기]</a></span>
-                                </div>
-
-                                <div class="border border-2 border-top-0 border-dark">
-                                    여기는 맨 마지막에 할 예정입니다<br>
-                                    여기는 맨 마지막에 할 예정입니다<br>
-                                    여기는 맨 마지막에 할 예정입니다<br>
-                                </div>
-
-                            </div>
-                        </div>
-
                         <!-- 신고 리스트&고객 센터 -->
                         <div class="row">
 
@@ -75,7 +58,7 @@
                             <div class="col-12 col-md-6">
 
                                 <div class="bg-danger bg-gradient bg-opacity-75 border rounded-top border-2 border-dark p-2">
-                                    <span class="h4 fw-bold">신고 리스트</span><span class="moreContent"><a href="#" class="link-dark fw-bold float-end">[더보기]</a></span>
+                                    <span class="h4 fw-bold">최근 신고</span><span class="moreContent"><a href="#" class="link-dark fw-bold float-end">[더보기]</a></span>
                                 </div>
 
                                 <table class="table table-hover mb-0 border border-top-0 border-2 border-dark mb-3 centerTable">
@@ -114,7 +97,7 @@
                             <div class="col-12 col-md-6">
 
                                 <div class="bg-info bg-gradient bg-opacity-75 border rounded-top border-2 border-dark p-2">
-                                    <span class="h4 fw-bold">고객 센터</span><span class="moreContent"><a href="#" class="link-dark fw-bold float-end">[더보기]</a></span>
+                                    <span class="h4 fw-bold">최근 문의 내역</span><span class="moreContent"><a href="#" class="link-dark fw-bold float-end">[더보기]</a></span>
                                 </div>
 
                                 <table class="table table-hover mb-0 border border-top-0 border-2 border-dark mb-3 centerTable">

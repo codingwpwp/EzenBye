@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import team.project.service.BannerService;
+import team.project.service.MemberService;
 import team.project.service.OrderProductService;
 import team.project.service.OrdersService;
 import team.project.service.ProductService;
 import team.project.util.PagingUtil;
 import team.project.vo.BannerVO;
+import team.project.vo.MemberVO;
 import team.project.vo.OrderProductVO;
 import team.project.vo.OrdersVO;
 import team.project.vo.ProductVO;
@@ -29,6 +31,8 @@ import team.project.vo.SearchVO;
 @Controller
 public class AdminPageController {
 
+	@Autowired
+	private MemberService memberService;
 	@Autowired
 	private ProductService productService;
 	@Autowired
@@ -45,33 +49,90 @@ public class AdminPageController {
 		return "adminPage/adminPage_main";
 	}
 
+	// 탈퇴 아닌 회원 조회페이지로 이동
 	@RequestMapping(value = "member_list.do", method = RequestMethod.GET)
-	public String member_list(Locale locale, Model model) {
+	public String memberList(Locale locale, Model model, SearchVO searchvo, int nowPage) throws Exception{
+		
+		// del_yn = "N"
+		searchvo.setDel_yn("N");
+		// 현재페이지
+		int realnowPage = 1;
+		if(nowPage != 0) realnowPage = nowPage;
+		
+		// 리스트 출력
+		List<MemberVO> memberList = memberService.adminMemberList(searchvo, realnowPage);
+		model.addAttribute("memberList", memberList);
+		
+		// 검색값 + 페이징 출력
+		PagingUtil paging = memberService.adminMemberPaging(searchvo, realnowPage);
+		if(searchvo.getSearchValue() != null) {
+			paging.setSearchValue(searchvo.getSearchValue());
+			paging.setSearchType(searchvo.getSearchType());
+		}
+		model.addAttribute("paging", paging);
+		
 		return "adminPage/adminPage_member_list";
 	}
-
+	// 탈퇴 아닌 회원 상세 조회페이지로 이동
 	@RequestMapping(value = "member_detail.do", method = RequestMethod.GET)
-	public String member_detail(Locale locale, Model model) {
+	public String memberDetail(Locale locale, Model model, SearchVO searchvo, int nowPage, int member_index) throws Exception{
+		
+		MemberVO member = memberService.memberInfor(member_index);
+		member.setPw("");
+		model.addAttribute("member", member);
+		
+		// 검색&페이지
+		model.addAttribute("searchType", searchvo.getSearchType());
+		model.addAttribute("searchValue", searchvo.getSearchValue());
+		model.addAttribute("nowPage", nowPage);
+		
 		return "adminPage/adminPage_member_detail";
 	}
-
-	@RequestMapping(value = "black_list.do", method = RequestMethod.GET)
-	public String black_list(Locale locale, Model model) {
-		return "adminPage/adminPage_black_list";
+	
+	// 회원을 추방하는 과정
+	@RequestMapping(value = "memberDely.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String memberDely(Locale locale, Model model, int member_index) throws Exception{
+		int result = memberService.adminChangeMemberDel_yn(member_index);
+		if(result > 0) {
+			return "Success";
+		}else {
+			return "Fail";
+		}
 	}
 
-	@RequestMapping(value = "black_detail.do", method = RequestMethod.GET)
-	public String black_detail(Locale locale, Model model) {
-		return "adminPage/adminPage_black_detail";
-	}
-
+	// 탈퇴된 회원 조회페이지로 이동
 	@RequestMapping(value = "dely_list.do", method = RequestMethod.GET)
-	public String dely_list(Locale locale, Model model) {
+	public String dely_list(Locale locale, Model model, SearchVO searchvo, int nowPage) throws Exception{
+		
+		// del_yn = "Y"
+		searchvo.setDel_yn("Y");
+		// 현재페이지
+		int realnowPage = 1;
+		if(nowPage != 0) realnowPage = nowPage;
+		
+		// 리스트 출력
+		List<MemberVO> memberList = memberService.adminMemberList(searchvo, realnowPage);
+		model.addAttribute("memberList", memberList);
+		
+		// 페이징 출력
+		PagingUtil paging = memberService.adminMemberPaging(searchvo, realnowPage);
+		model.addAttribute("paging", paging);
+		
 		return "adminPage/adminPage_delY_list";
 	}
 
+	// 탈퇴한 회원 상세 조회페이지로 이동
 	@RequestMapping(value = "dely_detail.do", method = RequestMethod.GET)
-	public String dely_detail(Locale locale, Model model) {
+	public String dely_detail(Locale locale, Model model, int nowPage, int member_index) throws Exception{
+		
+		MemberVO member = memberService.memberInfor(member_index);
+		member.setPw("");
+		model.addAttribute("member", member);
+		
+		// 페이지
+		model.addAttribute("nowPage", nowPage);
+		
 		return "adminPage/adminPage_delY_detail";
 	}
 
@@ -80,11 +141,10 @@ public class AdminPageController {
 		return "adminPage/adminPage_report_list";
 	}
 
-	// 회원 주문 조회
+	// 회원 주문 조회페이지로 이동
 	@RequestMapping(value = "member_order_list.do", method = RequestMethod.GET)
-	public String mOrderList(Locale locale, Model model, HttpServletRequest request, SearchVO searchvo, int nowPage) throws Exception {
+	public String memberOrderList(Locale locale, Model model, HttpServletRequest request, SearchVO searchvo, int nowPage) throws Exception {
 		
-
 		// 현재페이지
 		int realnowPage = 1;
 		if(nowPage != 0) realnowPage = nowPage;
@@ -103,7 +163,7 @@ public class AdminPageController {
 
 	// 회원 주문 상세조회페이지로 이동
 	@RequestMapping(value = "member_order_detail.do", method = RequestMethod.GET)
-	public String member_order_detail(Locale locale, Model model,
+	public String memberOrderOne(Locale locale, Model model,
 			OrdersVO ordersvo,
 			@RequestParam(value="searchValue") String searchValue,
 			@RequestParam(value="nowPage") int nowPage) throws Exception{
@@ -116,7 +176,11 @@ public class AdminPageController {
 		OrdersVO order = ordersService.adminMemberOrder(ordersvo);
 		model.addAttribute("order", order);
 		
-		// 검색값&페이징
+		// 회원 주문 상세조회 할때 쿠폰
+		OrdersVO ordersDetailJoin = ordersService.ordersDetailJoin(ordersvo.getMember_order_index());
+		model.addAttribute("orderCoupon",ordersDetailJoin);
+		
+		// 검색값&페이지
 		model.addAttribute("searchValue", searchValue);
 		model.addAttribute("nowPage", nowPage);
 		
@@ -131,11 +195,6 @@ public class AdminPageController {
 	@RequestMapping(value = "noMember_order_detail.do", method = RequestMethod.GET)
 	public String notMember_order_detail(Locale locale, Model model) {
 		return "adminPage/adminPage_noMember_order_detail";
-	}
-
-	@RequestMapping(value = "cancel_list.do", method = RequestMethod.GET)
-	public String cancel_list(Locale locale, Model model) {
-		return "adminPage/adminPage_order_cancel_list";
 	}
 
 	// 등록 상품 조회 페이지로 이동
@@ -322,11 +381,6 @@ public class AdminPageController {
 	@RequestMapping(value = "event.do", method = RequestMethod.GET)
 	public String event(Locale locale, Model model) {
 		return "adminPage/adminPage_event";
-	}
-
-	@RequestMapping(value = "settlement.do", method = RequestMethod.GET)
-	public String settlement(Locale locale, Model model) {
-		return "adminPage/adminPage_settlement";
 	}
 	
 }

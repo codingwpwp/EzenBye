@@ -2,12 +2,13 @@ package team.project.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import team.project.util.PagingUtil;
 import team.project.vo.MemberVO;
+import team.project.vo.SearchVO;
 
 @Repository
 public class MemberDAO {
@@ -23,8 +24,8 @@ public class MemberDAO {
 	
 	//로그인
 	public MemberVO Login(MemberVO vo) throws Exception {
-	        return sqlSession.selectOne(Namespace+".Login", vo);
-	    }
+		return sqlSession.selectOne(Namespace+".Login", vo);
+	}
 	
 	//회원가입
 	public int insertMember(MemberVO vo) throws Exception{
@@ -60,4 +61,21 @@ public class MemberDAO {
 		return sqlSession.selectOne(Namespace+".memberInfor",member_index);
 	}
 	
+	
+	/*여기서 부터는 관리자페이지*/
+	
+	// 회원 조회할때 글의 갯수(페이징)
+	public int adminMemberListCount(SearchVO searchvo) throws Exception{
+		return sqlSession.selectOne(Namespace + ".adminMemberListCount", searchvo);
+	}
+	
+	// 회원 조회
+	public List<MemberVO> adminMemberList(PagingUtil paging) throws Exception{
+		return sqlSession.selectList(Namespace + ".adminMemberList", paging);
+	}
+	
+	// 회원 추방
+	public int adminChangeMemberDel_yn(int member_index) throws Exception{
+		return sqlSession.update(Namespace + ".adminChangeMemberDel_yn", member_index);
+	}
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -67,7 +68,7 @@
                                 </div>
 
                                 <div class="col-7 col-sm-6 col-md-8">
-                                    <input type="text" class="form-control" value="8888" disabled>
+                                    <input type="text" class="form-control" value="${member.member_index}" disabled>
                                 </div>
 
                             </div>
@@ -79,7 +80,7 @@
                                 </div>
 
                                 <div class="col-7 col-sm-9">
-                                    <input type="text" class="form-control" value="testertester12345" disabled>
+                                    <input type="text" class="form-control" value="${member.id}" disabled>
                                 </div>
 
                             </div>
@@ -96,7 +97,7 @@
                                 </div>
 
                                 <div class="col-7 col-sm-6 col-md-8">
-                                    <input type="text" class="form-control" value="나는테스터" disabled>
+                                    <input type="text" class="form-control" value="${member.nickname}" disabled>
                                 </div>
 
                             </div>
@@ -108,7 +109,7 @@
                                 </div>
 
                                 <div class="col-7 col-sm-9">
-                                    <input type="text" class="form-control" value="2022-01-01" disabled>
+                                    <input type="text" class="form-control" value="${fn:substring(member.join_date, 0,10)}" disabled>
                                 </div>
 
                             </div>
@@ -125,7 +126,7 @@
                                 </div>
 
                                 <div class="col-7 col-sm-6 col-md-8">
-                                    <input type="text" class="form-control" value="테스터일" disabled>
+                                    <input type="text" class="form-control" value="${member.name}" disabled>
                                 </div>
 
                             </div>
@@ -137,7 +138,7 @@
                                 </div>
 
                                 <div class="col-7 col-sm-9">
-                                    <input type="text" class="form-control" value="010-3333-1111" disabled>
+                                    <input type="text" class="form-control" value="${member.phone}" disabled>
                                 </div>
 
                             </div>
@@ -154,7 +155,7 @@
                                 </div>
 
                                 <div class="col-7 col-sm-9 col-md-10 px-0">
-                                    <input type="text" class="form-control" value="dkek@naver.com" disabled>
+                                    <input type="text" class="form-control" value="${member.email}" disabled>
                                 </div>
 
                             </div>
@@ -170,7 +171,7 @@
                                 </div>
 
                                 <div class="col-7 col-sm-9 col-md-10 px-0">
-                                    <textarea class="form-control" rows="4" disabled>전라북도 전주시 덕진구 금암1동 667-52</textarea>
+                                    <textarea class="form-control" rows="4" disabled><c:if test="${not empty member.address}">${member.address}</c:if><c:if test="${empty member.address}">기본배송지가 없습니다.</c:if></textarea>
                                 </div>
 
                             </div>
@@ -181,76 +182,8 @@
                     
                     <!-- 각종 버튼들 -->
                     <div class="ps-2">
-                        <button type="button" class="btn btn-primary me-2">뒤로</button>
-                        <button type="button" class="btn btn-danger me-2">회원추방</button>
-                        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#blackListModal">블랙 리스트 추가</button>
-                    </div>
-                    
-                    <!-- 블랙 리스트 추가 -->
-                    <div class="modal fade" id="blackListModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="blackListModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-
-                                <div class="modal-header">
-                                    <span class="modal-title fs-3 fw-bold" id="blackListModalLabel">블랙 리스트</span>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-
-                                <div class="modal-body">
-                                
-                                    <div class="row d-flex align-items-center mb-3">
-
-                                        <div class="col-12 col-sm-6 d-flex align-items-center mb-3">
-
-                                            <div class="col-3 col-sm-4">
-                                                <span class="infoTitle p-1">아이디</span>
-                                            </div>
-            
-                                            <div class="col-9 col-sm-8">
-                                                <input type="text" class="form-control" value="testertester12345" disabled>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-12 col-sm-6 d-flex align-items-center mb-3">
-
-                                            <div class="col-3 col-sm-4">
-                                                <span class="infoTitle p-1">날짜</span>
-                                            </div>
-            
-                                            <div class="col-9 col-sm-8">
-                                                <input type="text" class="form-control" value="2022-03-03" disabled>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row d-flex align-items-center">
-
-                                        <div class="col-12 d-flex align-items-center">
-
-                                            <div class="col-3 col-sm-2">
-                                                <span class="infoTitle p-1">사유</span>
-                                            </div>
-            
-                                            <div class="col-9 col-sm-10">
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="내용을 작성하세요" maxlength="100"></textarea>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="modal-footer d-flex justify-content-start">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                                    <button type="button" class="btn btn-dark">블랙 리스트 추가</button>
-                                </div>
-
-                            </div>
-                        </div>
+                        <button type="button" class="btn btn-primary me-2" onclick="location.href='member_list.do?searchType=${searchType}&searchValue=${searchValue}&nowPage=${nowPage}'">뒤로</button>
+                        <button type="button" class="btn btn-danger me-2" onclick="changeMemberDelyn(${member.member_index}, '${member.id}')">회원추방</button>
                     </div>
 
                 </article>

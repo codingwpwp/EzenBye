@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -28,65 +27,38 @@ public class LoginController {
 	BCryptPasswordEncoder pwdEncoder;
 	
 	@Autowired
-	   private MemberService memberService;
-	   
-	   @RequestMapping(value ="loginmain.do", method= RequestMethod.POST)
-	   public String logingo(MemberVO vo,HttpServletRequest req,RedirectAttributes rttr,@RequestParam("id")String id
-	                     ,@RequestParam("pw")String pw) throws Exception{
-	      
-	      HttpSession session =req.getSession();
-	      MemberVO login = memberService.Login(vo);
-//	      boolean pwMatch =pwdEncoder.matches(vo.getPw(),login.getPw());
-	      
-	      
-	      String path="";
-	      vo = new MemberVO();
-	      System.out.println(id);
-	      System.out.println(pw);
-	      vo.setId(id);
-	      vo.setPw(pw);
-	      System.out.println(vo.getId()+","+vo.getPw());
-	      
-	        
-	      if(login !=null) {
-	    	   session.setAttribute("member", login);
-		        
-		      }else {
-					session.setAttribute("member", null);
-					rttr.addFlashAttribute("msg", false);
-		      
-		      }
-//	      if(login !=null&&pwMatch==true) {
-//	    	  session.setAttribute("member", login);
-//		      }else {
-//		    	  session.setAttribute("member",null);
-//			         rttr.addFlashAttribute("msg",false);
-//			         path="home";
-//		        
-//		      }
-	      
-	      
-//	      if(login ==null) {
-//	         session.setAttribute("member",null);
-//	         rttr.addFlashAttribute("msg",false);
-//	         path="home";
-//	      }else if(){
-//	         
-//	         session.setAttribute("member", login);
-//	      }
-	      return "index/index";
-	         
-	      
-	   }
-	   //비밀번호확인
-		@ResponseBody
-		@RequestMapping(value = "pwChk", method = RequestMethod.POST)
-		public boolean pwChk(MemberVO vo) throws Exception {
-			
-			MemberVO login =memberService.Login(vo);
-			boolean pwChk = pwdEncoder.matches(vo.getPw(), login.getPw());
-			return pwChk;
+	private MemberService memberService;
+	
+	@RequestMapping(value ="loginmain.do", method= RequestMethod.POST)
+	public String logingo(MemberVO vo,HttpServletRequest req,RedirectAttributes rttr) throws Exception{
+
+		// 세션 소환
+		HttpSession session =req.getSession();
+		
+		// 로그인 검증 과정(id, pw 비교해서 맞으면 login에 잘 담아서 오고 틀리면 null로 리턴)
+		MemberVO login = memberService.Login(vo);
+		
+		// 로그인 검증 이후 세션에 어떻게 담을지에 대한 과정
+		if(login !=null) {// 로그인 검증 통과의 경우
+			// 세션에 로그인 정보를 저장(member_index, id, name 만 저정해놨음)
+			session.setAttribute("member", login);
+			return "index/index";
+		}else {// 로그인 검증 실패의 경우
+			session.setAttribute("member", null);
+			return "login/loginFail";
 		}
+	}
+	
+	//비밀번호확인
+	@ResponseBody
+	@RequestMapping(value = "pwChk", method = RequestMethod.POST)
+	public boolean pwChk(MemberVO vo) throws Exception {
+		
+		MemberVO login =memberService.Login(vo);
+		boolean pwChk = pwdEncoder.matches(vo.getPw(), login.getPw());
+		return pwChk;
+	}
+	
 	@RequestMapping(value = "loginmain.do", method = RequestMethod.GET)
 	public String login(Locale locale, Model model,HttpSession session) throws Exception{
 		session.invalidate();
@@ -100,12 +72,6 @@ public class LoginController {
 		session.invalidate();
 		return "redirect:index.do";
 	}
-	
-	
-	
-	
-	
-	
 	
 	@RequestMapping(value = "id_find.do", method = RequestMethod.GET)
 	public String login2(Locale locale, Model model) {

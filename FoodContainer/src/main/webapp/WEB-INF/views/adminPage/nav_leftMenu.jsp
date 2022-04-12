@@ -9,7 +9,7 @@
 <div class="offcanvas offcanvas-start"  tabindex="-1" id="navAdminMenu" aria-labelledby="onavAdminMenuLabel">
     
     <div class="offcanvas-header">
-        <span class="h1 offcanvas-title fw-bold" id="onavAdminMenuLabel">관리자<br>페이지</span>
+        <a class="h1 offcanvas-title fw-bold link-secondary" href="admin.do" id="onavAdminMenuLabel" style="text-decoration: none">관리자<br>페이지</a>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
 
@@ -17,9 +17,8 @@
 
         <span class="fw-bold">회원 관리</span>
         <div class="list-group my-2">
-            <a href="member_list.do" class="list-group-item list-group-item-action fs-6">회원 리스트</a>
-            <a href="black_list.do" class="list-group-item list-group-item-action fs-6">블랙 리스트</a>
-            <a href="dely_list.do" class="list-group-item list-group-item-action fs-6">탈퇴 리스트</a>
+            <a href="member_list.do?nowPage=1" class="list-group-item list-group-item-action fs-6">회원 리스트</a>
+            <a href="dely_list.do?nowPage=1" class="list-group-item list-group-item-action fs-6">탈퇴 리스트</a>
             <a href="report.do" class="list-group-item list-group-item-action fs-6">신고 리스트</a>
             <a href="#" class="list-group-item list-group-item-action fs-6">고객 센터</a>
         </div>
