@@ -21,6 +21,7 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductDAO productDao;
 
+	//상품조회
 	@Override
 	public List<ProductVO> productListAll(ProductVO productVO) throws Exception {
 		
@@ -28,19 +29,27 @@ public class ProductServiceImpl implements ProductService {
 		
 		return prodcutListAll;
 	}
-	
+	//상세보기
 	@Override
 	public ProductVO view(String index) throws Exception {
 		
 		return productDao.view(index);
 	}
-
+	//최근 본 상품
 	@Override
 	public List<ProductVO> cookieList(ArrayList<String> cookieArr) throws Exception {
 		
 		List<ProductVO> cookieListArr = productDao.cookieList(cookieArr);
 		
 		return cookieListArr;
+	}
+	//비회원 장바구니
+	@Override
+	public List<ProductVO> noMemberCartList(ArrayList<String> noMemberCartArr) throws Exception {
+		
+		List<ProductVO> noMemberCartList = productDao.noMemberCartList(noMemberCartArr);
+		
+		return noMemberCartList;
 	}
 	
 	
@@ -181,5 +190,7 @@ public class ProductServiceImpl implements ProductService {
 		
 		return product;
 	}
+
+	
 	
 }

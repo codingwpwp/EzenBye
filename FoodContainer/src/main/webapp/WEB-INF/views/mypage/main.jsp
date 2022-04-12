@@ -189,6 +189,7 @@
 													<textarea class="reviewTextarea" name="contents" id="" cols="50" rows="10"></textarea>
 													<input type="hidden" name="product_index" value="${opList.product_index }" />
 													<input type="hidden" name="member_index" value="${memberInfor.member_index }" />
+													<input type="hidden" name="orderItem_index" value="${opList.orderItem_index }" />
 													<p class="fs-6 lookup-fs-6">리뷰 썸네일 등록</p>
 													<div class="input-group mb-3">
 													  <input type="file" class="form-control" name="reviewImage" accept="image/png, image/PNG" id="inputGroupFile02" onchange="bannerPreviewImage(event, this, 'bannerRegisterForm');">
@@ -200,7 +201,7 @@
 											      </div>
 											      <div class="modal-footer">
 											        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-											        <button type="submit" class="btn btn-primary">작성완료</button>
+											        <button type="button" class="btn btn-primary" onclick="reviewSumbit(this, 'bannerRegisterForm');">작성완료</button>
 											      </div>
 											    </div>
 											  </div>

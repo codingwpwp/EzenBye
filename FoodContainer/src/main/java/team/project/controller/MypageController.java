@@ -21,10 +21,10 @@ import team.project.service.OrderProductService;
 import team.project.service.OrdersService;
 import team.project.service.ReviewService;
 import team.project.service.ServiceCenterService;
-import team.project.vo.BannerVO;
 import team.project.vo.MemberVO;
 import team.project.vo.OrderProductVO;
 import team.project.vo.OrdersVO;
+import team.project.vo.ReviewVO;
 import team.project.vo.ServiceCenterVO;
 
 /**
@@ -59,21 +59,23 @@ public class MypageController {
 	@Autowired
 	private ReviewService reviewService;
 	
-	// 리뷰 등록
-	/*
-	 * @RequestMapping(value = "bannerRegister.do", method = RequestMethod.POST)
-	 * public String bannerRegister(Locale locale, Model model, BannerVO bannervo,
-	 * 
-	 * @RequestParam("bannerFile") MultipartFile bannerFile, HttpServletRequest
-	 * request) throws Exception {
-	 * 
-	 * int result = reviewService.reviewInsert(bannervo, bannerFile, request);
-	 * 
-	 * if(result > 0) { return "redirect:banner.do"; }else { return
-	 * "redirect:admin.do"; }
-	 * 
-	 * }
-	 */
+	 // 리뷰 등록
+	 @RequestMapping(value = "writeReview.do", method = RequestMethod.POST)
+	 public String bannerRegister(Locale locale, Model model, String orderItem_index, ReviewVO reviewVO,
+	 @RequestParam("reviewImage") MultipartFile reviewImage, int rating, HttpServletRequest
+	 request) throws Exception {
+		  
+		  int revieweOk = reviewService.revieweOk(orderItem_index);
+		 
+		  int result = reviewService.reviewInsert(reviewVO, reviewImage, rating, request);
+		  
+		  if(result > 0 && revieweOk > 0) { 
+			  return "redirect:mypage_review.do"; 
+		  }else {
+			  return "redirect:mypage_main.do"; 
+		  }
+	  }
+	 
 	
 	@RequestMapping(value = "buyOk.do", method = RequestMethod.POST)
 	@ResponseBody
