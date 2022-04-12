@@ -5,8 +5,15 @@
  
 <mapper namespace="team.project.mapper.reviewMapper" >
  	
- 	<select id="">
- 	
- 	</select>
+ 	<insert id="reviewInsert" parameterType="ReviewVO">
+		INSERT INTO review(product_index, member_index, image, star_count, contents)
+		VALUES(#{product_index}, #{member_index}, #{image}, #{star_count}, #{contents})
+	</insert>
+   
+   	<update id="revieweOk" parameterType="String">
+    	UPDATE order_product
+    	SET review_YN = 'Y'
+    	WHERE orderItem_index = #{orderItem_index}
+    </update>
    
 </mapper>

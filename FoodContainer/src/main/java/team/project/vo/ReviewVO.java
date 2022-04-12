@@ -4,7 +4,7 @@ public class ReviewVO {
 	private int review_index;
 	private String product_index;
 	private int member_index;
-	private String image;
+	private String image = null;
 	private int star_count;
 	private String contents;
 	private String review_date;
