@@ -10,6 +10,8 @@ import team.project.vo.SearchVO;
 public interface OrdersService {
 	List<OrdersVO> ordersList(int member_index) throws Exception;
 	
+	List<OrdersVO> ordersListAll(int member_index) throws Exception;
+	
 	OrdersVO ordersDetail(String member_order_index) throws Exception;
 	
 	OrdersVO ordersDetailJoin(String member_order_index) throws Exception;

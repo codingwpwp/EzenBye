@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -63,70 +65,47 @@
                     <div class="col-md-11">
 				 
 			        <p class="fs-6 lookup-fs-6">관심상품</p>
-			        <p class="fs-6 lookup-fs-6">3개의 상품이 있습니다.</p>
+			        <p class="fs-6 lookup-fs-6">${dibsListCount}개의 상품이 있습니다.</p>
 			        <hr />
 			        
+			        <c:if test="${empty dibsListAllJoin}">
+			        <div class="lookupBorder">
+			        	<p class="fs-6 lookup-fs-6">관심상품이 없습니다.</p>
+		        	</div>
+			        </c:if>
+			        
+			        <c:if test="${!empty dibsListAllJoin}">
+			        <c:forEach items="${dibsListAllJoin}" var="list">
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
 			        	<div class="row">
 			        		<div class="col-sm-3">
-			        			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
+			        			<img src="<%=request.getContextPath() %>/resources/img/${list.brand}/${list.middleSort}/${list.thumbnail_image}" class="img-thumbnail" alt="...">
 			        		</div>
 			        		<div class="col-sm-6 d-flex align-items-start flex-column mb-3">
-						    	<div class="mb-auto p-2">비비고 진한고기만두400g*2번들</div>
-  								<div class="p-2">4580원 | 5개</div>
+						    	<div class="mb-auto p-2">${list.product_name }</div>
+						    	<c:if test="${list.sale_price eq -1 }" >
+  									<div class="p-2"><fmt:formatNumber value="${list.origin_price}" pattern="#,###" />원</div>
+			        			</c:if>
+			        			<c:if test="${list.sale_price ne -1 }" >
+  									<div class="p-2"><fmt:formatNumber value="${list.sale_price}" pattern="#,###" />원</div>
+			        			</c:if>
 			        		</div>
 			        		<div class="col-sm-3 interItem-icon">
+			        			<input type="hidden" name="product_index" value="${list.product_index }" />
+			        			<input type="hidden" name="member_index" value="${list.member_index }" />
 						    	<i class="bi bi-trash" style="font-size: 3rem;"></i>
 			        		</div>
 			        	</div>
 			        	
 			        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 interItem-btn">
-						  <button class="btn btn-dark col-lg-3 col-md-3" type="button">장바구니 담기</button>
+						  <button class="btn btn-dark col-lg-3 col-md-3" type="button" onclick="cartInsert(this)">장바구니 담기</button>
 						  <button class="btn btn-secondary col-lg-3 col-md-3" type="button">바로구매</button>
 						</div>
 			        </div>
+			        </c:forEach>
+			        </c:if>
 			        
-			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
-			        	<div class="row">
-			        		<div class="col-sm-3">
-			        			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
-			        		</div>
-			        		<div class="col-sm-6 d-flex align-items-start flex-column mb-3">
-						    	<div class="mb-auto p-2">비비고 진한고기만두400g*2번들</div>
-  								<div class="p-2">4580원 | 5개</div>
-			        		</div>
-			        		<div class="col-sm-3 interItem-icon">
-						    	<i class="bi bi-trash" style="font-size: 3rem;"></i>
-			        		</div>
-			        	</div>
-			        	
-			        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 interItem-btn">
-						  <button class="btn btn-dark col-lg-3 col-md-3" type="button">장바구니 담기</button>
-						  <button class="btn btn-secondary col-lg-3 col-md-3" type="button">바로구매</button>
-						</div>
-			        </div>
-			        
-			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
-			        	<div class="row">
-			        		<div class="col-sm-3">
-			        			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
-			        		</div>
-			        		<div class="col-sm-6 d-flex align-items-start flex-column mb-3">
-						    	<div class="mb-auto p-2">비비고 진한고기만두400g*2번들</div>
-  								<div class="p-2">4580원 | 5개</div>
-			        		</div>
-			        		<div class="col-sm-3 interItem-icon">
-						    	<i class="bi bi-trash" style="font-size: 3rem;"></i>
-			        		</div>
-			        	</div>
-			        	
-			        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 interItem-btn">
-						  <button class="btn btn-dark col-lg-3 col-md-3" type="button">장바구니 담기</button>
-						  <button class="btn btn-secondary col-lg-3 col-md-3" type="button">바로구매</button>
-						</div>
-			        </div>
-			        
-      			</div>
+      				</div>
                 </article>
             </div>
 

@@ -21,6 +21,12 @@ public class OrdersServiceImpl implements OrdersService{
 		List<OrdersVO> list = ordersDAO.ordersList(member_index);
 		return list;
 	}
+	
+	@Override
+	public List<OrdersVO> ordersListAll(int member_index) throws Exception {
+		List<OrdersVO> list = ordersDAO.ordersListAll(member_index);
+		return list;
+	}
 
 	@Override
 	public OrdersVO ordersDetail(String member_order_index) throws Exception {
