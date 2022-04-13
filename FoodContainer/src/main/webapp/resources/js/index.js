@@ -64,11 +64,26 @@
 	
 	//장바구니 모바일
 	function indexCart(obj){
-		$(".cartBack").css("display","block");
-		var name = $(".productNameM").html();
-		var html = "<br>&quot;"+name+"&quot;<br> 상품이 장바구니에 담겼습니다.";
-			html += "<br><br><button type='button' class='btn btn-secondary' onclick='cartOk()'>확인</button>";
-		$(".message").html(html);
+		var loginCheck = $("#pListLoginCheck").val();
+		var pIndex = $(obj).parent().prev().val();
+		console.log(loginCheck);
+		console.log(pIndex);
+		if(loginCheck == ""){
+			$(".cartBack").css("display","block");
+			var name = $(obj).parent().next().find(".productNameM").html();
+			var html = "<br>&quot;"+name+"&quot;<br> 상품이 장바구니에 담겼습니다.";
+				html += "<br><br><button type='button' class='btn btn-secondary' onclick='cartOk()'>확인</button>";
+			$(".message").html(html);
+			
+			$.ajax({
+				url : "noMemberCartCookie.do",
+				type : "get",
+				data : "product_index="+pIndex,
+				succese : function(){
+							
+				}
+			});
+		}
 	}
 	
 	//장바구니 확인 알림
