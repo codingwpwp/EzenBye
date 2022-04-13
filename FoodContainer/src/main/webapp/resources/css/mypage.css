@@ -108,6 +108,9 @@
 .star-rating label:hover ~ label {
   -webkit-text-fill-color: #fff58c;
 }
+.review-starColor{
+	color: gold;
+}
 /* 리뷰 별점부분 */
 
 .result-star{

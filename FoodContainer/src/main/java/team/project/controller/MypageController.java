@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import team.project.service.CartService;
 import team.project.service.CouponService;
@@ -24,6 +25,7 @@ import team.project.service.OrdersService;
 import team.project.service.ReviewService;
 import team.project.service.ServiceCenterService;
 import team.project.vo.CartVO;
+import team.project.vo.CouponVO;
 import team.project.vo.DibsVO;
 import team.project.vo.MemberVO;
 import team.project.vo.OrderProductVO;
@@ -98,19 +100,28 @@ public class MypageController {
 		return "true";
 	}
 	
-	// 마이페이지 관심상품 삭제
-	/*
+	// 관심상품 -> 장바구니 추가
 	@RequestMapping(value = "cartInsert.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String cartInsert(Locale locale, Model model, CartVO cartVO) throws Exception {
+	public String cartInsert(Locale locale, Model model, CartVO cartVO, String product_index, int member_index) throws Exception {
 		
+		List<CartVO> selectList = cartService.selectList(member_index);
+		String result = "true";
+		System.out.println(selectList.size());
+		for(int i=0; i<selectList.size(); i++) {
+			if(selectList.get(i).getProduct_index().equals(product_index) && selectList.get(i).getMember_index() == member_index) {
+				result = "false";
+				break;
+			}
+		}
+		if(result.equals("true")) {
+			int cartInsert = cartService.cartInsert(cartVO);
+		}
+		return result;
 		
-		
-		return "true";
 	}
-	*/
 	
-	// 관심상품 -> 장바구니 추가
+	// 마이페이지 관심상품 삭제
 	@RequestMapping(value = "dibsDeleteMypage.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String dbisDeleteMypage(Locale locale, Model model, DibsVO dibsVO) throws Exception {
@@ -118,6 +129,35 @@ public class MypageController {
 		dibsService.dibsDelete(dibsVO);
 		
 		return "true";
+	}
+	
+	// 회원탈퇴
+	@RequestMapping(value = "deleteMember.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String deleteMember(MemberVO memberVO, HttpSession session) throws Exception {
+		
+		int mypageMemberDelete = memberService.mypageMemberDelete(memberVO);
+		session.invalidate();
+		return "true";
+	}
+	
+	// 개인정보 변경 비밀번호 입력
+	@RequestMapping(value ="mypage_PWCheck.do", method= RequestMethod.POST)
+	public String logingo(MemberVO vo,HttpServletRequest req,RedirectAttributes rttr) throws Exception{
+
+		// 세션 소환
+		HttpSession session =req.getSession();
+		
+		// 로그인 검증 과정(id, pw 비교해서 맞으면 login에 잘 담아서 오고 틀리면 null로 리턴)
+		MemberVO login = memberService.Login(vo);
+		
+		// 로그인 검증 이후 세션에 어떻게 담을지에 대한 과정
+		if(login !=null) {// 로그인 검증 통과의 경우
+			// 세션에 로그인 정보를 저장(member_index, id, name 만 저정해놨음)
+			return "redirect:mypage_changeInforOk.do";
+		}else {// 로그인 검증 실패의 경우
+			return "mypage/changeInfor";
+		}
 	}
 	
 	@RequestMapping(value = "mypage_main.do", method = RequestMethod.GET)
@@ -202,22 +242,58 @@ public class MypageController {
 		
 		return "mypage/interItem";
 	}
+	
 	@RequestMapping(value = "mypage_coupon.do", method = RequestMethod.GET)
-	public String home7(Locale locale, Model model) {
+	public String couponList(Locale locale, Model model, HttpSession session) throws Exception {
+		
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		int member_index = member.getMember_index();
+		
+		List<CouponVO> couponList = couponService.couponList(member_index);
+		int couponvo = couponService.mypageCouponCount(member_index);
+		
+		model.addAttribute("couponList",couponList);
+		model.addAttribute("couponvo",couponvo);
+		
 		return "mypage/coupon";
 	}
+	
 	@RequestMapping(value = "mypage_review.do", method = RequestMethod.GET)
-	public String home8(Locale locale, Model model) {
+	public String reviewList(Locale locale, Model model, HttpSession session) throws Exception {
+		
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		int member_index = member.getMember_index();
+		
+		List<ReviewVO> reviewList = reviewService.reviewList(member_index);
+		int countList = reviewService.countList(member_index);
+		
+		model.addAttribute("reviewList",reviewList);
+		model.addAttribute("countList",countList);
+		
 		return "mypage/review";
 	}
+	
 	@RequestMapping(value = "mypage_recipe.do", method = RequestMethod.GET)
 	public String home9(Locale locale, Model model) {
 		return "mypage/recipe";
 	}
+	
 	@RequestMapping(value = "mypage_inquiries.do", method = RequestMethod.GET)
-	public String home10(Locale locale, Model model) {
+	public String home10(Locale locale, Model model, HttpSession session) throws Exception {
+		
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		int member_index = member.getMember_index();
+		
+		List<ServiceCenterVO> serviceCenterList = serviceCenterService.serviceCenterList(member_index);
+		
+		int countServiceCenter = serviceCenterService.countServiceCenter(member_index);
+		
+		model.addAttribute("serviceCenterList",serviceCenterList);
+		model.addAttribute("countServiceCenter",countServiceCenter);
+		
 		return "mypage/inquiries";
 	}
+	
 	@RequestMapping(value = "mypage_changeInfor.do", method = RequestMethod.GET)
 	public String home11(Locale locale, Model model) {
 		return "mypage/changeInfor";
