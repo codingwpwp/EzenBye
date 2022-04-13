@@ -207,8 +207,8 @@
 
                             <div class="col-5 col-md-4 col-lg-3 mb-3 mb-md-0">
                                 <select class="form-select" name="delivery_free_YN" style="text-align: right;">
-                                    <option value="3000"<c:if test="${product.delivery_free_YN eq 'N'}"> selected</c:if>>3,000원</option>
-                                    <option value="0"<c:if test="${product.delivery_free_YN eq 'Y'}"> selected</c:if>>무료배송</option>
+                                    <option value="N"<c:if test="${product.delivery_free_YN eq 'N'}"> selected</c:if>>3,000원</option>
+                                    <option value="Y"<c:if test="${product.delivery_free_YN eq 'Y'}"> selected</c:if>>무료배송</option>
                                 </select>
                             </div>
 

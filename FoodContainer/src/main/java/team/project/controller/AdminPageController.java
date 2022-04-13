@@ -274,7 +274,7 @@ public class AdminPageController {
 		int result = productService.adminProductInsert(product, tumnailImage, detailImage, request);
 		
 		if(result == 1) {
-			return "redirect:product_main.do";
+			return "redirect:product_main.do?nowPage=1";
 		}else {
 			return "redirect:product_register.do";
 		}

@@ -112,9 +112,10 @@ public class ProductServiceImpl implements ProductService {
 		product.setThumbnail_image(tumnailImage.getOriginalFilename());
 		product.setDetail_image(detailImage.getOriginalFilename());
 		
+		// 이미지 업로드
 		imageUpload(product, tumnailImage, detailImage, request);
 		
-		return productDao.adminProductInsert(productIndex(product, tumnailImage, detailImage, request));
+		return productDao.adminProductInsert(productIndex(product));
 	}
 
 	// 상품 수정
@@ -122,19 +123,22 @@ public class ProductServiceImpl implements ProductService {
 	public int adminProductUpdate(ProductVO product, MultipartFile tumnailImage, MultipartFile detailImage,
 			HttpServletRequest request) throws Exception {
 		
-		if(!tumnailImage.getOriginalFilename().isEmpty()) product.setThumbnail_image(tumnailImage.getOriginalFilename());
-		if(!detailImage.getOriginalFilename().isEmpty()) product.setDetail_image(detailImage.getOriginalFilename());
+		product.setOrigin_product_index(product.getProduct_index());
 		
+		product.setThumbnail_image(tumnailImage.getOriginalFilename());
+		product.setDetail_image(detailImage.getOriginalFilename());
+		
+		// 이미지 업로드
 		imageUpload(product, tumnailImage, detailImage, request);
 		
-		return 0;
+		return productDao.adminProductUpdate(productIndex(product));
 	}
 	
+	// 상품 이미지 업로드 메소드
 	public void imageUpload(ProductVO product,
 			MultipartFile tumnailImage, MultipartFile detailImage,
 			HttpServletRequest request) throws Exception {
 		
-		// 이미지 업로드 하는 과정
 		// 경로 설정
 		String path = request.getSession().getServletContext().getRealPath("/resources/img/" + product.getBrand() + "/" + product.getMiddleSort());
 		
@@ -143,19 +147,19 @@ public class ProductServiceImpl implements ProductService {
 		if(!dir.exists()) dir.mkdirs();	// 경로에 대한 디렉토리가 없으면 알아서 생성해준다.
 		
 		// 해당 경로에 업로드
-		if(!tumnailImage.getOriginalFilename().isEmpty()) tumnailImage.transferTo(new File(path, product.getThumbnail_image()));
-		if(!detailImage.getOriginalFilename().isEmpty()) detailImage.transferTo(new File(path, product.getDetail_image()));
+		if(tumnailImage != null) {
+			if(!tumnailImage.getOriginalFilename().isEmpty()) tumnailImage.transferTo(new File(path, product.getThumbnail_image()));
+		}
+		if(detailImage != null) {
+			if(!detailImage.getOriginalFilename().isEmpty()) detailImage.transferTo(new File(path, product.getDetail_image()));
+		}
 		
 	}
 	
 	// 상품 등록&수정 과정에서 상품번호를 올바르게 생성하는 과정
-	private ProductVO productIndex(ProductVO product, MultipartFile tumnailImage, MultipartFile detailImage,
-			HttpServletRequest request) throws Exception {
-
-		// 상품 번호 과정
-		// 상품 번호를 생성하는 과정
-		String alphabetList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		String alphabetIndex = "";
+	private ProductVO productIndex(ProductVO product) throws Exception {
+		
+		// 상품번호 기본 설정
 		String productIndex = "P";
 		if(product.getBigSort().equals("냉동식품")) {
 			productIndex += "I";
@@ -175,29 +179,89 @@ public class ProductServiceImpl implements ProductService {
 			}
 		}
 
-		// 생성한 상품 번호를 DB와 대조하고 입력하는 과정
-		List<ProductVO> productIndexList = productDao.adminProductIndexSelectList(productIndex);
 		if(product.getProduct_index() == null) {	// 상품 등록의 경우
-			if(productIndexList.size() == 0) {
-				productIndex += "A";
-				product.setProduct_index(productIndex);
-			}else {
-				for(ProductVO alphabet : productIndexList) {
-					alphabetIndex += alphabet.getProduct_index();
-				}
-			}
+			System.out.println("상품등록입니다.");
+			System.out.println("상품등록입니다.");
+			// 마지막 부분 (알파벳)생성
+			productIndex = productLastIndex(productIndex);
+			
 		}else {	// 상품 수정의 경우
-			if(!productIndex.equals(product.getProduct_index().substring(0, 4))) {
-				
+			System.out.println("상품수정입니다.");
+			System.out.println("상품수정입니다.");
+			if(productIndex.equals(product.getProduct_index().substring(0, 4))) {	// 분류 바뀌었을 때
+				System.out.println("--------------------");
+				System.out.println("거기다가 분류가 바뀌지 않았읍니다");
+				System.out.println("--------------------");
+				System.out.println(product.getProduct_index());
+				System.out.println("--------------------");
+				return product;
+			}else {	// 분류 안 바뀌었을 때
+				// 마지막 부분 (알파벳)생성
+				productIndex = productLastIndex(productIndex);
 			}
 		}
 		
-		
-		
+		// 할거 다 끝나고 상품번호 마무리 세팅
+		product.setProduct_index(productIndex);
 		
 		return product;
 	}
 
-	
+	// 마지막 부분 (알파벳)생성 하는 메소드
+	private String productLastIndex(String productIndex) throws Exception{
+		// DB에 있는 관련 상품번호들을 리스트로 담기
+		List<String> productIndexList = productDao.adminProductIndexSelectList(productIndex);
+		
+		// 알파벳
+		String alphabetList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		// DB에 있는 관련 상품번호 리스트 끝자리들을 요놈에 담을거임
+		String alphabetIndex = "";
+		// 이빨 빠진지 안 빠진지의 여부 스위치
+		int productIndexSw = 0;
+		
+		if(productIndexList.size() == 0) {
+			productIndex += "A";
+		}else if(productIndexList.size() > 0 && productIndexList.size() < 26){
+			
+			for(String index : productIndexList) {
+				alphabetIndex += index.substring(4,5);
+			}
+			
+			
+			for(int i = 0; i < alphabetIndex.length(); i++) {
+				String aIndex = alphabetIndex.substring(i, i + 1);
+				String aList = alphabetList.substring(i, i + 1);
+
+				System.out.println("--------------------");
+				System.out.println(aIndex);
+				System.out.println(aList);
+				System.out.println("--------------------");
+				if(!aIndex.equals(aList)) {	// 중간에 이빨 빠진 경우
+					System.out.println("--------------------");
+					System.out.println("이빨 빠졌읍니다");
+					System.out.println("--------------------");
+					productIndex += alphabetList.substring(i, i + 1);
+					System.out.println(productIndex);
+					System.out.println("--------------------");
+					productIndexSw = 1;
+					break;
+				}
+			}
+			
+			if(productIndexSw == 0) {	// 이빨 안 빠진 경우
+				System.out.println("--------------------");
+				System.out.println("이빨 빠지지 않았읍니다");
+				System.out.println("--------------------");
+				productIndex += alphabetList.substring(productIndexList.size(), productIndexList.size() + 1);
+				System.out.println(productIndex);
+				System.out.println("--------------------");
+			}
+			
+		} else {
+			return null;
+		}
+		
+		return productIndex;
+	}
 	
 }

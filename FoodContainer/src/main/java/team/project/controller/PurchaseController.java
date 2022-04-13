@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.project.service.CouponService;
@@ -38,8 +39,13 @@ public class PurchaseController {
 	}
 	
 	// 비회원 구매페이지
-	@RequestMapping(value = "noMember.do", method = RequestMethod.GET)
-	public String nomember_purchase(Locale locale, Model model) {
+	@RequestMapping(value = "noMember.do", method = RequestMethod.POST)
+	public String nomember_purchase(Locale locale, Model model,
+									@RequestParam(value="name") String name,
+									@RequestParam(value="receiveMail") String email) {
+		model.addAttribute("name", name);
+		model.addAttribute("email", email);
+		
 		return "purchasePage/purchasePage_noMember";
 	}
 	// 비회원 이메일 인증
@@ -50,15 +56,28 @@ public class PurchaseController {
 	
 	// 비회원 이메일 보내기
 	@RequestMapping(value = "certification.do", method = RequestMethod.POST)
+	@ResponseBody
 	public String SendEmail(Locale locale, Model model, EmailVO emailvo) throws Exception {
 		
-		System.out.println(emailvo.getReceiveMail());
-		emailvo.setSubject("테스트제목");
-		emailvo.setMessage("테스트입니다.");
+		// 이메일 제목
+		String subject = "FoodContainer 비회원 이메일 인증번호";
+		emailvo.setSubject(subject);
+		
+		// 인증번호 생성
+		String randomBox = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		String randomNum = "";
+		for(int i = 0; i < 6; i++) {
+			int randomIndex = (int)(Math.random() * randomBox.length());
+			randomNum += randomBox.substring(randomIndex, randomIndex + 1);
+		}
+		
+		// 이메일 내용
+		String message = "인증번호는 " + randomNum + " 입니다. 3분이내에 입력하세요.";
+		emailvo.setMessage(message);
 		
 		emailService.sendEmail(emailvo);
 		
-		return "success";
+		return randomNum;
 	}
 	
 	// 회원 구매페이지 내에서 쿠폰 적용하는 비동기

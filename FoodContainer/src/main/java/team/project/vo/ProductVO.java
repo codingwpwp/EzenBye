@@ -116,5 +116,11 @@ public class ProductVO {
 		this.del_YN = del_YN;
 	}
 	
-	
+	private String origin_product_index;
+	public String getOrigin_product_index() {
+		return origin_product_index;
+	}
+	public void setOrigin_product_index(String origin_product_index) {
+		this.origin_product_index = origin_product_index;
+	}
 }

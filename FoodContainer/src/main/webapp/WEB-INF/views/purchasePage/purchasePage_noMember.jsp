@@ -137,7 +137,7 @@
                         </div>
 
                         <div class="col-8 col-md-6 col-lg-5 col-xxl-4">
-                            <input type="text" class="form-control fw-bold" id="orderName" name="orderName" value="" placeholder="이름을 입력하세요" maxlength="5" onblur="checkName(this)">
+                            <input type="text" class="form-control fw-bold" id="orderName" name="orderName" value="${name}" placeholder="이름을 입력하세요" maxlength="5" onblur="checkName(this)">
                         </div>
                     </div>
 
@@ -170,7 +170,7 @@
                         </div>
 
                         <div class="col-9 col-lg-8">
-                            <input class="form-control pe-1" type="email" name="email" id="email" value="tester1@naver.com" maxlength="30" readonly>
+                            <input class="form-control pe-1" type="email" name="email" id="email" value="${email}" maxlength="30" readonly>
                         </div>
                     </div>
 
