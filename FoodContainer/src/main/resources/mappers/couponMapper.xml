@@ -8,6 +8,7 @@
  	<select id="couponList" resultType="CouponVO" parameterType="int">
         SELECT * FROM coupon
 		WHERE member_index=#{member_index} and used_yn='N'
+		ORDER BY make_date desc
     </select>
     
      <select id="couponSelectOne" resultType="CouponVO" parameterType="int">

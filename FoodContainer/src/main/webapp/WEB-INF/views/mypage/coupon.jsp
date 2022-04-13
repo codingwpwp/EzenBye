@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -63,9 +65,16 @@
                     <div class="col-md-11">
 				 
 			        <p class="fs-6 lookup-fs-6">할인쿠폰</p>
-			        <p class="fs-6 lookup-fs-6">3개의 쿠폰이 있습니다.</p>
+			        <p class="fs-6 lookup-fs-6">${couponvo }개의 쿠폰이 있습니다.</p>
 			        <hr />
 			        
+			        <c:if test="${empty couponList}">
+			        <div class="lookupBorder">
+			        	<p class="fs-6 lookup-fs-6">보유햐신 쿠폰이 없습니다.</p>
+		        	</div>
+			        </c:if>
+			        
+			        <c:if test="${!empty couponList}">
 			        <div class="main-table">
 				        <table class="table table-hover coupon-table main-table2">
 						  <thead>
@@ -76,24 +85,17 @@
 						    </tr>
 						  </thead>
 						  <tbody>
+						  <c:forEach items="${couponList}" var="list">
 						    <tr>
-						      <td>어쩔쿠폰 5%</td>
-						      <td>5%</td>
-						      <td>2022.1.14</td>
+						      <td>${list.coupon_title }</td>
+						      <td>${list.discount_percent }%할인</td>
+						      <td>${list.make_date }</td>
 						    </tr>
-						    <tr>
-						      <td>저쩔쿠폰 10%</td>
-						      <td>10%</td>
-						      <td>2022.1.19</td>
-						    </tr>
-						    <tr>
-						      <td>어쩔쿠폰 15%</td>
-						      <td>15%</td>
-						      <td>2022.1.28</td>
-						    </tr>
+						  </c:forEach>  
 						  </tbody>
 						</table>
 					</div>
+					</c:if>
 			        
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
 			        	<ul>

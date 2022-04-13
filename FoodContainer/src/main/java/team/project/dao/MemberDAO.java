@@ -61,6 +61,9 @@ public class MemberDAO {
 		return sqlSession.selectOne(Namespace+".memberInfor",member_index);
 	}
 	
+	public int mypageMemberDelete(MemberVO memberVO) throws Exception{
+		return sqlSession.update(Namespace + ".mypageMemberDelete", memberVO);
+	}
 	
 	/*여기서 부터는 관리자페이지*/
 	

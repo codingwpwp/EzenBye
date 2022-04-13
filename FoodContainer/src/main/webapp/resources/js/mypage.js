@@ -326,9 +326,35 @@ function cartInsert(obj) {
 				url : "cartInsert.do",
 				type : "post",
 				data : "product_index="+product_index+"&member_index="+member_index,
+				success : function(data){
+					if(data == 'false'){
+						alert('이미 장바구니에 상품이 있습니다.');
+					}else if(data == 'true'){
+						alert('장바구니 추가 완료되었습니다.');
+						var YN2 = confirm("장바구니 페이지로 이동하시겠습니까?")
+						if(YN2){
+							window.location.href = "shopBasket_main.do";
+						}else{
+							window.location.reload();
+						}
+					}
+				}
+			});
+	}
+}
+
+function deleteMember(obj) {
+	var YN = confirm("정말 탈퇴 하시겠습니까?");
+	if(YN) {
+		var del_reason = $(obj).parent().parent().find("select[name='delReason']").val();
+		var member_index = $(obj).parent().find("input[name='member_index']").val();
+		$.ajax({
+				url : "deleteMember.do",
+				type : "post",
+				data : "del_reason="+del_reason+"&member_index="+member_index,
 				success : function(){
-					alert('장바구니 추가 완료되었습니다.');
-					window.location.reload();
+					alert('탈퇴가 완료되었습니다.');
+					window.location.href = "index.do";
 				}
 			});
 	}

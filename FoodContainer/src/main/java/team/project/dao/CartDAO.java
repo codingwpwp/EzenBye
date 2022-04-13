@@ -1,5 +1,7 @@
 package team.project.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,7 +18,12 @@ public class CartDAO {
 	
 	public int cartInsert(CartVO cartVO) throws Exception {
 		
-		return sqlSession.selectOne(Namespace+".cartInsert",cartVO);
+		return sqlSession.insert(Namespace+".cartInsert",cartVO);
+	}
+	
+	public List<CartVO> selectList(int member_index) throws Exception {
+		
+		return sqlSession.selectList(Namespace+".selectList",member_index);
 	}
 	
 }

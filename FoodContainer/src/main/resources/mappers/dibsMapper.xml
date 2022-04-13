@@ -25,7 +25,7 @@
   		SELECT * FROM dibs AS d
 		JOIN product AS p
 		ON d.product_index = p.product_index
-		WHERE member_index = #{member_index} 
+		WHERE member_index = #{member_index} order by d.dib_date desc
   	</select>
   	
   	<select id="dibsListCount" resultType="int" parameterType="int">

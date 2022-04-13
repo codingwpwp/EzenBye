@@ -1,6 +1,7 @@
 package team.project.service;
 
 import java.io.File;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,4 +38,23 @@ public class ReviewServiceImpl implements ReviewService {
 		int revieweOk = reviewDao.revieweOk(orderItem_index);
 		return revieweOk;
 	}
+
+	@Override
+	public List<ReviewVO> reviewList(int member_index) throws Exception {
+		
+		List<ReviewVO> reviewList = reviewDao.reviewList(member_index);
+		
+		return reviewList;
+	}
+
+	@Override
+	public int countList(int member_index) throws Exception {
+		
+		int countList = reviewDao.countList(member_index);
+		
+		return countList;
+	}
 }
+
+
+

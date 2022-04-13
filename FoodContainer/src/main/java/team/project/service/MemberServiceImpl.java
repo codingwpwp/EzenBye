@@ -89,6 +89,12 @@ public class MemberServiceImpl implements MemberService {
 	public void updatePoint(int point, int member_index) {
 		memberMapper.updatePoint(point, member_index);
 	}
+	
+	@Override
+	public int mypageMemberDelete(MemberVO memberVO) throws Exception {
+		int mypageMemberDelete = memberDao.mypageMemberDelete(memberVO);
+		return mypageMemberDelete;
+	}
 
 	/* 여기서 부터는 관리자페이지 */
 	
@@ -120,6 +126,8 @@ public class MemberServiceImpl implements MemberService {
 	public int adminChangeMemberDel_yn(int member_index) throws Exception {
 		return memberDao.adminChangeMemberDel_yn(member_index);
 	}
+
+	
 	
 }
  
