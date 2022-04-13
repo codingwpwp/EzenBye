@@ -13,10 +13,6 @@
                 ['view', ['fullscreen', 'codeview', 'help']]
             ]
         });
-        function popup(){
-           window.open("popup.do","a","width=400, height=300, left=800, top=500");
-        	
-        }
         function best(){
             var text = prompt("금:1 | 은:2 | 동:3");
         }
@@ -29,7 +25,7 @@ function previewImage(event,obj){
     var extension = valueArray[valueArray.length-1];
 
     var id = $(obj).attr("name") + "Modal";
-    var thumnail = document.getElementById("thumnail");
+  
     console.log(id);
 
     if(extension == "png" || extension == "PNG"){ // 확장자가 png일 경우
@@ -93,15 +89,15 @@ function previewImage2(event,obj){
     var valueArray = obj.value.split(".");
     var extension = valueArray[valueArray.length-1];
 
-    var id = $(obj).attr("name") + "Modal";
+    
     var thumnail = document.getElementById("thumnail");
-    console.log(id);
+    
 
     if(extension == "png" || extension == "PNG"){ // 확장자가 png일 경우
 
         // 원래 있던 이미지는 삭제
-        $("div#" + id).find(".imageContainer").find("img").remove();
-
+        
+		$(thumnail).find("img").remove();
         // 이미지가 없다는 문구를 삭제
         $(thumnail).find("strong").remove();
 	
@@ -115,7 +111,7 @@ function previewImage2(event,obj){
             var img = document.createElement("img");
             $(img).attr("src", event.target.result);
             $(img).addClass("img-fluid");           
-           $(thumnail).append(img);
+            $(thumnail).append(img);
            
         };
 		
@@ -126,29 +122,31 @@ function previewImage2(event,obj){
         $(obj).parent().parent().find(".previewButton").removeClass("btn-secondary");
         $(obj).parent().parent().find(".previewButton").addClass("btn-primary");
 
-    }else{ // 확장자가 png가 아닐 경우
-
-        alert("확장자는 png만 가능합니다.");
-
-        // 이미지가 없다는 문구의 중복 방지를 위해 삭제
-        $("div#" + id).find(".imageContainer").find("span").remove();
-
-        // 파일input의 value값 초기화
-        $(obj).val("");
-
-        // 이미지가 있다면 삭제
-        $("div#" + id).find(".imageContainer").find("img").remove();
-
-        // 이미지가 없다는 문구를 생성하고 뿌리기
-        var span = document.createElement("span");
-        $(span).addClass("fs-5");
-        $(span).text("이미지가 없습니다.");
-        $("div#" + id).find(".imageContainer").append(span);
-
-        // 버튼 변경
-        $(obj).parent().parent().find(".previewButton").removeClass("btn-primary");
-        $(obj).parent().parent().find(".previewButton").addClass("btn-secondary");
-
     }
 
 }
+
+function producut1(){
+	var name =$(".product_index1").val();
+	//console.log(id);
+	$.ajax({
+		url:"selectbox1",
+		type:"post",
+		data:"name="+name,
+	
+		success:function(data){
+		console.log(data);
+		
+		}	
+		
+	})
+
+}
+
+
+
+
+
+
+
+
