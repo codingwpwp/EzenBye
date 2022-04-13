@@ -15,5 +15,17 @@
     	SET review_YN = 'Y'
     	WHERE orderItem_index = #{orderItem_index}
     </update>
-   
+    
+    <select id="reviewList" resultType="ReviewVO" parameterType="int">
+        SELECT * FROM review AS r
+		JOIN product AS p
+		ON r.product_index = p.product_index
+		WHERE r.member_index = #{member_index} and r.del_YN = 'N'
+		ORDER BY review_date desc
+    </select>
+    
+    <select id="countList" resultType="int" parameterType="int">
+    	SELECT count(*) FROM review
+    	WHERE member_index = #{member_index}
+    </select>
 </mapper>

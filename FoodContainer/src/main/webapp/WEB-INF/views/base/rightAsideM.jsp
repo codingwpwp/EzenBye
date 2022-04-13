@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -9,16 +12,14 @@
 	
 	<div class="offcanvas offcanvas-bottom rightAsideDivM" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
 		<div class="offcanvas-body small d-flex justify-content-around">
-			<i class="bi bi-cart3 mobileCart"></i>
-			<div class="rightAsideImgM">
-       			<a href="#"><img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid border"></img></a>
-   			</div>
-    		<div class="rightAsideImgM">
-        		<a href="#"><img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid border"></img></a>
-    		</div>
-    		<div class="rightAsideImgM">
-        		<a href="#"><img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid border"></img></a>
-    		</div>
+			<a href="shopBasket_main.do"><i class="bi bi-cart3 mobileCart"></i></a>
+    		<c:forEach items="${viewCookie}" var="viewCookie">
+		    	<div class="rightAsideImgM">
+			        <a href="productView.do?product_index=${viewCookie.product_index}">
+			        	<img src="<%=request.getContextPath()%>/resources/img/${viewCookie.brand}/${viewCookie.middleSort}/${viewCookie.thumbnail_image}" class="img-fluid border"></img>
+			        </a>
+		   		</div>
+    		</c:forEach>
 		</div>
 	</div>
 </div>

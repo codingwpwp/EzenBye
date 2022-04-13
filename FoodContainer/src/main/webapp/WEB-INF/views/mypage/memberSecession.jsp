@@ -89,19 +89,20 @@
 			    	<p class="fs-6 lookup-fs-6">탈퇴사유</p>
 			        <hr />
 			        <div class="memberSecession-select2 mb-4">
-			        <select class="form-select memberSecession-select" aria-label=".form-select-lg example">
+			        <select name="delReason" class="form-select memberSecession-select" aria-label=".form-select-lg example">
 					  <option selected>선택해주세요</option>
-					  <option value="1">배송 불만</option>
-					  <option value="2">취소 불만</option>
-					  <option value="3">사용이 불편함</option>
-					  <option value="3">자주 사용하지 않음</option>
-					  <option value="3">상품의 다양성/가격 품질 불만</option>
-					  <option value="3">실질적인 혜택 부족</option>
-					  <option value="3">개인정보 유출 우려</option>
+					  <option value="배송 불만">배송 불만</option>
+					  <option value="취소 불만">취소 불만</option>
+					  <option value="사용이 불편함">사용이 불편함</option>
+					  <option value="자주 사용하지 않음">자주 사용하지 않음</option>
+					  <option value="상품의 다양성/가격 품질 불만">상품의 다양성/가격 품질 불만</option>
+					  <option value="실질적인 혜택 부족">실질적인 혜택 부족</option>
+					  <option value="개인정보 유출 우려">개인정보 유출 우려</option>
 					</select>
 					</div>
 					<div class="d-flex justify-content-center noteManageView-btn">
-					  <button class="btn btn-dark noteManageView-btn2" type="button">탈퇴하기</button>
+					  <input type="hidden" value="${member.member_index}" name="member_index" />
+					  <button class="btn btn-dark noteManageView-btn2" type="button" onclick="deleteMember(this)">탈퇴하기</button>
 					</div>
 			    	
       				</div>

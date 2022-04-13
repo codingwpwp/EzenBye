@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -63,9 +65,16 @@
                     <div class="col-md-11">
 				 
 			        <p class="fs-6 lookup-fs-6">나의 리뷰</p>
-			        <p class="fs-6 lookup-fs-6">3개의 리뷰가 있습니다.</p>
+			        <p class="fs-6 lookup-fs-6">${countList }개의 리뷰가 있습니다.</p>
 			        <hr />
 			        
+			        <c:if test="${empty reviewList}">
+			        <div class="lookupBorder">
+			        	<p class="fs-6 lookup-fs-6">작성하신 리뷰가 없습니다.</p>
+		        	</div>
+			        </c:if>
+			        
+			        <c:if test="${!empty reviewList}">
 			         <div class="main-table">
 				        <table class="table table-hover align-middle">
 						  <thead>
@@ -78,102 +87,60 @@
 						    </tr>
 						  </thead>
 						  <tbody>
+						  <c:forEach items="${reviewList }" var="list">
+						  <c:set var="i" value="${i+1}" />
 						    <tr>
-						      <td>★★★★★<br />좋아요</td>
+						    <c:if test="${list.star_count eq 1}">
+						    	<td class="fw-bold"><span class="review-starColor">★☆☆☆☆</span><br />매우 나빠요</td>
+						    </c:if>
+						    <c:if test="${list.star_count eq 2}">
+						    	<td class="fw-bold"><span class="review-starColor">★★☆☆☆</span><br />나빠요</td>
+						    </c:if>
+						    <c:if test="${list.star_count eq 3}">
+						    	<td class="fw-bold"><span class="review-starColor">★★★☆☆</span><br />보통</td>
+						    </c:if>
+						    <c:if test="${list.star_count eq 4}">
+						    	<td class="fw-bold"><span class="review-starColor">★★★★☆</span><br />좋아요</td>
+						    </c:if>
+						    <c:if test="${list.star_count eq 5}">
+						    	<td class="fw-bold"><span class="review-starColor">★★★★★</span><br />매우 좋아요</td>
+						    </c:if>
+						      
 						      <td>
 						      <span class="d-inline-block text-truncate" style="max-width: 150px;">
-								  비비고 진한고기만두400g*2번들
+								  <a href="productView.do?product_index=${list.product_index }" class="productHref">${list.product_name}</a>
 							  </span>
 						      </td>
 						      <td>
 						      <span class="d-inline-block text-truncate" style="max-width: 150px;">
-								  불량이에요 제품이 터졌네요 ㅡㅡ
+								  ${list.contents}
 							  </span>
 						      </td>
 						      <td>
-							      <a data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
+							      <a data-bs-toggle="collapse" href="#collapseExample${i}" role="button" aria-expanded="false" aria-controls="collapseExample">
 								    <i class="bi bi-arrow-down" style="color: cornflowerblue;" data-toggle=”collapse” data-target=”#demo“></i>
 								  </a>
 						      </td>
-						      <td class="main-table2">2022-01-26</td>
+						      <td class="main-table2">${list.review_date}</td>
 						    </tr>
 						    <tr>
 						      <td colspan="4">
-						      	<div class="collapse" id="collapseExample1">
+						      	<div class="collapse" id="collapseExample${i}">
 						      		<div class="review-title">
-						      			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="..." width="10%"> 상품명 : 비비고 진한고기만두400g*2번들
-						      		</div>	
-									<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
+						      			<a href="productView.do?product_index=${list.product_index }" class="productHref">
+						      			<img src="<%=request.getContextPath() %>/resources/img/${list.brand}/${list.middleSort}/${list.thumbnail_image}" class="img-thumbnail" alt="..." width="10%"> 상품명 : ${list.product_name}
+						      			</a>
+						      		</div>
+						      		<c:if test="${!empty list.image}">	
+									<img src="<%=request.getContextPath() %>/resources/img/review/${list.image}" class="img-thumbnail" alt="...">
+									</c:if>
 									<div class="review-content">
-						      			불량이에요 제품이 터졌네요 ㅡㅡ
+						      			${list.contents}
 						      		</div>
 								</div>
 						      </td>
 						    </tr>
-						    <tr>
-						      <td>★★★★★<br />매우좋아요</td>
-						      <td>
-						      <span class="d-inline-block text-truncate" style="max-width: 150px;">
-								  비비고 진한고기만두400g*2번들
-							  </span>
-						      </td>
-						      <td>
-						      <span class="d-inline-block text-truncate" style="max-width: 150px;">
-								  불량이에요 제품이 터졌네요 ㅡㅡ
-							  </span>
-						      </td>
-						      <td>
-							      <a data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
-								    <i class="bi bi-arrow-down" style="color: cornflowerblue;" data-toggle=”collapse” data-target=”#demo“></i>
-								  </a>
-						      </td>
-						      <td>2022-01-26</td>
-						    </tr>
-						    <tr>
-						      <td colspan="4">
-						      	<div class="collapse" id="collapseExample2">
-						      		<div class="review-title">
-						      			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="..." width="10%"> 상품명 : 비비고 진한고기만두400g*2번들 
-						      		</div>	
-									<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
-									<div class="review-content">
-						      			불량이에요 제품이 터졌네요 ㅡㅡ
-						      		</div>
-								</div>
-						      </td>
-						    </tr>
-						    <tr>
-						      <td>★★★★★<br />매우좋아요</td>
-						      <td>
-						      <span class="d-inline-block text-truncate" style="max-width: 150px;">
-								  비비고 진한고기만두400g*2번들
-							  </span>
-						      </td>
-						      <td>
-						      <span class="d-inline-block text-truncate" style="max-width: 150px;">
-								  불량이에요 제품이 터졌네요 ㅡㅡ
-							  </span>
-						      </td>
-						      <td>
-							      <a data-bs-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample">
-								    <i class="bi bi-arrow-down" style="color: cornflowerblue;" data-toggle=”collapse” data-target=”#demo“></i>
-								  </a>
-						      </td>
-						      <td>2022-01-26</td>
-						    </tr>
-						    <tr>
-						      <td colspan="4">
-						      	<div class="collapse" id="collapseExample3">
-						      		<div class="review-title">
-						      			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="..." width="10%"> 상품명 : 비비고 진한고기만두400g*2번들
-						      		</div>	
-									<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
-									<div class="review-content">
-						      			불량이에요 제품이 터졌네요 ㅡㅡ
-						      		</div>
-								</div>
-						      </td>
-						    </tr>
+						    </c:forEach>
 						  </tbody>
 						</table>
 					</div>
@@ -195,6 +162,7 @@
 					    </li>
 					  </ul>
 					</nav>
+					</c:if>
 					
 					<div class="h-100 p-2 bg-light border rounded-3 card-good">
 			        	<ul>

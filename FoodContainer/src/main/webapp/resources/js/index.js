@@ -70,7 +70,7 @@
 		console.log(pIndex);
 		if(loginCheck == ""){
 			$(".cartBack").css("display","block");
-			var name = $(obj).parent().next().find(".productNameM").html();
+			var name = $(obj).parent().prev().prev().find(".productNameM").html();
 			var html = "<br>&quot;"+name+"&quot;<br> 상품이 장바구니에 담겼습니다.";
 				html += "<br><br><button type='button' class='btn btn-secondary' onclick='cartOk()'>확인</button>";
 			$(".message").html(html);
@@ -127,6 +127,23 @@
 	//쿠키데이터
 	function productCookie(obj){
 		var name=$(obj).next("input[name='index']").val();
+		console.log(name);
+		
+		$.ajax({
+			url : "viewProductCookie.do",
+			type : "get",
+			data : "name="+name,
+			success : function(data){
+				
+			}
+		});
+	}
+	
+	//배너 클릭
+	function bannerFn(obj){
+		var linkName=$(obj).next("input[name='link']").val();
+		var name = linkName.substring(linkName.length-5,linkName.length);
+		
 		console.log(name);
 		
 		$.ajax({
