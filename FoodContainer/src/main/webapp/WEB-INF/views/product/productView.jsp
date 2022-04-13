@@ -66,7 +66,9 @@
 				        	</div>
 				        </div>
 				        <div class="col p-4 d-flex flex-column position-static">
-				          <strong class="d-inline-block mb-2 text-danger">[인기]</strong>
+				          <c:if test="${view.quantity >= 500}">
+	                	  	<strong class="d-inline-block mb-2 text-danger">[인기]</strong>
+	                	  </c:if>
 				          <p class="mb-0">${view.brand} ${view.product_name}</p>
 				          <hr>
 				          <h3 class="viewPrice">
@@ -111,18 +113,18 @@
 						<div class="d-flex justify-content-center" id="pView">
 							<img src="<%=request.getContextPath()%>/resources/img/${view.brand}/${view.middleSort}/${view.detail_image}" alt="${view.product_name} 상세페이지" class="img-fluid">
 							<div id="pViewleft">
-	                			<p class="card-text mdName">
-	                				${view.brand} ${view.product_name}
+	                			<div class="card-text mdName">
+	                				<c:if test="${view.quantity >= 500}">
+	                					<span style="color:red;">[인기]</span>
+	                				</c:if>
+	                				[${view.brand}]
 	                				<br>
-	                				<span class="mdPrice">
-	                					<fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>
-	                				</span>
-	                			</p>
-                				<p class="card-text mb-auto productNum fs-4"><i class="bi bi-dash-square-fill" onclick="minusFn(this)"></i> 1 <i class="bi bi-plus-square-fill" onclick="plusFn(this)"></i></p>
-				     	  		<hr>
-				    	    	<div class="leftViewTotal">
-				      	  			<span class="fs-5 totalPrice">합계 : <span class="fs-3"><fmt:formatNumber value="${view.origin_price}" pattern="#,###"/></span></span>
-				      	  		</div>
+	                				${view.product_name}
+	                				<p class="card-text mb-auto productNum fs-4"><i class="bi bi-dash-square-fill" onclick="minusFn(this)"></i> 1 <i class="bi bi-plus-square-fill" onclick="plusFn(this)"></i></p>
+					    	    	<div class="leftViewTotal">
+					      	  			<span class="fs-5 totalPrice">합계 : <span class="fs-3"><fmt:formatNumber value="${view.origin_price}" pattern="#,###"/></span></span>
+					      	  		</div>
+	                			</div>
 				      	  		<div class="leftViewButtonDiv">
 							   		<button class="leftViewButton btn btn-outline-success me-2">장바구니</button>
 							  		<button class="leftViewButton btn btn-success me-2">바로구매</button>

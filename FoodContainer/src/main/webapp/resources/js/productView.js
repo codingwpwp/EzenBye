@@ -99,7 +99,11 @@
 											});
 					$("#subRadio1").prop("checked",true);
 					
-					$("#pViewleft").css("display","inline-block");
+					if(width > 600){
+						$("#pViewleft").css("display","inline-block");
+					}else{
+						$("#pViewleft").css("display","none");
+					}
 				}else if(scrollLocation < pViewTop){
 					$(".subMenuGroup").css("position","static");
 					$("#subRadio1").prop("checked",false);

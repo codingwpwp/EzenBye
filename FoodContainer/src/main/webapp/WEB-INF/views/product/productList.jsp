@@ -68,9 +68,11 @@
 								  <div class="card-body">
 								    <p class="card-text">
 								    	<c:if test="${ProductVO.quantity >= 500}">
-							    			<span style="color:red;">[인기]</span><br>
+							    			<span style="color:red;">[인기]</span>
 							    		</c:if>
-									   	<span class="productName">[${ProductVO.brand}] ${ProductVO.product_name}</span><br>
+							    		<span>[${ProductVO.brand}]</span>
+							    		<br>
+									   	<span class="productName">${ProductVO.product_name}</span><br>
 									   	<span class="fs-4">
 											<fmt:formatNumber value="${ProductVO.origin_price}" pattern="#,###"/>
 										</span>원<br>
@@ -101,7 +103,7 @@
 								  </div>
 								</a>
 								  <input type="hidden" name="index" value="${ProductVO.product_index}">
-								  <div class="indexSubImg">
+								  <div class="pListSubImg">
 								  	<c:if test="${member.id != null }">
 								  		<c:set var="heartCheck" value="0" />
 									  	<c:forEach items="${userDibsList}" var="userDibsList">
@@ -136,8 +138,9 @@
 					<div class="productListCardM">
 						<c:forEach items="${productListAll}" var="ProductVO">
 						<div class="productListMDiv">
+							
 							<div class="productListMImg">
-								<img src="<%=request.getContextPath()%>/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="img-fluid" alt="${ProductVO.product_name}" onclick="location.href='productView.do'">
+								<img src="<%=request.getContextPath()%>/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="img-fluid" alt="${ProductVO.product_name}">
 								<div class="productListStarM">
 									<i class="bi bi-star-fill"></i>
 							        <i class="bi bi-star-fill"></i>
@@ -147,14 +150,19 @@
 								</div>
 							</div>
 							<div class="productListContent">
-								<span style="color:red;"></span>
-								<div class="productNameM" onclick="location.href='productView.do'">[${ProductVO.brand}] ${ProductVO.product_name}</div>
+								<c:if test="${ProductVO.quantity >= 500}">
+									<span style="color:red;">[인기]</span>
+								</c:if>
+								<span>[${ProductVO.brand}]</span>
+								<div class="productNameM">${ProductVO.product_name}</div>
+								<c:if test="${ProductVO.sale_price == -1}">
 								<div>
 									<fmt:formatNumber value="${ProductVO.origin_price}" pattern="#,###"/>원
 								</div>
+								</c:if>
 								<c:if test="${ProductVO.sale_price != -1}">
 								<div class="discountM">
-									<fmt:formatNumber value="${ProductVO.sale_price}" pattern="#,###"/>
+									[할인가]<fmt:formatNumber value="${ProductVO.sale_price}" pattern="#,###"/>원
 								</div>
 								</c:if>
 								<c:set var="delivery" value="${ProductVO.delivery_free_YN}" />
@@ -168,6 +176,7 @@
 								    		</c:when>
 								    	</c:choose>
 							</div>
+							
 							<input type="hidden" name="index" value="${ProductVO.product_index}">
 							<div class="pListSubImgM">
 								<c:if test="${member.id != null }">
