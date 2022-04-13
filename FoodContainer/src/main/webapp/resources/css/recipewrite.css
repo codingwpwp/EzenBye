@@ -62,13 +62,18 @@ select.select1 {
 .thumnail {
 	border: 1px solid black;
 	width: 100%;
-	max-width: 280px;
-	height: 100%;
-	max-height: 300px;
+	max-width: 300px;
+	
+	max-height: 350px;
 	text-align: center;
 	margin-left: 10%;
 }
-
+/*썸네일 이미지*/
+.thumnail img{
+	width:100%;
+	max-width:300px;
+	max-height:345px;
+}
 .col-sm-6.col-5.bt {
 	text-align: end;
 }

@@ -98,38 +98,50 @@
 									<div class="px-0" id="summernote"></div>
 								</div>
 								<div class="col-md-3 col-sm-3  col-12 thumnail" id="thumnail">
-									<a href="#" onclick="popup();"><svg
-											xmlns="http://www.w3.org/2000/svg" width="200" height="200"
-											fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">
-                                     <path
-												d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
-                                     <path
-												d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z" />
-                                     </svg></a>
-									<div>
+									<div id=thumnailstrong>
 										<strong>사진을 등록해주세요</strong>
 									</div>
 									
 								</div>
-								<div class="row my-3 imageRow d-flex justify-left-left">
-								<div class="col-5 col-md-2 col-lg-2 d-flex justify-left-left">
-                                <span class="infoTitle p-1"><span class="text-danger">*</span>이미지</span>
-                            </div>
-									<div class="col-11 col-md-6 col-lg-4">
-										<!-- 파일 등록 -->
-										<input class="form-control" name="tumnailImage" type="file" accept="image/png" onchange="previewImage(event, this);">
-									</div>
-									<div
-										class="col-7 col-md-3 col-lg-3 ">
-										<!-- 이미지 미리보기 -->
-										<button type="button" class="btn btn-secondary previewButton"
-											data-bs-toggle="modal" data-bs-target="#tumnailImageModal">미리보기</button>
-									</div>
+							
+							</div>
+							<!-- 대표이미지 -->
+							<div class="row my-3 imageRow d-flex justify-content-center">
 
+								<!-- 대표이미지 문구 -->
+								<div
+									class="col-5 col-md-3 col-lg-2 d-flex justify-content-center">
+									<span class="infoTitle p-1"><span class="text-danger">*</span>대표이미지</span>
+								</div>
+
+								<div class="col-11 col-md-6 col-lg-8 d-flex mt-2 inputImageFile">
+									<!-- 파일 등록 -->
+									<input class="form-control check" name="tumnailImage" type="file" accept="image/png" onchange="previewImage(event,this);previewImage2(event,this);">
+								</div>
+								<div
+									class="col-7 col-md-3 col-lg-2 d-flex justify-content-end imagePreview">
+									<!-- 이미지 미리보기 -->
+									<button type="button" class="btn btn-secondary previewButton" data-bs-toggle="modal" data-bs-target="#tumnailImageModal">미리보기</button>
 								</div>
 							</div>
-
-
+							  <!-- 대표이미지 미리보기 모달 -->
+							<div class="modal fade" id="tumnailImageModal" tabindex="-1"
+								aria-labelledby="tumnailImageModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="tumnailImageModalLabel">대표이미지</h5>
+											<button type="button" class="btn-close"
+												data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<div class="imageContainer">
+												<span class="fs-5">이미지가 없습니다.</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 							<div class="row hap">
 								<div class="col-sm-2 col-12" id="hap">
 									<strong>조합 상품</strong>

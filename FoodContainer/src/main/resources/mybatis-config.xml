@@ -16,6 +16,7 @@
             <typeAlias type="team.project.vo.ReviewVO" alias="ReviewVO"/>
             <typeAlias type="team.project.vo.CartVO" alias="CartVO"/>
             <typeAlias type="team.project.util.PagingUtil" alias="PagingUtil"/>
+            <typeAlias type="team.project.vo.RecipeVO" alias="RecipeVO"/>
         </typeAliases>
         
     </configuration>
