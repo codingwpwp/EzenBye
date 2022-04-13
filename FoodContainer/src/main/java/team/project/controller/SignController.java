@@ -31,33 +31,7 @@ public class SignController {
 	public String sign(Locale locale, Model model){
 		return "sign/member_sign";
 	}
-//	@ResponseBody
-//	@RequestMapping(value = "member_sign.do", method = RequestMethod.POST)
-//	public String sign(Locale locale, Model model,MemberVO vo,String id,String nickname) throws Exception{
-//		logger.info("post member_sign");
-////		int result = memberService.insertMember(vo);
-//		String result = memberService.idChk(id);
-//		String result2 = memberService.nickChk(nickname);
-//		try {
-//			if(result=="1") {
-//				
-//				return "sign/member_sign";
-//			}else if(result=="0"){
-//				
-//				memberService.insertMember(vo);
-//				
-//			}
-//			if(result2=="1") {
-//				return "member_sign.do";
-//			}else if(result2=="0") {
-//				memberService.insertMember(vo);
-//			}
-//		}catch(Exception e){
-//			throw new RuntimeException();
-//		}
-//		
-//		return "sign/member_sign";
-//	}
+
 	//회원가입 post
 	@RequestMapping(value = "member_sign.do", method = RequestMethod.POST)
 	public String sign(Locale locale, Model model,MemberVO vo) throws Exception{
