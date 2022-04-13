@@ -1,6 +1,6 @@
 package team.project.vo;
 
-public class ReviewVO {
+public class ReviewVO extends ProductVO {
 	private int review_index;
 	private String product_index;
 	private int member_index;

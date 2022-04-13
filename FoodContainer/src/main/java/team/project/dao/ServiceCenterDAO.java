@@ -21,4 +21,14 @@ public class ServiceCenterDAO {
 		return sqlSession.selectList(Namespace+".latelyServiceCenter",member_index);
 	}
 	
+	public List<ServiceCenterVO> serviceCenterList(int member_index) throws Exception {
+		
+		return sqlSession.selectList(Namespace+".serviceCenterList",member_index);
+	}
+	
+	public int countServiceCenter(int member_index) throws Exception {
+		
+		return sqlSession.selectOne(Namespace+".countServiceCenter",member_index);
+	}
+	
 }
