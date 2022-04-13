@@ -3,6 +3,7 @@ package team.project.service;
 import java.util.List;
 
 import team.project.util.PagingUtil;
+import team.project.vo.CartVO;
 import team.project.vo.OrderProductVO;
 import team.project.vo.OrdersVO;
 import team.project.vo.SearchVO;
@@ -17,7 +18,14 @@ public interface OrdersService {
 	OrdersVO ordersDetailJoin(String member_order_index) throws Exception;
 	
 	
+	/* 회원&비회원 구매 페이지 */
+	
+	//비회원 구매페이지에서 뿌려질 상품목록들
+	List<CartVO> noMemberPurchaseList(String[] product_index, int[] cart_count) throws Exception;
+	
+	
 	/* 여기서 부터는 관리자페이지 */
+	
 	// 회원 주문 조회
 	List<OrdersVO> adminMemberOrdersList(SearchVO searchvo, int nowPage) throws Exception;
 	PagingUtil adminMemberOrdersPaging(SearchVO searchvo, int nowPage) throws Exception;

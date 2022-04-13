@@ -32,7 +32,7 @@ function sendEmail(){
 			sendEmailTimeSw = 1;
 			$("#timer").html("보내는중...");
 			$.ajax({
-				url : "certification.do",
+				url : "emailCertification.do",
 				type : "post",
 				data : $("form[name='emailCertificationForm']").serialize(),
 				success : function(data){

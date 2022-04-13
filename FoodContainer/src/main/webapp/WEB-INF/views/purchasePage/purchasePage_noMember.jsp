@@ -49,7 +49,7 @@
                 </div>
 
                 <!-- 비회원 구매정보입력 + 모바일 버전 최종 구매버튼 -->
-                <form class="col-12 col-sm-8 ps-4 ps-lg-2 mt-2" id="puchaseForm" name="puchaseForm">
+                <form class="col-12 col-sm-8 ps-4 ps-lg-2 mt-2" id="puchaseForm" name="puchaseForm" method="post" action="noMemberPurchaseOk.do">
 
                     <!-- 전체약관 동의 -->
                     <div class="form-check fs-6 table-responsive" style="white-space: nowrap;">
@@ -133,11 +133,11 @@
                     <!-- 주문자명 -->
                     <div class="row my-4">
                         <div class="col-4 col-md-3 col-xxl-2 fs-5 fw-bold d-flex align-items-center justify-content-start justify-content-lg-center">
-                            <span class="text-danger">*</span><span id="orderNameSpan" class="checkResultSpan">주문자명</span>
+                            <span id="orderNameSpan" class="checkResultSpan">주문자명</span>
                         </div>
 
                         <div class="col-8 col-md-6 col-lg-5 col-xxl-4">
-                            <input type="text" class="form-control fw-bold" id="orderName" name="orderName" value="${name}" placeholder="이름을 입력하세요" maxlength="5" onblur="checkName(this)">
+                            <input type="text" class="form-control fw-bold" id="name" name="name" value="${name}" readonly>
                         </div>
                     </div>
 
@@ -153,7 +153,7 @@
                                 <option selected value="010">010</option>
                                 <option value="011">011</option>
                                 <option value="016">016</option>
-                                <option value="018">018</option>
+                                <option value="017">017</option>
                             </select>
                             <span class="input-group-text">-</span>
                             <input type="number" class="form-control" name="orderPhone2" min="100" max="9999" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" oninput="phoneMaxLength(this)" onblur="orderPhoneCheck(this, 3)">
@@ -184,7 +184,7 @@
                             </div>
 
                             <div class="col-7 col-md-8 col-xl-6">
-                                <input class="form-control pe-1" type="password" id="password" name="password" value="" placeholder="비밀번호를 입력" maxlength="15" onclick="passwordAlert()" onblur="passwordCheck(this, 'passwordOne')">
+                                <input class="form-control pe-1" type="password" id="password" name="pw" value="" placeholder="비밀번호를 입력" maxlength="15" onclick="passwordAlert()" onblur="passwordCheck(this, 'passwordOne')">
                             </div>
                         </div>
 
@@ -251,7 +251,6 @@
                             </div>
 
                         </div>
-
                     </div>
 
                     <!-- 받는 사람 연락처 -->
@@ -273,7 +272,6 @@
                             <span class="input-group-text">-</span>
                            <input type="number" class="form-control" name="receiverPhone3" min="1000" max="9999" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" oninput="phoneMaxLength(this)" onblur="receiverPhoneCheck(this, 4)">
                         </div>
-
                     </div>
 
                     <!-- 요청사항 -->
@@ -283,7 +281,7 @@
                         </div>
 
                         <div class="col-9 col-lg-8">
-                            <input class="form-control pe-1" name="requestOptions" list="requestOptions" placeholder="ex)부재시 경비실에 맡겨 주세요." maxlength="30">
+                            <input class="form-control pe-1" name="request" list="requestOptions" placeholder="ex)부재시 경비실에 맡겨 주세요." maxlength="30">
                             <datalist id="requestOptions">
                                 <option value="배송 전에 미리 연락 바랍니다.">
                                 <option value="부재시 경비실에 맡겨 주세요.">
@@ -301,40 +299,18 @@
 
                     <!-- 결제 상품들 -->
                     <div class="mt-4 mb-5" id="productItems">
-
+                    <c:forEach items="${CartList}" var="cart">
                         <div class="row bg-light border rounded-3 py-2 m-2 productItem">
-                            <div class="col-6 col-sm-4">
-                                <img src="<%=request.getContextPath()%>/resources/img/good.png" class="img-thumbnail" alt="...">
+                            <div class="col-6 col-sm-3">
+                                <img src="<%=request.getContextPath()%>/resources/img/${cart.brand}/${cart.middleSort}/${cart.thumbnail_image}" class="img-thumbnail" alt="${cart.product_name}">
                             </div>
 
                             <div class="col-6 col-sm-8 d-flex flex-column">
-                                <div class="mb-auto fw-bold pt-2">비비고 진한고기만두400g*2번들</div>
-                                <div class="fw-bold pb-2"><span class="productPrice">4580</span>원 | <span class="productCount">5</span>개</div>
+                                <div class="mb-auto fw-bold pt-2">${cart.product_name}</div>
+                                <div class="fw-bold pb-2"><span class="productPrice">${cart.origin_price}</span>원 | <span class="productCount">${cart.cart_count}</span>개</div>
                             </div>
-                        </div>
-
-                        <div class="row bg-light border rounded-3 py-2 m-2 productItem">
-                            <div class="col-6 col-sm-4">
-                                <img src="<%=request.getContextPath()%>/resources/img/good.png" class="img-thumbnail" alt="...">
-                            </div>
-
-                            <div class="col-6 col-sm-8 d-flex flex-column">
-                                <div class="mb-auto fw-bold pt-2">비비고 진한고기만두400g*2번들</div>
-                                <div class="fw-bold pb-2"><span class="productPrice">4580</span>원 | <span class="productCount">5</span>개</div>
-                            </div>
-                        </div>
-
-                        <div class="row bg-light border rounded-3 py-2 m-2 productItem">
-                            <div class="col-6 col-sm-4">
-                                <img src="<%=request.getContextPath()%>/resources/img/good.png" class="img-thumbnail" alt="...">
-                            </div>
-
-                            <div class="col-6 col-sm-8 d-flex flex-column">
-                                <div class="mb-auto fw-bold pt-2">비비고 진한고기만두400g*2번들</div>
-                                <div class="fw-bold pb-2"><span class="productPrice">4580</span>원 | <span class="productCount">5</span>개</div>
-                            </div>
-                        </div>
-
+                        </div>                    
+                    </c:forEach>
                     </div>
 
                     <!-- 모바일버전 최종 결제 정보 -->
@@ -369,7 +345,7 @@
 
                         <!-- 최종 결제 가격 -->
                         <div class="text-danger mb-3 d-flex justify-content-end align-items-center fw-bold">
-                            <span class="fs-1 totalPrice" id="finalPrice">43,000</span>
+                            <span class="fs-1 totalPrice" id="finalPrice">0</span>
                             <span class="fs-4">&nbsp;원</span>
                         </div>
 
@@ -378,6 +354,12 @@
                             <button type="button" class="btn btn-primary btn-lg fw-bold fs-4" onclick="requestPay()">결제하기</button>
                         </div>
                     </div>
+                    
+					<input type="hidden" name="no_member_order_index" value="">
+				    <input type="hidden" name="phone" value="">
+					<input type="hidden" name="address" value="">
+                    <input type="hidden" name="delivery_free_YN" value="">
+                    <input type="hidden" name="pay_price" value="">
 
                 </form>
 

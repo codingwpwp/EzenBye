@@ -44,7 +44,7 @@ $(document).ready(function(){
     $(".deliveryPrice").text(deliveryPrice.toLocaleString('ko-KR'));
     
     // 최종 결제 가격 따지기
-    totalPrice = sumPrice - deliveryPrice;
+    totalPrice = sumPrice + deliveryPrice;
 	$(".totalPrice").text(totalPrice.toLocaleString('ko-KR'));
 	
 	// 적립 예정 포인트 따지기
@@ -179,7 +179,7 @@ function checkedThree(obj){
 function checkName(obj){
 	var nameReg = /^[가-힣]{2,5}$/;
 	if(obj.value == "" || !nameReg.test(obj.value)){
-		if($(obj).attr("name") == "orderName"){
+		if($(obj).attr("name") == "name"){
 			$("#orderNameSpan").css("color", "red");
 			$("#orderNameSpan").prev().text("*");
 			setTimeout(function(){
@@ -195,7 +195,7 @@ function checkName(obj){
 	        receiverSw = 0;
 		}
 	}else{
-		if($(obj).attr("name") == "orderName"){
+		if($(obj).attr("name") == "name"){
 			$("#orderNameSpan").css("color", "green");
 			$("#orderNameSpan").prev().text("");
 			setTimeout(function(){
@@ -219,7 +219,7 @@ function sameName(obj){
 
 	if($(obj).is(":checked")){
 		// 유효성검사에 통과했을때
-		if(document.getElementById("orderName").value != "" && nameReg.test(document.getElementById("orderName").value)){
+		if(document.getElementById("name").value != "" && nameReg.test(document.getElementById("name").value)){
 			$("#receiver").val($("#orderName").val());
 			$("#receiver").prop('readonly', true);
 			$("#receiverSpan").css("color", "green");
@@ -626,12 +626,20 @@ function requestPay(){
 			orderPhone = $("#orderPhone").val();
 		}else{
 			orderPhone = $("select[name='orderPhone1']").val() + "-" + $("input[name='orderPhone2']").val() + "-" + $("input[name='orderPhone2']").val();
+			$("input[name='no_member_order_index']").val(order_index);
+			$("input[name='phone']").val(orderPhone);
+			$("input[name='address").val($("input[name='postcode']") + "|" + $("input[name='address']") + "|" + $("input[name='detailAddress']"));
+
+			$("input[name='delivery_free_YN']").val(order_index);
+			$("input[name='pay_price']").val(order_index);
 		}
+		
+		
 		
 		// console.log(orderPhone);
 		
 		// 결제하고나서 DB에 등록하는 페이지
-		$.ajax({
+		/*$.ajax({
 			url: "purchaseOk.do",
 			type: "post",
 			data: $("#puchaseForm").serialize(),
@@ -640,7 +648,7 @@ function requestPay(){
         		alert("결제성공");
         		// 걍 index로 이동 시키자.
 			}
-		});
+		});*/
 		
 		/*var IMP = window.IMP;
 	    IMP.init("imp13071934");

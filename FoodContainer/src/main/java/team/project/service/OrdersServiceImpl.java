@@ -1,5 +1,6 @@
 package team.project.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import team.project.dao.OrdersDAO;
 import team.project.util.PagingUtil;
+import team.project.vo.CartVO;
 import team.project.vo.OrderProductVO;
 import team.project.vo.OrdersVO;
 import team.project.vo.SearchVO;
@@ -39,6 +41,35 @@ public class OrdersServiceImpl implements OrdersService{
 		OrdersVO ordersDetailJoin = ordersDAO.ordersDetailJoin(member_order_index);
 		return ordersDetailJoin;
 	}
+	
+	/* 회원&비회원 구매 페이지 */
+	
+	// 비회원 구매페이지에서 뿌려질 상품목록들
+	@Override
+	public List<CartVO> noMemberPurchaseList(String[] product_index, int[] cart_count) throws Exception {
+		
+		
+		List<String> productIndexList = new ArrayList<String>();
+		for(String pidx : product_index) {
+			productIndexList.add(pidx);
+		}
+		
+		List<CartVO> CartList = ordersDAO.noMemberPurchaseList(productIndexList);
+		for(int i = 0; i < CartList.size(); i++) {
+			CartList.get(i).setCart_count(cart_count[i]);
+		}
+		
+		return CartList;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	/* 여기서 부터는 관리자페이지 */
 	// 회원 주문 조회 리스트 출력
@@ -67,5 +98,6 @@ public class OrdersServiceImpl implements OrdersService{
 	public OrdersVO adminMemberOrder(OrdersVO ordersvo) throws Exception {
 		return ordersDAO.adminMemberOrder(ordersvo);
 	}
+
 
 }
