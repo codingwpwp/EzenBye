@@ -69,7 +69,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-xs-1 g-4 menu">
-                            <a href="<%=request.getContextPath()%>/recipe/recipeview.do">
+                            <a href="<%=request.getContextPath()%>/recipeview.do">
                                 <div class="card shadow-sm">
                                     <img src="1.jpg" width="100%" height="190">
                                     <div class="card-body">
