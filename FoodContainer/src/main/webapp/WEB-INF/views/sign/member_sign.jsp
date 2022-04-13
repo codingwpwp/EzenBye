@@ -111,7 +111,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-12 tit">
-                                                <label for="name">이름</label>
+                                                <label for="name">이름<span class="red">*</span></label>
                                             </div>
                                             <div class="col-sm-9 col-12">
                                                 <input type="text" class="pwinput" name="name" id="name"
@@ -119,20 +119,21 @@
                                                
                                             </div>
                                             <div class="col-sm-12 col-12 tit">
-                                                <label for="ph">연락처</label>
+                                                <label for="ph">연락처<span class="red">*</span></label>
                                             </div>
                                             <div class="col-sm-8 col-12">
-                                                <select name="phone" id="phone1" class="phselect">
+                                                <select name="phone1" class="phselect" id="phone1">
                                                     <option value="010">010</option>
                                                     <option value="011">011</option>
                                                     <option value="016">016</option>
                                                     <option value="017">017</option>
                                                 </select>&nbsp;-
-                                                <input onblur="fn6(this)" type="text" class="phinput" name="phone"
+                                                <input onblur="fn6(this)" type="text" class="phinput" name="phone2"
                                                     id="phone2" placeholder="연락처2" maxlength="4" >&nbsp;-
-                                                <input onblur="fn7(this)" type="text" class="phinput" name="phone"
-                                                    id="phone3" placeholder="연락처3" maxlength="4" >
+                                                <input onblur="fn7(this)" type="text" class="phinput" name="phone3"
+                                                     id="phone3" placeholder="연락처3" maxlength="4" >
                                                 <span class="check"></span>
+                                                 <input type="hidden" name="phone" value="">
                                             </div>
                                             <div class="col-sm-12 col-12 tit">
                                                 <label for="nick">닉네임<span class="red">*</span></label>

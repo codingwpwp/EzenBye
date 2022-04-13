@@ -37,8 +37,7 @@ function sendEmail(){
 				data : $("form[name='emailCertificationForm']").serialize(),
 				success : function(data){
 					randomNum = data.trim();
-					$("#emailMessageSpan").html("해당 이메일로 인증번호를 발송했습니다.<br>3분 이내에 입력하세요");
-					time = 180;
+					time = 179;
 					$("#emailCheckOkBtn").removeClass("btn-secondary");
 					$("#emailCheckOkBtn").addClass("btn-primary");
 					setInterval(function(){
@@ -63,6 +62,7 @@ function sendEmail(){
 
 						
 					}, 1000);
+					$("#emailMessageSpan").html("해당 이메일로 인증번호를 발송했습니다.<br>3분 이내에 입력하세요");
 				}
 			});			
 		}else if(sendEmailTimeSw == 1 && checkNumSw == 1){

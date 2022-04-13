@@ -24,6 +24,16 @@ public class OrderProductDAO {
 		return sqlSession.update(Namespace+".buyOk",orderItem_index);
 	}
 	
+	// 비회원 상세주문 넣는 과정
+	public int noMemberOrderProductInsert(List<OrderProductVO> orderProductList) throws Exception{
+		return sqlSession.insert(Namespace + ".noMemberOrderProductInsert", orderProductList);
+	}
+	
+	// 상품 판매량 늘려주기(원래 product쪽에서 해야 하는데 사정상 여기에다가 함)
+	public int productQuantityUpdate(OrderProductVO orderProductvo)throws Exception{
+		return sqlSession.insert(Namespace + ".productQuantityUpdate", orderProductvo);
+	}
+	
 	/* 관리자페이지 */
 	// 회원 주문 상세조회할때 주문들 불러오기
 	public List<OrderProductVO> adminMemberOrderProductList(OrdersVO ordersvo) throws Exception {

@@ -63,7 +63,7 @@
                                 </div>
 
                                 <div class="col-sm-9 col-12">
-                                    <input type="text" class="form-control pwinput" name="name" id="name" placeholder="이름을 입력하세요" autocomplete="off">
+                                    <input type="text" class="form-control pwinput" name="name" id="name" maxlength="6" placeholder="이름을 입력하세요" autocomplete="off">
                                 </div>
 
                                 
