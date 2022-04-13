@@ -70,7 +70,7 @@
 		console.log(pIndex);
 		if(loginCheck == ""){
 			$(".cartBack").css("display","block");
-			var name = $(obj).parent().prev().prev().val();
+			var name = $(obj).parent().next().find(".productNameM").html();
 			var html = "<br>&quot;"+name+"&quot;<br> 상품이 장바구니에 담겼습니다.";
 				html += "<br><br><button type='button' class='btn btn-secondary' onclick='cartOk()'>확인</button>";
 			$(".message").html(html);

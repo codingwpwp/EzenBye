@@ -214,7 +214,6 @@
 							<c:forEach items="${popularList}" var="popularList" begin="${ran}" end="${ran+3}">
 								<div class="cardM">
 									<img src="<%=request.getContextPath()%>/resources/img/${popularList.brand}/${popularList.middleSort }/${popularList.thumbnail_image}" class="img-fluid" id="cardMimg" alt="${popularList.product_name }">
-									<input type="hidden" name="index" value="${popularList.product_name}">
 									<input type="hidden" name="index" value="${popularList.product_index}">
 									<div class="indexSubImgM">
 										<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
