@@ -151,7 +151,7 @@
 									  	<c:if test="${member.id != null }">
 								  		<c:set var="heartCheck" value="0" />
 										  	<c:forEach items="${userDibsList}" var="userDibsList">
-										  		<c:if test="${userDibsList.member_index == member.member_index && ProductVO.product_index == userDibsList.product_index}">
+										  		<c:if test="${userDibsList.member_index == member.member_index && popularList.product_index == userDibsList.product_index}">
 										  			<img src="<%=request.getContextPath()%>/resources/img/찬하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
 										  			<c:set var="heartCheck" value="1" />
 										  		</c:if>
@@ -216,7 +216,23 @@
 									<img src="<%=request.getContextPath()%>/resources/img/${popularList.brand}/${popularList.middleSort }/${popularList.thumbnail_image}" class="img-fluid" id="cardMimg" alt="${popularList.product_name }">
 									<input type="hidden" name="index" value="${popularList.product_index}">
 									<div class="indexSubImgM">
-										<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+										<c:if test="${member.id != null }">
+								  		<c:set var="heartCheck" value="0" />
+										  	<c:forEach items="${userDibsList}" var="userDibsList">
+										  		<c:if test="${userDibsList.member_index == member.member_index && popularList.product_index == userDibsList.product_index}">
+										  			<img src="<%=request.getContextPath()%>/resources/img/찬하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+										  			<c:set var="heartCheck" value="1" />
+										  		</c:if>
+										  	</c:forEach>
+										  	<c:if test="${heartCheck == '0'}">
+										  		<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+										  	</c:if>
+									  	
+								  		</c:if>
+									  	<c:if test="${member.id == null}">
+										  	<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+									  	</c:if>
+									  	
 										<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="indexCart(this)">
 									</div>
 									<div class="cardMContent">

@@ -148,28 +148,44 @@
 							</div>
 							<div class="productListContent">
 								<span style="color:red;"></span>
-								<div class="productNameM" onclick="location.href='productView.do'">${ProductVO.product_name}</div>
+								<div class="productNameM" onclick="location.href='productView.do'">[${ProductVO.brand}] ${ProductVO.product_name}</div>
 								<div>
 									<fmt:formatNumber value="${ProductVO.origin_price}" pattern="#,###"/>원
 								</div>
-								<c:if test="${ProductVO.sale_price != ''}">
+								<c:if test="${ProductVO.sale_price != -1}">
 								<div class="discountM">
 									<fmt:formatNumber value="${ProductVO.sale_price}" pattern="#,###"/>
 								</div>
 								</c:if>
 								<c:set var="delivery" value="${ProductVO.delivery_free_YN}" />
 								    	<c:choose>
-								    		<c:when test="${delivery == 'N'}">
+								    		<c:when test="${ProductVO.delivery_free_YN == 'N'}">
 								    			<div>배송비 3,000원</div>
 								    		</c:when>
 								    		
-								    		<c:when test="${delivery == 'Y'}">
+								    		<c:when test="${ProductVO.delivery_free_YN == 'Y'}">
 								    			<div>무료배송</div>
 								    		</c:when>
 								    	</c:choose>
 							</div>
+							<input type="hidden" name="index" value="${ProductVO.product_index}">
 							<div class="pListSubImgM">
-								<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+								<c:if test="${member.id != null }">
+								  	<c:set var="heartCheck" value="0" />
+								 	<c:forEach items="${userDibsList}" var="userDibsList">
+								  		<c:if test="${userDibsList.member_index == member.member_index && ProductVO.product_index == userDibsList.product_index}">
+								  			<img src="<%=request.getContextPath()%>/resources/img/찬하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+								  			<c:set var="heartCheck" value="1" />
+								  		</c:if>
+								  	</c:forEach>
+								  	<c:if test="${heartCheck == '0'}">
+								  		<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+								  	</c:if>
+									  	
+							  	</c:if>
+							  	<c:if test="${member.id == null}">
+								  	<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+							  	</c:if>
 								<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="pListCart(this)">
 							</div>
 						</div>

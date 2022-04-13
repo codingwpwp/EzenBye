@@ -20,31 +20,28 @@
 		$(".indexSubImgM").css("top","-40px");
 	}
 	
-	//찜
-	function pListHeart(obj){
-		var hCheck = obj.getAttribute("src").indexOf("빈하트");
-		var logingCheck = $("input[name='pListLoginCheck']").val();
-		
-		if(logingCheck == null){
-			alert("로그인 후 사용 가능합니다.");
-		}else{
-			if(hCheck > 0){
-				obj.setAttribute("src","/controller/resources/img/찬하트.png");
-			}else if(hCheck < 0){
-				obj.setAttribute("src","/controller/resources/img/빈하트.png");
-			}	
-		}
-			
-
-	}
 	//장바구니
 	function pListCart(obj){
-		$(".cartBack").css("display","block");
-		var name = $(".productNameM").html();
-		var html = "<br>&quot;"+name+"&quot;<br> 상품이 장바구니에 담겼습니다.";
-			html += "<br><br><button onclick='cartOk()''>확인</button>";
-		$(".message").html(html);
-		
+		var loginCheck = $("#pListLoginCheck").val();
+		var pIndex = $(obj).parent().prev().val();
+		console.log(loginCheck);
+		console.log(pIndex);
+		if(loginCheck == ""){
+			$(".cartBack").css("display","block");
+			var name = $(obj).parent().prev().prev().find(".productNameM").html();
+			var html = "<br>&quot;"+name+"&quot;<br> 상품이 장바구니에 담겼습니다.";
+				html += "<br><br><button type='button' class='btn btn-secondary' onclick='cartOk()'>확인</button>";
+			$(".message").html(html);
+			
+			$.ajax({
+				url : "noMemberCartCookie.do",
+				type : "get",
+				data : "product_index="+pIndex,
+				succese : function(){
+							
+				}
+			});
+		}
 	}
 	//장바구니 확인 알림
 	function cartOk(){

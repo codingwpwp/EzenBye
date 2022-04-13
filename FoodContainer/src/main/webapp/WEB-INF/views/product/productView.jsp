@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -40,24 +41,7 @@
             <!-- 왼쪽 사이드메뉴 -->
             <div class="col-lg-2 d-none d-lg-block" id="leftDiv">
                 <aside id="leftAside">
-                   <div id="pViewleft">
-                		<p class="card-text mdName">
-                			${view.brand} ${view.product_name}
-                			<br>
-                			<span class="mdPrice">
-                				<fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>
-                			</span>
-                		</p>
-                		<p class="card-text mb-auto productNum fs-4"><i class="bi bi-dash-square-fill" onclick="minusFn(this)"></i> 1 <i class="bi bi-plus-square-fill" onclick="plusFn(this)"></i></p>
-				        <hr>
-				        <div class="leftViewTotal">
-				        	<span class="fs-5 totalPrice">합계 : <span class="fs-3">10,000원</span></span>
-				        </div>
-				        <div class="leftViewButtonDiv">
-						   	<button class="leftViewButton btn btn-outline-success me-2">장바구니</button>
-						  	<button class="leftViewButton btn btn-success me-2">바로구매</button>
-				        </div>
-                	</div>
+                   
                 </aside>
             </div>
 
@@ -93,12 +77,12 @@
 				          <hr>
 				          <p class="card-text mdName">${view.brand} ${view.product_name} 
 				          	<span class="mdPrice">
-				          	<fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>
-					        원
+				          		<fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>원
+				          		<input type="hidden" value="${view.origin_price}">
 				          	</span>
 				          </p>
 				          <p class="card-text mb-auto productNum fs-4"><i class="bi bi-dash-square-fill" onclick="minusFn(this)"></i> 1 <i class="bi bi-plus-square-fill" onclick="plusFn(this)"></i></p>
-				          <div><span class="fs-5 totalPrice">합계 : <span class="fs-3">10,000원</span></span></div>
+				          <div><span class="fs-5 totalPrice">합계 : <span class="fs-3"><fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>원</span></span></div>
 				          <div class="d-flex justify-content-evenly">
 					          <button class="viewButton btn btn-outline-success me-2">장바구니 담기</button>
 					          <button class="viewButton btn btn-success me-2" onclick="location.href='purchase/notMember.do'">바로구매</button>
@@ -126,6 +110,24 @@
 						<!-- 상세페이지 -->
 						<div class="d-flex justify-content-center" id="pView">
 							<img src="<%=request.getContextPath()%>/resources/img/${view.brand}/${view.middleSort}/${view.detail_image}" alt="${view.product_name} 상세페이지" class="img-fluid">
+							<div id="pViewleft">
+	                			<p class="card-text mdName">
+	                				${view.brand} ${view.product_name}
+	                				<br>
+	                				<span class="mdPrice">
+	                					<fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>
+	                				</span>
+	                			</p>
+                				<p class="card-text mb-auto productNum fs-4"><i class="bi bi-dash-square-fill" onclick="minusFn(this)"></i> 1 <i class="bi bi-plus-square-fill" onclick="plusFn(this)"></i></p>
+				     	  		<hr>
+				    	    	<div class="leftViewTotal">
+				      	  			<span class="fs-5 totalPrice">합계 : <span class="fs-3"><fmt:formatNumber value="${view.origin_price}" pattern="#,###"/></span></span>
+				      	  		</div>
+				      	  		<div class="leftViewButtonDiv">
+							   		<button class="leftViewButton btn btn-outline-success me-2">장바구니</button>
+							  		<button class="leftViewButton btn btn-success me-2">바로구매</button>
+				      	  		</div>
+                			</div>
 						</div>
 						
 						<!-- 배송정보 -->
