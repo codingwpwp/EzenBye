@@ -17,6 +17,28 @@
     	WHERE orderItem_index = #{orderItem_index}
     </update>
     
+    <!-- 비회원 상세주문 넣는 과정 -->
+    <insert id="noMemberOrderProductInsert" parameterType="list">
+    	INSERT INTO order_product(
+    		no_member_order_index, orderItem_index,
+    		product_index, order_quantity, price, point
+    	) VALUES 
+    	<foreach collection="list" item="item" separator=" , ">
+			(
+			#{item.no_member_order_index}, #{item.orderItem_index},
+			#{item.product_index}, #{item.order_quantity},
+			#{item.price}, #{item.point}
+			)
+		</foreach>
+    </insert>
+    
+    <!-- 상품 판매량 늘려주기(원래 product쪽에서 해야 하는데 사정상 여기에다가 함) -->
+    <insert id="productQuantityUpdate" parameterType="OrderProductVO">
+    	UPDATE product
+    	SET quantity = quantity + #{order_quantity}
+    	WHERE product_index = #{product_index}
+    </insert>
+    
     <!-- 관리자페이지 -->
     <!-- 회원 주문 상세조회할때 주문들 불러오기 -->
     <select id="adminMemberOrderProductList" resultType="OrderProductVO" parameterType="OrdersVO">

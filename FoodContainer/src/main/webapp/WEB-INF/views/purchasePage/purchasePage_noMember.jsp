@@ -137,7 +137,7 @@
                         </div>
 
                         <div class="col-8 col-md-6 col-lg-5 col-xxl-4">
-                            <input type="text" class="form-control fw-bold" id="name" name="name" value="${name}" readonly>
+                            <input type="text" class="form-control fw-bold" id="name" name="name" value="${name}" maxlength="6" readonly>
                         </div>
                     </div>
 
@@ -215,7 +215,7 @@
                         </div>
 
                         <div class="col-9 col-md-6 col-lg-5 col-xxl-4">
-                            <input type="text" class="form-control fw-bold p-1 p-sm-2" id="receiver" name="receiver" value="" placeholder="이름을 입력하세요" maxlength="5" onblur="checkName(this)">
+                            <input type="text" class="form-control fw-bold p-1 p-sm-2" id="reciever" name="reciever" value="" placeholder="이름을 입력하세요" maxlength="6" onblur="checkName(this)">
                         </div>
                         
                         <div class="col-4 col-md-3 col-xl-3">
@@ -243,7 +243,7 @@
                             </div>
                             <div class="input-group my-2">
                                 <span class="input-group-text">주소</span>
-                                <input type="text" id="address" name="address" class="form-control" readonly>
+                                <input type="text" id="mainAddress" name="mainAddress" class="form-control" readonly>
                             </div>
                             <div class="input-group my-2">
                                 <span class="input-group-text">상세주소</span>
@@ -299,7 +299,7 @@
 
                     <!-- 결제 상품들 -->
                     <div class="mt-4 mb-5" id="productItems">
-                    <c:forEach items="${CartList}" var="cart">
+                    <c:forEach items="${cartList}" var="cart">
                         <div class="row bg-light border rounded-3 py-2 m-2 productItem">
                             <div class="col-6 col-sm-3">
                                 <img src="<%=request.getContextPath()%>/resources/img/${cart.brand}/${cart.middleSort}/${cart.thumbnail_image}" class="img-thumbnail" alt="${cart.product_name}">
@@ -308,13 +308,14 @@
                             <div class="col-6 col-sm-8 d-flex flex-column">
                                 <div class="mb-auto fw-bold pt-2">${cart.product_name}</div>
                                 <div class="fw-bold pb-2"><span class="productPrice">${cart.origin_price}</span>원 | <span class="productCount">${cart.cart_count}</span>개</div>
+                                <input type="hidden" name="price" value="${cart.origin_price}">
                             </div>
                         </div>                    
                     </c:forEach>
                     </div>
 
                     <!-- 모바일버전 최종 결제 정보 -->
-                    <div class="d-sm-none mt-4 notMemberFinalPurchase">
+                    <div class="d-sm-none mt-4 noMemberFinalPurchase">
                         <!-- 최종 결제 정보 문구 -->
                         <div class="fs-4 fw-bold mb-3">최종 결제 정보</div>
 
@@ -357,6 +358,7 @@
                     
 					<input type="hidden" name="no_member_order_index" value="">
 				    <input type="hidden" name="phone" value="">
+				    <input type="hidden" name="reciever_phone" value="">
 					<input type="hidden" name="address" value="">
                     <input type="hidden" name="delivery_free_YN" value="">
                     <input type="hidden" name="pay_price" value="">
@@ -364,7 +366,7 @@
                 </form>
 
                 <!-- pc버전 최종 결제 정보 -->
-                <div class="col-4 d-none d-sm-block position-sticky p-3 ms-md-3 notMemberFinalPurchase" id="purchaseNotMemberDiv">
+                <div class="col-4 d-none d-sm-block position-sticky p-3 ms-md-3 noMemberFinalPurchase" id="purchaseNotMemberDiv">
 
                     <!-- 최종 결제 정보 문구 -->
                     <div class="fs-4 fw-bold mb-3">최종 결제 정보</div>

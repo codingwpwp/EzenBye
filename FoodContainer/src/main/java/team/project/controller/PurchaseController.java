@@ -1,10 +1,8 @@
 package team.project.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -16,14 +14,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import team.project.service.CartService;
 import team.project.service.CouponService;
 import team.project.service.EmailService;
+import team.project.service.NoMemberOrdersService;
 import team.project.service.OrdersService;
 import team.project.vo.CartVO;
 import team.project.vo.CouponVO;
 import team.project.vo.EmailVO;
 import team.project.vo.MemberVO;
+import team.project.vo.NoMemberOrdersVO;
 
 @RequestMapping(value = "/purchase/")
 @Controller
@@ -37,6 +36,9 @@ public class PurchaseController {
 	
 	@Autowired
 	private OrdersService ordersService;
+	
+	@Autowired
+	private NoMemberOrdersService noMemberOrdersService;
 	
 	// 회원 구매페이지
 	@RequestMapping(value = "member.do", method = RequestMethod.GET)
@@ -174,10 +176,10 @@ public class PurchaseController {
 				String[] product_index = (String[])session.getAttribute("product_index");
 				int[] cart_count = (int[])session.getAttribute("cart_count");
 				
-				List<CartVO> CartList = ordersService.noMemberPurchaseList(product_index, cart_count);
+				List<CartVO> cartList = ordersService.noMemberPurchaseList(product_index, cart_count);
 				
 				
-				model.addAttribute("CartList", CartList);
+				model.addAttribute("cartList", cartList);
 				model.addAttribute("name", name);
 				model.addAttribute("email", email);
 				
@@ -186,8 +188,33 @@ public class PurchaseController {
 			
 		}
 		
-		
-		
 	}
+	
+	// 비회원 결제하고 난뒤 DB에 올리는 페이지
+	@RequestMapping(value = "noMemberPurchaseOk.do", method = RequestMethod.POST)
+	public String noMemberPurchaseOk(Model model, @RequestParam(value="price", required = false) int[] price,
+									HttpServletRequest request,
+									NoMemberOrdersVO noMemberOrdersvo) throws Exception{
+		
+		String tempPw = noMemberOrdersvo.getPw();
+		int result = noMemberOrdersService.orderInsert(request, noMemberOrdersvo, price);
+		
+		switch(result) {
+			case -2 : System.out.println("큰 주문 실패");
+			break;
+			case -1 : System.out.println("작은 주문 실패");
+			break;
+			case 0 : System.out.println("판매량 늘리기 실패");
+			break;
+			case 1 : System.out.println("대단히 성공적!");
+		}
+		
+		if(result == 1) {
+			noMemberOrdersvo.setPw(tempPw);
+			model.addAttribute("noMemberOrdersvo", noMemberOrdersvo);
+		}
+		
+		return "purchasePage/noMemberPurchaseOk";
+	}	
 
 }
