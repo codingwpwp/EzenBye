@@ -41,7 +41,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link px-lg-1 px-xl-2" href="#">유저레시피</a>
+                <a class="nav-link px-lg-1 px-xl-2" href="<%=request.getContextPath()%>/recipemain.do">유저레시피</a>
             </li>
 
             <li class="nav-item">

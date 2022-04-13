@@ -1,17 +1,28 @@
 package team.project.vo;
 
 public class RecipeVO {
+	private int recipe_index;
 	private int member_index;
 	private String title;
 	private String thumbnail_image;
 	private String contents;
-	private int product_index1;
-	private int product_index2;
-	private int product_index3;
+	private String product_index1;
+	private String product_index2;
+	private String product_index3;
 	private int hit;
 	private int thumb;
 	private String write_date;
 	private int best_rank;
+	
+	
+	public int getRecipe_index() {
+		return recipe_index;
+	}
+
+	public void setRecipe_index(int recipe_index) {
+		this.recipe_index = recipe_index;
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -39,22 +50,22 @@ public class RecipeVO {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public int getProduct_index1() {
+	public String getProduct_index1() {
 		return product_index1;
 	}
-	public void setProduct_index1(int product_index1) {
+	public void setProduct_index1(String product_index1) {
 		this.product_index1 = product_index1;
 	}
-	public int getProduct_index2() {
+	public String getProduct_index2() {
 		return product_index2;
 	}
-	public void setProduct_index2(int product_index2) {
+	public void setProduct_index2(String product_index2) {
 		this.product_index2 = product_index2;
 	}
-	public int getProduct_index3() {
+	public String getProduct_index3() {
 		return product_index3;
 	}
-	public void setProduct_index3(int product_index3) {
+	public void setProduct_index3(String product_index3) {
 		this.product_index3 = product_index3;
 	}
 	public int getHit() {

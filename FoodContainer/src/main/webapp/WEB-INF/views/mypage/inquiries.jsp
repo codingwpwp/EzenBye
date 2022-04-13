@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -63,9 +65,16 @@
                     <div class="col-md-11">
 				 
 			        <p class="fs-6 lookup-fs-6">문의내역</p>
-			        <p class="fs-6 lookup-fs-6">4개의 문의내역이 있습니다.</p>
+			        <p class="fs-6 lookup-fs-6">${countServiceCenter}개의 문의내역이 있습니다.</p>
 			        <hr />
 			        
+			        <c:if test="${empty serviceCenterList}">
+			        <div class="lookupBorder">
+			        	<p class="fs-6 lookup-fs-6">문의하신 내역이 없습니다.</p>
+		        	</div>
+			        </c:if>
+			        
+			        <c:if test="${!empty serviceCenterList}">
 			        <div class="main-table">
 				        <table class="table table-hover coupon-table main-table2">
 						  <thead>
@@ -76,26 +85,13 @@
 						    </tr>
 						  </thead>
 						  <tbody>
+						  <c:forEach items="${serviceCenterList}" var="list">
 						    <tr>
-						      <td>처리중</td>
-						      <td>[상품]음식이 이상해요</td>
-						      <td>2022.1.24</td>
+						      <th scope="row">${list.progress}</th>
+						      <td>[${list.sort2}] ${list.title}</td>
+						      <td>${list.write_date}</td>
 						    </tr>
-						    <tr>
-						      <td>처리중</td>
-						      <td>[상품]음식이 터졌어요</td>
-						      <td>2022.1.20</td>
-						    </tr>
-						    <tr>
-						      <td>처리완료</td>
-						      <td>[상품]탕수육 질문요</td>
-						      <td>2022.1.14</td>
-						    </tr>
-						    <tr>
-						      <td>처리완료</td>
-						      <td>[상품]한개가 덜왔어요</td>
-						      <td>2022.1.8</td>
-						    </tr>
+						  </c:forEach>  
 						  </tbody>
 						</table>
 					</div>
@@ -117,6 +113,7 @@
 					    </li>
 					  </ul>
 					</nav>
+			        </c:if>
 			        
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
 			        	<ul>

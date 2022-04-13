@@ -1,5 +1,7 @@
 package team.project.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,12 +15,22 @@ public class RecipeDAO {
 	
 	private static final String Namespace = "team.project.mapper.recipeMapper";
 	
+//	public List<RecipeVO> selectList(RecipeVO vo) throws Exception {
+//		return sqlSession.selectList(Namespace + ".selectRecipe");
+//	}
 	
 	//레시피작성
-	public int insertRecipe(RecipeVO vo)throws Exception{
+	public void insertRecipe(RecipeVO vo)throws Exception{
 		
-		return sqlSession.insert(Namespace+".insertRecipe",vo);	
+		sqlSession.insert(Namespace+".insertRecipe",vo);	
 		
 	}
+
+
+	
+	
+	
+
+	
 	
 }

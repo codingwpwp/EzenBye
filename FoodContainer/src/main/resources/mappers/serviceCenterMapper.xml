@@ -11,5 +11,18 @@
         servicecenter WHERE member_index = #{member_index} and del_YN = 'N' 
         order by write_date desc limit 3
     </select>
+    
+    <select id="serviceCenterList" resultType="ServiceCenterVO" parameterType="int">
+        SELECT * 
+        FROM 
+        servicecenter WHERE member_index = #{member_index} and del_YN = 'N' 
+        order by write_date desc
+    </select>
+    
+    <select id="countServiceCenter" resultType="int" parameterType="int">
+        SELECT count(*) 
+        FROM 
+        servicecenter WHERE member_index = #{member_index} and del_YN = 'N'
+    </select>
   
 </mapper>

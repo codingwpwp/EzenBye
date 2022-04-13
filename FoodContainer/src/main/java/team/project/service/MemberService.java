@@ -25,6 +25,8 @@ public interface MemberService {
 	
 	public void updatePoint(int point, int member_index);
 	
+	int mypageMemberDelete(MemberVO memberVO) throws Exception;
+	
 	/* 여기서 부터는 관리자페이지 */
 	
 	// 회원 조회

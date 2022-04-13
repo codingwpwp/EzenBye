@@ -4,16 +4,23 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="team.project.mapper.recipeMapper" >
+<select id="selectRecipe">
+SELECT * FROM recipe
+</select>
+
+<!-- 레시피작성 -->
  <insert id="insertRecipe"  parameterType="RecipeVO">
  INSERT INTO recipe(
+ member_index,
  title,
  thumbnail_image,
  contents,
  product_index1,
  product_index2,
- product_index3,
+ product_index3
 
  )VALUES(
+ #{member_index},
  #{title},
  #{thumbnail_image},
  #{contents},
@@ -23,6 +30,20 @@
  )
  
  </insert>
+ 
+
+ <update id="updateRecipe" parameterType="RecipeVO">
+
+		UPDATE recipe SET
+		title = #{title},
+		thumbnail_image = #{thumbnail_image},
+		contents = #{contents},
+		product_index1 = #{product_index1},
+		product_index2 = #{product_index2},
+		product_index3 = #{product_index3},
+		WHERE member_index = #{member_index}
+	</update>
+ 
 </mapper>
 
 

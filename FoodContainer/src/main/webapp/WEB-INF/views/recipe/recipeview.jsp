@@ -140,7 +140,7 @@
 							<div class="col-sm-12 col-12">
 								<div class="d-flex button">
 								<input type="button" value="목록" class="btn btn-primary" onclick="location.href='recipemain.do'">
-								<input type="button" value="수정" class="btn btn-secondary" onclick="location.href='recipeinsert.do'">
+								<input type="button" value="수정" class="btn btn-secondary" onclick="location.href='recipemodify.do'">
 								<input type="button" value="삭제" class="btn btn-danger">
 								</div> 
 							</div>

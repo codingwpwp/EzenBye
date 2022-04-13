@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -79,7 +82,7 @@
                         필요한 사람은 <div>태그에 작성.
                     -->
 					 <div class="fs-5 my-2 fw-bold">레시피 등록</div> 
-					<form action="#" method="post" id="recipewr">
+					<form action="recipewrite.do" method="post" id="recipewr" enctype="multipart/form-data">
 						<div class="container">
 							
 							<div class="row title">
@@ -87,7 +90,7 @@
 									<strong>제목</strong>
 								</div>
 								<div class="px-0 col-md-6 col-sm-6 col-10">
-									<input type="text" class="form-control">
+									<input type="text" class="form-control" name="title">
 								</div>
 							</div>
 							<div class="row content">
@@ -95,7 +98,8 @@
 									<strong>내용</strong>
 								</div>
 								<div class="px-0 col-md-6 col-sm-7 col-10 ">
-									<div class="px-0" id="summernote"></div>
+									
+									<textarea id="summernote" name="contents"></textarea>
 								</div>
 								<div class="col-md-3 col-sm-3  col-12 thumnail" id="thumnail">
 									<div id=thumnailstrong>
@@ -146,32 +150,38 @@
 								<div class="col-sm-2 col-12" id="hap">
 									<strong>조합 상품</strong>
 								</div>
+								
 								<div class="px-1 col-sm-3 col-4 sel1" id="selbox">
-									<select name="" id="sel" class="select1">
-										<option value="">상품1</option>
-										<option value="">상품1</option>
-										<option value="">상품1</option>
+									<select name="product_index1" id="sel" class="select1">
+										<c:forEach items="${productListAll}" var="productListAll" varStatus="status">
+										<option value="${productListAll.product_index}">[${productListAll.brand}]${productListAll.product_name}</option>
+										</c:forEach>
+										
+									
 									</select>
+									
 								</div>
 								<div class="px-1 col-sm-3 col-4 sel2" id="selbox">
-									<select name="" id="sel" class="select1">
-										<option value="">상품2</option>
-										<option value="">상품2</option>
-										<option value="">상품2</option>
+									<select name="product_index2" id="sel" class="select1">		
+										<option value="0">없음</option>							
+										<c:forEach items="${productListAll}" var="productListAll" varStatus="status">
+										<option value="${productListAll.product_index}">[${productListAll.brand}]${productListAll.product_name}</option>
+										</c:forEach>
 									</select>
 								</div>
 								<div class="px-1 col-sm-3 col-4 sel3" id="selbox">
-									<select name="" id="sel" class="select1">
-										<option value="">상품3</option>
-										<option value="">상품3</option>
-										<option value="">상품3</option>
+									<select name="product_index3" id="sel" class="select1">
+										<option value="0">없음</option>
+										<c:forEach items="${productListAll}" var="productListAll" varStatus="status">
+										<option value="${productListAll.product_index}">[${productListAll.brand}]${productListAll.product_name}</option>
+										</c:forEach>
 									</select>
 								</div>
 
 							</div>
 							<div class="row">
 								<div class="col-sm-6 col-5 bt">
-									<input type="button" value="등록" class="btn btn-primary">
+									<input type="submit" value="등록" class="btn btn-primary">
 								</div>
 								<div class="col-sm-6 col-5">
 									<input type="button" value="취소" class="btn btn-primary"

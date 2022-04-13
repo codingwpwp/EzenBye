@@ -46,7 +46,7 @@ public class MainController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
-	public String index(Locale locale, Model model, HttpServletRequest request, ProductVO productVO, BannerVO bannerVO) throws Exception {
+	public String index(Locale locale, Model model, HttpServletRequest request, ProductVO productVO, BannerVO bannerVO, DibsVO dibsVO) throws Exception {
 		
 		List<ProductVO> popularList = productService.popularList(productVO);
 		
@@ -55,6 +55,10 @@ public class MainController {
 		List<BannerVO> mainBannerList = bannerService.mainBannerList(bannerVO);
 		
 		model.addAttribute("mainBannerList",mainBannerList);
+		
+		List<DibsVO> dibsListAll = dibsService.dibsListAll(dibsVO);
+		
+		model.addAttribute("userDibsList", dibsListAll);
 		
 		//쿠키 사용
 		Cookie[] cookies = request.getCookies();

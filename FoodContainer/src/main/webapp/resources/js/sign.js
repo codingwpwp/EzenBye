@@ -17,9 +17,10 @@ function checkAll() {
         var name = document.getElementById("name");
         var nickname = document.getElementById("nickname");
         var email = document.getElementById("email"); 
+        var phone1 = document.getElementById("phone1");
         var phone2 = document.getElementById("phone2");
         var phone3 = document.getElementById("phone3");
-        
+       	var phonehap = document.getElementsByName("phone");
         var idChk = $("#idChk").val();
         var nickChk =$("#nickChk").val();
         
@@ -77,6 +78,7 @@ function checkAll() {
 		alert("숫자3~4자리를 입력해주세요!");
 		return false;
 	}
+	
 	//닉네임
 	else if(nickname.value==""){
 		alert("닉네임을 입력해주세요!");
@@ -96,6 +98,8 @@ function checkAll() {
 		alert("올바른 이메일 형식이 아닙니다.");
 		return false;
 	}
+	phonehap=phone1+"-"+phone2+"-"+phone3;
+	
 	return true;
 	
 }

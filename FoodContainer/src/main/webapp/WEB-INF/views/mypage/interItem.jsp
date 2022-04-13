@@ -77,18 +77,20 @@
 			        <c:if test="${!empty dibsListAllJoin}">
 			        <c:forEach items="${dibsListAllJoin}" var="list">
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
-			        	<a href="productView.do?product_index=${list.product_index }" class="productHref">
+			        	
 			        	<div class="row">
 			        		<div class="col-sm-3">
+			        			<a href="productView.do?product_index=${list.product_index }" class="productHref">
 			        			<img src="<%=request.getContextPath() %>/resources/img/${list.brand}/${list.middleSort}/${list.thumbnail_image}" class="img-thumbnail" alt="...">
+			        			</a>
 			        		</div>
 			        		<div class="col-sm-6 d-flex align-items-start flex-column mb-3">
-						    	<div class="mb-auto p-2">${list.product_name }</div>
+						    	<div class="mb-auto p-2"><a href="productView.do?product_index=${list.product_index }" class="productHref">${list.product_name }</a></div>
 						    	<c:if test="${list.sale_price eq -1 }" >
-  									<div class="p-2"><fmt:formatNumber value="${list.origin_price}" pattern="#,###" />원</div>
+  									<div class="p-2"><a href="productView.do?product_index=${list.product_index }" class="productHref"><fmt:formatNumber value="${list.origin_price}" pattern="#,###" />원</a></div>
 			        			</c:if>
 			        			<c:if test="${list.sale_price ne -1 }" >
-  									<div class="p-2"><fmt:formatNumber value="${list.sale_price}" pattern="#,###" />원</div>
+  									<div class="p-2"><a href="productView.do?product_index=${list.product_index }" class="productHref"><fmt:formatNumber value="${list.sale_price}" pattern="#,###" />원</a></div>
 			        			</c:if>
 			        		</div>
 			        		<div class="col-sm-3 interItem-icon">
@@ -97,7 +99,6 @@
 						    	<i class="bi bi-trash" style="font-size: 3rem;"></i>
 			        		</div>
 			        	</div>
-			        	</a>
 			        	
 			        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 interItem-btn">
 						  <button class="btn btn-dark col-lg-3 col-md-3" type="button" onclick="cartInsert(this)">장바구니 담기</button>
