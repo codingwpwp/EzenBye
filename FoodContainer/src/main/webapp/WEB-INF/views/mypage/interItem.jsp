@@ -77,6 +77,7 @@
 			        <c:if test="${!empty dibsListAllJoin}">
 			        <c:forEach items="${dibsListAllJoin}" var="list">
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
+			        	<a href="productView.do?product_index=${list.product_index }" class="productHref">
 			        	<div class="row">
 			        		<div class="col-sm-3">
 			        			<img src="<%=request.getContextPath() %>/resources/img/${list.brand}/${list.middleSort}/${list.thumbnail_image}" class="img-thumbnail" alt="...">
@@ -96,6 +97,7 @@
 						    	<i class="bi bi-trash" style="font-size: 3rem;"></i>
 			        		</div>
 			        	</div>
+			        	</a>
 			        	
 			        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 interItem-btn">
 						  <button class="btn btn-dark col-lg-3 col-md-3" type="button" onclick="cartInsert(this)">장바구니 담기</button>

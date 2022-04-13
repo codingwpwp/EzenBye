@@ -121,12 +121,12 @@ $(document).ready(function(){
 	});
 	
 	$('.bi-trash').on('click',function(){
-	var YN = confirm("정말 삭제하시겠습니까?");
-	if(YN){
-		var product_index = $(this).parent().find("input[name='product_index']").val();
-		var member_index = $(this).parent().find("input[name='member_index']").val();
-		
-		$.ajax({
+		var YN = confirm("정말 삭제하시겠습니까?");
+		if(YN){
+			var product_index = $(this).parent().find("input[name='product_index']").val();
+			var member_index = $(this).parent().find("input[name='member_index']").val();
+			
+			$.ajax({
 				url : "dibsDeleteMypage.do",
 				type : "post",
 				data : "product_index="+product_index+"&member_index="+member_index,
