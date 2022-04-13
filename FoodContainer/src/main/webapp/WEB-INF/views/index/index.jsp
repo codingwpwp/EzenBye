@@ -68,7 +68,8 @@
 							    <div class="carousel-item active">
 							      <c:if test="${mainBannerList.link_YN == 'Y' }">
 							      	<a href="${mainBannerList.link }">
-							      		<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.name}.png" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }">
+							      		<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.name}.png" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }" onclick="bannerFn(this)">
+							      		<input type="hidden" name="link" value="${mainBannerList.link }">
 							      	</a>
 							      </c:if>
 							      <c:if test="${mainBannerList.link_YN == 'N' }">
@@ -80,7 +81,8 @@
 							    <div class="carousel-item">
 							      <c:if test="${mainBannerList.link_YN == 'Y' }">
 							      	<a href="${mainBannerList.link }">
-							      		<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.name}.png" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }">
+							      		<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.name}.png" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }" onclick="bannerFn(this)">
+							      		<input type="hidden" name="link" value="${mainBannerList.link }">
 							      	</a>
 							      </c:if>
 							      <c:if test="${mainBannerList.link_YN == 'N' }">
@@ -110,14 +112,17 @@
 							<div class="row">
 								<c:set var="ran"><%= java.lang.Math.round(java.lang.Math.random() * 10) %></c:set>
 								<c:forEach items="${popularList}" var="popularList" begin="${ran}" end="${ran+3}">
-								<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 popular d-flex justify-content-center">
+								<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3 popular d-flex justify-content-center">
 									<div class="card" style="width: 18rem;">
+									<a href="productView.do?product_index=${popularList.product_index}" onclick="productCookie(this)">
 									  <img src="<%=request.getContextPath()%>/resources/img/${popularList.brand}/${popularList.middleSort }/${popularList.thumbnail_image}" class="card-img-top" id="cardImg" alt="${popularList.product_name }">
 									  
 									  <div class="card-body">
 									    <p class="card-text">
-									    	<span style="color:red;">[인기]</span><br>
-									    	<span class="productName">[${popularList.brand }] ${popularList.product_name }</span><br>
+									    	<span style="color:red;">[인기]</span>
+									    	<span>[${popularList.brand }]</span>
+									    	<br>
+									    	<span class="productName">${popularList.product_name }</span><br>
 									    	<span class="fs-4">
 									    		<fmt:formatNumber value="${popularList.origin_price}" pattern="#,###"/>
 									    	</span>원<br>
@@ -146,12 +151,13 @@
 									    	</c:choose>
 									    </p>
 									  </div>
+									  </a>
 									  <input type="hidden" name="index" value="${popularList.product_index}">
 									  <div class="indexSubImg">
 									  	<c:if test="${member.id != null }">
 								  		<c:set var="heartCheck" value="0" />
 										  	<c:forEach items="${userDibsList}" var="userDibsList">
-										  		<c:if test="${userDibsList.member_index == member.member_index && ProductVO.product_index == userDibsList.product_index}">
+										  		<c:if test="${userDibsList.member_index == member.member_index && popularList.product_index == userDibsList.product_index}">
 										  			<img src="<%=request.getContextPath()%>/resources/img/찬하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
 										  			<c:set var="heartCheck" value="1" />
 										  		</c:if>
@@ -213,23 +219,23 @@
 							<c:set var="ran"><%= java.lang.Math.round(java.lang.Math.random() * 10) %></c:set>
 							<c:forEach items="${popularList}" var="popularList" begin="${ran}" end="${ran+3}">
 								<div class="cardM">
+								<a href="productView.do?product_index=${popularList.product_index}" onclick="productCookie(this)">
 									<img src="<%=request.getContextPath()%>/resources/img/${popularList.brand}/${popularList.middleSort }/${popularList.thumbnail_image}" class="img-fluid" id="cardMimg" alt="${popularList.product_name }">
-									<input type="hidden" name="index" value="${popularList.product_index}">
-									<div class="indexSubImgM">
-										<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
-										<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="indexCart(this)">
-									</div>
 									<div class="cardMContent">
-										<span style="color:red;">[인기]</span><br>
-										<span class="productNameM">[${popularList.brand }] ${popularList.product_name }</span><br>
+										<span style="color:red;">[인기]</span>
+										<span>[${popularList.brand }]</span>
+										<br>
+										<span class="productNameM">${popularList.product_name }</span><br>
+										<c:if test="${popularList.sale_price == -1 }">
 										<span class="fs-4">
-											<c:if test="${popularList.sale_price == -1 }">
-												<fmt:formatNumber value="${popularList.origin_price}" pattern="#,###"/>
-											</c:if>
-											<c:if test="${popularList.sale_price != -1 }">
-												<fmt:formatNumber value="${popularList.sale_price}" pattern="#,###"/>
-											</c:if>
-										</span>원<br>
+									    	<fmt:formatNumber value="${popularList.origin_price}" pattern="#,###"/>
+									    </span>원<br>
+									    </c:if>
+									    	<c:if test="${popularList.sale_price != -1 }">
+									    		<span class="discountM">
+									    			[할인가]<fmt:formatNumber value="${popularList.sale_price}" pattern="#,###"/>원<br>
+									    		</span>
+									    	</c:if>
 										<span class="indexStarM">
 											<i class="bi bi-star-fill"></i>
 								        	<i class="bi bi-star-fill"></i>
@@ -248,6 +254,28 @@
 									    			무료배송
 									    		</c:when>
 									    	</c:choose>
+									</div>
+									</a>
+									<input type="hidden" name="index" value="${popularList.product_index}">
+									<div class="indexSubImgM">
+										<c:if test="${member.id != null }">
+								  		<c:set var="heartCheck" value="0" />
+										  	<c:forEach items="${userDibsList}" var="userDibsList">
+										  		<c:if test="${userDibsList.member_index == member.member_index && popularList.product_index == userDibsList.product_index}">
+										  			<img src="<%=request.getContextPath()%>/resources/img/찬하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+										  			<c:set var="heartCheck" value="1" />
+										  		</c:if>
+										  	</c:forEach>
+										  	<c:if test="${heartCheck == '0'}">
+										  		<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+										  	</c:if>
+									  	
+								  		</c:if>
+									  	<c:if test="${member.id == null}">
+										  	<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+									  	</c:if>
+									  	
+										<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="indexCart(this)">
 									</div>
 								</div>
 							</c:forEach>

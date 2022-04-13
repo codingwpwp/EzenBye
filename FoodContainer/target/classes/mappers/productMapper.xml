@@ -19,6 +19,7 @@
     		   origin_price,
     		   sale_price,
     		   brand,
+    		   quantity,
     		   delivery_free_YN,
     		   thumbnail_image,
     		   detail_image
