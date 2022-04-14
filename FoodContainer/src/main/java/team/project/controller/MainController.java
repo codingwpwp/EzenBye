@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import team.project.service.BannerService;
+import team.project.service.CartService;
 import team.project.service.DibsService;
 import team.project.service.ProductService;
 import team.project.vo.BannerVO;
+import team.project.vo.CartVO;
 import team.project.vo.DibsVO;
 import team.project.vo.MemberVO;
 import team.project.vo.ProductVO;
@@ -40,6 +42,8 @@ public class MainController {
 	private DibsService dibsService;
 	@Autowired
 	private BannerService bannerService;
+	@Autowired
+	private CartService cartService;
 	
 	
 	/**
@@ -292,7 +296,29 @@ public class MainController {
 			noMemberCartCookie = new Cookie("noMemberCart", viewProduct);
 			response.addCookie(noMemberCartCookie);
 		}
+	}
+	
+	@RequestMapping(value = "memberCartInsert.do", method = RequestMethod.POST)
+	public void memberCartInsert(Locale locale, Model model, CartVO cartVO, HttpServletRequest request, 
+									HttpServletResponse response) throws Exception {
 		
+		int member_index = cartVO.getMember_index();
+		String product_index = null;
+		
+		List<CartVO> selectList = cartService.selectList(member_index);
+		
+		if(selectList != null) {
+			product_index = cartVO.getProduct_index();
+			for(int i=0; i<selectList.size(); i++) {
+				if(selectList.get(i).getProduct_index().equals(product_index)) {
+					break;
+				}else {
+					int insertCart = cartService.cartInsert(cartVO);
+				}
+			}
+		}else {
+			int insertCart = cartService.cartInsert(cartVO);
+		}
 		
 	}
 }

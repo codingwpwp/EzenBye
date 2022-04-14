@@ -78,9 +78,9 @@
 				$(".message").html(html);
 				
 				$.ajax({
-					url : "cartInsert.do",
+					url : "memberCartInsert.do",
 					type : "post",
-					data : "product_index="+pIndex+"member_index="+loginCheck,
+					data : "product_index="+pIndex+"&member_index="+loginCheck,
 					succese : function(){
 								
 					}
