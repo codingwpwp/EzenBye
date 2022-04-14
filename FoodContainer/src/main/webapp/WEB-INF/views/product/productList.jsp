@@ -60,11 +60,16 @@
 					<!-- 전체상품 -->
 					<div class="container"> 
 						<div class="row">
-							<c:forEach items="${productListAll}" var="ProductVO">
+							<c:forEach items="${productListAll}" var="ProductVO" varStatus="status">
 							<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center">
 								<div class="card" style="width: 18rem;">
 								<a href="productView.do?product_index=${ProductVO.product_index}" onclick="productCookie(this)">
 								  <img src="<%=request.getContextPath()%>/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="card-img-top cardImg" alt="${ProductVO.product_name }">
+								  <c:if test="${ProductVO.inventory == 0 }">
+								  	<img src="<%=request.getContextPath()%>/resources/img/매진.png" class="card-img-top pListSold">
+								  	<div class="pListSoldout"></div>
+								  </c:if>
+								  <input type="hidden" class="inventory${status.index}" value="${ProductVO.inventory}">
 								  <div class="card-body">
 								    <p class="card-text">
 								    	<c:if test="${ProductVO.quantity >= 500}">
@@ -121,6 +126,7 @@
 									  	<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
 								  	</c:if>
 									<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="cart(this)">
+								  	<input type="hidden" value="${status.index}">
 								  </div>
 								</div>
 							</div>
@@ -136,11 +142,18 @@
 					<div class="fs-5 my-2 fw-bold topText">전체상품</div>
 					<hr>
 					<div class="productListCardM">
-						<c:forEach items="${productListAll}" var="ProductVO">
+						<c:forEach items="${productListAll}" var="ProductVO" varStatus="status">
 						<div class="productListMDiv">
-							
+						<a href="productView.do?product_index=${ProductVO.product_index}" onclick="productCookie(this)">
 							<div class="productListMImg">
-								<img src="<%=request.getContextPath()%>/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="img-fluid" alt="${ProductVO.product_name}">
+								<div style="width:100px; height:100px;">
+									<img src="<%=request.getContextPath()%>/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="img-fluid" alt="${ProductVO.product_name}">
+									<c:if test="${ProductVO.inventory == 0 }">
+									  	<img src="<%=request.getContextPath()%>/resources/img/매진.png" class="card-img-top pListSold">
+									  	<div class="pListSoldout"></div>
+									</c:if>
+								<input type="hidden" class="inventoryM${status.index}" value="${ProductVO.inventory}">
+								</div>
 								<div class="productListStarM">
 									<i class="bi bi-star-fill"></i>
 							        <i class="bi bi-star-fill"></i>
@@ -176,7 +189,7 @@
 								    		</c:when>
 								    	</c:choose>
 							</div>
-							
+							</a>
 							<input type="hidden" name="index" value="${ProductVO.product_index}">
 							<div class="pListSubImgM">
 								<c:if test="${member.id != null }">
@@ -196,6 +209,7 @@
 								  	<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
 							  	</c:if>
 								<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="pListCart(this)">
+								<input type="hidden" value="${status.index}">
 							</div>
 						</div>
 						</c:forEach>

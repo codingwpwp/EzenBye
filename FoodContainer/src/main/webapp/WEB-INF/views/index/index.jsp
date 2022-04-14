@@ -111,11 +111,18 @@
 						<hr>
 							<div class="row">
 								<c:set var="ran"><%= java.lang.Math.round(java.lang.Math.random() * 10) %></c:set>
-								<c:forEach items="${popularList}" var="popularList" begin="${ran}" end="${ran+3}">
+								<c:forEach items="${popularList}" var="popularList" begin="${ran}" end="${ran+3}" varStatus="status">
 								<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3 popular d-flex justify-content-center">
 									<div class="card" style="width: 18rem;">
 									<a href="productView.do?product_index=${popularList.product_index}" onclick="productCookie(this)">
-									  <img src="<%=request.getContextPath()%>/resources/img/${popularList.brand}/${popularList.middleSort }/${popularList.thumbnail_image}" class="card-img-top" id="cardImg" alt="${popularList.product_name }">
+									  <div>
+										  <img src="<%=request.getContextPath()%>/resources/img/${popularList.brand}/${popularList.middleSort }/${popularList.thumbnail_image}" class="card-img-top" id="cardImg" alt="${popularList.product_name }">
+										  <c:if test="${popularList.inventory == 0 }">
+									  	  	<img src="<%=request.getContextPath()%>/resources/img/매진.png" class="card-img-top indexSold">
+									  	  	<div class="soldout"></div>
+									  	  </c:if>
+									  	  <input type="hidden" class="inventory${status.index}" value="${popularList.inventory}">
+									  </div>
 									  
 									  <div class="card-body">
 									    <p class="card-text">
@@ -171,6 +178,7 @@
 										  	<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
 									  	</c:if>
 										<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="cart(this)">
+										<input type="hidden" value="${status.index}">
 									  </div>
 									</div>
 								</div>
@@ -217,10 +225,17 @@
 						<hr>
 						<div class="cardDivM">
 							<c:set var="ran"><%= java.lang.Math.round(java.lang.Math.random() * 10) %></c:set>
-							<c:forEach items="${popularList}" var="popularList" begin="${ran}" end="${ran+3}">
+							<c:forEach items="${popularList}" var="popularList" begin="${ran}" end="${ran+3}" varStatus="status">
 								<div class="cardM">
 								<a href="productView.do?product_index=${popularList.product_index}" onclick="productCookie(this)">
-									<img src="<%=request.getContextPath()%>/resources/img/${popularList.brand}/${popularList.middleSort }/${popularList.thumbnail_image}" class="img-fluid" id="cardMimg" alt="${popularList.product_name }">
+									<div style = "width:150px; height:180px; text-align:center;">
+										<img src="<%=request.getContextPath()%>/resources/img/${popularList.brand}/${popularList.middleSort }/${popularList.thumbnail_image}" class="img-fluid" id="cardMimg" alt="${popularList.product_name }">
+										<c:if test="${popularList.inventory == 0 }">
+									  	  	<img src="<%=request.getContextPath()%>/resources/img/매진.png" class="card-img-top indexSoldM">
+									  		<div class="soldout"></div>
+									  	</c:if>
+									  	<input type="hidden" class="inventoryM${status.index}" value="${popularList.inventory}">
+									</div>
 									<div class="cardMContent">
 										<span style="color:red;">[인기]</span>
 										<span>[${popularList.brand }]</span>
@@ -276,6 +291,7 @@
 									  	</c:if>
 									  	
 										<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="indexCart(this)">
+										<input type="hidden" value="${status.index}">
 									</div>
 								</div>
 							</c:forEach>
