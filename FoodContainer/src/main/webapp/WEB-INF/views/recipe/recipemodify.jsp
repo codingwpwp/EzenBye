@@ -81,7 +81,7 @@
                         필요하지 않는 사람은 <div>태그를 삭제.
                         필요한 사람은 <div>태그에 작성.
                     -->
-					 <div class="fs-5 my-2 fw-bold">레시피 등록</div> 
+					 <div class="fs-5 my-2 fw-bold">레시피 수정</div> 
 					<form action="recipemodify.do" method="post" id="recipewr" enctype="multipart/form-data">
 						<div class="container">
 							
@@ -90,7 +90,7 @@
 									<strong>제목</strong>
 								</div>
 								<div class="px-0 col-md-6 col-sm-6 col-10">
-									<input type="text" class="form-control" name="title" value="">
+									<input type="text" class="form-control" name="title" value="${recipeList.title}">
 								</div>
 							</div>
 							<div class="row content">

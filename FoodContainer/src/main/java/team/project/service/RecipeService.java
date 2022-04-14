@@ -13,8 +13,12 @@ public interface RecipeService {
 	//레시피작성
 	public void insertRecipe(RecipeVO vo, MultipartFile tumnailImage,HttpServletRequest request) throws Exception;
 
-//	public List<RecipeVO> selectList(RecipeVO vo)throws Exception;
+	//레시피 목록
+	List<RecipeVO> recipeList()throws Exception;
+	
+	//레시피 상세 조회
+	public RecipeVO recipeRead(int recipe_index) throws Exception;
+	
+	public int countRecipe() throws Exception;
 
-	
-	
 }

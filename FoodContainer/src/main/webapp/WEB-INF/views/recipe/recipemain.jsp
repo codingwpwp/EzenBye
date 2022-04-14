@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -59,58 +62,42 @@
                     <!-- 실질적인 메인 내용 -->
                     <div class="fs-5 my-2 fw-bold">유저레시피</div>
                     <div style="border-bottom:1px solid black"> <strong>총123,456개의 레시피가 있습니다</strong></div>
+                    <c:if test="${member==null}">
+                    <button class="btnwr" onclick="alert('로그인 후 이용해주세요!!')"><span>레시피 작성</span></button>
+                  	</c:if>
+                  	 <c:if test="${member!=null}">
                     <button class="btnwr" onclick="location.href='recipewrite.do'"><span>레시피 작성</span></button>
-                  
+                  	</c:if>
                     <select class="form-select sel1" name="searchType">
                         <option>정렬</option>
                         <option value="">추천순</option>
                         <option value="">최신순</option>
                     </select>
                     <div class="container">
-                        <div class="row">
-                            <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-xs-1 g-4 menu">
-                            <a href="<%=request.getContextPath()%>/recipeview.do">
-                                <div class="card shadow-sm">
-                                    <img src="1.jpg" width="100%" height="190">
-                                    <div class="card-body">
-                                        <p class="card-text">중식 특유의 그 맛이 땡기는 날! 멀리 배달 기다릴 필요도 없음</p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                          <div class="card-body">
-                                            <p class="card-text">작성자:관리자</p>
-                                            <p class="card-text">추천수:20 | 조회수:67 | 댓글(3)</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                </div>
-                           </a>
-                                <div class="card shadow-sm">
-                                    <img src="1.jpg" width="100%" height="190">
-                                    <div class="card-body">
-                                        <p class="card-text">중식 특유의 그 맛이 땡기는 날! 멀리 배달 기다릴 필요도 없음</p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                          <div class="card-body">
-                                            <p class="card-text">작성자:관리자</p>
-                                            <p class="card-text">추천수:20 | 조회수:67 | 댓글(3)</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                </div>
-                            
-                                <div class="card shadow-sm">
-                                    <img src="1.jpg" width="100%" height="190">
-                                    <div class="card-body">
-                                        <p class="card-text">중식 특유의 그 맛이 땡기는 날! 멀리 배달 기다릴 필요도 없음</p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                          <div class="card-body">
-                                            <p class="card-text">작성자:관리자</p>
-                                            <p class="card-text">추천수:20 | 조회수:67 | 댓글(3)</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                </div>
-                           
-                        
                        
+                            <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-xs-1 g-4 menu">
+                            <c:forEach items="${recipeList}" var="list">	
+							<div class="col">
+								<div class="card h-100">
+									<img
+										src="<%=request.getContextPath()%>/resources/img/mypage/good.jpg"
+										class="card-img-top" alt="...">
+									<div class="card-body">
+										<h6 class="card-title">
+											<div class="row">
+												<div class="col-12 text-truncate fw-bold"><a href="<%=request.getContextPath()%>/recipeview.do?recipe_index=${list.recipe_index}"><c:out value="${list.title}"/></a></div>
+											</div>
+										</h6>
+										<div class="row recipe-text">
+											<div class="col">추천수(2)</div>
+											<div class="col">조회수(<c:out value="${list.hit}"/>)</div>
+											<div class="col">댓글(3)</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							</c:forEach>
+							<%--    <a href="<%=request.getContextPath()%>/recipeview.do">
                                 <div class="card shadow-sm">
                                     <img src="1.jpg" width="100%" height="190">
                                     <div class="card-body">
@@ -123,34 +110,9 @@
                                         </div>
                                       </div>
                                 </div>
-                           
-                                <div class="card shadow-sm">
-                                    <img src="1.jpg" width="100%" height="190">
-                                    <div class="card-body">
-                                        <p class="card-text">중식 특유의 그 맛이 땡기는 날! 멀리 배달 기다릴 필요도 없음</p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                          <div class="card-body">
-                                            <p class="card-text">작성자:관리자</p>
-                                            <p class="card-text">추천수:20 | 조회수:67 | 댓글(3)</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                </div>
-                          
-                                <div class="card shadow-sm">
-                                    <img src="1.jpg" width="100%" height="190">
-                                    <div class="card-body">
-                                        <p class="card-text">중식 특유의 그 맛이 땡기는 날! 멀리 배달 기다릴 필요도 없음</p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                          <div class="card-body">
-                                            <p class="card-text">작성자:관리자</p>
-                                            <p class="card-text">추천수:20 | 조회수:67 | 댓글(3)</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                </div>
+                           </a> --%>
                             </div>
-                        </div>
+                        
                     </div>
                     <div class="container">
                         <div class="row">
@@ -201,5 +163,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
+    <script src="<%=request.getContextPath()%>/resources/js/recipe.js"></script>
 </body>
 </html>

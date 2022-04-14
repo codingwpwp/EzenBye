@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import team.project.dao.RecipeDAO;
@@ -16,12 +18,24 @@ public class RecipeServiceImpl implements RecipeService{
 	@Autowired
 	private RecipeDAO recipeDao;
 
-//	@Override
-//	public List<RecipeVO> selectList(RecipeVO vo)throws Exception{
-//		List<RecipeVO> list=recipeDao.selectList(vo);
-//		return list;
-//	}
-	
+	//레시피 목록 조회
+	@Override
+	public List<RecipeVO> recipeList() throws Exception {
+		List<RecipeVO> recipeList = recipeDao.recipeList();
+		return recipeList;
+	}
+	//레시피 상세 조회 
+	@Override
+	public RecipeVO recipeRead(int recipe_index) throws Exception{
+		//레시피 상세 조회수 부분
+		recipeDao.recipeHit(recipe_index);
+		return recipeDao.recipeRead(recipe_index);
+	}
+	//레시피 게시글 총 개수
+	@Override
+	public int countRecipe() throws Exception{
+		return recipeDao.countRecipe();
+	}
 	//레시피작성
 	@Override
 	public void insertRecipe(RecipeVO vo,MultipartFile tumnailImage, HttpServletRequest request) throws Exception {
