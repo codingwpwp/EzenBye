@@ -195,7 +195,20 @@
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
-		</dependency>        
+		</dependency>   
+		
+		
+		<!-- 트랜젝션 START -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-tx</artifactId>
+		    <version>4.1.1.RELEASE</version>
+		</dependency>
+		<!-- 트랜젝션 END -->
+		
+		
+		     
 	</dependencies>
     <build>
         <plugins>

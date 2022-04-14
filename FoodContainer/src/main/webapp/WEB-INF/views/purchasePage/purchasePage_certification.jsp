@@ -47,7 +47,7 @@
                 <article id="mainSection">
 
                     <!-- 메인컨텐츠 -->
-                    <form class="p-3" id="emailCertificationForm" action="#" name="emailCertificationForm" method="post">
+                    <form class="p-3" id="emailCertificationForm" action="noMember.do" name="emailCertificationForm" method="post" onsubmit="return checkForm()">
                         <div class="container">
 
                             <div class="row">
@@ -63,7 +63,7 @@
                                 </div>
 
                                 <div class="col-sm-9 col-12">
-                                    <input type="text" class="form-control pwinput" name="name" id="name" placeholder="이름를 입력하세요" autocomplete="off">
+                                    <input type="text" class="form-control pwinput" name="name" id="name" maxlength="6" placeholder="이름을 입력하세요" autocomplete="off">
                                 </div>
 
                                 
@@ -76,16 +76,22 @@
                                 </div>
 
                                 <div class="col-sm-3 col-4 px-0">
-                                    <input type="button" class="btn btn-secondary mailnum fw-bold" id="emailCheckBtn" value="인증번호 발송" onclick="sendEmail()">
+                                    <input type="button" class="btn btn-secondary mailnum fw-bold" id="emailCheckBtn" value="번호발송" onclick="sendEmail()">
                                 </div>
 
                                 <div class="col-sm-12 col-12 tit mb-1 fw-bold fs-5">
-                                    <label for="emailcheck">인증번호</label>
+                                    <label for="emailcheck">인증번호&nbsp;</label>&nbsp;&nbsp;<span class="fs-6 fw-bold text-danger" id="timer"></span>
                                 </div>
 
-                                <div class="col-sm-9 col-12">
-                                    <input type="text" class="form-control emailinput" name="email" id="email" placeholder="인증번호를 입력해주세요" autocomplete="off">
+                                <div class="col-sm-9 col-8">
+                                    <input type="text" class="form-control emailinput" id="randomNum" placeholder="인증번호를 입력해주세요" autocomplete="off">
                                 </div>
+                                
+                                <div class="col-sm-3 col-4 px-0">
+                                    <input type="button" class="btn btn-secondary mailnum fw-bold" id="emailCheckOkBtn" value="인증하기" onclick="checkNum()">
+                                </div>
+                                
+                                <span class="fw-bold" id="emailMessageSpan" style="font-size: small;"></span>
 
 								<div class="row mt-5">
 	                                <div class="col-sm-6 col-6 d-flex justify-content-center">
@@ -93,7 +99,7 @@
 	                                </div>
 	
 	                                <div class="col-sm-6 col-6 d-flex justify-content-center">
-	                                    <input type="submit" value="구매하러가기" class="btn btn-primary fw-bold w-75">
+	                                    <input type="submit" value="구매하러가기" class="btn btn-primary fw-bold w-75 px-0" disabled>
 	                                </div>
 								</div>
 

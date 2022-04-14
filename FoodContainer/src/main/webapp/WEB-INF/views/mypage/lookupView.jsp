@@ -108,15 +108,9 @@
 					        		<div class="col-sm-8 d-flex align-items-start flex-column mb-3">
 								    	<div class="mb-auto p-2">${opList.product_name}</div>
 								    	
-		  								<c:if test="${opList.sale_price eq -1 }" >
-			  								<div class="p-2"><fmt:formatNumber value="${opList.origin_price }" pattern="#,###" />원 | ${opList.order_quantity }개</div>
-			  								<c:set var="totalPrice" value="${totalPrice + opList.price}" />
-		  								</c:if>
+		  								<div class="p-2"><fmt:formatNumber value="${opList.price / opList.order_quantity }" pattern="#,###" />원 | ${opList.order_quantity }개</div>
+		  								<c:set var="totalPrice" value="${totalPrice + opList.price}" />
 		  								
-		  								<c:if test="${opList.sale_price ne -1 }" >
-			  								<div class="p-2"><fmt:formatNumber value="${opList.sale_price }" pattern="#,###" />원 | ${opList.order_quantity }개</div>
-		  									<c:set var="totalPrice" value="${totalPrice + opList.price}" />
-		  								</c:if>
 					        		</div>
 					        	</div>
 					        	</a>

@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -71,12 +74,13 @@
 
 					<div class="container">
 						<div class="row hd">
+						
 							<div class="col-sm-9 col-xs-3 col-12">
-								<h3>중식의 특유의 그 맛이 땡기는 날! 멀리 기다릴 필요도 없어요</h3>
+								<h3>${read.title}</h3>
 							</div>
 
 
-							<div class="col-sm-3 col-11">추천수 : 20 | 조회수 : 67 | 댓글(3)</div>
+							<div class="col-sm-3 col-11">추천수 : 20 | 조회수 : (${read.hit}) | 댓글(3)</div>
 						</div>
 
 						<div class="row body">
@@ -140,8 +144,11 @@
 							<div class="col-sm-12 col-12">
 								<div class="d-flex button">
 								<input type="button" value="목록" class="btn btn-primary" onclick="location.href='recipemain.do'">
-								<input type="button" value="수정" class="btn btn-secondary" onclick="location.href='recipeinsert.do'">
+								<c:if test="${member.member_index==read.member_index}">
+								<input type="button" value="수정" class="btn btn-secondary" onclick="location.href='recipemodify.do'">
 								<input type="button" value="삭제" class="btn btn-danger">
+								</c:if>
+								
 								</div> 
 							</div>
 							<div class="col-sm-12 col-12">

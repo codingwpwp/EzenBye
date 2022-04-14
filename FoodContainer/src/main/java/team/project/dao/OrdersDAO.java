@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import team.project.util.PagingUtil;
+import team.project.vo.CartVO;
 import team.project.vo.OrdersVO;
 import team.project.vo.SearchVO;
 
@@ -33,6 +34,9 @@ public class OrdersDAO {
 		return sqlSession.selectOne(Namespace+".ordersDetailJoin", member_order_index);
 	}
 	
+	/* 회원 구매 페이지 */
+	
+
 	
 	/* 여기서 부터는 관리자페이지 */
 	

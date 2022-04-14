@@ -6,7 +6,7 @@
 <mapper namespace="team.project.mapper.MemberMapper" >
  	<!--로그인 -->
  	<select id="Login" resultType="MemberVO" parameterType="MemberVO">
-        SELECT member_index, id, pw,name FROM member where id=#{id}
+        SELECT member_index, id, pw,name FROM member where id=#{id} and del_yn = 'N'
     </select>
     <!--아이디중복체크 -->
     <select id="idChk" resultType="int" parameterType="String">
@@ -61,6 +61,18 @@
     	WHERE member_index=#{member_index}
     </update>
     
+    <update id="mypageMemberDelete" parameterType="MemberVO">
+    	UPDATE member SET
+    	del_yn = 'Y', del_date = NOW(), del_reason = #{del_reason}
+    	WHERE member_index = #{member_index}
+    </update>
+    
+    <update id="mypageMemberModify" parameterType="MemberVO">
+    	UPDATE member SET
+    	name = #{name}, phone = #{phone}, nickname = #{nickname}
+    	WHERE member_index = #{member_index}
+    </update>
+       
     <!-- 여기서 부터는 관리자페이지 -->
     
     <!-- 회원 조회할때 먼저 총 글의 총 갯수를 구하는 쿼리 -->

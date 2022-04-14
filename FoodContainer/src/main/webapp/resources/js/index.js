@@ -43,21 +43,49 @@
 		var pIndex = $(obj).parent().prev().val();
 		console.log(loginCheck);
 		console.log(pIndex);
-		if(loginCheck == ""){
+		var invenCnt = $(obj).next().val();
+		console.log(invenCnt);
+		var inventory = $(".inventory"+invenCnt).val();
+		console.log(inventory);
+		
+		if(inventory < 1){
 			$(".cartBack").css("display","block");
-			var name = $(obj).parent().prev().prev().find(".productName").html();
-			var html = "<br>&quot;"+name+"&quot;<br> 상품이 장바구니에 담겼습니다.";
-				html += "<br><br><button type='button' class='btn btn-secondary' onclick='cartOk()'>확인</button>";
-			$(".message").html(html);
-			
-			$.ajax({
-				url : "noMemberCartCookie.do",
-				type : "get",
-				data : "product_index="+pIndex,
-				succese : function(){
-							
-				}
-			});
+				var name = $(obj).parent().prev().prev().find(".productName").html();
+				var html = "<br><br> 매진 된 상품입니다.";
+					html += "<br><br><button type='button' class='btn btn-secondary' onclick='cartOk()'>확인</button>";
+				$(".message").html(html);
+		}else{
+			if(loginCheck == ""){
+				$(".cartBack").css("display","block");
+				var name = $(obj).parent().prev().prev().find(".productName").html();
+				var html = "<br>&quot;"+name+"&quot;<br> 상품이 장바구니에 담겼습니다.";
+					html += "<br><br><button type='button' class='btn btn-secondary' onclick='cartOk()'>확인</button>";
+				$(".message").html(html);
+				
+				$.ajax({
+					url : "noMemberCartCookie.do",
+					type : "get",
+					data : "product_index="+pIndex,
+					succese : function(){
+								
+					}
+				});
+			}else{
+				$(".cartBack").css("display","block");
+				var name = $(obj).parent().prev().prev().find(".productName").html();
+				var html = "<br>&quot;"+name+"&quot;<br> 상품이 장바구니에 담겼습니다.";
+					html += "<br><br><button type='button' class='btn btn-secondary' onclick='cartOk()'>확인</button>";
+				$(".message").html(html);
+				
+				$.ajax({
+					url : "memberCartInsert.do",
+					type : "post",
+					data : "product_index="+pIndex+"&member_index="+loginCheck,
+					succese : function(){
+								
+					}
+				});
+			}
 		}
 		
 	}
@@ -68,21 +96,33 @@
 		var pIndex = $(obj).parent().prev().val();
 		console.log(loginCheck);
 		console.log(pIndex);
-		if(loginCheck == ""){
+		
+		var invenCnt = $(obj).next().val();
+		var inventory = $(".inventoryM"+invenCnt).val();
+		
+		if(inventory < 1){
 			$(".cartBack").css("display","block");
-			var name = $(obj).parent().prev().prev().val();
-			var html = "<br>&quot;"+name+"&quot;<br> 상품이 장바구니에 담겼습니다.";
-				html += "<br><br><button type='button' class='btn btn-secondary' onclick='cartOk()'>확인</button>";
-			$(".message").html(html);
-			
-			$.ajax({
-				url : "noMemberCartCookie.do",
-				type : "get",
-				data : "product_index="+pIndex,
-				succese : function(){
-							
-				}
-			});
+				var name = $(obj).parent().prev().prev().find(".productNameM").html();
+				var html = "<br><br> 매진 된 상품입니다.";
+					html += "<br><br><button type='button' class='btn btn-secondary' onclick='cartOk()'>확인</button>";
+				$(".message").html(html);
+		}else{
+			if(loginCheck == ""){
+				$(".cartBack").css("display","block");
+				var name = $(obj).parent().prev().prev().find(".productNameM").html();
+				var html = "<br>&quot;"+name+"&quot;<br> 상품이 장바구니에 담겼습니다.";
+					html += "<br><br><button type='button' class='btn btn-secondary' onclick='cartOk()'>확인</button>";
+				$(".message").html(html);
+				
+				$.ajax({
+					url : "noMemberCartCookie.do",
+					type : "get",
+					data : "product_index="+pIndex,
+					succese : function(){
+								
+					}
+				});
+			}
 		}
 	}
 	
@@ -127,6 +167,23 @@
 	//쿠키데이터
 	function productCookie(obj){
 		var name=$(obj).next("input[name='index']").val();
+		console.log(name);
+		
+		$.ajax({
+			url : "viewProductCookie.do",
+			type : "get",
+			data : "name="+name,
+			success : function(data){
+				
+			}
+		});
+	}
+	
+	//배너 클릭
+	function bannerFn(obj){
+		var linkName=$(obj).next("input[name='link']").val();
+		var name = linkName.substring(linkName.length-5,linkName.length);
+		
 		console.log(name);
 		
 		$.ajax({

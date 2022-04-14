@@ -60,17 +60,24 @@
 					<!-- 전체상품 -->
 					<div class="container"> 
 						<div class="row">
-							<c:forEach items="${productListAll}" var="ProductVO">
+							<c:forEach items="${productListAll}" var="ProductVO" varStatus="status">
 							<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center">
 								<div class="card" style="width: 18rem;">
 								<a href="productView.do?product_index=${ProductVO.product_index}" onclick="productCookie(this)">
 								  <img src="<%=request.getContextPath()%>/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="card-img-top cardImg" alt="${ProductVO.product_name }">
+								  <c:if test="${ProductVO.inventory == 0 }">
+								  	<img src="<%=request.getContextPath()%>/resources/img/매진.png" class="card-img-top pListSold">
+								  	<div class="pListSoldout"></div>
+								  </c:if>
+								  <input type="hidden" class="inventory${status.index}" value="${ProductVO.inventory}">
 								  <div class="card-body">
 								    <p class="card-text">
 								    	<c:if test="${ProductVO.quantity >= 500}">
-							    			<span style="color:red;">[인기]</span><br>
+							    			<span style="color:red;">[인기]</span>
 							    		</c:if>
-									   	<span class="productName">[${ProductVO.brand}] ${ProductVO.product_name}</span><br>
+							    		<span>[${ProductVO.brand}]</span>
+							    		<br>
+									   	<span class="productName">${ProductVO.product_name}</span><br>
 									   	<span class="fs-4">
 											<fmt:formatNumber value="${ProductVO.origin_price}" pattern="#,###"/>
 										</span>원<br>
@@ -101,7 +108,7 @@
 								  </div>
 								</a>
 								  <input type="hidden" name="index" value="${ProductVO.product_index}">
-								  <div class="indexSubImg">
+								  <div class="pListSubImg">
 								  	<c:if test="${member.id != null }">
 								  		<c:set var="heartCheck" value="0" />
 									  	<c:forEach items="${userDibsList}" var="userDibsList">
@@ -119,6 +126,7 @@
 									  	<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
 								  	</c:if>
 									<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="cart(this)">
+								  	<input type="hidden" value="${status.index}">
 								  </div>
 								</div>
 							</div>
@@ -134,10 +142,18 @@
 					<div class="fs-5 my-2 fw-bold topText">전체상품</div>
 					<hr>
 					<div class="productListCardM">
-						<c:forEach items="${productListAll}" var="ProductVO">
+						<c:forEach items="${productListAll}" var="ProductVO" varStatus="status">
 						<div class="productListMDiv">
+						<a href="productView.do?product_index=${ProductVO.product_index}" onclick="productCookie(this)">
 							<div class="productListMImg">
-								<img src="<%=request.getContextPath()%>/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="img-fluid" alt="${ProductVO.product_name}" onclick="location.href='productView.do'">
+								<div style="width:100px; height:100px;">
+									<img src="<%=request.getContextPath()%>/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="img-fluid" alt="${ProductVO.product_name}">
+									<c:if test="${ProductVO.inventory == 0 }">
+									  	<img src="<%=request.getContextPath()%>/resources/img/매진.png" class="card-img-top pListSold">
+									  	<div class="pListSoldout"></div>
+									</c:if>
+								<input type="hidden" class="inventoryM${status.index}" value="${ProductVO.inventory}">
+								</div>
 								<div class="productListStarM">
 									<i class="bi bi-star-fill"></i>
 							        <i class="bi bi-star-fill"></i>
@@ -147,30 +163,53 @@
 								</div>
 							</div>
 							<div class="productListContent">
-								<span style="color:red;"></span>
-								<div class="productNameM" onclick="location.href='productView.do'">${ProductVO.product_name}</div>
+								<c:if test="${ProductVO.quantity >= 500}">
+									<span style="color:red;">[인기]</span>
+								</c:if>
+								<span>[${ProductVO.brand}]</span>
+								<div class="productNameM">${ProductVO.product_name}</div>
+								<c:if test="${ProductVO.sale_price == -1}">
 								<div>
 									<fmt:formatNumber value="${ProductVO.origin_price}" pattern="#,###"/>원
 								</div>
-								<c:if test="${ProductVO.sale_price != ''}">
+								</c:if>
+								<c:if test="${ProductVO.sale_price != -1}">
 								<div class="discountM">
-									<fmt:formatNumber value="${ProductVO.sale_price}" pattern="#,###"/>
+									[할인가]<fmt:formatNumber value="${ProductVO.sale_price}" pattern="#,###"/>원
 								</div>
 								</c:if>
 								<c:set var="delivery" value="${ProductVO.delivery_free_YN}" />
 								    	<c:choose>
-								    		<c:when test="${delivery == 'N'}">
+								    		<c:when test="${ProductVO.delivery_free_YN == 'N'}">
 								    			<div>배송비 3,000원</div>
 								    		</c:when>
 								    		
-								    		<c:when test="${delivery == 'Y'}">
+								    		<c:when test="${ProductVO.delivery_free_YN == 'Y'}">
 								    			<div>무료배송</div>
 								    		</c:when>
 								    	</c:choose>
 							</div>
+							</a>
+							<input type="hidden" name="index" value="${ProductVO.product_index}">
 							<div class="pListSubImgM">
-								<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+								<c:if test="${member.id != null }">
+								  	<c:set var="heartCheck" value="0" />
+								 	<c:forEach items="${userDibsList}" var="userDibsList">
+								  		<c:if test="${userDibsList.member_index == member.member_index && ProductVO.product_index == userDibsList.product_index}">
+								  			<img src="<%=request.getContextPath()%>/resources/img/찬하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+								  			<c:set var="heartCheck" value="1" />
+								  		</c:if>
+								  	</c:forEach>
+								  	<c:if test="${heartCheck == '0'}">
+								  		<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+								  	</c:if>
+									  	
+							  	</c:if>
+							  	<c:if test="${member.id == null}">
+								  	<img src="<%=request.getContextPath()%>/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+							  	</c:if>
 								<img src="<%=request.getContextPath()%>/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="pListCart(this)">
+								<input type="hidden" value="${status.index}">
 							</div>
 						</div>
 						</c:forEach>

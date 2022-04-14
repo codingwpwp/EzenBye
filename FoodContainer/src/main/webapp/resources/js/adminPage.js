@@ -597,7 +597,11 @@ function checkProduct(obj){
 		if($("input[name='sale_price']").val() == ""){
 			$("input[name='sale_price']").val("-1");
 		}
-		alert('수정이 완료되었습니다.');
+		if($(obj).attr("name") == "productRegisterForm"){
+			alert('등록이 완료되었습니다.');
+        }else{
+			alert('수정이 완료되었습니다.');
+        }
 	}
     
     return flag;

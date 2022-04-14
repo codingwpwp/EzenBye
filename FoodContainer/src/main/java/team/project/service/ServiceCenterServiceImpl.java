@@ -20,4 +20,20 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 		
 		return list;
 	}
+
+	@Override
+	public List<ServiceCenterVO> serviceCenterList(int member_index) throws Exception {
+		
+		List<ServiceCenterVO> serviceCenterList = serviceCenterDAO.serviceCenterList(member_index);
+		
+		return serviceCenterList;
+	}
+
+	@Override
+	public int countServiceCenter(int member_index) throws Exception {
+		
+		int countServiceCenter = serviceCenterDAO.countServiceCenter(member_index);
+		
+		return countServiceCenter;
+	}
 }

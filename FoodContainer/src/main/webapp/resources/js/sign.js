@@ -17,15 +17,17 @@ function checkAll() {
         var name = document.getElementById("name");
         var nickname = document.getElementById("nickname");
         var email = document.getElementById("email"); 
+        var phone1 = document.getElementById("phone1");
         var phone2 = document.getElementById("phone2");
         var phone3 = document.getElementById("phone3");
-        
+       	var phonehap = "";
         var idChk = $("#idChk").val();
         var nickChk =$("#nickChk").val();
         
      
 	//아이디
 	if (id.value == "") {
+		
 		alert("ID를 입력해주세요!");
 		return false;
 	}else if (!checkId.test(id.value)) {
@@ -60,6 +62,7 @@ function checkAll() {
 		alert("특수문자,영어,숫자는 사용할 수 없습니다. 한글만 입력해주세요!");
 		return false;
 	}
+	
 	//연락처
 	else if(phone2.value==""){
 		alert("연락처2를 입력해주세요!");
@@ -77,6 +80,7 @@ function checkAll() {
 		alert("숫자3~4자리를 입력해주세요!");
 		return false;
 	}
+	
 	//닉네임
 	else if(nickname.value==""){
 		alert("닉네임을 입력해주세요!");
@@ -96,6 +100,11 @@ function checkAll() {
 		alert("올바른 이메일 형식이 아닙니다.");
 		return false;
 	}
+	phonehap = $("select[name='phone1']").val() + "-" + $("input[name='phone2']").val() + "-" + $("input[name='phone3']").val();
+	$("input[name='phone']").val(phonehap);
+
+
+	alert("회원가입이 완료되었습니다! 로그인해주세요");
 	return true;
 	
 }

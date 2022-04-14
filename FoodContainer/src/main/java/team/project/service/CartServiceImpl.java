@@ -1,5 +1,7 @@
 package team.project.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,14 @@ public class CartServiceImpl implements CartService {
 		int cartInsert = cartDAO.cartInsert(cartVO);
 		
 		return cartInsert;
+	}
+
+	@Override
+	public List<CartVO> selectList(int member_index) throws Exception {
+		
+		List<CartVO> selectList = cartDAO.selectList(member_index);
+		
+		return selectList;
 	}
 	
 	

@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -40,24 +41,7 @@
             <!-- 왼쪽 사이드메뉴 -->
             <div class="col-lg-2 d-none d-lg-block" id="leftDiv">
                 <aside id="leftAside">
-                   <div id="pViewleft">
-                		<p class="card-text mdName">
-                			${view.brand} ${view.product_name}
-                			<br>
-                			<span class="mdPrice">
-                				<fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>
-                			</span>
-                		</p>
-                		<p class="card-text mb-auto productNum fs-4"><i class="bi bi-dash-square-fill" onclick="minusFn(this)"></i> 1 <i class="bi bi-plus-square-fill" onclick="plusFn(this)"></i></p>
-				        <hr>
-				        <div class="leftViewTotal">
-				        	<span class="fs-5 totalPrice">합계 : <span class="fs-3">10,000원</span></span>
-				        </div>
-				        <div class="leftViewButtonDiv">
-						   	<button class="leftViewButton btn btn-outline-success me-2">장바구니</button>
-						  	<button class="leftViewButton btn btn-success me-2">바로구매</button>
-				        </div>
-                	</div>
+                   
                 </aside>
             </div>
 
@@ -68,7 +52,15 @@
                 	<div class="pViewCard">
 				      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 				        <div class="col-auto d-lg-block viewStarM">
-				        	<img src="<%=request.getContextPath()%>/resources/img/${view.brand}/${view.middleSort}/${view.thumbnail_image}" alt="${view.product_name}" class="img-fluid viewImg">
+				        	<div>
+					        	<img src="<%=request.getContextPath()%>/resources/img/${view.brand}/${view.middleSort}/${view.thumbnail_image}" alt="${view.product_name}" class="img-fluid viewImg">
+					        	<c:if test="${view.inventory == 0 }">
+									<img src="<%=request.getContextPath()%>/resources/img/매진.png" class="card-img-top viewSold">
+									<div class="viewSoldout"></div>
+									<input type="hidden" class="inventory" value="${view.inventory}">
+								</c:if>
+				        	</div>
+				        	
 				        	<div class="viewStar">
 				        		<span>평점 : 
 				        		<span class="fs-4 productViewStar">
@@ -82,8 +74,13 @@
 				        	</div>
 				        </div>
 				        <div class="col p-4 d-flex flex-column position-static">
-				          <strong class="d-inline-block mb-2 text-danger">[인기]</strong>
-				          <p class="mb-0">${view.brand} ${view.product_name}</p>
+				          <div class="mb-0">
+				          	<c:if test="${view.quantity >= 500}">
+	                	  		<strong class="d-inline-block mb-2 text-danger">[인기]</strong>
+	                	 	</c:if>
+				          	[${view.brand}]<br> 
+				          	<div class="productName">${view.product_name}</div>
+				          </div>
 				          <hr>
 				          <h3 class="viewPrice">
 					          <fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>
@@ -91,16 +88,16 @@
 				          </h3>
 				          <div class="text-muted">포인트 적립 1%</div>
 				          <hr>
-				          <p class="card-text mdName">${view.brand} ${view.product_name} 
-				          	<span class="mdPrice">
-				          	<fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>
-					        원
+				          <p class="card-text mdName"><span style="font-size:1rem;">[${view.brand}]<br> ${view.product_name}</span>
+				          	<span class="mdPrice" style="font-size:0.9rem;">
+				          		<fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>원
+				          		<input type="hidden" value="${view.origin_price}">
 				          	</span>
 				          </p>
 				          <p class="card-text mb-auto productNum fs-4"><i class="bi bi-dash-square-fill" onclick="minusFn(this)"></i> 1 <i class="bi bi-plus-square-fill" onclick="plusFn(this)"></i></p>
-				          <div><span class="fs-5 totalPrice">합계 : <span class="fs-3">10,000원</span></span></div>
+				          <div><span class="fs-5 totalPrice">합계 : <span class="fs-3"><fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>원</span></span></div>
 				          <div class="d-flex justify-content-evenly">
-					          <button class="viewButton btn btn-outline-success me-2">장바구니 담기</button>
+					          <button class="viewButton btn btn-outline-success me-2" onclick="viewCart(this)">장바구니 담기</button>
 					          <button class="viewButton btn btn-success me-2" onclick="location.href='purchase/notMember.do'">바로구매</button>
 				          </div>
 				        </div>
@@ -126,6 +123,25 @@
 						<!-- 상세페이지 -->
 						<div class="d-flex justify-content-center" id="pView">
 							<img src="<%=request.getContextPath()%>/resources/img/${view.brand}/${view.middleSort}/${view.detail_image}" alt="${view.product_name} 상세페이지" class="img-fluid">
+							<div id="pViewleft">
+	                			<div class="card-text mdName">
+	                				<c:if test="${view.quantity >= 500}">
+	                					<span style="color:red;">[인기]</span>
+	                				</c:if>
+	                				[${view.brand}]
+	                				<br>
+	                				<div class="productName">${view.product_name}</div>
+	                				<p class="card-text mb-auto productNumM fs-4"><i class="bi bi-dash-square-fill" onclick="minusFn(this)"></i> 1 <i class="bi bi-plus-square-fill" onclick="plusFn(this)"></i></p>
+					    	    	<div class="leftViewTotal">
+					      	  			<span class="fs-5 totalPrice">합계 : <span class="fs-3"><fmt:formatNumber value="${view.origin_price}" pattern="#,###"/></span></span>
+					      	  		</div>
+	                			</div>
+				      	  		<div class="leftViewButtonDiv">
+				      	  			<input type="hidden" id="viewLoginCheck" value="${member.member_index}">
+							   		<button class="leftViewButton btn btn-outline-success me-2">장바구니</button>
+							  		<button class="leftViewButton btn btn-success me-2">바로구매</button>
+				      	  		</div>
+                			</div>
 						</div>
 						
 						<!-- 배송정보 -->
@@ -412,11 +428,25 @@
         ↑Top
     </div>
     
-
+    <!-- 툴팁 -->
+    <div class="topTooltip">
+    	<p>상품을 장바구니에 담았습니다.</p>
+    	<button type='button' class='btn btn-light' onclick="shopping(this)">상품 더보기</button>
+    	<button type='button' class='btn btn-light' onclick="moveCart(this)">장바구니로 이동</button>
+	</div>
+	
+	<div class="topTooltipSold">
+		<br>
+    	<p style="color:white; font-size:1.2rem;">매진 된 상품입니다.</p>
+	</div>
+    
     <!-- 푸터 -->
     <footer class="py-3 my-4">
         <%@include file="/WEB-INF/views/base/footer.jsp"%>
     </footer>
+    
+    <!-- 외부클릭 -->
+	<div class="outter" onclick="outter()"></div>
 
     <!-- 자바스크립트 -->
     <script src="https://kit.fontawesome.com/b30bc4e0a9.js" crossorigin="anonymous"></script>

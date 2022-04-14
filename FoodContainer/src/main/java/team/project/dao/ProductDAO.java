@@ -64,13 +64,18 @@ public class ProductDAO {
 	}
 	
 	// 상품 등록&수정 전에 상품 번호를 조회하는 과정
-	public List<ProductVO> adminProductIndexSelectList(String productIndex) throws Exception{
+	public List<String> adminProductIndexSelectList(String productIndex) throws Exception{
 		return sqlSession.selectList(Namespace + ".adminProductIndexSelectList", productIndex);
 	}
 	
 	// 상품 등록
 	public int adminProductInsert(ProductVO product) throws Exception{
 		return sqlSession.insert(Namespace + ".adminProductInsert", product);
+	}
+	
+	// 상품 수정
+	public int adminProductUpdate(ProductVO product) throws Exception{
+		return sqlSession.update(Namespace + ".adminProductUpdate", product);
 	}
 
 }

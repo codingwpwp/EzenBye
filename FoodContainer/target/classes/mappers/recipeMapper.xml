@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="team.project.mapper.recipeMapper" >
+
+<!-- 레시피 목록 리스트 -->
+<select id="recipeList" resultType="RecipeVO">
+	SELECT * FROM recipe where del_yn = 'N'		
+</select>
+
+<!-- 레시피 상세 -->
+<select id="recipeRead" parameterType="int" resultType="RecipeVO">
+SELECT * FROM recipe where recipe_index =#{recipe_index}
+
+</select>
+
+<!-- 레시피 게시글 조회수 -->
+<update id="recipeHit" parameterType="int">
+UPDATE recipe set hit =hit+1 where recipe_index=#{recipe_index}
+</update>
+
+<!-- 레시피 게시글 갯수 -->
+<select id="countRecipe" resultType="int">
+SELECT count(recipe_index) from recipe
+</select>
+
+
+
+<!-- 레시피작성 -->
+ <insert id="insertRecipe"  parameterType="RecipeVO">
+ INSERT INTO recipe(
+ member_index,
+ title,
+ thumbnail_image,
+ contents,
+ product_index1,
+ product_index2,
+ product_index3
+
+ )VALUES(
+ #{member_index},
+ #{title},
+ #{thumbnail_image},
+ #{contents},
+ #{product_index1},
+ #{product_index2},
+ #{product_index3}
+ )
+ 
+ </insert>
+ 
+<!-- 레시피 수정 -->
+ <update id="updateRecipe" parameterType="RecipeVO">
+
+		UPDATE recipe SET
+		title = #{title},
+		thumbnail_image = #{thumbnail_image},
+		contents = #{contents},
+		product_index1 = #{product_index1},
+		product_index2 = #{product_index2},
+		product_index3 = #{product_index3},
+		WHERE member_index = #{member_index}
+	</update>
+ 
+</mapper>
+
+

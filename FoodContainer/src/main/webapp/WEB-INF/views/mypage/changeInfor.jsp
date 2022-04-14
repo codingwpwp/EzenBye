@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -65,11 +67,12 @@
 			        <p class="fs-6 lookup-fs-6">개인정보 변경</p>
 			        <hr />
 			        
-			        <form action="mypage_changeInforOk.do">
+			        <form action="pwCheck.do" method="post">
 			         <div class="mb-3 row changeInfor d-flex justify-content-center">
 					    <div class="input-group mb-3 changeInfor-input">
 						  <span class="input-group-text changeInfor-label" id="inputGroup-sizing-default">비밀번호</span>
-						  <input type="password" id="inputPassword" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="비밀번호를 입력해주세요.">
+						  <input type="password" name="pw" id="inputPassword" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="비밀번호를 입력해주세요.">
+						  <input type="hidden" value="${member.id }" name="id" />
 						  <button type="submit" class="btn btn-secondary btn-sm fw-bold">확인</button>
 						</div>
 					 </div>

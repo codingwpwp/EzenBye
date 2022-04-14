@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import team.project.service.BannerService;
+import team.project.service.CartService;
 import team.project.service.DibsService;
 import team.project.service.ProductService;
 import team.project.vo.BannerVO;
+import team.project.vo.CartVO;
 import team.project.vo.DibsVO;
 import team.project.vo.MemberVO;
 import team.project.vo.ProductVO;
@@ -40,13 +42,15 @@ public class MainController {
 	private DibsService dibsService;
 	@Autowired
 	private BannerService bannerService;
+	@Autowired
+	private CartService cartService;
 	
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
-	public String index(Locale locale, Model model, HttpServletRequest request, ProductVO productVO, BannerVO bannerVO) throws Exception {
+	public String index(Locale locale, Model model, HttpServletRequest request, ProductVO productVO, BannerVO bannerVO, DibsVO dibsVO) throws Exception {
 		
 		List<ProductVO> popularList = productService.popularList(productVO);
 		
@@ -55,6 +59,10 @@ public class MainController {
 		List<BannerVO> mainBannerList = bannerService.mainBannerList(bannerVO);
 		
 		model.addAttribute("mainBannerList",mainBannerList);
+		
+		List<DibsVO> dibsListAll = dibsService.dibsListAll(dibsVO);
+		
+		model.addAttribute("userDibsList", dibsListAll);
 		
 		//쿠키 사용
 		Cookie[] cookies = request.getCookies();
@@ -288,7 +296,29 @@ public class MainController {
 			noMemberCartCookie = new Cookie("noMemberCart", viewProduct);
 			response.addCookie(noMemberCartCookie);
 		}
+	}
+	
+	@RequestMapping(value = "memberCartInsert.do", method = RequestMethod.POST)
+	public void memberCartInsert(Locale locale, Model model, CartVO cartVO, HttpServletRequest request, 
+									HttpServletResponse response) throws Exception {
 		
+		int member_index = cartVO.getMember_index();
+		String product_index = null;
+		
+		List<CartVO> selectList = cartService.selectList(member_index);
+		
+		if(selectList != null) {
+			product_index = cartVO.getProduct_index();
+			for(int i=0; i<selectList.size(); i++) {
+				if(selectList.get(i).getProduct_index().equals(product_index)) {
+					break;
+				}else {
+					int insertCart = cartService.cartInsert(cartVO);
+				}
+			}
+		}else {
+			int insertCart = cartService.cartInsert(cartVO);
+		}
 		
 	}
 }

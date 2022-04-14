@@ -19,6 +19,8 @@
     		   origin_price,
     		   sale_price,
     		   brand,
+    		   inventory,
+    		   quantity,
     		   delivery_free_YN,
     		   thumbnail_image,
     		   detail_image
@@ -73,7 +75,7 @@
     
     <!-- 상품 삭제 -->
     <update id="adminProductDelYNisY" parameterType="list">
-    	update product SET del_YN = "Y"
+    	UPDATE product SET del_YN = "Y"
     	WHERE
 		<foreach collection="list" item="item" separator=" OR ">
 			product_index = #{item}
@@ -88,11 +90,11 @@
     </select>
     
     <!-- 상품 등록&수정 전에 상품 번호를 조회하는 과정 -->
-    <select id="adminProductIndexSelectList" resultType="ProductVO" parameterType="String">
+    <select id="adminProductIndexSelectList" resultType="String" parameterType="String">
     	SELECT product_index
     	FROM product
     	WHERE product_index LIKE CONCAT(#{productIndex},'%')
-    	ORDER BY product_index DESC
+    	ORDER BY product_index
     </select>
     
     <!-- 상품 등록 -->
@@ -108,5 +110,30 @@
     	)
     </insert>
     
+    <!-- 상품 수정 -->
+    <update id="adminProductUpdate" parameterType="ProductVO">
+    	UPDATE product SET
+	    	product_index = #{product_index},
+	    	bigSort = #{bigSort},
+	    	middleSort = #{middleSort},
+	    	product_name = #{product_name},
+	    	origin_price = #{origin_price},
+	    <if test="sale_price == -1">
+	    	sale_price = null,
+	    </if>
+	    <if test="sale_price > -1">
+	    	sale_price = #{sale_price},
+	    </if>
+	    	brand = #{brand},
+	    	inventory = #{inventory},
+	    <if test="thumbnail_image != ''">
+	    	thumbnail_image = #{thumbnail_image},
+	    </if>
+	    <if test="detail_image != ''">
+	    	detail_image = #{detail_image},
+	    </if>
+	    	delivery_free_YN = #{delivery_free_YN}
+    	WHERE product_index = #{origin_product_index}
+    </update>
     
 </mapper>
