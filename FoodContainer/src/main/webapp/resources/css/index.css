@@ -22,27 +22,34 @@
 	left : -5px;
 }
 
-.soldout{
-	width : 100%;
-	max-width : 250px;
-	height : 100%;
-	max-height : 250px;
-	background-color : gray;
-	opacity : 0.5;
-	z-index : 0.5;
-	position : absolute;
-	top : 0px;
+@media screen and (min-width : 600px){
+	.soldout{
+		width : 100%;
+		max-width : 250px;
+		height : 100%;
+		max-height : 250px;
+		background-color : gray;
+		opacity : 0.5;
+		z-index : 0.5;
+		position : absolute;
+		top : 0px;
+	}
 }
 
 @media screen and (max-width : 600px){
 	.soldout{
 		width : 100%;
-		max-width : 150px;
+		max-width : 149px;
 		height : 100%;
 		max-height : 180px;
 		background-color : gray;
 		opacity : 0.5;
 		z-index : 0.5;
+		position : relative;
+		top : -330px;
+		margin : 0px;
+		border-radius : 5px 5px 0px 0px;
+		
 	}
 }
 
@@ -74,6 +81,7 @@
 @media screen and (min-width : 600px){
 	.popular:hover .indexSubImg{
 		display : block;
+		z-index : 2;
 	}
 }
 
@@ -230,7 +238,7 @@
 	display : inline-block;
 	border : 1px solid #DCDCDC;
 	border-radius : 5px;
-	width : 155px;
+	width : 150px;
 	height : auto;
 }
 
@@ -244,11 +252,11 @@
 }
 
 .indexSoldM{
-	max-width : 160px;
-	max-height : 190px;
+	max-width : 150px;
+	max-height : 180px;
 	z-index : 1;
-	position : absolute;
-	left : 15px;
+	position : relative;
+	top : -160px;
 }
 
 /*모바일 베스트 레시피 카드*/
@@ -300,11 +308,46 @@
 	max-height : 190px;
 }
 
+.pListSoldout{
+	width : 100%;
+	max-width : 250px;
+	height : 100%;
+	max-height : 190px;
+	background-color : gray;
+	opacity : 0.5;
+	z-index : 0.5;
+	position : absolute;
+	top : 0px;
+}
+
+@media screen and (max-width : 600px){
+	.pListSoldout{
+		width : 100px;
+		height : 100px;
+		background-color : gray;
+		opacity : 0.5;
+		z-index : 0.5;
+		position : relative;
+		top : -100px;
+		border-radius : 10px 0px 0px 0px;
+	}
+}
+
 .pListSold{
 	max-height : 190px;
 	z-index : 1;
 	position : absolute;
 	left : -5px;
+}
+
+@media screen and (max-width : 600px){
+	.pListSold{
+		max-width : 100px;
+		max-height : 100px;
+		z-index : 1;
+		position : absolute;
+		left : -3px;
+	}
 }
 
 @media screen and (max-width : 600px){
@@ -339,6 +382,7 @@
 	left : 60%;
 	top : 45%;
 	display : none;
+	z-index : 2;
 }
 
 /*상품 호버*/
@@ -496,6 +540,26 @@ a{
 .viewImg{
 	width : 100%;
 	max-width : 400px;
+}
+
+.viewSoldout{
+	width : 100%;
+	max-width : 400px;
+	height : 100%;
+	max-height : 400px;
+	background-color : gray;
+	opacity : 0.5;
+	z-index : 0.5;
+	position : absolute;
+	top : 0px;
+}
+
+.viewSold{
+	max-width : 400px;
+	max-height : 400px;
+	z-index : 1;
+	position : absolute;
+	left : -5px;
 }
 
 .pViewCard{
@@ -812,4 +876,54 @@ a{
 	opacity : 0;
 	z-index : 1;
 	display : none;
+}
+
+.topTooltipSold{
+	position : absolute;
+	top : 560px;
+	left : 480px;
+	margin: 50px;
+ 	width:250px; 
+ 	height:80px;
+ 	background:#198754; 
+  	border-radius: 10px;
+  	text-align : center;
+  	display:none;
+  	z-index : 2;
+}
+
+.topTooltipSold:after{
+	border-top:0px solid transparent; 
+ 	border-left: 10px solid transparent; 
+ 	border-right: 10px solid transparent; 
+	border-bottom: 10px solid #198754; 
+ 	content:""; 
+ 	position:absolute;
+ 	top:-10px;
+	left:110px; 
+}
+
+@media screen and (max-width : 600px){
+	.topTooltipSold{
+		position : absolute;
+		top : 885px;
+		left : -30px;
+		margin: 50px;
+	 	width:250px; 
+	 	height:80px;
+	 	background:#198754; 
+	  	border-radius: 10px;
+	  	text-align : center;
+	}
+
+	.topTooltipSold:after{
+		border-top:0px solid transparent; 
+	 	border-left: 10px solid transparent; 
+	 	border-right: 10px solid transparent; 
+		border-bottom: 10px solid #198754; 
+	 	content:""; 
+	 	position:absolute;
+	 	top:-10px;
+		left:80px; 
+	}
 }

@@ -164,24 +164,32 @@
 	
 	//툴팁
 	function viewCart(obj){
-		$(".topTooltip").css("display","inline-block");
-		$(".outter").css("display","block");
-		
 		var loginCheck = $("#viewLoginCheck").val();
 		var pram = document.location.href;
 		var pIndex = pram.substring(pram.length-5,pram.length);
 		console.log(loginCheck);
 		console.log(pIndex);
-		if(loginCheck == ""){
+		
+		var inventory = $(".inventory").val();
+		
+		if(inventory < 1){
+			$(".topTooltipSold").css("display","inline-block");
+			$(".outter").css("display","block");
+		}else{
+			$(".topTooltip").css("display","inline-block");
+			$(".outter").css("display","block");
 			
-			$.ajax({
-				url : "noMemberCartCookie.do",
-				type : "get",
-				data : "product_index="+pIndex,
-				succese : function(){
-							
-				}
-			});
+			if(loginCheck == ""){
+				
+				$.ajax({
+					url : "noMemberCartCookie.do",
+					type : "get",
+					data : "product_index="+pIndex,
+					succese : function(){
+								
+					}
+				});
+			}
 		}
 	}
 	
@@ -195,6 +203,7 @@
 	
 	function outter(){
 		$(".topTooltip").css("display","none");
+		$(".topTooltipSold").css("display","none");
 		$(".outter").css("display","none");
 	}
 	

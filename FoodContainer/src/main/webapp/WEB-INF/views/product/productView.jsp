@@ -52,7 +52,15 @@
                 	<div class="pViewCard">
 				      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 				        <div class="col-auto d-lg-block viewStarM">
-				        	<img src="<%=request.getContextPath()%>/resources/img/${view.brand}/${view.middleSort}/${view.thumbnail_image}" alt="${view.product_name}" class="img-fluid viewImg">
+				        	<div>
+					        	<img src="<%=request.getContextPath()%>/resources/img/${view.brand}/${view.middleSort}/${view.thumbnail_image}" alt="${view.product_name}" class="img-fluid viewImg">
+					        	<c:if test="${view.inventory == 0 }">
+									<img src="<%=request.getContextPath()%>/resources/img/매진.png" class="card-img-top viewSold">
+									<div class="viewSoldout"></div>
+									<input type="hidden" class="inventory" value="${view.inventory}">
+								</c:if>
+				        	</div>
+				        	
 				        	<div class="viewStar">
 				        		<span>평점 : 
 				        		<span class="fs-4 productViewStar">
@@ -425,6 +433,11 @@
     	<p>상품을 장바구니에 담았습니다.</p>
     	<button type='button' class='btn btn-light' onclick="shopping(this)">상품 더보기</button>
     	<button type='button' class='btn btn-light' onclick="moveCart(this)">장바구니로 이동</button>
+	</div>
+	
+	<div class="topTooltipSold">
+		<br>
+    	<p style="color:white; font-size:1.2rem;">매진 된 상품입니다.</p>
 	</div>
     
     <!-- 푸터 -->
