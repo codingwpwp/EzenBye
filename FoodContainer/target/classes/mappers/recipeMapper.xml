@@ -4,9 +4,29 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="team.project.mapper.recipeMapper" >
-<select id="selectRecipe">
-SELECT * FROM recipe
+
+<!-- 레시피 목록 리스트 -->
+<select id="recipeList" resultType="RecipeVO">
+	SELECT * FROM recipe where del_yn = 'N'		
 </select>
+
+<!-- 레시피 상세 -->
+<select id="recipeRead" parameterType="int" resultType="RecipeVO">
+SELECT * FROM recipe where recipe_index =#{recipe_index}
+
+</select>
+
+<!-- 레시피 게시글 조회수 -->
+<update id="recipeHit" parameterType="int">
+UPDATE recipe set hit =hit+1 where recipe_index=#{recipe_index}
+</update>
+
+<!-- 레시피 게시글 갯수 -->
+<select id="countRecipe" resultType="int">
+SELECT count(recipe_index) from recipe
+</select>
+
+
 
 <!-- 레시피작성 -->
  <insert id="insertRecipe"  parameterType="RecipeVO">
@@ -31,7 +51,7 @@ SELECT * FROM recipe
  
  </insert>
  
-
+<!-- 레시피 수정 -->
  <update id="updateRecipe" parameterType="RecipeVO">
 
 		UPDATE recipe SET

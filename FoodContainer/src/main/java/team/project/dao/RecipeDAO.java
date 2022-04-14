@@ -15,9 +15,22 @@ public class RecipeDAO {
 	
 	private static final String Namespace = "team.project.mapper.recipeMapper";
 	
-//	public List<RecipeVO> selectList(RecipeVO vo) throws Exception {
-//		return sqlSession.selectList(Namespace + ".selectRecipe");
-//	}
+	//레시피 목록 조회
+	public List<RecipeVO> recipeList() throws Exception {
+		return sqlSession.selectList(Namespace + ".recipeList");
+	}
+	//레시피 상세 조회 
+	public RecipeVO recipeRead(int recipe_index) throws Exception{
+		return sqlSession.selectOne(Namespace+".recipeRead",recipe_index);
+	}
+	//레시피 게시물 조회수
+	public void recipeHit(int recipe_index) throws Exception{
+		sqlSession.update(Namespace+".recipeHit",recipe_index);
+	}
+	//레시피 게시물 총 개수
+	public int countRecipe() throws Exception{
+		return sqlSession.selectOne(Namespace+".countRecipe");
+	}
 	
 	//레시피작성
 	public void insertRecipe(RecipeVO vo)throws Exception{
@@ -26,11 +39,7 @@ public class RecipeDAO {
 		
 	}
 
-
-	
-	
-	
-
-	
-	
+		
 }
+
+

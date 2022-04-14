@@ -1,8 +1,11 @@
 package team.project.controller;
 
+import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -31,18 +34,24 @@ public class RecipeController {
 	@Autowired
 	private ProductService productService;
 	
-//	@RequestMapping(value = "/recipelist.do", method = RequestMethod.GET)
-//	public String selectList(Locale locale, Model model,RecipeVO vo) throws Exception{
-//		List<RecipeVO> list = recipeService.selectList(vo);
-//		return "recipe/recipemain";
-//	}
-	
-	
+
+	//레시피 목록 조회
+	@RequestMapping(value = "/recipeList", method = RequestMethod.GET)
+	public String selectList(Locale locale, Model model,int recipe_index) throws Exception{
+		List<RecipeVO> recipeList = recipeService.recipeList();		
+		model.addAttribute("recipeList", recipeList);	
+		return "recipe/recipeList";
+	}
 	
 	
 	//레시피메인
 	@RequestMapping(value = "/recipemain.do", method = RequestMethod.GET)
-	public String recipe(Locale locale, Model model) {
+	public String recipe(Locale locale, Model model,RecipeVO vo) throws Exception{
+		List<RecipeVO> recipeList = recipeService.recipeList();
+		model.addAttribute("recipeList", recipeList);
+		int count = recipeService.countRecipe();
+		
+		
 		return "recipe/recipemain";
 	}
 	//레시피 작성 화면 view
@@ -50,7 +59,6 @@ public class RecipeController {
 	public String recipeWrite(Locale locale, Model model,ProductVO productVO) throws Exception{
 		//셀렉터 박스 상품 리스트
 		List<ProductVO> ProductListAll = productService.productListAll(productVO);
-		System.out.println(ProductListAll);
 		model.addAttribute("productListAll",ProductListAll);
 		return "recipe/recipewrite";
 	}
@@ -71,13 +79,19 @@ public class RecipeController {
 	
 	//레시피 상세확인
 	@RequestMapping(value = "/recipeview.do", method = RequestMethod.GET)
-	public String recipe3(Locale locale, Model model) {
+	public String recipe3(Locale locale, Model model,RecipeVO vo,HttpServletRequest request) throws Exception {
+		logger.info("recipeRead");
+		model.addAttribute("read", recipeService.recipeRead(vo.getRecipe_index()));
+		
+	
 		return "recipe/recipeview";
 	}
 	//레시피내용 수정
 	@RequestMapping(value = "/recipemodify.do", method = RequestMethod.GET)
-	public String recipe4(Locale locale, Model model,RecipeVO vo) {
-	
+	public String recipe4(Locale locale, Model model,RecipeVO vo,ProductVO productVO) throws Exception{
+		List<ProductVO> ProductListAll = productService.productListAll(productVO);
+		model.addAttribute("productListAll",ProductListAll);
+		
 		return "recipe/recipemodify";
 	}
 	
