@@ -41,6 +41,7 @@ public class ShopBasketController {
 		Cookie[] cookies = request.getCookies();
 		String noMemberCartCookie = null;
 		ArrayList<String> noMemberCartArr = new ArrayList<>();
+		ArrayList<String> noMemberCartArrProductCnt = new ArrayList<>();
 		
 		if(cookies != null) {
 			for(Cookie cookie : cookies) {
@@ -54,12 +55,14 @@ public class ShopBasketController {
 			String[] tempCookieArr = noMemberCartCookie.split(",");
 			
 			for(int i=0; i<tempCookieArr.length; i++) {
-				noMemberCartArr.add(tempCookieArr[i]);
+				noMemberCartArr.add(tempCookieArr[i].substring(0,tempCookieArr[i].length()-1));
+				noMemberCartArrProductCnt.add(tempCookieArr[i].substring(tempCookieArr[i].length()-1,tempCookieArr[i].length()));
 			}
 			
 			List<ProductVO> noMemberCartList = productService.noMemberCartList(noMemberCartArr);
 			
 			model.addAttribute("noMemberCart",noMemberCartList);
+			model.addAttribute("noMemberCartCookie",tempCookieArr);
 		}
 		
 		return "shopbasket/shopBasketMain";

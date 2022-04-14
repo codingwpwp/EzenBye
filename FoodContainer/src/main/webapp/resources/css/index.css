@@ -927,3 +927,9 @@ a{
 		left:80px; 
 	}
 }
+
+.pCnt{
+	width:30px;
+	display : inline-block;
+	text-align : center;
+}

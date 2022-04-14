@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -105,7 +108,15 @@
 						        	</div>
 								</div>
 								<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-number">
-									<i class="bi bi-dash shopbasket-icon"></i>&nbsp; 1 &nbsp; <i class="bi bi-plus shopbasket-icon"></i>
+									<i class="bi bi-dash shopbasket-icon"></i>&nbsp; 
+										<c:forEach items="${noMemberCartCookie}" var="noMemberCartCookie">
+										<c:set var="pCnt" value="${noMemberCartCookie}" />
+										<c:set var="length" value="${fn:length(pCnt)}"/>
+											<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-1)}">
+												${fn:substring(pCnt,length-1,length)}
+											</c:if>
+										</c:forEach> 
+									&nbsp; <i class="bi bi-plus shopbasket-icon"></i>
 								</div>
 							</div>
 						</c:if>
@@ -147,7 +158,15 @@
 						        	</div>
 								</div>
 								<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-number">
-									<i class="bi bi-dash shopbasket-icon"></i>&nbsp; 1 &nbsp; <i class="bi bi-plus shopbasket-icon"></i>
+									<i class="bi bi-dash shopbasket-icon"></i>&nbsp; 
+										<c:forEach items="${noMemberCartCookie}" var="noMemberCartCookie">
+										<c:set var="pCnt" value="${noMemberCartCookie}" />
+										<c:set var="length" value="${fn:length(pCnt)}"/>
+											<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-1)}">
+												${fn:substring(pCnt,length-1,length)}
+											</c:if>
+										</c:forEach>  
+									&nbsp; <i class="bi bi-plus shopbasket-icon"></i>
 								</div>
 							</div>
 						</c:if>
