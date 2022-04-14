@@ -18,10 +18,9 @@ public interface OrdersService {
 	OrdersVO ordersDetailJoin(String member_order_index) throws Exception;
 	
 	
-	/* 회원&비회원 구매 페이지 */
+	/* 회원 구매 페이지 */
 	
-	//비회원 구매페이지에서 뿌려질 상품목록들
-	List<CartVO> noMemberPurchaseList(String[] product_index, int[] cart_count) throws Exception;
+	
 	
 	
 	/* 여기서 부터는 관리자페이지 */

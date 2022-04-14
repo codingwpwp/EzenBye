@@ -308,7 +308,7 @@
                             <div class="col-6 col-sm-8 d-flex flex-column">
                                 <div class="mb-auto fw-bold pt-2">${cart.product_name}</div>
                                 <div class="fw-bold pb-2"><span class="productPrice">${cart.origin_price}</span>원 | <span class="productCount">${cart.cart_count}</span>개</div>
-                                <input type="hidden" name="price" value="${cart.origin_price}">
+                                <input type="hidden" id="cartItem" name="${cart.product_index}" value="${cart.cart_count}">
                             </div>
                         </div>                    
                     </c:forEach>

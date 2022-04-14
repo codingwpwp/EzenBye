@@ -42,25 +42,8 @@ public class OrdersServiceImpl implements OrdersService{
 		return ordersDetailJoin;
 	}
 	
-	/* 회원&비회원 구매 페이지 */
+	/* 회원 구매 페이지 */
 	
-	// 비회원 구매페이지에서 뿌려질 상품목록들
-	@Override
-	public List<CartVO> noMemberPurchaseList(String[] product_index, int[] cart_count) throws Exception {
-		
-		
-		List<String> productIndexList = new ArrayList<String>();
-		for(String pidx : product_index) {
-			productIndexList.add(pidx);
-		}
-		
-		List<CartVO> CartList = ordersDAO.noMemberPurchaseList(productIndexList);
-		for(int i = 0; i < CartList.size(); i++) {
-			CartList.get(i).setCart_count(cart_count[i]);
-		}
-		
-		return CartList;
-	}
 	
 	
 	

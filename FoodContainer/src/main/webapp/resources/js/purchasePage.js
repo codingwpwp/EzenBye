@@ -62,7 +62,6 @@ var receiverPhoneSw = 0;
 
 // 비회원 전용 추가 유효성 검사 체크 스위치들
 var passwordSw = 0;
-var orderNameSw = 0;
 var orderPhoneSw = 0;
 
 
@@ -175,70 +174,37 @@ function checkedThree(obj){
 	}
 }
 
-// 주문자명&받는분 onblur 유효성검사
+// 받는분 onblur 유효성검사
 function checkName(obj){
 	var nameReg = /^[가-힣]{2,6}$/;
 	if(obj.value == "" || !nameReg.test(obj.value)){
-		if($(obj).attr("name") == "name"){
-			$("#orderNameSpan").css("color", "red");
-			$("#orderNameSpan").prev().text("*");
-			setTimeout(function(){
-	            $("#orderNameSpan").css("color", "black");
-	        },500);
-	        orderNameSw = 0;
-		}else{
-			$("#receiverSpan").css("color", "red");
-			$("#receiverSpan").prev().text("*");
-			setTimeout(function(){
-	            $("#receiverSpan").css("color", "black");
-	        },500);
-	        receiverSw = 0;
-		}
+		$("#receiverSpan").css("color", "red");
+		$("#receiverSpan").prev().text("*");
+		setTimeout(function(){
+            $("#receiverSpan").css("color", "black");
+        },500);
+        receiverSw = 0;
 	}else{
-		if($(obj).attr("name") == "name"){
-			$("#orderNameSpan").css("color", "green");
-			$("#orderNameSpan").prev().text("");
-			setTimeout(function(){
-	            $("#orderNameSpan").css("color", "black");
-	        },500);
-			orderNameSw = 1;
-		}else{
-			$("#receiverSpan").css("color", "green");
-			$("#receiverSpan").prev().text("");
-			setTimeout(function(){
-	            $("#receiverSpan").css("color", "black");
-	        },500);
-	        receiverSw = 1;
-		}
+		$("#receiverSpan").css("color", "green");
+		$("#receiverSpan").prev().text("");
+		setTimeout(function(){
+            $("#receiverSpan").css("color", "black");
+        },500);
+        receiverSw = 1;
 	}
 }
 
 // 주문자와 동일
 function sameName(obj){
-	var nameReg = /^[가-힣]{2,6}$/;
-
 	if($(obj).is(":checked")){
-		// 유효성검사에 통과했을때
-		if(document.getElementById("name").value != "" && nameReg.test(document.getElementById("name").value)){
-			$("#reciever").val($("#name").val());
-			$("#reciever").prop('readonly', true);
-			$("#receiverSpan").css("color", "green");
-			$("#receiverSpan").prev().text("");
-			setTimeout(function(){
-	            $("#receiverSpan").css("color", "black");
-	        },300);
-	        orderNameSw = 1;
-	        receiverSw = 1;
-	        
-		}else{ // 유효성검사에 통과하지 못했을때
-			$("#orderNameSpan").css("color", "red");
-			$("#orderNameSpan").prev().text("*");
-			$(obj).prop("checked", false);
-			setTimeout(function(){
-	            $("#orderNameSpan").css("color", "black");
-	        },500);
-	        orderNameSw = 0;
-		}
+		$("#reciever").val($("#name").val());
+		$("#reciever").prop('readonly', true);
+		$("#receiverSpan").css("color", "green");
+		$("#receiverSpan").prev().text("");
+		setTimeout(function(){
+            $("#receiverSpan").css("color", "black");
+        },300);
+        receiverSw = 1;
 	}else{
 		$("#reciever").val("");
 		$("#reciever").prop('readonly', false);
@@ -577,95 +543,90 @@ function usePoint(obj){
 function requestPay(){
 
 	var requiredSw = 0;
-	/*
-	console.log("addressSw :" + addressSw);
-	console.log("checkboxSw :" + checkboxSw);
-	console.log("receiverSw :" + receiverSw);
-	console.log("receiverPhoneSw :" + receiverPhoneSw);
-	console.log("passwordSw :" + passwordSw);
-	console.log("orderNameSw :" + orderNameSw);
-	console.log("orderPhoneSw :" + orderPhoneSw);
-	*/
-	var totalSw = addressSw + checkboxSw + receiverSw + receiverPhoneSw + passwordSw + orderNameSw + orderPhoneSw;
+	var totalSw = checkboxSw + orderPhoneSw + passwordSw + receiverSw + addressSw + receiverPhoneSw;
 	
 	if($("#agreeThreeCheckbox").val() == undefined){
-		requiredSw = 5;
+		// 회원인 경우
+		requiredSw = 4;
 	}else{
-		requiredSw = 7;
+		// 비회원인 경우
+		requiredSw = 6;
 	}
 	
 	if(totalSw == requiredSw){
-		var order_index = "";
 		
-		var now = new Date();
-		
-		var year = "";
-		year += now.getFullYear();
-		year = year.substr(2, 2);
-		var month = ('0' + (now.getMonth() + 1)).slice(-2);
-		var day = ('0' + now.getDate()).slice(-2);
-		var hours = ('0' + now.getHours()).slice(-2); 
-		var minutes = ('0' + now.getMinutes()).slice(-2);
-		var seconds = now.getSeconds();
-		
-		var keylist="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
-		var temp="";
-		
-	    for(i=0;i<3;i++){
-	        temp += keylist.charAt(Math.floor(Math.random()*keylist.length));
-	    }
-	    
-	    // console.log(temp);
-		
-		order_index = year + month + day + hours + minutes + seconds + temp;
-		
-		// console.log(order_index);
-		
-		var orderPhone = "";
-		if($("#agreeThreeCheckbox").val() == undefined){	// 회원 구매페이지의 경우
-			orderPhone = $("#orderPhone").val();
-		}else{	// 비회원 구매페이지의 경우
-			orderPhone = $("select[name='orderPhone1']").val() + "-" + $("input[name='orderPhone2']").val() + "-" + $("input[name='orderPhone3']").val();
-			$("input[name='no_member_order_index']").val(order_index);
-			$("input[name='phone']").val(orderPhone);
-			$("input[name='reciever_phone']").val($("select[name='receiverPhone1']").val() + "-" + $("input[name='receiverPhone2']").val() + "-" + $("input[name='receiverPhone3']").val());
-			$("input[name='address").val($("input[name='postcode']").val() + "|" + $("input[name='mainAddress']").val() + "|" + $("input[name='detailAddress']").val());
-			if(deliveryPrice == 0){
-				$("input[name='delivery_free_YN']").val("Y");
-			}else{
-				$("input[name='delivery_free_YN']").val("N");
+		var dataInfo = "";
+		$(".productItem").each(function(index, item){
+			dataInfo += $(item).find("#cartItem").attr("name") + "=" + $(item).find("#cartItem").val()
+			if(index + 1 != $(".productItem").length){
+				dataInfo += "&";
 			}
-			$("input[name='pay_price']").val(totalPrice);
-		}
+		});
 		
-		
-		
-		var IMP = window.IMP;
-	    IMP.init("imp13071934");
-	    
-	    IMP.request_pay({ // param
-	        pg: "html5_inicis",                     // pg사 선택
-	        pay_method: "card",                     // 지불 수단
-	        merchant_uid: order_index,   			// 주문번호
-	        name: "푸드컨테이너 상품",              	    // 상품이름
-	        amount: 100,                    		// 가격
-	        buyer_email: $("#email").val(),      	// 구매자 이메일
-	        buyer_name: $("#name").val(),   	// 구매자 이름
-	        buyer_tel: orderPhone,           		// 구매자 번호
-	        buyer_addr: $("input[name='mainAddress']").val() + "|" + $("input[name='detailAddress']").val(),   // 구매자 주소
-	        buyer_postcode: $("input[name='postcode']").val(),   // 구매자 우편번호
-	    }, function (rsp) {
-	    
-	        if (rsp.success) {
-		
-				$("#puchaseForm").submit();
-				
-	        } else {
-	            alert("결제에 실패하였습니다 (" +  rsp.error_msg + ")");
-	        }
-	        
-	    });
-		
+		$.ajax({
+			url: "checkProductInventory.do",
+			type: "post",
+			data: dataInfo,
+			success: function(data){
+				status = data.trim();
+				if(status == "Fail"){
+					alert("결제에 실패하였습니다 (일부 상품이 현재 남아있는 재고보다 많습니다)");
+				}else{
+					console.log(status);
+					if($("#agreeThreeCheckbox").val() == undefined){
+						// 회원 구매페이지의 경우
+						orderPhone = $("#orderPhone").val();
+					}else{
+						// 비회원 구매페이지의 경우
+						orderPhone = $("select[name='orderPhone1']").val() + "-" + $("input[name='orderPhone2']").val() + "-" + $("input[name='orderPhone3']").val();
+						$("input[name='no_member_order_index']").val(status);
+						$("input[name='phone']").val(orderPhone);
+						$("input[name='reciever_phone']").val($("select[name='receiverPhone1']").val() + "-" + $("input[name='receiverPhone2']").val() + "-" + $("input[name='receiverPhone3']").val());
+						$("input[name='address").val($("input[name='postcode']").val() + "|" + $("input[name='mainAddress']").val() + "|" + $("input[name='detailAddress']").val());
+						if(deliveryPrice == 0){
+							$("input[name='delivery_free_YN']").val("Y");
+						}else{
+							$("input[name='delivery_free_YN']").val("N");
+						}
+						$("input[name='pay_price']").val(totalPrice);
+					}
+					
+					// 결제 이니시스입니다.
+					var IMP = window.IMP;
+				    IMP.init("imp13071934");
+				    IMP.request_pay({
+				        pg: "html5_inicis",                     
+				        pay_method: "card",                     // 지불수단
+				        merchant_uid: status,   				// 주문번호
+				        name: "푸드컨테이너 상품",              	    // 상품이름
+				        amount: 100,                    		// 가격
+				        buyer_email: $("#email").val(),      	// 구매자 이메일
+				        buyer_name: $("#name").val(),   		// 구매자 이름
+				        buyer_tel: orderPhone,           		// 구매자 번호
+				        buyer_addr: $("input[name='mainAddress']").val() + "|" + $("input[name='detailAddress']").val(),   // 구매자 주소
+				        buyer_postcode: $("input[name='postcode']").val(),   // 구매자 우편번호
+				    }, function (rsp) {
+					
+						// 결제 성공!
+				        if (rsp.success) {
+							$("#puchaseForm").submit();
+							
+						// 결제 실패!
+				        } else {
+				            alert("결제에 실패하였습니다 (" +  rsp.error_msg + ")");
+				            // 다시 상품 채워놓기
+							$.ajax({
+								url: "plusInventory.do",
+								type: "post",
+								data: dataInfo,
+								success: function(){}	// 아무것도 없으면 안써도 되나 확인하기 귀찮아서 일단 내비둠
+							});
+				        }
+				    });
+				    			
+				}
+			}
+		});
 	}else{
 		alert("입력부족");
 	}

@@ -34,12 +34,9 @@ public class OrdersDAO {
 		return sqlSession.selectOne(Namespace+".ordersDetailJoin", member_order_index);
 	}
 	
-	/* 회원&비회원 구매 페이지 */
+	/* 회원 구매 페이지 */
 	
-	// 비회원 구매페이지에서 뿌려질 상품목록들
-	public List<CartVO> noMemberPurchaseList(List<String> productIndexList) throws Exception {
-		return sqlSession.selectList(Namespace + ".noMemberPurchaseList", productIndexList);
-	}
+
 	
 	/* 여기서 부터는 관리자페이지 */
 	
