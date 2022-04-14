@@ -65,6 +65,9 @@
 								<div class="card" style="width: 18rem;">
 								<a href="productView.do?product_index=${ProductVO.product_index}" onclick="productCookie(this)">
 								  <img src="<%=request.getContextPath()%>/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="card-img-top cardImg" alt="${ProductVO.product_name }">
+								  <c:if test="${ProductVO.inventory == 0 }">
+								  	<img src="<%=request.getContextPath()%>/resources/img/매진.png" class="card-img-top pListSold">
+								  </c:if>
 								  <div class="card-body">
 								    <p class="card-text">
 								    	<c:if test="${ProductVO.quantity >= 500}">
@@ -138,7 +141,7 @@
 					<div class="productListCardM">
 						<c:forEach items="${productListAll}" var="ProductVO">
 						<div class="productListMDiv">
-							
+						<a href="productView.do?product_index=${ProductVO.product_index}" onclick="productCookie(this)">
 							<div class="productListMImg">
 								<img src="<%=request.getContextPath()%>/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="img-fluid" alt="${ProductVO.product_name}">
 								<div class="productListStarM">
@@ -176,7 +179,7 @@
 								    		</c:when>
 								    	</c:choose>
 							</div>
-							
+							</a>
 							<input type="hidden" name="index" value="${ProductVO.product_index}">
 							<div class="pListSubImgM">
 								<c:if test="${member.id != null }">

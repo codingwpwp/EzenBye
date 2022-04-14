@@ -115,7 +115,13 @@
 								<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3 popular d-flex justify-content-center">
 									<div class="card" style="width: 18rem;">
 									<a href="productView.do?product_index=${popularList.product_index}" onclick="productCookie(this)">
-									  <img src="<%=request.getContextPath()%>/resources/img/${popularList.brand}/${popularList.middleSort }/${popularList.thumbnail_image}" class="card-img-top" id="cardImg" alt="${popularList.product_name }">
+									  <div>
+										  <img src="<%=request.getContextPath()%>/resources/img/${popularList.brand}/${popularList.middleSort }/${popularList.thumbnail_image}" class="card-img-top" id="cardImg" alt="${popularList.product_name }">
+										  <c:if test="${popularList.inventory == 0 }">
+									  	  	<img src="<%=request.getContextPath()%>/resources/img/매진.png" class="card-img-top indexSold">
+									  	  	<div class="soldout"></div>
+									  	  </c:if>
+									  </div>
 									  
 									  <div class="card-body">
 									    <p class="card-text">
@@ -220,7 +226,13 @@
 							<c:forEach items="${popularList}" var="popularList" begin="${ran}" end="${ran+3}">
 								<div class="cardM">
 								<a href="productView.do?product_index=${popularList.product_index}" onclick="productCookie(this)">
-									<img src="<%=request.getContextPath()%>/resources/img/${popularList.brand}/${popularList.middleSort }/${popularList.thumbnail_image}" class="img-fluid" id="cardMimg" alt="${popularList.product_name }">
+									<div>
+										<img src="<%=request.getContextPath()%>/resources/img/${popularList.brand}/${popularList.middleSort }/${popularList.thumbnail_image}" class="img-fluid" id="cardMimg" alt="${popularList.product_name }">
+										<c:if test="${popularList.inventory == 0 }">
+									  	  	<img src="<%=request.getContextPath()%>/resources/img/매진.png" class="card-img-top indexSoldM">
+									  	</c:if>
+									  	<div class="soldout"></div>
+									</div>
 									<div class="cardMContent">
 										<span style="color:red;">[인기]</span>
 										<span>[${popularList.brand }]</span>

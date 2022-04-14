@@ -13,6 +13,7 @@
 			var html = "<i class='bi bi-dash-square-fill' onclick='minusFn(this)'></i> "+num+" <i class='bi bi-plus-square-fill' onclick='plusFn(this)'></i>";
 			$(".totalPrice").html("합계 : <span class='fs-3'>"+tPrice.toLocaleString()+"원</span>");
 			$(".productNum").html(html);
+			$(".productNumM").html(html);
 		}
 	}
 		
@@ -27,6 +28,7 @@
 			var html = "<i class='bi bi-dash-square-fill' onclick='minusFn(this)'></i> "+num+" <i class='bi bi-plus-square-fill' onclick='plusFn(this)'></i>";
 			$(".totalPrice").html("합계 : <span class='fs-3'>"+tPrice.toLocaleString()+"원</span>");
 			$(".productNum").html(html);
+			$(".productNumM").html(html);
 		}
 	}
 	
@@ -159,4 +161,40 @@
 			$(".subMenuGroup").find("input:eq(2)").next("label").html("취소 규정");
 		}
 	})
+	
+	//툴팁
+	function viewCart(obj){
+		$(".topTooltip").css("display","inline-block");
+		$(".outter").css("display","block");
+		
+		var loginCheck = $("#viewLoginCheck").val();
+		var pram = document.location.href;
+		var pIndex = pram.substring(pram.length-5,pram.length);
+		console.log(loginCheck);
+		console.log(pIndex);
+		if(loginCheck == ""){
+			
+			$.ajax({
+				url : "noMemberCartCookie.do",
+				type : "get",
+				data : "product_index="+pIndex,
+				succese : function(){
+							
+				}
+			});
+		}
+	}
+	
+	function shopping(obj){
+		$(".topTooltip").css("display","none");
+	}
+	
+	function moveCart(obj){
+		location.href = "shopBasket_main.do";
+	}
+	
+	function outter(){
+		$(".topTooltip").css("display","none");
+		$(".outter").css("display","none");
+	}
 	

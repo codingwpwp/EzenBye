@@ -14,6 +14,38 @@
 	max-height : 250px;
 }
 
+.indexSold{
+	max-height : 190px;
+	z-index : 1;
+	position : absolute;
+	top : 30px;
+	left : -5px;
+}
+
+.soldout{
+	width : 100%;
+	max-width : 250px;
+	height : 100%;
+	max-height : 250px;
+	background-color : gray;
+	opacity : 0.5;
+	z-index : 0.5;
+	position : absolute;
+	top : 0px;
+}
+
+@media screen and (max-width : 600px){
+	.soldout{
+		width : 100%;
+		max-width : 150px;
+		height : 100%;
+		max-height : 180px;
+		background-color : gray;
+		opacity : 0.5;
+		z-index : 0.5;
+	}
+}
+
 .card:hover{
 	cursor:pointer;
 }
@@ -211,6 +243,14 @@
 	height : 180px;
 }
 
+.indexSoldM{
+	max-width : 160px;
+	max-height : 190px;
+	z-index : 1;
+	position : absolute;
+	left : 15px;
+}
+
 /*모바일 베스트 레시피 카드*/
 .recipeCardM{
 	height : auto;
@@ -258,6 +298,13 @@
 
 .cardImg{
 	max-height : 190px;
+}
+
+.pListSold{
+	max-height : 190px;
+	z-index : 1;
+	position : absolute;
+	left : -5px;
 }
 
 @media screen and (max-width : 600px){
@@ -355,8 +402,7 @@
 }
 
 .productListMDiv{
-	height : 120px;
-	display : flex;
+	height : 125px;
 	border : 1px solid #DCDCDC;
 	border-radius : 10px;
 	margin-top : 10px;
@@ -365,21 +411,26 @@
 
 .productListMImg{
 	margin : 0px;
-	max-width : 100px;
+	width : 100px;
 	height : 100px;
 	display : inline-block;
+	text-align : center;
 }
 
 .productListMImg>img{
 	border-radius : 10px;
+	max-width : 100px;
+	max-height : 100px;
 }
 
 .productListContent{
 	margin : 0px;
-	width : 270px;
+	width : 260px;
 	height : 100px;
 	display : inline-block;
 	text-indent : 1em;
+	position : relative;
+	top : -15px;
 }
 
 .productListStar{
@@ -390,6 +441,7 @@
 	text-align : center;
 	font-size : 0.8rem;
 	color : orange;
+	max-height : 25px;
 }
 
 /* 모바일 가격 메세지*/
@@ -421,7 +473,9 @@
 .pListSubImgM{
 	width : 90px;
 	position : relative;
-	top : 40px;
+	top : -82px;
+	left : 300px;
+	z-index : 5;
 }
 
 a:link{
@@ -466,11 +520,17 @@ a{
 .productNum{
 	margin-top : 10px;
 	position: relative;
-	left : 250px;
+	left : 130px;
+}
+
+.productNumM{
+	margin-top : 10px;
+	position: relative;
+	left : 280px;
 }
 /*중간 이름*/
 .mdName{
-	margin-top : 20px;
+	margin-top : 10px;
 	font-size : 1.3rem;
 }
 
@@ -650,7 +710,7 @@ a{
 #pViewleft{
 	width : 100%;
 	max-width : 800px;
-	height : 200px;
+	height : 170px;
 	display : none;
 	border : 1px solid black;
 	background-color : white;
@@ -664,15 +724,15 @@ a{
 }
 
 .leftViewButtonDiv{
-	width : 320px;
+	width : 300px;
 	position : absolute;
-	left : 450px;
-	top : 30px;
+	left : 480px;
+	top : 25px;
 }
 
 .leftViewButton{
-	width : 150px;
-	height : 150px;
+	width : 130px;
+	height : 130px;
 }
 
 .productViewStar{
@@ -685,4 +745,71 @@ a{
 
 .productViewReviewStarM{
 	color : orange;
+}
+
+.topTooltip{
+	position : absolute;
+	top : 560px;
+	left : 480px;
+	margin: 50px;
+ 	width:250px; 
+ 	height:80px;
+ 	background:#198754; 
+  	border-radius: 10px;
+  	text-align : center;
+  	display:none;
+  	z-index : 2;
+}
+
+.topTooltip:after{
+	border-top:0px solid transparent; 
+ 	border-left: 10px solid transparent; 
+ 	border-right: 10px solid transparent; 
+	border-bottom: 10px solid #198754; 
+ 	content:""; 
+ 	position:absolute;
+ 	top:-10px;
+	left:110px; 
+}
+
+.topTooltip>p{
+	margin-top : 6px;
+	margin-bottom : 3px;
+	color : white;
+}
+
+@media screen and (max-width : 600px){
+	.topTooltip{
+		position : absolute;
+		top : 885px;
+		left : -30px;
+		margin: 50px;
+	 	width:250px; 
+	 	height:80px;
+	 	background:#198754; 
+	  	border-radius: 10px;
+	  	text-align : center;
+	}
+
+	.topTooltip:after{
+		border-top:0px solid transparent; 
+	 	border-left: 10px solid transparent; 
+	 	border-right: 10px solid transparent; 
+		border-bottom: 10px solid #198754; 
+	 	content:""; 
+	 	position:absolute;
+	 	top:-10px;
+		left:80px; 
+	}
+}
+
+.outter{
+	position : absolute;
+	top : 0px;
+	width : 100%;
+	height: 300%;
+	background-color : white;
+	opacity : 0;
+	z-index : 1;
+	display : none;
 }
