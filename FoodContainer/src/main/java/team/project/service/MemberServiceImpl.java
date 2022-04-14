@@ -95,6 +95,12 @@ public class MemberServiceImpl implements MemberService {
 		int mypageMemberDelete = memberDao.mypageMemberDelete(memberVO);
 		return mypageMemberDelete;
 	}
+	
+	@Override
+	public int mypageMemberModify(MemberVO memberVO) throws Exception {
+		int mypageMemberModify = memberDao.mypageMemberModify(memberVO);
+		return mypageMemberModify;
+	}
 
 	/* 여기서 부터는 관리자페이지 */
 	
@@ -126,6 +132,8 @@ public class MemberServiceImpl implements MemberService {
 	public int adminChangeMemberDel_yn(int member_index) throws Exception {
 		return memberDao.adminChangeMemberDel_yn(member_index);
 	}
+
+	
 
 	
 	

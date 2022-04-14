@@ -1,9 +1,11 @@
 package team.project.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -142,8 +144,8 @@ public class MypageController {
 	}
 	
 	// 개인정보 변경 비밀번호 입력
-	@RequestMapping(value ="mypage_PWCheck.do", method= RequestMethod.POST)
-	public String logingo(MemberVO vo,HttpServletRequest req,RedirectAttributes rttr) throws Exception{
+	@RequestMapping(value ="pwCheck.do", method= RequestMethod.POST)
+	public String logingo(MemberVO vo,HttpServletRequest req,RedirectAttributes rttr, HttpServletResponse response) throws Exception{
 
 		// 세션 소환
 		HttpSession session =req.getSession();
@@ -151,13 +153,38 @@ public class MypageController {
 		// 로그인 검증 과정(id, pw 비교해서 맞으면 login에 잘 담아서 오고 틀리면 null로 리턴)
 		MemberVO login = memberService.Login(vo);
 		
-		// 로그인 검증 이후 세션에 어떻게 담을지에 대한 과정
 		if(login !=null) {// 로그인 검증 통과의 경우
-			// 세션에 로그인 정보를 저장(member_index, id, name 만 저정해놨음)
 			return "redirect:mypage_changeInforOk.do";
 		}else {// 로그인 검증 실패의 경우
+			
+			response.setContentType("text/html; charset=UTF-8");
+			 
+			PrintWriter out = response.getWriter();
+			 
+			out.println("<script>alert('비밀번호가 틀렸습니다.'); </script>");
+			 
+			out.flush();
 			return "mypage/changeInfor";
 		}
+	}
+	
+	// 개인정보 변경
+	@RequestMapping(value ="mypageMemberModify.do", method= RequestMethod.POST)
+	public String mypageMemberModify(Locale locale, Model model, MemberVO memberVO) throws Exception{
+		
+		int mypageMemberModify = memberService.mypageMemberModify(memberVO);
+		
+		return "redirect:mypage_changeInforOk.do";
+	}
+	
+	// 개인정보 비번 변경
+	@RequestMapping(value = "mypageMemberpwModify.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String mypageMemberpwModify(String pw1, String pw, int member_index) throws Exception {
+		
+		String result = "true";
+		
+		return result;
 	}
 	
 	@RequestMapping(value = "mypage_main.do", method = RequestMethod.GET)
@@ -295,11 +322,19 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value = "mypage_changeInfor.do", method = RequestMethod.GET)
-	public String home11(Locale locale, Model model) {
+	public String home11(Locale locale, Model model) {	
 		return "mypage/changeInfor";
 	}
+	
 	@RequestMapping(value = "mypage_changeInforOk.do", method = RequestMethod.GET)
-	public String home12(Locale locale, Model model) {
+	public String home12(Locale locale, Model model, HttpSession session) throws Exception {
+		
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		int member_index = member.getMember_index();
+		MemberVO memberInfor = memberService.memberInfor(member_index);
+		
+		model.addAttribute("memberInfor",memberInfor);
+		
 		return "mypage/changeInforOk";
 	}
 	@RequestMapping(value = "mypage_addressManage.do", method = RequestMethod.GET)
