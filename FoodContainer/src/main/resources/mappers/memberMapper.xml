@@ -66,6 +66,12 @@
     	del_yn = 'Y', del_date = NOW(), del_reason = #{del_reason}
     	WHERE member_index = #{member_index}
     </update>
+    
+    <update id="mypageMemberModify" parameterType="MemberVO">
+    	UPDATE member SET
+    	name = #{name}, phone = #{phone}, nickname = #{nickname}
+    	WHERE member_index = #{member_index}
+    </update>
        
     <!-- 여기서 부터는 관리자페이지 -->
     

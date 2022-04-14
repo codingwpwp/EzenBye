@@ -1,5 +1,20 @@
 $(document).ready(function(){
 	
+	$(".nameCheck").hide();
+	$(".phoneCheck").hide();
+	$(".nicknameCheck").hide();
+	$(".nameCheck2").hide();
+	$(".phoneCheck2").hide();
+	$(".nicknameCheck2").hide();
+	$(".phoneCheck3").hide();
+	$(".phoneCheck4").hide();
+	$(".pwChe1").hide();
+	$(".pwChe2").hide();
+	$(".pwChe3").hide();
+	$(".pwChe4").hide();
+	$(".pwChe5").hide();
+	$(".pwChe6").hide();
+	
     var size_sw = 0;
     var left_full_menu = $("#asdieMenu");
 
@@ -343,6 +358,7 @@ function cartInsert(obj) {
 	}
 }
 
+// 회원탈퇴
 function deleteMember(obj) {
 	var YN = confirm("정말 탈퇴 하시겠습니까?");
 	if(YN) {
@@ -358,6 +374,191 @@ function deleteMember(obj) {
 				}
 			});
 	}
+}
+
+// 개인정보 변경 유효성 검사
+function mypageMemberModify(obj) {
+	var checkName = /^[가-힣]{2,6}$/g;
+	var checkphone2 = /^[0-9]{3,4}/g;
+	var checkphone3 = /^[0-9]{4}/g;
+	
+	var flag = true;
+	var form = $('form[name=memberModify]');
+	
+	var name = $(obj).parent().parent().find("input[name='name']").val();
+	var phone1 = $(obj).parent().parent().find("select[name='phone1']").val();
+	var phone2 = $(obj).parent().parent().find("input[name='phone2']").val();
+	var phone3 = $(obj).parent().parent().find("input[name='phone3']").val();
+	var nickname = $(obj).parent().parent().find("input[name='nickname']").val();
+	var nickChk =$("#nickChk").val();
+	var phonehap = "";
+	
+	if(name == ""){
+		$(".nameCheck").show();
+		$(".nameCheck2").hide();
+		$(obj).parent().parent().find("input[name='name']").focus();
+		flag = false;
+	}else if(!checkName.test(name)){
+		$(".nameCheck2").show();
+		$(".nameCheck").hide();
+		$(obj).parent().parent().find("input[name='name']").focus();
+		flag = false;
+	}else {
+		$(".nameCheck").hide();
+		$(".nameCheck2").hide();
+	}
+	
+	if(phone2 == ""){
+		$(".phoneCheck").show();
+		$(".phoneCheck2").hide();
+		$(obj).parent().parent().find("input[name='phone2']").focus();
+		flag = false;
+	}else if(!checkphone2.test(phone2)){
+		$(".phoneCheck2").show();
+		$(".phoneCheck").hide();
+		$(obj).parent().parent().find("input[name='phone2']").focus();
+		flag = false;
+	}else {
+		$(".phoneCheck").hide();
+		$(".phoneCheck2").hide();
+	}
+	
+	if(phone3 == ""){
+		$(".phoneCheck3").show();
+		$(".phoneCheck4").hide();
+		$(obj).parent().parent().find("input[name='phone3']").focus();
+		flag = false;
+	}else if(!checkphone3.test(phone3)){
+		$(".phoneCheck4").show();
+		$(".phoneCheck3").hide();
+		$(obj).parent().parent().find("input[name='phone3']").focus();
+		flag = false;
+	}else{
+		$(".phoneCheck3").hide();
+		$(".phoneCheck4").hide();
+	}
+	
+	if(nickname == ""){
+		$(".nicknameCheck").show();
+		$(".nicknameCheck2").hide();
+		$(obj).parent().parent().find("input[name='nickname']").focus();
+		flag = false;
+	}else if(nickChk=="N"){
+		$(".nicknameCheck2").show();
+		$(".nicknameCheck").hide();
+		$(obj).parent().parent().find("input[name='nickname']").focus();
+		flag = false;
+	}else{
+		$(".nicknameCheck").hide();
+		$(".nicknameCheck2").hide();
+	}
+		
+	phonehap = $("select[name='phone1']").val() + "-" + $("input[name='phone2']").val() + "-" + $("input[name='phone3']").val();
+	$("input[name='phone']").val(phonehap);
+	
+	var YN = confirm('정말 수정하시겠습니까?');
+	if(YN){
+		if(flag == true){
+		alert('수정 완료!!');
+		form.submit();
+		}
+	}
+
+}
+
+// 닉네임 중복체크
+function fn_nickChk(obj){
+	var nickname =$(obj).parent().find("input[name='nickname']").val();
+	
+	$.ajax({
+		url:"nickChk",
+		type:"post",
+		data:"nickname="+nickname,
+		success:function(data){
+			if(data=="1"){
+				alert("중복된 닉네임 입니다.");
+				
+			}else if(data=="0"){
+				$("#nickChk").attr("value","Y");
+				$(".nicknameCheck").hide();
+				$(".nicknameCheck2").hide();
+				alert("사용가능한 닉네임 입니다.");
+				
+			}	
+		}	
+		
+	})
+
+}
+
+// 개인정보 비밀번호 변경
+function mypageMemberpwModify(obj){
+	var checkPw = /^.*(?=^.{6,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+	
+	var flag = true;
+	
+	var pw1 = $(obj).parent().parent().find("input[name='pw1']").val();
+	var pw = $(obj).parent().parent().find("input[name='pw']").val();
+	var pw2 = $(obj).parent().parent().find("input[name='pw2']").val();
+	var member_index = $(obj).parent().find("input[name='member_index']").val();
+	
+	if(pw1 == ""){
+		$(".pwChe1").show();
+		$(".pwChe2").hide();
+		$(obj).parent().parent().find("input[name='pw1']").focus();
+		flag = false;
+	}else {
+		$(".pwChe1").hide();
+		$(".pwChe2").hide();
+	}
+	
+	if(pw == ""){
+		$(".pwChe3").show();
+		$(".pwChe4").hide();
+		$(obj).parent().parent().find("input[name='pw']").focus();
+		flag = false;
+	}else if(!checkPw.test(pw)){
+		$(".pwChe3").hide();
+		$(".pwChe4").show();
+		$(obj).parent().parent().find("input[name='pw']").focus();
+		flag = false;
+	}else {
+		$(".pwChe3").hide();
+		$(".pwChe4").hide();
+	}
+	
+	if(pw2 == ""){
+		$(".pwChe5").show();
+		$(".pwChe6").hide();
+		$(obj).parent().parent().find("input[name='pw2']").focus();
+		flag = false;
+	}else if(pw != pw2){
+		$(".pwChe5").hide();
+		$(".pwChe6").show();
+		$(obj).parent().parent().find("input[name='pw2']").focus();
+		flag = false;
+	}else {
+		$(".pwChe5").hide();
+		$(".pwChe6").hide();
+	}
+	
+	if(flag == true){
+		
+		var YN = confirm('정말 수정하시겠습니까?');
+		if(YN){
+			
+			$.ajax({
+				url:"mypageMemberpwModify.do",
+				type:"post",
+				data:"name="+pw1+"&pw="+pw+"&member_index="+member_index,
+				success:function(data){
+					
+				}	
+				
+			});
+		}
+	}
+	
 }
 
 
