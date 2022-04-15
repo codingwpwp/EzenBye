@@ -10,7 +10,7 @@
 		}else{
 			num++;
 			var tPrice = num*price;
-			var html = "<i class='bi bi-dash-square-fill' onclick='minusFn(this)'></i> "+num+" <i class='bi bi-plus-square-fill' onclick='plusFn(this)'></i>";
+			var html = "<i class='bi bi-dash-square-fill' onclick='minusFn(this)'></i> <div class='pCnt'>"+num+"</div> <i class='bi bi-plus-square-fill' onclick='plusFn(this)'></i>";
 			$(".totalPrice").html("합계 : <span class='fs-3'>"+tPrice.toLocaleString()+"원</span>");
 			$(".productNum").html(html);
 			$(".productNumM").html(html);
@@ -25,7 +25,7 @@
 		}else{
 			num--;
 			var tPrice = num*price;
-			var html = "<i class='bi bi-dash-square-fill' onclick='minusFn(this)'></i> "+num+" <i class='bi bi-plus-square-fill' onclick='plusFn(this)'></i>";
+			var html = "<i class='bi bi-dash-square-fill' onclick='minusFn(this)'></i> <div class='pCnt'>"+num+"</div> <i class='bi bi-plus-square-fill' onclick='plusFn(this)'></i>";
 			$(".totalPrice").html("합계 : <span class='fs-3'>"+tPrice.toLocaleString()+"원</span>");
 			$(".productNum").html(html);
 			$(".productNumM").html(html);
@@ -167,6 +167,7 @@
 		var loginCheck = $("#viewLoginCheck").val();
 		var pram = document.location.href;
 		var pIndex = pram.substring(pram.length-5,pram.length);
+		var productCnt = $(".pCnt").html();
 		console.log(loginCheck);
 		console.log(pIndex);
 		
@@ -184,7 +185,7 @@
 				$.ajax({
 					url : "noMemberCartCookie.do",
 					type : "get",
-					data : "product_index="+pIndex,
+					data : "product_index="+pIndex+"&productCnt="+productCnt,
 					succese : function(){
 								
 					}
