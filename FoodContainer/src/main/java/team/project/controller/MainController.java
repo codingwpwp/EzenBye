@@ -311,22 +311,25 @@ public class MainController {
 									HttpServletResponse response) throws Exception {
 		
 		int member_index = cartVO.getMember_index();
-		String product_index = null;
-		
+		int cart_count = cartVO.getCart_count();
+		System.out.println(cart_count);
+		String product_index = cartVO.getProduct_index();
 		List<CartVO> selectList = cartService.selectList(member_index);
 		
-		if(selectList != null) {
+		boolean check = true;
+		
+		if(selectList.size() > 0) {
 			product_index = cartVO.getProduct_index();
+			
 			for(int i=0; i<selectList.size(); i++) {
-				if(selectList.get(i).getProduct_index().equals(product_index)) {
-					break;
-				}else {
-					int insertCart = cartService.cartInsert(cartVO);
+				if(selectList.get(i).getProduct_index().equals(product_index) && selectList.get(i).getMember_index() == member_index) {
+					check = false;
 				}
 			}
-		}else {
-			int insertCart = cartService.cartInsert(cartVO);
 		}
 		
+		if(check) {
+			int cartInsert = cartService.cartInsert(cartVO);
+		}
 	}
 }

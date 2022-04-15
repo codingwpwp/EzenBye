@@ -112,9 +112,17 @@
 										<c:forEach items="${noMemberCartCookie}" var="noMemberCartCookie">
 										<c:set var="pCnt" value="${noMemberCartCookie}" />
 										<c:set var="length" value="${fn:length(pCnt)}"/>
-											<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-1)}">
-												<div>${fn:substring(pCnt,length-1,length)}</div>
-												<input type="hidden" value="${noMemberCart.product_index}">
+											<c:if test="${length < 7}">
+												<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-1)}">
+													<div>${fn:substring(pCnt,length-1,length)}</div>
+													<input type="hidden" value="${noMemberCart.product_index}">
+												</c:if>
+											</c:if>
+											<c:if test="${length == 7}">
+												<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-2)}">
+													<div>${fn:substring(pCnt,length-2,length)}</div>
+													<input type="hidden" value="${noMemberCart.product_index}">
+												</c:if>
 											</c:if>
 										</c:forEach> 
 									&nbsp; <i class="bi bi-plus shopbasket-icon" onclick="plusFn(this)"></i>
@@ -163,9 +171,17 @@
 										<c:forEach items="${noMemberCartCookie}" var="noMemberCartCookie">
 										<c:set var="pCnt" value="${noMemberCartCookie}" />
 										<c:set var="length" value="${fn:length(pCnt)}"/>
-											<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-1)}">
-												<div>${fn:substring(pCnt,length-1,length)}</div>
-												<input type="hidden" value="${noMemberCart.product_index}">
+											<c:if test="${length < 7}">
+												<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-1)}">
+													<div>${fn:substring(pCnt,length-1,length)}</div>
+													<input type="hidden" value="${noMemberCart.product_index}">
+												</c:if>
+											</c:if>
+											<c:if test="${length == 7}">
+												<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-2)}">
+													<div>${fn:substring(pCnt,length-2,length)}</div>
+													<input type="hidden" value="${noMemberCart.product_index}">
+												</c:if>
 											</c:if>
 										</c:forEach>  
 									&nbsp; <i class="bi bi-plus shopbasket-icon" onclick="plusFn(this)"></i>

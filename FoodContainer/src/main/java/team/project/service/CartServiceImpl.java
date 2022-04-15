@@ -28,6 +28,14 @@ public class CartServiceImpl implements CartService {
 		
 		return selectList;
 	}
+
+	@Override
+	public List<CartVO> selectList(CartVO cartVO) throws Exception {
+		
+		List<CartVO> selectList = cartDAO.selectList(cartVO);
+		
+		return selectList;
+	}
 	
 	
 }
