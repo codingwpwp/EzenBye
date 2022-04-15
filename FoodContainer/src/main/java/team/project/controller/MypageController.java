@@ -180,11 +180,21 @@ public class MypageController {
 	// 개인정보 비번 변경
 	@RequestMapping(value = "mypageMemberpwModify.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String mypageMemberpwModify(String pw1, String pw, int member_index) throws Exception {
+	public String mypageMemberpwModify(MemberVO memberVO,HttpServletRequest req,RedirectAttributes rttr) throws Exception {
 		
 		String result = "true";
 		
-		return result;
+		// 세션 소환
+		HttpSession session =req.getSession();
+		
+		// 로그인 검증 과정(id, pw 비교해서 맞으면 login에 잘 담아서 오고 틀리면 null로 리턴)
+		MemberVO corretPW = memberService.corretPW(memberVO);
+		
+		if(corretPW !=null) {// 로그인 검증 통과의 경우
+			return "redirect:mypage_changeInforOk.do";
+		}else {// 로그인 검증 실패의 경우
+			return "mypage/changeInfor";
+		}
 	}
 	
 	@RequestMapping(value = "mypage_main.do", method = RequestMethod.GET)

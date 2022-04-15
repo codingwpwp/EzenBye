@@ -51,6 +51,33 @@ public class MemberServiceImpl implements MemberService {
 		}
 
 	}
+	
+	@Override
+	public MemberVO corretPW(MemberVO memberVO) throws Exception {
+		
+		MemberVO memberFromDB = memberDao.corretPW(memberVO);
+		
+		if(memberFromDB == null) {
+			return null;
+		}else {// pw는 일단 있는 경우
+			if(PasswordEncoder.matches(memberVO.getName(), memberFromDB.getName())) {	// 비밀번호 비교해서 일치하는 경우
+				memberFromDB.setName("");
+				return memberFromDB;
+			}else {	// 비밀번호가 일치하지 않는 경우
+				return null;
+			}
+		}
+		
+	}
+
+	@Override
+	public int modifyPW(MemberVO memberVO) throws Exception {
+		
+		memberVO.setPw(PasswordEncoder.encode(memberVO.getPw()));
+		
+		return memberDao.insertMember(memberVO);
+	}
+	
 	@Override
 	public int insertMember(MemberVO vo) throws Exception {
 		vo.setPw(PasswordEncoder.encode(vo.getPw()));
@@ -132,8 +159,6 @@ public class MemberServiceImpl implements MemberService {
 	public int adminChangeMemberDel_yn(int member_index) throws Exception {
 		return memberDao.adminChangeMemberDel_yn(member_index);
 	}
-
-	
 
 	
 	

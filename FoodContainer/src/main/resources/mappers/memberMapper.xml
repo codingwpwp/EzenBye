@@ -72,7 +72,18 @@
     	name = #{name}, phone = #{phone}, nickname = #{nickname}
     	WHERE member_index = #{member_index}
     </update>
-       
+    
+    <select id="corretPW" resultType="MemberVO" parameterType="MemberVO">
+		SELECT pw
+		FROM member 
+		WHERE pw = #{name}
+	</select>
+	
+	<update id="modifyPW" parameterType="MemberVO">
+		UPDATE MEMBER SET
+		pw = #{pw}
+		WHERE member_index = #{member_index} 
+	</update>   
     <!-- 여기서 부터는 관리자페이지 -->
     
     <!-- 회원 조회할때 먼저 총 글의 총 갯수를 구하는 쿼리 -->
