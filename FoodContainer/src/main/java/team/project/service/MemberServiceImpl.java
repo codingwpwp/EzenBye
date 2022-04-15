@@ -52,30 +52,32 @@ public class MemberServiceImpl implements MemberService {
 
 	}
 	
+	//마이페이지 개인정보 현재 비밀번호 일치하는지 판별
 	@Override
 	public MemberVO corretPW(MemberVO memberVO) throws Exception {
 		
 		MemberVO memberFromDB = memberDao.corretPW(memberVO);
 		
-		if(memberFromDB == null) {
-			return null;
-		}else {// pw는 일단 있는 경우
-			if(PasswordEncoder.matches(memberVO.getName(), memberFromDB.getName())) {	// 비밀번호 비교해서 일치하는 경우
-				memberFromDB.setName("");
-				return memberFromDB;
-			}else {	// 비밀번호가 일치하지 않는 경우
-				return null;
-			}
-		}
-		
+		// id부터 없는경우
+				if(memberFromDB == null) {
+					return null;
+				}else {// id는 일단 있는 경우
+					if(PasswordEncoder.matches(memberVO.getPw1(), memberFromDB.getPw())) {	// 비밀번호 비교해서 일치하는 경우
+						memberFromDB.setPw("");
+						return memberFromDB;
+					}else {	// 비밀번호가 일치하지 않는 경우
+						return null;
+					}
+				}
 	}
-
+	
+	//마이페이지 비밀번호 변경
 	@Override
 	public int modifyPW(MemberVO memberVO) throws Exception {
 		
 		memberVO.setPw(PasswordEncoder.encode(memberVO.getPw()));
 		
-		return memberDao.insertMember(memberVO);
+		return memberDao.modifyPW(memberVO);
 	}
 	
 	@Override
@@ -128,7 +130,12 @@ public class MemberServiceImpl implements MemberService {
 		int mypageMemberModify = memberDao.mypageMemberModify(memberVO);
 		return mypageMemberModify;
 	}
-
+	
+	@Override
+	public int mypageChangeAddress(MemberVO memberVO) throws Exception {
+		int mypageChangeAddress = memberDao.mypageChangeAddress(memberVO);
+		return mypageChangeAddress;
+	}
 	/* 여기서 부터는 관리자페이지 */
 	
 	// 회원 조회(페이징 + 리스트 출력)

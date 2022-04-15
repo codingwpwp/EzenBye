@@ -191,10 +191,23 @@ public class MypageController {
 		MemberVO corretPW = memberService.corretPW(memberVO);
 		
 		if(corretPW !=null) {// 로그인 검증 통과의 경우
-			return "redirect:mypage_changeInforOk.do";
+			int modifyPW = memberService.modifyPW(memberVO);
+			result = "true";
 		}else {// 로그인 검증 실패의 경우
-			return "mypage/changeInfor";
+			result = "false";
 		}
+		
+		return result;
+	}
+	
+	// 배송지 변경
+	@RequestMapping(value = "mypageChangeAddress.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String mypageChangeAddress(MemberVO memberVO) throws Exception {
+		
+		int mypageChangeAddress = memberService.mypageChangeAddress(memberVO);
+		
+		return "true";
 	}
 	
 	@RequestMapping(value = "mypage_main.do", method = RequestMethod.GET)
@@ -316,7 +329,7 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value = "mypage_inquiries.do", method = RequestMethod.GET)
-	public String home10(Locale locale, Model model, HttpSession session) throws Exception {
+	public String inquiries(Locale locale, Model model, HttpSession session) throws Exception {
 		
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		int member_index = member.getMember_index();
@@ -332,12 +345,12 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value = "mypage_changeInfor.do", method = RequestMethod.GET)
-	public String home11(Locale locale, Model model) {	
+	public String changeInfor(Locale locale, Model model) {	
 		return "mypage/changeInfor";
 	}
 	
 	@RequestMapping(value = "mypage_changeInforOk.do", method = RequestMethod.GET)
-	public String home12(Locale locale, Model model, HttpSession session) throws Exception {
+	public String changeInforOk(Locale locale, Model model, HttpSession session) throws Exception {
 		
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		int member_index = member.getMember_index();
@@ -347,14 +360,27 @@ public class MypageController {
 		
 		return "mypage/changeInforOk";
 	}
+	
 	@RequestMapping(value = "mypage_addressManage.do", method = RequestMethod.GET)
-	public String home13(Locale locale, Model model) {
+	public String addressManage(Locale locale, Model model, HttpSession session) throws Exception {
+		
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		int member_index = member.getMember_index();
+		MemberVO memberInfor = memberService.memberInfor(member_index);
+		
+		model.addAttribute("memberInfor",memberInfor);
+		
 		return "mypage/addressManage";
 	}
+	
 	@RequestMapping(value = "mypage_noteManage.do", method = RequestMethod.GET)
-	public String home14(Locale locale, Model model) {
+	public String noteManage(Locale locale, Model model, HttpSession session) throws Exception {
+		
+		
+		
 		return "mypage/noteManage";
 	}
+	
 	@RequestMapping(value = "mypage_noteManageView.do", method = RequestMethod.GET)
 	public String home15(Locale locale, Model model) {
 		return "mypage/noteManageView";

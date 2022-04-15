@@ -4,6 +4,7 @@ public class MemberVO {
 	private int member_index;
 	private String id;
 	private String pw;
+	private String pw1;
 	private String name;
 	private String nickname;
 	private String phone;
@@ -113,5 +114,11 @@ public class MemberVO {
 	}
 	public void setDel_reason(String del_reason) {
 		this.del_reason = del_reason;
+	}
+	public String getPw1() {
+		return pw1;
+	}
+	public void setPw1(String pw1) {
+		this.pw1 = pw1;
 	}
 }
