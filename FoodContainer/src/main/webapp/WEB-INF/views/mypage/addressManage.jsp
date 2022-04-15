@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -61,7 +64,7 @@
             <div class="col-12 col-sm-9 col-md-10 col-lg-8">
                 <article id="mainSection \">
                     <!-- 실질적인 메인 내용 -->
-                    <div class="col-md-11">
+                <div class="col-md-11">
 				 
 			        <p class="fs-6 lookup-fs-6">배송지 관리</p>
 			        <hr />
@@ -69,38 +72,63 @@
 			        <p class="fs-6 lookup-fs-6">기본 배송지</p>
 			        <div class="input-group mb-3 addressManage-1">
 					  <span class="input-group-text fw-bold" id="inputGroup-sizing-default">우편번호</span>
-					  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
+					  <input type="text" class="form-control" value="${fn:split(memberInfor.address, '|')[0]}" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
 					</div>
 			        <div class="input-group mb-3 addressManage-2">
 					  <span class="input-group-text fw-bold" id="inputGroup-sizing-default">주소</span>
-					  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
+					  <input type="text" class="form-control" value="${fn:split(memberInfor.address, '|')[1]}" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
 					</div>
 					<div class="input-group addressManage-3">
 					  <span class="input-group-text fw-bold">상세주소</span>
-					  <input type="text" aria-label="Last name" class="form-control" disabled>
+					  <input type="text" aria-label="Last name" value="${fn:split(memberInfor.address, '|')[2]}" class="form-control" disabled>
 					  <input type="hidden" aria-label="Last name" class="form-control" disabled>
 					</div>
 					
-					<form action="">
-						<p class="fs-6 lookup-fs-6">기본 배송지 변경</p>
-				        <div class="input-group mb-3 addressManage-4">
-						  <span class="input-group-text fw-bold" id="inputGroup-sizing-default">우편번호</span>
-						  <input type="text" id="sample6_postcode" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-						  <button type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn btn-secondary btn-sm fw-bold">주소검색</button>
-						</div>
-				        <div class="input-group mb-3 addressManage-5">
-						  <span class="input-group-text fw-bold" id="inputGroup-sizing-default">주소</span>
-						  <input type="text" id="sample6_address" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-						</div>
-						<div class="input-group addressManage-6">
-						  <span class="input-group-text fw-bold">상세주소</span>
-						  <input type="text" id="sample6_detailAddress" aria-label="Last name" class="form-control">
-						  <input type="hidden" id="sample6_extraAddress" aria-label="Last name" class="form-control">
-						</div>
-						<div class="d-grid addressManage-btn col-5 mx-auto">
-						  <button class="btn btn-dark" type="button">기본 배송지 변경</button>
-						</div>
-					</form>
+					
+					<c:if test="${empty memberInfor.address}">
+					<p class="fs-6 lookup-fs-6">기본 배송지 등록</p>
+					</c:if>
+					
+					<c:if test="${!empty memberInfor.address}">
+					<p class="fs-6 lookup-fs-6">기본 배송지 변경</p>
+					</c:if>
+					
+			        <div class="input-group mb-3 addressManage-4">
+					  <span class="input-group-text fw-bold" id="inputGroup-sizing-default">우편번호</span>
+					  <input type="text" name="address1" id="sample6_postcode" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+					  <button type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn btn-secondary btn-sm fw-bold position-relative">주소검색
+					  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger addrCheck1">
+							    필수
+			   		  </span>
+					  </button>
+					</div>
+			        <div class="input-group mb-3 addressManage-5">
+					  <span class="input-group-text fw-bold" id="inputGroup-sizing-default">주소</span>
+					  <input type="text" name="address2" id="sample6_address" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+					  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger addrCheck2">
+							    필수
+			   		  </span>
+					</div>
+					<div class="input-group addressManage-6">
+					  <span class="input-group-text fw-bold">상세주소</span>
+					  <input type="text" name="address3" id="sample6_detailAddress" aria-label="Last name" class="form-control">
+					  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger addrCheck3">
+							    필수
+			   		  </span>
+					  <input type="hidden" id="sample6_extraAddress" aria-label="Last name" class="form-control">
+					</div>
+					<div class="d-grid addressManage-btn col-5 mx-auto">
+					  <c:if test="${empty memberInfor.address}">
+					  <input type="hidden" value="" name="address" />
+					  <input type="hidden" value="${memberInfor.member_index}" name="member_index" />
+					  <button class="btn btn-dark" type="button" onclick="changeAddress(this)">기본 배송지 등록</button>
+					  </c:if>
+					  <c:if test="${!empty memberInfor.address}">
+					  <input type="hidden" value="" name="address" />
+					  <input type="hidden" value="${memberInfor.member_index}" name="member_index" />
+					  <button class="btn btn-dark" type="button" onclick="changeAddress(this)">기본 배송지 변경</button>
+					  </c:if>
+					</div>
 					
       			</div>
                 </article>
