@@ -35,3 +35,50 @@ function selectAll(obj)  {
 	    checkbox.checked = obj.checked;
 	  })
 }
+
+	function minusFn(obj){
+		var cnt = $(obj).next("div").html();
+		var product_index = $(obj).next().next("input[type='hidden']").val();
+		
+		if(cnt == 1){
+			alert("최소 한 개는 선택해야 합니다.");
+		}else{
+			cnt--;
+		}
+		var html = cnt;
+		
+		$(obj).next("div").html(html);
+		
+		$.ajax({
+			url : "shopBasket_main.do",
+			type : "get",
+			data : "product_index="+product_index+"&cnt="+cnt,
+			success : function(){
+				
+			}
+		});
+	}
+	
+	function plusFn(obj){
+		var cnt = $(obj).prev().prev("div").html();
+		var product_index = $(obj).prev("input[type='hidden']").val();
+		
+		if(cnt == 10){
+			alert("최대 개수는 10개 입니다.");
+		}else{
+			cnt++;
+		}
+
+		var html = cnt;
+		
+		$(obj).prev().prev("div").html(html);
+		
+		$.ajax({
+			url : "shopBasket_main.do",
+			type : "get",
+			data : "product_index="+product_index+"&cnt="+cnt,
+			success : function(){
+				
+			}
+		});
+	}
