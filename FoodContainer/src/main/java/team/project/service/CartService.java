@@ -9,4 +9,6 @@ public interface CartService {
 	int cartInsert(CartVO cartVO) throws Exception;
 	
 	List<CartVO> selectList(int member_index) throws Exception;
+	
+	List<CartVO> selectList(CartVO cartVO) throws Exception;
 }

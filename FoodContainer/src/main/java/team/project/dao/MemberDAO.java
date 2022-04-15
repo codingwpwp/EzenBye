@@ -77,6 +77,10 @@ public class MemberDAO {
 		return sqlSession.update(Namespace + ".modifyPW", memberVO);
 	}
 	
+	public int mypageChangeAddress(MemberVO memberVO) throws Exception{
+		return sqlSession.update(Namespace + ".mypageChangeAddress", memberVO);
+	}
+	
 	/*여기서 부터는 관리자페이지*/
 	
 	// 회원 조회할때 글의 갯수(페이징)

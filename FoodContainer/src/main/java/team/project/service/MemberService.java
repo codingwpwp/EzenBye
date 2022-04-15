@@ -33,6 +33,8 @@ public interface MemberService {
 	
 	int modifyPW(MemberVO memberVO) throws Exception;
 	
+	int mypageChangeAddress(MemberVO memberVO) throws Exception;
+	
 	/* 여기서 부터는 관리자페이지 */
 	
 	// 회원 조회

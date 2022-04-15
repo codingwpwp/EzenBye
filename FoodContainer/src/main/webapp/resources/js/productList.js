@@ -40,6 +40,21 @@
 								
 					}
 				});
+			}else{
+				$(".cartBack").css("display","block");
+				var name = $(obj).parent().prev().prev().find(".productNameM").html();
+				var html = "<br>&quot;"+name+"&quot;<br> 상품이 장바구니에 담겼습니다.";
+					html += "<br><br><button type='button' class='btn btn-secondary' onclick='cartOk()'>확인</button>";
+				$(".message").html(html);
+				
+				$.ajax({
+					url : "memberCartInsert.do",
+					type : "post",
+					data : "product_index="+pIndex+"&member_index="+loginCheck,
+					succese : function(){
+								
+					}
+				});
 			}
 		}
 	}

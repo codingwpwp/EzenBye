@@ -11,6 +11,7 @@ import java.util.Locale;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,26 +62,52 @@ public class ShopBasketController {
 				
 				for(int i=0; i<tempCookieArr.length; i++) {
 					
-					if(tempCookieArr[i].substring(0,tempCookieArr[i].length()-1).equals(product_index)) {
-						tempCookieArr[i] = product_index + cnt;
+					if(tempCookieArr[i].length() < 7) {
 						
-						if(i == 0) {
-							changeCookie = tempCookieArr[i];
-							System.out.println("1 ="+changeCookie);
+						if(tempCookieArr[i].substring(0,tempCookieArr[i].length()-1).equals(product_index)) {
+							tempCookieArr[i] = product_index + cnt;
+							
+							if(i == 0) {
+								changeCookie = tempCookieArr[i];
+								System.out.println("1 ="+changeCookie);
+							}else {
+								String tempCookie = URLDecoder.decode(changeCookie,"UTF-8");
+								changeCookie = URLEncoder.encode(tempCookie.toString()+","+tempCookieArr[i],"UTF-8");
+								System.out.println("2 ="+changeCookie);
+							}
+							
 						}else {
-							String tempCookie = URLDecoder.decode(changeCookie,"UTF-8");
-							changeCookie = URLEncoder.encode(tempCookie.toString()+","+tempCookieArr[i],"UTF-8");
-							System.out.println("2 ="+changeCookie);
+							if(i == 0) {
+								changeCookie = tempCookieArr[i];
+								System.out.println("3 ="+changeCookie);
+							}else {
+								String tempCookie = URLDecoder.decode(changeCookie,"UTF-8");
+								changeCookie = URLEncoder.encode(tempCookie.toString()+","+tempCookieArr[i],"UTF-8");
+								System.out.println("4 ="+changeCookie);
+							}
 						}
-						
 					}else {
-						if(i == 0) {
-							changeCookie = tempCookieArr[i];
-							System.out.println("3 ="+changeCookie);
+						if(tempCookieArr[i].substring(0,tempCookieArr[i].length()-2).equals(product_index)) {
+							tempCookieArr[i] = product_index + cnt;
+							
+							if(i == 0) {
+								changeCookie = tempCookieArr[i];
+								System.out.println("1 ="+changeCookie);
+							}else {
+								String tempCookie = URLDecoder.decode(changeCookie,"UTF-8");
+								changeCookie = URLEncoder.encode(tempCookie.toString()+","+tempCookieArr[i],"UTF-8");
+								System.out.println("2 ="+changeCookie);
+							}
+							
 						}else {
-							String tempCookie = URLDecoder.decode(changeCookie,"UTF-8");
-							changeCookie = URLEncoder.encode(tempCookie.toString()+","+tempCookieArr[i],"UTF-8");
-							System.out.println("4 ="+changeCookie);
+							if(i == 0) {
+								changeCookie = tempCookieArr[i];
+								System.out.println("3 ="+changeCookie);
+							}else {
+								String tempCookie = URLDecoder.decode(changeCookie,"UTF-8");
+								changeCookie = URLEncoder.encode(tempCookie.toString()+","+tempCookieArr[i],"UTF-8");
+								System.out.println("4 ="+changeCookie);
+							}
 						}
 					}
 				}
@@ -91,7 +118,11 @@ public class ShopBasketController {
 			}
 			
 			for(int i=0; i<tempCookieArr.length; i++) {
-				noMemberCartArr.add(tempCookieArr[i].substring(0,tempCookieArr[i].length()-1));
+				if(tempCookieArr[i].length() < 7) {
+					noMemberCartArr.add(tempCookieArr[i].substring(0,tempCookieArr[i].length()-1));
+				}else {
+					noMemberCartArr.add(tempCookieArr[i].substring(0,tempCookieArr[i].length()-2));
+				}
 			}
 			
 			List<ProductVO> noMemberCartList = productService.noMemberCartList(noMemberCartArr);

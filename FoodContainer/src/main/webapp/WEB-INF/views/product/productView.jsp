@@ -98,7 +98,7 @@
 				          <div><span class="fs-5 totalPrice">합계 : <span class="fs-3"><fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>원</span></span></div>
 				          <div class="d-flex justify-content-evenly">
 					          <button class="viewButton btn btn-outline-success me-2" onclick="viewCart(this)">장바구니 담기</button>
-					          <button class="viewButton btn btn-success me-2" onclick="location.href='purchase/notMember.do'">바로구매</button>
+					          <button class="viewButton btn btn-success me-2" onclick="directBuy(this)">바로구매</button>
 				          </div>
 				        </div>
 				      </div>
@@ -138,8 +138,8 @@
 	                			</div>
 				      	  		<div class="leftViewButtonDiv">
 				      	  			<input type="hidden" id="viewLoginCheck" value="${member.member_index}">
-							   		<button class="leftViewButton btn btn-outline-success me-2">장바구니</button>
-							  		<button class="leftViewButton btn btn-success me-2">바로구매</button>
+							   		<button class="leftViewButton btn btn-outline-success me-2" onclick="viewCartBottom(this)">장바구니</button>
+							  		<button class="leftViewButton btn btn-success me-2" onclick="directBuy(this)">바로구매</button>
 				      	  		</div>
                 			</div>
 						</div>
@@ -436,6 +436,17 @@
 	</div>
 	
 	<div class="topTooltipSold">
+		<br>
+    	<p style="color:white; font-size:1.2rem;">매진 된 상품입니다.</p>
+	</div>
+	
+	<div class="bottomTooltip">
+    	<p>상품을 장바구니에 담았습니다.</p>
+    	<button type='button' class='btn btn-light' onclick="shopping(this)">상품 더보기</button>
+    	<button type='button' class='btn btn-light' onclick="moveCart(this)">장바구니로 이동</button>
+	</div>
+	
+	<div class="bottomTooltipSold">
 		<br>
     	<p style="color:white; font-size:1.2rem;">매진 된 상품입니다.</p>
 	</div>

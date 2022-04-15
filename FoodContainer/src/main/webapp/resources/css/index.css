@@ -538,8 +538,8 @@ a{
 
 /*상품 이미지*/
 .viewImg{
-	width : 100%;
 	max-width : 400px;
+	max-height : 400px;
 }
 
 .viewSoldout{
@@ -926,6 +926,62 @@ a{
 	 	top:-10px;
 		left:80px; 
 	}
+}
+
+.bottomTooltip{
+	position : fixed;
+	bottom : 105px;
+	left : 480px;
+	margin: 50px;
+ 	width:250px; 
+ 	height:80px;
+ 	background:#198754; 
+  	border-radius: 10px;
+  	text-align : center;
+  	display:none;
+  	z-index : 2;
+}
+
+.bottomTooltip:after{
+	border-top:10px solid #198754; 
+ 	border-left: 10px solid transparent; 
+ 	border-right: 10px solid transparent; 
+	border-bottom: 0px solid transparent; 
+ 	content:""; 
+ 	position:absolute;
+ 	bottom:-10px;
+	left:110px; 
+}
+
+.bottomTooltip>p{
+	margin-top : 6px;
+	margin-bottom : 3px;
+	color : white;
+}
+
+.bottomTooltipSold{
+	position : fixed;
+	bottom : 105px;
+	left : 480px;
+	margin: 50px;
+ 	width:250px; 
+ 	height:80px;
+ 	background:#198754; 
+  	border-radius: 10px;
+  	text-align : center;
+  	display:none;
+  	z-index : 2;
+}
+
+.bottomTooltipSold:after{
+	border-top:10px solid #198754; 
+ 	border-left: 10px solid transparent; 
+ 	border-right: 10px solid transparent; 
+	border-bottom: 0px solid transparent; 
+ 	content:""; 
+ 	position:absolute;
+ 	top:-10px;
+	left:110px; 
 }
 
 .pCnt{
