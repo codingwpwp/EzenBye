@@ -61,7 +61,7 @@
                 <article id="mainSection">
                     <!-- 실질적인 메인 내용 -->
                     <div class="fs-5 my-2 fw-bold">유저레시피</div>
-                    <div style="border-bottom:1px solid black"> <strong>총123,456개의 레시피가 있습니다</strong></div>
+                    <div style="border-bottom:1px solid black"> <strong>총<c:out value="${pu.total}"/>개의 레시피가 있습니다</strong></div>
                     <c:if test="${member==null}">
                     <button class="btnwr" onclick="alert('로그인 후 이용해주세요!!')"><span>레시피 작성</span></button>
                   	</c:if>
@@ -89,7 +89,7 @@
 											</div>
 										</h6>
 										<div class="row recipe-text">
-											<div class="col">추천수(2)</div>
+											<div class="col">추천수(<c:out value="${list.thumb}"/>)</div>
 											<div class="col">조회수(<c:out value="${list.hit}"/>)</div>
 											<div class="col">댓글(3)</div>
 										</div>
@@ -133,10 +133,13 @@
                         <div class="row">
                             <div class="col-md-12 col-12 page">
                                 <ul class="pagination">
+                                	
+                                	
                                     <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                  <c:forEach  begin="${pu.startPage}" end="${pu.endPage}">
+                                    <li class="page-item"><a class="page-link" href="#"><c:out value="${pu.nowPage}"/></a></li>
+                                    </c:forEach>
+                                    
                                     <li class="page-item"><a class="page-link" href="#">Next</a></li>
                                   </ul>
                             </div>
