@@ -190,6 +190,16 @@
 								
 					}
 				});
+			}else{
+				
+				$.ajax({
+					url : "memberCartInsert.do",
+					type : "post",
+					data : "product_index="+pIndex+"&member_index="+loginCheck+"&cart_count="+productCnt,
+					succese : function(){
+								
+					}
+				});
 			}
 		}
 	}

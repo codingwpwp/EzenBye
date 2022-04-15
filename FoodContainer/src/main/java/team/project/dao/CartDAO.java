@@ -26,4 +26,8 @@ public class CartDAO {
 		return sqlSession.selectList(Namespace+".selectList",member_index);
 	}
 	
+public List<CartVO> selectList(CartVO cartVO) throws Exception {
+		
+		return sqlSession.selectList(Namespace+".selectList",cartVO);
+	}
 }
