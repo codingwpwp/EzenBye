@@ -253,6 +253,13 @@ public class MainController {
 									HttpServletResponse response) throws UnsupportedEncodingException {
 		//쿠키 value
 		String viewProduct = request.getParameter("product_index");
+		//상품 개수
+		String productCnt = request.getParameter("productCnt");
+		
+		if(productCnt == null) {
+			productCnt = "1";
+		}
+		
 		//모든 쿠키 호출
 		Cookie[] cookies = request.getCookies();
 		
@@ -275,7 +282,7 @@ public class MainController {
 			String[] tempCookieArr = tempCookie.split(",");
 			//중복방지
 			for(int i=0; i<tempCookieArr.length; i++) {
-				if(tempCookieArr[i].equals(viewProduct)) {
+				if(tempCookieArr[i].substring(0,tempCookieArr[i].length()-1).equals(viewProduct)) {
 					System.out.println("5");
 					overlap = true;
 					break;
@@ -285,7 +292,7 @@ public class MainController {
 			if(!(overlap)) {
 				//기존 쿠키에 결합
 				System.out.println("4");
-				String setCookie = URLEncoder.encode(tempCookie.toString() + "," + viewProduct,"UTF-8");
+				String setCookie = URLEncoder.encode(tempCookie.toString() + "," + viewProduct+productCnt,"UTF-8");
 				System.out.println(setCookie);
 				noMemberCartCookie = new Cookie("noMemberCart", setCookie);
 				response.addCookie(noMemberCartCookie);
@@ -293,8 +300,9 @@ public class MainController {
 		//찾는 쿠키가 없을 때
 		}else{
 			System.out.println("2");
-			noMemberCartCookie = new Cookie("noMemberCart", viewProduct);
+			noMemberCartCookie = new Cookie("noMemberCart", viewProduct+productCnt);
 			response.addCookie(noMemberCartCookie);
+			System.out.println(noMemberCartCookie.getValue());
 		}
 	}
 	
