@@ -16,32 +16,7 @@
     	SET order_status = '구매확정', buy_YN = 'Y'
     	WHERE orderItem_index = #{orderItem_index}
     </update>
-    
-    <!-- 구매페이지 -->
-    <!-- 밑에 세개는 원래 상품페이지에서 하려는데 사정상 여기에다가함 -->
-    <!-- 회원&비회원 공통 결제하려는 상품 수량 확인 -->
-    <select id="checkInventory" resultType="int" parameterType="String">
-    	SELECT COALESCE(inventory, 0)
-    	FROM product
-    	WHERE product_index = #{product_index}
-    	AND del_YN = 'N'
-    </select>
-    
-    <!-- 회원&비회원 공통 수량이 충분하다면 해당 갯수만큼 빼주기 -->
-    <update id="MinusInventory" parameterType="CartVO">
-    	UPDATE product
-    	SET inventory = inventory - #{cart_count}
-    	WHERE product_index = #{product_index}
-    </update>
-    
-    <!-- 회원&비회원 공통 다시 상품 채워놓기 -->
-    <update id="plusInventory">
-    	UPDATE product
-    	SET inventory = inventory + #{cart_count}
-    	WHERE product_index = #{product_index}  
-    </update>
-    
-    
+       
     <!-- 비회원 상세주문 넣는 과정 -->
     <insert id="noMemberOrderProductInsert" parameterType="list">
     	INSERT INTO order_product(
@@ -55,13 +30,6 @@
 			#{item.price}, #{item.point}
 			)
 		</foreach>
-    </insert>
-    
-    <!-- 상품 판매량 늘려주기(원래 product쪽에서 해야 하는데 사정상 여기에다가 함) -->
-    <insert id="productQuantityUpdate" parameterType="OrderProductVO">
-    	UPDATE product
-    	SET quantity = quantity + #{order_quantity}
-    	WHERE product_index = #{product_index}
     </insert>
     
     <!-- 관리자페이지 -->

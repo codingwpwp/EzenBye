@@ -5,22 +5,7 @@
  
 <mapper namespace="team.project.mapper.noMemberOrdersMapper" >
  	
-	<!-- 여기는 상품 구매 페이지-->
-	
-	<!-- 비회원 구매페이지에서 뿌려질 상품목록들 -->
-	<select id="noMemberPurchaseList" resultType="CartVO" parameterType="list">
-		SELECT
-			brand,
-			middleSort,
-			thumbnail_image,
-			product_name,
-			COALESCE(sale_price, sale_price, origin_price) as origin_price,
-			product_index
-		FROM product
-		<foreach collection="list" item="item" open="WHERE " separator=" OR ">
-			product_index = #{item}
-		</foreach>
-	</select>
+	<!-- 여기서 부터는 비회원 상품 구매 페이지-->
  	
  	<!-- 비회원 큰 단위 주문 넣는 쿼리 -->
  	<insert id="noMemberOrdersInsert" parameterType="NoMemberOrdersVO">

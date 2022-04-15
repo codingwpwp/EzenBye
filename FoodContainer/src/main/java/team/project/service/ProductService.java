@@ -1,6 +1,7 @@
 package team.project.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import team.project.util.PagingUtil;
+import team.project.vo.CartVO;
 import team.project.vo.ProductVO;
 import team.project.vo.SearchVO;
 
@@ -22,6 +24,14 @@ public interface ProductService {
 	List<ProductVO> noMemberCartList(ArrayList<String> noMemberCartArr) throws Exception;
 	//메인 - 인기상품
 	List<ProductVO> popularList(ProductVO productVO) throws Exception;
+	
+	/* 구매페이지 */
+	// 회원&비회원 결제화면 전에 상품 수량 확인 및 빼주기
+	String checkProductInventory(HashMap<String, String> cartMap) throws Exception;
+	// 회원&비회원 결제화면에서 취소할 경우 다시 상품 채워놓기
+	void plusInventory(HashMap<String, String> cartMap) throws Exception;
+	// 비회원 구매페이지에서 뿌려질 상품목록들
+	List<CartVO> noMemberPurchaseList(HttpServletRequest request) throws Exception;
 	
 	/*여기서 부터는 관리자페이지*/
 	

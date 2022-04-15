@@ -47,9 +47,52 @@
     	WHERE del_YN = 'N' and quantity > 500
     </select>
     
+    <!--  ****************구매 페이지 관련*************************** -->
     
+    <!-- 회원&비회원 결제하려는 상품 수량 확인 -->
+    <select id="checkInventory" resultType="int" parameterType="String">
+    	SELECT COALESCE(inventory, 0)
+    	FROM product
+    	WHERE product_index = #{product_index}
+    	AND del_YN = 'N'
+    </select>
     
-    <!-- 여기서 부터는 관리자페이지 -->
+    <!-- 회원&비회원 수량이 충분하다면 해당 갯수만큼 빼주기 -->
+    <update id="MinusInventory" parameterType="CartVO">
+    	UPDATE product
+    	SET inventory = inventory - #{cart_count}
+    	WHERE product_index = #{product_index}
+    </update>
+    
+    <!-- 회원&비회원 다시 상품 채워놓기 -->
+    <update id="plusInventory" parameterType="CartVO">
+    	UPDATE product
+    	SET inventory = inventory + #{cart_count}
+    	WHERE product_index = #{product_index}  
+    </update>
+    <!-- 회원&비회원 상품 판매량 늘려주기 -->
+    <insert id="productQuantityUpdate" parameterType="OrderProductVO">
+    	UPDATE product
+    	SET quantity = quantity + #{order_quantity}
+    	WHERE product_index = #{product_index}
+    </insert>
+    
+	<!-- 비회원 구매페이지에서 뿌려질 상품목록들 -->
+	<select id="noMemberPurchaseList" resultType="CartVO" parameterType="list">
+		SELECT
+			brand,
+			middleSort,
+			thumbnail_image,
+			product_name,
+			COALESCE(sale_price, sale_price, origin_price) as origin_price,
+			product_index
+		FROM product
+		<foreach collection="list" item="item" open="WHERE " separator=" OR ">
+			product_index = #{item}
+		</foreach>
+	</select>
+    
+    <!-- *************************여기서 부터는 관리자페이지**************************** -->
     
     <!-- 상품 조회할때 먼저 총 글의 총 갯수를 구하는 쿼리  -->
     <select id="adminProductListCount" resultType="int" parameterType="SearchVO">

@@ -3,15 +3,14 @@ package team.project.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +20,7 @@ import team.project.service.CouponService;
 import team.project.service.EmailService;
 import team.project.service.NoMemberOrdersService;
 import team.project.service.OrderProductService;
-import team.project.service.OrdersService;
+import team.project.service.ProductService;
 import team.project.vo.CartVO;
 import team.project.vo.CouponVO;
 import team.project.vo.EmailVO;
@@ -39,7 +38,7 @@ public class PurchaseController {
 	private EmailService emailService;
 	
 	@Autowired
-	private OrdersService ordersService;
+	private ProductService productService;
 	
 	@Autowired
 	private NoMemberOrdersService noMemberOrdersService;
@@ -102,39 +101,37 @@ public class PurchaseController {
 		return "purchasePage/purchaseOk";
 	}
 	
-	
-	//	회원&비회원 공통 결제하려는 상품 수량 확인 및 빼주기 비동기
+	/*---------------------------------------회원&비회원 공통-------------------------------------*/
+	// 결제화면 전에 상품 수량 확인 및 빼주기 비동기
 	@RequestMapping(value = "checkProductInventory.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String check(@RequestParam HashMap<String, String> cartMap) throws Exception {
-		
-		return orderProductService.checkProductInventory(cartMap);
+		return productService.checkProductInventory(cartMap);
 	}
-	//	회원&비회원 공통 다시 상품 채워놓기 비동기
+	
+	// 결제화면에서 취소할 경우 다시 상품 채워놓기 비동기
 	@RequestMapping(value = "plusInventory.do", method = RequestMethod.POST)
 	@ResponseBody
 	public void plusInventory(@RequestParam HashMap<String, String> cartMap) throws Exception {
-		orderProductService.plusInventory(cartMap);
+		productService.plusInventory(cartMap);
 	}
 	
-	
-	
-	
-	/*------------------------------------비회원-------------------------------------------*/
+	/*-------------------------------------------비회원----------------------------------------*/
 
-	// 비회원 이메일 인증페이지로 이동
+	// 비회원 이메일 인증페이지로 이동(해시맵HashMap<String, String>으로 받는게 맞음.)
 	@RequestMapping(value = "certification.do")
-	public String nomember_certification(Locale locale, Model model,
-										HttpServletRequest request) {
+	public String nomember_certification(Model model, HttpServletRequest request) {
 		
 		 //세션 소환
 		 HttpSession session =request.getSession();
 		 
-		 if(session.getAttribute("member") != null){ // 회원인 경우
+		 if(session.getAttribute("member") != null){
+			// 회원인 경우
 			 return "wrongAccessPage/wrongAccess";
-		 }else {	// 비회원인 경우
+		 }else {
+			 // 비회원인 경우
 			 
-			 // 예시로 넣어봄
+			 // 예시로 넣어봄(실제로 구현할 때는 String, Integer로 해놔야함.)
 			 HashMap<String, Integer> cartMap = new HashMap<String, Integer>();
 			 cartMap.put("PI02B", 3);
 			 cartMap.put("PI01B", 5);
@@ -150,7 +147,7 @@ public class PurchaseController {
 	// 비회원 이메일 보내는 비동기
 	@RequestMapping(value = "emailCertification.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String SendEmail(Locale locale, Model model, EmailVO emailvo) throws Exception {
+	public String SendEmail(EmailVO emailvo) throws Exception {
 		
 		// 이메일 제목
 		String subject = "FoodContainer 비회원 이메일 인증번호";
@@ -164,7 +161,7 @@ public class PurchaseController {
 			randomNum += randomBox.substring(randomIndex, randomIndex + 1);
 		}
 		
-		// 이메일 내용에 인증번호 넣어서 보내기
+		// 이메일 내용에 인증번호 넣기
 		String message = "인증번호는 " + randomNum + " 입니다. 3분이내에 입력하세요.";
 		emailvo.setMessage(message);
 		
@@ -176,27 +173,29 @@ public class PurchaseController {
 	
 	// 비회원 구매페이지로 이동
 	@RequestMapping(value = "noMember.do")
-	public String noMemberPurchase(Locale locale, Model model,
-									HttpServletRequest request,
-									@RequestParam(value="name", required = false) String name,
-									@RequestParam(value="receiveMail", required = false) String email) throws Exception {
+	public String noMemberPurchase(Model model,
+								   HttpServletRequest request,
+								   @RequestParam(value="name", required = false) String name,
+								   @RequestParam(value="receiveMail", required = false) String email
+								  ) throws Exception {
 
 		// 세션 소환
 		HttpSession session = request.getSession();
 		
-		if(session.getAttribute("member") != null) {	// 회원인 경우
+		if(session.getAttribute("member") != null) {
+			// 회원인 경우
 			return "wrongAccessPage/wrongAccess";
-		}else {	// 비회원인 경우
+		}else {
+			// 비회원인 경우
 			
 			// 세션에 상품번호와 갯수 리스트가 없는 경우(말이 안되는 경우라고 생각하면 된다.)
 			if(session.getAttribute("cartMap") == null) {
 				return "wrongAccessPage/cartNull";
 			}else {	// 상품번호와 갯수리스트가 있는 경우(여기가 이제 제대로된 접근이다.)
 				
-				
-				List<CartVO> cartList = noMemberOrdersService.noMemberPurchaseList(request);
-				
+				List<CartVO> cartList = productService.noMemberPurchaseList(request);
 				model.addAttribute("cartList", cartList);
+				
 				model.addAttribute("name", name);
 				model.addAttribute("email", email);
 				
@@ -209,16 +208,16 @@ public class PurchaseController {
 	
 	// 비회원 결제하고 난뒤 DB에 올리는 페이지
 	@RequestMapping(value = "noMemberPurchaseOk.do", method = RequestMethod.POST)
-	public String noMemberPurchaseOk(Model model, @RequestParam(value="price", required = false) int[] price,
+	public String noMemberPurchaseOk(Model model,
 									HttpServletRequest request,
+									HttpServletResponse response,
 									NoMemberOrdersVO noMemberOrdersvo) throws Exception{
-		// 구매 완료하고 비회원 비밀번호 1회용
+		// 구매 완료 화면에 뿌려질 비밀번호를 여기에 임시 저장
 		String tempPw = noMemberOrdersvo.getPw();
 		// 상품 등록
-		noMemberOrdersService.orderInsert(request, noMemberOrdersvo, price);
-		// 1회용 비밀번호 설정
+		noMemberOrdersService.orderInsert(request, response, noMemberOrdersvo);
+		// 임시 저장한걸 vo에 담기
 		noMemberOrdersvo.setPw(tempPw);
-		// 모델에 담기
 		model.addAttribute("noMemberOrdersvo", noMemberOrdersvo);
 		
 		return "purchasePage/noMemberPurchaseOk";

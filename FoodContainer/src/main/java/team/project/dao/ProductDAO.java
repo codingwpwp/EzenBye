@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import team.project.util.PagingUtil;
+import team.project.vo.CartVO;
+import team.project.vo.OrderProductVO;
 import team.project.vo.ProductVO;
 import team.project.vo.SearchVO;
 
@@ -40,8 +42,34 @@ public class ProductDAO {
 	public List<ProductVO> popularList(ProductVO productVO) throws Exception{
 		return sqlSession.selectList(Namespace+".popularList",productVO);
 	}
+
 	
-	/*여기서 부터는 관리자페이지*/
+	/* **********************구매페이지************************ */
+	
+	// 회원&비회원 결제하려는 상품 수량 확인
+	public int checkInventory(String product_index) throws Exception{
+		return sqlSession.selectOne(Namespace + ".checkInventory", product_index);
+	}
+	// 회원&비회원 수량이 충분하다면 해당 갯수만큼 빼주기
+	public void MinusInventory(CartVO cartvo) throws Exception{
+		sqlSession.update(Namespace + ".MinusInventory", cartvo);
+	}
+	// 회원&비회원 다시 상품 채워놓기
+	public void plusInventory(CartVO cartvo) throws Exception{
+		sqlSession.update(Namespace + ".plusInventory", cartvo);
+	}
+	
+	// 회원&비회원 상품 판매량 늘려주기
+	public void productQuantityUpdate(OrderProductVO orderProductvo)throws Exception{
+		sqlSession.insert(Namespace + ".productQuantityUpdate", orderProductvo);
+	}
+	// 비회원 구매할 목록들 뿌리기
+	public List<CartVO> noMemberPurchaseList(List<String> productIndexList){
+		return sqlSession.selectList(Namespace + ".noMemberPurchaseList", productIndexList);
+	}
+	
+	
+	/* **********************여기서 부터는 관리자페이지********************** */
 	
 	// 상품 조회할때 글의 갯수(페이징)
 	public int adminProductListCount(SearchVO searchvo) throws Exception{
