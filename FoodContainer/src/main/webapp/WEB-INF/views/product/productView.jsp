@@ -98,7 +98,7 @@
 				          <div><span class="fs-5 totalPrice">합계 : <span class="fs-3"><fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>원</span></span></div>
 				          <div class="d-flex justify-content-evenly">
 					          <button class="viewButton btn btn-outline-success me-2" onclick="viewCart(this)">장바구니 담기</button>
-					          <button class="viewButton btn btn-success me-2" onclick="location.href='purchase/certification.do'">바로구매</button>
+					          <button class="viewButton btn btn-success me-2" onclick="directBuy(this)">바로구매</button>
 				          </div>
 				        </div>
 				      </div>
@@ -138,8 +138,8 @@
 	                			</div>
 				      	  		<div class="leftViewButtonDiv">
 				      	  			<input type="hidden" id="viewLoginCheck" value="${member.member_index}">
-							   		<button class="leftViewButton btn btn-outline-success me-2">장바구니</button>
-							  		<button class="leftViewButton btn btn-success me-2">바로구매</button>
+							   		<button class="leftViewButton btn btn-outline-success me-2" onclick="viewCart(this)">장바구니</button>
+							  		<button class="leftViewButton btn btn-success me-2" onclick="directBuy(this)">바로구매</button>
 				      	  		</div>
                 			</div>
 						</div>

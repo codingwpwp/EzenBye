@@ -218,3 +218,21 @@
 		$(".outter").css("display","none");
 	}
 	
+	function directBuy(obj){
+		
+		location.href="purchase/certification.do";
+		
+		var pram = document.location.href;
+		var product_index = pram.substring(pram.length-5,pram.length);
+		var prodcut_count = $(".pCnt").html();
+		
+		$.ajax({
+			url : "purchase/certification.do",
+			type : "post",
+			data : product_index+"="+prodcut_count,
+			success : function(){
+				
+			}
+		});
+	}
+	
