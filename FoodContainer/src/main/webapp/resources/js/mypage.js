@@ -14,6 +14,9 @@ $(document).ready(function(){
 	$(".pwChe4").hide();
 	$(".pwChe5").hide();
 	$(".pwChe6").hide();
+	$(".addrCheck1").hide();
+	$(".addrCheck2").hide();
+	$(".addrCheck3").hide();
 	
     var size_sw = 0;
     var left_full_menu = $("#asdieMenu");
@@ -542,17 +545,24 @@ function mypageMemberpwModify(obj){
 		$(".pwChe6").hide();
 	}
 	
-	if(flag == true){
-		
-		var YN = confirm('정말 수정하시겠습니까?');
+	var YN = confirm('정말 수정하시겠습니까?');
 		if(YN){
-			
+			if(flag == true){
+				
 			$.ajax({
 				url:"mypageMemberpwModify.do",
 				type:"post",
-				data:"name="+pw1+"&pw="+pw+"&member_index="+member_index,
+				data:"pw1="+pw1+"&pw="+pw+"&member_index="+member_index,
 				success:function(data){
-					
+					if(data == "true"){
+						alert('수정이 완료되었습니다.');
+						window.location.href='mypage_changeInforOk.do';
+					}else {
+						alert('현재 비밀번호가 일치하지 않습니다.');
+						$(".pwChe1").hide();
+						$(".pwChe2").show();
+						$(obj).parent().parent().find("input[name='pw1']").focus();
+					}
 				}	
 				
 			});
@@ -561,6 +571,62 @@ function mypageMemberpwModify(obj){
 	
 }
 
+//기본배송지 변경 or 등록
+function changeAddress(obj){
+	
+	var flag = true;
+	
+	var address1 = $(obj).parent().parent().find("input[name='address1']").val();
+	var address2 = $(obj).parent().parent().find("input[name='address2']").val();
+	var address3 = $(obj).parent().parent().find("input[name='address3']").val();
+	
+	var address = $(obj).parent().find("input[name='address']").val();
+	var member_index = $(obj).parent().find("input[name='member_index']").val();
+	
+	if(address1 == ""){
+		$(".addrCheck1").show();
+		$(obj).parent().parent().find("input[name='address1']").focus();
+		flag = false;
+	}else{
+		$(".addrCheck1").hide();
+	}
+	
+	if(address2 == ""){
+		$(".addrCheck2").show();
+		$(obj).parent().parent().find("input[name='address2']").focus();
+		flag = false;
+	}else{
+		$(".addrCheck2").hide();
+	}
+	
+	if(address3 == ""){
+		$(".addrCheck3").show();
+		$(obj).parent().parent().find("input[name='address3']").focus();
+		flag = false;
+	}else{
+		$(".addrCheck3").hide();
+	}
+	
+	address = $("input[name='address1']").val() + "|" + $("input[name='address2']").val() + "|" + $("input[name='address3']").val();
+	$("input[name='address']").val(address);
+	
+	var YN = confirm('정말 등록/변경 하시겠습니까?');
+		if(YN){
+			if(flag == true){
+				
+			$.ajax({
+				url:"mypageChangeAddress.do",
+				type:"post",
+				data:"address="+address+"&member_index="+member_index,
+				success:function(){
+					alert('배송지 등록/변경 완료하였습니다.');
+					window.location.href='mypage_addressManage.do';
+				}	
+				
+			});
+		}
+	}
+}
 
 	
 
