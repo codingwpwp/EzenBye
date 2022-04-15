@@ -31,6 +31,12 @@ public class RecipeDAO {
 	public int countRecipe() throws Exception{
 		return sqlSession.selectOne(Namespace+".countRecipe");
 	}
+	//레시피 게시물 추천
+//	public void recipeThumb(int recipe_index) throws Exception{
+//		sqlSession.update(Namespace+".recipeThumb",recipe_index);
+//	}
+	
+	
 	
 	//레시피작성
 	public void insertRecipe(RecipeVO vo)throws Exception{

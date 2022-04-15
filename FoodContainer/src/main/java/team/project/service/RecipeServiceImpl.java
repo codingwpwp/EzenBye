@@ -36,6 +36,14 @@ public class RecipeServiceImpl implements RecipeService{
 	public int countRecipe() throws Exception{
 		return recipeDao.countRecipe();
 	}
+	
+	//레시피 게시글 추천
+//	@Override
+//	public void recipeThumb(int recipe_index)throws Exception{
+//		recipeDao.recipeThumb(recipe_index);
+//	}
+	
+	
 	//레시피작성
 	@Override
 	public void insertRecipe(RecipeVO vo,MultipartFile tumnailImage, HttpServletRequest request) throws Exception {

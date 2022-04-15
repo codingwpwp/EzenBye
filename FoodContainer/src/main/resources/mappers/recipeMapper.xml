@@ -21,10 +21,33 @@ SELECT * FROM recipe where recipe_index =#{recipe_index}
 UPDATE recipe set hit =hit+1 where recipe_index=#{recipe_index}
 </update>
 
+
 <!-- 레시피 게시글 갯수 -->
 <select id="countRecipe" resultType="int">
 SELECT count(recipe_index) from recipe
 </select>
+
+
+<!-- 레시피 게시글 추천 -->
+<!-- <update id="recipeThumb" parameterType="int">
+UPDATE recipe set 
+thumb = thumb+1
+where recipe_index=#{recipe_index}
+
+</update>
+
+레시피 게시글 추천 중복 방지
+<insert id="insertThumb" parameterType="ThumbVO">
+INSERT INTO thumb(
+recipe_index,
+member_index
+)VALUES(
+#{recipe_index},
+#{member_index}
+)
+
+</insert> -->
+
 
 
 
