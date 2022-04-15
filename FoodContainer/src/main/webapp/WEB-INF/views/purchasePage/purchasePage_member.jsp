@@ -1,4 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -128,12 +130,12 @@
                         </div>
 
                         <div class="col-8 col-sm-7 col-md-6 col-lg-5 col-xxl-4">
-                            <input type="text" class="form-control fw-bold" id="orderName" name="orderName" value="홍길동" readonly>
+                            <input type="text" class="form-control fw-bold" id="name" name="name" value="${memberInfo.name}" readonly>
                         </div>
                         <!-- 주문자 이메일(히든) -->
-                        <input class="form-control pe-1" type="hidden" name="email" id="email" value="tester1@naver.com" maxlength="30" readonly>
+                        <input class="form-control pe-1" type="hidden" name="email" id="email" value="${memberInfo.email}" maxlength="30" readonly>
                         <!-- 주문자 연락처(히든) -->
-                        <input class="form-control pe-1" type="hidden" name="orderPhone" id="orderPhone" value="010-3222-1111" maxlength="30" readonly>
+                        <input class="form-control pe-1" type="hidden" name="orderPhone" id="orderPhone" value="${memberInfo.phone}" maxlength="30" readonly>
                     </div>
 
                     <!-- 배송지 설정 -->
@@ -151,14 +153,14 @@
 
                         <div class="col-8 col-md-8 row d-flex justify-content-end">
                             <div class="col-6 col-md-5 p-0">
-                                <input class="form-check-input border border-dark" type="radio" id="basicAddress" name="addressSort">
+                                <input class="form-check-input border border-dark" type="radio" id="basicAddress" name="addressSort" value="basic" <c:if test="${empty memberInfo.address}">disabled</c:if> <c:if test="${not empty memberInfo.address}"> checked</c:if>>
                                 <label class="form-check-label text-dark fontSmall fw-bold" for="basicAddress">
                                     기본 배송지
                                 </label>
                             </div>
 
                             <div class="col-6 col-md-5">
-                                <input class="form-check-input border border-dark" type="radio" id="newAddress" name="addressSort" checked>
+                                <input class="form-check-input border border-dark" type="radio" id="newAddress" name="addressSort" value="new" <c:if test="${empty memberInfo.address}"> checked</c:if>>
                                 <label class="form-check-label text-dark fontSmall fw-bold" for="newAddress">
                                     새 배송지
                                 </label>
@@ -174,7 +176,7 @@
                         </div>
 
                         <div class="col-5 col-md-6 col-lg-5 col-xxl-4">
-                            <input type="text" class="form-control fw-bold p-1 p-sm-2" id="receiver" name="receiver" value="" placeholder="이름을 입력하세요" maxlength="5" onblur="checkName(this)">
+                            <input type="text" class="form-control fw-bold p-1 p-sm-2" id="reciever" name="reciever" value="" placeholder="이름을 입력하세요" maxlength="6" onblur="checkName(this)">
                         </div>
 
                         <div class="col-4 col-md-3 col-xl-3">
@@ -197,18 +199,24 @@
 
                             <div class="input-group my-2">
                                 <span class="input-group-text">우편번호</span>
-                                <input type="text" id="postcode" name="postcode" class="form-control" readonly>
-                                <button type="button" onclick="deliveryAddress()" value="우편번호 찾기" class="btn btn-secondary">주소검색</button>
+                                <input type="text" id="postcode" name="postcode" class="form-control" value="<c:if test="${not empty memberInfo.address}">${fn:split(memberInfo.address, '|')[0]}</c:if>" readonly>
+                                <button type="button" onclick="deliveryAddress()" value="우편번호 찾기" class="btn btn-secondary" <c:if test="${not empty memberInfo.address}">style="display: none;"</c:if> >주소검색</button>
                             </div>
                             <div class="input-group my-2">
                                 <span class="input-group-text">주소</span>
-                                <input type="text" id="address" name="address" class="form-control" readonly>
+                                <input type="text" id="mainAddress" name="mainAddress" value="<c:if test="${not empty memberInfo.address}">${fn:split(memberInfo.address, '|')[1]}</c:if>" class="form-control" readonly>
                             </div>
                             <div class="input-group my-2">
                                 <span class="input-group-text">상세주소</span>
-                                <input type="text" id="detailAddress" name="detailAddress" class="form-control" readonly onblur="checkAddress(this)">
+                                <input type="text" id="detailAddress" name="detailAddress" value="<c:if test="${not empty memberInfo.address}">${fn:split(memberInfo.address, '|')[2]}</c:if>" class="form-control" readonly onblur="checkAddress(this)">
                             </div>
-
+                            <input class="form-check-input border border-dark" type="checkbox" value="Y" id="newBasicAddress">
+                            <label class="form-check-label text-dark fontSmall" for="newBasicAddress">
+                                기본 배송지로 등록
+                            </label>
+                            <c:if test="${not empty memberInfo.address}">
+                            	<input type="hidden" id="memberbasicAddress" value="${memberInfo.address}">
+                            </c:if>
                         </div>
 
                     </div>
@@ -242,7 +250,7 @@
                         </div>
 
                         <div class="col-9 col-lg-8">
-                            <input class="form-control pe-1" name="requestOptions" list="requestOptions" placeholder="ex)부재시 경비실에 맡겨 주세요." maxlength="30">
+                            <input class="form-control pe-1" name="request" list="requestOptions" placeholder="ex)부재시 경비실에 맡겨 주세요." maxlength="30">
                             <datalist id="requestOptions">
                                 <option value="배송 전에 미리 연락 바랍니다.">
                                 <option value="부재시 경비실에 맡겨 주세요.">
@@ -260,43 +268,19 @@
 
                     <!-- 결제 상품들 -->
                     <div class="mt-4 mb-5" id="productItems">
-
+                    <c:forEach items="${cartList}" var="cart">
                         <div class="row bg-light border rounded-3 py-2 m-2 productItem">
-                            <div class="col-6 col-sm-4">
-                                <img src="<%=request.getContextPath()%>/resources/img/good.png" class="img-thumbnail" alt="...">
+                            <div class="col-6 col-sm-3">
+                                <img src="<%=request.getContextPath()%>/resources/img/${cart.brand}/${cart.middleSort}/${cart.thumbnail_image}" class="img-thumbnail" alt="${cart.product_name}">
                             </div>
 
                             <div class="col-6 col-sm-8 d-flex flex-column">
-                                <div class="mb-auto fw-bold pt-2">비비고 진한고기만두400g*2번들</div>
-                                <div class="fw-bold pb-2"><span class="productPrice">4580</span>원 | <span class="productCount">5</span>개</div>
-                                <input type="hidden" class="productDeliveryPrice" value="3000">
+                                <div class="mb-auto fw-bold pt-2">${cart.product_name}</div>
+                                <div class="fw-bold pb-2"><span class="productPrice">${cart.origin_price}</span>원 | <span class="productCount">${cart.cart_count}</span>개</div>
+                                <input type="hidden" id="cartItem" name="${cart.product_index}" value="${cart.cart_count}">
                             </div>
-                        </div>
-
-                        <div class="row bg-light border rounded-3 py-2 m-2 productItem">
-                            <div class="col-6 col-sm-4">
-                                <img src="<%=request.getContextPath()%>/resources/img/good.png" class="img-thumbnail" alt="...">
-                            </div>
-
-                            <div class="col-6 col-sm-8 d-flex flex-column">
-                                <div class="mb-auto fw-bold pt-2">비비고 진한고기만두400g*2번들</div>
-                                <div class="fw-bold pb-2"><span class="productPrice">4580</span>원 | <span class="productCount">5</span>개</div>
-                                <input type="hidden" class="productDeliveryPrice" value="3000">
-                            </div>
-                        </div>
-
-                        <div class="row bg-light border rounded-3 py-2 m-2 productItem">
-                            <div class="col-6 col-sm-4">
-                                <img src="<%=request.getContextPath()%>/resources/img/good.png" class="img-thumbnail" alt="...">
-                            </div>
-
-                            <div class="col-6 col-sm-8 d-flex flex-column">
-                                <div class="mb-auto fw-bold pt-2">비비고 진한고기만두400g*2번들</div>
-                                <div class="fw-bold pb-2"><span class="productPrice">4580</span>원 | <span class="productCount">5</span>개</div>
-                                <input type="hidden" class="productDeliveryPrice" value="3000">
-                            </div>
-                        </div>
-
+                        </div>                    
+                    </c:forEach>
                     </div>
 
                     <!-- 할인혜택 -->
@@ -312,11 +296,11 @@
                         </div>
 
                         <div class="col-8">
-                            <select class="form-select" name="coupon" onchange="checkedCoupon(this)">
-                            	<c:if test="${couponList == null}">
+                            <select class="form-select" name="coupon" onchange="checkedCoupon(this)" <c:if test="${couponList.size() == 0}">disabled</c:if> >
+                            	<c:if test="${couponList.size() == 0}">
                             		<option value="" disabled selected style="display: none;">쿠폰이 없습니다.</option>
                             	</c:if>
-                            	<c:if test="${couponList != null}">
+                            	<c:if test="${couponList.size() != 0}">
                                 	<option id="notUsed" value="0" disabled selected style="display: none;">쿠폰이 있습니다.</option>
 	                            	<c:forEach items="${couponList}" var="couponVO">
                                 		<option value="${couponVO.coupon_index}">${couponVO.coupon_title}</option>
@@ -334,7 +318,7 @@
                         </div>
 
                         <div class="col-3 d-flex justify-content-end">
-                        	<c:if test="${couponList != null}">
+                        	<c:if test="${couponList.size() != 0}">
                             	<button type="button" class="btn btn-sm btn-warning text-dark fw-bold" id="couponResetbutton" onclick="couponResetbuttonFn()">초기화</button>
                             </c:if>
                         </div>
@@ -345,22 +329,18 @@
                     <div class="row mb-2 d-flex align-items-center">
 
                         <div class="col-5">
-                            <input class="form-check-input border border-dark" type="checkbox" value="" id="pointCheckbox" name="pointYN" onchange="checkedPoint(this)">
+                            <input class="form-check-input border border-dark" type="checkbox" value="" id="pointCheckbox" name="pointYN" onchange="checkedPoint(this)" <c:if test="${memberInfo.point == 0}">disabled</c:if> >
                             <label class="form-check-label text-dark" for="pointCheckbox">
-                                포인트 사용<br class="d-lg-none"> (최대 <span id="availablePointCommaVer" class="checkResultSpan">20,000</span>p)
-                                <input type="hidden" id="availablePoint" value="20000">
+                                포인트 사용<br class="d-lg-none"> (최대 <span id="availablePointCommaVer" class="checkResultSpan"><fmt:formatNumber value='${memberInfo.point}' pattern="#,###"/></span>p)
+                                <input type="hidden" id="availablePoint" value="${memberInfo.point}">
                             </label>
                         </div>
 
                         <div class="col-6 pe-1">
-                            <input type="number" min="0" max="20000" class="form-control p-1 fw-bold" id="point" name="point" value="0" placeholder="숫자만 입력하세요" onKeyup="pointReg(this)" onblur="usePoint(this)" oninput="pointMax(this)" style="text-align: right;" readonly>
+                            <input type="number" min="0" max="${memberInfo.point}" class="form-control p-1 fw-bold" id="point" name="point" value="0" placeholder="숫자만 입력하세요" onKeyup="pointReg(this)" onblur="usePoint(this)" oninput="pointMax(this)" style="text-align: right;" readonly>
                         </div>
                         
                         <div class="col-1 ps-0 fw-bold">p</div>
-                        
-                      	<!-- <div class="col-1" id="pointLimit">
-                        	
-                        </div> -->
 
                     </div>
 

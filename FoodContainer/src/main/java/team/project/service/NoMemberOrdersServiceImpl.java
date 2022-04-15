@@ -62,7 +62,7 @@ public class NoMemberOrdersServiceImpl implements NoMemberOrdersService{
 			
 			List<String> pidxListOne = new ArrayList<String>();
 			pidxListOne.add(pidx);
-			vo.setPrice(productDao.noMemberPurchaseList(pidxListOne).get(0).getOrigin_price());
+			vo.setPrice(productDao.purchaseListCaseOne(pidxListOne).get(0).getOrigin_price());
 			
 			orderProductList.add(vo);
 		}
@@ -99,7 +99,7 @@ public class NoMemberOrdersServiceImpl implements NoMemberOrdersService{
 		String[] cartProductIndexArray = currentCookie.split(",");
 		for(String pidx : cartMap.keySet()) {
 			for(int i = 0; i < cartProductIndexArray.length; i++) {
-				if(pidx.equals(cartProductIndexArray[i])) {
+				if(cartProductIndexArray[i].contains(pidx)) {
 					cartProductIndexArray[i] = "";
 				}
 			}

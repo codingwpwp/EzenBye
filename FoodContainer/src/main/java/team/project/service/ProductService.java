@@ -30,8 +30,10 @@ public interface ProductService {
 	String checkProductInventory(HashMap<String, String> cartMap) throws Exception;
 	// 회원&비회원 결제화면에서 취소할 경우 다시 상품 채워놓기
 	void plusInventory(HashMap<String, String> cartMap) throws Exception;
-	// 비회원 구매페이지에서 뿌려질 상품목록들
-	List<CartVO> noMemberPurchaseList(HttpServletRequest request) throws Exception;
+	// 구매페이지에서 뿌려질 상품목록들(상품번호=갯수 의 경우)
+	List<CartVO> purchaseListCaseOne(HttpServletRequest request) throws Exception;
+	// 구매페이지에서 뿌려질 상품목록들(카트번호=값 의 경우)
+	List<CartVO> purchaseListCaseTwo(int[] cart_index) throws Exception;
 	
 	/*여기서 부터는 관리자페이지*/
 	

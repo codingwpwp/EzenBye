@@ -58,14 +58,17 @@ public class ProductDAO {
 	public void plusInventory(CartVO cartvo) throws Exception{
 		sqlSession.update(Namespace + ".plusInventory", cartvo);
 	}
-	
 	// 회원&비회원 상품 판매량 늘려주기
 	public void productQuantityUpdate(OrderProductVO orderProductvo)throws Exception{
 		sqlSession.insert(Namespace + ".productQuantityUpdate", orderProductvo);
 	}
-	// 비회원 구매할 목록들 뿌리기
-	public List<CartVO> noMemberPurchaseList(List<String> productIndexList){
-		return sqlSession.selectList(Namespace + ".noMemberPurchaseList", productIndexList);
+	// 구매페이지에서 뿌려질 상품목록들(상품번호=갯수 의 경우)
+	public List<CartVO> purchaseListCaseOne(List<String> productIndexList){
+		return sqlSession.selectList(Namespace + ".purchaseListCaseOne", productIndexList);
+	}
+	// 구매페이지에서 뿌려질 상품목록들(카트번호=값 의 경우)
+	public List<CartVO> purchaseListCaseTwo(List<Integer> cartIndex){
+		return sqlSession.selectList(Namespace + ".purchaseListCaseTwo", cartIndex);
 	}
 	
 	
