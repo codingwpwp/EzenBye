@@ -97,8 +97,8 @@
 				          <div class="card-text mb-auto productNum fs-4"><i class="bi bi-dash-square-fill" onclick="minusFn(this)"></i> <div class="pCnt">1</div> <i class="bi bi-plus-square-fill" onclick="plusFn(this)"></i></div>
 				          <div><span class="fs-5 totalPrice">합계 : <span class="fs-3"><fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>원</span></span></div>
 				          <div class="d-flex justify-content-evenly">
-					          <button class="viewButton btn btn-outline-success me-2" onclick="viewCart(this)">장바구니 담기</button>
-					          <button class="viewButton btn btn-success me-2" onclick="directBuy(this)">바로구매</button>
+						  	<button type="button" class="viewButton btn btn-outline-success me-2" onclick="viewCart(this)">장바구니 담기</button>
+						  	<button class="viewButton btn btn-success me-2" onclick="directBuy(this)">바로구매</button>
 				          </div>
 				        </div>
 				      </div>

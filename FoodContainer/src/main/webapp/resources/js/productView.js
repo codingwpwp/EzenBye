@@ -274,13 +274,20 @@
 		var product_index = pram.substring(pram.length-5,pram.length);
 		var prodcut_count = $(".pCnt").html();
 		
-		$.ajax({
-			url : "purchase/certification.do",
-			type : "post",
-			data : product_index+"="+prodcut_count,
-			success : function(){
-				
-			}
-		});
+		var form = document.createElement('form');
+    
+	    var tag;
+	    tag = document.createElement('input');
+	    tag.setAttribute('type', 'hidden');
+	    tag.setAttribute('name', product_index);
+	    tag.setAttribute('value', prodcut_count);
+	    
+	    form.appendChild(tag);
+	    form.setAttribute('method', 'post');
+	    form.setAttribute('action', 'certification.do');
+	    document.body.appendChild(form);
+	    form.submit();
+
+
 	}
 	
