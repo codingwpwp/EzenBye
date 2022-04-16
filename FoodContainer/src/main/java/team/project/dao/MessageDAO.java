@@ -20,5 +20,10 @@ public class MessageDAO {
 		return sqlSession.selectList(Namespace+".messageList",member_index);
 	}
 	
+	public MessageVO messageListDetail(int message_index) throws Exception {
+		
+		return sqlSession.selectOne(Namespace+".messageListDetail",message_index);
+	}
+	
 	
 }

@@ -214,6 +214,19 @@ public class MypageController {
 		return "true";
 	}
 	
+	// 쪽지 선택삭제
+	@RequestMapping(value = "chooseMessageDelete.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String chooseMessageDelete(HttpServletRequest request) throws Exception {
+		
+		String[] valueArr = request.getParameterValues("valueArr");
+		int size = valueArr.length;
+		for(int i = 0; i<size; i++) {
+			
+		}
+		return "redirect:mypage_noteManage.do";
+	}
+	
 	@RequestMapping(value = "mypage_main.do", method = RequestMethod.GET)
 	public String main(Locale locale, Model model, OrderProductVO opVO, HttpSession session) throws Exception {
 		
@@ -391,7 +404,12 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value = "mypage_noteManageView.do", method = RequestMethod.GET)
-	public String home15(Locale locale, Model model) {
+	public String messageListDetail(Locale locale, Model model, int message_index) throws Exception {
+		
+		MessageVO messageListDetail = messageService.messageListDetail(message_index);
+		
+		model.addAttribute("messageListDetail",messageListDetail);
+		
 		return "mypage/noteManageView";
 	}
 	@RequestMapping(value = "mypage_memberSecession.do", method = RequestMethod.GET)

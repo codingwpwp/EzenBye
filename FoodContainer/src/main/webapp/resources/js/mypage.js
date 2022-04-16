@@ -207,15 +207,59 @@ function sample6_execDaumPostcode() {
         }).open();
     }
 
-// 쪽지관리 전체선택
-function selectAll(obj)  {
-	  const checkboxes 
-	       = document.getElementsByName('note');
-	  
-	  checkboxes.forEach((checkbox) => {
-	    checkbox.checked = obj.checked;
-	  })
-}
+// 쪽지관리 삭제 함수
+	$(function(){
+		var note = document.getElementsByName("note");
+		var rowCnt = note.length;
+		
+		$("input[name='noteAll']").click(function(){
+			var noteArray = $("input[name=note]");
+			for(var i=0; i<noteArray.length; i++){
+				noteArray[i].checked = this.checked;
+			}
+		});
+		
+		$("input[name='note']").click(function(){
+			if($("input[name='note']:checked").length == rowCnt){
+				$("input[name='noteAll']")[0].checked = true;
+			}else{
+				$("input[name='noteAll']")[0].checked = false;
+			}
+		});
+	});
+	
+	function chooseDelete(){
+		var valueArr = new Array();
+		var list = $("input[name='note']");
+		for(var i = 0; i<list.length; i++){
+			if(list[i].checked){
+				valueArr.push(list[i].value);
+			}
+		}
+		if(valueArr.length == 0){
+			alert('선택된 쪽지가 없습니다.');
+		}else{
+			var YN = confirm('정말 삭제하시겠습니까?');
+			if(YN){
+				$.ajax({
+					type : 'POST',
+					url : 'chooseMessageDelete.do',
+					traditional : true,
+					data : {
+						valueArr : valueArr
+					},
+					success : function(jdata){
+						if(jdata = 1){
+							alert('삭제되었습니다.');
+							window.location.reload();
+						}else{
+							alert('삭제실패');
+						}
+					}
+				});
+			}
+		}
+	}
 
 //세션이 만료됬을때 메인으로 나가짐
 	setInterval(function sessionCheck(){

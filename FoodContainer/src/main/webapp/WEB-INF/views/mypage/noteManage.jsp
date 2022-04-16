@@ -77,12 +77,12 @@
 			        <div class="row">
 			        	<div class="col-sm-12 col-md-3 col-lg-3 col-xl-2">
 			        		<div class="form-check form-check-inline">
-							  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="selectall" name="note" onclick="selectAll(this)">
-							  <label class="form-check-label" for="inlineCheckbox1">전체 선택</label>
+							  <input class="form-check-input" type="checkbox" id="inlineCheckbox" value="selectall" name="noteAll">
+							  <label class="form-check-label" for="inlineCheckbox">전체 선택</label>
 							</div>
 			        	</div>
 			        	<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 noteManage-btn">
-			        		<button type="button" class="btn btn-secondary btn-sm">선택삭제</button>
+			        		<button type="button" class="btn btn-secondary btn-sm" onclick="chooseDelete()">선택삭제</button>
 			        		<button type="button" class="btn btn-secondary btn-sm">선택읽음</button>
 			        	</div>
 			        	<div class="col-4 col-sm-4 col-md-6 col-lg-6 col-xl-2">
@@ -112,15 +112,16 @@
 						  <tbody>
 						  
 						    <c:forEach items="${messageList}" var="list">
+						    <c:set var="i" value="${i+1}" />
 						    <tr>
 						      <th scope="row">
 						      	<div class="form-check form-check-inline">
-								  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="${list.message_index }" name="note">
-								  <label class="form-check-label" for="inlineCheckbox2">${list.message_index }</label>
+								  <input class="form-check-input" type="checkbox" id="inlineCheckbox${i}" value="${list.message_index }" name="note">
+								  <label class="form-check-label" for="inlineCheckbox${i}">${list.message_index }</label>
 								</div>
 						      </th>
 						      <td>
-						      	<a href="mypage_noteManageView.do"><span class="d-inline-block text-truncate" style="max-width: 150px;">
+						      	<a href="mypage_noteManageView.do?message_index=${list.message_index}"><span class="d-inline-block text-truncate" style="max-width: 150px;">
 								  ${list.title}
 								</span></a>
 						      </td>
