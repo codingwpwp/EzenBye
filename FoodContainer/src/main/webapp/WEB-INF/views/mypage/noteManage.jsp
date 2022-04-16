@@ -67,6 +67,13 @@
 			        <p class="fs-6 lookup-fs-6">쪽지 관리</p>
 			        <hr />
 			        
+			        <c:if test="${empty messageList}">
+			        <div class="lookupBorder">
+			        	<p class="fs-6 lookup-fs-6">받은 쪽지가 없습니다.</p>
+		        	</div>
+			        </c:if>
+			        
+			        <c:if test="${!empty messageList}">
 			        <div class="row">
 			        	<div class="col-sm-12 col-md-3 col-lg-3 col-xl-2">
 			        		<div class="form-check form-check-inline">
@@ -81,7 +88,7 @@
 			        	<div class="col-4 col-sm-4 col-md-6 col-lg-6 col-xl-2">
 			        		<select class="form-select" aria-label="Default select example">
 							  <option selected value="title">제목</option>
-							  <option value="date">날짜</option>
+							  <option value="date">내용</option>
 							</select>
 			        	</div>
 			        	<div class="col-8 col-sm-8 col-md-6 col-lg-6 col-xl-4">
@@ -103,60 +110,28 @@
 						    </tr>
 						  </thead>
 						  <tbody>
+						  
+						    <c:forEach items="${messageList}" var="list">
 						    <tr>
 						      <th scope="row">
 						      	<div class="form-check form-check-inline">
-								  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" name="note">
-								  <label class="form-check-label" for="inlineCheckbox2">1</label>
+								  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="${list.message_index }" name="note">
+								  <label class="form-check-label" for="inlineCheckbox2">${list.message_index }</label>
 								</div>
 						      </th>
 						      <td>
 						      	<a href="mypage_noteManageView.do"><span class="d-inline-block text-truncate" style="max-width: 150px;">
-								  쪽지인데요 읽거나 말거나 알아서 하세요.
+								  ${list.title}
 								</span></a>
 						      </td>
-						      <td>2022-3-23</td>
+						      <td>${list.send_date}</td>
 						      <td>
 						      	<button type="button" class="btn btn-secondary btn-sm">읽음</button>
 			        			<button type="button" class="btn btn-secondary btn-sm">삭제</button>
 						      </td>
 						    </tr>
-						    <tr>
-						      <th scope="row">
-						      	<div class="form-check form-check-inline">
-								  <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" name="note">
-								  <label class="form-check-label" for="inlineCheckbox3">2</label>
-								</div>
-						      </th>
-						      <td>
-						      	<span class="d-inline-block text-truncate" style="max-width: 150px;">
-								  쪽지인데요 읽거나 말거나 알아서 하세요.
-								</span>
-						      </td>
-						      <td>2022-3-14</td>
-						      <td>
-						      	<button type="button" class="btn btn-secondary btn-sm">읽음</button>
-			        			<button type="button" class="btn btn-secondary btn-sm">삭제</button>
-						      </td>
-						    </tr>
-						    <tr>
-						      <th scope="row">
-						      	<div class="form-check form-check-inline">
-								  <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4" name="note">
-								  <label class="form-check-label" for="inlineCheckbox4">3</label>
-								</div>
-						      </th>
-						      <td>
-						      	<span class="d-inline-block text-truncate" style="max-width: 150px;">
-								  쪽지인데요 읽거나 말거나 알아서 하세요.
-								</span>
-						      </td>
-						      <td>2022-3-6</td>
-						      <td>
-						      	<button type="button" class="btn btn-secondary btn-sm">읽음</button>
-			        			<button type="button" class="btn btn-secondary btn-sm">삭제</button>
-						      </td>
-						    </tr>
+						    </c:forEach>
+						    
 						  </tbody>
 						</table>
 					</div>
@@ -178,6 +153,7 @@
 					    </li>
 					  </ul>
 					</nav>
+			    	</c:if>
 			    	
       				</div>
                 </article>
