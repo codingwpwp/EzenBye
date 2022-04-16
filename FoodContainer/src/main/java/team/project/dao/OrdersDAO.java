@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import team.project.util.PagingUtil;
-import team.project.vo.CartVO;
 import team.project.vo.OrdersVO;
 import team.project.vo.SearchVO;
 
@@ -35,7 +34,10 @@ public class OrdersDAO {
 	}
 	
 	/* 회원 구매 페이지 */
-	
+	// 회원 결제하고 난뒤 DB에 올리는 과정
+	public void memberOrderInsert(OrdersVO ordersvo) throws Exception{
+		sqlSession.insert(Namespace + ".memberOrderInsert", ordersvo);
+	}
 
 	
 	/* 여기서 부터는 관리자페이지 */

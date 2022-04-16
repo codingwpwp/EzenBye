@@ -70,12 +70,13 @@
     	SET inventory = inventory + #{cart_count}
     	WHERE product_index = #{product_index}  
     </update>
+    
     <!-- 회원&비회원 상품 판매량 늘려주기 -->
-    <insert id="productQuantityUpdate" parameterType="OrderProductVO">
+    <update id="productQuantityUpdate" parameterType="OrderProductVO">
     	UPDATE product
     	SET quantity = quantity + #{order_quantity}
     	WHERE product_index = #{product_index}
-    </insert>
+    </update>
     
 	<!-- 구매페이지에서 뿌려질 상품목록들(상품번호=갯수 의 경우) -->
 	<select id="purchaseListCaseOne" resultType="CartVO" parameterType="list">

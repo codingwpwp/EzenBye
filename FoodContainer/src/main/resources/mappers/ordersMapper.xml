@@ -29,9 +29,31 @@
     </select>
     
     
-	<!-- 여기는 상품 구매 페이지-->
-	
-
+	<!-- 여기는 구매 페이지-->
+	<!-- 회원 결제하고 난뒤 DB에 올리는 쿼리 -->
+	<insert id="memberOrderInsert" parameterType="OrdersVO">
+		INSERT INTO orders(
+			member_order_index, member_index,
+			address, reciever, phone, delivery_free_YN,
+			<if test="request != ''">
+ 		 		request,
+ 			</if>
+			<if test="coupon_index != 0">
+ 		 		coupon_index,
+ 			</if>
+ 			used_point, pay_price
+		)VALUES(
+			#{member_order_index}, #{member_index},
+			#{address}, #{reciever}, #{phone}, #{delivery_free_YN}.
+ 			<if test="request != ''">
+ 		 		#{request},
+ 			</if>
+			<if test="coupon_index != 0">
+ 		 		#{coupon_index},
+ 			</if>
+ 			#{used_point}, #{pay_price} 
+		)
+	</insert>
     
     <!-- 여기서 부터는 관리자페이지 -->
     

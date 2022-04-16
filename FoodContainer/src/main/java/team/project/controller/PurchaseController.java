@@ -22,13 +22,14 @@ import team.project.service.CouponService;
 import team.project.service.EmailService;
 import team.project.service.MemberService;
 import team.project.service.NoMemberOrdersService;
-import team.project.service.OrderProductService;
+import team.project.service.OrdersService;
 import team.project.service.ProductService;
 import team.project.vo.CartVO;
 import team.project.vo.CouponVO;
 import team.project.vo.EmailVO;
 import team.project.vo.MemberVO;
 import team.project.vo.NoMemberOrdersVO;
+import team.project.vo.OrdersVO;
 
 @RequestMapping(value = "/purchase/")
 @Controller
@@ -44,17 +45,22 @@ public class PurchaseController {
 	private ProductService productService;
 	
 	@Autowired
+	private OrdersService ordersService;
+	
+	@Autowired
 	private NoMemberOrdersService noMemberOrdersService;
 	
 	@Autowired
 	private MemberService memberService;
 	
-	
+
+	/*****************************************회원*******************************************/
 	// 회원 장바구니에서 구매페이지
 	@RequestMapping(value = "member.do")
 	public String memberPurchase(Model model, HttpServletRequest request,
 								 @RequestParam(value="cart_index", required = false) int[] cart_index) throws Exception {
-
+		
+		// 예시로 설정한 거임.
 		int[] carr = new int[2];
 		carr[0] = 1;
 		carr[1] = 2;
@@ -76,20 +82,17 @@ public class PurchaseController {
 				if(session.getAttribute("memberPurchaseNow") != null) {
 					// 바로구매에서 오는 경우
 					cartList = productService.purchaseListCaseOne(request);
+					session.setAttribute("memberPurchaseNow", null);
 					
 				}else{
 					// 장바구니에서 오는 경우
-					System.out.println("--------------------");
-					System.out.println("--------------------");
-					System.out.println("--------------------");
-					System.out.println("--------------------");
-					System.out.println("--------------------");
 					cartList = productService.purchaseListCaseTwo(carr);
 					
 				}
 				
-				// 구매할 상품들을 모델에 담기
+				// 구매할 상품들을 모델&세션에 담기
 				model.addAttribute("cartList", cartList);
+				session.setAttribute("cartList", cartList);
 				
 				// 회원정보&쿠폰 조회
 				couponList(model, session);
@@ -99,7 +102,43 @@ public class PurchaseController {
 		}
 	}
 	
-	/****************************회원정보&쿠폰 조회*******************************/
+	// 결제하고 난뒤 DB에 올리는 페이지
+	@RequestMapping(value = "memberPurchaseOk.do", method = RequestMethod.POST)
+	public String purchaseOk(Model model, HttpServletRequest request, OrdersVO ordersvo,
+							 @RequestParam(value="newBasicAddress") String newBasicAddress) throws Exception{
+		// 세션 소환
+		HttpSession session =request.getSession();
+		if(session.getAttribute("member") == null) {
+			// 비회원인 경우
+			return "wrongAccessPage/wrongAccess";
+			
+		}else {
+			MemberVO member = (MemberVO)session.getAttribute("member");
+			ordersvo.setMember_index(member.getMember_index());
+			
+			System.out.println("-------------------------------");
+			System.out.println(ordersvo.getMember_order_index());
+			System.out.println(ordersvo.getMember_index());
+			System.out.println(ordersvo.getAddress());
+			System.out.println(ordersvo.getReciever());
+			System.out.println(ordersvo.getPhone());
+			System.out.println(ordersvo.getRequest());
+			System.out.println(ordersvo.getDelivery_free_YN());
+			System.out.println(ordersvo.getCoupon_index());
+			System.out.println(ordersvo.getUsed_point());
+			System.out.println(ordersvo.getPay_price());
+			System.out.println(newBasicAddress);
+			System.out.println("-------------------------------");
+			
+			ordersService.orderInsert(session, ordersvo);
+			
+			return "purchasePage/memberPurchaseOk";
+		}
+		
+	}
+	/***************************************************************************************/
+	
+	/*************************************회원정보&쿠폰 조회*************************************/
 	public void couponList(Model model, HttpSession session) throws Exception{
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		MemberVO memberInfo = memberService.memberInfor(member.getMember_index());
@@ -108,8 +147,10 @@ public class PurchaseController {
 		List<CouponVO> couponvo = couponService.couponList(member.getMember_index());
 		model.addAttribute("couponList", couponvo);
 	}
-	/*********************************************************************/
+	/***************************************************************************************/
 	
+	
+	/**********************************회원쿠폰 조회하는 비동기************************************/
 	// 회원 구매페이지 내에서 쿠폰 적용하는 비동기
 	@RequestMapping(value = "couponCheck.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -120,18 +161,10 @@ public class PurchaseController {
 		
 		return discountPer;
 	}
+	/***************************************************************************************/
 	
-	// 결제하고 난뒤 DB에 올리는 페이지
-	@RequestMapping(value = "purchaseOk.do", method = RequestMethod.POST)
-	@ResponseBody
-	public String purchaseOk(Locale locale, Model model, HttpServletRequest request) {
-
-		String orderName = request.getParameter("orderName");
-		System.out.println(orderName);
-		return "purchasePage/purchaseOk";
-	}
 	
-	/*---------------------------------------회원&비회원 공통-------------------------------------*/
+	/**************************************회원&비회원 공통**************************************/
 	// 결제화면 전에 상품 수량 확인 및 빼주기 비동기
 	@RequestMapping(value = "checkProductInventory.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -145,8 +178,9 @@ public class PurchaseController {
 	public void plusInventory(@RequestParam HashMap<String, String> cartMap) throws Exception {
 		productService.plusInventory(cartMap);
 	}
+	/***************************************************************************************/
 	
-	/*-------------------------------------------비회원----------------------------------------*/
+	/*****************************************비회원******************************************/
 
 	// 비회원 이메일 인증페이지로 이동(해시맵HashMap<String, String>으로 받는게 맞음.)
 	@RequestMapping(value = "certification.do")

@@ -25,8 +25,13 @@ public class OrderProductDAO {
 		return sqlSession.update(Namespace+".buyOk",orderItem_index);
 	}
 	
-	/* 비회원구매페이지 */
-	// 비회원 상세주문 넣는 과정
+	/* 구매페이지 */
+	// 회원 상세주문 넣는 쿼리
+	public void memberOrderProductInsert(List<OrderProductVO> orderProductList) throws Exception{
+		sqlSession.insert(Namespace + ".memberOrderProductInsert", orderProductList);
+	}
+	
+	// 비회원 상세주문 넣는 쿼리
 	public void noMemberOrderProductInsert(List<OrderProductVO> orderProductList) throws Exception{
 		sqlSession.insert(Namespace + ".noMemberOrderProductInsert", orderProductList);
 	}

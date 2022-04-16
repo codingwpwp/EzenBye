@@ -4,6 +4,17 @@ var totalPrice;
 var couponPrice = 0;
 var pointPrice = 0;
 var expectedPoint = 0;
+
+// 결제하기 버튼 누를 때 유효성 검사 체크 스위치들
+var addressSw = 0;
+var checkboxSw = 0;
+var receiverSw = 0;
+var receiverPhoneSw = 0;
+
+// 비회원 전용 추가 유효성 검사 체크 스위치들
+var passwordSw = 0;
+var orderPhoneSw = 0;
+
 $(document).ready(function(){
     if(window.innerWidth >= 992){
         $(".phone").removeClass("w-75");
@@ -20,6 +31,14 @@ $(document).ready(function(){
 
         }
     });
+    
+    // 배송지 입력되어있는지에 따라 스위치 체크
+    if($("#detailAddress").val() != ""){
+		addressSw = 1;
+		$("#deliverySpan").prev().text("");
+	}else{
+		addressSw = 0;
+	}
     
     // 총 금액 따지기
     sumPrice = parseInt($("#productSumPrice").text());
@@ -50,19 +69,8 @@ $(document).ready(function(){
 	// 적립 예정 포인트 따지기
 	expectedPoint = Math.floor(sumPrice * 0.01);
 	$(".expectedPoint").text(expectedPoint);
-
     
 });
-
-// 결제하기 버튼 누를 때 유효성 검사 체크 스위치들
-var addressSw = 0;
-var checkboxSw = 0;
-var receiverSw = 0;
-var receiverPhoneSw = 0;
-
-// 비회원 전용 추가 유효성 검사 체크 스위치들
-var passwordSw = 0;
-var orderPhoneSw = 0;
 
 
 // 전체약관 동의
@@ -210,6 +218,33 @@ function sameName(obj){
 		$("#reciever").prop('readonly', false);
 		$("#receiverSpan").prev().text("*");
 		receiverSw = 0;
+	}
+}
+
+// 주소검색 버튼 활성화
+function addressFn(){
+	if($("input[name='addressSort']:checked").val() == "basic"){
+		$("#findAddressBtn").hide();
+		$("#postcode").val($("#memberBasicAddress").val().split("|")[0]);
+		$("#mainAddress").val($("#memberBasicAddress").val().split("|")[1]);
+		$("#detailAddress").val($("#memberBasicAddress").val().split("|")[2]);
+		$("#detailAddress").prop("readonly", true);
+		$("input#newBasicAddress").prop("checked", false);
+		$("input#newBasicAddress").prop("disabled", true);
+		$("#deliverySpan").css("color", "green");
+		$("#deliverySpan").prev().text("");
+		setTimeout(function(){
+            $("#deliverySpan").css("color", "black");
+        },500);
+		addressSw = 1;
+	}else{
+		$("#findAddressBtn").show();
+		$("#postcode").val("");
+		$("#mainAddress").val("");
+		$("#detailAddress").val("");
+		$("input#newBasicAddress").prop("disabled", false);
+		$("#deliverySpan").prev().text("*");
+		addressSw = 0;
 	}
 }
 
@@ -477,7 +512,7 @@ function couponResetbuttonFn(){
 	
 	$(".totalPrice").text(totalPrice.toLocaleString('ko-KR'));
 	
-	$("select[name='coupon']").find("option[id='notUsed']").prop("selected", true);
+	$("select[name='coupon_index']").find("option[id='notUsed']").prop("selected", true);
 }
 
 // 포인트 사용을 체크하는 함수
@@ -496,14 +531,12 @@ function checkedPoint(obj){
 
 // 포인트 입력하는 중에 유효성 검사
 function pointReg(obj){
-	var pointReg = /^$|^[0-9]$|^[1-9][0-9]*$/g;
-	if(!pointReg.test(obj.value)){
-		obj.value = "";
-	}
-}
-
-// 사용가능한 포인트를 초과할 때
-function pointMax(obj){
+	// 숫자 아닌 것들 싹다 지우기(한글 외에는 자동으로 입력이 안됨)
+	obj.value = obj.value.replace(/^[가-힣]*$/g, 0);
+	// 0으로 시작 하면 지우기
+	obj.value = obj.value.replace(/^[0]*/g, "");
+	
+	// 포인트 초과할 때
 	if(parseInt(obj.value) > parseInt($("#availablePoint").val())){
 		
 		$(obj).val(obj.value.slice(0, $("#availablePoint").val().length - 1));
@@ -514,32 +547,34 @@ function pointMax(obj){
         },500);
         
     }
-}
-
-// 포인트를 입력하고 onblur 적용하는 함수
-function usePoint(obj){
+	
+	// 포인트 적용
 	var point = parseInt(obj.value);
-	pointPrice = point;
-	var numberReg = /[^0-9]/g;
-	if(numberReg.test(point)){
-		$(obj).val("");
-	}else{
-		if(sumPrice + deliveryPrice - couponPrice - point >= 0){
-			$(".pointPrice").text(point.toLocaleString('ko-KR'));
-			totalPrice = sumPrice + deliveryPrice - couponPrice - point;
-			$(".totalPrice").text(totalPrice.toLocaleString('ko-KR'));
-		}else{
-			$(obj).val("");
-			$(".totalPrice").css("color", "#0d6efd");
-			setTimeout(function(){
-	            $(".totalPrice").css("color", "#dc3545");
-	        },500);
-		}
-		
+	if(obj.value == ""){
+		obj.value = 0;
+		point = 0;
 	}
+	pointPrice = point;
+	
+	if(sumPrice + deliveryPrice - couponPrice - pointPrice >= 0){
+		$(".pointPrice").text(pointPrice.toLocaleString('ko-KR'));
+		totalPrice = sumPrice + deliveryPrice - couponPrice - pointPrice;
+		$(".totalPrice").text(totalPrice.toLocaleString('ko-KR'));
+	}else{
+		$(obj).val(0);
+		pointPrice = 0;
+		$(".pointPrice").text(pointPrice.toLocaleString('ko-KR'));
+		$(".totalPrice").css("color", "#0d6efd");
+		setTimeout(function(){
+            $(".totalPrice").css("color", "#dc3545");
+        },500);
+        totalPrice = sumPrice + deliveryPrice - couponPrice - pointPrice;
+		$(".totalPrice").text(totalPrice.toLocaleString('ko-KR'));
+	}
+	$("#point").val(obj.value);
 }
 
-
+// 결제하기 버튼
 function requestPay(){
 
 	var requiredSw = 0;
@@ -572,10 +607,26 @@ function requestPay(){
 				if(status == "Fail"){
 					alert("결제에 실패하였습니다 (일부 상품이 현재 남아있는 재고보다 많습니다)");
 				}else{
-					console.log(status);
 					if($("#agreeThreeCheckbox").val() == undefined){
 						// 회원 구매페이지의 경우
 						orderPhone = $("#orderPhone").val();
+						$("input[name='phone']").val($("select[name='receiverPhone1']").val() + "-" + $("input[name='receiverPhone2']").val() + "-" + $("input[name='receiverPhone3']").val());
+						$("input[name='member_order_index']").val(status);
+						$("input[name='address").val($("input[name='postcode']").val() + "|" + $("input[name='mainAddress']").val() + "|" + $("input[name='detailAddress']").val());
+						if(deliveryPrice == 0){
+							$("input[name='delivery_free_YN']").val("Y");
+						}else{
+							$("input[name='delivery_free_YN']").val("N");
+						}
+						$("input[name='pay_price']").val(totalPrice);
+						
+						// 기본 배송지로 등록여부
+						if($('#newBasicAddress').is(':checked')){
+							$("input[name='newBasicAddress']").val("Y");
+						}else{
+							$("input[name='newBasicAddress']").val("N");
+						}
+						
 					}else{
 						// 비회원 구매페이지의 경우
 						orderPhone = $("select[name='orderPhone1']").val() + "-" + $("input[name='orderPhone2']").val() + "-" + $("input[name='orderPhone3']").val();

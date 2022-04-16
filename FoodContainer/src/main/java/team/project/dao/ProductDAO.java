@@ -60,7 +60,7 @@ public class ProductDAO {
 	}
 	// 회원&비회원 상품 판매량 늘려주기
 	public void productQuantityUpdate(OrderProductVO orderProductvo)throws Exception{
-		sqlSession.insert(Namespace + ".productQuantityUpdate", orderProductvo);
+		sqlSession.update(Namespace + ".productQuantityUpdate", orderProductvo);
 	}
 	// 구매페이지에서 뿌려질 상품목록들(상품번호=갯수 의 경우)
 	public List<CartVO> purchaseListCaseOne(List<String> productIndexList){

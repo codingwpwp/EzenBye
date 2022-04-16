@@ -15,7 +15,7 @@ public class NoMemberOrderDAO {
 	private static final String Namespace = "team.project.mapper.noMemberOrdersMapper";
 	
 	// 큰 단위 주문 넣는 메소드
-	public void noMemberOrdersInsert(NoMemberOrdersVO noMemberOrdersvo) throws Exception{
+	public void noMemberOrderInsert(NoMemberOrdersVO noMemberOrdersvo) throws Exception{
 		sqlSession.insert(Namespace + ".noMemberOrdersInsert", noMemberOrdersvo);
 	}
 	

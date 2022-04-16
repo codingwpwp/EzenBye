@@ -158,7 +158,7 @@ public class ProductServiceImpl implements ProductService {
 		
 		return productDao.purchaseListCaseTwo(cartIndex);
 	}
-	/*----------------------------------------------------------------------------------------*/
+	/*****************************************************************************************/
 	
 	/*여기서 부터는 관리자페이지*/
 	

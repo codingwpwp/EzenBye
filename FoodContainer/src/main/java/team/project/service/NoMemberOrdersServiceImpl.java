@@ -71,7 +71,7 @@ public class NoMemberOrdersServiceImpl implements NoMemberOrdersService{
 		noMemberOrdersvo.setPw(PasswordEncoder.encode(noMemberOrdersvo.getPw()));
 		
 		// 큰 주문 단위 넣는 과정
-		noMemberOrderDao.noMemberOrdersInsert(noMemberOrdersvo);
+		noMemberOrderDao.noMemberOrderInsert(noMemberOrdersvo);
 
 		// 이제 상세 주문을 넣어보자
 		orderProductDao.noMemberOrderProductInsert(orderProductList);

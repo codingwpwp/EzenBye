@@ -16,6 +16,21 @@
     	SET order_status = '구매확정', buy_YN = 'Y'
     	WHERE orderItem_index = #{orderItem_index}
     </update>
+    
+    <!-- 회원 상세주문 넣는 과정 -->
+    <insert id="memberOrderProductInsert" parameterType="list">
+    	INSERT INTO order_product(
+    		member_order_index, orderItem_index,
+    		product_index, order_quantity, price, point
+    	) VALUES 
+    	<foreach collection="list" item="item" separator=" , ">
+			(
+			#{item.no_member_order_index}, #{item.orderItem_index},
+			#{item.product_index}, #{item.order_quantity},
+			#{item.price}, #{item.point}
+			)
+		</foreach>
+    </insert>
        
     <!-- 비회원 상세주문 넣는 과정 -->
     <insert id="noMemberOrderProductInsert" parameterType="list">
