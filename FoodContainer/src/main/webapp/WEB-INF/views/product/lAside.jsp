@@ -16,9 +16,9 @@
 				</button>
 				<div class="collapse" id="product-collapse">
 					<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-						<li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideIceAll" onclick="asideIceAll(this)" checked> 전체</label></a></li>
-					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideIce" value="0" onclick="asideIce(this)"> 볶음밥</label></a></li>
-					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideIce" value="1" onclick="asideIce(this)"> 치킨,만두</label></a></li>
+						<li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideIceAll" onclick="asideIceAll(this); productFilter();" checked> 전체</label></a></li>
+					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideIce" value="0" onclick="asideIce(this); productFilter();"> 볶음밥</label></a></li>
+					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideIce" value="1" onclick="asideIce(this); productFilter();"> 치킨,만두</label></a></li>
 					</ul>
 				</div>
 			</li>
@@ -29,10 +29,10 @@
 				</button>
 				<div class="collapse" id="home-collapse">
 					<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-						<li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideProductAll" onclick="asideProductAll(this)" checked> 전체</label></a></li>
-					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideProduct" value="0" onclick="asideProduct(this)"> 국</label></a></li>
-					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideProduct" value="1" onclick="asideProduct(this)"> 반찬</label></a></li>
-					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideProduct" value="2" onclick="asideProduct(this)"> 컵밥,햇반</label></a></li>
+						<li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideProductAll" onclick="asideProductAll(this); productFilter();" checked> 전체</label></a></li>
+					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideProduct" value="0" onclick="asideProduct(this); productFilter();"> 국</label></a></li>
+					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideProduct" value="1" onclick="asideProduct(this); productFilter();"> 반찬</label></a></li>
+					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideProduct" value="2" onclick="asideProduct(this); productFilter();"> 컵밥,햇반</label></a></li>
 					</ul>
 				</div>
 			</li>
@@ -43,12 +43,12 @@
 				</button>
 				<div class="collapse" id="dashboard-collapse" style="">
 					<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-						<li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideBrandAll" onclick="asideBrandAll(this)" checked> 전체</label></a></li>
-					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideBrand" value="0" onclick="asideBrand(this)"> CJ</label></a></li>
-					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideBrand" value="1" onclick="asideBrand(this)"> 오뚜기</label></a></li>
-					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideBrand" value="2" onclick="asideBrand(this)"> 청정원</label></a></li>
-					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideBrand" value="3" onclick="asideBrand(this)"> 하림</label></a></li>
-					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideBrand" value="4" onclick="asideBrand(this)"> 기타</label></a></li>
+						<li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideBrandAll" onclick="asideBrandAll(this); productFilter();" checked> 전체</label></a></li>
+					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideBrand" value="0" onclick="asideBrand(this); productFilter();"> CJ</label></a></li>
+					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideBrand" value="1" onclick="asideBrand(this); productFilter();"> 오뚜기</label></a></li>
+					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideBrand" value="2" onclick="asideBrand(this); productFilter();"> 청정원</label></a></li>
+					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideBrand" value="3" onclick="asideBrand(this); productFilter();"> 하림</label></a></li>
+					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideBrand" value="4" onclick="asideBrand(this); productFilter();"> 기타</label></a></li>
 					</ul>
 				</div>
 			</li>
@@ -59,13 +59,13 @@
 				</button>
 				<div class="collapse" id="orders-collapse">
 					<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asidePrice" value="0" onclick="asidePrice(this)" checked> 낮은 가격 순</label></a></li>
-					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asidePrice" value="1" onclick="asidePrice(this)" checked> 높은 가격 순</label></a></li>
+					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asidePrice" value="0" onclick="asidePrice(this); productFilter();" checked> 낮은 가격 순</label></a></li>
+					    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asidePrice" value="1" onclick="asidePrice(this); productFilter();" checked> 높은 가격 순</label></a></li>
 					</ul>
 				</div>
 			</li>
 			<!-- 무료배송 체크박스 -->
-			<button class="btn btn-toggle align-items-center rounded collapsed free" onclick="free(this)">
+			<button class="btn btn-toggle align-items-center rounded collapsed free" onclick="free(this); productFilter();">
 				<i class="bi bi-check-square"></i> 무료배송
 			</button>
 			
