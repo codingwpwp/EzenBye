@@ -36,14 +36,15 @@ public class RecipeController {
 	
 	
 	//레시피 목록 조회
-//	@RequestMapping(value = "/recipeList", method = RequestMethod.GET)
-//	public String selectList(Locale locale, Model model,int recipe_index,int nowPage) throws Exception{
-//		List<RecipeVO> recipeList = recipeService.recipeList();		
-//		model.addAttribute("recipeList", recipeList);	
-//	
-//		
-//		return "recipe/recipeList";
-//	}
+	@RequestMapping(value = "/recipeList", method = RequestMethod.GET)
+	public String selectList(Locale locale, Model model,int recipe_index,@RequestParam(value="nowPage") int nowPage,
+			@RequestParam(value="cntPage")int cntPage) throws Exception{
+		List<RecipeVO> recipeList = recipeService.recipeList();		
+		model.addAttribute("recipeList", recipeList);	
+	
+		
+		return "recipe/recipeList";
+	}
 	
 	
 	//레시피 게시물 추천
@@ -74,7 +75,7 @@ public class RecipeController {
 		//1.게시글 총갯수 구해오기
 		//service 추가 작업
 		//2.pagingutil 객체 생성
-		PagingUtil pu = new PagingUtil(count,nowPageNum,9,10);
+		PagingUtil pu = new PagingUtil(count,nowPageNum,6,10);
 		System.out.println(pu);
 		model.addAttribute("pu",pu);
 		
