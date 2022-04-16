@@ -135,7 +135,9 @@
 									    	</span>원<br>
 									    	<c:if test="${popularList.sale_price != -1 }">
 									    		<span class="discount">
-									    			<fmt:formatNumber value="${popularList.sale_price}" pattern="#,###"/>원<br>
+									    			<fmt:formatNumber value="${popularList.sale_price}" pattern="#,###"/>원
+									    			<c:set var="sale" value="${((popularList.origin_price - popularList.sale_price)/popularList.origin_price)*100}" />
+				          							(<fmt:formatNumber value="${sale}" pattern="##.#"/>%)<br>
 									    		</span>
 									    	</c:if>
 									    	<span class="indexStar">
@@ -248,7 +250,9 @@
 									    </c:if>
 									    	<c:if test="${popularList.sale_price != -1 }">
 									    		<span class="discountM">
-									    			[할인가]<fmt:formatNumber value="${popularList.sale_price}" pattern="#,###"/>원<br>
+									    			<fmt:formatNumber value="${popularList.sale_price}" pattern="#,###"/>원
+									    			<c:set var="sale" value="${((popularList.origin_price - popularList.sale_price)/popularList.origin_price)*100}" />
+				          							(<fmt:formatNumber value="${sale}" pattern="##.#"/>%)<br>
 									    		</span>
 									    	</c:if>
 										<span class="indexStarM">

@@ -83,7 +83,9 @@
 										</span>원<br>
 									   	<c:if test="${ProductVO.sale_price != -1}">
 									   	<span class="discount">
-									   		<fmt:formatNumber value="${ProductVO.sale_price}" pattern="#,###"/>원<br>
+									   		<fmt:formatNumber value="${ProductVO.sale_price}" pattern="#,###"/>원
+									   		<c:set var="sale" value="${((ProductVO.origin_price - ProductVO.sale_price)/ProductVO.origin_price)*100}" />
+				          					(<fmt:formatNumber value="${sale}" pattern="##.#"/>%)<br>
 									   	</span>
 									   	</c:if>
 									   	<span class="productListStar">
@@ -176,6 +178,8 @@
 								<c:if test="${ProductVO.sale_price != -1}">
 								<div class="discountM">
 									[할인가]<fmt:formatNumber value="${ProductVO.sale_price}" pattern="#,###"/>원
+									<c:set var="sale" value="${((ProductVO.origin_price - ProductVO.sale_price)/ProductVO.origin_price)*100}" />
+				          			(<fmt:formatNumber value="${sale}" pattern="##.#"/>%)
 								</div>
 								</c:if>
 								<c:set var="delivery" value="${ProductVO.delivery_free_YN}" />
