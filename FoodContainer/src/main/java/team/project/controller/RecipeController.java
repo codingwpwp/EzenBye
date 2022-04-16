@@ -35,18 +35,6 @@ public class RecipeController {
 	
 	
 	
-	//레시피 목록 조회
-	@RequestMapping(value = "/recipeList", method = RequestMethod.GET)
-	public String selectList(Locale locale, Model model,int recipe_index,@RequestParam(value="nowPage") int nowPage,
-			@RequestParam(value="cntPage")int cntPage) throws Exception{
-		List<RecipeVO> recipeList = recipeService.recipeList();		
-		model.addAttribute("recipeList", recipeList);	
-	
-		
-		return "recipe/recipeList";
-	}
-	
-	
 	//레시피 게시물 추천
 //	@RequestMapping(value = "/recipeThumb", method = RequestMethod.GET)
 //	public int recipeThumb(int recipe_index) throws Exception{
@@ -60,16 +48,12 @@ public class RecipeController {
 	//레시피메인
 	@RequestMapping(value = "/recipemain.do", method = RequestMethod.GET)
 	public String recipe(Locale locale, Model model,RecipeVO vo,String nowPage) throws Exception{
-			
-		List<RecipeVO> recipeList = recipeService.recipeList();
-		model.addAttribute("recipeList", recipeList);		
-		
-		int nowPageNum = 0;
+		//페이징
+		int nowPageNum = 1;
 		
 		if(nowPage!=null) {
 			nowPageNum = Integer.parseInt(nowPage);
 		}
-		
 		int count = recipeService.countRecipe();
 		
 		//1.게시글 총갯수 구해오기
@@ -78,8 +62,12 @@ public class RecipeController {
 		PagingUtil pu = new PagingUtil(count,nowPageNum,6,10);
 		System.out.println(pu);
 		model.addAttribute("pu",pu);
+		//레시피 게시물 리스트
+		List<RecipeVO> recipeList = recipeService.recipeList(pu);
+		model.addAttribute("recipeList", recipeList);
 		
 		
+		model.addAttribute("nowPage", nowPageNum);
 		//3.2번 객체 model에 담
 		
 		return "recipe/recipemain";

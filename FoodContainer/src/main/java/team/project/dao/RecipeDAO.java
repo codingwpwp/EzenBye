@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import team.project.util.PagingUtil;
 import team.project.vo.RecipeVO;
 
 @Repository
@@ -16,8 +17,8 @@ public class RecipeDAO {
 	private static final String Namespace = "team.project.mapper.recipeMapper";
 	
 	//레시피 목록 조회
-	public List<RecipeVO> recipeList() throws Exception {
-		return sqlSession.selectList(Namespace + ".recipeList");
+	public List<RecipeVO> recipeList(PagingUtil pu ) throws Exception {
+		return sqlSession.selectList(Namespace + ".recipeList", pu );
 	}
 	//레시피 상세 조회 
 	public RecipeVO recipeRead(int recipe_index) throws Exception{
