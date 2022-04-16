@@ -22,6 +22,7 @@ import team.project.service.CartService;
 import team.project.service.CouponService;
 import team.project.service.DibsService;
 import team.project.service.MemberService;
+import team.project.service.MessageService;
 import team.project.service.OrderProductService;
 import team.project.service.OrdersService;
 import team.project.service.ReviewService;
@@ -30,6 +31,7 @@ import team.project.vo.CartVO;
 import team.project.vo.CouponVO;
 import team.project.vo.DibsVO;
 import team.project.vo.MemberVO;
+import team.project.vo.MessageVO;
 import team.project.vo.OrderProductVO;
 import team.project.vo.OrdersVO;
 import team.project.vo.ReviewVO;
@@ -71,6 +73,8 @@ public class MypageController {
 	private DibsService dibsService;
 	@Autowired
 	private CartService cartService;
+	@Autowired
+	private MessageService messageService;
 	
 	 // 리뷰 등록
 	 @RequestMapping(value = "writeReview.do", method = RequestMethod.POST)
@@ -376,7 +380,12 @@ public class MypageController {
 	@RequestMapping(value = "mypage_noteManage.do", method = RequestMethod.GET)
 	public String noteManage(Locale locale, Model model, HttpSession session) throws Exception {
 		
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		int member_index = member.getMember_index();
 		
+		List<MessageVO> messageList = messageService.messageList(member_index);
+		
+		model.addAttribute("messageList",messageList);
 		
 		return "mypage/noteManage";
 	}
