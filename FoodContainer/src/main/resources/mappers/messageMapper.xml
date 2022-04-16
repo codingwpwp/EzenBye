@@ -5,7 +5,10 @@
  
 <mapper namespace="team.project.mapper.messageMapper" >
 
-	
+	<select id="messageList" resultType="MessageVO" parameterType="int">
+  		SELECT * FROM message
+		WHERE member_index = #{member_index} and del_yn = 'N' order by send_date desc
+  	</select>
  
 </mapper>
 

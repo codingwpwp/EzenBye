@@ -189,6 +189,7 @@
 	position : fixed;
 	bottom : 5%;
 	left : 80%;
+	z-index : 6;
 }
 
 @media screen and (max-width : 600px){
