@@ -62,18 +62,17 @@ public class PurchaseController {
 		
 		// 예시로 설정한 거임.
 		int[] carr = new int[2];
-		carr[0] = 1;
-		carr[1] = 2;
+		carr[0] = 3;
+		carr[1] = 4;
 		// 세션 소환
 		HttpSession session =request.getSession();
-		System.out.println(session.getAttribute("memberPurchaseNow"));
 		if(session.getAttribute("member") == null){
 			// 비회원인 경우
 			return "wrongAccessPage/wrongAccess";
 			
 		}else {
 			// 회원인 경우
-			if((session.getAttribute("memberPurchaseNow") == null && carr == null) || (session.getAttribute("memberPurchaseNow") != null && cart_index != null)) {
+			if((session.getAttribute("memberPurchaseNow") == null && carr == null) || (session.getAttribute("memberPurchaseNow") != null && carr != null)) {
 				// 잘못된 접근
 				return "wrongAccessPage/wrongAccess";
 				
@@ -130,7 +129,7 @@ public class PurchaseController {
 			System.out.println(newBasicAddress);
 			System.out.println("-------------------------------");
 			
-			ordersService.orderInsert(session, ordersvo);
+			ordersService.orderInsert(session, ordersvo, newBasicAddress);
 			
 			return "purchasePage/memberPurchaseOk";
 		}

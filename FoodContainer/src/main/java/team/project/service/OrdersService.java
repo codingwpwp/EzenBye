@@ -20,7 +20,7 @@ public interface OrdersService {
 	
 	/* 회원 구매 페이지 */
 	// 회원 결제하고 난뒤 DB에 올리는 과정
-	void orderInsert(HttpSession session, OrdersVO ordersvo) throws Exception;
+	void orderInsert(HttpSession session, OrdersVO ordersvo, String newBasicAddress) throws Exception;
 	
 	
 	/* 여기서 부터는 관리자페이지 */

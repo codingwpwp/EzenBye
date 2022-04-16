@@ -25,7 +25,7 @@
     	) VALUES 
     	<foreach collection="list" item="item" separator=" , ">
 			(
-			#{item.no_member_order_index}, #{item.orderItem_index},
+			#{item.member_order_index}, #{item.orderItem_index},
 			#{item.product_index}, #{item.order_quantity},
 			#{item.price}, #{item.point}
 			)

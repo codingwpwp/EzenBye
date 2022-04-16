@@ -8,11 +8,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import team.project.dao.MemberDAO;
 import team.project.dao.OrderProductDAO;
 import team.project.dao.OrdersDAO;
 import team.project.dao.ProductDAO;
 import team.project.util.PagingUtil;
 import team.project.vo.CartVO;
+import team.project.vo.CouponVO;
+import team.project.vo.MemberVO;
 import team.project.vo.OrderProductVO;
 import team.project.vo.OrdersVO;
 import team.project.vo.SearchVO;
@@ -27,6 +30,9 @@ public class OrdersServiceImpl implements OrdersService{
 	
 	@Autowired
 	private ProductDAO productDao;
+	
+	@Autowired
+	private MemberDAO memberDao;
 
 	@Override
 	public List<OrdersVO> ordersList(int member_index) throws Exception {
@@ -55,7 +61,7 @@ public class OrdersServiceImpl implements OrdersService{
 	/* 회원 구매 페이지 */
 	// 회원 결제하고 난뒤 DB에 올리는 과정
 	@Override
-	public void orderInsert(HttpSession session, OrdersVO ordersvo) throws Exception {
+	public void orderInsert(HttpSession session, OrdersVO ordersvo, String newBasicAddress) throws Exception {
 		List<CartVO> cartList = (List<CartVO>)session.getAttribute("cartList");
 		
 		// 상세 주문정보에 넣을 친구들 소환하고 for문 돌려서 집어 넣음
@@ -84,9 +90,25 @@ public class OrdersServiceImpl implements OrdersService{
 			productDao.productQuantityUpdate(orderProductList.get(i));
 		}
 		
-		// 회원 포인트&쿠폰 사용
+		// 회원 포인트&이벤트티켓&배송지 업데이트
+		MemberVO membervo = (MemberVO)session.getAttribute("member");
+		membervo.setPoint(ordersvo.getUsed_point());
+		membervo.setAddress(ordersvo.getAddress());
+		ordersDAO.memberStatusUpdate(membervo);
+		if(newBasicAddress.equals("Y")) {
+			ordersDAO.addressUpdate(membervo);
+		}
+		
+		// 쿠폰 사용
+		ordersDAO.couponUpdate(ordersvo.getCoupon_index());
 		
 		// 장바구니 비우기
+		for(OrderProductVO vo : orderProductList){
+			CartVO cartvo = new CartVO();
+			cartvo.setProduct_index(vo.getProduct_index());
+			cartvo.setMember_index(membervo.getMember_index());
+			ordersDAO.cartUpdate(cartvo);
+		}
 	}
 
 	/* 여기서 부터는 관리자페이지 */
