@@ -118,14 +118,17 @@
                         <div class="row">
 
 						<div class="col-12 seldiv">
-							<form action="#" class="selbox">
-								<select class="form-select">
+							<form action="#" class="selbox" method="post">
+								<select class="form-select" name="searchType">
 									<option>검색</option>
-									<option>상품이름</option>
-									<option>작성자</option>
+									<option value="title">제목</option>
+									<option >작성자</option>
 								</select> 
-								<input type="text" class="form-control seltext"> 
+								<input type="text" class="form-control seltext" name="searchValue"> 
 								<input type="button" value="검색" class="btn btn-primary selbtn">
+								<input type="hidden" name="nowPage" value="1">
+								
+								
 							</form>
 						</div>
 
@@ -134,13 +137,28 @@
                             <div class="col-md-12 col-12 page">
                                 <ul class="pagination">
                                 	
-                                	
-                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                  <c:forEach  begin="${pu.startPage}" end="${pu.endPage}" var="num">
-                                    <li class="page-item"><a class="page-link" href="#"><c:out value="${num}"/></a></li>
+                                
+                                    <li class="page-item">
+                                    <c:if test="${nowPage > 1 }">
+                                    <a class="page-link"  href="recipemain.do?nowPage=${nowPage-1}">Previous</a>
+                                    </c:if>
+                                    <c:if test="${nowPage <= 1 }">
+                                    <a class="page-link"  href="recipemain.do?nowPage=1">Previous</a>
+                                    </c:if>
+                                    </li>
+                                    
+                                  <c:forEach  begin="${pu.startPage}" end="${pu.endPage}" varStatus="num">
+                                    <li class="page-item"><a class="page-link" href="recipemain.do?nowPage=${num.count}">${num.count}</a></li>
                                     </c:forEach>
                                     
-                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                    <li class="page-item">
+                                    <c:if test="${nowPage >= 0 }">
+                                    <a class="page-link" href="recipemain.do?nowPage=${nowPage}">Next</a>
+                                 	</c:if>
+                                 	<c:if test="${nowPage <= 0 }">
+                                    <a class="page-link" href="recipemain.do?nowPage=${nowPage+1}">Next</a>
+                                 	</c:if>
+                                    </li>
                                   </ul>
                             </div>
                         </div>

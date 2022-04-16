@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import team.project.util.PagingUtil;
 import team.project.vo.RecipeVO;
 
 public interface RecipeService {
@@ -14,7 +15,7 @@ public interface RecipeService {
 	public void insertRecipe(RecipeVO vo, MultipartFile tumnailImage,HttpServletRequest request) throws Exception;
 
 	//레시피 목록
-	List<RecipeVO> recipeList()throws Exception;
+	List<RecipeVO> recipeList(PagingUtil pu )throws Exception;
 	
 	//레시피 상세 조회
 	public RecipeVO recipeRead(int recipe_index) throws Exception;
