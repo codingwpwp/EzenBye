@@ -8,4 +8,6 @@ public interface MessageService {
 	
 	List<MessageVO> messageList(int member_index) throws Exception;
 	
+	MessageVO messageListDetail(int message_index) throws Exception;
+	
 }

@@ -9,6 +9,11 @@
   		SELECT * FROM message
 		WHERE member_index = #{member_index} and del_yn = 'N' order by send_date desc
   	</select>
+  	
+  	<select id="messageListDetail" resultType="MessageVO" parameterType="int">
+  		SELECT * FROM message
+		WHERE message_index = #{message_index}
+  	</select>
  
 </mapper>
 

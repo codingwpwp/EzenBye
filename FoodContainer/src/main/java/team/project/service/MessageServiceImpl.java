@@ -21,6 +21,14 @@ public class MessageServiceImpl implements MessageService {
 		return messageList;
 	}
 
+	@Override
+	public MessageVO messageListDetail(int message_index) throws Exception {
+		
+		MessageVO messageListDetail = messageDAO.messageListDetail(message_index);
+		
+		return messageListDetail;
+	}
+
 }
 
 
