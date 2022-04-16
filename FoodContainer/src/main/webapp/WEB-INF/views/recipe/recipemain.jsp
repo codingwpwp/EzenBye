@@ -136,8 +136,8 @@
                                 	
                                 	
                                     <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                  <c:forEach  begin="${pu.startPage}" end="${pu.endPage}">
-                                    <li class="page-item"><a class="page-link" href="#"><c:out value="${pu.nowPage}"/></a></li>
+                                  <c:forEach  begin="${pu.startPage}" end="${pu.endPage}" var="num">
+                                    <li class="page-item"><a class="page-link" href="#"><c:out value="${num}"/></a></li>
                                     </c:forEach>
                                     
                                     <li class="page-item"><a class="page-link" href="#">Next</a></li>
