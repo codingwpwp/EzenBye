@@ -15,6 +15,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/base.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/purchasePage.css">
+    
+    <script>
+		window.onpageshow = function(event) {
+		    if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+		        alert("이미 구매하였습니다");
+		        history.go(1);
+		    }
+		}
+    </script>
 </head>
 <body>
 	<!-- 헤더 -->

@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import team.project.dao.NoMemberOrderDAO;
 import team.project.dao.OrderProductDAO;
 import team.project.dao.ProductDAO;
+import team.project.vo.CartVO;
 import team.project.vo.NoMemberOrdersVO;
 import team.project.vo.OrderProductVO;
 
@@ -44,27 +45,22 @@ public class NoMemberOrdersServiceImpl implements NoMemberOrdersService{
 	public void orderInsert(HttpServletRequest request, HttpServletResponse response, NoMemberOrdersVO noMemberOrdersvo) throws Exception{
 		// 세션 소환
 		HttpSession session = request.getSession();
-		HashMap<String, Integer> cartMap = (HashMap<String, Integer>) session.getAttribute("cartMap");
+		List<CartVO> cartList = (List<CartVO>)session.getAttribute("cartList");
 		
 		// 상세 주문정보에 넣을 친구들 소환하고 for문 돌려서 집어 넣음
 		List<OrderProductVO> orderProductList = new ArrayList<>();
 		
-		for(String pidx : cartMap.keySet()) {
-			OrderProductVO vo = new OrderProductVO();
+		for(CartVO vo : cartList) {
+			OrderProductVO opvo = new OrderProductVO();
 			
-			vo.setNo_member_order_index(noMemberOrdersvo.getNo_member_order_index());
+			opvo.setNo_member_order_index(noMemberOrdersvo.getNo_member_order_index());
+			opvo.setOrderItem_index(noMemberOrdersvo.getNo_member_order_index().substring(4, 8) + vo.getProduct_index() + vo.getCart_count());
+			opvo.setProduct_index(vo.getProduct_index());
+			opvo.setOrder_quantity(vo.getCart_count());
+			opvo.setPrice(vo.getOrigin_price());
+			opvo.setPoint(0);
 			
-			String orderItemIndex = noMemberOrdersvo.getNo_member_order_index().substring(4, 8) + pidx + cartMap.get(pidx);			
-			vo.setOrderItem_index(orderItemIndex);
-			
-			vo.setProduct_index(pidx);
-			vo.setOrder_quantity(cartMap.get(pidx));
-			
-			List<String> pidxListOne = new ArrayList<String>();
-			pidxListOne.add(pidx);
-			vo.setPrice(productDao.purchaseListCaseOne(pidxListOne).get(0).getOrigin_price());
-			
-			orderProductList.add(vo);
+			orderProductList.add(opvo);
 		}
 		
 		// 주문 비밀번호 해쉬로 변환
@@ -82,8 +78,8 @@ public class NoMemberOrdersServiceImpl implements NoMemberOrdersService{
 		}
 		
 		// DB작업 끝났으니까 비워줄거 비워주는 과정
-		// 비회원 카트 세션 비우기
-		session.setAttribute("cartMap", null);
+		// 카트 세션 비우기
+		session.setAttribute("cartList", null);
 		
 		// 쿠키에서 결제완료된 상품들을 삭제하는 과정(주석은 안달았음)
 		Cookie[] cookies = request.getCookies();
@@ -95,30 +91,32 @@ public class NoMemberOrdersServiceImpl implements NoMemberOrdersService{
 				}
 			}
 		}
-		
-		String[] cartProductIndexArray = currentCookie.split(",");
-		for(String pidx : cartMap.keySet()) {
-			for(int i = 0; i < cartProductIndexArray.length; i++) {
-				if(cartProductIndexArray[i].contains(pidx)) {
-					cartProductIndexArray[i] = "";
+		if(currentCookie != null) {
+
+			String[] cartProductIndexArray = currentCookie.split(",");
+			for(CartVO vo : cartList) {
+				for(int i = 0; i < cartProductIndexArray.length; i++) {
+					if(cartProductIndexArray[i].contains(vo.getProduct_index())) {
+						cartProductIndexArray[i] = "";
+					}
 				}
 			}
-		}
-		
-		String tempCurrentCookie = "";
-		for(int i = 0; i < cartProductIndexArray.length; i++) {
-			if(!cartProductIndexArray[i].equals("")) {
-				tempCurrentCookie += cartProductIndexArray[i] + ","; 
+			
+			String tempCurrentCookie = "";
+			for(int i = 0; i < cartProductIndexArray.length; i++) {
+				if(!cartProductIndexArray[i].equals("")) {
+					tempCurrentCookie += cartProductIndexArray[i] + ","; 
+				}
 			}
+			
+			tempCurrentCookie = tempCurrentCookie.substring(0, tempCurrentCookie.length() - 1);
+			tempCurrentCookie = URLEncoder.encode(tempCurrentCookie, "UTF-8");
+			Cookie pidxCookie = new Cookie("noMemberCart", tempCurrentCookie);
+			pidxCookie.setPath("/controller");
+			
+		    response.addCookie(pidxCookie);
+		    
 		}
-		
-		tempCurrentCookie = tempCurrentCookie.substring(0, tempCurrentCookie.length() - 1);
-		tempCurrentCookie = URLEncoder.encode(tempCurrentCookie, "UTF-8");
-		Cookie pidxCookie = new Cookie("noMemberCart", tempCurrentCookie);
-		pidxCookie.setMaxAge(60*60*24);
-		pidxCookie.setPath("/controller");
-		
-	    response.addCookie(pidxCookie);
 	}
 
 }

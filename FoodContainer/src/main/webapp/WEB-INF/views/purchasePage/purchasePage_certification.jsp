@@ -121,13 +121,23 @@
     <footer class="py-3 my-4">
         <%@include file="/WEB-INF/views/base/footer.jsp"%>
     </footer>
+<script>
+window.onpageshow = function(event) {
+	alert(event.persisted);
+	alert(window.performance);
+	alert(window.performance.navigation.type);
 
+    if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) { 
+        alert("뒤로가기 감지");
+        location.reload();
+    } 
+}
+</script>
     <!-- 자바스크립트 -->
-    <script src="https://kit.fontawesome.com/b30bc4e0a9.js" crossorigin="anonymous"></script>
+    <%-- <script src="https://kit.fontawesome.com/b30bc4e0a9.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
-    <script src="<%=request.getContextPath()%>/resources/js/purchasePage.js"></script>
-    <script src="<%=request.getContextPath()%>/resources/js/purchasePage_certification.js"></script>
+    <script src="<%=request.getContextPath()%>/resources/js/purchasePage_certification.js"></script> --%>
 </body>
 </html>

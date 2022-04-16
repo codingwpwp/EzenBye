@@ -47,11 +47,11 @@ public class OrdersDAO {
 	}
 	// 회원 결제하고 난뒤 쿠폰사용
 	public void couponUpdate(int coupon_index) throws Exception{
-		sqlSession.update(Namespace + ".memberStatusUpdate", coupon_index);
+		sqlSession.update(Namespace + ".couponUpdate", coupon_index);
 	}
 	// 회원 결제하고 난뒤 배송지 업데이트
 	public void addressUpdate(MemberVO membervo) throws Exception{
-		sqlSession.update(Namespace + ".memberStatusUpdate", membervo);
+		sqlSession.update(Namespace + ".addressUpdate", membervo);
 	}
 	// 회원 결제하고 난뒤 장바구니 비우기
 	public void cartUpdate(CartVO cartvo) throws Exception{

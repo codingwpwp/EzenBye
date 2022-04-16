@@ -94,7 +94,9 @@ public class OrdersServiceImpl implements OrdersService{
 		MemberVO membervo = (MemberVO)session.getAttribute("member");
 		membervo.setPoint(ordersvo.getUsed_point());
 		membervo.setAddress(ordersvo.getAddress());
+		
 		ordersDAO.memberStatusUpdate(membervo);
+		
 		if(newBasicAddress.equals("Y")) {
 			ordersDAO.addressUpdate(membervo);
 		}
@@ -109,6 +111,9 @@ public class OrdersServiceImpl implements OrdersService{
 			cartvo.setMember_index(membervo.getMember_index());
 			ordersDAO.cartUpdate(cartvo);
 		}
+		// 카트 세션 비우기
+		session.setAttribute("cartList", null);
+		session.setAttribute("cartMap", null);
 	}
 
 	/* 여기서 부터는 관리자페이지 */
