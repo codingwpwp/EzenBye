@@ -125,7 +125,7 @@
 									<option >작성자</option>
 								</select> 
 								<input type="text" class="form-control seltext" name="searchValue"> 
-								<input type="button" value="검색" class="btn btn-primary selbtn">
+								<input type="submit" value="검색" class="btn btn-primary selbtn">
 								<input type="hidden" name="nowPage" value="1">
 								
 								

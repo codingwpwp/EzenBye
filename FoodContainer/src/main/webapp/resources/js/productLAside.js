@@ -171,6 +171,7 @@
 	function asideIceAll(obj){
 		var ice = $("input[name='asideIce']");
 		var check = $(obj).is(":checked");
+		var iceAllM = $("input[name='asideIceAllM']");
 		var iceM = $("input[name='asideIceM']");
 		
 		$.each(ice,function(){
@@ -178,7 +179,10 @@
 			iceM.prop("checked",check);
 		})
 		
-		if(!(check)){
+		if(check){
+			iceAllM.prop("checked",true);
+		}else{
+			iceAllM.prop("checked",false);
 			$("button[name='lAsideProductAll']").find("i").attr("class","bi bi-check-circle");
 		}
 	}
@@ -214,13 +218,17 @@
 		var iceM = $("input[name='asideIceM']");
 		var checkM = $(obj).is(":checked");
 		var ice = $("input[name='asideIce']");
+		var iceAll = $("input[name='asideIceAll']");
 		
 		$.each(iceM,function(){
 			iceM.prop("checked",checkM);
 			ice.prop("checked",checkM);
 		})
 		
-		if(!(checkM)){
+		if(checkM){
+			iceAll.prop("checked",true);
+		}else{
+			iceAll.prop("checked",false);
 			$("button[name='lAsideProductAllM']").find("i").attr("class","bi bi-check-circle");
 		}
 	}
@@ -256,12 +264,18 @@
 	function asideProductAll(obj){
 		var product = $("input[name='asideProduct']");
 		var check = $(obj).is(":checked");
+		var productAllM = $("input[name='asideProductAllM']");
+		var productM = $("input[name='asideProductM']");
 		
 		$.each(product,function(){
 			product.prop("checked",check);
+			productM.prop("checked",check);
 		})
 		
-		if(!(check)){
+		if(check){
+			productAllM.prop("checked",true);
+		}else{
+			productAllM.prop("checked",false);
 			$("button[name='lAsideProductAll']").find("i").attr("class","bi bi-check-circle");
 		}
 	}
@@ -296,12 +310,18 @@
 	function asideProductAllM(obj){
 		var productM = $("input[name='asideProductM']");
 		var checkM = $(obj).is(":checked");
+		var product = $("input[name='asideProduct']");
+		var productAll = $("input[name='asideProductAll']");
 		
 		$.each(productM,function(){
 			productM.prop("checked",checkM);
+			product.prop("checked",checkM);
 		})
 		
-		if(!(checkM)){
+		if(checkM){
+			productAll.prop("checked",true);
+		}else{
+			productAll.prop("checked",false);
 			$("button[name='lAsideProductAllM']").find("i").attr("class","bi bi-check-circle");
 		}
 	}
@@ -338,12 +358,18 @@
 	function asideBrandAll(obj){
 		var brand = $("input[name='asideBrand']");
 		var check = $(obj).is(":checked");
+		var brandAllM = $("input[name='asideBrandAllM']");
+		var brandM = $("input[name='asideBrandM']");
 		
 		$.each(brand,function(){
 			brand.prop("checked", check);
+			brandM.prop("checked", check);
 		})
 		
-		if(!(check)){
+		if(check){
+			brandAllM.prop("checked",true);
+		}else{
+			brandAllM.prop("checked",false);
 			$("button[name='lAsideProductAll']").find("i").attr("class","bi bi-check-circle");
 		}
 	}
@@ -378,12 +404,19 @@
 	function asideBrandAllM(obj){
 		var brandM = $("input[name='asideBrandM']");
 		var checkM = $(obj).is(":checked");
+		var brand = $("input[name='asideBrand']");
+		var brandAll = $("input[name='asideBrandAll']");
+		
 		
 		$.each(brandM,function(){
 			brandM.prop("checked", checkM);
+			brand.prop("checked", checkM);
 		})
 		
-		if(!(checkM)){
+		if(checkM){
+			brandAll.prop("checked",true);
+		}else{
+			brandAll.prop("checked",false);
 			$("button[name='lAsideProductAllM']").find("i").attr("class","bi bi-check-circle");
 		}
 	}
@@ -559,3 +592,7 @@
 							});
 		}
 	})
+	
+	function productFilter(){
+		
+	}
