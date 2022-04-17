@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import team.project.dao.RecipeDAO;
 import team.project.util.PagingUtil;
 import team.project.vo.RecipeVO;
+import team.project.vo.SearchVO;
 @Service
 public class RecipeServiceImpl implements RecipeService{
 
@@ -21,8 +22,8 @@ public class RecipeServiceImpl implements RecipeService{
 
 	//레시피 목록 조회
 	@Override
-	public List<RecipeVO> recipeList(PagingUtil pu ) throws Exception {
-		List<RecipeVO> recipeList = recipeDao.recipeList( pu );
+	public List<RecipeVO> recipeList(PagingUtil pu,SearchVO searchvo) throws Exception {
+		List<RecipeVO> recipeList = recipeDao.recipeList( pu);
 		return recipeList;
 	}
 	//레시피 상세 조회 
