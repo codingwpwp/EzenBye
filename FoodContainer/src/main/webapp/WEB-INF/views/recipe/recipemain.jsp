@@ -118,14 +118,14 @@
                         <div class="row">
 
 						<div class="col-12 seldiv">
-							<form action="#" class="selbox" method="post">
+							<form action="recipemain.do" class="selbox" method="get">
 								<select class="form-select" name="searchType">
 									<option>검색</option>
 									<option value="title">제목</option>
 									<option >작성자</option>
 								</select> 
 								<input type="text" class="form-control seltext" name="searchValue"> 
-								<input type="button" value="검색" class="btn btn-primary selbtn">
+								<input type="submit" value="검색" class="btn btn-primary selbtn">
 								<input type="hidden" name="nowPage" value="1">
 								
 								
@@ -152,10 +152,10 @@
                                     </c:forEach>
                                     
                                     <li class="page-item">
-                                    <c:if test="${nowPage >= 0 }">
+                                    <c:if test="${nowPage <= 0 }">
                                     <a class="page-link" href="recipemain.do?nowPage=${nowPage}">Next</a>
                                  	</c:if>
-                                 	<c:if test="${nowPage <= 0 }">
+                                 	<c:if test="${nowPage >= 0 }">
                                     <a class="page-link" href="recipemain.do?nowPage=${nowPage+1}">Next</a>
                                  	</c:if>
                                     </li>

@@ -62,7 +62,7 @@
     <!-- 회원 결제하고 난뒤 쿠폰사용 -->
     <update id="couponUpdate" parameterType="int">
     	UPDATE coupon SET
-    	used_yn = 'N'
+    	used_yn = 'Y'
     	WHERE coupon_index = #{coupon_index}
     </update>
     <!-- 회원 결제하고 난뒤 배송지 업데이트 -->

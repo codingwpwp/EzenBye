@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -67,27 +69,31 @@
 			        
 			        <div class="input-group mb-3 noteManageView-group1">
 			          <button type="button" class="btn btn-secondary btn-sm" disabled>제목</button>
-					  <input type="text" class="form-control" id="noteManageView-title" value="쪽지인데요 읽거나 말거나 알아서 하세요." aria-label="Recipient's username" aria-describedby="basic-addon2" disabled>
+					  <input type="text" class="form-control" id="noteManageView-title" value="${messageListDetail.title}" aria-label="Recipient's username" aria-describedby="basic-addon2" disabled>
 					  <button type="button" class="btn btn-secondary btn-sm" disabled>날짜</button>
-					  <input type="text" class="form-control" value="2022-3-26 15:26" aria-label="Recipient's username" aria-describedby="basic-addon2" disabled>
+					  <input type="text" class="form-control" value="${messageListDetail.send_date}" aria-label="Recipient's username" aria-describedby="basic-addon2" disabled>
 					</div>
 					
 					<div class="input-group mb-3 noteManageView-group2">
 			          <button type="button" class="btn btn-secondary btn-sm" disabled>제목</button>
-					  <input type="text" class="form-control" id="noteManageView-title" value="쪽지인데요 읽거나 말거나 알아서 하세요." aria-label="Recipient's username" aria-describedby="basic-addon2" disabled>  
+					  <input type="text" class="form-control" id="noteManageView-title" value="${messageListDetail.title}" aria-label="Recipient's username" aria-describedby="basic-addon2" disabled>  
 					</div>
 					
 					<div class="input-group mb-3 noteManageView-group3">
 						<button type="button" class="btn btn-secondary btn-sm" disabled>날짜</button>
-						<input type="text" class="form-control" value="2022-3-26 15:26" aria-label="Recipient's username" aria-describedby="basic-addon2" disabled>
+						<input type="text" class="form-control" value="${messageListDetail.send_date}" aria-label="Recipient's username" aria-describedby="basic-addon2" disabled>
 					</div>
 					
-			    	<textarea class="form-control" id="exampleFormControlTextarea1" rows="15" disabled>쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용
+			    	<textarea class="form-control" id="exampleFormControlTextarea1" rows="15" disabled>${messageListDetail.contents}
 			    	</textarea>
 			    	
 			    	<div class="d-flex justify-content-center mt-4 noteManageView-btn">
-					  <button class="btn btn-secondary me-3 noteManageView-btn2" type="button">뒤로</button>
-					  <button class="btn btn-dark noteManageView-btn2" type="button">삭제</button>
+			    	  <input type="hidden" value="${messageListDetail.message_index}" name="message_index" />
+			    	  <input type="hidden" value="${searchType}" name="searchType" />
+			    	  <input type="hidden" value="${searchValue}" name="searchValue" />
+			    	  <input type="hidden" value="${nowPage}" name="nowPage" />		
+					  <button class="btn btn-secondary me-3 noteManageView-btn2" type="button" onclick="location.href='mypage_noteManage.do?searchType=${searchType}&searchValue=${searchValue}&nowPage=${nowPage}'">뒤로</button>
+					  <button class="btn btn-dark noteManageView-btn2" type="button" onclick="messageDelete(this)">삭제</button>
 					</div>
 			    	
       				</div>
