@@ -24,7 +24,7 @@
 	  		<p class="fs-5 nav-title">개인정보</p>
 	  		<a class="nav-link active nav8 left-nav-text" aria-current="page" href="mypage_changeInfor.do">개인정보 변경</a>
 	  		<a class="nav-link nav9 left-nav-text" href="mypage_addressManage.do">배송지 관리</a>
-	  		<a class="nav-link nav10 left-nav-text" href="mypage_noteManage.do">쪽지 관리</a>
+	  		<a class="nav-link nav10 left-nav-text" href="mypage_noteManage.do?nowPage=1">쪽지 관리</a>
 	  		<a class="nav-link nav11 left-nav-text" href="mypage_memberSecession.do">회원탈퇴</a>
   		</div>
 	</nav>
