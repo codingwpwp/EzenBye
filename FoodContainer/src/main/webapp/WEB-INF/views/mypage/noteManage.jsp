@@ -67,14 +67,7 @@
 			        <p class="fs-6 lookup-fs-6">쪽지 관리</p>
 			        <hr />
 			        
-			        <c:if test="${empty messageList}">
-			        <div class="lookupBorder">
-			        	<p class="fs-6 lookup-fs-6">받은 쪽지가 없습니다.</p>
-		        	</div>
-			        </c:if>
-			        
-			        <c:if test="${!empty messageList}">
-			        <div class="row">
+			        <form action="mypage_noteManage.do" method="get" class="row">
 			        	<div class="col-sm-12 col-md-3 col-lg-3 col-xl-2">
 			        		<div class="form-check form-check-inline">
 							  <input class="form-check-input" type="checkbox" id="inlineCheckbox" value="selectall" name="noteAll">
@@ -82,23 +75,37 @@
 							</div>
 			        	</div>
 			        	<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 noteManage-btn">
-			        		<button type="button" class="btn btn-secondary btn-sm" onclick="chooseDelete()">선택삭제</button>
-			        		<button type="button" class="btn btn-secondary btn-sm">선택읽음</button>
+				        	<input type="hidden" value="${paging.searchType}" name="searchType" />
+				    	    <input type="hidden" value="${paging.searchValue}" name="searchValue" />
+				    	    <input type="hidden" value="${paging.nowPage}" name="nowPage" />	
+			        		<button type="button" class="btn btn-secondary btn-sm" onclick="chooseDelete(this)">선택삭제</button>
+			        		<button type="button" class="btn btn-secondary btn-sm" onclick="chooseRead()">선택읽음</button>
 			        	</div>
+			        	
+			        	
 			        	<div class="col-4 col-sm-4 col-md-6 col-lg-6 col-xl-2">
-			        		<select class="form-select" aria-label="Default select example">
-							  <option selected value="title">제목</option>
-							  <option value="date">내용</option>
+			        		<select class="form-select" aria-label="Default select example" name="searchType">
+							  <option value="title" <c:if test="${not empty paging.searchType and paging.searchType eq 'title'}"> selected</c:if>>제목</option>
+							  <option value="contents" <c:if test="${not empty paging.searchType and paging.searchType eq 'contents'}"> selected</c:if>>내용</option>
 							</select>
 			        	</div>
 			        	<div class="col-8 col-sm-8 col-md-6 col-lg-6 col-xl-4">
 			        		<div class="input-group mb-3">
-							  <input type="text" class="form-control" placeholder="내용을 입력해주세요." aria-label="Recipient's username" aria-describedby="basic-addon2">
-							  <button type="button" class="btn btn-secondary btn-sm">검색</button>
+							  <input type="text" name="searchValue" class="form-control" placeholder="내용을 입력해주세요." aria-label="Recipient's username" aria-describedby="basic-addon2" value="<c:if test="${not empty paging.searchValue and paging.searchValue ne ''}">${paging.searchValue}</c:if>">
+							  <!-- 페이지(히든) -->
+                              <input type="hidden" name="nowPage" value="1">
+							  <button type="submit" class="btn btn-secondary btn-sm">검색</button>
 							</div>
 			        	</div>
-			        </div>
+		        	</form>
 			        
+			        <c:if test="${empty messageList}">
+			        <div class="lookupBorder">
+			        	<p class="fs-6 lookup-fs-6">받은 쪽지가 없습니다.</p>
+		        	</div>
+			        </c:if>
+			        
+			        <c:if test="${!empty messageList}">
 			        <div class="main-table">
 				        <table class="table table-hover main-table2">
 						  <thead>
@@ -112,23 +119,28 @@
 						  <tbody>
 						  
 						    <c:forEach items="${messageList}" var="list">
-						    <c:set var="i" value="${i+1}" />
+						    <c:set var="a" value="${a+1}" />
 						    <tr>
 						      <th scope="row">
 						      	<div class="form-check form-check-inline">
-								  <input class="form-check-input" type="checkbox" id="inlineCheckbox${i}" value="${list.message_index }" name="note">
-								  <label class="form-check-label" for="inlineCheckbox${i}">${list.message_index }</label>
+								  <input class="form-check-input" type="checkbox" id="inlineCheckbox${a}" value="${list.message_index }" name="note">
+								  <label class="form-check-label" for="inlineCheckbox${a}">${list.message_index }</label>
+								  <c:if test="${list.read_yn eq 'Y'}"><span style="color: black">(읽음)</span></c:if><c:if test="${list.read_yn eq 'N'}"><span style="color: red">(읽지않음)</span></c:if>
 								</div>
 						      </th>
 						      <td>
-						      	<a href="mypage_noteManageView.do?message_index=${list.message_index}"><span class="d-inline-block text-truncate" style="max-width: 150px;">
+						      	<a href="mypage_noteManageView.do?searchType=${paging.searchType}&searchValue=${paging.searchValue}&nowPage=${paging.nowPage}&message_index=${list.message_index}"><span class="d-inline-block text-truncate" style="max-width: 150px;">
 								  ${list.title}
 								</span></a>
 						      </td>
 						      <td>${list.send_date}</td>
 						      <td>
-						      	<button type="button" class="btn btn-secondary btn-sm">읽음</button>
-			        			<button type="button" class="btn btn-secondary btn-sm">삭제</button>
+						      	<input type="hidden" value="${list.message_index}" name="message_index" />
+						      	<input type="hidden" value="${paging.searchType}" name="searchType" />
+				    	        <input type="hidden" value="${paging.searchValue}" name="searchValue" />
+				    	        <input type="hidden" value="${paging.nowPage}" name="nowPage" />
+						      	<button type="button" class="btn btn-secondary btn-sm" onclick="messageRead(this)">읽음</button>
+			        			<button type="button" class="btn btn-secondary btn-sm" onclick="messageDelete(this)">삭제</button>
 						      </td>
 						    </tr>
 						    </c:forEach>
@@ -137,23 +149,59 @@
 						</table>
 					</div>
 					
+					<!-- 페이징 -->
 					<nav aria-label="Page navigation example">
 					  <ul class="pagination review-paging">
-					    <li class="page-item">
-					      <a class="page-link" href="#" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
+					  <!-- <부분 -->
+					  <c:if test="${paging.startPage > 1}">
+					  <li class="page-item">
+					      <a class="page-link" href="mypage_noteManage.do?searchType=${paging.searchType}&searchValue=${paging.searchValue}&nowPage=${paging.startPage - 1}" aria-label="Previous">
+					        <span aria-hidden="true">&lt;</span>
 					      </a>
 					    </li>
-					    <li class="page-item"><a class="page-link" href="#">1</a></li>
-					    <li class="page-item"><a class="page-link" href="#">2</a></li>
-					    <li class="page-item"><a class="page-link" href="#">3</a></li>
-					    <li class="page-item">
-					      <a class="page-link" href="#" aria-label="Next">
-					        <span aria-hidden="true">&raquo;</span>
+					  </c:if>
+					   
+					  <c:if test="${paging.startPage <= 1}">
+			  			<li class="page-item" style="visibility: hidden">
+                               <a class="page-link" href="#" aria-label="Previous">
+                                   <span aria-hidden="true">&lt;</span>
+                               </a>
+                           </li>
+					  </c:if> 
+					  
+					  <!-- 각 페이지 -->
+					  <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i" step="1">
+					  	<c:if test="${i != paging.nowPage}">
+					  		<li class="page-item">
+					  			<a class="page-link" href="mypage_noteManage.do?searchType=${paging.searchType}&searchValue=${paging.searchValue}&nowPage=${i}">${i}</a>
+					  		</li>
+					  	</c:if>
+					  	<c:if test="${i == paging.nowPage}">
+					  		 <li class="page-item active" aria-current="page">
+					  		 	<a class="page-link fw-bold" href="#">${i}</a>
+					  		 </li>
+					  	</c:if>
+					  </c:forEach>
+					   
+				      <!-- >부분 -->
+				      <c:if test="${paging.endPage != paging.lastPage}">
+				      	<li class="page-item">
+					      <a class="page-link" href="mypage_noteManage.do?searchType=${paging.searchType}&searchValue=${paging.searchValue}&nowPage=${paging.endPage + 1}" aria-label="Next">
+					        <span aria-hidden="true">&gt;</span>
 					      </a>
 					    </li>
+				      </c:if>
+				      <c:if test="${paging.startPage == paging.lastPage}">
+				      	<li class="page-item" style="visibility: hidden">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&gt;</span>
+                            </a>
+                        </li>
+				      </c:if>
+					    
 					  </ul>
 					</nav>
+					
 			    	</c:if>
 			    	
       				</div>
