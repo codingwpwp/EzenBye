@@ -111,13 +111,3 @@ function checkForm(){
 	
 	return flag;
 }
-        window.onpageshow = function(event) {
-			alert(event.persisted);
-			alert(window.performance);
-			alert(event.persisted);
-	
-            if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) { 
-                alert("뒤로가기 감지");
-                location.reload();
-            } 
-        }

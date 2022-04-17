@@ -261,15 +261,34 @@ public class PurchaseController {
 									HttpServletRequest request,
 									HttpServletResponse response,
 									NoMemberOrdersVO noMemberOrdersvo) throws Exception{
-		// 구매 완료 화면에 뿌려질 비밀번호를 여기에 임시 저장
-		String tempPw = noMemberOrdersvo.getPw();
-		// 비회원 주문 등록
-		noMemberOrdersService.orderInsert(request, response, noMemberOrdersvo);
-		// 임시 저장한걸 vo에 담기
-		noMemberOrdersvo.setPw(tempPw);
-		model.addAttribute("noMemberOrdersvo", noMemberOrdersvo);
+		// 세션 소환
+		HttpSession session = request.getSession();
+		if(session.getAttribute("member") != null) {
+			// 회원인 경우
+			return "redirect:/loginmain.do";
+		}else {
+			// 비회원인 경우
+			if(noMemberOrdersvo.getNo_member_order_index().equals("")) {
+				return "wrongAccessPage/wrongAccess";
+			}else {
+				// 구매 완료 화면에 뿌려질 비밀번호를 여기에 임시 저장
+				String tempPw = noMemberOrdersvo.getPw();
+				// 비회원 주문 등록
+				noMemberOrdersService.orderInsert(request, response, noMemberOrdersvo);
+				// 임시 저장한걸 vo에 담기
+				noMemberOrdersvo.setPw(tempPw);
+				model.addAttribute("noMemberOrdersvo", noMemberOrdersvo);
+				
+				return "purchasePage/noMemberPurchaseOk";
+			}
+		}
 		
-		return "purchasePage/noMemberPurchaseOk";
+		
+	}
+	// 억지로 입력했을 때
+	@RequestMapping(value = "noMemberPurchaseOk.do", method = RequestMethod.GET)
+	public String wrongAccess(Model model) throws Exception{
+		return "wrongAccessPage/wrongAccess";
 	}	
 
 }
