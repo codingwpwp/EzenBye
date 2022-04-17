@@ -47,7 +47,7 @@ public class RecipeController {
 	
 	//레시피메인
 	@RequestMapping(value = "/recipemain.do", method = RequestMethod.GET)
-	public String recipe(Locale locale, Model model,RecipeVO vo,String nowPage) throws Exception{
+	public String recipe(Locale locale, Model model,RecipeVO vo,String nowPage,SearchVO searchvo) throws Exception{
 		//페이징
 		int nowPageNum = 1;
 		
@@ -55,7 +55,7 @@ public class RecipeController {
 			nowPageNum = Integer.parseInt(nowPage);
 		}
 		int count = recipeService.countRecipe();
-		
+		searchvo.setDel_yn("N");
 		//1.게시글 총갯수 구해오기
 		//service 추가 작업
 		//2.pagingutil 객체 생성
@@ -63,7 +63,11 @@ public class RecipeController {
 		System.out.println(pu);
 		model.addAttribute("pu",pu);
 		//레시피 게시물 리스트
-		List<RecipeVO> recipeList = recipeService.recipeList(pu);
+		List<RecipeVO> recipeList = recipeService.recipeList(pu,searchvo);
+		if(searchvo.getSearchValue()!=null) {
+			pu.setSearchValue(searchvo.getSearchValue());
+			pu.setSearchType(searchvo.getSearchType());
+		}
 		model.addAttribute("recipeList", recipeList);
 		
 		
