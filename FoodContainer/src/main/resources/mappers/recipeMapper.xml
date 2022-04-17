@@ -7,15 +7,26 @@
 
 <!-- 레시피 목록 리스트 -->
  <select id="recipeList" resultType="RecipeVO" parameterType="PagingUtil">
-	SELECT * FROM recipe where del_yn = 'N'	LIMIT #{start},6
+	SELECT * FROM recipe where del_yn = 'N' 
+	<if test="searchType != null and searchType.equals('title')">
+    		AND title LIKE CONCAT('%',#{searchValue},'%')
+        </if>
+        
+	LIMIT #{start},6
 	<!-- <include refid="search"></include>
 		                       ) recipe
 		WHERE RNUM BETWEEN #{startPage} AND #{endPage}
 		ORDER BY recipe_index DESC -->
-	
-</select>
- 
+</select> 
 
+<!-- 레시피 게시글 갯수 -->
+<select id="countRecipe" resultType="int" parameterType="SearchVO">
+SELECT count(recipe_index) from recipe WHERE del_yn = 'N'
+<if test="searchType != null and searchType.equals('title')">
+    		AND title LIKE CONCAT('%',#{searchValue},'%')
+        </if>
+
+</select>
 
 <!-- 레시피 상세 -->
 <select id="recipeRead" parameterType="int" resultType="RecipeVO">
@@ -29,21 +40,14 @@ UPDATE recipe set hit =hit+1 where recipe_index=#{recipe_index}
 </update>
 
 
-<!-- 레시피 게시글 갯수 -->
-<select id="countRecipe" resultType="int">
-SELECT count(recipe_index) from recipe where 1=1
-	<include refid="search"></include>	
-		   AND recipe_index > 0
-		   
-		   
-</select>
 
-<sql id="search">
+
+<!-- <sql id="search">
 		<if test="searchType != null">
 			<if test="searchType == 'title'.toString()">AND TITLE LIKE '%' || #{searchValue} || '%'</if>
 			
 		</if>
-	</sql>
+	</sql> -->
 
 <!--레시피 게시글 작성 상품 찾기  -->
 <select id="pro">

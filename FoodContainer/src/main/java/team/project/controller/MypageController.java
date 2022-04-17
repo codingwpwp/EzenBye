@@ -27,6 +27,7 @@ import team.project.service.OrderProductService;
 import team.project.service.OrdersService;
 import team.project.service.ReviewService;
 import team.project.service.ServiceCenterService;
+import team.project.util.PagingUtil;
 import team.project.vo.CartVO;
 import team.project.vo.CouponVO;
 import team.project.vo.DibsVO;
@@ -35,6 +36,7 @@ import team.project.vo.MessageVO;
 import team.project.vo.OrderProductVO;
 import team.project.vo.OrdersVO;
 import team.project.vo.ReviewVO;
+import team.project.vo.SearchVO;
 import team.project.vo.ServiceCenterVO;
 
 /**
@@ -222,8 +224,41 @@ public class MypageController {
 		String[] valueArr = request.getParameterValues("valueArr");
 		int size = valueArr.length;
 		for(int i = 0; i<size; i++) {
-			
+			messageService.messageChooseDelete(valueArr[i]);
 		}
+		return "redirect:mypage_noteManage.do";
+	}
+	
+	// 쪽지 삭제
+	@RequestMapping(value = "messageDelete.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String messageDelete(int message_index) throws Exception {
+		
+		messageService.messageDelete(message_index);
+		
+		return "redirect:mypage_noteManage.do";
+	}
+	
+	// 쪽지 선택읽음
+	@RequestMapping(value = "chooseMessageRead.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String chooseMessageRead(HttpServletRequest request) throws Exception {
+		
+		String[] valueArr = request.getParameterValues("valueArr");
+		int size = valueArr.length;
+		for(int i = 0; i<size; i++) {
+			messageService.messageChooseRead(valueArr[i]);
+		}
+		return "redirect:mypage_noteManage.do";
+	}
+	
+	// 쪽지 읽음
+	@RequestMapping(value = "messageRead.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String messageRead(int message_index) throws Exception {
+		
+		messageService.messageRead(message_index);
+		
 		return "redirect:mypage_noteManage.do";
 	}
 	
@@ -391,22 +426,39 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value = "mypage_noteManage.do", method = RequestMethod.GET)
-	public String noteManage(Locale locale, Model model, HttpSession session) throws Exception {
+	public String noteManage(Locale locale, Model model, HttpSession session, SearchVO searchVO, int nowPage) throws Exception {
 		
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		int member_index = member.getMember_index();
 		
-		List<MessageVO> messageList = messageService.messageList(member_index);
+		// del_yn = "N"
+		searchVO.setDel_yn("N");
+		searchVO.setMember_index(member_index);
+		// 현재페이지
+		int realnowPage = 1;
+		if(nowPage != 0) realnowPage = nowPage;
 		
+		List<MessageVO> messageList = messageService.messageList(searchVO, realnowPage);
 		model.addAttribute("messageList",messageList);
+		
+		PagingUtil paging = messageService.messageListPaging(searchVO, realnowPage);
+		if(searchVO.getSearchValue() != null) {
+			paging.setSearchValue(searchVO.getSearchValue());
+			paging.setSearchType(searchVO.getSearchType());
+		}
+		model.addAttribute("paging", paging);
 		
 		return "mypage/noteManage";
 	}
 	
 	@RequestMapping(value = "mypage_noteManageView.do", method = RequestMethod.GET)
-	public String messageListDetail(Locale locale, Model model, int message_index) throws Exception {
+	public String messageListDetail(Locale locale, Model model, SearchVO searchvo, int nowPage, int message_index) throws Exception {
 		
 		MessageVO messageListDetail = messageService.messageListDetail(message_index);
+		
+		model.addAttribute("searchType", searchvo.getSearchType());
+		model.addAttribute("searchValue", searchvo.getSearchValue());
+		model.addAttribute("nowPage", nowPage);
 		
 		model.addAttribute("messageListDetail",messageListDetail);
 		
