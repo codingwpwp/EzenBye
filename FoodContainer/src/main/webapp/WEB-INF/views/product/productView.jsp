@@ -90,7 +90,7 @@
 					          <br>
 					          <c:if test="${view.sale_price != -1}">
 					          	<span class="viewDiscount">
-				          			[할인가]<fmt:formatNumber value="${view.sale_price}" pattern="#,###"/>원
+				          			<fmt:formatNumber value="${view.sale_price}" pattern="#,###"/>원
 				          			<c:set var="sale" value="${((view.origin_price - view.sale_price)/view.origin_price)*100}" />
 				          			(<fmt:formatNumber value="${sale}" pattern="##.#"/>%)
 				          			<input type="hidden" name="sale_price" value="${view.sale_price}">
@@ -123,6 +123,17 @@
 				          <div class="d-flex justify-content-evenly">
 						  	<button type="button" class="viewButton btn btn-outline-success me-2" onclick="viewCart(this)">장바구니 담기</button>
 						  	<button class="viewButton btn btn-success me-2" onclick="directBuy(this)">바로구매</button>
+				          
+				          	<div class="topTooltip">
+								<p>상품을 장바구니에 담았습니다.</p>
+								<button type='button' class='btn btn-light' onclick="shopping(this)">상품 더보기</button>
+								<button type='button' class='btn btn-light' onclick="moveCart(this)">장바구니로 이동</button>
+							</div>
+									
+							<div class="topTooltipSold">
+								<br>
+								<p style="color:white; font-size:1.2rem;">매진 된 상품입니다.</p>
+							</div>
 				          </div>
 				        </div>
 				      </div>
@@ -460,17 +471,6 @@
     </div>
     
     <!-- 툴팁 -->
-    <div class="topTooltip">
-    	<p>상품을 장바구니에 담았습니다.</p>
-    	<button type='button' class='btn btn-light' onclick="shopping(this)">상품 더보기</button>
-    	<button type='button' class='btn btn-light' onclick="moveCart(this)">장바구니로 이동</button>
-	</div>
-	
-	<div class="topTooltipSold">
-		<br>
-    	<p style="color:white; font-size:1.2rem;">매진 된 상품입니다.</p>
-	</div>
-	
 	<div class="bottomTooltip">
     	<p>상품을 장바구니에 담았습니다.</p>
     	<button type='button' class='btn btn-light' onclick="shopping(this)">상품 더보기</button>

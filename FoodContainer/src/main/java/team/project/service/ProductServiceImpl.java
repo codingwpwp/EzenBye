@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import team.project.dao.ProductDAO;
 import team.project.util.PagingUtil;
 import team.project.vo.CartVO;
+import team.project.vo.ProductFilterVO;
 import team.project.vo.ProductVO;
 import team.project.vo.SearchVO;
 
@@ -31,6 +32,13 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductVO> productListAll(ProductVO productVO) throws Exception {
 		
 		List<ProductVO> prodcutListAll = productDao.productListAll(productVO);
+		
+		return prodcutListAll;
+	}
+	@Override
+	public List<ProductVO> productListAll2(ProductFilterVO productFilterVO) throws Exception {
+		
+		List<ProductVO> prodcutListAll = productDao.productListAll2(productFilterVO);
 		
 		return prodcutListAll;
 	}

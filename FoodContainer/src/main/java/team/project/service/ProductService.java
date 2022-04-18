@@ -10,12 +10,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import team.project.util.PagingUtil;
 import team.project.vo.CartVO;
+import team.project.vo.ProductFilterVO;
 import team.project.vo.ProductVO;
 import team.project.vo.SearchVO;
 
 public interface ProductService {
 	//상품조회
 	List<ProductVO> productListAll(ProductVO productVO) throws Exception;
+	List<ProductVO> productListAll2(ProductFilterVO productFilterVO) throws Exception;
 	//상세보기
 	ProductVO view(String index) throws Exception;
 	//최근 본 상품

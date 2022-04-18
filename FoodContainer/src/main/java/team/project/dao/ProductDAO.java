@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import team.project.util.PagingUtil;
 import team.project.vo.CartVO;
 import team.project.vo.OrderProductVO;
+import team.project.vo.ProductFilterVO;
 import team.project.vo.ProductVO;
 import team.project.vo.SearchVO;
 
@@ -23,6 +24,9 @@ public class ProductDAO {
 	//상품조회
 	public List<ProductVO> productListAll(ProductVO productVO) throws Exception{
 		return sqlSession.selectList(Namespace+".ProductListAll",productVO);
+	}
+	public List<ProductVO> productListAll2(ProductFilterVO productFilterVO) throws Exception{
+		return sqlSession.selectList(Namespace+".ProductListAll",productFilterVO);
 	}
 	//상세보기
 	public ProductVO view(String index) {
