@@ -28,6 +28,7 @@ import team.project.vo.BannerVO;
 import team.project.vo.CartVO;
 import team.project.vo.DibsVO;
 import team.project.vo.MemberVO;
+import team.project.vo.ProductFilterVO;
 import team.project.vo.ProductVO;
 
 /**
@@ -96,9 +97,11 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
-	public String productList(Locale locale, Model model, ProductVO productVO, HttpServletRequest request, DibsVO dibsVO) throws Exception {
+	public String productList(Locale locale, Model model, ProductVO productVO, HttpServletRequest request, DibsVO dibsVO, ProductFilterVO productFilterVO) throws Exception {
 		
-		List<ProductVO> ProductListAll = productService.productListAll(productVO);
+		System.out.println(productFilterVO.getProduct1());
+		
+		List<ProductVO> ProductListAll = productService.productListAll2(productFilterVO);
 		
 		model.addAttribute("productListAll",ProductListAll);
 		

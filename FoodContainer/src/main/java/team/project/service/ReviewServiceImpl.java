@@ -11,7 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import team.project.dao.OrderProductDAO;
 import team.project.dao.ReviewDAO;
+import team.project.util.PagingUtil;
 import team.project.vo.ReviewVO;
+import team.project.vo.SearchVO;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -40,11 +42,20 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public List<ReviewVO> reviewList(int member_index) throws Exception {
+	public List<ReviewVO> reviewList(SearchVO searchVO, int nowPage) throws Exception {
 		
-		List<ReviewVO> reviewList = reviewDao.reviewList(member_index);
+		PagingUtil paging = countListPaging(searchVO, nowPage);
 		
-		return reviewList;
+		paging.setMember_index(searchVO.getMember_index());
+		paging.setStart(paging.getStart() - 1);
+		
+		return reviewDao.reviewList(paging);
+	}
+	
+	@Override
+	public PagingUtil countListPaging(SearchVO searchVO, int nowPage) throws Exception {
+		int cnt = reviewDao.countReviewList(searchVO);
+		return new PagingUtil(cnt, nowPage, 10, 5);
 	}
 
 	@Override

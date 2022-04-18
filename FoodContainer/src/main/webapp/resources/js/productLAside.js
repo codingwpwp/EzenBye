@@ -594,5 +594,192 @@
 	})
 	
 	function productFilter(){
+		var ice0 = $("input[name='asideIce']:eq(0)").is(":checked");
+		var ice1 = $("input[name='asideIce']:eq(1)").is(":checked");
+		var product0 = $("input[name='asideProduct']:eq(0)").is(":checked");
+		var product1 = $("input[name='asideProduct']:eq(1)").is(":checked");
+		var product2 = $("input[name='asideProduct']:eq(2)").is(":checked");
+		var brand0 = $("input[name='asideBrand']:eq(0)").is(":checked");
+		var brand1 = $("input[name='asideBrand']:eq(1)").is(":checked");
+		var brand2 = $("input[name='asideBrand']:eq(2)").is(":checked");
+		var brand3 = $("input[name='asideBrand']:eq(3)").is(":checked");
+		var brand4 = $("input[name='asideBrand']:eq(4)").is(":checked");
+		var price0 = $("input[name='asidePrice']:eq(0)").is(":checked");
+		var price1 = $("input[name='asidePrice']:eq(1)").is(":checked");
+		
+		/*
+		var mainSectionHtml = "<!-- pc버전 -->";
+			mainSectionHtml += "<article class='pList'>";
+			mainSectionHtml += "<div class='fs-5 my-2 fw-bold topText'>전체상품</div>";
+			mainSectionHtml += "<hr>";
+			mainSectionHtml += "<!-- 전체상품 -->";
+			mainSectionHtml += "<div class='container'>";
+			mainSectionHtml += "<div class='row'>";
+			mainSectionHtml += "<c:forEach items='${productListAll}' var='ProductVO' varStatus='status'>";
+			mainSectionHtml += "<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center'>";
+			mainSectionHtml += "<div class='card' style='width: 18rem;'>";
+			mainSectionHtml += "<a href='productView.do?product_index=${ProductVO.product_index}' onclick='productCookie(this)'>";
+			mainSectionHtml += "<img src='/controller/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}' class='card-img-top cardImg' alt='${ProductVO.product_name }'>";
+			mainSectionHtml += "<c:if test='${ProductVO.inventory == 0 }'>";
+			mainSectionHtml += "<img src='/controller/resources/img/매진.png' class='card-img-top pListSold'>";
+			mainSectionHtml += "<div class='pListSoldout'></div>";
+			mainSectionHtml += "</c:if>";
+			mainSectionHtml += "<input type='hidden' class='inventory${status.index}' value='${ProductVO.inventory}'>";
+			mainSectionHtml += "<div class='card-body'>";
+			mainSectionHtml += "<p class='card-text'>";
+			mainSectionHtml += "<c:if test='${ProductVO.quantity >= 500}'>";
+			mainSectionHtml += "<span style='color:red;'>[인기]</span>";
+			mainSectionHtml += "</c:if>";
+			mainSectionHtml += "<span>[${ProductVO.brand}]</span>";
+			mainSectionHtml += "<br>";
+			mainSectionHtml += "<span class='productNam'>${ProductVO.product_name}</span><br>";
+			mainSectionHtml += "<span class='fs-4'>";
+			mainSectionHtml += "<fmt:formatNumber value='${ProductVO.origin_price}' pattern='#,###'/>";
+			mainSectionHtml += "</span>원<br>";
+			mainSectionHtml += "<c:if test='${ProductVO.sale_price != -1}'>";
+			mainSectionHtml += "<span class='discount'>";
+			mainSectionHtml += "<fmt:formatNumber value='${ProductVO.sale_price}' pattern='#,###'/>원";
+			mainSectionHtml += "<c:set var='sale' value='${((ProductVO.origin_price - ProductVO.sale_price)/ProductVO.origin_price)*100}' />";
+			mainSectionHtml += "(<fmt:formatNumber value='${sale}' pattern='##.#'/>%)<br>";
+			mainSectionHtml += "</span>";
+			mainSectionHtml += "</c:if>";
+			mainSectionHtml += "<span class='productListStar'>";
+			mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+			mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+			mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+			mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+			mainSectionHtml += "<i class='bi bi-star'></i>";
+			mainSectionHtml += "</span>";
+			mainSectionHtml += "<br>";
+			mainSectionHtml += "<c:set var='delivery' value='${ProductVO.delivery_free_YN}' />";
+			mainSectionHtml += "<c:choose>";
+			mainSectionHtml += "<c:when test='${delivery == 'Y'}'>";
+			mainSectionHtml += "배송비 3,000원";
+			mainSectionHtml += "</c:when>";
+			mainSectionHtml += "<c:when test='${delivery == 'Y'}'>";
+			mainSectionHtml += "무료배송";
+			mainSectionHtml += "</c:when>";
+			mainSectionHtml += "</c:choose>";
+			mainSectionHtml += "</p>";
+			mainSectionHtml += "</div>";
+			mainSectionHtml += "</a>";
+			mainSectionHtml += "<input type='hidden' name='index' value='${ProductVO.product_index}'>";
+			mainSectionHtml += "<div class='pListSubImg'>";
+			mainSectionHtml += "<c:if test='${member.id != null }'>";
+			mainSectionHtml += "<c:set var='heartCheck' value='0' />";
+			mainSectionHtml += "<c:forEach items='${userDibsList}' var='userDibsList'>";
+			mainSectionHtml += "<c:if test='${userDibsList.member_index == member.member_index && ProductVO.product_index == userDibsList.product_index}'>";
+			mainSectionHtml += "<img src='/controller/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+			mainSectionHtml += "<c:set var='heartCheck' value='1' />";
+			mainSectionHtml += "</c:if>";
+			mainSectionHtml += "</c:forEach>";
+			mainSectionHtml += "<c:if test='${heartCheck == '0'}'>";
+			mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+			mainSectionHtml += "</c:if>";
+			mainSectionHtml += "</c:if>";
+			mainSectionHtml += "<c:if test='${member.id == null}'>";
+			mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+			mainSectionHtml += "</c:if>";
+			mainSectionHtml += "<img src='/controller/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='cart(this)'>";
+			mainSectionHtml += "<input type='hidden' value='${status.index}'>";
+			mainSectionHtml += "</div>";
+			mainSectionHtml += "</div>";
+			mainSectionHtml += "</div>";
+			mainSectionHtml += "</c:forEach>";
+			mainSectionHtml += "<input type='hidden' id='pListLoginCheck' value='${member.member_index}'>";
+			mainSectionHtml += "</div>";
+			mainSectionHtml += "</article>";
+									  	
+									
+				
+				<!-- 모바일 버전 -->	
+				<article class="pListM">
+					<div class="fs-5 my-2 fw-bold topText">전체상품</div>
+					<hr>
+					<div class="productListCardM">
+						<c:forEach items="${productListAll}" var="ProductVO" varStatus="status">
+						<div class="productListMDiv">
+						<a href="productView.do?product_index=${ProductVO.product_index}" onclick="productCookie(this)">
+							<div class="productListMImg">
+								<div style="width:100px; height:100px;">
+									<img src="/controller/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="img-fluid" style="width:100px; height:100px;" alt="${ProductVO.product_name}">
+									<c:if test="${ProductVO.inventory == 0 }">
+									  	<img src="/controller/resources/img/매진.png" class="card-img-top pListSold">
+									  	<div class="pListSoldout"></div>
+									</c:if>
+								<input type="hidden" class="inventoryM${status.index}" value="${ProductVO.inventory}">
+								</div>
+								<div class="productListStarM">
+									<i class="bi bi-star-fill"></i>
+							        <i class="bi bi-star-fill"></i>
+							        <i class="bi bi-star-fill"></i>
+							      	<i class="bi bi-star-fill"></i>
+							       	<i class="bi bi-star"></i>
+								</div>
+							</div>
+							<div class="productListContent">
+								<c:if test="${ProductVO.quantity >= 500}">
+									<span style="color:red;">[인기]</span>
+								</c:if>
+								<span>[${ProductVO.brand}]</span>
+								<div class="productNameM">${ProductVO.product_name}</div>
+								<c:if test="${ProductVO.sale_price == -1}">
+								<div>
+									<fmt:formatNumber value="${ProductVO.origin_price}" pattern="#,###"/>원
+								</div>
+								</c:if>
+								<c:if test="${ProductVO.sale_price != -1}">
+								<div class="discountM">
+									[할인가]<fmt:formatNumber value="${ProductVO.sale_price}" pattern="#,###"/>원
+									<c:set var="sale" value="${((ProductVO.origin_price - ProductVO.sale_price)/ProductVO.origin_price)*100}" />
+				          			(<fmt:formatNumber value="${sale}" pattern="##.#"/>%)
+								</div>
+								</c:if>
+								<c:set var="delivery" value="${ProductVO.delivery_free_YN}" />
+								    	<c:choose>
+								    		<c:when test="${ProductVO.delivery_free_YN == 'N'}">
+								    			<div>배송비 3,000원</div>
+								    		</c:when>
+								    		
+								    		<c:when test="${ProductVO.delivery_free_YN == 'Y'}">
+								    			<div>무료배송</div>
+								    		</c:when>
+								    	</c:choose>
+							</div>
+							</a>
+							<input type="hidden" name="index" value="${ProductVO.product_index}">
+							<div class="pListSubImgM">
+								<c:if test="${member.id != null }">
+								  	<c:set var="heartCheck" value="0" />
+								 	<c:forEach items="${userDibsList}" var="userDibsList">
+								  		<c:if test="${userDibsList.member_index == member.member_index && ProductVO.product_index == userDibsList.product_index}">
+								  			<img src="/controller/resources/img/찬하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+								  			<c:set var="heartCheck" value="1" />
+								  		</c:if>
+								  	</c:forEach>
+								  	<c:if test="${heartCheck == '0'}">
+								  		<img src="/controller/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+								  	</c:if>
+									  	
+							  	</c:if>
+							  	<c:if test="${member.id == null}">
+								  	<img src="/controller/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
+							  	</c:if>
+								<img src="/controller/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="pListCart(this)">
+								<input type="hidden" value="${status.index}">
+							</div>
+						</div>
+						</c:forEach>
+					</div>
+				</article>
+		*/
+		
+		$.ajax({
+			url : "productList.do",
+			data : {ice0:ice0, ice1:ice1, product0:product0, product1:product1, product2:product2, brand0:brand0, brand1:brand1, brand2:brand2, brand3:brand3, brand4:brand4, price0:price0, price1:price1},
+			success : function(data){
+				
+			}
+		});
 		
 	}

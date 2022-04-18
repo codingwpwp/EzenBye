@@ -149,7 +149,7 @@
 						<a href="productView.do?product_index=${ProductVO.product_index}" onclick="productCookie(this)">
 							<div class="productListMImg">
 								<div style="width:100px; height:100px;">
-									<img src="<%=request.getContextPath()%>/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="img-fluid" alt="${ProductVO.product_name}">
+									<img src="<%=request.getContextPath()%>/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="img-fluid" style="width:100px; height:100px;" alt="${ProductVO.product_name}">
 									<c:if test="${ProductVO.inventory == 0 }">
 									  	<img src="<%=request.getContextPath()%>/resources/img/매진.png" class="card-img-top pListSold">
 									  	<div class="pListSoldout"></div>

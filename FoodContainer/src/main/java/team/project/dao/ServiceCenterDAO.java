@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import team.project.util.PagingUtil;
+import team.project.vo.SearchVO;
 import team.project.vo.ServiceCenterVO;
 
 @Repository
@@ -21,9 +23,14 @@ public class ServiceCenterDAO {
 		return sqlSession.selectList(Namespace+".latelyServiceCenter",member_index);
 	}
 	
-	public List<ServiceCenterVO> serviceCenterList(int member_index) throws Exception {
+	public int countServiceCenters(SearchVO searchVO) throws Exception {
 		
-		return sqlSession.selectList(Namespace+".serviceCenterList",member_index);
+		return sqlSession.selectOne(Namespace+".countServiceCenters",searchVO);
+	}
+	
+	public List<ServiceCenterVO> serviceCenterList(PagingUtil paging) throws Exception {
+		
+		return sqlSession.selectList(Namespace+".serviceCenterList",paging);
 	}
 	
 	public int countServiceCenter(int member_index) throws Exception {
