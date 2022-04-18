@@ -80,10 +80,11 @@
 							<div class="col">
 								<div class="card h-100">
 									<img
-										src="<%=request.getContextPath()%>/resources/img/mypage/good.jpg"
-										class="card-img-top" alt="...">
+										src="<%=request.getContextPath()%>/resources/img/recipe/${list.thumbnail_image}"
+										class="card-img-top" alt="${list.thumbnail_image}">
 									<div class="card-body">
 										<h6 class="card-title">
+										
 											<div class="row">
 												<div class="col-12 text-truncate fw-bold"><a href="<%=request.getContextPath()%>/recipeview.do?recipe_index=${list.recipe_index}"><c:out value="${list.title}"/></a></div>
 											</div>

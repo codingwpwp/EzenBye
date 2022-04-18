@@ -6,8 +6,20 @@
 <mapper namespace="team.project.mapper.replyMapper" >
 
 <select id="readReply" resultType="ReplyVO">
-	SELECT * FROM reply where reply_index
+	SELECT * FROM reply where  del_yn = 'N' and reply_index =#{reply_index}
 </select>
+<insert id="writeReply">
+INSERT INTO reply(
+	recipe_index,
+	member_index,
+	contents
+)VALUE(
+	#{recipe_index},
+	#{member_index},
+	#{contents}
+)
+
+</insert>
 
  
 </mapper>

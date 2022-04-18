@@ -16,5 +16,9 @@ public class ReplyServiceImpl implements ReplyService{
 	public List<ReplyVO> readReply(int reply_index) throws Exception{
 		return replyDao.readReply(reply_index);
 	}
+	@Override
+	public void writeReply(ReplyVO vo)throws Exception{
+		replyDao.writeReply(vo);
+	}
 	
 }

@@ -26,7 +26,7 @@ public class RecipeServiceImpl implements RecipeService{
 	//레시피 목록 조회
 	@Override
 	public List<RecipeVO> recipeList(PagingUtil pu,SearchVO searchvo) throws Exception {
-		List<RecipeVO> recipeList = recipeDao.recipeList( pu);
+		List<RecipeVO> recipeList = recipeDao.recipeList(pu);
 		return recipeList;
 	}
 	//레시피 상세 조회 
@@ -84,7 +84,9 @@ public class RecipeServiceImpl implements RecipeService{
 		System.out.println(product2);
 		System.out.println(product3);
 		System.out.println(vo);
+		
 		imageUpload(vo, tumnailImage, request);
+		
 		recipeDao.insertRecipe(vo);
 	}
 	
@@ -94,7 +96,7 @@ public class RecipeServiceImpl implements RecipeService{
 	
 			
 			// 경로 설정
-			String path = request.getSession().getServletContext().getRealPath("/resources/img/레시피");
+			String path = request.getSession().getServletContext().getRealPath("/resources/img/recipe");
 			
 			// 경로에 대한 디렉토리 생성
 			File dir = new File(path);
