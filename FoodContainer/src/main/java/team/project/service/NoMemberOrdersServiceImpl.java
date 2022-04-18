@@ -119,4 +119,11 @@ public class NoMemberOrdersServiceImpl implements NoMemberOrdersService{
 		}
 	}
 
+
+	@Override
+	public NoMemberOrdersVO noMemberOrdersList(String no_member_order_index) throws Exception {
+		NoMemberOrdersVO noMemberOrdersList = noMemberOrderDao.noMemberOrdersList(no_member_order_index);
+		return noMemberOrdersList;
+	}
+
 }

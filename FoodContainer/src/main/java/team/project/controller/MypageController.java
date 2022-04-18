@@ -361,15 +361,26 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value = "mypage_review.do", method = RequestMethod.GET)
-	public String reviewList(Locale locale, Model model, HttpSession session) throws Exception {
+	public String reviewList(Locale locale, Model model, HttpSession session, SearchVO searchVO, int nowPage) throws Exception {
 		
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		int member_index = member.getMember_index();
 		
-		List<ReviewVO> reviewList = reviewService.reviewList(member_index);
-		int countList = reviewService.countList(member_index);
+		// del_yn = "N"
+		searchVO.setMember_index(member_index);
+		// 현재페이지
+		int realnowPage = 1;
+		if(nowPage != 0) realnowPage = nowPage;
 		
+		List<ReviewVO> reviewList = reviewService.reviewList(searchVO, realnowPage);
 		model.addAttribute("reviewList",reviewList);
+		
+		PagingUtil paging = reviewService.countListPaging(searchVO, realnowPage);
+		
+		model.addAttribute("paging", paging);
+		
+		int countList = reviewService.countList(member_index);
+	
 		model.addAttribute("countList",countList);
 		
 		return "mypage/review";
@@ -381,16 +392,25 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value = "mypage_inquiries.do", method = RequestMethod.GET)
-	public String inquiries(Locale locale, Model model, HttpSession session) throws Exception {
+	public String inquiries(Locale locale, Model model, HttpSession session, SearchVO searchVO, int nowPage) throws Exception {
 		
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		int member_index = member.getMember_index();
 		
-		List<ServiceCenterVO> serviceCenterList = serviceCenterService.serviceCenterList(member_index);
+		searchVO.setMember_index(member_index);
+		
+		// 현재페이지
+		int realnowPage = 1;
+		if(nowPage != 0) realnowPage = nowPage;
+		
+		List<ServiceCenterVO> serviceCenterList = serviceCenterService.serviceCenterList(searchVO, realnowPage);
+		model.addAttribute("serviceCenterList",serviceCenterList);
+		
+		PagingUtil paging = serviceCenterService.serviceCenterListPaging(searchVO, realnowPage);
+		
+		model.addAttribute("paging", paging);
 		
 		int countServiceCenter = serviceCenterService.countServiceCenter(member_index);
-		
-		model.addAttribute("serviceCenterList",serviceCenterList);
 		model.addAttribute("countServiceCenter",countServiceCenter);
 		
 		return "mypage/inquiries";

@@ -11,8 +11,18 @@
 	</insert>
 	
 	<select id="selectList" resultType="CartVO" parameterType="int">
-		SELECT * FROM cart
-		WHERE member_index = #{member_index}
+		SELECT * FROM cart AS c JOIN product AS p
+        ON c.product_index = p.product_index
+		WHERE member_index=#{member_index}
 	</select>
-  
+  	
+  	<delete id="chooseShopbasketDelete" parameterType="String">
+  		DELETE from cart
+  		WHERE cart_index = #{cart_index}
+  	</delete>
+  	
+  	<delete id="shopbasketDelete" parameterType="int">
+  		DELETE from cart
+  		WHERE cart_index = #{cart_index}
+  	</delete>
 </mapper>

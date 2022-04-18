@@ -9,4 +9,6 @@ public interface NoMemberOrdersService {
 	
 	// 비회원 구매 완료 후 DB에 큰 주문, 작은 주문, 판매량 늘려주기
 	void orderInsert(HttpServletRequest request, HttpServletResponse response, NoMemberOrdersVO noMemberOrdersvo) throws Exception;
+	
+	NoMemberOrdersVO noMemberOrdersList(String no_member_order_index) throws Exception;
 }

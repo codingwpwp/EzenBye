@@ -539,8 +539,8 @@ a{
 
 /*상품 이미지*/
 .viewImg{
-	max-width : 400px;
-	max-height : 400px;
+	width : 400px;
+	height : 400px;
 }
 
 .viewSoldout{
@@ -561,6 +561,7 @@ a{
 	z-index : 1;
 	position : absolute;
 	left : -5px;
+	top : 0px;
 }
 
 .pViewCard{
@@ -814,8 +815,8 @@ a{
 
 .topTooltip{
 	position : absolute;
-	top : 560px;
-	left : 480px;
+	bottom : 6%;
+	left : 46%;
 	margin: 50px;
  	width:250px; 
  	height:80px;
@@ -827,13 +828,13 @@ a{
 }
 
 .topTooltip:after{
-	border-top:0px solid transparent; 
+	border-top:10px solid #198754; 
  	border-left: 10px solid transparent; 
  	border-right: 10px solid transparent; 
-	border-bottom: 10px solid #198754; 
+	border-bottom: 0px solid transparent; 
  	content:""; 
  	position:absolute;
- 	top:-10px;
+ 	bottom:-10px;
 	left:110px; 
 }
 
@@ -846,7 +847,7 @@ a{
 @media screen and (max-width : 600px){
 	.topTooltip{
 		position : absolute;
-		top : 885px;
+		bottom : 3%;
 		left : -30px;
 		margin: 50px;
 	 	width:250px; 
@@ -857,13 +858,13 @@ a{
 	}
 
 	.topTooltip:after{
-		border-top:0px solid transparent; 
+		border-top:10px solid #198754; 
 	 	border-left: 10px solid transparent; 
 	 	border-right: 10px solid transparent; 
-		border-bottom: 10px solid #198754; 
+		border-bottom: 0px solid transparent; 
 	 	content:""; 
 	 	position:absolute;
-	 	top:-10px;
+	 	bottom:-10px;
 		left:80px; 
 	}
 }
@@ -881,8 +882,8 @@ a{
 
 .topTooltipSold{
 	position : absolute;
-	top : 560px;
-	left : 480px;
+	bottom : 6%;
+	left : 46%;
 	margin: 50px;
  	width:250px; 
  	height:80px;
@@ -894,20 +895,20 @@ a{
 }
 
 .topTooltipSold:after{
-	border-top:0px solid transparent; 
+	border-top:10px solid #198754; 
  	border-left: 10px solid transparent; 
  	border-right: 10px solid transparent; 
-	border-bottom: 10px solid #198754; 
+	border-bottom: 0px solid transparent; 
  	content:""; 
  	position:absolute;
- 	top:-10px;
+ 	bottom:-10px;
 	left:110px; 
 }
 
 @media screen and (max-width : 600px){
 	.topTooltipSold{
 		position : absolute;
-		top : 885px;
+		bottom : 3%;
 		left : -30px;
 		margin: 50px;
 	 	width:250px; 
@@ -918,13 +919,13 @@ a{
 	}
 
 	.topTooltipSold:after{
-		border-top:0px solid transparent; 
+		border-top:10px solid #198754; 
 	 	border-left: 10px solid transparent; 
 	 	border-right: 10px solid transparent; 
-		border-bottom: 10px solid #198754; 
+		border-bottom: 0px solid transparent; 
 	 	content:""; 
 	 	position:absolute;
-	 	top:-10px;
+	 	bottom:-10px;
 		left:80px; 
 	}
 }
@@ -981,7 +982,7 @@ a{
 	border-bottom: 0px solid transparent; 
  	content:""; 
  	position:absolute;
- 	top:-10px;
+ 	bottom:-10px;
 	left:110px; 
 }
 

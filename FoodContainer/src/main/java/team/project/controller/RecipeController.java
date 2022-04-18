@@ -3,6 +3,7 @@ package team.project.controller;
 import java.util.List;
 import java.util.Locale;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -19,10 +20,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import team.project.service.ProductService;
 import team.project.service.RecipeService;
+import team.project.service.ReplyService;
 import team.project.util.PagingUtil;
 import team.project.vo.MemberVO;
 import team.project.vo.ProductVO;
 import team.project.vo.RecipeVO;
+import team.project.vo.ReplyVO;
 import team.project.vo.SearchVO;
 
 @Controller
@@ -33,16 +36,18 @@ public class RecipeController {
 	@Autowired
 	private ProductService productService;
 	
+//	@Inject
+//	private ReplyService replyService;
 	
 	
 	//레시피 게시물 추천
-//	@RequestMapping(value = "/recipeThumb", method = RequestMethod.GET)
-//	public int recipeThumb(int recipe_index) throws Exception{
-//		
-//		recipeService.recipeThumb(recipe_index);
-//		return recipe_index;
-//		
-//	}
+	@RequestMapping(value = "recipeThumb", method = RequestMethod.POST)
+	public int recipeThumb(int recipe_index) throws Exception{
+		
+		
+		return recipeService.updateThumb(recipe_index); 
+		
+	}
 	
 	
 	//레시피메인
@@ -59,8 +64,8 @@ public class RecipeController {
 		//1.게시글 총갯수 구해오기
 		//service 추가 작업
 		//2.pagingutil 객체 생성
-		PagingUtil pu = new PagingUtil(count,nowPageNum,6,10);
-		System.out.println(pu);
+		PagingUtil pu = new PagingUtil(count,nowPageNum,6,5);
+		pu.setStart(pu.getStart()-1);
 		model.addAttribute("pu",pu);
 		//레시피 게시물 리스트
 		List<RecipeVO> recipeList = recipeService.recipeList(pu,searchvo);
@@ -94,6 +99,14 @@ public class RecipeController {
 		//회원
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		vo.setMember_index(member.getMember_index());
+		System.out.println("==============================");
+		System.out.println(vo.getMember_index());
+		System.out.println(vo.getTitle());
+		System.out.println(vo.getContents());
+		System.out.println(vo.getProduct_index1());
+		System.out.println(vo.getProduct_index2());
+		System.out.println(vo.getProduct_index3());
+		System.out.println("==============================");
 		recipeService.insertRecipe(vo, tumnailImage, request);
 		return "redirect:recipemain.do";
 	}
@@ -101,11 +114,18 @@ public class RecipeController {
 	
 	//레시피 상세확인
 	@RequestMapping(value = "/recipeview.do", method = RequestMethod.GET)
-	public String recipe3(Locale locale, Model model,RecipeVO vo,HttpServletRequest request) throws Exception {
+	public String recipe3(Locale locale, Model model,RecipeVO vo,HttpServletRequest request,ProductVO productVO ) throws Exception {
 		logger.info("recipeRead");
-		model.addAttribute("read", recipeService.recipeRead(vo.getRecipe_index()));
-		
 	
+		
+		model.addAttribute("read", recipeService.recipeRead(vo.getRecipe_index()));
+		List<ProductVO> ProductListAll = productService.productListAll(productVO);
+		model.addAttribute("productListAll",ProductListAll);
+		
+		
+//		List<ReplyVO> replyList = replyService.readReply(vo.getRecipe_index());
+//		model.addAttribute("reply",replyList);
+		
 		return "recipe/recipeview";
 	}
 	//레시피내용 수정

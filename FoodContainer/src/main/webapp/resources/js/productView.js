@@ -300,25 +300,30 @@
 	
 	function directBuy(obj){
 		
-		location.href="purchase/certification.do";
+		var inventory = $(".inventory").val();
 		
-		var pram = document.location.href;
-		var product_index = pram.substring(pram.length-5,pram.length);
-		var prodcut_count = $(".pCnt").html();
-		
-		var form = document.createElement('form');
-    
-	    var tag;
-	    tag = document.createElement('input');
-	    tag.setAttribute('type', 'hidden');
-	    tag.setAttribute('name', product_index);
-	    tag.setAttribute('value', prodcut_count);
+		if(inventory != 0){
+			
+			location.href="purchase/certification.do";
+			
+			var pram = document.location.href;
+			var product_index = pram.substring(pram.length-5,pram.length);
+			var prodcut_count = $(".pCnt").html();
+			
+			var form = document.createElement('form');
 	    
-	    form.appendChild(tag);
-	    form.setAttribute('method', 'post');
-	    form.setAttribute('action', 'purchase/certification.do');
-	    document.body.appendChild(form);
-	    form.submit();
+		    var tag;
+		    tag = document.createElement('input');
+		    tag.setAttribute('type', 'hidden');
+		    tag.setAttribute('name', product_index);
+		    tag.setAttribute('value', prodcut_count);
+		    
+		    form.appendChild(tag);
+		    form.setAttribute('method', 'post');
+		    form.setAttribute('action', 'purchase/certification.do');
+		    document.body.appendChild(form);
+		    form.submit();
+		}
 
 
 	}

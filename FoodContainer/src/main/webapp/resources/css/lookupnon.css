@@ -30,3 +30,11 @@
 .lookupView-infmoney{
 	margin-top: 20px;
 }
+
+.productHref{
+	text-decoration: none; color: black;
+}
+.productHref:hover {
+	font-style: italic; color: orange;
+	font-weight: bold;
+}

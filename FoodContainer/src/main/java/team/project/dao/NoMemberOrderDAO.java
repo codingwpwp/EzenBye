@@ -19,4 +19,8 @@ public class NoMemberOrderDAO {
 		sqlSession.insert(Namespace + ".noMemberOrdersInsert", noMemberOrdersvo);
 	}
 	
+	public NoMemberOrdersVO noMemberOrdersList(String no_member_order_index) throws Exception{
+		return sqlSession.selectOne(Namespace + ".noMemberOrdersList", no_member_order_index);
+	}
+	
 }

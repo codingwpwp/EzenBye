@@ -25,6 +25,10 @@
 	href="<%=request.getContextPath()%>/resources/css/base.css">
 	<link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/css/recipeview.css">
+	<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
+	rel="stylesheet">
+	
 </head>
 <body>
 	<!-- 헤더 -->
@@ -87,28 +91,35 @@
 
 							<div class="col-sm-8 col-10">
 								<table>
+							<%-- 	<c:forEach items="${product_index}" var="productListAll" varStatus="status"> --%>
 									<tr>
-										<th class="tdimg"><img src="" width="150"
+										<th class="tdimg"><img src="<%=request.getContextPath()%>/resources/img/${read.product_img1}" width="150"
 											height="150"></th>
-										<td class="tdtx">햇반 컵밥 Big 김치날치알밥 239g</td>
+										
+										<td class="tdtx">${read.product_name1}</td>
 									</tr>
+									<%-- </c:forEach> --%>
+									<c:if test="${not empty read.product_index2}">
 									<tr>
 										<th class="plus"><strong>+</strong></th>
 									</tr>
 									<tr>
-										<th class="tdimg"><img src="" width="150"
+										<th class="tdimg"><img src="<%=request.getContextPath()%>/resources/img/${read.product_img2}" width="150"
 											height="150"></th>
-										<td class="tdtx">비비고 플랜테이블 김치 왕교자 420g</td>
+										<td class="tdtx">${read.product_name2}</td>
 									</tr>
+									</c:if>
+									<c:if test="${not empty read.product_index3}">
 									<tr>
 										<th class="plus"><strong>+</strong></th>
 									</tr>
 									<tr>
-										<th class="tdimg"><img src="" width="150"
+										<th class="tdimg"><img src="<%=request.getContextPath()%>/resources/img/${read.product_img3}" width="150"
 											height="150"></th>
-										<td class="tdtx">고메 클래식 콤비네이션 피자 405g</td>
+										<td class="tdtx">${read.product_name3}</td>
 
 									</tr>
+									</c:if>
 
 								</table>
 
@@ -125,18 +136,26 @@
                                 </svg>
 								</div>
 							</div>
-							<div class="col-sm-12 col-12">
-								<textarea></textarea>
+							<div class="col-sm-12 col-12" id="">
+								<textarea readonly id="summernote">${read.contents}</textarea>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-sm-12 col-12 good">
-								<a href="#" onclick="insertThumb(); return false;"><svg xmlns="http://www.w3.org/2000/svg"
+								 <a href="#" onclick="insertThumb(); return false;" name="thumb">
+								<svg xmlns="http://www.w3.org/2000/svg"
 										width="50" height="50" fill="currentColor"
 										class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
                                     <path
 											d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z" />
                                   </svg></a>
+                                <!--   <button type="button"onclick="insertThumb(); return false;" name="thumb">
+								<svg xmlns="http://www.w3.org/2000/svg"
+										width="50" height="50" fill="currentColor"
+										class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
+                                    <path
+											d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z" />
+                                  </svg></button> -->
 								<div name="">(${read.thumb})</div>
 							</div>
 						</div>
@@ -161,14 +180,18 @@
 								<h4>댓글 3</h4>
 							</div>
 						</div>
+						<form >
 						<div class="row rp">
+							
 							<div class="col-sm-8 col-9 reply-write">
-								<input type="text" placeholder="로그인 후 댓글 작성이 가능합니다.">
+								<input type="text" name="contents" placeholder="로그인 후 댓글 작성이 가능합니다.">
 							</div>
 							<div class="col-sm-2 col-3">
 								<button class="btn btn-secondary">등록</button>
 							</div>
+							
 						</div>
+						</form>
 						<div class="row rpt">
 
 							<div class="col-3 col-sm-2 col-md-2 col-lg-2 replyview">
@@ -206,6 +229,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
-      <script src="<%=request.getContextPath()%>/resources/js/recipe.js"></script>
+    <script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js">
+	</script>
+	<script src="<%=request.getContextPath()%>/resources/js/recipe2.js"></script>
 </body>
 </html>

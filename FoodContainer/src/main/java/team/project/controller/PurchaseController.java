@@ -172,7 +172,7 @@ public class PurchaseController {
 	public String certification(Model model, HttpServletRequest request,
 										@RequestParam HashMap<String, String> cMap) {
 		
-
+		
 		//세션 소환
 		HttpSession session = request.getSession();
 		HashMap<String, Integer> cartMap;
