@@ -46,6 +46,11 @@ public class CartServiceImpl implements CartService {
 	public void shopbasketDelete(int cart_index) throws Exception {
 		cartDAO.shopbasketDelete(cart_index);
 	}
+
+	@Override
+	public void cartCount(int cnt, int cart_index) throws Exception {
+		cartDAO.cartCount(cnt, cart_index);
+	}
 	
 	
 }
