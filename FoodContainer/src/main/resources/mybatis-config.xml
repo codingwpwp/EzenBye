@@ -19,6 +19,7 @@
             <typeAlias type="team.project.util.PagingUtil" alias="PagingUtil"/>
             <typeAlias type="team.project.vo.RecipeVO" alias="RecipeVO"/>
             <typeAlias type="team.project.vo.NoMemberOrdersVO" alias="NoMemberOrdersVO"/>
+             <typeAlias type="team.project.vo.ReplyVO" alias="ReplyVO"/>    
         </typeAliases>
         
     </configuration>
