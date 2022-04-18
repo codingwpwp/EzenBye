@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.project.service.CartService;
@@ -46,6 +47,7 @@ public class ShopBasketController {
 	public String chooseShopbasketDelete(HttpServletRequest request) throws Exception {
 		
 		String[] valueArr = request.getParameterValues("valueArr");
+		
 		int size = valueArr.length;
 		for(int i = 0; i<size; i++) {
 			cartService.chooseShopbasketDelete(valueArr[i]);
@@ -59,6 +61,16 @@ public class ShopBasketController {
 	public String shopbasketDelete(int cart_index) throws Exception {
 		
 		cartService.shopbasketDelete(cart_index);
+		
+		return "redirect:shopBasket_main.do";
+	}
+	
+	// 상품 cnt 감소
+	@RequestMapping(value = "cartCount.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String cartCount(@RequestParam(value="cart_index") int cart_index, @RequestParam(value="cnt") int cnt) throws Exception {
+		
+		cartService.cartCount(cnt, cart_index);
 		
 		return "redirect:shopBasket_main.do";
 	}

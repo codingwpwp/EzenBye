@@ -1,5 +1,6 @@
 package team.project.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -38,4 +39,13 @@ public class CartDAO {
 	public void shopbasketDelete(int cart_index) throws Exception {
 		sqlSession.delete(Namespace+".shopbasketDelete",cart_index);
 	}
+	
+	public void cartCount(int cnt, int cart_index) throws Exception {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("cnt", cnt);
+		map.put("cart_index", cart_index);
+		sqlSession.update(Namespace+".cartCount",map);
+		
+	}
+	
 }

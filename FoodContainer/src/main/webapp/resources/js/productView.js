@@ -13,11 +13,10 @@
 	
 	
 	//상품 개수
-	var num = 1;
 	function plusFn(obj){
+		var num = $(".pCnt").html();
 		var price = $(".mdPrice").find("input[name='origin_price']").val();
 		var salePrice = $(".mdPrice").find("input[name='sale_price']").val();
-			
 		if(num == 10){
 			alert("최대 선택 개수는 10개 입니다.");
 		}else{
@@ -40,6 +39,7 @@
 	}
 		
 	function minusFn(obj){
+		var num = $(".pCnt").html();
 		var price = $(".mdPrice").find("input[name='origin_price']").val();
 		var salePrice = $(".mdPrice").find("input[name='sale_price']").val();
 			
