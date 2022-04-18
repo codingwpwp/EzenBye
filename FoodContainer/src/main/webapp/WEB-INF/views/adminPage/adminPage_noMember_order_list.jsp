@@ -1,3 +1,4 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -65,31 +66,117 @@
                                 <tr>
                                     <th scope="col">번호</th>
                                     <th scope="col">주문번호</th>
+                                    <th scope="col">이름</th>
                                     <th scope="col">주문일</th>
-                                    <th scope="col">배송상태</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="notMember_order_detail.do" class="link-primary">B01245151</a></td>
-                                    <td>2022-02-30</td>
-                                    <td >배송완료</td>
-                                </tr>
-
+								<c:if test="${not empty noMemberOrdersList}">
+									<c:set var="cnt" value="${paging.total - ( (paging.nowPage - 1) * paging.perPage )}" />
+									<c:forEach items="${noMemberOrdersList}" var="orders" step="1">
+	                                <tr>
+	                                    <td>${cnt}</td>
+	                                    <td><a href="noMember_order_detail.do?searchType=${paging.searchType}&searchValue=${paging.searchValue}&nowPage=${paging.nowPage}&no_member_order_index=${orders.no_member_order_index}" class="link-primary">${orders.no_member_order_index}</a></td>
+	                                    <td>${orders.name}</td>
+	                                    <td>${fn:substring(orders.order_date, 0,10)}<br></td>
+	                                    <c:set var="cnt" value="${cnt - 1}"/>
+	                                </tr>
+									</c:forEach>
+                                </c:if>
+								<c:if test="${empty noMemberOrdersList}">
+								<tr>
+									<td colspan="4" class="display-2 fw-bold p-3">
+										주문이 없습니다.
+									</td>
+								</tr>
+                                </c:if>
                             </tbody>
 
                         </table>
+                    </div>
+
+                    <!-- 검색&페이징 -->
+                    <div id="searchMember" class="row">
+
+                        <!-- 검색 -->
+                        <form method="get" action="noMember_order_list.do" class="col-12 col-md-8 row d-flex align-items-center justify-content-center">
+
+							<!--  검색종류 -->
+                            <div class="col-3 d-flex justify-content-end">
+                                <select class="form-select form-select-sm p-1" name="searchType" id="searchType">
+                                    <option value="no_member_order_index" <c:if test="${not empty paging.searchType and paging.searchType eq 'no_member_order_index'}"> selected</c:if>>주문번호</option>
+                                    <option value="name" <c:if test="${not empty paging.searchType and paging.searchType eq 'name'}"> selected</c:if>>이름</option>
+                                </select>
+                            </div>
+							<!-- 입력창 -->
+                            <div class="col-6">
+                                <input type="text" class="form-control" name="searchValue" placeholder="검색어를 입력하세요" value='<c:if test="${not empty paging.searchValue and paging.searchValue ne ''}">${paging.searchValue}</c:if>'>
+                            </div>
+                            <!-- 페이지(히든) -->
+                            <input type="hidden" name="nowPage" value="1">
+                            <!-- 검색버튼 -->
+                            <div class="col-3 d-flex justify-content-start">
+                                <button type="submit" class="btn btn-outline-primary">검색</button>
+                            </div>      
+
+                        </form>
+
+                        <!-- 페이징 -->
+                        <ul class="col-12 col-md-4 d-flex align-items-center justify-content-center pagination mt-2 my-md-0">
+	                        <!-- <부분 -->
+							<c:if test="${paging.startPage > 1}">
+	                            <li class="page-item">
+	                                <a class="page-link" href="noMember_order_list.do?searchValue=${paging.searchValue}&nowPage=${paging.startPage - 1}" aria-label="Previous">
+	                                    <span aria-hidden="true">&lt;</span>
+	                                </a>
+	                            </li>
+	                        </c:if>
+	                        <c:if test="${paging.startPage <= 1}">
+	                            <li class="page-item" style="visibility: hidden">
+	                                <a class="page-link" href="#" aria-label="Previous">
+	                                    <span aria-hidden="true"></span>
+	                                </a>
+	                            </li>
+	                        </c:if>
+	                        <!-- 각 페이지 -->
+							<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i" step="1">
+								<c:if test="${i != paging.nowPage}">
+									<li class="page-item">
+										<a class="page-link" href="noMember_order_list.do?searchValue=${paging.searchValue}&nowPage=${i}">${i}</a>
+									</li>
+								</c:if>
+								<c:if test="${i == paging.nowPage}">
+									<li class="page-item active" aria-current="page">
+										<span class="page-link fw-bold">${i}</span>
+									</li>
+								</c:if>
+							</c:forEach>
+							<!-- >부분 -->
+							<c:if test="${paging.endPage != paging.lastPage}">
+	                            <li class="page-item">
+	                                <a class="page-link" href="noMember_order_list.do?searchValue=${paging.searchValue}&nowPage=${paging.endPage + 1}" aria-label="Next">
+	                                    <span aria-hidden="true">&gt;</span>
+	                                </a>
+	                            </li>
+	                        </c:if>
+	                        <c:if test="${paging.startPage == paging.lastPage}">
+	                            <li class="page-item" style="visibility: hidden">
+	                                <a class="page-link" href="#" aria-label="Next">
+	                                    <span aria-hidden="true">&gt;</span>
+	                                </a>
+	                            </li>
+	                        </c:if>
+                        </ul>
+
                     </div>
     
                 </article>
             </div>
 
+
             <!-- 오른쪽 사이드메뉴 -->
             <div class="col-sm-3 col-md-2 col-lg-2 d-none d-sm-block">
-            	<%@include file="/WEB-INF/views/base/rightAside.jsp"%>
             </div>
             
         </div>

@@ -33,4 +33,10 @@ public class OrderProductServiceImpl implements OrderProductService{
 		return orderProductDAO.adminMemberOrderProductList(ordersvo);
 	}
 
+	// 비회원 주문 상세조회할때 주문들 불러오기
+	@Override
+	public List<OrderProductVO> adminNoMemberOrderProductList(String no_member_order_index) throws Exception {
+		return orderProductDAO.adminNoMemberOrderProductList(no_member_order_index);
+	}
+
 }

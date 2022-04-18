@@ -126,7 +126,7 @@
 	                        <!-- <부분 -->
 							<c:if test="${paging.startPage > 1}">
 	                            <li class="page-item">
-	                                <a class="page-link" href="member_order_detail.do?searchValue=${paging.searchValue}&nowPage=${paging.startPage - 1}" aria-label="Previous">
+	                                <a class="page-link" href="member_order_list.do?searchValue=${paging.searchValue}&nowPage=${paging.startPage - 1}" aria-label="Previous">
 	                                    <span aria-hidden="true">&lt;</span>
 	                                </a>
 	                            </li>
@@ -142,7 +142,7 @@
 							<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i" step="1">
 								<c:if test="${i != paging.nowPage}">
 									<li class="page-item">
-										<a class="page-link" href="member_order_detail.do?searchValue=${paging.searchValue}&nowPage=${i}">${i}</a>
+										<a class="page-link" href="member_order_list.do?searchValue=${paging.searchValue}&nowPage=${i}">${i}</a>
 									</li>
 								</c:if>
 								<c:if test="${i == paging.nowPage}">
@@ -154,7 +154,7 @@
 							<!-- >부분 -->
 							<c:if test="${paging.endPage != paging.lastPage}">
 	                            <li class="page-item">
-	                                <a class="page-link" href="member_order_detail.do?searchValue=${paging.searchValue}&nowPage=${paging.endPage + 1}" aria-label="Next">
+	                                <a class="page-link" href="member_order_list.do?searchValue=${paging.searchValue}&nowPage=${paging.endPage + 1}" aria-label="Next">
 	                                    <span aria-hidden="true">&gt;</span>
 	                                </a>
 	                            </li>

@@ -19,9 +19,11 @@ import org.springframework.stereotype.Service;
 import team.project.dao.NoMemberOrderDAO;
 import team.project.dao.OrderProductDAO;
 import team.project.dao.ProductDAO;
+import team.project.util.PagingUtil;
 import team.project.vo.CartVO;
 import team.project.vo.NoMemberOrdersVO;
 import team.project.vo.OrderProductVO;
+import team.project.vo.SearchVO;
 
 @Service
 public class NoMemberOrdersServiceImpl implements NoMemberOrdersService{
@@ -124,6 +126,30 @@ public class NoMemberOrdersServiceImpl implements NoMemberOrdersService{
 	public NoMemberOrdersVO noMemberOrdersList(String no_member_order_index) throws Exception {
 		NoMemberOrdersVO noMemberOrdersList = noMemberOrderDao.noMemberOrdersList(no_member_order_index);
 		return noMemberOrdersList;
+	}
+
+	
+	/* 관리자페이지 */
+	
+	// 비회원 주문 조회 리스트 출력
+	@Override
+	public List<NoMemberOrdersVO> adminNoMemberOrdersList(SearchVO searchvo, int nowPage) throws Exception {
+		
+		// 페이징 처리
+		PagingUtil paging = adminNoMemberOrdersPaging(searchvo, nowPage);
+		
+		// 페이징 내부 값 세팅
+		paging.setStart(paging.getStart() - 1);
+		paging.setSearchType(searchvo.getSearchType());
+		paging.setSearchValue(searchvo.getSearchValue());
+		return noMemberOrderDao.adminNoMemberOrdersList(paging);
+	}
+
+	// 비회원 주문 조회 페이징
+	@Override
+	public PagingUtil adminNoMemberOrdersPaging(SearchVO searchvo, int nowPage) throws Exception {
+		int cnt = noMemberOrderDao.adminNoMemberOrdersCount(searchvo);
+		return new PagingUtil(cnt, nowPage, 10, 5);
 	}
 
 }

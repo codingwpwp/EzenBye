@@ -14,4 +14,7 @@ public interface OrderProductService {
 	/* 관리자페이지 */
 	// 회원 주문 상세조회할때 주문들 불러오기
 	List<OrderProductVO> adminMemberOrderProductList(OrdersVO ordersvo) throws Exception;
+	
+	// 비회원 주문 상세조회할때 주문들 불러오기
+	List<OrderProductVO> adminNoMemberOrderProductList(String no_member_order_index) throws Exception;
 }

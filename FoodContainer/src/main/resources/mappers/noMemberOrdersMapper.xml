@@ -26,9 +26,37 @@
  		)
  	</insert>
  	
+ 	<!-- 비회원 주문 상세 조회 -->
  	<select id="noMemberOrdersList" resultType="NoMemberOrdersVO" parameterType="String">
         SELECT * FROM no_member_orders
 		WHERE no_member_order_index=#{no_member_order_index}
+    </select>
+    
+    <!-- 여기서 부터는 관리자페이지 -->
+    
+    <!-- 비회원 주문 조회할때 먼저 총 글의 총 갯수를 구하는 쿼리 -->
+    <select id="adminNoMemberOrdersCount" resultType="int" parameterType="SearchVO">
+    	SELECT COUNT(*)
+    	FROM no_member_orders
+    	<if test="searchType != null and searchType.equals('no_member_order_index')">
+    		WHERE no_member_order_index LIKE CONCAT('%',#{searchValue},'%')
+        </if>
+        <if test="searchType != null and searchType.equals('name')">
+    		WHERE name LIKE CONCAT('%',#{searchValue},'%')
+        </if>
+    </select>
+    
+    <!-- 비회원 주문 조회 -->
+    <select id="adminNoMemberOrdersList" resultType="NoMemberOrdersVO" parameterType="PagingUtil">
+		SELECT no_member_order_index, name, order_date FROM no_member_orders
+    	<if test="searchType != null and searchType.equals('no_member_order_index')">
+    		WHERE no_member_order_index LIKE CONCAT('%',#{searchValue},'%')
+        </if>
+        <if test="searchType != null and searchType.equals('name')">
+    		WHERE name LIKE CONCAT('%',#{searchValue},'%')
+        </if>
+	    ORDER BY order_date DESC
+    	LIMIT #{start}, #{perPage}
     </select>
    
 </mapper>
