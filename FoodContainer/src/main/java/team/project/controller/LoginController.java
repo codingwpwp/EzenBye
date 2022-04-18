@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import team.project.service.MemberService;
+import team.project.util.CaptchaImage;
+import team.project.util.CaptchaNkey;
 import team.project.vo.MemberVO;
 
 @Controller
@@ -28,7 +30,20 @@ public class LoginController {
 	
 	@Autowired
 	private MemberService memberService;
+
+	// 로그인 페이지로 이동
+	@RequestMapping(value = "loginmain.do", method = RequestMethod.GET)
+	public String login(Locale locale, Model model,HttpSession session) throws Exception{
+		CaptchaNkey c = new CaptchaNkey();
+		String key = c.main(null);
+		System.out.println(key);
+		
+		CaptchaImage cl = new CaptchaImage();
+		cl.main(key);
+		return "login/loginmain";
+	}
 	
+	// 로그인 검증 과정
 	@RequestMapping(value ="loginmain.do", method= RequestMethod.POST)
 	public String logingo(MemberVO vo,HttpServletRequest req,RedirectAttributes rttr) throws Exception{
 
@@ -45,7 +60,7 @@ public class LoginController {
 			return "redirect:index.do";
 		}else {// 로그인 검증 실패의 경우
 			session.setAttribute("member", null);
-			return "login/loginFail";
+			return "login/loginmain";
 		}
 	}
 	
@@ -57,12 +72,6 @@ public class LoginController {
 		MemberVO login =memberService.Login(vo);
 		boolean pwChk = pwdEncoder.matches(vo.getPw(), login.getPw());
 		return pwChk;
-	}
-	
-	@RequestMapping(value = "loginmain.do", method = RequestMethod.GET)
-	public String login(Locale locale, Model model,HttpSession session) throws Exception{
-		session.invalidate();
-		return "login/loginmain";
 	}
 	
 	@RequestMapping(value = "logout.do", method = RequestMethod.GET)

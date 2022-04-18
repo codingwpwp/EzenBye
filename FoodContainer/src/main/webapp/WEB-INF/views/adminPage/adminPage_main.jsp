@@ -141,7 +141,7 @@
                             <div class="col-12 col-md-6">
 
                                 <div class="bg-success bg-gradient bg-opacity-50 border border-bottom-0 rounded-top border-2 border-dark p-2">
-                                    <span class="h4 fw-bold">등록중인 배너</span><span class="moreContent"><a href="#" class="link-dark fw-bold float-end">[더보기]</a></span>
+                                    <span class="h4 fw-bold">등록중인 배너</span><span class="moreContent"><a href="banner.do" class="link-dark fw-bold float-end">[더보기]</a></span>
                                 </div>
 
                                 <table class="table table-hover align-middle border border-2 border-dark fw-bold">
@@ -169,10 +169,10 @@
 
                             </div>
                             
-                            <!-- 매진 상품 -->
+                            <!-- 최고매출 상품 -->
                             <div class="col-12 col-md-6">
                                 <div class="bg-primary bg-gradient bg-opacity-50 border border-bottom-0 rounded-top border-2 border-dark p-2">
-                                    <span class="h4 fw-bold">매진 상품</span><span class="moreContent"><a href="#" class="link-dark fw-bold float-end">[더보기]</a></span>
+                                    <span class="h4 fw-bold">최고매출 상품</span><span class="moreContent"></span>
                                 </div>
 
                                 <table class="table table-hover align-middle border border-2 border-dark fw-bold">

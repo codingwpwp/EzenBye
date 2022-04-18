@@ -48,8 +48,12 @@ public class AdminPageController {
 
 	@RequestMapping(value = "admin.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		String springVersion = org.springframework.core.SpringVersion.getVersion();
-		System.out.println("스프링 프레임워크 버전 : " + springVersion);
+		
+		
+		// 등록중인 배너 3개 뿌리기
+		List<BannerVO> bannerList;
+		//model.addAttribute("bList", bannerList);
+		
 		return "adminPage/adminPage_main";
 	}
 
