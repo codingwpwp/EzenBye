@@ -101,8 +101,6 @@ public class MainController {
 		
 		List<ProductVO> ProductListAll = productService.productListAll2(productFilterVO);
 		
-		System.out.println("==========================================");
-		
 		model.addAttribute("productListAll",ProductListAll);
 		
 		List<DibsVO> dibsListAll = dibsService.dibsListAll(dibsVO);

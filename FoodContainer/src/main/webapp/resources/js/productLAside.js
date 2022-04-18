@@ -627,9 +627,9 @@
 			}
 		}
 		
-		var middleSortArr = middleSort.split("|");
-		var brandArr = brand.split("|");
-		var priceArr = price.split("|");
+		var middleSortArr = $.trim(middleSort.split("|"));
+		var brandArr = $.trim(brand.split("|"));
+		var priceArr = $.trim(price.split("|"));
 		
 		/*
 		var mainSectionHtml = "<!-- pc버전 -->";
@@ -802,7 +802,7 @@
 			url : "productList.do",
 			data : "middleSort="+middleSortArr+"&brand="+brandArr+"&price="+priceArr,
 			success : function(data){
-			
+				console.log("ok");
 			}
 		});
 		
