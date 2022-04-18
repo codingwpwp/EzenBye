@@ -7,14 +7,68 @@ public class RecipeVO {
 	private String thumbnail_image;
 	private String contents;
 	private String product_index1;
+	private String product_name1;
+	private String product_img1;
 	private String product_index2;
+	private String product_name2;
+	private String product_img2;
 	private String product_index3;
+	private String product_name3;
+	private String product_img3;
 	private int hit;
 	private int thumb;
 	private String write_date;
 	private int best_rank;
 	
 	
+	public String getProduct_img1() {
+		return product_img1;
+	}
+
+	public void setProduct_img1(String product_img1) {
+		this.product_img1 = product_img1;
+	}
+
+	public String getProduct_img2() {
+		return product_img2;
+	}
+
+	public void setProduct_img2(String product_img2) {
+		this.product_img2 = product_img2;
+	}
+
+	public String getProduct_img3() {
+		return product_img3;
+	}
+
+	public void setProduct_img3(String product_img3) {
+		this.product_img3 = product_img3;
+	}
+
+	public String getProduct_name1() {
+		return product_name1;
+	}
+
+	public void setProduct_name1(String product_name1) {
+		this.product_name1 = product_name1;
+	}
+
+	public String getProduct_name2() {
+		return product_name2;
+	}
+
+	public void setProduct_name2(String product_name2) {
+		this.product_name2 = product_name2;
+	}
+
+	public String getProduct_name3() {
+		return product_name3;
+	}
+
+	public void setProduct_name3(String product_name3) {
+		this.product_name3 = product_name3;
+	}
+
 	public int getRecipe_index() {
 		return recipe_index;
 	}
