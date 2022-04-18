@@ -37,7 +37,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link px-lg-1 px-xl-2" href="#">이벤트</a>
+                <a class="nav-link px-lg-1 px-xl-2" href="event.do">이벤트</a>
             </li>
 
             <li class="nav-item">
@@ -65,7 +65,7 @@
 </c:if>
 <c:if test="${member!=null}">
 <div class="col-5 col-sm-3 col-lg-2 col-xl-3 d-flex align-items-lg-center justify-content-end justify-content-sm-center justify-content-lg-start pe-4 pe-sm-2 fs-6" id="userLogin">
-    <a>${member.name}님 환영합니다.</a>&nbsp;|&nbsp;<a href="<%=request.getContextPath()%>/logout.do" class="link-dark">로그아웃</a>
+    <a>${member.name}님</a>&nbsp;|&nbsp;<a href="<%=request.getContextPath()%>/logout.do" class="link-dark">로그아웃</a>
 </div>
 </c:if>
 

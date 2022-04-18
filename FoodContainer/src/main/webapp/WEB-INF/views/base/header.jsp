@@ -10,7 +10,7 @@
 
             <!-- 로고 -->
             <div class="col-2 d-flex justify-content-start">
-                <a href="index.do"><img src="<%=request.getContextPath()%>/resources/img/로고.png" class="w-100 img-fluid" id="logo"></a>
+                <a href="/controller/index.do"><img src="<%=request.getContextPath()%>/resources/img/로고.png" class="w-100 img-fluid" id="logo"></a>
             </div>
 
             <!-- 검색 -->
@@ -23,9 +23,9 @@
             <div class="col-4 col-lg-3">
                 <div class="d-flex justify-content-evenly">
                     <i class="bi bi-truck fs-1"></i>
-                    <i class="bi bi-cart3 fs-1" onclick="location.href='shopBasket_main.do'"></i>
+                    <i class="bi bi-cart3 fs-1" onclick="location.href='/controller/shopBasket_main.do'"></i>
                     <c:if test="${not empty member }">
-                    <i class="bi bi-person fs-1 position-relative" onclick="location.href='mypage_main.do'">
+                    <i class="bi bi-person fs-1 position-relative" onclick="location.href='/controller/mypage_main.do'">
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger header-badge">
 					    99+
 					</span>

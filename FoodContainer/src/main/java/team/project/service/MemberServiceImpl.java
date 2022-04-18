@@ -3,14 +3,20 @@ package team.project.service;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.mysql.cj.Session;
+
+import team.project.dao.CouponDAO;
 import team.project.dao.MemberDAO;
 import team.project.mapper.MemberMapper;
 import team.project.util.PagingUtil;
+import team.project.vo.CouponVO;
 import team.project.vo.MemberVO;
 import team.project.vo.SearchVO;
 
@@ -20,6 +26,8 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDAO memberDao;
 	@Autowired
 	private MemberMapper memberMapper;
+	@Autowired
+	private CouponDAO couponDao;
 	@Inject
 	private BCryptPasswordEncoder PasswordEncoder;
 	
@@ -167,7 +175,69 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.adminChangeMemberDel_yn(member_index);
 	}
 
+	/* 이벤트 페이지 */
+	// 룰렛 돌리기 전에 티켓 체크
+	@Override
+	public String eventTicket(int member_index) throws Exception {
+		int ticket = memberDao.eventTicketCheck(member_index);
+		if(ticket <= 0) {
+			return "noTicket";
+		}else {
+			memberDao.eventTicketMinus(member_index);
+			int gacha = (int)(Math.random() * 100) + 1;
+			if(gacha >= 1 && gacha <= 35) {			// 10p
+				return "6";
+			}else if(gacha >= 36 && gacha <= 70) {	// 10p
+				return "5";
+			}else if(gacha >= 71 && gacha <= 80) {	// 5%쿠폰
+				return "2";
+			}else if(gacha >= 81 && gacha <= 88) {	// 10%쿠폰
+				return "1";
+			}else if(gacha >= 89 && gacha <= 95) {	// 1,000p
+				return "3";
+			}else{									// 50,000p
+				return "4";
+			}
+		}
+	}
 	
+	// 이벤트 결과에 따라 지급
+	@Override
+	public void eventResult(HttpServletRequest request, String r) throws Exception {
+		int result = Integer.parseInt(r);
+		System.out.println(result);
+		int point = 0;
+		String title = "";
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		
+		if(result == 3) {
+			point = 1000;
+		}else if(result == 4) {
+			point = 50000;
+		}else if(result == 5 || result == 6) {
+			point = 10;
+		}
+		
+		if(point == 0) {	// 쿠폰의 경우
+			if(result == 1) {
+				title = "룰렛 이벤트 10%쿠폰";
+				point = 10;
+			}else {
+				title = "룰렛 이벤트 5%쿠폰";
+				point = 5;
+			}
+			CouponVO couponvo = new CouponVO();
+			couponvo.setMember_index(member.getMember_index());
+			couponvo.setCoupon_title(title);
+			couponvo.setDiscount_percent(point);
+			couponDao.eventCouponInsert(couponvo);
+			
+		}else {
+			memberMapper.updatePoint(point, member.getMember_index());
+		}
+		
+	}
 	
 }
  

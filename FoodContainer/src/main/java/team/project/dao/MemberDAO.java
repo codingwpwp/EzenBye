@@ -97,4 +97,16 @@ public class MemberDAO {
 	public int adminChangeMemberDel_yn(int member_index) throws Exception{
 		return sqlSession.update(Namespace + ".adminChangeMemberDel_yn", member_index);
 	}
+	
+	/* 이벤트 페이지 */
+	// 티켓 조회
+	public int eventTicketCheck(int member_index) throws Exception{
+		return sqlSession.selectOne(Namespace + ".eventTicketCheck", member_index);
+	}
+	
+	// 티켓 하나 깎기
+	public void eventTicketMinus(int member_index) throws Exception{
+		sqlSession.update(Namespace + ".eventTicketMinus", member_index);
+	}
+
 }

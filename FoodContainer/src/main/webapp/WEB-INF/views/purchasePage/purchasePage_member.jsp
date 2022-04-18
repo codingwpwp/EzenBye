@@ -19,7 +19,11 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/base.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/purchasePage.css">
 </head>
-<body>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+	<script type="text/javascript">
+		 window.history.forward();
+		 function noBack(){window.history.forward();}
+	</script>
 	<!-- 헤더 -->
 	<header class="border-bottom border-dark">
 		<%@include file="/WEB-INF/views/base/header.jsp"%>

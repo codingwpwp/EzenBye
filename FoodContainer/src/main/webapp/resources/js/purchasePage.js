@@ -482,7 +482,7 @@ function checkedCoupon(obj){
 			var discount_percent = parseInt(data.trim());
 			// console.log(discount_percent);
 			if(totalPrice > 0){
-				couponPrice = (sumPrice + deliveryPrice) * (discount_percent * 0.01);
+				couponPrice = Math.floor((sumPrice + deliveryPrice) * (discount_percent * 0.01));
 				totalPrice = sumPrice + deliveryPrice - couponPrice - pointPrice;
 				if(totalPrice < 0 ){
 					totalPrice = 0;
@@ -538,14 +538,7 @@ function pointReg(obj){
 	
 	// 포인트 초과할 때
 	if(parseInt(obj.value) > parseInt($("#availablePoint").val())){
-		
-		$(obj).val(obj.value.slice(0, $("#availablePoint").val().length - 1));
-		
-    	$("#availablePointCommaVer").css("color", "red");
-		setTimeout(function(){
-            $("#availablePointCommaVer").css("color", "black");
-        },500);
-        
+		$(obj).val(parseInt($("#availablePoint").val()));
     }
 	
 	// 포인트 적용
@@ -561,8 +554,8 @@ function pointReg(obj){
 		totalPrice = sumPrice + deliveryPrice - couponPrice - pointPrice;
 		$(".totalPrice").text(totalPrice.toLocaleString('ko-KR'));
 	}else{
-		$(obj).val(0);
-		pointPrice = 0;
+		$(obj).val(sumPrice + deliveryPrice - couponPrice);
+		pointPrice = $(obj).val();
 		$(".pointPrice").text(pointPrice.toLocaleString('ko-KR'));
 		$(".totalPrice").css("color", "#0d6efd");
 		setTimeout(function(){

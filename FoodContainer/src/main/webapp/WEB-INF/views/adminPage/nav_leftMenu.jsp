@@ -38,7 +38,6 @@
         <span class="h5 fw-bold">기타 관리</span>
         <div class="list-group my-2">
 	        <a href="banner.do" class="list-group-item list-group-item-action fs-6">배너</a>
-	        <a href="event.do" class="list-group-item list-group-item-action fs-6">이벤트 설정</a>
 	        <a href="bestRecipe.do" class="list-group-item list-group-item-action fs-6">베스트 레시피</a>
         </div>
 

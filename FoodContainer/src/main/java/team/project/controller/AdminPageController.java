@@ -377,10 +377,5 @@ public class AdminPageController {
 	public String bestRecipe(Locale locale, Model model) {
 		return "adminPage/adminPage_bestRecipe";
 	}
-
-	@RequestMapping(value = "event.do", method = RequestMethod.GET)
-	public String event(Locale locale, Model model) {
-		return "adminPage/adminPage_event";
-	}
 	
 }

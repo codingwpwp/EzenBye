@@ -79,6 +79,7 @@ public class PurchaseController {
 					
 					// 바로구매에서 오는 경우
 					cartList = productService.purchaseListCaseOne(request);
+					session.setAttribute("cartMap", null);
 					
 				}else{
 					// 장바구니에서 오는 경우
@@ -101,7 +102,7 @@ public class PurchaseController {
 	// 결제하고 난뒤 DB에 올리는 페이지
 	@RequestMapping(value = "memberPurchaseOk.do", method = RequestMethod.POST)
 	public String purchaseOk(Model model, HttpServletRequest request, OrdersVO ordersvo,
-							 @RequestParam(value="newBasicAddress") String newBasicAddress) throws Exception{
+							 @RequestParam(value="newBasicAddress", required = false) String newBasicAddress) throws Exception{
 		// 세션 소환
 		HttpSession session =request.getSession();
 		if(session.getAttribute("member") == null) {
@@ -109,16 +110,26 @@ public class PurchaseController {
 			return "wrongAccessPage/wrongAccess";
 			
 		}else {
-			MemberVO member = (MemberVO)session.getAttribute("member");
-			ordersvo.setMember_index(member.getMember_index());
-			ordersService.orderInsert(session, ordersvo, newBasicAddress);
-			
-			return "purchasePage/memberPurchaseOk";
+			if(newBasicAddress == null) {
+				return "wrongAccessPage/wrongAccess";
+			}else {
+				MemberVO member = (MemberVO)session.getAttribute("member");
+				ordersvo.setMember_index(member.getMember_index());
+				ordersService.orderInsert(session, ordersvo, newBasicAddress);
+				model.addAttribute("ordersvo", ordersvo);
+				
+				return "purchasePage/memberPurchaseOk";
+			}
 		}
 		
 	}
-	/***************************************************************************************/
 	
+	// 억지로 입력했을 때
+	@RequestMapping(value = "memberPurchaseOk.do", method = RequestMethod.GET)
+	public String purchaseOk() throws Exception{
+			return "wrongAccessPage/wrongAccess";
+	}
+	/***************************************************************************************/
 	/*************************************회원정보&쿠폰 조회*************************************/
 	public void couponList(Model model, HttpSession session) throws Exception{
 		MemberVO member = (MemberVO)session.getAttribute("member");
@@ -128,10 +139,6 @@ public class PurchaseController {
 		List<CouponVO> couponvo = couponService.couponList(member.getMember_index());
 		model.addAttribute("couponList", couponvo);
 	}
-	/***************************************************************************************/
-	
-	
-	/**********************************회원쿠폰 조회하는 비동기************************************/
 	// 회원 구매페이지 내에서 쿠폰 적용하는 비동기
 	@RequestMapping(value = "couponCheck.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -142,8 +149,8 @@ public class PurchaseController {
 		
 		return discountPer;
 	}
-	
-	/**************************************회원&비회원 공통**************************************/
+	/***************************************************************************************/
+	/**************************************회원&비회원 공통*************************************/
 	// 결제화면 전에 상품 수량 확인 및 빼주기 비동기
 	@RequestMapping(value = "checkProductInventory.do", method = RequestMethod.POST)
 	@ResponseBody

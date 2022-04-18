@@ -21,5 +21,12 @@
         FROM 
         coupon WHERE member_index=#{member_index} and used_yn='N'
     </select>
-   
+
+    <insert id="eventCouponInsert" parameterType="CouponVO">
+    	INSERT INTO coupon(
+    		member_index, coupon_title, discount_percent
+    	)VALUES(
+    		#{member_index}, #{coupon_title}, #{discount_percent}
+    	)
+    </insert>
 </mapper>
