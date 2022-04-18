@@ -2,15 +2,14 @@ package team.project.controller;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +18,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import team.project.service.CartService;
 import team.project.service.ProductService;
+import team.project.vo.CartVO;
+import team.project.vo.MemberVO;
 import team.project.vo.ProductVO;
 
 /**
@@ -34,11 +38,45 @@ public class ShopBasketController {
 	@Autowired
 	private ProductService productService;
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
+	@Autowired
+	private CartService cartService;
+	
+	// 상품 선택삭제
+	@RequestMapping(value = "chooseShopbasketDelete.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String chooseShopbasketDelete(HttpServletRequest request) throws Exception {
+		
+		String[] valueArr = request.getParameterValues("valueArr");
+		
+		int size = valueArr.length;
+		for(int i = 0; i<size; i++) {
+			cartService.chooseShopbasketDelete(valueArr[i]);
+		}
+		return "redirect:shopBasket_main.do";
+	}
+	
+	// 상품 삭제
+	@RequestMapping(value = "shopbasketDelete.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String shopbasketDelete(int cart_index) throws Exception {
+		
+		cartService.shopbasketDelete(cart_index);
+		
+		return "redirect:shopBasket_main.do";
+	}
+	
+	// 상품 cnt 감소
+	@RequestMapping(value = "cartCount.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String cartCount(@RequestParam(value="cart_index") int cart_index, @RequestParam(value="cnt") int cnt) throws Exception {
+		
+		cartService.cartCount(cnt, cart_index);
+		
+		return "redirect:shopBasket_main.do";
+	}
+	
 	@RequestMapping(value = "shopBasket_main.do", method = RequestMethod.GET)
-	public String home(Locale locale, Model model, HttpServletRequest request, ProductVO productVO, HttpServletResponse response) throws Exception{
+	public String home(Locale locale, Model model, HttpServletRequest request, ProductVO productVO, HttpServletResponse response, HttpSession session) throws Exception{
 		
 		Cookie[] cookies = request.getCookies();
 		String noMemberCartCookie = null;
@@ -61,26 +99,52 @@ public class ShopBasketController {
 				
 				for(int i=0; i<tempCookieArr.length; i++) {
 					
-					if(tempCookieArr[i].substring(0,tempCookieArr[i].length()-1).equals(product_index)) {
-						tempCookieArr[i] = product_index + cnt;
+					if(tempCookieArr[i].length() < 7) {
 						
-						if(i == 0) {
-							changeCookie = tempCookieArr[i];
-							System.out.println("1 ="+changeCookie);
+						if(tempCookieArr[i].substring(0,tempCookieArr[i].length()-1).equals(product_index)) {
+							tempCookieArr[i] = product_index + cnt;
+							
+							if(i == 0) {
+								changeCookie = tempCookieArr[i];
+								System.out.println("1 ="+changeCookie);
+							}else {
+								String tempCookie = URLDecoder.decode(changeCookie,"UTF-8");
+								changeCookie = URLEncoder.encode(tempCookie.toString()+","+tempCookieArr[i],"UTF-8");
+								System.out.println("2 ="+changeCookie);
+							}
+							
 						}else {
-							String tempCookie = URLDecoder.decode(changeCookie,"UTF-8");
-							changeCookie = URLEncoder.encode(tempCookie.toString()+","+tempCookieArr[i],"UTF-8");
-							System.out.println("2 ="+changeCookie);
+							if(i == 0) {
+								changeCookie = tempCookieArr[i];
+								System.out.println("3 ="+changeCookie);
+							}else {
+								String tempCookie = URLDecoder.decode(changeCookie,"UTF-8");
+								changeCookie = URLEncoder.encode(tempCookie.toString()+","+tempCookieArr[i],"UTF-8");
+								System.out.println("4 ="+changeCookie);
+							}
 						}
-						
 					}else {
-						if(i == 0) {
-							changeCookie = tempCookieArr[i];
-							System.out.println("3 ="+changeCookie);
+						if(tempCookieArr[i].substring(0,tempCookieArr[i].length()-2).equals(product_index)) {
+							tempCookieArr[i] = product_index + cnt;
+							
+							if(i == 0) {
+								changeCookie = tempCookieArr[i];
+								System.out.println("1 ="+changeCookie);
+							}else {
+								String tempCookie = URLDecoder.decode(changeCookie,"UTF-8");
+								changeCookie = URLEncoder.encode(tempCookie.toString()+","+tempCookieArr[i],"UTF-8");
+								System.out.println("2 ="+changeCookie);
+							}
+							
 						}else {
-							String tempCookie = URLDecoder.decode(changeCookie,"UTF-8");
-							changeCookie = URLEncoder.encode(tempCookie.toString()+","+tempCookieArr[i],"UTF-8");
-							System.out.println("4 ="+changeCookie);
+							if(i == 0) {
+								changeCookie = tempCookieArr[i];
+								System.out.println("3 ="+changeCookie);
+							}else {
+								String tempCookie = URLDecoder.decode(changeCookie,"UTF-8");
+								changeCookie = URLEncoder.encode(tempCookie.toString()+","+tempCookieArr[i],"UTF-8");
+								System.out.println("4 ="+changeCookie);
+							}
 						}
 					}
 				}
@@ -91,13 +155,29 @@ public class ShopBasketController {
 			}
 			
 			for(int i=0; i<tempCookieArr.length; i++) {
-				noMemberCartArr.add(tempCookieArr[i].substring(0,tempCookieArr[i].length()-1));
+				if(tempCookieArr[i].length() < 7) {
+					noMemberCartArr.add(tempCookieArr[i].substring(0,tempCookieArr[i].length()-1));
+				}else {
+					noMemberCartArr.add(tempCookieArr[i].substring(0,tempCookieArr[i].length()-2));
+				}
 			}
 			
 			List<ProductVO> noMemberCartList = productService.noMemberCartList(noMemberCartArr);
 			
 			model.addAttribute("noMemberCart",noMemberCartList);
 			model.addAttribute("noMemberCartCookie",tempCookieArr);
+		}
+		
+		// 회원 장바구니 불러오기
+		int member_index = 0;
+		
+		if((MemberVO) session.getAttribute("member") != null) {
+			MemberVO member = (MemberVO) session.getAttribute("member");
+		    member_index = member.getMember_index();
+		    
+		    List<CartVO> selectList = cartService.selectList(member_index);
+			
+			model.addAttribute("selectList",selectList);
 		}
 		
 		return "shopbasket/shopBasketMain";

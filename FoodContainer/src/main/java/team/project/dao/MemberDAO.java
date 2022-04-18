@@ -69,6 +69,18 @@ public class MemberDAO {
 		return sqlSession.update(Namespace + ".mypageMemberModify", memberVO);
 	}
 	
+	public MemberVO corretPW(MemberVO memberVO) throws Exception{
+		return sqlSession.selectOne(Namespace + ".corretPW", memberVO);
+	}
+	
+	public int modifyPW(MemberVO memberVO) throws Exception{
+		return sqlSession.update(Namespace + ".modifyPW", memberVO);
+	}
+	
+	public int mypageChangeAddress(MemberVO memberVO) throws Exception{
+		return sqlSession.update(Namespace + ".mypageChangeAddress", memberVO);
+	}
+	
 	/*여기서 부터는 관리자페이지*/
 	
 	// 회원 조회할때 글의 갯수(페이징)
@@ -85,4 +97,16 @@ public class MemberDAO {
 	public int adminChangeMemberDel_yn(int member_index) throws Exception{
 		return sqlSession.update(Namespace + ".adminChangeMemberDel_yn", member_index);
 	}
+	
+	/* 이벤트 페이지 */
+	// 티켓 조회
+	public int eventTicketCheck(int member_index) throws Exception{
+		return sqlSession.selectOne(Namespace + ".eventTicketCheck", member_index);
+	}
+	
+	// 티켓 하나 깎기
+	public void eventTicketMinus(int member_index) throws Exception{
+		sqlSession.update(Namespace + ".eventTicketMinus", member_index);
+	}
+
 }

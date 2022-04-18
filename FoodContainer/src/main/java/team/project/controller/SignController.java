@@ -40,7 +40,7 @@ public class SignController {
 //		vo.setPw(pwd);
 		memberService.insertMember(vo);
 		
-		return "sign/member_sign";
+		return "redirect:loginmain.do";
 	}
 	
 	

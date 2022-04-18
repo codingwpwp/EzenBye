@@ -22,17 +22,21 @@ import team.project.service.CartService;
 import team.project.service.CouponService;
 import team.project.service.DibsService;
 import team.project.service.MemberService;
+import team.project.service.MessageService;
 import team.project.service.OrderProductService;
 import team.project.service.OrdersService;
 import team.project.service.ReviewService;
 import team.project.service.ServiceCenterService;
+import team.project.util.PagingUtil;
 import team.project.vo.CartVO;
 import team.project.vo.CouponVO;
 import team.project.vo.DibsVO;
 import team.project.vo.MemberVO;
+import team.project.vo.MessageVO;
 import team.project.vo.OrderProductVO;
 import team.project.vo.OrdersVO;
 import team.project.vo.ReviewVO;
+import team.project.vo.SearchVO;
 import team.project.vo.ServiceCenterVO;
 
 /**
@@ -71,6 +75,8 @@ public class MypageController {
 	private DibsService dibsService;
 	@Autowired
 	private CartService cartService;
+	@Autowired
+	private MessageService messageService;
 	
 	 // 리뷰 등록
 	 @RequestMapping(value = "writeReview.do", method = RequestMethod.POST)
@@ -180,11 +186,80 @@ public class MypageController {
 	// 개인정보 비번 변경
 	@RequestMapping(value = "mypageMemberpwModify.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String mypageMemberpwModify(String pw1, String pw, int member_index) throws Exception {
+	public String mypageMemberpwModify(MemberVO memberVO,HttpServletRequest req,RedirectAttributes rttr) throws Exception {
 		
 		String result = "true";
 		
+		// 세션 소환
+		HttpSession session =req.getSession();
+		
+		// 로그인 검증 과정(id, pw 비교해서 맞으면 login에 잘 담아서 오고 틀리면 null로 리턴)
+		MemberVO corretPW = memberService.corretPW(memberVO);
+		
+		if(corretPW !=null) {// 로그인 검증 통과의 경우
+			int modifyPW = memberService.modifyPW(memberVO);
+			result = "true";
+		}else {// 로그인 검증 실패의 경우
+			result = "false";
+		}
+		
 		return result;
+	}
+	
+	// 배송지 변경
+	@RequestMapping(value = "mypageChangeAddress.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String mypageChangeAddress(MemberVO memberVO) throws Exception {
+		
+		int mypageChangeAddress = memberService.mypageChangeAddress(memberVO);
+		
+		return "true";
+	}
+	
+	// 쪽지 선택삭제
+	@RequestMapping(value = "chooseMessageDelete.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String chooseMessageDelete(HttpServletRequest request) throws Exception {
+		
+		String[] valueArr = request.getParameterValues("valueArr");
+		int size = valueArr.length;
+		for(int i = 0; i<size; i++) {
+			messageService.messageChooseDelete(valueArr[i]);
+		}
+		return "redirect:mypage_noteManage.do";
+	}
+	
+	// 쪽지 삭제
+	@RequestMapping(value = "messageDelete.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String messageDelete(int message_index) throws Exception {
+		
+		messageService.messageDelete(message_index);
+		
+		return "redirect:mypage_noteManage.do";
+	}
+	
+	// 쪽지 선택읽음
+	@RequestMapping(value = "chooseMessageRead.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String chooseMessageRead(HttpServletRequest request) throws Exception {
+		
+		String[] valueArr = request.getParameterValues("valueArr");
+		int size = valueArr.length;
+		for(int i = 0; i<size; i++) {
+			messageService.messageChooseRead(valueArr[i]);
+		}
+		return "redirect:mypage_noteManage.do";
+	}
+	
+	// 쪽지 읽음
+	@RequestMapping(value = "messageRead.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String messageRead(int message_index) throws Exception {
+		
+		messageService.messageRead(message_index);
+		
+		return "redirect:mypage_noteManage.do";
 	}
 	
 	@RequestMapping(value = "mypage_main.do", method = RequestMethod.GET)
@@ -286,15 +361,26 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value = "mypage_review.do", method = RequestMethod.GET)
-	public String reviewList(Locale locale, Model model, HttpSession session) throws Exception {
+	public String reviewList(Locale locale, Model model, HttpSession session, SearchVO searchVO, int nowPage) throws Exception {
 		
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		int member_index = member.getMember_index();
 		
-		List<ReviewVO> reviewList = reviewService.reviewList(member_index);
-		int countList = reviewService.countList(member_index);
+		// del_yn = "N"
+		searchVO.setMember_index(member_index);
+		// 현재페이지
+		int realnowPage = 1;
+		if(nowPage != 0) realnowPage = nowPage;
 		
+		List<ReviewVO> reviewList = reviewService.reviewList(searchVO, realnowPage);
 		model.addAttribute("reviewList",reviewList);
+		
+		PagingUtil paging = reviewService.countListPaging(searchVO, realnowPage);
+		
+		model.addAttribute("paging", paging);
+		
+		int countList = reviewService.countList(member_index);
+	
 		model.addAttribute("countList",countList);
 		
 		return "mypage/review";
@@ -306,28 +392,37 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value = "mypage_inquiries.do", method = RequestMethod.GET)
-	public String home10(Locale locale, Model model, HttpSession session) throws Exception {
+	public String inquiries(Locale locale, Model model, HttpSession session, SearchVO searchVO, int nowPage) throws Exception {
 		
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		int member_index = member.getMember_index();
 		
-		List<ServiceCenterVO> serviceCenterList = serviceCenterService.serviceCenterList(member_index);
+		searchVO.setMember_index(member_index);
+		
+		// 현재페이지
+		int realnowPage = 1;
+		if(nowPage != 0) realnowPage = nowPage;
+		
+		List<ServiceCenterVO> serviceCenterList = serviceCenterService.serviceCenterList(searchVO, realnowPage);
+		model.addAttribute("serviceCenterList",serviceCenterList);
+		
+		PagingUtil paging = serviceCenterService.serviceCenterListPaging(searchVO, realnowPage);
+		
+		model.addAttribute("paging", paging);
 		
 		int countServiceCenter = serviceCenterService.countServiceCenter(member_index);
-		
-		model.addAttribute("serviceCenterList",serviceCenterList);
 		model.addAttribute("countServiceCenter",countServiceCenter);
 		
 		return "mypage/inquiries";
 	}
 	
 	@RequestMapping(value = "mypage_changeInfor.do", method = RequestMethod.GET)
-	public String home11(Locale locale, Model model) {	
+	public String changeInfor(Locale locale, Model model) {	
 		return "mypage/changeInfor";
 	}
 	
 	@RequestMapping(value = "mypage_changeInforOk.do", method = RequestMethod.GET)
-	public String home12(Locale locale, Model model, HttpSession session) throws Exception {
+	public String changeInforOk(Locale locale, Model model, HttpSession session) throws Exception {
 		
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		int member_index = member.getMember_index();
@@ -337,16 +432,56 @@ public class MypageController {
 		
 		return "mypage/changeInforOk";
 	}
+	
 	@RequestMapping(value = "mypage_addressManage.do", method = RequestMethod.GET)
-	public String home13(Locale locale, Model model) {
+	public String addressManage(Locale locale, Model model, HttpSession session) throws Exception {
+		
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		int member_index = member.getMember_index();
+		MemberVO memberInfor = memberService.memberInfor(member_index);
+		
+		model.addAttribute("memberInfor",memberInfor);
+		
 		return "mypage/addressManage";
 	}
+	
 	@RequestMapping(value = "mypage_noteManage.do", method = RequestMethod.GET)
-	public String home14(Locale locale, Model model) {
+	public String noteManage(Locale locale, Model model, HttpSession session, SearchVO searchVO, int nowPage) throws Exception {
+		
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		int member_index = member.getMember_index();
+		
+		// del_yn = "N"
+		searchVO.setDel_yn("N");
+		searchVO.setMember_index(member_index);
+		// 현재페이지
+		int realnowPage = 1;
+		if(nowPage != 0) realnowPage = nowPage;
+		
+		List<MessageVO> messageList = messageService.messageList(searchVO, realnowPage);
+		model.addAttribute("messageList",messageList);
+		
+		PagingUtil paging = messageService.messageListPaging(searchVO, realnowPage);
+		if(searchVO.getSearchValue() != null) {
+			paging.setSearchValue(searchVO.getSearchValue());
+			paging.setSearchType(searchVO.getSearchType());
+		}
+		model.addAttribute("paging", paging);
+		
 		return "mypage/noteManage";
 	}
+	
 	@RequestMapping(value = "mypage_noteManageView.do", method = RequestMethod.GET)
-	public String home15(Locale locale, Model model) {
+	public String messageListDetail(Locale locale, Model model, SearchVO searchvo, int nowPage, int message_index) throws Exception {
+		
+		MessageVO messageListDetail = messageService.messageListDetail(message_index);
+		
+		model.addAttribute("searchType", searchvo.getSearchType());
+		model.addAttribute("searchValue", searchvo.getSearchValue());
+		model.addAttribute("nowPage", nowPage);
+		
+		model.addAttribute("messageListDetail",messageListDetail);
+		
 		return "mypage/noteManageView";
 	}
 	@RequestMapping(value = "mypage_memberSecession.do", method = RequestMethod.GET)

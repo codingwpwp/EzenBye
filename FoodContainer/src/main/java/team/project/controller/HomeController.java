@@ -33,20 +33,8 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String list(Locale locale, Model model, MemberVO vo) throws Exception {
-		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate);
-		
-		//List<MemberVO> list = memberService.list(vo);
-		
-		//model.addAttribute("list",list);
-		
-		return "home";
+		return "redirect:index.do";
 	}
 	
 }

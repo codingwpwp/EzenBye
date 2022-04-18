@@ -14,6 +14,9 @@ $(document).ready(function(){
 	$(".pwChe4").hide();
 	$(".pwChe5").hide();
 	$(".pwChe6").hide();
+	$(".addrCheck1").hide();
+	$(".addrCheck2").hide();
+	$(".addrCheck3").hide();
 	
     var size_sw = 0;
     var left_full_menu = $("#asdieMenu");
@@ -204,15 +207,139 @@ function sample6_execDaumPostcode() {
         }).open();
     }
 
-// 쪽지관리 전체선택
-function selectAll(obj)  {
-	  const checkboxes 
-	       = document.getElementsByName('note');
-	  
-	  checkboxes.forEach((checkbox) => {
-	    checkbox.checked = obj.checked;
-	  })
-}
+// 쪽지관리 삭제 함수
+	$(function(){
+		var note = document.getElementsByName("note");
+		var rowCnt = note.length;
+		
+		$("input[name='noteAll']").click(function(){
+			var noteArray = $("input[name=note]");
+			for(var i=0; i<noteArray.length; i++){
+				noteArray[i].checked = this.checked;
+			}
+		});
+		
+		$("input[name='note']").click(function(){
+			if($("input[name='note']:checked").length == rowCnt){
+				$("input[name='noteAll']")[0].checked = true;
+			}else{
+				$("input[name='noteAll']")[0].checked = false;
+			}
+		});
+	});
+	
+	function chooseDelete(obj){
+		var valueArr = new Array();
+		var list = $("input[name='note']");
+		var searchType = $(obj).parent().find("input[name='searchType']").val();
+		var searchValue = $(obj).parent().find("input[name='searchValue']").val();
+		var nowPage = $(obj).parent().find("input[name='nowPage']").val();
+		for(var i = 0; i<list.length; i++){
+			if(list[i].checked){
+				valueArr.push(list[i].value);
+			}
+		}
+		if(valueArr.length == 0){
+			alert('선택된 쪽지가 없습니다.');
+		}else{
+			var YN = confirm('정말 삭제하시겠습니까?');
+			if(YN){
+				$.ajax({
+					type : 'POST',
+					url : 'chooseMessageDelete.do',
+					traditional : true,
+					data : {
+						valueArr : valueArr
+					},
+					success : function(jdata){
+						if(jdata = 1){
+							alert('삭제되었습니다.');
+							window.location.href="mypage_noteManage.do?searchType="+searchType+"&searchValue="+searchValue+"&nowPage="+nowPage;
+						}else{
+							alert('삭제실패');
+						}
+					}
+				});
+			}
+		}
+	}
+	
+	function messageDelete(obj){
+		var message_index = $(obj).parent().find("input[name='message_index']").val();
+		var searchType = $(obj).parent().find("input[name='searchType']").val();
+		var searchValue = $(obj).parent().find("input[name='searchValue']").val();
+		var nowPage = $(obj).parent().find("input[name='nowPage']").val();
+		var YN = confirm('정말 삭제하시겠습니까?');
+			if(YN){
+				$.ajax({
+					type : 'POST',
+					url : 'messageDelete.do',
+					data : "message_index="+message_index,
+					success : function(data){
+						if(data = 1){
+							alert('삭제되었습니다.');
+							window.location.href="mypage_noteManage.do?searchType="+searchType+"&searchValue="+searchValue+"&nowPage="+nowPage;
+						}else{
+							alert('삭제실패');
+						}
+					}
+				});
+			}
+	}
+	
+	// 쪽지 읽음
+	function chooseRead(){
+		var valueArr = new Array();
+		var list = $("input[name='note']");
+		for(var i = 0; i<list.length; i++){
+			if(list[i].checked){
+				valueArr.push(list[i].value);
+			}
+		}
+		if(valueArr.length == 0){
+			alert('선택된 쪽지가 없습니다.');
+		}else{
+			var YN = confirm('정말 읽음처리 하시겠습니까?');
+			if(YN){
+				$.ajax({
+					type : 'POST',
+					url : 'chooseMessageRead.do',
+					traditional : true,
+					data : {
+						valueArr : valueArr
+					},
+					success : function(jdata){
+						if(jdata = 1){
+							alert('읽음처리 되었습니다.');
+							window.location.reload();
+						}else{
+							alert('읽음처리 실패');
+						}
+					}
+				});
+			}
+		}
+	}
+	
+	function messageRead(obj){
+		var message_index = $(obj).parent().find("input[name='message_index']").val();
+		var YN = confirm('정말 읽음처리 하시겠습니까?');
+			if(YN){
+				$.ajax({
+					type : 'POST',
+					url : 'messageRead.do',
+					data : "message_index="+message_index,
+					success : function(data){
+						if(data = 1){
+							alert('읽음처리 되었습니다.');
+							window.location.reload();
+						}else{
+							alert('읽음처리 실패');
+						}
+					}
+				});
+			}
+	}
 
 //세션이 만료됬을때 메인으로 나가짐
 	setInterval(function sessionCheck(){
@@ -542,17 +669,24 @@ function mypageMemberpwModify(obj){
 		$(".pwChe6").hide();
 	}
 	
-	if(flag == true){
-		
-		var YN = confirm('정말 수정하시겠습니까?');
+	var YN = confirm('정말 수정하시겠습니까?');
 		if(YN){
-			
+			if(flag == true){
+				
 			$.ajax({
 				url:"mypageMemberpwModify.do",
 				type:"post",
-				data:"name="+pw1+"&pw="+pw+"&member_index="+member_index,
+				data:"pw1="+pw1+"&pw="+pw+"&member_index="+member_index,
 				success:function(data){
-					
+					if(data == "true"){
+						alert('수정이 완료되었습니다.');
+						window.location.href='mypage_changeInforOk.do';
+					}else {
+						alert('현재 비밀번호가 일치하지 않습니다.');
+						$(".pwChe1").hide();
+						$(".pwChe2").show();
+						$(obj).parent().parent().find("input[name='pw1']").focus();
+					}
 				}	
 				
 			});
@@ -561,6 +695,62 @@ function mypageMemberpwModify(obj){
 	
 }
 
+//기본배송지 변경 or 등록
+function changeAddress(obj){
+	
+	var flag = true;
+	
+	var address1 = $(obj).parent().parent().find("input[name='address1']").val();
+	var address2 = $(obj).parent().parent().find("input[name='address2']").val();
+	var address3 = $(obj).parent().parent().find("input[name='address3']").val();
+	
+	var address = $(obj).parent().find("input[name='address']").val();
+	var member_index = $(obj).parent().find("input[name='member_index']").val();
+	
+	if(address1 == ""){
+		$(".addrCheck1").show();
+		$(obj).parent().parent().find("input[name='address1']").focus();
+		flag = false;
+	}else{
+		$(".addrCheck1").hide();
+	}
+	
+	if(address2 == ""){
+		$(".addrCheck2").show();
+		$(obj).parent().parent().find("input[name='address2']").focus();
+		flag = false;
+	}else{
+		$(".addrCheck2").hide();
+	}
+	
+	if(address3 == ""){
+		$(".addrCheck3").show();
+		$(obj).parent().parent().find("input[name='address3']").focus();
+		flag = false;
+	}else{
+		$(".addrCheck3").hide();
+	}
+	
+	address = $("input[name='address1']").val() + "|" + $("input[name='address2']").val() + "|" + $("input[name='address3']").val();
+	$("input[name='address']").val(address);
+	
+	var YN = confirm('정말 등록/변경 하시겠습니까?');
+		if(YN){
+			if(flag == true){
+				
+			$.ajax({
+				url:"mypageChangeAddress.do",
+				type:"post",
+				data:"address="+address+"&member_index="+member_index,
+				success:function(){
+					alert('배송지 등록/변경 완료하였습니다.');
+					window.location.href='mypage_addressManage.do';
+				}	
+				
+			});
+		}
+	}
+}
 
 	
 

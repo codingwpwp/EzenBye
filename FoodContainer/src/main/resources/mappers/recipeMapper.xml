@@ -6,13 +6,47 @@
 <mapper namespace="team.project.mapper.recipeMapper" >
 
 <!-- 레시피 목록 리스트 -->
-<select id="recipeList" resultType="RecipeVO">
-	SELECT * FROM recipe where del_yn = 'N'		
+ <select id="recipeList" resultType="RecipeVO" parameterType="PagingUtil">
+	SELECT * FROM recipe where del_yn = 'N' 
+	<if test="searchType != null and searchType.equals('title')">
+    		AND title LIKE CONCAT('%',#{searchValue},'%')
+        </if>
+     ORDER BY recipe_index DESC LIMIT #{start},6
+	
+</select> 
+
+<!-- 레시피 게시글 갯수 -->
+<select id="countRecipe" resultType="int" parameterType="SearchVO">
+SELECT count(recipe_index) from recipe WHERE del_yn = 'N'
+<if test="searchType != null and searchType.equals('title')">
+    		AND title LIKE CONCAT('%',#{searchValue},'%')
+        </if>
+
 </select>
 
 <!-- 레시피 상세 -->
 <select id="recipeRead" parameterType="int" resultType="RecipeVO">
-SELECT * FROM recipe where recipe_index =#{recipe_index}
+select *
+     , (select product_name 
+          from product 
+		 where product_index=recipe.product_index1) as product_name1
+	, (select concat(concat(concat(concat(brand,'/'),middleSort),'/'),thumbnail_image) 
+          from product 
+		 where product_index=recipe.product_index1) as product_img1
+         
+     , (select product_name 
+          from product 
+		 where product_index=recipe.product_index2) as product_name2 
+    , (select concat(concat(concat(concat(brand,'/'),middleSort),'/'),thumbnail_image) 
+          from product 
+		 where product_index=recipe.product_index2) as product_img2     
+	 , (select product_name 
+          from product 
+		 where product_index=recipe.product_index3) as product_name3
+    , (select concat(concat(concat(concat(brand,'/'),middleSort),'/'),thumbnail_image) 
+          from product 
+		 where product_index=recipe.product_index3) as product_img3 
+	from recipe where recipe_index =#{recipe_index}
 
 </select>
 
@@ -21,9 +55,58 @@ SELECT * FROM recipe where recipe_index =#{recipe_index}
 UPDATE recipe set hit =hit+1 where recipe_index=#{recipe_index}
 </update>
 
-<!-- 레시피 게시글 갯수 -->
-<select id="countRecipe" resultType="int">
-SELECT count(recipe_index) from recipe
+
+
+
+
+<!--레시피 게시글 작성 상품 찾기  -->
+<!-- <select id="viewProduct" resultType="RecipeVO">
+select title
+     , (select product_name 
+          from product 
+		 where product_index=recipe.product_index1) as product_name1
+	, (select thumbnail_image 
+          from product 
+		 where product_index=recipe.product_index1) as product_img1
+         
+     , (select product_name 
+          from product 
+		 where product_index=recipe.product_index2) as product_name2 
+    , (select thumbnail_image 
+          from product 
+		 where product_index=recipe.product_index2) as product_img2     
+	 , (select product_name 
+          from product 
+		 where product_index=recipe.product_index3) as product_name3
+     , (select thumbnail_image 
+          from product 
+		 where product_index=recipe.product_index3) as product_img3    
+ from recipe
+</select> -->
+
+
+
+<!-- 레시피 게시글 추천 -->
+<update id="updateThumb">
+UPDATE recipe set 
+thumb = thumb+1
+where recipe_index=#{recipe_index}
+
+</update>
+
+ <!-- 레시피 게시글 추천 중복 방지 -->
+<insert id="insertThumb" >
+INSERT INTO thumb(
+recipe_index,
+member_index
+)VALUES(
+#{recipe_index},
+#{member_index}
+)
+
+</insert>
+<select id="getThumb" parameterType="int">
+ SELECT COUNT(thumb) FROM thumb WHERE recipe_index = #{recipe_index} AND member_index = #{member_index}
 </select>
 
 
@@ -35,18 +118,25 @@ SELECT count(recipe_index) from recipe
  title,
  thumbnail_image,
  contents,
- product_index1,
- product_index2,
- product_index3
-
+ <if test="product_index2 !=''">
+  product_index2,
+ </if>
+<if test="product_index3 !=''">
+  product_index3,
+ </if>
+ product_index1
  )VALUES(
  #{member_index},
  #{title},
  #{thumbnail_image},
  #{contents},
- #{product_index1},
+ <if test="product_index2 !=''">
  #{product_index2},
- #{product_index3}
+ </if>
+  <if test="product_index3 !=''">
+ #{product_index3},
+ </if>
+ #{product_index1}
  )
  
  </insert>

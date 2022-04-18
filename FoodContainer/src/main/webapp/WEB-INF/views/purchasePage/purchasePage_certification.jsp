@@ -17,7 +17,11 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/sign.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/purchasePage.css">
 </head>
-<body>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+	<script type="text/javascript">
+		 window.history.forward();
+		 function noBack(){window.history.forward();}
+	</script>
 	<!-- 헤더 -->
 	<header class="border-bottom border-dark">
 		<%@include file="/WEB-INF/views/base/header.jsp"%>
@@ -121,13 +125,11 @@
     <footer class="py-3 my-4">
         <%@include file="/WEB-INF/views/base/footer.jsp"%>
     </footer>
-
     <!-- 자바스크립트 -->
     <script src="https://kit.fontawesome.com/b30bc4e0a9.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
-    <script src="<%=request.getContextPath()%>/resources/js/purchasePage.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/purchasePage_certification.js"></script>
 </body>
 </html>

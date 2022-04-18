@@ -64,6 +64,7 @@
                             <div class="my-2 fw-bold">주문 번호 : ${noMemberOrdersvo.no_member_order_index}</div>
                             <div class="my-2 fw-bold">주문 비밀번호 : ${noMemberOrdersvo.pw}</div>
                             <div class="my-2 fw-bold">최종 결제 가격 : <fmt:formatNumber value='${noMemberOrdersvo.pay_price}' pattern="#,###"/></div>
+                            주문 비밀번호는 꼭 기억하세요!
                         </div>
                         <br>
                         <div>

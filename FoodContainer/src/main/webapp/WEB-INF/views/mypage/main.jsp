@@ -119,15 +119,21 @@
 						        			<span class="fw-bold">상품 주문번호 : ${opList.orderItem_index }</span>
 						        		</div>
 						        	</div>
+						        	
+						        	<c:if test="${opList.del_YN eq 'N'}">
 						        	<a href="productView.do?product_index=${opList.product_index }" class="productHref">
+						        	</c:if>
+						        	<c:if test="${opList.del_YN eq 'Y'}">
+						        	<a href="javascript:alert('삭제된 상품입니다.');" class="productHref">
+						        	</c:if>
 						        	<div class="row">
 						        		<div class="col-sm-3">
 						        			<img src="<%=request.getContextPath() %>/resources/img/${opList.brand}/${opList.middleSort}/${opList.thumbnail_image}" class="img-thumbnail" alt="상품사진">
 						        		</div>
 						        		<div class="col-sm-8 d-flex align-items-start flex-column mb-3">
-									    	<div class="mb-auto p-2">${opList.product_name}</div>
+									    	<div class="mb-auto p-2">${opList.brand} ${opList.product_name}</div>
 									    	
-			  								<div class="p-2"><fmt:formatNumber value="${opList.price / opList.order_quantity }" pattern="#,###" />원 | ${opList.order_quantity }개</div>
+			  								<div class="p-2"><fmt:formatNumber value="${opList.price}" pattern="#,###" />원 | ${opList.order_quantity }개</div>
 			  								
 						        		</div>
 						        	</div>

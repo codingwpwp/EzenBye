@@ -17,12 +17,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import team.project.service.BannerService;
 import team.project.service.MemberService;
+import team.project.service.NoMemberOrdersService;
 import team.project.service.OrderProductService;
 import team.project.service.OrdersService;
 import team.project.service.ProductService;
 import team.project.util.PagingUtil;
 import team.project.vo.BannerVO;
 import team.project.vo.MemberVO;
+import team.project.vo.NoMemberOrdersVO;
 import team.project.vo.OrderProductVO;
 import team.project.vo.OrdersVO;
 import team.project.vo.ProductVO;
@@ -41,6 +43,8 @@ public class AdminPageController {
 	private OrdersService ordersService;
 	@Autowired
 	private OrderProductService orderProductService;
+	@Autowired
+	private NoMemberOrdersService noMemberOrdersService;
 
 	@RequestMapping(value = "admin.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -143,7 +147,7 @@ public class AdminPageController {
 
 	// 회원 주문 조회페이지로 이동
 	@RequestMapping(value = "member_order_list.do", method = RequestMethod.GET)
-	public String memberOrderList(Locale locale, Model model, HttpServletRequest request, SearchVO searchvo, int nowPage) throws Exception {
+	public String memberOrderList(Model model, HttpServletRequest request, SearchVO searchvo, int nowPage) throws Exception {
 		
 		// 현재페이지
 		int realnowPage = 1;
@@ -187,13 +191,49 @@ public class AdminPageController {
 		return "adminPage/adminPage_member_order_detail";
 	}
 
+	// 비회원 주문 조회페이지로 이동
 	@RequestMapping(value = "noMember_order_list.do", method = RequestMethod.GET)
-	public String notMember_order_list(Locale locale, Model model) {
+	public String noMemberOrderList(Model model, HttpServletRequest request, SearchVO searchvo, int nowPage) throws Exception{
+		// 현재페이지
+		int realnowPage = 1;
+		if(nowPage != 0) realnowPage = nowPage;
+		
+		// 리스트 출력
+		List<NoMemberOrdersVO> noMemberOrdersList = noMemberOrdersService.adminNoMemberOrdersList(searchvo, realnowPage);
+		model.addAttribute("noMemberOrdersList", noMemberOrdersList);
+ 
+		// 검색값 + 페이징 출력
+		PagingUtil paging = noMemberOrdersService.adminNoMemberOrdersPaging(searchvo, realnowPage);
+		if(searchvo.getSearchValue() != null) {
+			paging.setSearchValue(searchvo.getSearchValue());
+			paging.setSearchType(searchvo.getSearchType());
+		}
+		model.addAttribute("paging", paging);	
+		
 		return "adminPage/adminPage_noMember_order_list";
 	}
 
+	// 비회원 주문 상세조회페이지로 이동
 	@RequestMapping(value = "noMember_order_detail.do", method = RequestMethod.GET)
-	public String notMember_order_detail(Locale locale, Model model) {
+	public String noMemberOrderOne(Model model,
+			@RequestParam(value="no_member_order_index") String no_member_order_index,
+			@RequestParam(value="searchType", required = false) String searchType,
+			@RequestParam(value="searchValue", required = false) String searchValue,
+			@RequestParam(value="nowPage", required = false) int nowPage) throws Exception{
+		
+		// 비회원 주문 상세 리스트 출력
+		List<OrderProductVO> adminNoMemberOrderProductList = orderProductService.adminNoMemberOrderProductList(no_member_order_index);
+		model.addAttribute("nopList", adminNoMemberOrderProductList);
+		
+		// 비회원 주문 대략적인 정보
+		NoMemberOrdersVO order = noMemberOrdersService.noMemberOrdersList(no_member_order_index);
+		model.addAttribute("order", order);
+		
+		// 검색값&페이지
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("searchValue", searchValue);
+		model.addAttribute("nowPage", nowPage);
+		
 		return "adminPage/adminPage_noMember_order_detail";
 	}
 
@@ -376,11 +416,6 @@ public class AdminPageController {
 	@RequestMapping(value = "bestRecipe.do", method = RequestMethod.GET)
 	public String bestRecipe(Locale locale, Model model) {
 		return "adminPage/adminPage_bestRecipe";
-	}
-
-	@RequestMapping(value = "event.do", method = RequestMethod.GET)
-	public String event(Locale locale, Model model) {
-		return "adminPage/adminPage_event";
 	}
 	
 }

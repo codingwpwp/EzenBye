@@ -83,7 +83,9 @@
 										</span>원<br>
 									   	<c:if test="${ProductVO.sale_price != -1}">
 									   	<span class="discount">
-									   		<fmt:formatNumber value="${ProductVO.sale_price}" pattern="#,###"/>원<br>
+									   		<fmt:formatNumber value="${ProductVO.sale_price}" pattern="#,###"/>원
+									   		<c:set var="sale" value="${((ProductVO.origin_price - ProductVO.sale_price)/ProductVO.origin_price)*100}" />
+				          					(<fmt:formatNumber value="${sale}" pattern="##.#"/>%)<br>
 									   	</span>
 									   	</c:if>
 									   	<span class="productListStar">
@@ -147,7 +149,7 @@
 						<a href="productView.do?product_index=${ProductVO.product_index}" onclick="productCookie(this)">
 							<div class="productListMImg">
 								<div style="width:100px; height:100px;">
-									<img src="<%=request.getContextPath()%>/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="img-fluid" alt="${ProductVO.product_name}">
+									<img src="<%=request.getContextPath()%>/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="img-fluid" style="width:100px; height:100px;" alt="${ProductVO.product_name}">
 									<c:if test="${ProductVO.inventory == 0 }">
 									  	<img src="<%=request.getContextPath()%>/resources/img/매진.png" class="card-img-top pListSold">
 									  	<div class="pListSoldout"></div>
@@ -176,6 +178,8 @@
 								<c:if test="${ProductVO.sale_price != -1}">
 								<div class="discountM">
 									[할인가]<fmt:formatNumber value="${ProductVO.sale_price}" pattern="#,###"/>원
+									<c:set var="sale" value="${((ProductVO.origin_price - ProductVO.sale_price)/ProductVO.origin_price)*100}" />
+				          			(<fmt:formatNumber value="${sale}" pattern="##.#"/>%)
 								</div>
 								</c:if>
 								<c:set var="delivery" value="${ProductVO.delivery_free_YN}" />

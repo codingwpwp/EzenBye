@@ -2,6 +2,8 @@ package team.project.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import team.project.util.PagingUtil;
 import team.project.vo.MemberVO;
 import team.project.vo.SearchVO;
@@ -29,6 +31,12 @@ public interface MemberService {
 	
 	int mypageMemberModify(MemberVO memberVO) throws Exception;
 	
+	MemberVO corretPW(MemberVO memberVO) throws Exception;
+	
+	int modifyPW(MemberVO memberVO) throws Exception;
+	
+	int mypageChangeAddress(MemberVO memberVO) throws Exception;
+	
 	/* 여기서 부터는 관리자페이지 */
 	
 	// 회원 조회
@@ -37,4 +45,11 @@ public interface MemberService {
 	
 	// 회원 추방
 	int adminChangeMemberDel_yn(int member_index) throws Exception;
+	
+	/* 여기서 부터는 이벤트페이지 */
+	// 이벤트 페이지
+	String eventTicket(int member_index) throws Exception;
+	
+	// 이벤트 결과에 따라 지금
+	void eventResult(HttpServletRequest request, String result) throws Exception;
 }

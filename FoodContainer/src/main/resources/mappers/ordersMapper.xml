@@ -28,10 +28,54 @@
 		WHERE member_order_index=#{member_order_index}
     </select>
     
-    
-	<!-- 여기는 상품 구매 페이지-->
-	
-
+	<!-- 여기는 구매 페이지-->
+	<!-- 회원 결제하고 난뒤 DB에 올리는 쿼리 -->
+	<insert id="memberOrderInsert" parameterType="OrdersVO">
+		INSERT INTO orders(
+			member_order_index, member_index,
+			address, reciever, phone, delivery_free_YN,
+			<if test="request != ''">
+ 		 		request,
+ 			</if>
+			<if test="coupon_index != 0">
+ 		 		coupon_index,
+ 			</if>
+ 			used_point, pay_price
+		)VALUES(
+			#{member_order_index}, #{member_index},
+			#{address}, #{reciever}, #{phone}, #{delivery_free_YN},
+ 			<if test="request != ''">
+ 		 		#{request},
+ 			</if>
+			<if test="coupon_index != 0">
+ 		 		#{coupon_index},
+ 			</if>
+ 			#{used_point}, #{pay_price} 
+		)
+	</insert>
+	<!-- 회원 결제하고 난뒤 포인트&이벤트 티켓 -->
+    <update id="memberStatusUpdate" parameterType="MemberVO">
+    	UPDATE member SET
+    	point = point - #{point}, event_ticket = event_ticket + 1
+    	WHERE member_index = #{member_index}
+    </update>
+    <!-- 회원 결제하고 난뒤 쿠폰사용 -->
+    <update id="couponUpdate" parameterType="int">
+    	UPDATE coupon SET
+    	used_yn = 'Y'
+    	WHERE coupon_index = #{coupon_index}
+    </update>
+    <!-- 회원 결제하고 난뒤 배송지 업데이트 -->
+    <update id="addressUpdate" parameterType="MemberVO">
+    	UPDATE member SET
+    	address = #{address}
+    	WHERE member_index = #{member_index}
+    </update>
+    <!-- 회원 결제하고 난뒤 장바구니 비우기 -->
+    <delete id="cartUpdate" parameterType="CartVO">
+    	DELETE FROM cart
+    	WHERE product_index = #{product_index} AND member_index = #{member_index}
+    </delete>
     
     <!-- 여기서 부터는 관리자페이지 -->
     

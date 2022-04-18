@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -60,154 +62,88 @@
 			        <hr />
 			        
 			        <div class="row">
-			        	<div class="col-sm-4 col-6">
-			        		<span class="good-date">2022.3.15</span>
+			        	<div class="col-sm-12 col-md-12 col-lg-5">
+			        		<span class="good-date">${noMemberOrdersList.order_date}</span>
 			        	</div>
-			        	<div class="col-sm-5 col-6">
-			        		<span class="good-date">주문번호 : ADDF1325</span>
+			        	<div class="col-sm-12 col-md-12 col-lg-5">
+			        		<span class="good-date">주문번호 : ${noMemberOrdersList.no_member_order_index}</span>
 			        	</div>
-			        	<div class="col-sm-3 col-12 findT">
+			        	<div class="col-sm-12 col-lg-2 findT">
 			        		<a href="#" class="link-info fw-bold"><span>배송조회</span></a>
 			        	</div>
 			        </div>
 			        
+			        <c:set var="totalPrice" value="0" />
+			        <c:forEach items="${opList}" var="opList">
+			        <c:if test="${noMemberOrdersList.no_member_order_index eq opList.no_member_order_index}"> 
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
 			        	<div class="row">
 			        		<div class="col-sm-4">
-			        			<span class="fw-bold">배송준비중</span>
+			        			<span class="fw-bold">${opList.order_status }</span>
 			        		</div>
 			        		<div class="col-sm-8 number-good">
-			        			<span class="fw-bold">상품 주문번호 : DFSD5649</span>
+			        			<span class="fw-bold">상품 주문번호 : ${opList.orderItem_index }</span>
 			        		</div>
 			        	</div>
+			        	
+			        	<c:if test="${opList.del_YN eq 'N'}">
+			        	<a href="productView.do?product_index=${opList.product_index }" class="productHref">
+			        	</c:if>
+			        	<c:if test="${opList.del_YN eq 'Y'}">
+			        	<a href="javascript:alert('삭제된 상품입니다.');" class="productHref">
+			        	</c:if>
 			        	<div class="row">
 			        		<div class="col-sm-3">
-			        			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
+			        			<img src="<%=request.getContextPath() %>/resources/img/${opList.brand}/${opList.middleSort}/${opList.thumbnail_image}" class="img-thumbnail" alt="...">
 			        		</div>
 			        		<div class="col-sm-8 d-flex align-items-start flex-column mb-3">
-						    	<div class="mb-auto p-2">비비고 진한고기만두400g*2번들</div>
-  								<div class="p-2">4580원 | 5개</div>
-			        		</div>
-			        	</div>
-			        </div>
-			        
-			        <div class="row">
-			        	<div class="col-sm-3">
+						    	<div class="mb-auto p-2">${opList.brand} ${opList.product_name}</div>
+  								
+  								<div class="p-2"><fmt:formatNumber value="${opList.price}" pattern="#,###" />원 | ${opList.order_quantity }개</div>
+  								<c:set var="totalPrice" value="${totalPrice + (opList.price * opList.order_quantity)}" />
 			        		
+			        		</div>
 			        	</div>
-			        	<div class="col-sm-6">
-			        		
-			        	</div>
-			        	<div class="col-sm-3 findT">
-			        		<a href="#" class="link-info fw-bold"><span>배송조회</span></a>
-			        	</div>
+			        	</a>
+			        	
 			        </div>
+			        </c:if>
+			        </c:forEach>
 			        
-			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
-			        	<div class="row">
-			        		<div class="col-sm-4">
-			        			<span class="fw-bold">배송준비중</span>
-			        		</div>
-			        		<div class="col-sm-8 number-good">
-			        			<span class="fw-bold">상품 주문번호 : DFSD5649</span>
-			        		</div>
-			        	</div>
-			        	<div class="row">
-			        		<div class="col-sm-3">
-			        			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
-			        		</div>
-			        		<div class="col-sm-8 d-flex align-items-start flex-column mb-3">
-						    	<div class="mb-auto p-2">비비고 진한고기만두400g*2번들</div>
-  								<div class="p-2">4580원 | 5개</div>
-			        		</div>
-			        	</div>
-			        </div>
-			        
-			        <div class="row">
-			        	<div class="col-sm-3">
-			        		
-			        	</div>
-			        	<div class="col-sm-6">
-			        		
-			        	</div>
-			        	<div class="col-sm-3 findT">
-			        		<a href="#" class="link-info fw-bold"><span>배송조회</span></a>
-			        	</div>
-			        </div>
-			        
-			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
-			        	<div class="row">
-			        		<div class="col-sm-4">
-			        			<span class="fw-bold">배송준비중</span>
-			        		</div>
-			        		<div class="col-sm-8 number-good">
-			        			<span class="fw-bold">상품 주문번호 : DFSD5649</span>
-			        		</div>
-			        	</div>
-			        	<div class="row">
-			        		<div class="col-sm-3">
-			        			<img src="<%=request.getContextPath() %>/resources/img/mypage/good.jpg" class="img-thumbnail" alt="...">
-			        		</div>
-			        		<div class="col-sm-8 d-flex align-items-start flex-column mb-3">
-						    	<div class="mb-auto p-2">비비고 진한고기만두400g*2번들</div>
-  								<div class="p-2">4580원 | 5개</div>
-			        		</div>
-			        	</div>
-			        </div>
-			        
-			        <div class="d-grid gap-2 col-5 mx-auto">
-					  <button class="btn btn-secondary cancle-btn" type="button" data-bs-toggle="modal" data-bs-target="#cancle-good">취소신청</button>
-					</div>
-					<form action="#">
-							<div class="modal fade" id="cancle-good" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-							  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-							    <div class="modal-content">
-							      <div class="modal-header">
-							        <h5 class="modal-title" id="staticBackdropLabel">주문 취소</h5>
-							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-							      </div>
-							      <div class="modal-body">
-						        	<p class="fs-6 lookup-fs-6">주문날짜 : </p>
-						        	<p class="fs-6 lookup-fs-6">주문번호 : </p>
-						        	<p class="fs-6 lookup-fs-6">주문한 상품 : </p>
-						        	<p class="fs-6 lookup-fs-6">취소 사유를 입력해 주세요.</p>
-						        	
-									<textarea class="cancleTextarea" name="content" id="" cols="50" rows="10" placeholder="내용을 입력해주세요."></textarea>
-									
-							      </div>
-							      <div class="modal-footer">
-							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-							        <button type="submit" class="btn btn-primary">상품취소</button>
-							      </div>
-							    </div>
-							  </div>
-							</div>
-					</form>
-					
 					<p class="fs-6 lookup-fs-6">결제정보</p>
 			        <hr />
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
-			        	<div><span class="fw-bold">상품가격 :</span> </div>
-			        	<div class="lookupView-infmoney"><span class="fw-bold">배송비 :</span> </div>
-			        	<div class="lookupView-infmoney"><span class="fw-bold">할인가격 :</span> </div>
-			        	<div class="lookupView-infmoney"><span class="fw-bold">총 결제금액 :</span> </div>
+			        	<div><span class="fw-bold">상품가격 :</span> 
+			        		<fmt:formatNumber value="${totalPrice}" pattern="#,###" />원
+			        	</div>
+			        	
+			        	<div class="lookupView-infmoney"><span class="fw-bold">배송비 :</span> 
+			        		<c:if test="${noMemberOrdersList.delivery_free_YN eq 'Y' }">
+			        			없음
+			        		</c:if>
+			        		<c:if test="${noMemberOrdersList.delivery_free_YN eq 'N' }">
+			        			<fmt:formatNumber value="3000" pattern="#,###" />원
+			        		</c:if>
+			        	</div>
+			        	
+			        	<div class="lookupView-infmoney"><span class="fw-bold">총 결제금액 :</span> <fmt:formatNumber value="${noMemberOrdersList.pay_price }" pattern="#,###" />원 </div>
 			        </div>
 			        
 			        <p class="fs-6 lookup-fs-6">주문자정보</p>
 			        <hr />
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
-			        	<div><span class="fw-bold">주문자명 :</span> </div>
-			        	<div class="lookupView-infmoney"><span class="fw-bold">연락처 :</span> </div>
-			        	<div class="lookupView-infmoney"><span class="fw-bold">이메일 :</span> </div>
+			        	<div><span class="fw-bold">주문자명 :</span> ${noMemberOrdersList.name} </div>
+			        	<div class="lookupView-infmoney"><span class="fw-bold">연락처 :</span> ${noMemberOrdersList.phone} </div>
+			        	<div class="lookupView-infmoney"><span class="fw-bold">이메일 :</span> ${noMemberOrdersList.email}</div>
 			        </div>
 			        
 			        <p class="fs-6 lookup-fs-6">배송지정보</p>
 			        <hr />
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
-			        	<div><span class="fw-bold">받는분 :</span> </div>
-			        	<div class="lookupView-infmoney"><span class="fw-bold">주소 :</span> </div>
-			        	<div class="lookupView-infmoney"><span class="fw-bold">연락처 :</span> 010 - 1234 - 5678 </div>
-			        	<div class="lookupView-infmoney"><span class="fw-bold">요청사항 :</span> </div>
+			        	<div><span class="fw-bold">받는분 :</span> ${noMemberOrdersList.reciever} </div>
+			        	<div class="lookupView-infmoney"><span class="fw-bold">주소 :</span> ${noMemberOrdersList.address} </div>
+			        	<div class="lookupView-infmoney"><span class="fw-bold">연락처 :</span> ${noMemberOrdersList.reciever_phone} </div>
+			        	<div class="lookupView-infmoney"><span class="fw-bold">요청사항 :</span> ${noMemberOrdersList.request} </div>
 			        </div>
 			        
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good2">

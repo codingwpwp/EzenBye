@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import team.project.util.PagingUtil;
+import team.project.vo.CartVO;
+import team.project.vo.OrderProductVO;
+import team.project.vo.ProductFilterVO;
 import team.project.vo.ProductVO;
 import team.project.vo.SearchVO;
 
@@ -21,6 +24,9 @@ public class ProductDAO {
 	//상품조회
 	public List<ProductVO> productListAll(ProductVO productVO) throws Exception{
 		return sqlSession.selectList(Namespace+".ProductListAll",productVO);
+	}
+	public List<ProductVO> productListAll2(ProductFilterVO productFilterVO) throws Exception{
+		return sqlSession.selectList(Namespace+".ProductListAll",productFilterVO);
 	}
 	//상세보기
 	public ProductVO view(String index) {
@@ -40,8 +46,37 @@ public class ProductDAO {
 	public List<ProductVO> popularList(ProductVO productVO) throws Exception{
 		return sqlSession.selectList(Namespace+".popularList",productVO);
 	}
+
 	
-	/*여기서 부터는 관리자페이지*/
+	/* **********************구매페이지************************ */
+	
+	// 회원&비회원 결제하려는 상품 수량 확인
+	public int checkInventory(String product_index) throws Exception{
+		return sqlSession.selectOne(Namespace + ".checkInventory", product_index);
+	}
+	// 회원&비회원 수량이 충분하다면 해당 갯수만큼 빼주기
+	public void MinusInventory(CartVO cartvo) throws Exception{
+		sqlSession.update(Namespace + ".MinusInventory", cartvo);
+	}
+	// 회원&비회원 다시 상품 채워놓기
+	public void plusInventory(CartVO cartvo) throws Exception{
+		sqlSession.update(Namespace + ".plusInventory", cartvo);
+	}
+	// 회원&비회원 상품 판매량 늘려주기
+	public void productQuantityUpdate(OrderProductVO orderProductvo)throws Exception{
+		sqlSession.update(Namespace + ".productQuantityUpdate", orderProductvo);
+	}
+	// 구매페이지에서 뿌려질 상품목록들(상품번호=갯수 의 경우)
+	public List<CartVO> purchaseListCaseOne(List<String> productIndexList){
+		return sqlSession.selectList(Namespace + ".purchaseListCaseOne", productIndexList);
+	}
+	// 구매페이지에서 뿌려질 상품목록들(카트번호=값 의 경우)
+	public List<CartVO> purchaseListCaseTwo(List<Integer> cartIndex){
+		return sqlSession.selectList(Namespace + ".purchaseListCaseTwo", cartIndex);
+	}
+	
+	
+	/* **********************여기서 부터는 관리자페이지********************** */
 	
 	// 상품 조회할때 글의 갯수(페이징)
 	public int adminProductListCount(SearchVO searchvo) throws Exception{

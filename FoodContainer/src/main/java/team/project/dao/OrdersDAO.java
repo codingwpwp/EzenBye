@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import team.project.util.PagingUtil;
 import team.project.vo.CartVO;
+import team.project.vo.CouponVO;
+import team.project.vo.MemberVO;
 import team.project.vo.OrdersVO;
 import team.project.vo.SearchVO;
 
@@ -35,8 +37,27 @@ public class OrdersDAO {
 	}
 	
 	/* 회원 구매 페이지 */
-	
-
+	// 회원 결제하고 난뒤 DB에 올리는 과정
+	public void memberOrderInsert(OrdersVO ordersvo) throws Exception{
+		sqlSession.insert(Namespace + ".memberOrderInsert", ordersvo);
+	}
+	// 회원 결제하고 난뒤 포인트&이벤트 티켓
+	public void memberStatusUpdate(MemberVO membervo) throws Exception{
+		sqlSession.update(Namespace + ".memberStatusUpdate", membervo);
+	}
+	// 회원 결제하고 난뒤 쿠폰사용
+	public void couponUpdate(int coupon_index) throws Exception{
+		sqlSession.update(Namespace + ".couponUpdate", coupon_index);
+	}
+	// 회원 결제하고 난뒤 배송지 업데이트
+	public void addressUpdate(MemberVO membervo) throws Exception{
+		sqlSession.update(Namespace + ".addressUpdate", membervo);
+	}
+	// 회원 결제하고 난뒤 장바구니 비우기
+	public void cartUpdate(CartVO cartvo) throws Exception{
+		sqlSession.delete(Namespace + ".cartUpdate", cartvo);
+		
+	}
 	
 	/* 여기서 부터는 관리자페이지 */
 	

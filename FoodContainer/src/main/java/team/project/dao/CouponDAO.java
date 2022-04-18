@@ -3,7 +3,6 @@ package team.project.dao;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -26,6 +25,10 @@ public class CouponDAO {
 	
 	public int mypageCouponCount(int member_index) throws Exception {
 		return sqlSession.selectOne(Namespace+".mypageCouponCount", member_index);
+	}
+	
+	public void eventCouponInsert(CouponVO couponvo) throws Exception{
+		sqlSession.insert(Namespace + ".eventCouponInsert", couponvo);
 	}
 	
 }

@@ -78,7 +78,7 @@
 	                            <a href="#"><span>배송조회</span></a>
 	                        </div>
 	                        
-	                        <div class="h-100 p-2 bg-light border rounded-3 card-good">
+	                        <div class="h-100 p-2 bg-light border rounded-3 card-good fw-bold">
 	
 	                            <div class="row">
 	                                <div class="col-sm-4">
@@ -95,8 +95,8 @@
 	                                </div>
 	                                <div class="col-sm-8 d-flex align-items-start flex-column mb-3">
 	                                    <div class="mb-auto p-2">${list.product_name}</div>
-	                                    <div class="p-2">${list.price}원 | ${list.order_quantity}개</div>
-	                                    <c:set var="totalPrice" value="${totalPrice + list.price}" />
+	                                    <div class="p-2"><fmt:formatNumber value="${list.price}" pattern="#,###"/>원 | ${list.order_quantity}개</div>
+	                                    <c:set var="totalPrice" value="${totalPrice + (list.price * list.order_quantity)}" />
 	                                    <c:set var="totalPoint" value="${totalPoint + list.point}" />
 	                                </div>
 	                            </div>
@@ -104,11 +104,11 @@
 	                        </div>
                         </c:forEach>
 
-				        <p class="fs-6 lookup-fs-6">결제정보</p>
+				        <p class="fs-5 lookup-fs-6">결제정보</p>
 				        
 				        <hr>
 				        
-				        <div class="h-100 p-2 bg-light border rounded-3 card-good">
+				        <div class="h-100 p-2 bg-light border rounded-3 card-good fw-bold">
 				        	<div><span class="fw-bold">상품가격 :</span>
 				        		<fmt:formatNumber value="${totalPrice}" pattern="#,###" />원
 				        	</div>
@@ -142,11 +142,11 @@
 				        	 </div>
 				        </div>
 				        
-				        <p class="fs-6 lookup-fs-6">배송지정보</p>
+				        <p class="fs-5 lookup-fs-6">배송지정보</p>
 				        
 				        <hr>
 				        
-				        <div class="h-100 p-2 bg-light border rounded-3 card-good">
+				        <div class="h-100 p-2 bg-light border rounded-3 card-good fw-bold">
 				        	<div><span class="fw-bold">받는분 :</span> ${order.reciever}</div>
 				        	<div class="lookupView-infmoney"><span class="fw-bold">주소 :</span> ${order.address}</div>
 				        	<div class="lookupView-infmoney"><span class="fw-bold">연락처 :</span> ${order.phone}</div>
@@ -154,7 +154,7 @@
 				        </div>
 				       
 	    			    <div class="d-grid gap-2 col-4 mx-auto lookupView-btn">
-						  <button type="button" class="btn btn-secondary" onclick="location.href='member_order_list.do?searchValue=${searchValue}&nowPage=${nowPage}'">주문목록으로</button>
+						  <button type="button" class="btn btn-primary fw-bold" onclick="location.href='member_order_list.do?searchValue=${searchValue}&nowPage=${nowPage}'">주문목록으로</button>
 						</div>
 
                     </div>

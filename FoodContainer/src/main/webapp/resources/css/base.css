@@ -103,3 +103,8 @@ header i:hover, nav #userLogin a:hover{
 		display : block;
 	}
 }
+
+.header-badge{
+	font-size: .30em;
+	transform: translate(-65%,13%)!important;
+}

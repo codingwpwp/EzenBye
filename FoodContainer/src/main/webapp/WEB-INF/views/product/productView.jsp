@@ -83,22 +83,57 @@
 				          </div>
 				          <hr>
 				          <h3 class="viewPrice">
-					          <fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>
-					          <small>원</small>
+					          <span>
+						          <fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>
+					        	  <small>원</small>
+					          </span>
+					          <br>
+					          <c:if test="${view.sale_price != -1}">
+					          	<span class="viewDiscount">
+				          			<fmt:formatNumber value="${view.sale_price}" pattern="#,###"/>원
+				          			<c:set var="sale" value="${((view.origin_price - view.sale_price)/view.origin_price)*100}" />
+				          			(<fmt:formatNumber value="${sale}" pattern="##.#"/>%)
+				          			<input type="hidden" name="sale_price" value="${view.sale_price}">
+					          	</span>
+				          		</c:if>
 				          </h3>
 				          <div class="text-muted">포인트 적립 1%</div>
 				          <hr>
 				          <p class="card-text mdName"><span style="font-size:1rem;">[${view.brand}]<br> ${view.product_name}</span>
 				          	<span class="mdPrice" style="font-size:0.9rem;">
-				          		<fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>원
-				          		<input type="hidden" value="${view.origin_price}">
+				          		<c:if test="${view.sale_price == -1}">
+				          			<fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>원
+				          		</c:if>
+				          		<c:if test="${view.sale_price != -1}">
+				          			<fmt:formatNumber value="${view.sale_price}" pattern="#,###"/>원
+				          		</c:if>
+				          			<input type="hidden" name="origin_price" value="${view.origin_price}">
+				          			<input type="hidden" name="sale_price" value="${view.sale_price}">
 				          	</span>
 				          </p>
 				          <div class="card-text mb-auto productNum fs-4"><i class="bi bi-dash-square-fill" onclick="minusFn(this)"></i> <div class="pCnt">1</div> <i class="bi bi-plus-square-fill" onclick="plusFn(this)"></i></div>
-				          <div><span class="fs-5 totalPrice">합계 : <span class="fs-3"><fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>원</span></span></div>
+				          <div><span class="fs-5 totalPrice">
+				          		<c:if test="${view.sale_price == -1}">
+				          			합계 : <span class="fs-3"><fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>원</span>
+				         		</c:if>
+				         		<c:if test="${view.sale_price != -1}">
+				          			합계 : <span class="fs-3"><fmt:formatNumber value="${view.sale_price}" pattern="#,###"/>원</span>
+				         		</c:if>
+				          </span></div>
 				          <div class="d-flex justify-content-evenly">
-					          <button class="viewButton btn btn-outline-success me-2" onclick="viewCart(this)">장바구니 담기</button>
-					          <button class="viewButton btn btn-success me-2" onclick="location.href='purchase/notMember.do'">바로구매</button>
+						  	<button type="button" class="viewButton btn btn-outline-success me-2" onclick="viewCart(this)">장바구니 담기</button>
+						  	<button class="viewButton btn btn-success me-2" onclick="directBuy(this)">바로구매</button>
+				          
+				          	<div class="topTooltip">
+								<p>상품을 장바구니에 담았습니다.</p>
+								<button type='button' class='btn btn-light' onclick="shopping(this)">상품 더보기</button>
+								<button type='button' class='btn btn-light' onclick="moveCart(this)">장바구니로 이동</button>
+							</div>
+									
+							<div class="topTooltipSold">
+								<br>
+								<p style="color:white; font-size:1.2rem;">매진 된 상품입니다.</p>
+							</div>
 				          </div>
 				        </div>
 				      </div>
@@ -133,13 +168,20 @@
 	                				<div class="productName">${view.product_name}</div>
 	                				<div class="card-text mb-auto productNumM fs-4"><i class="bi bi-dash-square-fill" onclick="minusFn(this)"></i> <div class="pCnt">1</div> <i class="bi bi-plus-square-fill" onclick="plusFn(this)"></i></div>
 					    	    	<div class="leftViewTotal">
-					      	  			<span class="fs-5 totalPrice">합계 : <span class="fs-3"><fmt:formatNumber value="${view.origin_price}" pattern="#,###"/></span></span>
+					      	  			<span class="fs-5 totalPrice">
+					      	  				<c:if test="${view.sale_price == -1}">
+							          			합계 : <span class="fs-3"><fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>원</span>
+							         		</c:if>
+							         		<c:if test="${view.sale_price != -1}">
+							          			합계 : <span class="fs-3"><fmt:formatNumber value="${view.sale_price}" pattern="#,###"/>원</span>
+							         		</c:if>
+					      	  			</span>
 					      	  		</div>
 	                			</div>
 				      	  		<div class="leftViewButtonDiv">
 				      	  			<input type="hidden" id="viewLoginCheck" value="${member.member_index}">
-							   		<button class="leftViewButton btn btn-outline-success me-2">장바구니</button>
-							  		<button class="leftViewButton btn btn-success me-2">바로구매</button>
+							   		<button class="leftViewButton btn btn-outline-success me-2" onclick="viewCartBottom(this)">장바구니</button>
+							  		<button class="leftViewButton btn btn-success me-2" onclick="directBuy(this)">바로구매</button>
 				      	  		</div>
                 			</div>
 						</div>
@@ -429,13 +471,13 @@
     </div>
     
     <!-- 툴팁 -->
-    <div class="topTooltip">
+	<div class="bottomTooltip">
     	<p>상품을 장바구니에 담았습니다.</p>
     	<button type='button' class='btn btn-light' onclick="shopping(this)">상품 더보기</button>
     	<button type='button' class='btn btn-light' onclick="moveCart(this)">장바구니로 이동</button>
 	</div>
 	
-	<div class="topTooltipSold">
+	<div class="bottomTooltipSold">
 		<br>
     	<p style="color:white; font-size:1.2rem;">매진 된 상품입니다.</p>
 	</div>

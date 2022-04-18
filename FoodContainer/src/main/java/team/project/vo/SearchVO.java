@@ -5,7 +5,14 @@ public class SearchVO {
 	private String searchValue;
 	private String del_YN;
 	private String del_yn;
+	private int member_index;
 	
+	public int getMember_index() {
+		return member_index;
+	}
+	public void setMember_index(int member_index) {
+		this.member_index = member_index;
+	}
 	public String getSearchType() {
 		return searchType;
 	}

@@ -28,6 +28,29 @@ public class CartServiceImpl implements CartService {
 		
 		return selectList;
 	}
+
+	@Override
+	public List<CartVO> selectList(CartVO cartVO) throws Exception {
+		
+		List<CartVO> selectList = cartDAO.selectList(cartVO);
+		
+		return selectList;
+	}
+
+	@Override
+	public void chooseShopbasketDelete(String cart_index) throws Exception {
+		cartDAO.chooseShopbasketDelete(cart_index);
+	}
+
+	@Override
+	public void shopbasketDelete(int cart_index) throws Exception {
+		cartDAO.shopbasketDelete(cart_index);
+	}
+
+	@Override
+	public void cartCount(int cnt, int cart_index) throws Exception {
+		cartDAO.cartCount(cnt, cart_index);
+	}
 	
 	
 }

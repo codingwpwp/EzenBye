@@ -14,10 +14,12 @@
             <typeAlias type="team.project.vo.BannerVO" alias="BannerVO"/>
             <typeAlias type="team.project.vo.SearchVO" alias="SearchVO"/>
             <typeAlias type="team.project.vo.ReviewVO" alias="ReviewVO"/>
+            <typeAlias type="team.project.vo.MessageVO" alias="MessageVO"/>
             <typeAlias type="team.project.vo.CartVO" alias="CartVO"/>
             <typeAlias type="team.project.util.PagingUtil" alias="PagingUtil"/>
             <typeAlias type="team.project.vo.RecipeVO" alias="RecipeVO"/>
             <typeAlias type="team.project.vo.NoMemberOrdersVO" alias="NoMemberOrdersVO"/>
+             <typeAlias type="team.project.vo.ReplyVO" alias="ReplyVO"/>    
         </typeAliases>
         
     </configuration>

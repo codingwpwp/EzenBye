@@ -163,7 +163,7 @@
 								</div>
 								<div class="px-1 col-sm-3 col-4 sel2" id="selbox">
 									<select name="product_index2" id="sel" class="select1">		
-										<option value="0">없음</option>							
+										<option value="">없음</option>							
 										<c:forEach items="${productListAll}" var="productListAll" varStatus="status">
 										<option value="${productListAll.product_index}">[${productListAll.brand}]${productListAll.product_name}</option>
 										</c:forEach>
@@ -171,7 +171,7 @@
 								</div>
 								<div class="px-1 col-sm-3 col-4 sel3" id="selbox">
 									<select name="product_index3" id="sel" class="select1">
-										<option value="0">없음</option>
+										<option value="">없음</option>
 										<c:forEach items="${productListAll}" var="productListAll" varStatus="status">
 										<option value="${productListAll.product_index}">[${productListAll.brand}]${productListAll.product_name}</option>
 										</c:forEach>

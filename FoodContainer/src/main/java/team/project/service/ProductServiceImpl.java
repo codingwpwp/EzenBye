@@ -1,11 +1,15 @@
 package team.project.service;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import team.project.dao.ProductDAO;
 import team.project.util.PagingUtil;
+import team.project.vo.CartVO;
+import team.project.vo.ProductFilterVO;
 import team.project.vo.ProductVO;
 import team.project.vo.SearchVO;
 
@@ -26,6 +32,13 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductVO> productListAll(ProductVO productVO) throws Exception {
 		
 		List<ProductVO> prodcutListAll = productDao.productListAll(productVO);
+		
+		return prodcutListAll;
+	}
+	@Override
+	public List<ProductVO> productListAll2(ProductFilterVO productFilterVO) throws Exception {
+		
+		List<ProductVO> prodcutListAll = productDao.productListAll2(productFilterVO);
 		
 		return prodcutListAll;
 	}
@@ -59,6 +72,101 @@ public class ProductServiceImpl implements ProductService {
 		
 		return popularList;
 	}
+
+	/*--------------------------------------회원&비회원 공통------------------------------------*/
+	// 결제화면 전에 상품 수량 확인 및 빼주기
+	@Override
+	public String checkProductInventory(HashMap<String, String> cartMap) throws Exception {
+
+		int checkInventoryResult = 0;
+		
+		for(String pidx : cartMap.keySet()) {
+			int inventory = productDao.checkInventory(pidx);
+			if(Integer.parseInt(cartMap.get(pidx)) > inventory) {
+				break;
+			}else {
+				checkInventoryResult++;
+			}
+		}
+		
+		if(checkInventoryResult != cartMap.size()) {
+			// 수량이 충분하지 않는 경우
+			return "Fail";
+		}else {
+			// 수량이 충분하다면 해당 갯수만큼 빼주기
+			for(String pidx : cartMap.keySet()) {
+				CartVO vo = new CartVO();
+				vo.setProduct_index(pidx);
+				vo.setCart_count(Integer.parseInt(cartMap.get(pidx)));
+				productDao.MinusInventory(vo);
+			}
+			
+			String orderRandomNum = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+			Date now = new Date();
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+			
+			String order_index = simpleDateFormat.format(now).substring(2);
+			for(int i = 0; i < 3; i++) {
+				int randomIndex = (int)(Math.random() * orderRandomNum.length());
+				order_index += orderRandomNum.substring(randomIndex, randomIndex + 1);
+			}
+			
+			return order_index;
+		}
+		
+	}
+	
+	// 결제화면에서 취소할 경우 다시 상품 채워놓기
+	@Override
+	public void plusInventory(HashMap<String, String> cartMap) throws Exception {
+		for(String pidx : cartMap.keySet()) {
+			CartVO vo = new CartVO();
+			vo.setProduct_index(pidx);
+			vo.setCart_count(Integer.parseInt(cartMap.get(pidx)));
+			productDao.plusInventory(vo);
+		}
+	}
+	/*----------------------------------------------------------------------------------------*/
+	
+	/******************************************구매페이지*****************************************/
+	// 구매페이지에서 뿌려질 상품목록들(상품번호=갯수 의 경우)
+	@Override
+	public List<CartVO> purchaseListCaseOne(HttpServletRequest request) throws Exception {
+		
+		// 세션에 있는 cartMap 소환
+		HttpSession session = request.getSession();
+		HashMap<String, Integer> cartMap = (HashMap<String, Integer>) session.getAttribute("cartMap");
+		
+		// 쿼리에 WHERE절로 집어 넣을 List(Mapper에 hashMap의 key를 못넣어서 그럼)
+		List<String> productIndexList = new ArrayList<String>();
+		for(String pidx : cartMap.keySet()) productIndexList.add(pidx);
+		
+		// 상품번호들 넣어서 해당 상품 정보 불러오기
+		List<CartVO> CartList = productDao.purchaseListCaseOne(productIndexList);
+		
+		// 각 상품에 대한 구매하려는 갯수를 해당 상품에 올바르게 집어 넣기
+		for(String pidx : cartMap.keySet()){
+			for(int i = 0; i < CartList.size(); i++) {
+				if(pidx.equals(CartList.get(i).getProduct_index())) {
+					CartList.get(i).setCart_count(cartMap.get(pidx));
+					break;
+				}
+			}
+		}
+		
+		return CartList;
+	}
+	
+	// 구매페이지에서 뿌려질 상품목록들(카트번호=값 의 경우)
+	@Override
+	public List<CartVO> purchaseListCaseTwo(int[] cart_index) throws Exception{
+		
+		List<Integer> cartIndex = new ArrayList<Integer>();
+		for(int cidx : cart_index) cartIndex.add(cidx);
+		
+		return productDao.purchaseListCaseTwo(cartIndex);
+	}
+	/*****************************************************************************************/
 	
 	/*여기서 부터는 관리자페이지*/
 	

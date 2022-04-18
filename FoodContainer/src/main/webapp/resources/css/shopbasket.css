@@ -8,6 +8,10 @@
 .shopbasket-icon {
 	border: 1px solid gray;
 }
+.shopbasket-icon:hover {
+	cursor: pointer;
+	background: paleturquoise;
+}
 
 .shopbasket-card{
 	margin-bottom: 30px;
@@ -25,4 +29,17 @@
 .shopbasket-title{
 	padding: 20px;
 	margin-top: 25px;
+}
+
+.lookupBorder{
+	border-style: groove;
+	border-width: 4px;
+}
+
+.productHref{
+	text-decoration: none; color: black;
+}
+.productHref:hover {
+	font-style: italic; color: orange;
+	font-weight: bold;
 }

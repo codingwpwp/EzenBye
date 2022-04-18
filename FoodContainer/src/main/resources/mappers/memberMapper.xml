@@ -72,7 +72,25 @@
     	name = #{name}, phone = #{phone}, nickname = #{nickname}
     	WHERE member_index = #{member_index}
     </update>
-       
+    
+    <select id="corretPW" resultType="MemberVO" parameterType="MemberVO">
+		SELECT pw, member_index 
+		FROM member 
+		WHERE member_index = #{member_index}
+	</select>
+	
+	<update id="modifyPW" parameterType="MemberVO">
+		UPDATE MEMBER SET
+		pw = #{pw}
+		WHERE member_index = #{member_index} 
+	</update>
+	
+	<update id="mypageChangeAddress" parameterType="MemberVO">
+		UPDATE MEMBER SET
+		address = #{address}
+		WHERE member_index = #{member_index} 
+	</update>
+	   
     <!-- 여기서 부터는 관리자페이지 -->
     
     <!-- 회원 조회할때 먼저 총 글의 총 갯수를 구하는 쿼리 -->
@@ -115,6 +133,23 @@
     	del_yn = 'Y', del_date = NOW(), del_reason = '관리자에 의한 추방'
     	WHERE member_index = #{member_index}
     </update>
+    
+    <!-- 이벤트 페이지 -->
+    
+    <!-- 티켓 조회 -->
+    <select id="eventTicketCheck" resultType="int" parameterType="int">
+    	SELECT event_ticket
+    	FROM member
+    	WHERE member_index = #{member_index}
+    </select>
+    
+    <!-- 티켓 하나 깎기 -->
+    <update id="eventTicketMinus" parameterType="int">
+    	UPDATE member SET
+    	event_ticket = event_ticket - 1
+    	WHERE member_index = #{member_index}
+    </update>
+
 </mapper>
 
 
