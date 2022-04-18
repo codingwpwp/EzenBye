@@ -152,10 +152,12 @@
 						        		<div class="col-sm-9 d-flex align-items-start flex-column mb-3">
 									    	<div class="mb-auto p-2">${list.brand} ${list.product_name}</div>
 			  								<c:if test="${list.sale_price == -1}">
-			  									<div class="p-2">${list.origin_price}원</div>
+			  									<div class="p-2 productPrice"><fmt:formatNumber value="${list.origin_price * list.cart_count}" pattern="#,###" />원</div>
+			  									<input type="hidden" name="origin_price" value="${list.origin_price}" />
 			  								</c:if>
 			  								<c:if test="${list.sale_price != -1}">
-			  									<div class="p-2">${list.sale_price}원</div>
+			  									<div class="p-2 productPrice2"><fmt:formatNumber value="${list.sale_price * list.cart_count}" pattern="#,###" />원</div>
+			  									<input type="hidden" name="sale_price" value="${list.sale_price}" />
 			  								</c:if>
 						        		</div>
 						        	</div>
@@ -170,7 +172,8 @@
 							</div>
 							<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-number">
 								<i class="bi bi-dash shopbasket-icon" onclick="minusCount(this)"></i>&nbsp; 
-									${list.cart_count}
+									<div>${list.cart_count}</div>
+									<input type="hidden" value="${list.cart_index}">
 								&nbsp; <i class="bi bi-plus shopbasket-icon" onclick="plusCount(this)"></i>
 							</div>
 						</div>
@@ -259,10 +262,12 @@
 						        		<div class="col-sm-9 d-flex align-items-start flex-column mb-3">
 									    	<div class="mb-auto p-2">${list.brand} ${list.product_name}</div>
 			  								<c:if test="${list.sale_price == -1}">
-			  									<div class="p-2">${list.origin_price}원</div>
+			  									<div class="p-2 productPrice"><fmt:formatNumber value="${list.origin_price * list.cart_count}" pattern="#,###" />원</div>
+			  									<input type="hidden" name="origin_price" value="${list.origin_price}" />
 			  								</c:if>
 			  								<c:if test="${list.sale_price != -1}">
-			  									<div class="p-2">${list.sale_price}원</div>
+			  									<div class="p-2 productPrice2"><fmt:formatNumber value="${list.sale_price * list.cart_count}" pattern="#,###" />원</div>
+			  									<input type="hidden" name="sale_price" value="${list.sale_price}" />
 			  								</c:if>
 						        		</div>
 						        	</div>
@@ -276,9 +281,10 @@
 					        	</div>
 							</div>
 							<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-number">
-								<i class="bi bi-dash shopbasket-icon" onclick="minusFn(this)"></i>&nbsp; 
-									${list.cart_count}
-								&nbsp; <i class="bi bi-plus shopbasket-icon" onclick="plusFn(this)"></i>
+								<i class="bi bi-dash shopbasket-icon" onclick="minusCount(this)"></i>&nbsp; 
+									<div>${list.cart_count}</div>
+									<input type="hidden" value="${list.cart_index}">
+								&nbsp; <i class="bi bi-plus shopbasket-icon" onclick="plusCount(this)"></i>
 							</div>
 						</div>
 					</c:if>
