@@ -10,8 +10,6 @@
     	FROM product
     	WHERE del_YN = 'N'
     	
-    	
-    	
     	ORDER BY product_date DESC
     </select>
 
