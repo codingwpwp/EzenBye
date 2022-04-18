@@ -25,5 +25,10 @@
  			#{delivery_free_YN}, #{pay_price}
  		)
  	</insert>
+ 	
+ 	<select id="noMemberOrdersList" resultType="NoMemberOrdersVO" parameterType="String">
+        SELECT * FROM no_member_orders
+		WHERE no_member_order_index=#{no_member_order_index}
+    </select>
    
 </mapper>

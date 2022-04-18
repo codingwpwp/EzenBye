@@ -108,7 +108,14 @@
 						      
 						      <td>
 						      <span class="d-inline-block text-truncate" style="max-width: 150px;">
-								  <a href="productView.do?product_index=${list.product_index }" class="productHref">${list.product_name}</a>
+								  <c:if test="${list.del_YN eq 'N'}">
+						          <a href="productView.do?product_index=${list.product_index }" class="productHref">
+					        	  </c:if>
+					        	  <c:if test="${list.del_YN eq 'Y'}">
+					        	  <a href="javascript:alert('삭제된 상품입니다.');" class="productHref">
+					        	  </c:if>
+								  ${list.brand} ${list.product_name}
+								  </a>
 							  </span>
 						      </td>
 						      <td>
@@ -127,8 +134,13 @@
 						      <td colspan="4">
 						      	<div class="collapse" id="collapseExample${i}">
 						      		<div class="review-title">
-						      			<a href="productView.do?product_index=${list.product_index }" class="productHref">
-						      			<img src="<%=request.getContextPath() %>/resources/img/${list.brand}/${list.middleSort}/${list.thumbnail_image}" class="img-thumbnail" alt="..." width="10%"> 상품명 : ${list.product_name}
+						      			<c:if test="${list.del_YN eq 'N'}">
+							        	<a href="productView.do?product_index=${list.product_index }" class="productHref">
+							        	</c:if>
+							        	<c:if test="${list.del_YN eq 'Y'}">
+							        	<a href="javascript:alert('삭제된 상품입니다.');" class="productHref">
+							        	</c:if>
+						      			<img src="<%=request.getContextPath() %>/resources/img/${list.brand}/${list.middleSort}/${list.thumbnail_image}" class="img-thumbnail" alt="..." width="10%"> 상품명 : ${list.brand} ${list.product_name}
 						      			</a>
 						      		</div>
 						      		<c:if test="${!empty list.image}">	
@@ -147,21 +159,56 @@
 					
 					<nav aria-label="Page navigation example">
 					  <ul class="pagination review-paging">
-					    <li class="page-item">
-					      <a class="page-link" href="#" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
+					  <!-- <부분 -->
+					  <c:if test="${paging.startPage > 1}">
+					  <li class="page-item">
+					      <a class="page-link" href="mypage_review.do?nowPage=${paging.startPage - 1}" aria-label="Previous">
+					        <span aria-hidden="true">&lt;</span>
 					      </a>
 					    </li>
-					    <li class="page-item"><a class="page-link" href="#">1</a></li>
-					    <li class="page-item"><a class="page-link" href="#">2</a></li>
-					    <li class="page-item"><a class="page-link" href="#">3</a></li>
-					    <li class="page-item">
-					      <a class="page-link" href="#" aria-label="Next">
-					        <span aria-hidden="true">&raquo;</span>
+					  </c:if>
+					   
+					  <c:if test="${paging.startPage <= 1}">
+			  			<li class="page-item" style="visibility: hidden">
+                               <a class="page-link" href="#" aria-label="Previous">
+                                   <span aria-hidden="true">&lt;</span>
+                               </a>
+                           </li>
+					  </c:if> 
+					  
+					  <!-- 각 페이지 -->
+					  <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="a" step="1">
+					  	<c:if test="${a != paging.nowPage}">
+					  		<li class="page-item">
+					  			<a class="page-link" href="mypage_review.do?nowPage=${a}">${a}</a>
+					  		</li>
+					  	</c:if>
+					  	<c:if test="${a == paging.nowPage}">
+					  		 <li class="page-item active" aria-current="page">
+					  		 	<a class="page-link fw-bold" href="#">${a}</a>
+					  		 </li>
+					  	</c:if>
+					  </c:forEach>
+					   
+				      <!-- >부분 -->
+				      <c:if test="${paging.endPage != paging.lastPage}">
+				      	<li class="page-item">
+					      <a class="page-link" href="mypage_review.do?nowPage=${paging.endPage + 1}" aria-label="Next">
+					        <span aria-hidden="true">&gt;</span>
 					      </a>
 					    </li>
+				      </c:if>
+				      <c:if test="${paging.startPage == paging.lastPage}">
+				      	<li class="page-item" style="visibility: hidden">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&gt;</span>
+                            </a>
+                        </li>
+				      </c:if>
+					    
 					  </ul>
 					</nav>
+					
 					</c:if>
 					
 					<div class="h-100 p-2 bg-light border rounded-3 card-good">

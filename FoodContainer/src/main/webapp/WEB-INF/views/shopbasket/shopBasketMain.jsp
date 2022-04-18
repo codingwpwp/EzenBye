@@ -66,17 +66,17 @@
 			        <div class="row shopbasket-checkbox">
 			        	<div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4">
 			        		<div class="form-check form-check-inline">
-							  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="selectall" name="shopbasket" onclick="selectAll(this)">
+							  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="selectall" name="shopbasketAll">
 							  <label class="form-check-label" for="inlineCheckbox1">전체 선택</label>
 							</div>
 			        	</div>
 			        	<div class="col-xxl-4 col-xl-5 col-xl-5 col-lg-5 col-md-5">
-			        		<button type="button" class="btn btn-secondary btn-sm">선택 상품 삭제</button>
+			        		<button type="button" class="btn btn-secondary btn-sm" onclick="chooseDelete(this)">선택 상품 삭제</button>
 			        	</div>
 					</div>
 					
-					<div class="shopbasket-title border border-info border-1 rounded shadow-sm">
-					<p class="fs-4 shopbasket-fs4"><i class="bi bi-snow2"></i>냉동식품</p>	
+					<div class="shopbasket-title rounded lookupBorder">
+					<p class="fs-4 shopbasket-fs4 fw-bold text-primary text-opacity-50"><i class="bi bi-snow2"></i>냉동식품</p>	
 					<c:if test="${member.member_index == null}">
 						<c:forEach items="${noMemberCart}" var="noMemberCart" varStatus="status">
 							<c:if test="${noMemberCart.bigSort == '냉동식품'}">
@@ -131,11 +131,59 @@
 						</c:if>
 						</c:forEach>
 					</c:if>
+					
+					<!-- 로그인 상태일때 -->
+					<c:if test="${member.member_index != null}">
+					<c:forEach items="${selectList}" var="list" varStatus="status">
+					
+					<c:if test="${list.bigSort == '냉동식품' && list.del_YN == 'N'}">
+						<div class="row d-flex align-items-center shopbasket-card">
+							<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-checkbox">
+								<input class="form-check-input" type="checkbox" id="iceCheckbox${status.index}" value="${list.cart_index}" name="shopbasket">
+							</div>
+							<div class="col-lg-8 col-md-8">
+								<div class="h-100 p-2 bg-light border rounded-3 card-good">
+								
+						        	<a href="productView.do?product_index=${list.product_index }" class="productHref">
+						        	<div class="row">
+						        		<div class="col-sm-3">
+						        			<img src="<%=request.getContextPath() %>/resources/img/${list.brand}/${list.middleSort}/${list.thumbnail_image}" class="img-thumbnail" alt="${list.product_name}">
+						        		</div>
+						        		<div class="col-sm-9 d-flex align-items-start flex-column mb-3">
+									    	<div class="mb-auto p-2">${list.brand} ${list.product_name}</div>
+			  								<c:if test="${list.sale_price == -1}">
+			  									<div class="p-2">${list.origin_price}원</div>
+			  								</c:if>
+			  								<c:if test="${list.sale_price != -1}">
+			  									<div class="p-2">${list.sale_price}원</div>
+			  								</c:if>
+						        		</div>
+						        	</div>
+						        	</a>
+					        	
+						        	<form action="purchase/member.do" method="post" class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 shopbasket-btn">
+						        	  <input type="hidden" name="cart_index" value="${list.cart_index}" />
+									  <button class="btn btn-secondary col-lg-3 col-md-4" type="button" onclick="shopbasketDelete(this)">삭제</button>
+									  <button class="btn btn-dark col-lg-3 col-md-4" type="submit">바로 구매</button>
+									</form>
+					        	</div>
+							</div>
+							<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-number">
+								<i class="bi bi-dash shopbasket-icon" onclick="minusCount(this)"></i>&nbsp; 
+									${list.cart_count}
+								&nbsp; <i class="bi bi-plus shopbasket-icon" onclick="plusCount(this)"></i>
+							</div>
+						</div>
+					</c:if>
+					
+					</c:forEach>
+					</c:if>
+					
 					</div>
 					
 					
-					<div class="shopbasket-title border border-success border-1 rounded shadow-sm">
-					<p class="fs-4 shopbasket-fs4"><i class="fa-solid fa-utensils"></i>즉석식품</p>
+					<div class="shopbasket-title rounded lookupBorder">
+					<p class="fs-4 shopbasket-fs4 fw-bold text-success text-opacity-50"><i class="fa-solid fa-utensils"></i>즉석식품</p>
 					<c:if test="${member.member_index == null}">
 						<c:forEach items="${noMemberCart}" var="noMemberCart" varStatus="status">	
 						<c:if test="${noMemberCart.bigSort == '즉석식품'}">
@@ -190,6 +238,54 @@
 						</c:if>
 						</c:forEach>
 					</c:if>
+					
+					<!-- 로그인 상태일때 -->
+					<c:if test="${member.member_index != null}">
+					<c:forEach items="${selectList}" var="list" varStatus="status">
+					
+					<c:if test="${list.bigSort == '즉석식품' && list.del_YN == 'N'}">
+						<div class="row d-flex align-items-center shopbasket-card">
+							<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-checkbox">
+								<input class="form-check-input" type="checkbox" id="iceCheckbox${status.index}" value="${list.cart_index}" name="shopbasket">
+							</div>
+							<div class="col-lg-8 col-md-8">
+								<div class="h-100 p-2 bg-light border rounded-3 card-good">
+									
+									<a href="productView.do?product_index=${list.product_index }" class="productHref">
+						        	<div class="row">
+						        		<div class="col-sm-3">
+						        			<img src="<%=request.getContextPath() %>/resources/img/${list.brand}/${list.middleSort}/${list.thumbnail_image}" class="img-thumbnail" alt="${list.product_name}">
+						        		</div>
+						        		<div class="col-sm-9 d-flex align-items-start flex-column mb-3">
+									    	<div class="mb-auto p-2">${list.brand} ${list.product_name}</div>
+			  								<c:if test="${list.sale_price == -1}">
+			  									<div class="p-2">${list.origin_price}원</div>
+			  								</c:if>
+			  								<c:if test="${list.sale_price != -1}">
+			  									<div class="p-2">${list.sale_price}원</div>
+			  								</c:if>
+						        		</div>
+						        	</div>
+						        	</a>
+					        	
+						        	<form action="purchase/member.do" method="post" class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 shopbasket-btn">
+						        	  <input type="hidden" name="cart_index" value="${list.cart_index}" />
+									  <button class="btn btn-secondary col-lg-3 col-md-4" type="button" onclick="shopbasketDelete(this)">삭제</button>
+									  <button class="btn btn-dark col-lg-3 col-md-4" type="submit">바로 구매</button>
+									</form>
+					        	</div>
+							</div>
+							<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-number">
+								<i class="bi bi-dash shopbasket-icon" onclick="minusFn(this)"></i>&nbsp; 
+									${list.cart_count}
+								&nbsp; <i class="bi bi-plus shopbasket-icon" onclick="plusFn(this)"></i>
+							</div>
+						</div>
+					</c:if>
+					
+					</c:forEach>
+					</c:if>
+					
 					</div>
 					
 					<div class="d-flex justify-content-center shopbasket-sum">선택 상품 합계 : 40,000원</div>
