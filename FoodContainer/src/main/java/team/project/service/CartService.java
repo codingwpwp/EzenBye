@@ -15,4 +15,6 @@ public interface CartService {
 	void chooseShopbasketDelete(String cart_index) throws Exception;
 	
 	void shopbasketDelete(int cart_index) throws Exception;
+	
+	void cartCount(int cnt, int cart_index) throws Exception;
 }
