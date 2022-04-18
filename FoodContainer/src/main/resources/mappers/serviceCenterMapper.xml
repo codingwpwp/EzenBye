@@ -12,11 +12,18 @@
         order by write_date desc limit 3
     </select>
     
-    <select id="serviceCenterList" resultType="ServiceCenterVO" parameterType="int">
+    <select id="countServiceCenters" resultType="int" parameterType="SearchVO">
+        SELECT count(*) 
+        FROM 
+        servicecenter WHERE member_index = #{member_index} and del_YN = 'N'
+    </select>
+    
+    <select id="serviceCenterList" resultType="ServiceCenterVO" parameterType="PagingUtil">
         SELECT * 
         FROM 
         servicecenter WHERE member_index = #{member_index} and del_YN = 'N' 
         order by write_date desc
+        LIMIT #{start}, #{perPage}
     </select>
     
     <select id="countServiceCenter" resultType="int" parameterType="int">

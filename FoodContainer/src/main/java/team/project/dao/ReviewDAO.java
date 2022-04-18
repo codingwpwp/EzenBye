@@ -6,7 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import team.project.util.PagingUtil;
 import team.project.vo.ReviewVO;
+import team.project.vo.SearchVO;
 
 @Repository
 public class ReviewDAO {
@@ -23,11 +25,17 @@ public class ReviewDAO {
 		return sqlSession.update(Namespace + ".revieweOk", orderItem_index);
 	}
 	
-	public List<ReviewVO> reviewList(int member_index) throws Exception {
-		return sqlSession.selectList(Namespace + ".reviewList", member_index);
-	}
-	
 	public int countList(int member_index) throws Exception {
 		return sqlSession.selectOne(Namespace + ".countList", member_index);
 	}
+	
+	public int countReviewList(SearchVO searchVO) throws Exception {
+		return sqlSession.selectOne(Namespace + ".countReviewList", searchVO);
+	}
+	
+	public List<ReviewVO> reviewList(PagingUtil paging) throws Exception {
+		return sqlSession.selectList(Namespace + ".reviewList", paging);
+	}
+	
+	
 }

@@ -98,21 +98,56 @@
 					
 					<nav aria-label="Page navigation example">
 					  <ul class="pagination review-paging">
-					    <li class="page-item">
-					      <a class="page-link" href="#" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
+					  <!-- <부분 -->
+					  <c:if test="${paging.startPage > 1}">
+					  <li class="page-item">
+					      <a class="page-link" href="mypage_inquiries.do?nowPage=${paging.startPage - 1}" aria-label="Previous">
+					        <span aria-hidden="true">&lt;</span>
 					      </a>
 					    </li>
-					    <li class="page-item"><a class="page-link" href="#">1</a></li>
-					    <li class="page-item"><a class="page-link" href="#">2</a></li>
-					    <li class="page-item"><a class="page-link" href="#">3</a></li>
-					    <li class="page-item">
-					      <a class="page-link" href="#" aria-label="Next">
-					        <span aria-hidden="true">&raquo;</span>
+					  </c:if>
+					   
+					  <c:if test="${paging.startPage <= 1}">
+			  			<li class="page-item" style="visibility: hidden">
+                               <a class="page-link" href="#" aria-label="Previous">
+                                   <span aria-hidden="true">&lt;</span>
+                               </a>
+                           </li>
+					  </c:if> 
+					  
+					  <!-- 각 페이지 -->
+					  <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i" step="1">
+					  	<c:if test="${i != paging.nowPage}">
+					  		<li class="page-item">
+					  			<a class="page-link" href="mypage_inquiries.do?nowPage=${i}">${i}</a>
+					  		</li>
+					  	</c:if>
+					  	<c:if test="${i == paging.nowPage}">
+					  		 <li class="page-item active" aria-current="page">
+					  		 	<a class="page-link fw-bold" href="#">${i}</a>
+					  		 </li>
+					  	</c:if>
+					  </c:forEach>
+					   
+				      <!-- >부분 -->
+				      <c:if test="${paging.endPage != paging.lastPage}">
+				      	<li class="page-item">
+					      <a class="page-link" href="mypage_inquiries.do?nowPage=${paging.endPage + 1}" aria-label="Next">
+					        <span aria-hidden="true">&gt;</span>
 					      </a>
 					    </li>
+				      </c:if>
+				      <c:if test="${paging.startPage == paging.lastPage}">
+				      	<li class="page-item" style="visibility: hidden">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&gt;</span>
+                            </a>
+                        </li>
+				      </c:if>
+					    
 					  </ul>
 					</nav>
+					
 			        </c:if>
 			        
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">

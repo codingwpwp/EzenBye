@@ -26,8 +26,16 @@ public class CartDAO {
 		return sqlSession.selectList(Namespace+".selectList",member_index);
 	}
 	
-public List<CartVO> selectList(CartVO cartVO) throws Exception {
+	public List<CartVO> selectList(CartVO cartVO) throws Exception {
 		
 		return sqlSession.selectList(Namespace+".selectList",cartVO);
+	}
+	
+	public void chooseShopbasketDelete(String cart_index) throws Exception {
+		sqlSession.delete(Namespace+".chooseShopbasketDelete",cart_index);
+	}
+	
+	public void shopbasketDelete(int cart_index) throws Exception {
+		sqlSession.delete(Namespace+".shopbasketDelete",cart_index);
 	}
 }
