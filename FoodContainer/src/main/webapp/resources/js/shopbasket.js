@@ -147,3 +147,56 @@ $(function(){
 			}
 		});
 	}
+	
+	function minusCount(obj){
+		var cnt = $(obj).next("div").html();
+		var cart_index = $(obj).next().next("input[type='hidden']").val();
+		var origin_price = $(obj).parent().parent().find("input[name='origin_price']").val();
+		var sale_price = $(obj).parent().parent().find("input[name='sale_price']").val();
+		
+		if(cnt == 1){
+			alert("최소 한 개는 선택해야 합니다.");
+		}else{
+			cnt--;
+		}
+		var html = cnt;
+		
+		$(obj).next("div").html(html);
+		
+		$.ajax({
+			url : "cartCount.do",
+			type : "post",
+			data : "cart_index="+cart_index+"&cnt="+cnt,
+			success : function(){
+				$(obj).parent().parent().find(".productPrice").html((cnt * origin_price).toLocaleString()+"원");
+				$(obj).parent().parent().find(".productPrice2").html((cnt * sale_price).toLocaleString()+"원");  
+			}
+		});
+	}
+	
+	function plusCount(obj){
+		var cnt = $(obj).prev().prev("div").html();
+		var cart_index = $(obj).prev("input[type='hidden']").val();
+		var origin_price = $(obj).parent().parent().find("input[name='origin_price']").val();
+		var sale_price = $(obj).parent().parent().find("input[name='sale_price']").val();
+		
+		if(cnt == 10){
+			alert("최대 개수는 10개 입니다.");
+		}else{
+			cnt++;
+		}
+
+		var html = cnt;
+		
+		$(obj).prev().prev("div").html(html);
+		
+		$.ajax({
+			url : "cartCount.do",
+			type : "post",
+			data : "cart_index="+cart_index+"&cnt="+cnt,
+			success : function(){
+				$(obj).parent().parent().find(".productPrice").html((cnt * origin_price).toLocaleString()+"원");
+				$(obj).parent().parent().find(".productPrice2").html((cnt * sale_price).toLocaleString()+"원");
+			}
+		});
+	}

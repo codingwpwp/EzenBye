@@ -25,4 +25,10 @@
   		DELETE from cart
   		WHERE cart_index = #{cart_index}
   	</delete>
+  	
+  	<update id="cartCount" parameterType="map">
+  		UPDATE cart
+    	SET cart_count = #{cnt}
+    	WHERE cart_index = #{cart_index}
+  	</update>
 </mapper>

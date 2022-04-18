@@ -8,6 +8,10 @@
 .shopbasket-icon {
 	border: 1px solid gray;
 }
+.shopbasket-icon:hover {
+	cursor: pointer;
+	background: paleturquoise;
+}
 
 .shopbasket-card{
 	margin-bottom: 30px;

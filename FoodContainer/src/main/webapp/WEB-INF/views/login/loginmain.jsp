@@ -131,12 +131,12 @@
 							</div>
 							<div class="row">
 								<div class="col-md-12 col-sm-12 col-12 loginbtn">
-									<button class="btn btn-dark" onclick="location.href='/member_sign.do'">회원가입</button>
+									<button class="btn btn-dark" type="button" onclick="location.href='<%=request.getContextPath()%>/member_sign.do'">회원가입</button>
 								</div>
 							</div>
 							<div class="row lookup">
 								<div class="col-md-12 col-sm-12 col-12 loginbtn">
-									<button class="btn btn-dark">비회원 배송 조회</button>
+									<button class="btn btn-dark">비회원 주 조회</button>
 								</div>
 							</div>
 							
