@@ -16,16 +16,24 @@
     	WHERE orderItem_index = #{orderItem_index}
     </update>
     
-    <select id="reviewList" resultType="ReviewVO" parameterType="int">
+    <select id="countList" resultType="int" parameterType="int">
+    	SELECT count(*) FROM review
+    	WHERE member_index = #{member_index} and del_YN = 'N'
+    </select>
+    
+    <select id="countReviewList" resultType="int" parameterType="SearchVO">
+    	SELECT count(*) FROM review
+    	WHERE member_index = #{member_index} and del_YN = 'N'
+    </select>
+    
+    <select id="reviewList" resultType="ReviewVO" parameterType="PagingUtil">
         SELECT * FROM review AS r
 		JOIN product AS p
 		ON r.product_index = p.product_index
 		WHERE r.member_index = #{member_index} and r.del_YN = 'N'
 		ORDER BY review_date desc
+		LIMIT #{start}, #{perPage}
     </select>
     
-    <select id="countList" resultType="int" parameterType="int">
-    	SELECT count(*) FROM review
-    	WHERE member_index = #{member_index}
-    </select>
+    
 </mapper>

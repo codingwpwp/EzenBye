@@ -76,21 +76,34 @@
 			        
 			        <c:if test="${!empty dibsListAllJoin}">
 			        <c:forEach items="${dibsListAllJoin}" var="list">
+			        <c:if test="${list.del_YN eq 'N'}">
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">
-			        	
 			        	<div class="row">
 			        		<div class="col-sm-3">
-			        			<a href="productView.do?product_index=${list.product_index }" class="productHref">
+			        			
+					        	<a href="productView.do?product_index=${list.product_index }" class="productHref">
 			        			<img src="<%=request.getContextPath() %>/resources/img/${list.brand}/${list.middleSort}/${list.thumbnail_image}" class="img-thumbnail" alt="...">
 			        			</a>
 			        		</div>
 			        		<div class="col-sm-6 d-flex align-items-start flex-column mb-3">
-						    	<div class="mb-auto p-2"><a href="productView.do?product_index=${list.product_index }" class="productHref">${list.product_name }</a></div>
+						    	<div class="mb-auto p-2">
+						        	<a href="productView.do?product_index=${list.product_index }" class="productHref">
+							    	${list.brand } ${list.product_name }
+							    	</a>
+						    	</div>
 						    	<c:if test="${list.sale_price eq -1 }" >
-  									<div class="p-2"><a href="productView.do?product_index=${list.product_index }" class="productHref"><fmt:formatNumber value="${list.origin_price}" pattern="#,###" />원</a></div>
+  									<div class="p-2">
+							        	<a href="productView.do?product_index=${list.product_index }" class="productHref">
+	  									<fmt:formatNumber value="${list.origin_price}" pattern="#,###" />원
+	  									</a>
+  									</div>
 			        			</c:if>
 			        			<c:if test="${list.sale_price ne -1 }" >
-  									<div class="p-2"><a href="productView.do?product_index=${list.product_index }" class="productHref"><fmt:formatNumber value="${list.sale_price}" pattern="#,###" />원</a></div>
+  									<div class="p-2">
+							        	<a href="productView.do?product_index=${list.product_index }" class="productHref">
+	  									<fmt:formatNumber value="${list.sale_price}" pattern="#,###" />원
+	  									</a>
+  									</div>
 			        			</c:if>
 			        		</div>
 			        		<div class="col-sm-3 interItem-icon">
@@ -100,11 +113,14 @@
 			        		</div>
 			        	</div>
 			        	
-			        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 interItem-btn">
+			        	<form action="purchase/certification.do" method="post" class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 interItem-btn">
+			        		<input type="hidden" name="${list.product_index}" value="1" />
 						  <button class="btn btn-dark col-lg-3 col-md-3" type="button" onclick="cartInsert(this)">장바구니 담기</button>
-						  <button class="btn btn-secondary col-lg-3 col-md-3" type="button">바로구매</button>
-						</div>
+						  <button class="btn btn-secondary col-lg-3 col-md-3" type="submit">바로구매</button>
+						</form>
 			        </div>
+			        
+			        </c:if>
 			        </c:forEach>
 			        </c:if>
 			        

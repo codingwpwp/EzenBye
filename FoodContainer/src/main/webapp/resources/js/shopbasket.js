@@ -27,14 +27,79 @@ $(document).ready(function(){
 });
 
 // 장바구니 전체선택
-function selectAll(obj)  {
-	  const checkboxes 
-	       = document.getElementsByName('shopbasket');
-	  
-	  checkboxes.forEach((checkbox) => {
-	    checkbox.checked = obj.checked;
-	  })
-}
+$(function(){
+		var shopbasket = document.getElementsByName("shopbasket");
+		var rowCnt = shopbasket.length;
+		
+		$("input[name='shopbasketAll']").click(function(){
+			var shopbasketArray = $("input[name=shopbasket]");
+			for(var i=0; i<shopbasketArray.length; i++){
+				shopbasketArray[i].checked = this.checked;
+			}
+		});
+		
+		$("input[name='shopbasket']").click(function(){
+			if($("input[name='shopbasket']:checked").length == rowCnt){
+				$("input[name='shopbasketAll']")[0].checked = true;
+			}else{
+				$("input[name='shopbasketAll']")[0].checked = false;
+			}
+		});
+	});
+	
+	function chooseDelete(obj){
+		var valueArr = new Array();
+		var list = $("input[name='shopbasket']");
+		
+		for(var i = 0; i<list.length; i++){
+			if(list[i].checked){
+				valueArr.push(list[i].value);
+			}
+		}
+		if(valueArr.length == 0){
+			alert('선택된 상품이 없습니다.');
+		}else{
+			var YN = confirm('정말 삭제하시겠습니까?');
+			if(YN){
+				$.ajax({
+					type : 'POST',
+					url : 'chooseShopbasketDelete.do',
+					traditional : true,
+					data : {
+						valueArr : valueArr
+					},
+					success : function(jdata){
+						if(jdata = 1){
+							alert('삭제되었습니다.');
+							window.location.reload();
+						}else{
+							alert('삭제실패');
+						}
+					}
+				});
+			}
+		}
+	}
+	
+	function shopbasketDelete(obj){
+		var cart_index = $(obj).parent().find("input[name='cart_index']").val();
+		var YN = confirm('정말 삭제하시겠습니까?');
+			if(YN){
+				$.ajax({
+					type : 'POST',
+					url : 'shopbasketDelete.do',
+					data : "cart_index="+cart_index,
+					success : function(data){
+						if(data = 1){
+							alert('삭제되었습니다.');
+							window.location.reload();
+						}else{
+							alert('삭제실패');
+						}
+					}
+				});
+			}
+	}
 
 	function minusFn(obj){
 		var cnt = $(obj).next("div").html();
