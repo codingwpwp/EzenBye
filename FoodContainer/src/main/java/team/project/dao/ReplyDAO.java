@@ -15,8 +15,15 @@ public class ReplyDAO {
 	private SqlSession sqlSession;
 	
 	private static final String Namespace = "team.project.mapper.replyMapper";
-	
+	//댓글 목록
 	public List<ReplyVO> readReply(int reply_index) throws Exception{
 		return sqlSession.selectList(Namespace+".readReply",reply_index);
 	}
+	
+	//댓글 작성
+	public void writeReply(ReplyVO vo) throws Exception{
+		sqlSession.insert(Namespace+".writeReply",vo);
+	}
+	
+	
 }
