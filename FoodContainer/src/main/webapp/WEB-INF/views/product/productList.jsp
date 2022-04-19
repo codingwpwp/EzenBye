@@ -3,6 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   <div id="aa">
+   </div>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -56,6 +58,7 @@
                	<!-- pc버전 -->
                	<article class="pList">
 					<div class="fs-5 my-2 fw-bold topText">전체상품</div>
+					${productFilter}
 					<hr>
 					<!-- 전체상품 -->
 					<div class="container"> 

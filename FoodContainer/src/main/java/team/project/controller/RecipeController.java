@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import team.project.service.ProductService;
 import team.project.service.RecipeService;
@@ -35,11 +34,10 @@ public class RecipeController {
 	private RecipeService recipeService;
 	@Autowired
 	private ProductService productService;
-//	@Autowired
-//	private ReplyService replyService;
+	@Autowired
+	private ReplyService replyService;
 	
-//	@Inject
-//	private ReplyService replyService;
+
 	
 	
 	//레시피 게시물 추천
@@ -54,7 +52,7 @@ public class RecipeController {
 	
 	//레시피메인
 	@RequestMapping(value = "/recipemain.do", method = RequestMethod.GET)
-	public String recipe(Locale locale, Model model,RecipeVO vo,String nowPage,SearchVO searchvo) throws Exception{
+	public String recipe(Locale locale, Model model,RecipeVO vo,String nowPage,SearchVO searchvo,ReplyVO replyvo) throws Exception{
 		//페이징
 		int nowPageNum = 1;
 		
@@ -62,6 +60,7 @@ public class RecipeController {
 			nowPageNum = Integer.parseInt(nowPage);
 		}
 		int count = recipeService.countRecipe();
+		
 		searchvo.setDel_yn("N");
 		//1.게시글 총갯수 구해오기
 		//service 추가 작업
@@ -71,6 +70,7 @@ public class RecipeController {
 		model.addAttribute("pu",pu);
 		//레시피 게시물 리스트
 		List<RecipeVO> recipeList = recipeService.recipeList(pu,searchvo);
+		System.out.println(recipeList);
 		if(searchvo.getSearchValue()!=null) {
 			pu.setSearchValue(searchvo.getSearchValue());
 			pu.setSearchType(searchvo.getSearchType());
@@ -82,6 +82,9 @@ public class RecipeController {
 		model.addAttribute("nowPage", nowPageNum);
 		//3.2번 객체 model에 담
 		
+//		int replyList = replyService.countReply();
+//		model.addAttribute("replyList",replyList);
+//		System.out.println(replyList);
 		return "recipe/recipemain";
 	}
 	//레시피 작성 화면 view
@@ -117,17 +120,20 @@ public class RecipeController {
 	
 	//레시피 상세확인
 	@RequestMapping(value = "/recipeview.do", method = RequestMethod.GET)
-	public String recipe3(Locale locale, Model model,RecipeVO vo,HttpServletRequest request,ProductVO productVO ) throws Exception {
+	public String recipe3(Locale locale, Model model,RecipeVO vo,HttpServletRequest request,ProductVO productVO,ReplyVO replyvo) throws Exception {
 		logger.info("recipeRead");
 	
 		
 		model.addAttribute("read", recipeService.recipeRead(vo.getRecipe_index()));
 		List<ProductVO> ProductListAll = productService.productListAll(productVO);
 		model.addAttribute("productListAll",ProductListAll);
+//		List<ReplyVO> readReply = replyService.readReply(replyvo);
 		
+		List<ReplyVO> replyList = replyService.replyList(replyvo);
+		model.addAttribute("replyList",replyList);
 		
-//		List<ReplyVO> replyList = replyService.readReply(vo.getRecipe_index());
-//		model.addAttribute("reply",replyList);
+//		System.out.println(replyvo);
+		System.out.println(replyList);
 		
 		return "recipe/recipeview";
 	}

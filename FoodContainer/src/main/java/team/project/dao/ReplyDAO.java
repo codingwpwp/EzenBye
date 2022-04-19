@@ -16,14 +16,28 @@ public class ReplyDAO {
 	
 	private static final String Namespace = "team.project.mapper.replyMapper";
 	//댓글 목록
-	public List<ReplyVO> readReply(int reply_index) throws Exception{
-		return sqlSession.selectList(Namespace+".readReply",reply_index);
+	public List<ReplyVO> replyList(ReplyVO replyvo) throws Exception{
+		return sqlSession.selectList(Namespace+".replyList",replyvo);
 	}
 	
 	//댓글 작성
 	public void writeReply(ReplyVO vo) throws Exception{
 		sqlSession.insert(Namespace+".writeReply",vo);
 	}
+	//댓글 총 개수
+	public int countReply() throws Exception{
+		return sqlSession.selectOne(Namespace+".countReply");
+	}
 	
 	
+	
+	//댓글 수정
+	public void updateReply(ReplyVO vo) throws Exception{
+		sqlSession.update(Namespace+".updateReply",vo);
+	}
+	
+	//댓글 삭제
+	public void deleteReply(ReplyVO vo) throws Exception{
+		sqlSession.delete(Namespace+".deleteReply",vo);
+	}
 }

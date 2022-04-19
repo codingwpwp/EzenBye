@@ -79,8 +79,11 @@
                             <c:forEach items="${recipeList}" var="list">	
 							<div class="col">
 								<div class="card h-100">
+								
+								<%-- <c:url value="${list.thumbnail_image}" var="img" />
+								<c:out value="${img}"/> --%>
 									<img
-										src="<%=request.getContextPath()%>/resources/img/recipe/${list.thumbnail_image}"
+										src="<%=request.getContextPath()%>/resources/img/recipe/<c:out value="${img }"/>"
 										class="card-img-top" alt="${list.thumbnail_image}">
 									<div class="card-body">
 										<h6 class="card-title">
@@ -92,7 +95,7 @@
 										<div class="row recipe-text">
 											<div class="col">추천수(<c:out value="${list.thumb}"/>)</div>
 											<div class="col">조회수(<c:out value="${list.hit}"/>)</div>
-											<div class="col">댓글(3)</div>
+											<div class="col">댓글(<c:out value="${list.reply_index}"/>)</div>
 										</div>
 									</div>
 								</div>

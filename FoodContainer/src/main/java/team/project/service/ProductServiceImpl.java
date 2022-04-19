@@ -36,9 +36,9 @@ public class ProductServiceImpl implements ProductService {
 		return prodcutListAll;
 	}
 	@Override
-	public List<ProductVO> productListAll2(ProductFilterVO productFilterVO) throws Exception {
+	public List<ProductVO> productListAll2(List<ProductFilterVO> filterList) throws Exception {
 		
-		List<ProductVO> prodcutListAll = productDao.productListAll2(productFilterVO);
+		List<ProductVO> prodcutListAll = productDao.productListAll2(filterList);
 		
 		return prodcutListAll;
 	}
