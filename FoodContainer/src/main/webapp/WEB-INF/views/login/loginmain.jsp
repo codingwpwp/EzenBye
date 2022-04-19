@@ -35,14 +35,7 @@
 		<div class="row">
 			<div class="col-lg-2 d-none d-lg-block"></div>
 
-			<!--
-                id="navLeftMenu"인 현재 주석 바로 아래의 태그는 페이지의 종류에 따른 왼쪽메뉴.
-                네비게이션 바가 펼쳐질 때 알아서 태그가 안보이도록 설정.
-                필요시에만 div태그 사이에 코드를 작성.
-                작성시 border border-dark는 구분용으로만 작성했기 때문에 알아서 지우고 작업.
-                작성하지 않는 경우는 절대 건들지 않음.
-                base.js에 id="navLeftMenu"와 관련된 코드가 작성되어있음.
-            -->
+
 			<div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark"
 				id="navLeftMenu"></div>
 
@@ -52,7 +45,7 @@
 	</nav>
 
 	<!-- 섹션 -->
-	<section class="mt-1">
+	<section>
 		<div class="row">
 
 			<!-- 왼쪽 사이드메뉴 -->
@@ -63,13 +56,6 @@
 			<!-- 메인 -->
 			<div class="col-12 col-sm-9 col-md-10 col-lg-8">
 				<article id="mainSection">
-
-					<!--
-                        헤딩.
-                        필요하지 않는 사람은 <div>태그를 삭제.
-                        필요한 사람은 <div>태그에 작성.
-                    -->
-
 
 					<form action="loginmain.do" name="frm" class="loginfrm" method="post">
 						<div class="container">

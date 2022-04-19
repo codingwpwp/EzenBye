@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-                                            
+                                                
+    
     
     
     
@@ -10,7 +11,8 @@
     
     
     <wb-module deploy-name="controller-1.0.0-BUILD-SNAPSHOT">
-                                                                                        
+                                                                                                
+        
         
         
         
@@ -21,11 +23,12 @@
         
         
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
-                                                                                        
+                                                                                                
+        
         
         
         
@@ -36,8 +39,10 @@
         
         
         <property name="context-root" value="controller"/>
+                
         <property name="java-output-path" value="/FoodContainer/target/classes"/>
-                                                                                    
+                                                                                            
+    
     
     
     
@@ -48,7 +53,8 @@
     
     
     </wb-module>
-                                        
+                                            
+
 
 
 
