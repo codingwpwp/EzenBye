@@ -80,10 +80,9 @@
 							<div class="col">
 								<div class="card h-100">
 								
-								<%-- <c:url value="${list.thumbnail_image}" var="img" />
-								<c:out value="${img}"/> --%>
+								
 									<img
-										src="<%=request.getContextPath()%>/resources/img/recipe/<c:out value="${img }"/>"
+										src="<%=request.getContextPath()%>/resources/img/recipe/${list.thumbnail_image}"
 										class="card-img-top" alt="${list.thumbnail_image}">
 									<div class="card-body">
 										<h6 class="card-title">

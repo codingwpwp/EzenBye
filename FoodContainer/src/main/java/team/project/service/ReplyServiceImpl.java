@@ -27,4 +27,17 @@ public class ReplyServiceImpl implements ReplyService{
 	public int countReply() throws Exception{
 		return replyDao.countReply();
 	}
+	
+	//댓글 수정
+	@Override
+	public void updateReply(ReplyVO vo) throws Exception{
+		replyDao.updateReply(vo);
+	}
+		
+	//댓글 삭제
+	@Override
+	public void deleteReply(ReplyVO vo)throws Exception{
+		replyDao.deleteReply(vo);
+	}
+	
 }
