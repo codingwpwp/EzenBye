@@ -58,7 +58,7 @@
                 <article id="mainSection \">
                     <!-- 실질적인 메인 내용 -->
                     
-                    <div class="col-md-12">
+                    <form name="frm" action="purchase/member.do" method="post" class="col-md-12">
 				 
 			        <p class="fs-6 shopbasket-fs6">장바구니</p>
 			        <hr />
@@ -139,7 +139,7 @@
 					<c:if test="${list.bigSort == '냉동식품' && list.del_YN == 'N'}">
 						<div class="row d-flex align-items-center shopbasket-card">
 							<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-checkbox">
-								<input class="form-check-input" type="checkbox" id="iceCheckbox${status.index}" value="${list.cart_index}" name="shopbasket">
+								<input class="form-check-input" type="checkbox" id="iceCheckbox${status.index}" value="${list.cart_index}" name="cart_index" onclick="itemSum(this)">
 							</div>
 							<div class="col-lg-8 col-md-8">
 								<div class="h-100 p-2 bg-light border rounded-3 card-good">
@@ -150,31 +150,31 @@
 						        			<img src="<%=request.getContextPath() %>/resources/img/${list.brand}/${list.middleSort}/${list.thumbnail_image}" class="img-thumbnail" alt="${list.product_name}">
 						        		</div>
 						        		<div class="col-sm-9 d-flex align-items-start flex-column mb-3">
-									    	<div class="mb-auto p-2">${list.brand} ${list.product_name}</div>
+									    	<div class="mb-auto p-2 confirmProductName">${list.brand} ${list.product_name}</div>
 			  								<c:if test="${list.sale_price == -1}">
-			  									<div class="p-2 productPrice"><fmt:formatNumber value="${list.origin_price * list.cart_count}" pattern="#,###" />원</div>
+			  									<div class="p-2 productPrice"><span class="productPrice3"><fmt:formatNumber value="${list.origin_price * list.cart_count}" pattern="#,###" /></span>원</div>
 			  									<input type="hidden" name="origin_price" value="${list.origin_price}" />
 			  								</c:if>
 			  								<c:if test="${list.sale_price != -1}">
-			  									<div class="p-2 productPrice2"><fmt:formatNumber value="${list.sale_price * list.cart_count}" pattern="#,###" />원</div>
+			  									<div class="p-2 productPrice2"><span class="productPrice3"><fmt:formatNumber value="${list.sale_price * list.cart_count}" pattern="#,###" /></span>원</div>
 			  									<input type="hidden" name="sale_price" value="${list.sale_price}" />
 			  								</c:if>
 						        		</div>
 						        	</div>
 						        	</a>
 					        	
-						        	<form action="purchase/member.do" method="post" class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 shopbasket-btn">
-						        	  <input type="hidden" name="cart_index" value="${list.cart_index}" />
+						        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 shopbasket-btn">
 									  <button class="btn btn-secondary col-lg-3 col-md-4" type="button" onclick="shopbasketDelete(this)">삭제</button>
-									  <button class="btn btn-dark col-lg-3 col-md-4" type="submit">바로 구매</button>
-									</form>
+									  <button class="btn btn-dark col-lg-3 col-md-4" type="button" onclick="OneBuyProduct(this)">바로 구매</button>
+									</div>
 					        	</div>
 							</div>
 							<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-number">
 								<i class="bi bi-dash shopbasket-icon" onclick="minusCount(this)"></i>&nbsp; 
 									<div>${list.cart_count}</div>
-									<input type="hidden" value="${list.cart_index}">
+									<input type="hidden" value="${list.cart_index}" />
 								&nbsp; <i class="bi bi-plus shopbasket-icon" onclick="plusCount(this)"></i>
+									<input type="hidden" value="${list.inventory}" />
 							</div>
 						</div>
 					</c:if>
@@ -249,7 +249,7 @@
 					<c:if test="${list.bigSort == '즉석식품' && list.del_YN == 'N'}">
 						<div class="row d-flex align-items-center shopbasket-card">
 							<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-checkbox">
-								<input class="form-check-input" type="checkbox" id="iceCheckbox${status.index}" value="${list.cart_index}" name="shopbasket">
+								<input class="form-check-input" type="checkbox" id="iceCheckbox${status.index}" value="${list.cart_index}" name="cart_index" onclick="itemSum(this)">
 							</div>
 							<div class="col-lg-8 col-md-8">
 								<div class="h-100 p-2 bg-light border rounded-3 card-good">
@@ -260,31 +260,31 @@
 						        			<img src="<%=request.getContextPath() %>/resources/img/${list.brand}/${list.middleSort}/${list.thumbnail_image}" class="img-thumbnail" alt="${list.product_name}">
 						        		</div>
 						        		<div class="col-sm-9 d-flex align-items-start flex-column mb-3">
-									    	<div class="mb-auto p-2">${list.brand} ${list.product_name}</div>
+									    	<div class="mb-auto p-2 confirmProductName">${list.brand} ${list.product_name}</div>
 			  								<c:if test="${list.sale_price == -1}">
-			  									<div class="p-2 productPrice"><fmt:formatNumber value="${list.origin_price * list.cart_count}" pattern="#,###" />원</div>
+			  									<div class="p-2 productPrice"><span class="productPrice3"><fmt:formatNumber value="${list.origin_price * list.cart_count}" pattern="#,###" /></span>원</div>
 			  									<input type="hidden" name="origin_price" value="${list.origin_price}" />
 			  								</c:if>
 			  								<c:if test="${list.sale_price != -1}">
-			  									<div class="p-2 productPrice2"><fmt:formatNumber value="${list.sale_price * list.cart_count}" pattern="#,###" />원</div>
+			  									<div class="p-2 productPrice2"><span class="productPrice3"><fmt:formatNumber value="${list.sale_price * list.cart_count}" pattern="#,###" /></span>원</div>
 			  									<input type="hidden" name="sale_price" value="${list.sale_price}" />
 			  								</c:if>
 						        		</div>
 						        	</div>
 						        	</a>
 					        	
-						        	<form action="purchase/member.do" method="post" class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 shopbasket-btn">
-						        	  <input type="hidden" name="cart_index" value="${list.cart_index}" />
+						        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 shopbasket-btn">
 									  <button class="btn btn-secondary col-lg-3 col-md-4" type="button" onclick="shopbasketDelete(this)">삭제</button>
-									  <button class="btn btn-dark col-lg-3 col-md-4" type="submit">바로 구매</button>
-									</form>
+									  <button class="btn btn-dark col-lg-3 col-md-4" type="button" onclick="OneBuyProduct(this)">바로 구매</button>
+									</div>
 					        	</div>
 							</div>
 							<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-number">
 								<i class="bi bi-dash shopbasket-icon" onclick="minusCount(this)"></i>&nbsp; 
 									<div>${list.cart_count}</div>
-									<input type="hidden" value="${list.cart_index}">
+									<input type="hidden" value="${list.cart_index}" />
 								&nbsp; <i class="bi bi-plus shopbasket-icon" onclick="plusCount(this)"></i>
+									<input type="hidden" value="${list.inventory}" />
 							</div>
 						</div>
 					</c:if>
@@ -294,14 +294,14 @@
 					
 					</div>
 					
-					<div class="d-flex justify-content-center shopbasket-sum">선택 상품 합계 : 40,000원</div>
+					<div class="d-flex justify-content-center shopbasket-sum">선택 상품 합계 :&nbsp;<span class="shopbasket-sum2"> 0</span>원</div>
 					
 					<div class="d-flex justify-content-center shopbasket-btn2">
-						<button type="button" class="btn btn-outline-dark col-5">구매하기</button>
+						<button type="button" class="btn btn-outline-dark col-5" onclick="buyProduct(this)">구매하기</button>
 					</div>
 						
       				
-      				
+      				</form>
                 </article>
             </div>
             
