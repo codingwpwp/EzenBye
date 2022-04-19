@@ -46,38 +46,50 @@
 	  	//전체식품
 	  	var all = $("button[name='lAsideProductAll']");
 		//냉동식품
-		var ice = $("input[name='asideIceAll']");
+		var iceAll = $("input[name='asideIceAll']");
+		var ice = $("input[name='asideIce']");
 		//즉석식품
-		var product = $("input[name='asideProductAll']");
+		var productAll = $("input[name='asideProductAll']");
+		var product = $("input[name='asideProduct']");
 		//브랜드
-		var brand = $("input[name='asideBrandAll']");
+		var brandAll = $("input[name='asideBrandAll']");
+		var brand = $("input[name='asideBrand']");
 		//가격
 		var price = $("input[name='asidePrice']");
 		
-		if(ice.is(":checked") && product.is(":checked") && brand.is(":checked") && price.is(":checked")){
-			ice.click();
-			product.click();
-			brand.click();
-			all.click();
+		if(!(iceAll.is(":checked")) && !(productAll.is(":checked")) && !(brandAll.is(":checked")) && !(price.is(":checked"))){
+			iceAll.prop("checked",true);
+			ice.prop("checked",true);
+			productAll.prop("checked",true);
+			product.prop("checked",true);
+			brandAll.prop("checked",true);
+			brand.prop("checked",true);
+			price.prop("checked",true);
 		}
 		
 	  //모바일 화면 - 처음 또는 새로고침 시 전체선택
 	 	//전체식품
 	  	var allM = $("button[name='lAsideProductAllM']");
 		//냉동식품
-		var iceM = $("input[name='asideIceAllM']");
+		var iceAllM = $("input[name='asideIceAllM']");
+		var iceM = $("input[name='asideIceM']");
 		//즉석식품
-		var productM = $("input[name='asideProductAllM']");
+		var productAllM = $("input[name='asideProductAllM']");
+		var productM = $("input[name='asideProductM']");
 		//브랜드
-		var brandM = $("input[name='asideBrandAllM']");
+		var brandAllM = $("input[name='asideBrandAllM']");
+		var brandM = $("input[name='asideBrandM']");
 		//가격
 		var priceM = $("input[name='asidePriceM']");
 		
-		if(iceM.is(":checked") && productM.is(":checked") && brandM.is(":checked") && priceM.is(":checked")){
-			iceM.click();
-			productM.click();
-			brandM.click();
-			allM.click();
+		if(!(iceAllM.is(":checked")) && !(productAllM.is(":checked")) && !(brandAllM.is(":checked")) && !(priceM.is(":checked"))){
+			iceAllM.prop("checked",true);
+			iceM.prop("checked",true);
+			productAllM.prop("checked",true);
+			productM.prop("checked",true);
+			brandAllM.prop("checked",true);
+			brandM.prop("checked",true);
+			priceM.prop("checked",true);
 		}
 	}
 	
@@ -605,33 +617,28 @@
 		
 		for(var i=0; i<ice.length; i++){
 			if(ice.eq(i).is(":checked")){
-				middleSort += ice.eq(i).next().html() + "|";
+				middleSort += ice.eq(i).next().html() + " ";
 			}
 		}
 		
 		for(var i=0; i<product.length; i++){
 			if(product.eq(i).is(":checked")){
-				middleSort += product.eq(i).next().html() + "|";
+				middleSort += product.eq(i).next().html() + " ";
 			}
 		}
 		
 		for(var i=0; i<brandList.length; i++){
 			if(brandList.eq(i).is(":checked")){
-				brand += brandList.eq(i).next().html() + "|";
+				brand += brandList.eq(i).next().html() + " ";
 			}
 		}
 		
 		for(var i=0; i<priceList.length; i++){
 			if(priceList.eq(i).is(":checked")){
-				price += priceList.eq(i).val() + "|";
+				price += priceList.eq(i).val();
 			}
 		}
 		
-		var middleSortArr = $.trim(middleSort.split("|"));
-		var brandArr = $.trim(brand.split("|"));
-		var priceArr = $.trim(price.split("|"));
-		
-		/*
 		var mainSectionHtml = "<!-- pc버전 -->";
 			mainSectionHtml += "<article class='pList'>";
 			mainSectionHtml += "<div class='fs-5 my-2 fw-bold topText'>전체상품</div>";
@@ -715,7 +722,7 @@
 			mainSectionHtml += "</article>";
 									  	
 									
-				
+			/*	
 				<!-- 모바일 버전 -->	
 				<article class="pListM">
 					<div class="fs-5 my-2 fw-bold topText">전체상품</div>
@@ -799,10 +806,13 @@
 		*/
 		
 		$.ajax({
-			url : "productList.do",
-			data : "middleSort="+middleSortArr+"&brand="+brandArr+"&price="+priceArr,
+			url : "productFilter.do",
+			data : "middleSort="+middleSort+"&brand="+brand+"&price="+price,
 			success : function(data){
-				console.log("ok");
+				console.log(data);
+			},
+			error : function() {
+				console.log('error');			
 			}
 		});
 		

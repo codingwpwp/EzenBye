@@ -5,12 +5,33 @@
  
 <mapper namespace="team.project.mapper.productMapper">
 
-    <select id="ProductListAll" resultType="ProductVO" parameterType="team.project.vo.ProductFilterVO">
+    <select id="ProductListAll" resultType="ProductVO">
     	SELECT *
     	FROM product
-    	WHERE del_YN = 'N'
-    	
-    	ORDER BY product_date DESC
+    	WHERE del_YN = 'N' 
+    	    	
+    </select>
+    
+    <select id="ProductFilter" resultType="ProductVO" parameterType="list">
+    	SELECT *
+    	FROM product
+    	WHERE del_YN = 'N' 
+    		
+    	<if test="list != null">
+    		and middleSort in (<foreach collection="list" item="filter" separator=",">#{filter.middleSort}</foreach>) 
+    		and brand in (<foreach collection="list" item="filter" separator=",">#{filter.brand}</foreach>) 
+	    	<!-- 
+	    	<foreach collection="list" item="filter">
+		    	<if test="#{filter.price != null and filter.price.equals('0')}">
+		    		ORDER BY origin_price DESC
+		    	</if>
+		    	<if test="#{filter.price != null and filter.price.equals('1')}">
+		    		ORDER BY origin_price ASC
+		    	</if>
+	    	</foreach>
+	    	 -->
+    	</if>
+    	    	
     </select>
 
     <select id="view" resultType="ProductVO">

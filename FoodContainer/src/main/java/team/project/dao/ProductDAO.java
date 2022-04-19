@@ -25,8 +25,8 @@ public class ProductDAO {
 	public List<ProductVO> productListAll(ProductVO productVO) throws Exception{
 		return sqlSession.selectList(Namespace+".ProductListAll",productVO);
 	}
-	public List<ProductVO> productListAll2(ProductFilterVO productFilterVO) throws Exception{
-		return sqlSession.selectList(Namespace+".ProductListAll",productFilterVO);
+	public List<ProductVO> productListAll2(List<ProductFilterVO> filterList) throws Exception{
+		return sqlSession.selectList(Namespace+".ProductFilter",filterList);
 	}
 	//상세보기
 	public ProductVO view(String index) {
