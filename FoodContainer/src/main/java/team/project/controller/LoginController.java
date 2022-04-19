@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -17,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import nl.captcha.Captcha;
+import nl.captcha.servlet.CaptchaServletUtil;
 import team.project.service.MemberService;
-import team.project.util.CaptchaImage;
-import team.project.util.CaptchaNkey;
 import team.project.vo.MemberVO;
 
 @Controller
@@ -33,14 +34,30 @@ public class LoginController {
 
 	// 로그인 페이지로 이동
 	@RequestMapping(value = "loginmain.do", method = RequestMethod.GET)
-	public String login(Locale locale, Model model,HttpSession session) throws Exception{
-		CaptchaNkey c = new CaptchaNkey();
-		String key = c.main(null);
-		System.out.println(key);
+	public String login(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
-		CaptchaImage cl = new CaptchaImage();
-		cl.main(key);
-		return "login/loginmain";
+		// 세션 소환
+		HttpSession session =request.getSession();
+		
+		if(session.getAttribute("member") != null) {
+			return "redirect:index.do";
+		}else {
+
+			/*
+			 * Captcha captcha = new Captcha.Builder(148, 48) .addText() // default: 5개의
+			 * 숫자+문자 .addNoise().addNoise().addNoise().addNoise().addNoise().addNoise() //
+			 * 시야 방해 라인 3개 .addBackground() // 기본 하얀색 배경 .build();
+			 * 
+			 * response.setHeader("Cache-Control", "no-cache");
+			 * response.setDateHeader("Expires", 0); response.setHeader("Pragma",
+			 * "no-cache"); response.setDateHeader("Max-Age", 0);
+			 * response.setContentType("image/png"); CaptchaServletUtil.writeImage(response,
+			 * captcha.getImage()); // 이미지 그리기 session.setAttribute("captcha",
+			 * captcha.getAnswer()); // 값 저장
+			 */
+	        return "login/loginmain";
+		}
+		
 	}
 	
 	// 로그인 검증 과정
