@@ -2,6 +2,7 @@ package team.project.service;
 
 import java.util.List;
 
+
 import team.project.vo.ReplyVO;
 
 public interface ReplyService {
@@ -14,4 +15,11 @@ public interface ReplyService {
 	
 	//댓글 총 개수
 	public int countReply() throws Exception;
+	
+	//댓글 수정
+	public void updateReply(ReplyVO vo) throws Exception; 
+	
+	//댓글 삭제
+	public void deleteReply(ReplyVO vo)throws Exception;
+	
 }

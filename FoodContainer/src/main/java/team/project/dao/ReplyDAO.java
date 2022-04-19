@@ -30,7 +30,6 @@ public class ReplyDAO {
 	}
 	
 	
-	
 	//댓글 수정
 	public void updateReply(ReplyVO vo) throws Exception{
 		sqlSession.update(Namespace+".updateReply",vo);

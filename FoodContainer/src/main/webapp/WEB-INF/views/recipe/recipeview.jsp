@@ -206,10 +206,16 @@
 							</div>
 							<div class="col-md-2 col-sm-2 col-3 report">
 								<a href="#">신고<i class="bi bi-brightness-alt-high"></i></a>
-								<a>수정</a>
+								<c:if test="${member.member_index==read.member_index}">
+							<!-- 	<a hrep="recipeview_reply_modify.do" onclick="recipeview_reply_modify.do">수정</a> -->
+								<input type="button" value="수정" onclick="updateReply();">
 								<a>삭제</a>
+								</c:if>
 							</div>
-							<div name="replycontent" class="col-12 replycontent">┗ &nbsp;${re.contents}</div>
+							<div name="replycontent" class="col-12 replycontent">┗ &nbsp;${re.contents}
+							<input type="hidden" value="${re.contents}">
+							
+							</div>
 								
 							 </c:forEach>	 
 						</div>
