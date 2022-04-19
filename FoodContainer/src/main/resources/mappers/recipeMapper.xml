@@ -7,7 +7,9 @@
 
 <!-- 레시피 목록 리스트 -->
  <select id="recipeList" resultType="RecipeVO" parameterType="PagingUtil">
-	SELECT * FROM recipe where del_yn = 'N' 
+	SELECT * , (select count(reply_index)
+          from reply
+		 where recipe_index=recipe.recipe_index) as reply_index FROM recipe where del_yn = 'N' 
 	<if test="searchType != null and searchType.equals('title')">
     		AND title LIKE CONCAT('%',#{searchValue},'%')
         </if>
@@ -46,6 +48,9 @@ select *
     , (select concat(concat(concat(concat(brand,'/'),middleSort),'/'),thumbnail_image) 
           from product 
 		 where product_index=recipe.product_index3) as product_img3 
+	, (select count(reply_index)
+          from reply
+		 where recipe_index=recipe.recipe_index) as reply_index	 
 	from recipe where recipe_index =#{recipe_index}
 
 </select>
