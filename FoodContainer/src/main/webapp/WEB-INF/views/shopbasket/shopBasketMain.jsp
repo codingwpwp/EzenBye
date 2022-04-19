@@ -153,11 +153,11 @@
 									    	<div class="mb-auto p-2 confirmProductName">${list.brand} ${list.product_name}</div>
 			  								<c:if test="${list.sale_price == -1}">
 			  									<div class="p-2 productPrice"><span class="productPrice3"><fmt:formatNumber value="${list.origin_price * list.cart_count}" pattern="#,###" /></span>원</div>
-			  									<input type="hidden" name="origin_price" value="${list.origin_price}" />
+			  									<input type="hidden" name="origin_price" class="productPrice4" value="${list.origin_price}" />
 			  								</c:if>
 			  								<c:if test="${list.sale_price != -1}">
 			  									<div class="p-2 productPrice2"><span class="productPrice3"><fmt:formatNumber value="${list.sale_price * list.cart_count}" pattern="#,###" /></span>원</div>
-			  									<input type="hidden" name="sale_price" value="${list.sale_price}" />
+			  									<input type="hidden" name="sale_price" class="productPrice4" value="${list.sale_price}" />
 			  								</c:if>
 						        		</div>
 						        	</div>
@@ -263,11 +263,11 @@
 									    	<div class="mb-auto p-2 confirmProductName">${list.brand} ${list.product_name}</div>
 			  								<c:if test="${list.sale_price == -1}">
 			  									<div class="p-2 productPrice"><span class="productPrice3"><fmt:formatNumber value="${list.origin_price * list.cart_count}" pattern="#,###" /></span>원</div>
-			  									<input type="hidden" name="origin_price" value="${list.origin_price}" />
+			  									<input type="hidden" name="origin_price" class="productPrice4" value="${list.origin_price}" />
 			  								</c:if>
 			  								<c:if test="${list.sale_price != -1}">
 			  									<div class="p-2 productPrice2"><span class="productPrice3"><fmt:formatNumber value="${list.sale_price * list.cart_count}" pattern="#,###" /></span>원</div>
-			  									<input type="hidden" name="sale_price" value="${list.sale_price}" />
+			  									<input type="hidden" name="sale_price" class="productPrice4" value="${list.sale_price}" />
 			  								</c:if>
 						        		</div>
 						        	</div>
