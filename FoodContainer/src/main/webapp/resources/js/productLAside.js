@@ -639,7 +639,6 @@
 			}
 		}
 		
-		
 		var mainSectionHtml = "<!-- pc버전 -->";
 			mainSectionHtml += "<article class='pList'>";
 			mainSectionHtml += "<div class='fs-5 my-2 fw-bold topText'>전체상품</div>";
@@ -810,7 +809,7 @@
 			url : "productFilter.do",
 			data : "middleSort="+middleSort+"&brand="+brand+"&price="+price,
 			success : function(data){
-				//$(".pList").html(mainSectionHtml);
+				console.log(data);
 			},
 			error : function() {
 				console.log('error');			

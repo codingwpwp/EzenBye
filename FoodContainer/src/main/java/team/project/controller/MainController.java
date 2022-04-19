@@ -101,9 +101,9 @@ public class MainController {
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
 	public String productList(Locale locale, Model model, ProductVO productVO, HttpServletRequest request, DibsVO dibsVO) throws Exception {
 	
-		//List<ProductVO> ProductListAll = productService.productListAll(productVO);
+		List<ProductVO> ProductListAll = productService.productListAll(productVO);
 			
-		//model.addAttribute("productListAll",ProductListAll);
+		model.addAttribute("productListAll",ProductListAll);
 		
 		List<DibsVO> dibsListAll = dibsService.dibsListAll(dibsVO);
 		
@@ -338,7 +338,7 @@ public class MainController {
 	
 	@RequestMapping(value = "productFilter.do", method = RequestMethod.GET)
 	@ResponseBody
-	public String productFilter(Locale locale, Model model, ProductVO productVO, ProductFilterVO productFilterVO) throws Exception {
+	public ProductFilterVO productFilter(Locale locale, Model model, ProductVO productVO, ProductFilterVO productFilterVO) throws Exception {
 	
 		List<ProductFilterVO> filterList = new ArrayList<>();
 		
@@ -372,9 +372,9 @@ public class MainController {
 			
 			List<ProductVO> ProductListAll = productService.productListAll2(filterList);
 			
-			model.addAttribute("productListAll",ProductListAll);
+			model.addAttribute("productFilter",ProductListAll);
 		}
 		
-		return "product/productList";
+		return productFilterVO;
 	}
 }
