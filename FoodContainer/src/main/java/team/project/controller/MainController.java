@@ -338,7 +338,7 @@ public class MainController {
 	
 	@RequestMapping(value = "productFilter.do", method = RequestMethod.GET)
 	@ResponseBody
-	public ProductFilterVO productFilter(Locale locale, Model model, ProductVO productVO, ProductFilterVO productFilterVO) throws Exception {
+	public String productFilter(Locale locale, Model model, ProductVO productVO, ProductFilterVO productFilterVO) throws Exception {
 	
 		List<ProductFilterVO> filterList = new ArrayList<>();
 		
@@ -375,6 +375,6 @@ public class MainController {
 			model.addAttribute("productFilter",ProductListAll);
 		}
 		
-		return productFilterVO;
+		return "Product/productList";
 	}
 }
