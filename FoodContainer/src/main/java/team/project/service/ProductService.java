@@ -39,6 +39,9 @@ public interface ProductService {
 	
 	/*여기서 부터는 관리자페이지*/
 	
+	// 관리자메인페이지 최고 인기매출 상품 3개 뿌리기
+	List<ProductVO> adminMainProductList() throws Exception;	
+	
 	// 상품 조회
 	List<ProductVO> adminProductList(SearchVO searchvo, int nowPage) throws Exception;
 	PagingUtil adminProductPaging(SearchVO searchvo, int nowPage) throws Exception;
@@ -62,4 +65,7 @@ public interface ProductService {
 						   MultipartFile detailImage,
 						   HttpServletRequest request
 						  ) throws Exception;
+	
+	// 상품 복구
+	void adminProductDelYNisN(String product_index) throws Exception;
 }

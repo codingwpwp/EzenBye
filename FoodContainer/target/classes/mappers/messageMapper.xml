@@ -59,6 +59,15 @@
 		read_yn = 'Y'
 		WHERE message_index = #{message_index} 
 	</update>
+	
+	<insert id="messageInsert" parameterType="MessageVO">
+		INSERT INTO message(
+			member_index, contents, title
+		)
+		VALUES(
+			#{member_index}, #{contents}, #{title}
+		)
+	</insert>
  	
 </mapper>
 

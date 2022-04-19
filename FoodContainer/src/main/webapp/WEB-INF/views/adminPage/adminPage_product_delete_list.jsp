@@ -57,94 +57,117 @@
 
                     <!-- 상품 테이블 -->
                     <div class="table-responsive">
-                        <table class="table table-hover centerTable" style="min-width: 600px;" id="productTable">
+                            <table class="table table-hover centerTable" style="min-width: 600px;" id="productTable">
 
-                            <colgroup></colgroup>
+                                <colgroup></colgroup>
 
-                            <thead>
-                                <tr>
-                                    <th scope="col">상품 번호</th>
-                                    <th scope="col">상품 분류</th>
-                                    <th scope="col">브랜드</th>
-                                    <th scope="col">상품 이름</th>
-                                    <th scope="col">재고</th>
-                                    <th scope="col">관리</th>
-                                </tr>
-                            </thead>
-                            
-                            <tbody>
-
-                                <tr>
-                                    <th>1</th>
-                                    <td>냉동식품</td>
-                                    <td>CJ</td>
-                                    <td class="col5">
-                                        <a href="product_delete_detail.do" class="link-primary">무말랭이무말랭이무말랭이무말랭이무말랭이무말랭이무말랭이무말</a>
-                                    </td>
-                                    <td>3</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-secondary py-0">복구</button>
-                                    </td>
-                                </tr>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">상품 번호</th>
+                                        <th scope="col">상품 분류</th>
+                                        <th scope="col">브랜드</th>
+                                        <th scope="col">상품 이름</th>
+                                        <th scope="col">재고</th>
+                                        <th scope="col">관리</th>
+                                    </tr>
+                                </thead>
                                 
-                                <tr>
-                                    <th>1</th>
-                                    <td>냉동식품</td>
-                                    <td>CJ</td>
-                                    <td class="col5">
-                                        <a href="#" class="link-primary">건지산방사능맛수통 나무 다리어카센터</a>
-                                    </td>
-                                    <td>3</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-secondary py-0">복구</button>
-                                    </td>
-                                </tr>
-                                
-                            </tbody>
-                        </table>
+                                <tbody>
+                                <c:if test="${not empty productList}">
+	                                <c:forEach items="${productList}" var="product">
+                               		<tr>
+                                        <th>${product.product_index}</th>
+                                        <td>${product.bigSort}</td>
+                                        <td>${product.brand}</td>
+                                        <td class="col5">
+                                            <a href="product_delete_detail.do?product_index=${product.product_index}&searchValue=${paging.searchValue}&nowPage=${paging.nowPage}" class="link-primary">${product.product_name}</a>
+                                        </td>
+                                        <td>${product.inventory}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-outline-primary btn-sm px-1 py-0" onclick="productDelN('${product.product_index}')">복구</button>
+                                        </td>
+                                   	</tr>
+									</c:forEach>
+								</c:if>
+								<c:if test="${empty productList}">
+									<tr>
+										<td colspan="6" class="display-2 fw-bold p-3">
+											관련 상품이 없습니다.
+										</td>
+									</tr>
+                                </c:if>
+                                </tbody>
+                            </table>
                     </div>
 
-                    <!-- 검색&페이징 -->
+					<!-- 검색&페이징 -->
                     <div id="searchMember" class="row">
 
                         <!-- 검색 -->
-                        <form method="get" action="#" class="col-12 col-md-8 row d-flex align-items-center justify-content-center">
-
+                        <form method="get" action="product_delete_list.do" class="col-12 col-md-8 row d-flex align-items-center justify-content-center">
+							<!-- 상품 이름 -->	
                             <div class="col-3 d-flex justify-content-end">
-                                <select class="form-select form-select-sm p-1" name="searchType" id="searchType">
-                                    <option value="productName">상품 이름</option>
+                                <select class="form-select form-select-sm p-1" id="searchType">
+                                    <option>상품 이름</option>
                                 </select>
                             </div>
-
+							<!-- 입력창 -->
                             <div class="col-6">
-                                <input type="text" class="form-control" name="searchValue" placeholder="검색어를 입력하세요" value="">
+                                <input type="text" class="form-control" name="searchValue" placeholder="검색어를 입력하세요" maxlength="9" value='<c:if test="${not empty paging.searchValue and paging.searchValue ne ''}">${paging.searchValue}</c:if>'>
                             </div>
-                            
+                            <!-- 페이지(히든) -->
+                            <input type="hidden" name="nowPage" value="1">
+                            <!-- 검색버튼 -->
                             <div class="col-3 d-flex justify-content-start">
-                                <button type="submit" class="btn btn-outline-primary btn-sm">검색</button>
-                            </div>      
-
+                                <button type="submit" class="btn btn-outline-primary">검색</button>
+                            </div>
                         </form>
 
                         <!-- 페이징 -->
                         <ul class="col-12 col-md-4 d-flex align-items-center justify-content-center pagination mt-2 my-md-0">
-
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&lt;</span>
-                                </a>
-                            </li>
-
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&gt;</span>
-                                </a>
-                            </li>
-
+	                        <!-- <부분 -->
+							<c:if test="${paging.startPage > 1}">
+	                            <li class="page-item">
+	                                <a class="page-link" href="product_delete_list.do?searchValue=${paging.searchValue}&nowPage=${paging.startPage - 1}" aria-label="Previous">
+	                                    <span aria-hidden="true">&lt;</span>
+	                                </a>
+	                            </li>
+	                        </c:if>
+	                        <c:if test="${paging.startPage <= 1}">
+	                            <li class="page-item" style="visibility: hidden">
+	                                <a class="page-link" href="#" aria-label="Previous">
+	                                    <span aria-hidden="true"></span>
+	                                </a>
+	                            </li>
+	                        </c:if>
+	                        <!-- 각 페이지 -->
+							<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i" step="1">
+								<c:if test="${i != paging.nowPage}">
+									<li class="page-item">
+										<a class="page-link" href="product_delete_list.do?searchValue=${paging.searchValue}&nowPage=${i}">${i}</a>
+									</li>
+								</c:if>
+								<c:if test="${i == paging.nowPage}">
+									<li class="page-item active" aria-current="page">
+										<span class="page-link fw-bold">${i}</span>
+									</li>
+								</c:if>
+							</c:forEach>
+							<!-- >부분 -->
+							<c:if test="${paging.endPage != paging.lastPage}">
+	                            <li class="page-item">
+	                                <a class="page-link" href="product_delete_list.do?searchValue=${paging.searchValue}&nowPage=${paging.endPage + 1}" aria-label="Next">
+	                                    <span aria-hidden="true">&gt;</span>
+	                                </a>
+	                            </li>
+	                        </c:if>
+	                        <c:if test="${paging.startPage == paging.lastPage}">
+	                            <li class="page-item" style="visibility: hidden">
+	                                <a class="page-link" href="#" aria-label="Next">
+	                                    <span aria-hidden="true">&gt;</span>
+	                                </a>
+	                            </li>
+	                        </c:if>
                         </ul>
 
                     </div>
@@ -171,5 +194,12 @@
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/adminPage.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/adminPage_leftMenu.js"></script>
+    <script type="text/javascript">
+    window.onpageshow = function(event) {
+        if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+            location.reload();
+        } 
+    }
+    </script>
 </body>
 </html>

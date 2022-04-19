@@ -21,4 +21,6 @@ public interface MessageService {
 	void messageChooseRead(String message_index) throws Exception;
 	
 	void messageRead(int message_index) throws Exception;
+	
+	int messageInsert(MessageVO vo) throws Exception; 
 }

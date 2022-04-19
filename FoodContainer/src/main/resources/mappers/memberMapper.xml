@@ -6,7 +6,7 @@
 <mapper namespace="team.project.mapper.MemberMapper" >
  	<!--로그인 -->
  	<select id="Login" resultType="MemberVO" parameterType="MemberVO">
-        SELECT member_index, id, pw,name FROM member where id=#{id} and del_yn = 'N'
+        SELECT member_index, id, pw, name, position FROM member where id=#{id} and del_yn = 'N'
     </select>
     <!--아이디중복체크 -->
     <select id="idChk" resultType="int" parameterType="String">
@@ -97,7 +97,7 @@
     <select id="adminMemberListCount" resultType="int" parameterType="SearchVO">
     	SELECT COUNT(*)
     	FROM member
-    	WHERE del_yn = #{del_yn}
+    	WHERE del_yn = #{del_yn} AND position = '일반'
     	<if test="searchType != null and searchType.equals('id')">
     		AND id LIKE CONCAT('%',#{searchValue},'%')
         </if>
@@ -113,7 +113,7 @@
     <select id="adminMemberList" resultType="MemberVO" parameterType="PagingUtil">
     	SELECT member_index, id, nickname, name, join_date, del_date, del_reason
     	FROM member
-    	WHERE del_yn = #{del_yn}
+    	WHERE del_yn = #{del_yn} AND position = '일반'
     	<if test="searchType != null and searchType.equals('id')">
     		AND id LIKE CONCAT('%',#{searchValue},'%')
         </if>

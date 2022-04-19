@@ -71,6 +71,11 @@ public class MessageServiceImpl implements MessageService {
 		
 	}
 
+	@Override
+	public int messageInsert(MessageVO vo) throws Exception {
+		return messageDAO.messageInsert(vo);
+	}
+
 
 }
 

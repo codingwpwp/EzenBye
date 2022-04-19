@@ -16,6 +16,10 @@ public class BannerDAO {
 	
 	private static final String Namespace = "team.project.mapper.bannerMapper";
 	
+	public List<BannerVO> adminMainBanner() throws Exception {
+		return sqlSession.selectList(Namespace + ".adminMainBanner");
+	}
+	
 	public List<BannerVO> bannerList() throws Exception {
 		return sqlSession.selectList(Namespace + ".bannerList");
 	}

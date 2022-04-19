@@ -10,6 +10,8 @@ import team.project.vo.BannerVO;
 
 public interface BannerService {
 	
+	List<BannerVO> adminMainBanner() throws Exception;
+	
 	List<BannerVO> bannerList() throws Exception;
 	
 	int bannerInsert(BannerVO bannervo, MultipartFile bannerFile, HttpServletRequest request) throws Exception;

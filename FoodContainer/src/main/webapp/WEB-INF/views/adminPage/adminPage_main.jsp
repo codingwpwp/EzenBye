@@ -151,18 +151,25 @@
                                     </colgroup>
 
                                     <tbody>
-                                        <tr>
-                                            <td scope="row"><img src="<%=request.getContextPath()%>/resources/img/배너3.png" class="img-fluid"></td>
-                                            <td class="align-middle fw-bold">이것은 배너입니다</td>
+                                    <c:if test="${not empty bList}">
+	                                    <c:forEach items = "${bList}" var = "list">
+                                    	<tr>
+                                            <td scope="row">
+                                            	<c:if test="${list.link_YN == 'Y'}"><a href="${list.link}" target="blank"></c:if>
+                                            	<img src="<%=request.getContextPath()%>/resources/img/배너/${list.image}" class="img-fluid" title="${list.name}" alt="${list.name}">
+                                            	<c:if test="${list.link_YN == 'Y'}"></a></c:if>	
+                                           	</td>
+                                            <td>${list.name}</td>
                                         </tr>
-                                        <tr>
-                                            <td scope="row"><img src="<%=request.getContextPath()%>/resources/img/배너1.png" class="img-fluid"></td>
-                                            <td class="align-middle fw-bold">이것은 배너입니다2이벤트!!!</td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row"><img src="<%=request.getContextPath()%>/resources/img/배너3.png" class="img-fluid"></td>
-                                            <td class="align-middle fw-bold">무슨이벤트일까요저도잘...</td>
-                                        </tr>
+	                                    </c:forEach>
+                                    </c:if>
+                                    <c:if test="${empty bList}">
+	                                    <tr>
+		                                    <td colspan="2" class="display-6 fw-bold p-3" style="text-align: center;">
+												등록된 배너가 없습니다.
+											</td>
+	                                    </tr>
+                                    </c:if>
                                     </tbody>
 
                                 </table>
@@ -172,30 +179,39 @@
                             <!-- 최고매출 상품 -->
                             <div class="col-12 col-md-6">
                                 <div class="bg-primary bg-gradient bg-opacity-50 border border-bottom-0 rounded-top border-2 border-dark p-2">
-                                    <span class="h4 fw-bold">최고매출 상품</span><span class="moreContent"></span>
+                                    <span class="h4 fw-bold">최고매출 TOP3</span>
+                                    <span class="moreContent"><a href="product_main.do?nowPage=1" class="link-dark fw-bold float-end">[등록상품 보기]</a></span>
                                 </div>
 
                                 <table class="table table-hover align-middle border border-2 border-dark fw-bold">
 
                                     <colgroup>
-                                        <col style="width: 45%;"/>
+                                        <col style="width: 20%;"/>
                                     </colgroup>
-
                                     <tbody>
-                                        <tr>
-                                            <td scope="row"><img src="<%=request.getContextPath()%>/resources/img/배너1.png" class="img-fluid"></td>
-                                            <td>이것은 배너입니다</td>
+                                    <c:if test="${not empty pList}">
+	                                    <c:forEach items = "${pList}" var = "list">
+                                    	<tr>
+                                            <td scope="row">
+	                                            <a href="productView.do?product_index=${list.product_index}" target="blank">
+	                                            	<img src="<%=request.getContextPath()%>/resources/img/${list.brand}/${list.middleSort}/${list.thumbnail_image}" class="img-fluid" title="${list.product_name}" alt="${list.product_name}">
+	                                            </a>
+                                           	</td>
+                                            <td>
+                                            	<a href="productView.do?product_index=${list.product_index}" class="link-dark" target="blank">${list.product_name}</a>
+                                            </td>
                                         </tr>
-                                        <tr>
-                                            <td scope="row"><img src="<%=request.getContextPath()%>/resources/img/배너3.png" class="img-fluid"></td>
-                                            <td>이것은 배너입니다2이벤트!!!</td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row"><img src="<%=request.getContextPath()%>/resources/img/배너1.png" class="img-fluid"></td>
-                                            <td>무슨이벤트일까요저도잘...</td>
-                                        </tr>
+	                                    </c:forEach>
+                                    </c:if>
+                                    <c:if test="${empty pList}">
+	                                    <tr>
+		                                    <td colspan="2" class="display-6 fw-bold p-3" style="text-align: center;">
+												등록된 상품이 없습니다.
+											</td>
+	                                    </tr>
+                                    </c:if>
                                     </tbody>
-
+                                    
                                 </table>
                             </div>
                             
@@ -223,5 +239,12 @@
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/adminPage.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/adminPage_leftMenu.js"></script>
+    <script type="text/javascript">
+    window.onpageshow = function(event) {
+        if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+            location.reload();
+        } 
+    }
+    </script>
 </body>
 </html>
