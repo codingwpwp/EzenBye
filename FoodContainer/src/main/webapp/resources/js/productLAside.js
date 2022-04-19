@@ -46,39 +46,51 @@
 	  	//전체식품
 	  	var all = $("button[name='lAsideProductAll']");
 		//냉동식품
-		var ice = $("input[name='asideIceAll']");
+		var iceAll = $("input[name='asideIceAll']");
+		var ice = $("input[name='asideIce']");
 		//즉석식품
-		var product = $("input[name='asideProductAll']");
+		var productAll = $("input[name='asideProductAll']");
+		var product = $("input[name='asideProduct']");
 		//브랜드
-		var brand = $("input[name='asideBrandAll']");
+		var brandAll = $("input[name='asideBrandAll']");
+		var brand = $("input[name='asideBrand']");
 		//가격
 		var price = $("input[name='asidePrice']");
 		
-		if(!(ice.is(":checked")) && !(product.is(":checked")) && !(brand.is(":checked")) && !(price.is(":checked"))){
-			ice.click();
-			product.click();
-			brand.click();
-			price.click();
+		if(!(iceAll.is(":checked")) && !(productAll.is(":checked")) && !(brandAll.is(":checked")) && !(price.is(":checked"))){
+			iceAll.prop("checked",true);
+			ice.prop("checked",true);
+			productAll.prop("checked",true);
+			product.prop("checked",true);
+			brandAll.prop("checked",true);
+			brand.prop("checked",true);
+			price.prop("checked",true);
 		}
 		
 	  //모바일 화면 - 처음 또는 새로고침 시 전체선택
 	 	//전체식품
 	  	var allM = $("button[name='lAsideProductAllM']");
 		//냉동식품
-		var iceM = $("input[name='asideIceAllM']");
+		var iceAllM = $("input[name='asideIceAllM']");
+		var iceM = $("input[name='asideIceM']");
 		//즉석식품
-		var productM = $("input[name='asideProductAllM']");
+		var productAllM = $("input[name='asideProductAllM']");
+		var productM = $("input[name='asideProductM']");
 		//브랜드
-		var brandM = $("input[name='asideBrandAllM']");
+		var brandAllM = $("input[name='asideBrandAllM']");
+		var brandM = $("input[name='asideBrandM']");
 		//가격
 		var priceM = $("input[name='asidePriceM']");
-		/*
-		if(iceM.is(":checked") && productM.is(":checked") && brandM.is(":checked") && priceM.is(":checked")){
-			iceM.click();
-			productM.click();
-			brandM.click();
-			allM.click();
-		}*/
+		
+		if(!(iceAllM.is(":checked")) && !(productAllM.is(":checked")) && !(brandAllM.is(":checked")) && !(priceM.is(":checked"))){
+			iceAllM.prop("checked",true);
+			iceM.prop("checked",true);
+			productAllM.prop("checked",true);
+			productM.prop("checked",true);
+			brandAllM.prop("checked",true);
+			brandM.prop("checked",true);
+			priceM.prop("checked",true);
+		}
 	}
 	
 	//전체메뉴
@@ -793,13 +805,16 @@
 					</div>
 				</article>
 		*/
-		/*
+		
 		$.ajax({
-			url : "productList.do",
+			url : "productFilter.do",
 			data : "middleSort="+middleSort+"&brand="+brand+"&price="+price,
 			success : function(data){
-				$("#mainSection").html(mainSectionHtml);
+				//$(".pList").html(mainSectionHtml);
+			},
+			error : function() {
+				console.log('error');			
 			}
 		});
-		*/
+		
 	}

@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.project.service.BannerService;
 import team.project.service.CartService;
@@ -98,46 +99,11 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
-	public String productList(Locale locale, Model model, ProductVO productVO, HttpServletRequest request, DibsVO dibsVO, ProductFilterVO productFilterVO) throws Exception {
+	public String productList(Locale locale, Model model, ProductVO productVO, HttpServletRequest request, DibsVO dibsVO) throws Exception {
 	
-		List<ProductFilterVO> filterList = new ArrayList<>();
-		
-		if(productFilterVO.getMiddleSort() != null) {
+		//List<ProductVO> ProductListAll = productService.productListAll(productVO);
 			
-			String[] middleSort = productFilterVO.getMiddleSort().split(" ");
-			
-			for(int i=0; i<middleSort.length; i++) {
-				ProductFilterVO temp = new ProductFilterVO();
-				temp.setMiddleSort(middleSort[i]);
-				filterList.add(temp);
-			}
-			
-			if(productFilterVO.getBrand() != null) {
-				
-				String[] brand = productFilterVO.getBrand().split(" ");
-				
-				for(int i=0; i<brand.length; i++) {
-					ProductFilterVO temp = new ProductFilterVO();
-					temp.setBrand(brand[i]);
-					filterList.add(temp);
-				}
-			}
-			
-			if(productFilterVO.getPrice() != null) {
-					
-				ProductFilterVO temp = new ProductFilterVO();
-				temp.setPrice(productFilterVO.getPrice());
-				filterList.add(temp);
-			}
-			
-			List<ProductVO> ProductListAll = productService.productListAll2(filterList);
-			
-			model.addAttribute("productListAll",ProductListAll);
-		}else {
-			List<ProductVO> ProductListAll = productService.productListAll(productVO);
-			
-			model.addAttribute("productListAll",ProductListAll);
-		}
+		//model.addAttribute("productListAll",ProductListAll);
 		
 		List<DibsVO> dibsListAll = dibsService.dibsListAll(dibsVO);
 		
@@ -368,5 +334,47 @@ public class MainController {
 		if(check) {
 			int cartInsert = cartService.cartInsert(cartVO);
 		}
+	}
+	
+	@RequestMapping(value = "productFilter.do", method = RequestMethod.GET)
+	@ResponseBody
+	public String productFilter(Locale locale, Model model, ProductVO productVO, ProductFilterVO productFilterVO) throws Exception {
+	
+		List<ProductFilterVO> filterList = new ArrayList<>();
+		
+		if(productFilterVO.getMiddleSort() != null) {
+			
+			String[] middleSort = productFilterVO.getMiddleSort().split(" ");
+			
+			for(int i=0; i<middleSort.length; i++) {
+				ProductFilterVO temp = new ProductFilterVO();
+				temp.setMiddleSort(middleSort[i]);
+				filterList.add(temp);
+			}
+			
+			if(productFilterVO.getBrand() != null) {
+				
+				String[] brand = productFilterVO.getBrand().split(" ");
+				
+				for(int i=0; i<brand.length; i++) {
+					ProductFilterVO temp = new ProductFilterVO();
+					temp.setBrand(brand[i]);
+					filterList.add(temp);
+				}
+			}
+			
+			if(productFilterVO.getPrice() != null) {
+					
+				ProductFilterVO temp = new ProductFilterVO();
+				temp.setPrice(productFilterVO.getPrice());
+				filterList.add(temp);
+			}
+			
+			List<ProductVO> ProductListAll = productService.productListAll2(filterList);
+			
+			model.addAttribute("productListAll",ProductListAll);
+		}
+		
+		return "product/productList";
 	}
 }

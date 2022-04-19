@@ -20,15 +20,16 @@
     	<if test="list != null">
     		and middleSort in (<foreach collection="list" item="filter" separator=",">#{filter.middleSort}</foreach>) 
     		and brand in (<foreach collection="list" item="filter" separator=",">#{filter.brand}</foreach>) 
-	    	<foreach collection="list" item="filter" separator="">
+	    	<!-- 
+	    	<foreach collection="list" item="filter">
 		    	<if test="#{filter.price != null and filter.price.equals('0')}">
 		    		ORDER BY origin_price DESC
 		    	</if>
 		    	<if test="#{filter.price != null and filter.price.equals('1')}">
 		    		ORDER BY origin_price ASC
 		    	</if>
-	    	
 	    	</foreach>
+	    	 -->
     	</if>
     	    	
     </select>
