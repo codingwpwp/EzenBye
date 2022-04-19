@@ -103,12 +103,12 @@
 				          	<span class="mdPrice" style="font-size:0.9rem;">
 				          		<c:if test="${view.sale_price == -1}">
 				          			<fmt:formatNumber value="${view.origin_price}" pattern="#,###"/>원
-				          			<input type="hidden" name="origin_price" value="${view.origin_price}">
 				          		</c:if>
 				          		<c:if test="${view.sale_price != -1}">
 				          			<fmt:formatNumber value="${view.sale_price}" pattern="#,###"/>원
-				          			<input type="hidden" name="sale_price" value="${view.sale_price}">
 				          		</c:if>
+				          			<input type="hidden" name="origin_price" value="${view.origin_price}">
+				          			<input type="hidden" name="sale_price" value="${view.sale_price}">
 				          	</span>
 				          </p>
 				          <div class="card-text mb-auto productNum fs-4"><i class="bi bi-dash-square-fill" onclick="minusFn(this)"></i> <div class="pCnt">1</div> <i class="bi bi-plus-square-fill" onclick="plusFn(this)"></i></div>

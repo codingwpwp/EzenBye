@@ -18,7 +18,7 @@
     <span class="h5 ps-2 fw-bold ">주문 관리</span>
     <div class="list-group px-1 my-2">
         <a href="member_order_list.do?nowPage=1" class="list-group-item list-group-item-action fs-6">회원 주문</a>
-        <a href="noMember_order_list.do" class="list-group-item list-group-item-action fs-6">비회원 주문</a>
+        <a href="noMember_order_list.do?nowPage=1" class="list-group-item list-group-item-action fs-6">비회원 주문</a>
     </div>
 
     <span class="h5 ps-2 fw-bold">상품 관리</span>

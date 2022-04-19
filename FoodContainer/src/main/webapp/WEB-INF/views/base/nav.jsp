@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!-- 네비게이션 바 -->
-<div class="col-5 col-sm-5 col-md-6 col-lg-8 col-xl-7" id="navCenterMenuDiv">
+<div class="col-4 col-sm-4 col-md-5 col-lg-8 col-xl-7" id="navCenterMenuDiv">
 
     <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navCenterMenu" aria-controls="navCenterMenu">
         <span class="navbar-toggler-icon"></span>
@@ -37,7 +37,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link px-lg-1 px-xl-2" href="event.do">이벤트</a>
+                <a class="nav-link px-lg-1 px-xl-2" href="<%=request.getContextPath()%>/event.do">이벤트</a>
             </li>
 
             <li class="nav-item">
@@ -59,12 +59,12 @@
 
 <!-- 회원 -->
 <c:if test="${member==null}">
-<div class="col-5 col-sm-3 col-lg-2 col-xl-3 d-flex align-items-lg-center justify-content-end justify-content-sm-center justify-content-lg-start pe-4 pe-sm-2 fs-6" id="userLogin">
+<div class="col-6 col-sm-4 col-lg-2 col-xl-3 d-flex align-items-lg-center justify-content-end justify-content-sm-center justify-content-lg-start pe-4 pe-sm-2 fs-6" id="userLogin">
     <a href="<%=request.getContextPath()%>/loginmain.do" class="link-dark">로그인</a>&nbsp;|&nbsp;<a href="<%=request.getContextPath()%>/member_sign.do" class="link-dark">회원가입</a>
 </div>
 </c:if>
 <c:if test="${member!=null}">
-<div class="col-5 col-sm-3 col-lg-2 col-xl-3 d-flex align-items-lg-center justify-content-end justify-content-sm-center justify-content-lg-start pe-4 pe-sm-2 fs-6" id="userLogin">
+<div class="col-6 col-sm-4 col-lg-2 col-xl-3 d-flex align-items-lg-center justify-content-end justify-content-sm-center justify-content-lg-start pe-4 pe-sm-2 fs-6" id="userLogin">
     <a>${member.name}님</a>&nbsp;|&nbsp;<a href="<%=request.getContextPath()%>/logout.do" class="link-dark">로그아웃</a>
 </div>
 </c:if>

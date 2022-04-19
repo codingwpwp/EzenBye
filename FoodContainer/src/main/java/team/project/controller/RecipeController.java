@@ -3,7 +3,6 @@ package team.project.controller;
 import java.util.List;
 import java.util.Locale;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import team.project.service.ProductService;
 import team.project.service.RecipeService;
@@ -35,6 +35,8 @@ public class RecipeController {
 	private RecipeService recipeService;
 	@Autowired
 	private ProductService productService;
+//	@Autowired
+//	private ReplyService replyService;
 	
 //	@Inject
 //	private ReplyService replyService;
@@ -74,8 +76,9 @@ public class RecipeController {
 			pu.setSearchType(searchvo.getSearchType());
 		}
 		model.addAttribute("recipeList", recipeList);
-		
-		
+//		System.out.println("=======================");
+//		System.out.println(vo.getThumbnail_image());
+//		System.out.println("=======================");
 		model.addAttribute("nowPage", nowPageNum);
 		//3.2번 객체 model에 담
 		
@@ -108,7 +111,7 @@ public class RecipeController {
 		System.out.println(vo.getProduct_index3());
 		System.out.println("==============================");
 		recipeService.insertRecipe(vo, tumnailImage, request);
-		return "redirect:recipemain.do";
+		return "recipemain.do";
 	}
 	
 	
@@ -128,6 +131,10 @@ public class RecipeController {
 		
 		return "recipe/recipeview";
 	}
+
+	
+	
+	
 	//레시피내용 수정
 	@RequestMapping(value = "/recipemodify.do", method = RequestMethod.GET)
 	public String recipe4(Locale locale, Model model,RecipeVO vo,ProductVO productVO) throws Exception{

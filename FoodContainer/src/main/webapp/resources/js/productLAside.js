@@ -594,18 +594,42 @@
 	})
 	
 	function productFilter(){
-		var ice0 = $("input[name='asideIce']:eq(0)").is(":checked");
-		var ice1 = $("input[name='asideIce']:eq(1)").is(":checked");
-		var product0 = $("input[name='asideProduct']:eq(0)").is(":checked");
-		var product1 = $("input[name='asideProduct']:eq(1)").is(":checked");
-		var product2 = $("input[name='asideProduct']:eq(2)").is(":checked");
-		var brand0 = $("input[name='asideBrand']:eq(0)").is(":checked");
-		var brand1 = $("input[name='asideBrand']:eq(1)").is(":checked");
-		var brand2 = $("input[name='asideBrand']:eq(2)").is(":checked");
-		var brand3 = $("input[name='asideBrand']:eq(3)").is(":checked");
-		var brand4 = $("input[name='asideBrand']:eq(4)").is(":checked");
-		var price0 = $("input[name='asidePrice']:eq(0)").is(":checked");
-		var price1 = $("input[name='asidePrice']:eq(1)").is(":checked");
+		var ice = $("input[name='asideIce']");
+		var product = $("input[name='asideProduct']");
+		var brandList = $("input[name='asideBrand']");
+		var priceList = $("input[name='asidePrice']");
+		
+		var middleSort = "";
+		var brand = "";
+		var price = "";
+		
+		for(var i=0; i<ice.length; i++){
+			if(ice.eq(i).is(":checked")){
+				middleSort += ice.eq(i).next().html() + "|";
+			}
+		}
+		
+		for(var i=0; i<product.length; i++){
+			if(product.eq(i).is(":checked")){
+				middleSort += product.eq(i).next().html() + "|";
+			}
+		}
+		
+		for(var i=0; i<brandList.length; i++){
+			if(brandList.eq(i).is(":checked")){
+				brand += brandList.eq(i).next().html() + "|";
+			}
+		}
+		
+		for(var i=0; i<priceList.length; i++){
+			if(priceList.eq(i).is(":checked")){
+				price += priceList.eq(i).val() + "|";
+			}
+		}
+		
+		var middleSortArr = $.trim(middleSort.split("|"));
+		var brandArr = $.trim(brand.split("|"));
+		var priceArr = $.trim(price.split("|"));
 		
 		/*
 		var mainSectionHtml = "<!-- pc버전 -->";
@@ -776,9 +800,9 @@
 		
 		$.ajax({
 			url : "productList.do",
-			data : {ice0:ice0, ice1:ice1, product0:product0, product1:product1, product2:product2, brand0:brand0, brand1:brand1, brand2:brand2, brand3:brand3, brand4:brand4, price0:price0, price1:price1},
+			data : "middleSort="+middleSortArr+"&brand="+brandArr+"&price="+priceArr,
 			success : function(data){
-				
+				console.log("ok");
 			}
 		});
 		

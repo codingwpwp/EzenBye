@@ -99,8 +99,6 @@ public class MainController {
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
 	public String productList(Locale locale, Model model, ProductVO productVO, HttpServletRequest request, DibsVO dibsVO, ProductFilterVO productFilterVO) throws Exception {
 		
-		System.out.println(productFilterVO.getProduct1());
-		
 		List<ProductVO> ProductListAll = productService.productListAll2(productFilterVO);
 		
 		model.addAttribute("productListAll",ProductListAll);

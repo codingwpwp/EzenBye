@@ -62,7 +62,7 @@
                         <!-- 상품 분류 -->
                         <div class="h3 my-4 fw-bold ps-3">
                             [상품 분류]
-                            <span class="text-primary bg-opacity-50 fw-bold">냉동</span><span class="fw-bold">&</span><span class="text-success bg-opacity-50 fw-bold">즉석</span>
+                            <span class="text-danger fs-6">*수정불가능</span>
                             <input type="hidden" name="product_index" value="${product.product_index}">
                         </div>
 
@@ -76,12 +76,17 @@
 
                             <div class="col-5 col-md-4 col-lg-3 mb-3 mb-md-0">
                                 <select class="bg-opacity-75 form-select fw-bold" id="bigSort" name="bigSort" onchange="changeBigSort(this)">
-                                    <option class="bg-primary bg-opacity-75 fw-bold" value="냉동식품"<c:if test="${product.bigSort eq '냉동식품'}"> selected</c:if>>
+                                <c:if test="${product.bigSort eq '냉동식품'}">
+                                    <option class="bg-primary bg-opacity-75 fw-bold" value="냉동식품" selected>
                                     	냉동식품
                                     </option>
-                                    <option class="bg-success fw-bold" value="즉석식품"<c:if test="${product.bigSort eq '즉석식품'}"> selected</c:if>>
+                                </c:if>
+								<c:if test="${product.bigSort eq '즉석식품'}">
+                                    <option class="bg-success fw-bold" value="즉석식품" selected>
                                         즉석식품
-                                    </option>
+                                    </option>								
+								</c:if>
+
                                 </select>
                             </div>
 
@@ -107,6 +112,7 @@
                         <!-- 상품 정보 -->
                         <div class="h3 my-4 fw-bold ps-3">
                             [상품 정보]
+                            <span class="text-danger fs-6">*상품이름 변경 불가능</span>
                         </div>
 
                         <!-- 브랜드 -->
@@ -136,7 +142,7 @@
                             </div>
 
                             <div class="col-8 col-md-10 col-lg-8">
-                                <input type="text" class="form-control check" name="product_name" value="${product.product_name}" placeholder="상품이름을 입력하세요" maxlength="30" autocomplete="off">
+                                <input type="text" class="form-control check" name="product_name" value="${product.product_name}" placeholder="상품이름을 입력하세요" maxlength="30" autocomplete="off" readonly>
                             </div>
 
                         </div>

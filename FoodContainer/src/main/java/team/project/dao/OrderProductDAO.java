@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import team.project.vo.CartVO;
 import team.project.vo.OrderProductVO;
 import team.project.vo.OrdersVO;
 
@@ -41,5 +40,10 @@ public class OrderProductDAO {
 	// 회원 주문 상세조회할때 주문들 불러오기
 	public List<OrderProductVO> adminMemberOrderProductList(OrdersVO ordersvo) throws Exception {
 		return sqlSession.selectList(Namespace + ".adminMemberOrderProductList", ordersvo);
+	}
+	
+	// 비회원 주문 상세조회할 때 주문들 불러오기
+	public List<OrderProductVO> adminNoMemberOrderProductList(String no_member_order_index) throws Exception{
+		return sqlSession.selectList(Namespace + ".adminNoMemberOrderProductList", no_member_order_index);
 	}
 }
