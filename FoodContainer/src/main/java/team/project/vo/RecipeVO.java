@@ -19,8 +19,18 @@ public class RecipeVO {
 	private int thumb;
 	private String write_date;
 	private int best_rank;
+	private int reply_index;
 	
 	
+	
+	public int getReply_index() {
+		return reply_index;
+	}
+
+	public void setReply_index(int reply_index) {
+		this.reply_index = reply_index;
+	}
+
 	public String getProduct_img1() {
 		return product_img1;
 	}
