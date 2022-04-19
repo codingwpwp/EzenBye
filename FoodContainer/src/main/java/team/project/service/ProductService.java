@@ -17,7 +17,7 @@ import team.project.vo.SearchVO;
 public interface ProductService {
 	//상품조회
 	List<ProductVO> productListAll(ProductVO productVO) throws Exception;
-	List<ProductVO> productListAll2(ProductFilterVO productFilterVO) throws Exception;
+	List<ProductVO> productListAll2(List<ProductFilterVO> filterList) throws Exception;
 	//상세보기
 	ProductVO view(String index) throws Exception;
 	//최근 본 상품
@@ -38,6 +38,9 @@ public interface ProductService {
 	List<CartVO> purchaseListCaseTwo(int[] cart_index) throws Exception;
 	
 	/*여기서 부터는 관리자페이지*/
+	
+	// 관리자메인페이지 최고 인기매출 상품 3개 뿌리기
+	List<ProductVO> adminMainProductList() throws Exception;	
 	
 	// 상품 조회
 	List<ProductVO> adminProductList(SearchVO searchvo, int nowPage) throws Exception;
@@ -62,4 +65,7 @@ public interface ProductService {
 						   MultipartFile detailImage,
 						   HttpServletRequest request
 						  ) throws Exception;
+	
+	// 상품 복구
+	void adminProductDelYNisN(String product_index) throws Exception;
 }

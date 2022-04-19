@@ -49,7 +49,7 @@
                 작성하지 않는 경우는 절대 건들지 않음.
                 base.js에 id="navLeftMenu"와 관련된 코드가 작성되어있음.
             -->
-            <div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark" id="navLeftMenu">d<!-- 여기에 작성 --></div>
+            <div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark" id="navLeftMenu"><!-- 여기에 작성 --></div>
 
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
 
@@ -84,7 +84,7 @@
 							</div>
 
 
-							<div class="col-sm-3 col-11">추천수 : (${read.thumb}) | 조회수 : (${read.hit}) | 댓글(3)</div>
+							<div class="col-sm-3 col-11">추천수 : (${read.thumb}) | 조회수 : (${read.hit}) | 댓글(${read.reply_index})</div>
 						</div>
 
 						<div class="row body">
@@ -177,35 +177,49 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-12 col-12">
-								<h4>댓글 3</h4>
+								<h4>댓글 ${read.reply_index}</h4>
 							</div>
 						</div>
-						<form >
+						
+						<form method="post" action="wirteReply" id="writeReply">
+						<input type="hidden" value="${read.recipe_index}" name="recipe_index">
 						<div class="row rp">
 							
 							<div class="col-sm-8 col-9 reply-write">
 								<input type="text" name="contents" placeholder="로그인 후 댓글 작성이 가능합니다.">
 							</div>
 							<div class="col-sm-2 col-3">
-								<button class="btn btn-secondary">등록</button>
+								<button class="btn btn-secondary" type="submit">등록</button>
 							</div>
 							
 						</div>
 						</form>
+						
+						
 						<div class="row rpt">
-
+ 						<c:forEach items="${replyList}" var="re"> 
+ 							
 							<div class="col-3 col-sm-2 col-md-2 col-lg-2 replyview">
-								<p>홍길동</p>
+								<p>${re.name}</p>
 							</div>
-							<div class="col-lg-2 col-md-2 col-sm-2 col-6 wday">2022.03.17 12:00
+							<div class="col-lg-2 col-md-2 col-sm-2 col-6 wday">${re.reply_date}
 							</div>
 							<div class="col-md-2 col-sm-2 col-3 report">
 								<a href="#">신고<i class="bi bi-brightness-alt-high"></i></a>
+								<c:if test="${member.member_index==read.member_index}">
+							<!-- 	<a hrep="recipeview_reply_modify.do" onclick="recipeview_reply_modify.do">수정</a> -->
+								<input type="button" value="수정" onclick="updateReply();">
+								<a>삭제</a>
+								</c:if>
 							</div>
-							<div name="replycontent" class="col-12 replycontent">정말
-								맛있어요~~</div>
+							<div name="replycontent" class="col-12 replycontent">┗ &nbsp;${re.contents}
+							<input type="hidden" value="${re.contents}">
+							
+							</div>
+								
+							 </c:forEach>	 
 						</div>
-
+						
 					</div>
 
 				</article>

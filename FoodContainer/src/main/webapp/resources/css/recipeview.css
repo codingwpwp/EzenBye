@@ -170,6 +170,8 @@ height: 100%;
 }
 .replycontent{
     float: left;
+    margin-top:-1%;
+    padding-bottom: 1%;
 }
 .rpt{
     border-bottom: 1px solid;
@@ -177,10 +179,18 @@ height: 100%;
 
 
 /*모바일 버전 댓글*/
+@media(max-width:380px){
+    .replyview{
+        width: 100%;
+       max-width: 70px;
+       font-size:14px;
+    }
+}
 @media(min-width:540px){
     .replyview{
         width: 100%;
        max-width: 70px;
+     
     }
 }
 @media(min-width:720px){
@@ -193,6 +203,13 @@ height: 100%;
     .replyview{
         width: 100%;
        max-width: 70px;
+    }
+}
+@media(max-width:380px){
+    .wday{
+       
+       font-size:13px;
+       
     }
 }
 @media(min-width:540px){
@@ -202,12 +219,13 @@ height: 100%;
        margin-left: -1%;
        margin-right: -2%;
        
+       
     }
 }
 @media(min-width:720px){
     .wday{
         width: 100%;
-       max-width: 180px;
+       max-width: 220px;
        margin-left: -1%;
        margin-right: -2%;
     }
@@ -215,11 +233,30 @@ height: 100%;
 @media(min-width:1000px){
     .wday{
         width: 100%;
-       max-width: 170px;
+       max-width: 220px;
        margin-left: -1%;
        margin-right: -2%;
     }
 }
 
-
-
+@media(max-width:380px){
+    .report{
+       
+       font-size:13px;
+       
+    }
+}
+@media(max-width:380px){
+    .replycontent{
+       
+       font-size:13px;
+       margin-top:-7%;
+       padding-bottom:4%;
+       
+    }
+}
+@media screen and (max-width:380px){
+   ::placeholder{
+      font-size:0.8em;
+    }    
+}

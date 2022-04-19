@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -68,7 +69,7 @@
                                 </div>
 
                                 <div class="col-7 col-sm-6 col-md-8">
-                                    <input type="text" class="form-control" value="${member.member_index}" disabled>
+                                    <input type="text" class="form-control" value="${m.member_index}" disabled>
                                 </div>
 
                             </div>
@@ -80,7 +81,7 @@
                                 </div>
 
                                 <div class="col-7 col-sm-9">
-                                    <input type="text" class="form-control" value="${member.id}" disabled>
+                                    <input type="text" class="form-control" value="${m.id}" disabled>
                                 </div>
 
                             </div>
@@ -97,7 +98,7 @@
                                 </div>
 
                                 <div class="col-7 col-sm-6 col-md-8">
-                                    <input type="text" class="form-control" value="${member.nickname}" disabled>
+                                    <input type="text" class="form-control" value="${m.nickname}" disabled>
                                 </div>
 
                             </div>
@@ -109,7 +110,7 @@
                                 </div>
 
                                 <div class="col-7 col-sm-9">
-                                    <input type="text" class="form-control" value="${fn:substring(member.join_date, 0,10)}" disabled>
+                                    <input type="text" class="form-control" value="${fn:substring(m.join_date, 0,10)}" disabled>
                                 </div>
 
                             </div>
@@ -126,7 +127,7 @@
                                 </div>
 
                                 <div class="col-7 col-sm-6 col-md-8">
-                                    <input type="text" class="form-control" value="${member.name}" disabled>
+                                    <input type="text" class="form-control" value="${m.name}" disabled>
                                 </div>
 
                             </div>
@@ -138,7 +139,7 @@
                                 </div>
 
                                 <div class="col-7 col-sm-9">
-                                    <input type="text" class="form-control" value="${member.phone}" disabled>
+                                    <input type="text" class="form-control" value="${m.phone}" disabled>
                                 </div>
 
                             </div>
@@ -155,7 +156,7 @@
                                 </div>
 
                                 <div class="col-7 col-sm-9 col-md-10 px-0">
-                                    <input type="text" class="form-control" value="${member.email}" disabled>
+                                    <input type="text" class="form-control" value="${m.email}" disabled>
                                 </div>
 
                             </div>
@@ -171,7 +172,7 @@
                                 </div>
 
                                 <div class="col-7 col-sm-9 col-md-10 px-0">
-                                    <textarea class="form-control" rows="4" disabled><c:if test="${not empty member.address}">${member.address}</c:if><c:if test="${empty member.address}">기본배송지가 없습니다.</c:if></textarea>
+                                    <textarea class="form-control" rows="4" disabled><c:if test="${not empty m.address}">${m.address}</c:if><c:if test="${empty m.address}">기본배송지가 없습니다.</c:if></textarea>
                                 </div>
 
                             </div>
@@ -183,7 +184,77 @@
                     <!-- 각종 버튼들 -->
                     <div class="ps-2">
                         <button type="button" class="btn btn-primary me-2" onclick="location.href='member_list.do?searchType=${searchType}&searchValue=${searchValue}&nowPage=${nowPage}'">뒤로</button>
-                        <button type="button" class="btn btn-danger me-2" onclick="changeMemberDelyn(${member.member_index}, '${member.id}')">회원추방</button>
+                        <button type="button" class="btn btn-danger me-2" onclick="changeMemberDelyn(${m.member_index}, '${m.id}')">회원추방</button>
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#messageModal"><i class="bi bi-envelope"></i> 쪽지</button>
+                    </div>
+
+                    <!-- 쪽지 -->
+                    <div class="modal fade" id="messageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <span class="modal-title fs-3 fw-bold" id="messageModalLabel">
+                                        <i class="bi bi-envelope"></i> 쪽지
+                                    </span>
+                                </div>
+                                
+                                <form class="modal-body" name="messageForm">
+                                
+                                    <div class="row d-flex align-items-center mb-3">
+
+                                        <div class="col-12 d-flex align-items-center mb-3">
+
+                                            <div class="col-3 col-sm-2">
+                                                <span class="infoTitle p-1">받는 회원</span>
+                                            </div>
+            
+                                            <div class="col-9 col-sm-10">
+                                                <input type="text" class="form-control" value="${m.id}" disabled>
+                                                <input type="hidden" name="member_index" value="${m.member_index}">
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="row d-flex align-items-center mb-3">
+                                        <div class="col-12 d-flex align-items-center">
+
+                                            <div class="col-3 col-sm-2 d-flex justify-content-center">
+                                                <span class="infoTitle p-1" id="titleSpan">제목</span>
+                                            </div>
+            
+                                            <div class="col-9 col-sm-10">
+                                                <input type="text" class="form-control" name="title" value="" placeholder="제목을 입력하세요">
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-12 d-flex align-items-center">
+
+                                            <div class="col-3 col-sm-2 d-flex justify-content-center">
+                                                <span class="infoTitle p-1" id="contentsSpan">내용</span>
+                                            </div>
+            
+                                            <div class="col-9 col-sm-10">
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" name="contents" rows="3" placeholder="내용을 작성하세요" maxlength="100"></textarea>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                                <div class="modal-footer d-flex justify-content-start">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="messageCancelBtn">취소</button>
+                                    <button type="button" class="btn btn-primary" onclick="sendMessage('${m.id}');">보내기</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </article>
@@ -208,5 +279,12 @@
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/adminPage.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/adminPage_leftMenu.js"></script>
+    <script type="text/javascript">
+    window.onpageshow = function(event) {
+        if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+        	history.forward();
+        } 
+    }
+    </script>
 </body>
 </html>

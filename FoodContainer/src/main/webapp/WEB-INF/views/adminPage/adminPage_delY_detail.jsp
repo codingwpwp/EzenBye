@@ -67,7 +67,7 @@
                                 </div>
 
                                 <div class="col-7 col-sm-6 col-md-8">
-                                    <input type="text" class="form-control" value="${member.id}" disabled>
+                                    <input type="text" class="form-control" value="${m.id}" disabled>
                                 </div>
 
                             </div>
@@ -79,7 +79,7 @@
                                 </div>
 
                                 <div class="col-7 col-sm-9">
-                                    <input type="text" class="form-control" value="${member.del_date}" disabled>
+                                    <input type="text" class="form-control" value="${m.del_date}" disabled>
                                 </div>
 
                             </div>
@@ -95,7 +95,7 @@
                                 </div>
 
                                 <div class="col-7 col-sm-9 col-md-10 px-0">
-                                    <textarea class="form-control" rows="4" disabled>${member.del_reason}</textarea>
+                                    <textarea class="form-control" rows="4" disabled>${m.del_reason}</textarea>
                                 </div>
 
                             </div>
@@ -131,5 +131,12 @@
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/adminPage.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/adminPage_leftMenu.js"></script>
+    <script type="text/javascript">
+    window.onpageshow = function(event) {
+        if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+        	history.forward();
+        } 
+    }
+    </script>
 </body>
 </html>

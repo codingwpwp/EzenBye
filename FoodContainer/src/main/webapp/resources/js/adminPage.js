@@ -316,9 +316,47 @@ function changeMemberDelyn(member_index, id){
 					alert("추방 실패");
 				}
 			}
-		})
+		});
 	}else{
 		
+	}
+}
+
+// 회원 쪽지 보내기
+function sendMessage(id){
+	var form = $("form[name='messageForm']");
+	var title = form.find("input[name='title']").val();
+	var contents = form.find("textarea[name='contents']").val();
+	if(title == ""){
+		$("#titleSpan").css("color", "red");
+		setTimeout(function(){
+            $("#titleSpan").css("color", "black");
+        },500);
+	}else if(contents == ""){
+		$("#contentsSpan").css("color", "red");
+		setTimeout(function(){
+            $("#contentsSpan").css("color", "black");
+        },500);		
+	}else{
+		if(confirm(id + "님께 쪽지를 보내시겠습니까?")){
+			$.ajax({
+				url : "sendMessage.do",
+				type : "post",
+				data : form.serialize(),
+				success : function(data){
+					var result = data.trim();
+					if(result == "Success") {
+						alert("전송 완료");
+						
+					} else {
+						alert("전송 실패(혹시 해킹?????)");
+					}
+					$("#messageCancelBtn").trigger("click");
+				}
+			});
+		}else{
+			
+		}
 	}
 }
 
@@ -606,6 +644,26 @@ function checkProduct(obj){
     
     return flag;
 
+}
+
+// 상품 복구하는 비동기
+function productDelN(index){
+	if(confirm("복구하시겠습니까??")){
+		$.ajax({
+			url : "changeDelYNinN.do",
+			type : "post",
+			data : "product_index=" + index,
+			success : function(data){
+				var result = data.trim();
+				if(result == "Success") {
+					alert("복구되었습니다");
+					location.href="product_delete_list.do?nowPage=1";
+				} else {
+					alert("복구 실패");
+				}
+			}
+		});
+	}
 }
 
 // 배너페이지의 이미지 미리보기

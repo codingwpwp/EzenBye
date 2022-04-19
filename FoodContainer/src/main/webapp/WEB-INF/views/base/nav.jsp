@@ -65,7 +65,7 @@
 </c:if>
 <c:if test="${member!=null}">
 <div class="col-6 col-sm-4 col-lg-2 col-xl-3 d-flex align-items-lg-center justify-content-end justify-content-sm-center justify-content-lg-start pe-4 pe-sm-2 fs-6" id="userLogin">
-    <a>${member.name}님</a>&nbsp;|&nbsp;<a href="<%=request.getContextPath()%>/logout.do" class="link-dark">로그아웃</a>
+    <a <c:if test="${member.position == '관리자'}">href="admin.do" class="link-secondary"</c:if>>${member.name}님</a>&nbsp;|&nbsp;<a href="<%=request.getContextPath()%>/logout.do" class="link-dark">로그아웃</a>
 </div>
 </c:if>
 

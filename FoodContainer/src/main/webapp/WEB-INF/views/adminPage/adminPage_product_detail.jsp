@@ -220,7 +220,7 @@
 
                             <!-- 대표이미지 -->
                             <div class="col-6 col-md-3 d-flex justify-content-center">
-                                <button type="button" class="btn btn-primary btn-sm mb-3 col-12" data-bs-toggle="modal" data-bs-target="#sumnailImageModal">대표이미지</button>
+                                <button type="button" class="btn btn-primary btn-sm mb-3 col-12" data-bs-toggle="modal" data-bs-target="#tumnailImageModal">대표이미지</button>
                             </div>
 
                             <!-- 상세이미지 -->
@@ -250,11 +250,11 @@
                     </div>
 
                     <!-- 대표이미지 모달 -->
-                    <div class="modal fade" id="sumnailImageModal" tabindex="-1" aria-labelledby="sumnailImageModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="tumnailImageModal" tabindex="-1" aria-labelledby="tumnailImageModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="sumnailImageModalLabel">대표이미지</h5>
+                                    <h5 class="modal-title" id="#tumnailImageModalLabel">대표이미지</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
@@ -339,5 +339,12 @@
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/adminPage.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/adminPage_leftMenu.js"></script>
+    <script type="text/javascript">
+    window.onpageshow = function(event) {
+        if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+        	history.forward();
+        } 
+    }
+    </script>
 </body>
 </html>

@@ -68,12 +68,12 @@
 							    <div class="carousel-item active">
 							      <c:if test="${mainBannerList.link_YN == 'Y' }">
 							      	<a href="${mainBannerList.link }">
-							      		<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.name}.png" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }" onclick="bannerFn(this)">
+							      		<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.image}" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }" onclick="bannerFn(this)">
 							      		<input type="hidden" name="link" value="${mainBannerList.link }">
 							      	</a>
 							      </c:if>
 							      <c:if test="${mainBannerList.link_YN == 'N' }">
-							      	<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.name}.png" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }">
+							      	<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.image}" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }">
 							      </c:if>
 							    </div>
 							</c:if>
@@ -81,12 +81,12 @@
 							    <div class="carousel-item">
 							      <c:if test="${mainBannerList.link_YN == 'Y' }">
 							      	<a href="${mainBannerList.link }">
-							      		<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.name}.png" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }" onclick="bannerFn(this)">
+							      		<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.image}" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }" onclick="bannerFn(this)">
 							      		<input type="hidden" name="link" value="${mainBannerList.link }">
 							      	</a>
 							      </c:if>
 							      <c:if test="${mainBannerList.link_YN == 'N' }">
-							      	<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.name}.png" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }">
+							      	<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.image}" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }">
 							      </c:if>
 							    </div>
 							</c:if>

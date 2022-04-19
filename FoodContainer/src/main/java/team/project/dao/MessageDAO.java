@@ -52,4 +52,8 @@ public class MessageDAO {
 		sqlSession.update(Namespace+".messageRead",message_index);
 	}
 	
+	public int messageInsert(MessageVO vo) throws Exception{
+		return sqlSession.insert(Namespace + ".messageInsert", vo);
+	}
+	
 }

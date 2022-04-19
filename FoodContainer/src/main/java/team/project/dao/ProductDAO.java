@@ -25,8 +25,8 @@ public class ProductDAO {
 	public List<ProductVO> productListAll(ProductVO productVO) throws Exception{
 		return sqlSession.selectList(Namespace+".ProductListAll",productVO);
 	}
-	public List<ProductVO> productListAll2(ProductFilterVO productFilterVO) throws Exception{
-		return sqlSession.selectList(Namespace+".ProductListAll",productFilterVO);
+	public List<ProductVO> productListAll2(List<ProductFilterVO> filterList) throws Exception{
+		return sqlSession.selectList(Namespace+".ProductFilter",filterList);
 	}
 	//상세보기
 	public ProductVO view(String index) {
@@ -78,6 +78,11 @@ public class ProductDAO {
 	
 	/* **********************여기서 부터는 관리자페이지********************** */
 	
+	// 관리자페이지 메인 최고 인기매출 상품 3개 뿌리기
+	public List<ProductVO> adminMainProductList() throws Exception{
+		return sqlSession.selectList(Namespace + ".adminMainProductList");
+	}
+	
 	// 상품 조회할때 글의 갯수(페이징)
 	public int adminProductListCount(SearchVO searchvo) throws Exception{
 		return sqlSession.selectOne(Namespace + ".adminProductListCount", searchvo);
@@ -111,6 +116,11 @@ public class ProductDAO {
 	// 상품 수정
 	public int adminProductUpdate(ProductVO product) throws Exception{
 		return sqlSession.update(Namespace + ".adminProductUpdate", product);
+	}
+	
+	// 상품 복구
+	public void adminProductDelYNisN(String product_index) throws Exception{
+		sqlSession.update(Namespace + ".adminProductDelYNisN", product_index);
 	}
 
 }

@@ -28,28 +28,54 @@ $(document).ready(function(){
 
 // 장바구니 전체선택
 $(function(){
-		var shopbasket = document.getElementsByName("shopbasket");
-		var rowCnt = shopbasket.length;
+		var cart_index = document.getElementsByName("cart_index");
+		var rowCnt = cart_index.length;
 		
 		$("input[name='shopbasketAll']").click(function(){
-			var shopbasketArray = $("input[name=shopbasket]");
-			for(var i=0; i<shopbasketArray.length; i++){
-				shopbasketArray[i].checked = this.checked;
+			var cart_indexArray = $("input[name=cart_index]");
+			for(var i=0; i<cart_indexArray.length; i++){
+				cart_indexArray[i].checked = this.checked;
 			}
+			var sum = 0;
+			
+			$(".shopbasket-card").each(function(){
+			if($(this).find("input[name='cart_index']").is(":checked") == true){
+				sum += parseInt($(this).find(".productPrice3").html().replace(/,/g,""));
+				
+			}
+			
+		    });
+		    
+			$('.shopbasket-sum2').html(sum.toLocaleString());
 		});
 		
-		$("input[name='shopbasket']").click(function(){
-			if($("input[name='shopbasket']:checked").length == rowCnt){
+		
+		$("input[name='cart_index']").click(function(){
+			if($("input[name='cart_index']:checked").length == rowCnt){
 				$("input[name='shopbasketAll']")[0].checked = true;
 			}else{
 				$("input[name='shopbasketAll']")[0].checked = false;
 			}
+			
 		});
 	});
 	
+function itemSum(obj){
+	var sum = 0;
+	$(".shopbasket-card").each(function(){
+		if($(this).find("input[name='cart_index']").is(":checked") == true){
+			sum += parseInt($(this).find(".productPrice3").html().replace(/,/g,""));
+			
+		}
+		
+	});
+	$('.shopbasket-sum2').html(sum.toLocaleString());
+	
+}
+	
 	function chooseDelete(obj){
 		var valueArr = new Array();
-		var list = $("input[name='shopbasket']");
+		var list = $("input[name='cart_index']");
 		
 		for(var i = 0; i<list.length; i++){
 			if(list[i].checked){
@@ -82,7 +108,7 @@ $(function(){
 	}
 	
 	function shopbasketDelete(obj){
-		var cart_index = $(obj).parent().find("input[name='cart_index']").val();
+		var cart_index = $(obj).parent().parent().parent().parent().find("input[name='cart_index']").val();
 		var YN = confirm('정말 삭제하시겠습니까?');
 			if(YN){
 				$.ajax({
@@ -100,7 +126,134 @@ $(function(){
 				});
 			}
 	}
+	
+	function minusCount(obj){
+		var cnt = $(obj).next("div").html();
+		var cart_index = $(obj).next().next("input[type='hidden']").val();
+		var origin_price = $(obj).parent().parent().find("input[name='origin_price']").val();
+		var sale_price = $(obj).parent().parent().find("input[name='sale_price']").val();
+		var htmlTag = "<span class='productPrice3'>";
+		var htmlTag2 = "</span>";
+		
+		if(cnt == 1){
+			alert("최소 한 개는 선택해야 합니다.");
+		}else{
+			cnt--;
+		}
+		var html = cnt;
+		
+		$(obj).next("div").html(html);
+		
+		$.ajax({
+			url : "cartCount.do",
+			type : "post",
+			data : "cart_index="+cart_index+"&cnt="+cnt,
+			success : function(){
+				$(obj).parent().parent().find(".productPrice").html(htmlTag+(cnt * origin_price).toLocaleString()+htmlTag2+"원");
+				$(obj).parent().parent().find(".productPrice2").html(htmlTag+(cnt * sale_price).toLocaleString()+htmlTag2+"원");
+				
+				var sum = parseInt($('.shopbasket-sum2').html().replace(/,/g,""));
+				var sum2 = $(obj).parent().parent().find(".productPrice4").val();
+				console.log(sum2);
+				$(".shopbasket-card").each(function(){
+				if($(this).find("input[name='cart_index']").is(":checked") == true){
+					
+					sum -= sum2;
+					
+				}
+				
+			    });
+			    
+				$('.shopbasket-sum2').html(sum.toLocaleString());  
+			}
+		});
+	}
+	
+	function plusCount(obj){
+		var cnt = $(obj).prev().prev("div").html();
+		var cart_index = $(obj).prev("input[type='hidden']").val();
+		var origin_price = $(obj).parent().parent().find("input[name='origin_price']").val();
+		var sale_price = $(obj).parent().parent().find("input[name='sale_price']").val();
+		var inventory = $(obj).next("input[type='hidden']").val();
+		var htmlTag = "<span class='productPrice3'>";
+		var htmlTag2 = "</span>";
+		
+		if(parseInt(cnt) >= parseInt(inventory)){
+			alert("남은 재고는 "+inventory+"개 입니다.");
+		}else{
+			cnt++;
+		}
 
+		var html = cnt;
+		
+		$(obj).prev().prev("div").html(html);
+		
+		$.ajax({
+			url : "cartCount.do",
+			type : "post",
+			data : "cart_index="+cart_index+"&cnt="+cnt,
+			success : function(){
+				$(obj).parent().parent().find(".productPrice").html(htmlTag+(cnt * origin_price).toLocaleString()+htmlTag2+"원");
+				$(obj).parent().parent().find(".productPrice2").html(htmlTag+(cnt * sale_price).toLocaleString()+htmlTag2+"원");
+				
+				var sum = 0;
+			
+				$(".shopbasket-card").each(function(){
+				if($(this).find("input[name='cart_index']").is(":checked") == true){
+					sum += parseInt($(this).find(".productPrice3").html().replace(/,/g,""));
+					
+				}
+				
+			    });
+			    
+				$('.shopbasket-sum2').html(sum.toLocaleString());
+				
+			}
+		});
+	}
+	
+	function buyProduct(obj){
+		
+		var form = $('form[name=frm]');
+		
+		var cart_index = $(obj).parent().parent().parent().parent().find("input[name='cart_index']");
+		var totalPrice = $('.shopbasket-sum2').html();
+		
+		var YN = confirm("총 금액 "+totalPrice.toLocaleString()+"원 구매 하시겠습니까?"); 
+		if(YN){
+			
+			if(cart_index.is(':checked')){
+			form.submit();
+			}else {
+			alert('선택한 상품이 없습니다.');
+			}
+			
+		}
+		
+	}
+	
+	function OneBuyProduct(obj){
+		
+		var form = $('form[name=frm]');
+		
+		var cart_index = $(obj).parent().parent().parent().parent().find("input[name='cart_index']");
+		
+		var confirmProductName = $(obj).parent().parent().find(".confirmProductName").html();
+		
+		var YN = confirm(""+confirmProductName+" 바로 구매 하시겠습니까?");
+		
+		if(YN){
+			if(cart_index.is(':checked')){
+				$("input[name='cart_index']").prop('checked',false);
+				cart_index.prop('checked',true);
+				form.submit();
+			}else {
+				alert('상품을 선택한 후 눌러주세요.');
+			}
+		}
+		
+	}
+	
 	function minusFn(obj){
 		var cnt = $(obj).next("div").html();
 		var product_index = $(obj).next().next("input[type='hidden']").val();
@@ -148,55 +301,11 @@ $(function(){
 		});
 	}
 	
-	function minusCount(obj){
-		var cnt = $(obj).next("div").html();
-		var cart_index = $(obj).next().next("input[type='hidden']").val();
-		var origin_price = $(obj).parent().parent().find("input[name='origin_price']").val();
-		var sale_price = $(obj).parent().parent().find("input[name='sale_price']").val();
-		
-		if(cnt == 1){
-			alert("최소 한 개는 선택해야 합니다.");
-		}else{
-			cnt--;
-		}
-		var html = cnt;
-		
-		$(obj).next("div").html(html);
-		
-		$.ajax({
-			url : "cartCount.do",
-			type : "post",
-			data : "cart_index="+cart_index+"&cnt="+cnt,
-			success : function(){
-				$(obj).parent().parent().find(".productPrice").html((cnt * origin_price).toLocaleString()+"원");
-				$(obj).parent().parent().find(".productPrice2").html((cnt * sale_price).toLocaleString()+"원");  
-			}
-		});
-	}
 	
-	function plusCount(obj){
-		var cnt = $(obj).prev().prev("div").html();
-		var cart_index = $(obj).prev("input[type='hidden']").val();
-		var origin_price = $(obj).parent().parent().find("input[name='origin_price']").val();
-		var sale_price = $(obj).parent().parent().find("input[name='sale_price']").val();
-		
-		if(cnt == 10){
-			alert("최대 개수는 10개 입니다.");
-		}else{
-			cnt++;
-		}
-
-		var html = cnt;
-		
-		$(obj).prev().prev("div").html(html);
-		
-		$.ajax({
-			url : "cartCount.do",
-			type : "post",
-			data : "cart_index="+cart_index+"&cnt="+cnt,
-			success : function(){
-				$(obj).parent().parent().find(".productPrice").html((cnt * origin_price).toLocaleString()+"원");
-				$(obj).parent().parent().find(".productPrice2").html((cnt * sale_price).toLocaleString()+"원");
-			}
-		});
-	}
+	
+	
+	
+	
+	
+	
+	

@@ -36,9 +36,9 @@ public class ProductServiceImpl implements ProductService {
 		return prodcutListAll;
 	}
 	@Override
-	public List<ProductVO> productListAll2(ProductFilterVO productFilterVO) throws Exception {
+	public List<ProductVO> productListAll2(List<ProductFilterVO> filterList) throws Exception {
 		
-		List<ProductVO> prodcutListAll = productDao.productListAll2(productFilterVO);
+		List<ProductVO> prodcutListAll = productDao.productListAll2(filterList);
 		
 		return prodcutListAll;
 	}
@@ -170,6 +170,12 @@ public class ProductServiceImpl implements ProductService {
 	
 	/*여기서 부터는 관리자페이지*/
 	
+	// 관리자 메인페이지 최고 인기매출 상품 3개 뿌리기
+	@Override
+	public List<ProductVO> adminMainProductList() throws Exception {
+		return productDao.adminMainProductList();
+	}
+	
 	// 상품 조회(페이징 + 리스트 출력)
 	@Override
 	public List<ProductVO> adminProductList(SearchVO searchvo, int nowPage) throws Exception {
@@ -239,7 +245,7 @@ public class ProductServiceImpl implements ProductService {
 		// 이미지 업로드
 		imageUpload(product, tumnailImage, detailImage, request);
 		
-		return productDao.adminProductUpdate(productIndex(product));
+		return productDao.adminProductUpdate(product);
 	}
 	
 	// 상품 이미지 업로드 메소드
@@ -287,28 +293,9 @@ public class ProductServiceImpl implements ProductService {
 			}
 		}
 
-		if(product.getProduct_index() == null) {	// 상품 등록의 경우
-			System.out.println("상품등록입니다.");
-			System.out.println("상품등록입니다.");
-			// 마지막 부분 (알파벳)생성
-			productIndex = productLastIndex(productIndex);
+		// 마지막 부분 (알파벳)생성
+		productIndex = productLastIndex(productIndex);
 			
-		}else {	// 상품 수정의 경우
-			System.out.println("상품수정입니다.");
-			System.out.println("상품수정입니다.");
-			if(productIndex.equals(product.getProduct_index().substring(0, 4))) {	// 분류 바뀌었을 때
-				System.out.println("--------------------");
-				System.out.println("거기다가 분류가 바뀌지 않았읍니다");
-				System.out.println("--------------------");
-				System.out.println(product.getProduct_index());
-				System.out.println("--------------------");
-				return product;
-			}else {	// 분류 안 바뀌었을 때
-				// 마지막 부분 (알파벳)생성
-				productIndex = productLastIndex(productIndex);
-			}
-		}
-		
 		// 할거 다 끝나고 상품번호 마무리 세팅
 		product.setProduct_index(productIndex);
 		
@@ -370,6 +357,12 @@ public class ProductServiceImpl implements ProductService {
 		}
 		
 		return productIndex;
+	}
+	
+	// 상품 복구
+	@Override
+	public void adminProductDelYNisN(String product_index) throws Exception {
+		productDao.adminProductDelYNisN(product_index);
 	}
 	
 }

@@ -97,11 +97,21 @@
 
                             <div class="col-5 col-md-4 col-lg-3">
                                 <select class="bg-opacity-25 form-select fw-bold" id="middleSort" name="middleSort">
-                                    <option class="bg-primary bg-opacity-25 fw-bold frozen" value="볶음밥"<c:if test="${product.middleSort eq '볶음밥'}"> selected</c:if>>볶음밥</option>
-                                    <option class="bg-primary bg-opacity-25 fw-bold frozen" value="치킨,만두"<c:if test="${product.middleSort eq '치킨,만두'}"> selected</c:if>>치킨,만두</option>
-                                    <option class="bg-success bg-opacity-25 fw-bold instant" value="국"<c:if test="${product.middleSort eq '국'}"> selected</c:if>>국</option>
-                                    <option class="bg-success bg-opacity-25 fw-bold instant" value="반찬"<c:if test="${product.middleSort eq '반찬'}"> selected</c:if>>반찬</option>
-                                    <option class="bg-success bg-opacity-25 fw-bold instant" value="컵밥,햇반"<c:if test="${product.middleSort eq '컵밥,햇반'}"> selected</c:if>>컵밥,햇반</option>
+	                                <c:if test="${product.middleSort eq '볶음밥'}">
+	                                	<option class="bg-primary bg-opacity-25 fw-bold frozen" value="볶음밥" selected>볶음밥</option>
+	                                </c:if>
+	                                <c:if test="${product.middleSort eq '치킨,만두'}">
+	                                	<option class="bg-primary bg-opacity-25 fw-bold frozen" value="치킨,만두" selected>치킨,만두</option>
+	                                </c:if>
+	                                <c:if test="${product.middleSort eq '국'}">
+	                                	<option class="bg-success bg-opacity-25 fw-bold instant" value="국" selected>국</option>
+	                                </c:if>
+	                                <c:if test="${product.middleSort eq '반찬'}">
+	                                	<option class="bg-success bg-opacity-25 fw-bold instant" value="반찬" selected>반찬</option>
+	                                </c:if>
+	                                <c:if test="${product.middleSort eq '컵밥,햇반'}">
+	                                	<option class="bg-success bg-opacity-25 fw-bold instant" value="컵밥,햇반" selected>컵밥,햇반</option>
+	                                </c:if>
                                 </select>
                             </div>
 
@@ -410,5 +420,12 @@
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/adminPage.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/adminPage_leftMenu.js"></script>
+    <script type="text/javascript">
+    window.onpageshow = function(event) {
+        if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+        	history.forward();
+        } 
+    }
+    </script>
 </body>
 </html>

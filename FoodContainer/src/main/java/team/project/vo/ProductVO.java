@@ -19,6 +19,7 @@ public class ProductVO {
 	private String modify_YN;
 	private String modify_date;
 	private String del_YN;
+	
 	public String getProduct_index() {
 		return product_index;
 	}

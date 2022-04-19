@@ -19,6 +19,12 @@ public class BannerServiceImpl implements BannerService {
 	@Autowired
 	private BannerDAO bannerDao;
 	
+	// 관리자메인 페이지 배너
+	@Override
+	public List<BannerVO> adminMainBanner() throws Exception {
+		return bannerDao.adminMainBanner();
+	}
+	
 	// 배너 조회
 	@Override
 	public List<BannerVO> bannerList() throws Exception {

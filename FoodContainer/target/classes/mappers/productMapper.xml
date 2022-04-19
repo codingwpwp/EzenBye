@@ -5,12 +5,33 @@
  
 <mapper namespace="team.project.mapper.productMapper">
 
-    <select id="ProductListAll" resultType="ProductVO" parameterType="team.project.vo.ProductFilterVO">
+    <select id="ProductListAll" resultType="ProductVO">
     	SELECT *
     	FROM product
-    	WHERE del_YN = 'N'
-    	
-    	ORDER BY product_date DESC
+    	WHERE del_YN = 'N' 
+    	    	
+    </select>
+    
+    <select id="ProductFilter" resultType="ProductVO" parameterType="list">
+    	SELECT *
+    	FROM product
+    	WHERE del_YN = 'N' 
+    		
+    	<if test="list != null">
+    		and middleSort in (<foreach collection="list" item="filter" separator=",">#{filter.middleSort}</foreach>) 
+    		and brand in (<foreach collection="list" item="filter" separator=",">#{filter.brand}</foreach>) 
+	    	<!-- 
+	    	<foreach collection="list" item="filter">
+		    	<if test="#{filter.price != null and filter.price.equals('0')}">
+		    		ORDER BY origin_price DESC
+		    	</if>
+		    	<if test="#{filter.price != null and filter.price.equals('1')}">
+		    		ORDER BY origin_price ASC
+		    	</if>
+	    	</foreach>
+	    	 -->
+    	</if>
+    	    	
     </select>
 
     <select id="view" resultType="ProductVO">
@@ -114,6 +135,13 @@
     
     <!-- *************************여기서 부터는 관리자페이지**************************** -->
     
+    <!-- 관리자페이지 메인 최고매출 상품 3개 뿌리기 -->
+    <select id="adminMainProductList" resultType="ProductVO">
+    	SELECT * FROM product
+    	ORDER BY quantity DESC, product_date DESC
+    	LIMIT 0, 3
+    </select>
+        
     <!-- 상품 조회할때 먼저 총 글의 총 갯수를 구하는 쿼리  -->
     <select id="adminProductListCount" resultType="int" parameterType="SearchVO">
     	SELECT COUNT(*)
@@ -198,5 +226,11 @@
 	    	delivery_free_YN = #{delivery_free_YN}
     	WHERE product_index = #{origin_product_index}
     </update>
-    
+
+    <!-- 상품 복구 -->
+    <update id="adminProductDelYNisN" parameterType="String">
+    	UPDATE product SET del_YN = "N"
+    	WHERE product_index = #{product_index}
+    </update>
+
 </mapper>

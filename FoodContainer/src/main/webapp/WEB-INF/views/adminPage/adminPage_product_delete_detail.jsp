@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -70,7 +72,8 @@
                                 <span class="infoTitle p-1" style="width: 78px;">대분류</span>
                             </div>
                             <div class="col-8 col-md-6">
-                                <input type="text" class="bg-light form-control" value="냉동식품" disabled>
+                                <input type="text" class="form-control fw-bold bg-opacity-75 <c:if test="${product.bigSort eq '냉동식품'}">bg-primary</c:if><c:if test="${product.bigSort eq '즉석식품'}">bg-success</c:if>"
+                                value="${product.bigSort}" disabled>
                             </div>
 
                         </div>
@@ -82,7 +85,8 @@
                                 <span class="infoTitle p-1" style="width: 78px;">중분류</span>
                             </div>
                             <div class="col-8 col-md-6">
-                                <input type="text" class="bg-light form-control" value="볶음밥" disabled>
+                                <input type="text" class="form-control fw-bold bg-opacity-25 <c:if test="${product.bigSort eq '냉동식품'}">bg-primary</c:if><c:if test="${product.bigSort eq '즉석식품'}">bg-success</c:if>"
+                                	   value="${product.middleSort}" disabled>
                             </div>
 
                         </div>
@@ -102,7 +106,7 @@
                             </div>
 
                             <div class="col-3 col-lg-2">
-                                <input type="text" class="bg-light form-control" value="122" disabled>
+                                <input type="text" class="bg-light form-control" name="product_index" value="${product.product_index}" disabled>
                             </div>
 
                         </div>
@@ -115,7 +119,7 @@
                             </div>
 
                             <div class="col-8 col-md-6">
-                                <input type="text" class="bg-light form-control" value="CJ" disabled>
+                                <input type="text" class="bg-light form-control" value="${product.brand}" disabled>
                             </div>
 
                         </div>
@@ -128,7 +132,7 @@
                             </div>
 
                             <div class="col-8 col-md-6">
-                                <input type="text" class="bg-light form-control" value="아몰라상품" disabled>
+                                <input type="text" class="bg-light form-control" value="${product.product_name}" disabled>
                             </div>
 
                         </div>
@@ -143,11 +147,9 @@
 
                             <div class="col-8 col-md-2 mb-3 mb-md-0">
                                 <div class="row">
-
                                     <div class="col-11 pe-0">
-                                        <input type="text" class="form-control bg-light" style="text-align: right;" value="30,000" disabled>
+                                        <input type="text" class="form-control bg-light" style="text-align: right;" value="<fmt:formatNumber value='${product.origin_price}' pattern="#,###"/>" disabled>
                                     </div>
-
                                     <div class="col-1 d-flex align-items-center fw-bold px-0">원</div>
 
                                 </div>
@@ -157,16 +159,13 @@
                             <div class="col-4 col-md-2 d-flex justify-content-center justify-content-md-end">
                                 <span class="infoTitle p-1" style="width: 78px;">할인 가격</span>
                             </div>
-
                             <div class="col-8 col-md-2">
                                 <div class="row">
-
                                     <div class="col-11 pe-0">
-                                        <input type="text" class="form-control bg-light" style="text-align: right;" value="23,000" disabled>
+                                        <input type="text" class="form-control bg-light" style="text-align: right;"
+											   value="<c:if test="${product.sale_price > -1}">${product.sale_price}</c:if><c:if test="${product.sale_price <= -1}">할인없음</c:if>" disabled>
                                     </div>
-
-                                    <div class="col-1 d-flex align-items-center fw-bold px-0">원</div>
-
+                                    <div class="col-1 d-flex align-items-center fw-bold px-0"><c:if test="${product.sale_price > -1}">원</c:if></div>
                                 </div>
                             </div>
 
@@ -180,16 +179,12 @@
                             <div class="col-4 d-flex justify-content-center">
                                 <span class="infoTitle p-1" style="width: 78px;">재고</span>
                             </div>
-
                             <div class="col-8 col-md-2 mb-3 mb-md-0">
                                 <div class="row">
-
                                     <div class="col-11 pe-0">
-                                        <input type="text" class="bg-light form-control" style="text-align: right;" value="1,350" disabled>
+                                        <input type="text" class="bg-light form-control" style="text-align: right;" value="<fmt:formatNumber value='${product.inventory}' pattern="#,###"/>" disabled>
                                     </div>
-
                                     <div class="col-1 d-flex align-items-center fw-bold px-0">개</div>
-
                                 </div>
                             </div>
 
@@ -200,13 +195,10 @@
 
                             <div class="col-8 col-md-2">
                                 <div class="row">
-
                                     <div class="col-11 pe-0">
-                                        <input type="text" class="bg-light form-control" style="text-align: right;" value="3,000" disabled>
+                                        <input type="text" class="bg-light form-control" style="text-align: right;" value="<c:choose><c:when test="${product.delivery_free_YN eq 'N'}">3,000</c:when><c:otherwise>무료배송</c:otherwise></c:choose>" disabled>
                                     </div>
-
-                                    <div class="col-1 d-flex align-items-center fw-bold px-0">원</div>
-
+                                    <div class="col-1 d-flex align-items-center fw-bold px-0"><c:if test="${product.delivery_free_YN eq 'N'}">원</c:if></div>
                                 </div>
                             </div>
 
@@ -221,13 +213,10 @@
 
                             <div class="col-8 col-md-7">
                                 <div class="row">
-
                                     <div class="col-11 col-md-10 pe-0">
-                                        <input type="text" class="bg-light text-danger fw-bold form-control" style="text-align: right;" value="3,212" disabled>
+                                        <input type="text" class="bg-light text-danger fw-bold form-control" style="text-align: right;" value="<fmt:formatNumber value='${product.quantity}' pattern="#,###"/>" disabled>
                                     </div>
-
                                     <div class="col-1 d-flex align-items-center fw-bold px-0">개</div>
-
                                 </div>
                             </div>
 
@@ -245,7 +234,7 @@
 
                             <!-- 대표이미지 -->
                             <div class="col-6 col-md-3 d-flex justify-content-center">
-                                <button type="button" class="btn btn-primary btn-sm mb-3 col-12" data-bs-toggle="modal" data-bs-target="#sumnailImageModal">대표이미지</button>
+                                <button type="button" class="btn btn-primary btn-sm mb-3 col-12" data-bs-toggle="modal" data-bs-target="#tumnailImageModal">대표이미지</button>
                             </div>
 
                             <!-- 상세이미지 -->
@@ -267,23 +256,23 @@
 
                         <!-- 관리버튼들 -->
                         <div class="gap-2">
-                            <button type="button" class="btn btn-secondary fw-bold">뒤로가기</button>
-                            <button type="button" class="btn btn-primary fw-bold">복구하기</button>
+                            <button type="button" class="btn btn-secondary fw-bold" onclick="location.href='product_delete_list.do?searchValue=${searchValue}&nowPage=${nowPage}'">뒤로가기</button>
+                            <button type="button" class="btn btn-primary fw-bold" onclick="productDelN('${product.product_index}')">복구하기</button>
                         </div>
 
                     </div>
 
                     <!-- 대표이미지 모달 -->
-                    <div class="modal fade" id="sumnailImageModal" tabindex="-1" aria-labelledby="sumnailImageModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="tumnailImageModal" tabindex="-1" aria-labelledby="tumnailImageModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="sumnailImageModalLabel">대표이미지</h5>
+                                    <h5 class="modal-title" id="tumnailImageModalLabel">대표이미지</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="imageContainer">
-                                        <img src="1_1.png" class="img-fluid">
+                                        <img src="<%=request.getContextPath()%>/resources/img/${product.brand}/${product.middleSort}/${product.thumbnail_image}" class="img-fluid">
                                     </div>
                                 </div>
                             </div>
@@ -300,7 +289,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="imageContainer">
-                                        <img src="1_1.png" class="img-fluid">
+                                        <img src="<%=request.getContextPath()%>/resources/img/${product.brand}/${product.middleSort}/${product.detail_image}" class="img-fluid">
                                     </div>
                                 </div>
                             </div>
@@ -317,7 +306,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="imageContainer">
-                                        <img src="1_1.png" class="img-fluid">
+                                        <img src="<%=request.getContextPath()%>/resources/img/배송.png" class="img-fluid">
                                     </div>
                                 </div>
                             </div>
@@ -334,7 +323,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="imageContainer">
-                                        <img src="1_1.png" class="img-fluid">
+                                        <img src="<%=request.getContextPath()%>/resources/img/취소.png" class="img-fluid">
                                     </div>
                                 </div>
                             </div>
@@ -363,5 +352,12 @@
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/adminPage.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/adminPage_leftMenu.js"></script>
+    <script type="text/javascript">
+    window.onpageshow = function(event) {
+        if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+        	history.forward();
+        } 
+    }
+    </script>
 </body>
 </html>

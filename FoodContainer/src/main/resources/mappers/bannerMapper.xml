@@ -5,7 +5,7 @@
 
 <mapper namespace="team.project.mapper.bannerMapper">
 
-	<select id="adminMainBanner">
+	<select resultType="BannerVO" id="adminMainBanner">
 		SELECT * FROM banner
 		ORDER BY register_date DESC
     	LIMIT 0, 3
