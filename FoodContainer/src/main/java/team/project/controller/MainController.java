@@ -338,8 +338,10 @@ public class MainController {
 	
 	@RequestMapping(value = "productFilter.do", method = RequestMethod.GET)
 	@ResponseBody
-	public String productFilter(Locale locale, Model model, ProductVO productVO, ProductFilterVO productFilterVO) throws Exception {
+	public List<ProductVO> productFilter(Locale locale, Model model, ProductVO productVO, ProductFilterVO productFilterVO) throws Exception {
 	
+		List<ProductVO> ProductListAll = null;
+		
 		List<ProductFilterVO> filterList = new ArrayList<>();
 		
 		if(productFilterVO.getMiddleSort() != null) {
@@ -370,11 +372,11 @@ public class MainController {
 				filterList.add(temp);
 			}
 			
-			List<ProductVO> ProductListAll = productService.productListAll2(filterList);
+			ProductListAll = productService.productListAll2(filterList);
 			
 			model.addAttribute("productFilter",ProductListAll);
 		}
 		
-		return "Product/productList";
+		return ProductListAll;
 	}
 }

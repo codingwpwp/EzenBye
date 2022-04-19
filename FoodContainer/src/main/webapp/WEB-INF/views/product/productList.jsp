@@ -58,7 +58,6 @@
                	<!-- pc버전 -->
                	<article class="pList">
 					<div class="fs-5 my-2 fw-bold topText">전체상품</div>
-					${productFilter}
 					<hr>
 					<!-- 전체상품 -->
 					<div class="container"> 
