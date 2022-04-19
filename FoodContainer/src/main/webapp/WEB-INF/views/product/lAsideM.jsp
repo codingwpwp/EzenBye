@@ -22,7 +22,7 @@
 					</button>
 					<div class="collapse" id="product-collapse">
 						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideIceAllM" onclick="asideIceAllM(this); productFilter();" checked> 전체</label></a></li>
+							<li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideIceAllM" onclick="asideIceAllM(this); productFilter();"> 전체</label></a></li>
 						    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideIceM" value="0" onclick="asideIceM(this); productFilter();"> 볶음밥</label></a></li>
 						    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideIceM" value="1" onclick="asideIceM(this); productFilter();"> 치킨,만두</label></a></li>
 						</ul>
@@ -35,7 +35,7 @@
 					</button>
 					<div class="collapse" id="home-collapse">
 						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideProductAllM" onclick="asideProductAllM(this); productFilter();" checked> 전체</label></a></li>
+							<li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideProductAllM" onclick="asideProductAllM(this); productFilter();"> 전체</label></a></li>
 						    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideProductM" value="0" onclick="asideProductM(this); productFilter();"> 국</label></a></li>
 						    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideProductM" value="1" onclick="asideProductM(this); productFilter();"> 반찬</label></a></li>
 						    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideProductM" value="2" onclick="asideProductM(this); productFilter();"> 컵밥,햇반</label></a></li>
@@ -49,7 +49,7 @@
 					</button>
 					<div class="collapse" id="dashboard-collapse" style="">
 						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideBrandAllM" onclick="asideBrandAllM(this); productFilter();" checked> 전체</label></a></li>
+							<li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideBrandAllM" onclick="asideBrandAllM(this); productFilter();"> 전체</label></a></li>
 						    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideBrandM" value="0" onclick="asideBrandM(this); productFilter();"> CJ</label></a></li>
 						    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideBrandM" value="1" onclick="asideBrandM(this); productFilter();"> 오뚜기</label></a></li>
 						    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asideBrandM" value="2" onclick="asideBrandM(this); productFilter();"> 청정원</label></a></li>
@@ -65,8 +65,8 @@
 					</button>
 					<div class="collapse" id="orders-collapse">
 						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-						    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asidePriceM" value="0" onclick="asidePriceM(this); productFilter();" checked> 낮은 가격 순</label></a></li>
-						    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asidePriceM" value="1" onclick="asidePriceM(this); productFilter();" checked> 높은 가격 순</label></a></li>
+						    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asidePriceM" value="0" onclick="asidePriceM(this); productFilter();"> 낮은 가격 순</label></a></li>
+						    <li><a href="#" class="link-dark rounded"><label><input type="checkbox" name="asidePriceM" value="1" onclick="asidePriceM(this); productFilter();"> 높은 가격 순</label></a></li>
 						</ul>
 					</div>
 				</li>

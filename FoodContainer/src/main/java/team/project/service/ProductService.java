@@ -17,7 +17,7 @@ import team.project.vo.SearchVO;
 public interface ProductService {
 	//상품조회
 	List<ProductVO> productListAll(ProductVO productVO) throws Exception;
-	List<ProductVO> productListAll2(ProductFilterVO productFilterVO) throws Exception;
+	List<ProductVO> productListAll2(List<ProductFilterVO> filterList) throws Exception;
 	//상세보기
 	ProductVO view(String index) throws Exception;
 	//최근 본 상품

@@ -54,11 +54,11 @@
 		//가격
 		var price = $("input[name='asidePrice']");
 		
-		if(ice.is(":checked") && product.is(":checked") && brand.is(":checked") && price.is(":checked")){
+		if(!(ice.is(":checked")) && !(product.is(":checked")) && !(brand.is(":checked")) && !(price.is(":checked"))){
 			ice.click();
 			product.click();
 			brand.click();
-			all.click();
+			price.click();
 		}
 		
 	  //모바일 화면 - 처음 또는 새로고침 시 전체선택
@@ -72,13 +72,13 @@
 		var brandM = $("input[name='asideBrandAllM']");
 		//가격
 		var priceM = $("input[name='asidePriceM']");
-		
+		/*
 		if(iceM.is(":checked") && productM.is(":checked") && brandM.is(":checked") && priceM.is(":checked")){
 			iceM.click();
 			productM.click();
 			brandM.click();
 			allM.click();
-		}
+		}*/
 	}
 	
 	//전체메뉴
@@ -605,33 +605,29 @@
 		
 		for(var i=0; i<ice.length; i++){
 			if(ice.eq(i).is(":checked")){
-				middleSort += ice.eq(i).next().html() + "|";
+				middleSort += ice.eq(i).next().html() + " ";
 			}
 		}
 		
 		for(var i=0; i<product.length; i++){
 			if(product.eq(i).is(":checked")){
-				middleSort += product.eq(i).next().html() + "|";
+				middleSort += product.eq(i).next().html() + " ";
 			}
 		}
 		
 		for(var i=0; i<brandList.length; i++){
 			if(brandList.eq(i).is(":checked")){
-				brand += brandList.eq(i).next().html() + "|";
+				brand += brandList.eq(i).next().html() + " ";
 			}
 		}
 		
 		for(var i=0; i<priceList.length; i++){
 			if(priceList.eq(i).is(":checked")){
-				price += priceList.eq(i).val() + "|";
+				price += priceList.eq(i).val();
 			}
 		}
 		
-		var middleSortArr = $.trim(middleSort.split("|"));
-		var brandArr = $.trim(brand.split("|"));
-		var priceArr = $.trim(price.split("|"));
 		
-		/*
 		var mainSectionHtml = "<!-- pc버전 -->";
 			mainSectionHtml += "<article class='pList'>";
 			mainSectionHtml += "<div class='fs-5 my-2 fw-bold topText'>전체상품</div>";
@@ -715,7 +711,7 @@
 			mainSectionHtml += "</article>";
 									  	
 									
-				
+			/*	
 				<!-- 모바일 버전 -->	
 				<article class="pListM">
 					<div class="fs-5 my-2 fw-bold topText">전체상품</div>
@@ -797,13 +793,13 @@
 					</div>
 				</article>
 		*/
-		
+		/*
 		$.ajax({
 			url : "productList.do",
-			data : "middleSort="+middleSortArr+"&brand="+brandArr+"&price="+priceArr,
+			data : "middleSort="+middleSort+"&brand="+brand+"&price="+price,
 			success : function(data){
-				console.log("ok");
+				$("#mainSection").html(mainSectionHtml);
 			}
 		});
-		
+		*/
 	}
