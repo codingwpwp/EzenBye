@@ -736,43 +736,32 @@
 				mainSectionHtml += "<div class='container'>";
 				mainSectionHtml += "<div class='row'>";
 				for(var i=0; i<data.length; i++){
-					//mainSectionHtml += "<c:forEach items='${productListAll}' var='ProductVO' varStatus='status'>";
 					mainSectionHtml += "<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center'>";
 					mainSectionHtml += "<div class='card' style='width: 18rem;'>";
 					mainSectionHtml += "<a href='productView.do?product_index="+data[i].product_index+"' onclick='productCookie(this)'>";
 					mainSectionHtml += "<img src='/controller/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='card-img-top cardImg' alt='"+data[i].product_name+"'>";
 					if(data[i].inventory == 0){
-						//mainSectionHtml += "<c:if test='${ProductVO.inventory == 0 }'>";
 						mainSectionHtml += "<img src='/controller/resources/img/매진.png' class='card-img-top pListSold'>";
 						mainSectionHtml += "<div class='pListSoldout'></div>";
-						//mainSectionHtml += "</c:if>";
 					}
 					mainSectionHtml += "<input type='hidden' class='inventory"+i+"' value='"+data[i].inventory+"'>";
 					mainSectionHtml += "<div class='card-body'>";
 					mainSectionHtml += "<p class='card-text'>";
 					if(data[i].quantity >= 500){
-						//mainSectionHtml += "<c:if test='${ProductVO.quantity >= 500}'>";
 						mainSectionHtml += "<span style='color:red;'>[인기]</span>";
-						//mainSectionHtml += "</c:if>";
 					}
 					mainSectionHtml += "<span>["+data[i].brand+"]</span>";
 					mainSectionHtml += "<br>";
 					mainSectionHtml += "<span class='productName'>"+data[i].product_name+"</span><br>";
 					mainSectionHtml += "<span class='fs-4'>";
 					mainSectionHtml += data[i].origin_price.toLocaleString();
-					//mainSectionHtml += "<fmt:formatNumber value='${ProductVO.origin_price}' pattern='#,###'/>";
 					mainSectionHtml += "</span>원<br>";
 					if(data[i].sale_price != -1){
-						//mainSectionHtml += "<c:if test='${ProductVO.sale_price != -1}'>";
 						mainSectionHtml += "<span class='discount'>";
 						mainSectionHtml += data[i].sale_price.toLocaleString()+"원";
-						//mainSectionHtml += "<fmt:formatNumber value='${ProductVO.sale_price}' pattern='#,###'/>원";
 						var persent = ((data[i].origin_price - data[i].sale_price)/data[i].origin_price)*100;
-						//mainSectionHtml += "<c:set var='sale' value='${((ProductVO.origin_price - ProductVO.sale_price)/ProductVO.origin_price)*100}' />";
 						mainSectionHtml += "("+persent.toFixed(2)+"%)<br>";
-						//mainSectionHtml += "(<fmt:formatNumber value='${sale}' pattern='##.#'/>%)<br>";
 						mainSectionHtml += "</span>";
-						//mainSectionHtml += "</c:if>";
 					}
 					mainSectionHtml += "<span class='productListStar'>";
 					mainSectionHtml += "<i class='bi bi-star-fill'></i>";
@@ -784,15 +773,6 @@
 					mainSectionHtml += "<br>";
 					if(data[i].delivery_free_YN == "Y"){
 						mainSectionHtml += "배송비 3,000원"; 
-						/*mainSectionHtml += "<c:set var='delivery' value='${ProductVO.delivery_free_YN}' />";
-						mainSectionHtml += "<c:choose>";
-						mainSectionHtml += "<c:when test='${delivery == 'Y'}'>";
-						mainSectionHtml += "배송비 3,000원";
-						mainSectionHtml += "</c:when>";
-						mainSectionHtml += "<c:when test='${delivery == 'Y'}'>";
-						mainSectionHtml += "무료배송";
-						mainSectionHtml += "</c:when>";
-						mainSectionHtml += "</c:choose>";*/
 					}else{
 						mainSectionHtml += "무료배송";
 					}
@@ -800,30 +780,37 @@
 					mainSectionHtml += "</div>";
 					mainSectionHtml += "</a>";
 					mainSectionHtml += "<input type='hidden' name='index' value='"+data[i].product_index+"'>";
-			/*		mainSectionHtml += "<div class='pListSubImg'>";
-					mainSectionHtml += "<c:if test='${member.id != null }'>";
-					mainSectionHtml += "<c:set var='heartCheck' value='0' />";
-					mainSectionHtml += "<c:forEach items='${userDibsList}' var='userDibsList'>";
-					mainSectionHtml += "<c:if test='${userDibsList.member_index == member.member_index && ProductVO.product_index == userDibsList.product_index}'>";
-					mainSectionHtml += "<img src='/controller/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
-					mainSectionHtml += "<c:set var='heartCheck' value='1' />";
-					mainSectionHtml += "</c:if>";
-					mainSectionHtml += "</c:forEach>";
-					mainSectionHtml += "<c:if test='${heartCheck == '0'}'>";
-					mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
-					mainSectionHtml += "</c:if>";
-					mainSectionHtml += "</c:if>";
-					mainSectionHtml += "<c:if test='${member.id == null}'>";
-					mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
-					mainSectionHtml += "</c:if>";
+					mainSectionHtml += "<div class='pListSubImg'>";
+					var loginCheck = $("input[name='LoginCheck']").val();
+					if(loginCheck != null){
+						var heartCheck = 0;
+						var userDibsCheck = $("input[name='userDibsCheck']").val();
+						var userDibsProduct = $("input[name='userDibsProduct']").val();
+						var userDibsProductArr = [];
+						userDibsProductArr = userDibsProduct.split(",");
+						for(var j=0; j<userDibsCheck.lenght; j++){
+							if(userDibsCheck == loginCheck && data[i].product_index == userDibsProductArr[j]){
+								mainSectionHtml += "<img src='/controller/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+								heartCheck = 1;
+							}
+						}
+						if(heartCheck == 0){
+							mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+						}
+					}else{
+						mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+					}
 					mainSectionHtml += "<img src='/controller/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='cart(this)'>";
-					mainSectionHtml += "<input type='hidden' value='${status.index}'>";  */
+					mainSectionHtml += "<input type='hidden' value='"+i+"'>";  
 					mainSectionHtml += "</div>";
 					mainSectionHtml += "</div>";
 					mainSectionHtml += "</div>";
-					//mainSectionHtml += "</c:forEach>";
 				}
-			//	mainSectionHtml += "<input type='hidden' id='pListLoginCheck' value='${member.member_index}'>";
+				if(loginCheck == null){
+					mainSectionHtml += "<input type='hidden' id='pListLoginCheck' value=''>";
+				}else{
+					mainSectionHtml += "<input type='hidden' id='pListLoginCheck' value='"+loginCheck+"'>";
+				}
 				mainSectionHtml += "</div>";
 				mainSectionHtml += "</div>";
 				mainSectionHtml += "</article>";

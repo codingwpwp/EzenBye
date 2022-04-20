@@ -1,12 +1,27 @@
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   
+<%@ page import = "team.project.vo.*" %> 
+<%@ page import = "java.util.*" %> 
 <%
+	MemberVO member = (MemberVO)session.getAttribute("member");
+	List<DibsVO> userDibsList = (List) request.getAttribute("userDibsList");
+	String dibsProduct = null;
+	ArrayList<String> dibsProductArr = new ArrayList<>();
 	
+	if(member != null){
+		if(userDibsList != null){
+			for(int i=0; i<userDibsList.size(); i++){
+				dibsProductArr.add(userDibsList.get(i).getProduct_index());
+			}
+		}
+		dibsProduct = dibsProductArr.toString();
+	}
 %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -53,7 +68,29 @@
                     <%@include file="lAside.jsp"%>
                 </aside>
             </div>
-
+          
+            
+			<%if(member != null) {%>
+				<input type="hidden" name="LoginCheck" value="<%=member.getMember_index()%>">
+				<%if(userDibsList != null) {%>
+					<%int checkVal = 0; %>
+					<%for(int i=0; i<userDibsList.size(); i++){ %>
+						<%if(userDibsList.get(i).getMember_index() == member.getMember_index()){%>
+							<input type="hidden" name="userDibsCheck" value="<%=userDibsList.get(i).getMember_index()%>">
+							<%checkVal = 1; %>
+						<%}%>
+						<%if(checkVal == 0){ %>
+							<input type="hidden" name="userDibsCheck" value="">
+						<%} %>
+					<%} %>
+				<%}else{ %>
+					<input type="hidden" name="userDibsCheck" value="">
+				<%} %>
+					<input type="hidden" name="userDibsProduct" value="<%=dibsProduct%>">
+			<%} %>
+             
+            
+            
             <!-- 메인 -->
             <div class="col-12 col-sm-9 col-md-10 col-lg-8">
                 <article id="mainSection">
