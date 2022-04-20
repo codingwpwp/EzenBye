@@ -58,7 +58,7 @@
                 <article id="mainSection \">
                     <!-- 실질적인 메인 내용 -->
                     
-                    <form name="frm" action="purchase/member.do" method="post" class="col-md-12">
+                    <div class="col-md-12">
 				 
 			        <p class="fs-6 shopbasket-fs6">장바구니</p>
 			        <hr />
@@ -70,40 +70,117 @@
 							  <label class="form-check-label" for="inlineCheckbox1">전체 선택</label>
 							</div>
 			        	</div>
+			        	<c:if test="${member.member_index != null}">
 			        	<div class="col-xxl-4 col-xl-5 col-xl-5 col-lg-5 col-md-5">
 			        		<button type="button" class="btn btn-secondary btn-sm" onclick="chooseDelete(this)">선택 상품 삭제</button>
 			        	</div>
+			        	</c:if>
+			        	<c:if test="${member.member_index == null}">
+			        	<div class="col-xxl-4 col-xl-5 col-xl-5 col-lg-5 col-md-5">
+			        		<button type="button" class="btn btn-secondary btn-sm" onclick="chooseDeleteNon(this)">선택 상품 삭제</button>
+			        	</div>
+			        	</c:if>
 					</div>
 					
+					<!-- 비로그인 냉동 -->
+				    <c:if test="${member.member_index == null}">
+				    <form name="frms" action="purchase/certification.do" method="post">
 					<div class="shopbasket-title rounded lookupBorder">
 					<p class="fs-4 shopbasket-fs4 fw-bold text-primary text-opacity-50"><i class="bi bi-snow2"></i>냉동식품</p>	
-					<c:if test="${member.member_index == null}">
+					
 						<c:forEach items="${noMemberCart}" var="noMemberCart" varStatus="status">
 							<c:if test="${noMemberCart.bigSort == '냉동식품'}">
 							<div class="row d-flex align-items-center shopbasket-card">
 								<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-checkbox">
-									<input class="form-check-input" type="checkbox" id="iceCheckbox${status.index}" value="option${status.index}" name="shopbasket">
+								
+									<c:forEach items="${noMemberCartCookie}" var="noMemberCartCookie">
+										<c:set var="pCnt" value="${noMemberCartCookie}" />
+										<c:set var="length" value="${fn:length(pCnt)}"/>
+											<c:if test="${length < 7}">
+												<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-1)}">
+													<input class="form-check-input cart_indexCheck" type="checkbox" id="iceCheckbox${status.index}" value="${fn:substring(pCnt,length-1,length)}" name="${fn:substring(pCnt,0,length-1)}" onclick="itemSum(this)">
+												</c:if>
+											</c:if>
+											<c:if test="${length == 7}">
+												<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-2)}">
+													<input class="form-check-input cart_indexCheck" type="checkbox" id="iceCheckbox${status.index}" value="${fn:substring(pCnt,length-2,length)}" name="${fn:substring(pCnt,0,length-2)}" onclick="itemSum(this)">
+												</c:if>
+											</c:if>
+										</c:forEach>	
+									
 								</div>
 								<div class="col-lg-8 col-md-8">
 									<div class="h-100 p-2 bg-light border rounded-3 card-good">
+									
+									<c:forEach items="${noMemberCartCookie}" var="noMemberCartCookie">
+										<c:set var="pCnt" value="${noMemberCartCookie}" />
+										<c:set var="length" value="${fn:length(pCnt)}"/>
+											<c:if test="${length < 7}">
+												<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-1)}">
+													<a href="productView.do?product_index=${fn:substring(pCnt,0,length-1)}" class="productHref">
+												</c:if>
+											</c:if>
+											<c:if test="${length == 7}">
+												<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-2)}">
+													<a href="productView.do?product_index=${fn:substring(pCnt,0,length-2)}" class="productHref">
+												</c:if>
+											</c:if>
+										</c:forEach>
+									
 							        	<div class="row">
 							        		<div class="col-sm-3">
 							        			<img src="<%=request.getContextPath() %>/resources/img/${noMemberCart.brand}/${noMemberCart.middleSort}/${noMemberCart.thumbnail_image}" class="img-thumbnail" alt="${noMemberCart.product_name}">
 							        		</div>
 							        		<div class="col-sm-9 d-flex align-items-start flex-column mb-3">
-										    	<div class="mb-auto p-2">${noMemberCart.brand} ${noMemberCart.product_name}</div>
+										    	<div class="mb-auto p-2 confirmProductName">${noMemberCart.brand} ${noMemberCart.product_name}</div>
 				  								<c:if test="${noMemberCart.sale_price == -1}">
-				  									<div class="p-2">${noMemberCart.origin_price}원</div>
+				  								
+				  									<c:forEach items="${noMemberCartCookie}" var="noMemberCartCookie">
+													<c:set var="pCnt" value="${noMemberCartCookie}" />
+													<c:set var="length" value="${fn:length(pCnt)}"/>
+														<c:if test="${length < 7}">
+															<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-1)}">
+																<div class="p-2 productPrice"><span class="productPrice3"><fmt:formatNumber value="${noMemberCart.origin_price * fn:substring(pCnt,length-1,length)}" pattern="#,###" /></span>원</div>
+																<input type="hidden" name="origin_price" class="productPrice4" value="${noMemberCart.origin_price}" />
+															</c:if>
+														</c:if>
+														<c:if test="${length == 7}">
+															<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-2)}">
+																<div class="p-2 productPrice"><span class="productPrice3"><fmt:formatNumber value="${noMemberCart.origin_price * fn:substring(pCnt,length-2,length)}" pattern="#,###" /></span>원</div>
+																<input type="hidden" name="origin_price" class="productPrice4" value="${noMemberCart.origin_price}" />
+															</c:if>
+														</c:if>
+													</c:forEach>
+				  								
 				  								</c:if>
+				  								
 				  								<c:if test="${noMemberCart.sale_price != -1}">
-				  									<div class="p-2">${noMemberCart.sale_price}원</div>
+				  								
+				  									<c:forEach items="${noMemberCartCookie}" var="noMemberCartCookie">
+													<c:set var="pCnt" value="${noMemberCartCookie}" />
+													<c:set var="length" value="${fn:length(pCnt)}"/>
+														<c:if test="${length < 7}">
+															<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-1)}">
+																<div class="p-2 productPrice2"><span class="productPrice3"><fmt:formatNumber value="${noMemberCart.sale_price * fn:substring(pCnt,length-1,length)}" pattern="#,###" /></span>원</div>
+																<input type="hidden" name="sale_price" class="productPrice4" value="${noMemberCart.sale_price}" />
+															</c:if>
+														</c:if>
+														<c:if test="${length == 7}">
+															<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-2)}">
+																<div class="p-2 productPrice2"><span class="productPrice3"><fmt:formatNumber value="${noMemberCart.sale_price * fn:substring(pCnt,length-2,length)}" pattern="#,###" /></span>원</div>
+																<input type="hidden" name="sale_price" class="productPrice4" value="${noMemberCart.sale_price}" />
+															</c:if>
+														</c:if>
+													</c:forEach>
+				  									
 				  								</c:if>
 							        		</div>
 							        	</div>
+							        	</a>
 						        	
 							        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 shopbasket-btn">
-										  <button class="btn btn-secondary col-lg-3 col-md-4" type="button">삭제</button>
-										  <button class="btn btn-dark col-lg-3 col-md-4" type="button">바로 구매</button>
+										  <button class="btn btn-secondary col-lg-3 col-md-4" type="button" onclick="shopbasketDeleteNon(this)">삭제</button>
+										  <button class="btn btn-dark col-lg-3 col-md-4" type="button" onclick="OneBuyProductNon(this)">바로 구매</button>
 										</div>
 						        	</div>
 								</div>
@@ -126,20 +203,154 @@
 											</c:if>
 										</c:forEach> 
 									&nbsp; <i class="bi bi-plus shopbasket-icon" onclick="plusFn(this)"></i>
+											<input type="hidden" value="${noMemberCart.inventory}" />
 								</div>
 							</div>
 						</c:if>
 						</c:forEach>
+						</div>
+						
+					<!-- 비로그인 즉석 -->	
+					<div class="shopbasket-title rounded lookupBorder">
+					<p class="fs-4 shopbasket-fs4 fw-bold text-success text-opacity-50"><i class="fa-solid fa-utensils"></i>즉석식품</p>
+					
+						<c:forEach items="${noMemberCart}" var="noMemberCart" varStatus="status">	
+						<c:if test="${noMemberCart.bigSort == '즉석식품'}">
+							<div class="row d-flex align-items-center shopbasket-card">
+								<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-checkbox">
+								
+									<c:forEach items="${noMemberCartCookie}" var="noMemberCartCookie">
+										<c:set var="pCnt" value="${noMemberCartCookie}" />
+										<c:set var="length" value="${fn:length(pCnt)}"/>
+											<c:if test="${length < 7}">
+												<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-1)}">
+													<input class="form-check-input cart_indexCheck" type="checkbox" id="iceCheckbox${status.index}" value="${fn:substring(pCnt,length-1,length)}" name="${fn:substring(pCnt,0,length-1)}" onclick="itemSum(this)">
+												</c:if>
+											</c:if>
+											<c:if test="${length == 7}">
+												<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-2)}">
+													<input class="form-check-input cart_indexCheck" type="checkbox" id="iceCheckbox${status.index}" value="${fn:substring(pCnt,length-2,length)}" name="${fn:substring(pCnt,0,length-2)}" onclick="itemSum(this)">
+												</c:if>
+											</c:if>
+										</c:forEach>
+									
+								</div>
+								<div class="col-lg-8 col-md-8">
+									<div class="h-100 p-2 bg-light border rounded-3 card-good">
+										
+										<c:forEach items="${noMemberCartCookie}" var="noMemberCartCookie">
+										<c:set var="pCnt" value="${noMemberCartCookie}" />
+										<c:set var="length" value="${fn:length(pCnt)}"/>
+											<c:if test="${length < 7}">
+												<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-1)}">
+													<a href="productView.do?product_index=${fn:substring(pCnt,0,length-1)}" class="productHref">
+												</c:if>
+											</c:if>
+											<c:if test="${length == 7}">
+												<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-2)}">
+													<a href="productView.do?product_index=${fn:substring(pCnt,0,length-2)}" class="productHref">
+												</c:if>
+											</c:if>
+										</c:forEach>
+										
+							        	<div class="row">
+							        		<div class="col-sm-3">
+							        			<img src="<%=request.getContextPath() %>/resources/img/${noMemberCart.brand}/${noMemberCart.middleSort}/${noMemberCart.thumbnail_image}" class="img-thumbnail" alt="${noMemberCart.product_name}">
+							        		</div>
+							        		<div class="col-sm-9 d-flex align-items-start flex-column mb-3">
+										    	<div class="mb-auto p-2 confirmProductName">${noMemberCart.brand} ${noMemberCart.product_name}</div>
+				  								<c:if test="${noMemberCart.sale_price == -1}">
+				  								
+				  									<c:forEach items="${noMemberCartCookie}" var="noMemberCartCookie">
+													<c:set var="pCnt" value="${noMemberCartCookie}" />
+													<c:set var="length" value="${fn:length(pCnt)}"/>
+														<c:if test="${length < 7}">
+															<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-1)}">
+																<div class="p-2 productPrice"><span class="productPrice3"><fmt:formatNumber value="${noMemberCart.origin_price * fn:substring(pCnt,length-1,length)}" pattern="#,###" /></span>원</div>
+																<input type="hidden" name="origin_price" class="productPrice4" value="${noMemberCart.origin_price}" />
+															</c:if>
+														</c:if>
+														<c:if test="${length == 7}">
+															<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-2)}">
+																<div class="p-2 productPrice"><span class="productPrice3"><fmt:formatNumber value="${noMemberCart.origin_price * fn:substring(pCnt,length-2,length)}" pattern="#,###" /></span>원</div>
+																<input type="hidden" name="origin_price" class="productPrice4" value="${noMemberCart.origin_price}" />
+															</c:if>
+														</c:if>
+													</c:forEach>
+				  								
+				  									
+				  								</c:if>
+				  								
+				  								<c:if test="${noMemberCart.sale_price != -1}">
+				  								
+				  									<c:forEach items="${noMemberCartCookie}" var="noMemberCartCookie">
+													<c:set var="pCnt" value="${noMemberCartCookie}" />
+													<c:set var="length" value="${fn:length(pCnt)}"/>
+														<c:if test="${length < 7}">
+															<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-1)}">
+																<div class="p-2 productPrice2"><span class="productPrice3"><fmt:formatNumber value="${noMemberCart.sale_price * fn:substring(pCnt,length-1,length)}" pattern="#,###" /></span>원</div>
+																<input type="hidden" name="sale_price" class="productPrice4" value="${noMemberCart.sale_price}" />
+															</c:if>
+														</c:if>
+														<c:if test="${length == 7}">
+															<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-2)}">
+																<div class="p-2 productPrice2"><span class="productPrice3"><fmt:formatNumber value="${noMemberCart.sale_price * fn:substring(pCnt,length-2,length)}" pattern="#,###" /></span>원</div>
+																<input type="hidden" name="sale_price" class="productPrice4" value="${noMemberCart.sale_price}" />
+															</c:if>
+														</c:if>
+													</c:forEach>
+				  									
+				  								</c:if>
+							        		</div>
+							        	</div>
+						        		</a>
+						        		
+							        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 shopbasket-btn">
+										  <button class="btn btn-secondary col-lg-3 col-md-4" type="button" onclick="shopbasketDeleteNon(this)">삭제</button>
+										  <button class="btn btn-dark col-lg-3 col-md-4" type="button" onclick="OneBuyProductNon(this)">바로 구매</button>
+										</div>
+						        	</div>
+								</div>
+								<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-number">
+									<i class="bi bi-dash shopbasket-icon" onclick="minusFn(this)"></i>&nbsp; 
+										<c:forEach items="${noMemberCartCookie}" var="noMemberCartCookie">
+										<c:set var="pCnt" value="${noMemberCartCookie}" />
+										<c:set var="length" value="${fn:length(pCnt)}"/>
+											<c:if test="${length < 7}">
+												<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-1)}">
+													<div>${fn:substring(pCnt,length-1,length)}</div>
+													<input type="hidden" value="${noMemberCart.product_index}">
+												</c:if>
+											</c:if>
+											<c:if test="${length == 7}">
+												<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-2)}">
+													<div>${fn:substring(pCnt,length-2,length)}</div>
+													<input type="hidden" value="${noMemberCart.product_index}">
+												</c:if>
+											</c:if>
+										</c:forEach>  
+									&nbsp; <i class="bi bi-plus shopbasket-icon" onclick="plusFn(this)"></i>
+											<input type="hidden" value="${noMemberCart.inventory}" />
+								</div>
+							</div>
+						</c:if>
+						</c:forEach>
+					
+					</div>
+					</form>	
 					</c:if>
 					
-					<!-- 로그인 상태일때 -->
+					<!-- 로그인 냉동 -->
 					<c:if test="${member.member_index != null}">
-					<c:forEach items="${selectList}" var="list" varStatus="status">
+					<form name="frm" action="purchase/member.do" method="post">
+					<div class="shopbasket-title rounded lookupBorder">
+					<p class="fs-4 shopbasket-fs4 fw-bold text-primary text-opacity-50"><i class="bi bi-snow2"></i>냉동식품</p>
 					
+					<c:forEach items="${selectList}" var="list" varStatus="status">
 					<c:if test="${list.bigSort == '냉동식품' && list.del_YN == 'N'}">
 						<div class="row d-flex align-items-center shopbasket-card">
 							<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-checkbox">
-								<input class="form-check-input" type="checkbox" id="iceCheckbox${status.index}" value="${list.cart_index}" name="cart_index" onclick="itemSum(this)">
+								<input class="form-check-input cart_indexCheck" type="checkbox" id="iceCheckbox${status.index}" value="${list.cart_index}" name="cart_index" onclick="itemSum(this)">
 							</div>
 							<div class="col-lg-8 col-md-8">
 								<div class="h-100 p-2 bg-light border rounded-3 card-good">
@@ -180,76 +391,19 @@
 					</c:if>
 					
 					</c:forEach>
-					</c:if>
 					
 					</div>
 					
-					
+					<!-- 로그인 즉석 -->
 					<div class="shopbasket-title rounded lookupBorder">
 					<p class="fs-4 shopbasket-fs4 fw-bold text-success text-opacity-50"><i class="fa-solid fa-utensils"></i>즉석식품</p>
-					<c:if test="${member.member_index == null}">
-						<c:forEach items="${noMemberCart}" var="noMemberCart" varStatus="status">	
-						<c:if test="${noMemberCart.bigSort == '즉석식품'}">
-							<div class="row d-flex align-items-center shopbasket-card">
-								<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-checkbox">
-									<input class="form-check-input" type="checkbox" id="inlineCheckbox${status.index}" value="option${status.index}" name="shopbasket">
-								</div>
-								<div class="col-lg-8 col-md-8">
-									<div class="h-100 p-2 bg-light border rounded-3 card-good">
-							        	<div class="row">
-							        		<div class="col-sm-3">
-							        			<img src="<%=request.getContextPath() %>/resources/img/${noMemberCart.brand}/${noMemberCart.middleSort}/${noMemberCart.thumbnail_image}" class="img-thumbnail" alt="${noMemberCart.product_name}">
-							        		</div>
-							        		<div class="col-sm-9 d-flex align-items-start flex-column mb-3">
-										    	<div class="mb-auto p-2">${noMemberCart.brand} ${noMemberCart.product_name}</div>
-				  								<c:if test="${noMemberCart.sale_price == -1}">
-				  									<div class="p-2">${noMemberCart.origin_price}원</div>
-				  								</c:if>
-				  								<c:if test="${noMemberCart.sale_price != -1}">
-				  									<div class="p-2">${noMemberCart.sale_price}원</div>
-				  								</c:if>
-							        		</div>
-							        	</div>
-						        	
-							        	<div class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 shopbasket-btn">
-										  <button class="btn btn-secondary col-lg-3 col-md-4" type="button">삭제</button>
-										  <button class="btn btn-dark col-lg-3 col-md-4" type="button">바로 구매</button>
-										</div>
-						        	</div>
-								</div>
-								<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-number">
-									<i class="bi bi-dash shopbasket-icon" onclick="minusFn(this)"></i>&nbsp; 
-										<c:forEach items="${noMemberCartCookie}" var="noMemberCartCookie">
-										<c:set var="pCnt" value="${noMemberCartCookie}" />
-										<c:set var="length" value="${fn:length(pCnt)}"/>
-											<c:if test="${length < 7}">
-												<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-1)}">
-													<div>${fn:substring(pCnt,length-1,length)}</div>
-													<input type="hidden" value="${noMemberCart.product_index}">
-												</c:if>
-											</c:if>
-											<c:if test="${length == 7}">
-												<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-2)}">
-													<div>${fn:substring(pCnt,length-2,length)}</div>
-													<input type="hidden" value="${noMemberCart.product_index}">
-												</c:if>
-											</c:if>
-										</c:forEach>  
-									&nbsp; <i class="bi bi-plus shopbasket-icon" onclick="plusFn(this)"></i>
-								</div>
-							</div>
-						</c:if>
-						</c:forEach>
-					</c:if>
 					
-					<!-- 로그인 상태일때 -->
-					<c:if test="${member.member_index != null}">
 					<c:forEach items="${selectList}" var="list" varStatus="status">
 					
 					<c:if test="${list.bigSort == '즉석식품' && list.del_YN == 'N'}">
 						<div class="row d-flex align-items-center shopbasket-card">
 							<div class="col-lg-2 col-md-2 d-flex justify-content-center shopbasket-checkbox">
-								<input class="form-check-input" type="checkbox" id="iceCheckbox${status.index}" value="${list.cart_index}" name="cart_index" onclick="itemSum(this)">
+								<input class="form-check-input cart_indexCheck" type="checkbox" id="iceCheckbox${status.index}" value="${list.cart_index}" name="cart_index" onclick="itemSum(this)">
 							</div>
 							<div class="col-lg-8 col-md-8">
 								<div class="h-100 p-2 bg-light border rounded-3 card-good">
@@ -290,18 +444,24 @@
 					</c:if>
 					
 					</c:forEach>
-					</c:if>
-					
 					</div>
+					</form>
+					</c:if>
 					
 					<div class="d-flex justify-content-center shopbasket-sum">선택 상품 합계 :&nbsp;<span class="shopbasket-sum2"> 0</span>원</div>
 					
+					<c:if test="${member.member_index != null}">
 					<div class="d-flex justify-content-center shopbasket-btn2">
 						<button type="button" class="btn btn-outline-dark col-5" onclick="buyProduct(this)">구매하기</button>
 					</div>
-						
+					</c:if>
+					<c:if test="${member.member_index == null}">
+					<div class="d-flex justify-content-center shopbasket-btn2">
+						<button type="button" class="btn btn-outline-dark col-5" onclick="buyProductNon(this)">구매하기</button>
+					</div>
+					</c:if>
       				
-      				</form>
+      				</div>
                 </article>
             </div>
             

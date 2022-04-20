@@ -36,7 +36,12 @@ public class ReplyDAO {
 	}
 	
 	//댓글 삭제
-	public void deleteReply(ReplyVO vo) throws Exception{
-		sqlSession.delete(Namespace+".deleteReply",vo);
+	public void deleteReply(int reply_index) throws Exception{
+		sqlSession.delete(Namespace+".deleteReply",reply_index);
+	}
+	
+	//선택된 댓글 찾기
+	public ReplyVO selectReply(int reply_index) throws Exception{
+		return sqlSession.selectOne(Namespace+".selectReply",reply_index);
 	}
 }

@@ -82,7 +82,8 @@
                         필요한 사람은 <div>태그에 작성.
                     -->
 					 <div class="fs-5 my-2 fw-bold">레시피 수정</div> 
-					<form action="recipemodify.do" method="post" id="recipewr" enctype="multipart/form-data">
+					<form action="recipemodify" method="post" id="recipewr" enctype="multipart/form-data">
+					<input type="hidden" name="recipe_index" value="${vo.recipe_index}">
 						<div class="container">
 							
 							<div class="row title">
@@ -90,7 +91,7 @@
 									<strong>제목</strong>
 								</div>
 								<div class="px-0 col-md-6 col-sm-6 col-10">
-									<input type="text" class="form-control" name="title" value="${recipeList.title}">
+									<input type="text" class="form-control" name="title" value="${read.title}">
 								</div>
 							</div>
 							<div class="row content">
@@ -99,11 +100,11 @@
 								</div>
 								<div class="px-0 col-md-6 col-sm-7 col-10 ">
 									
-									<textarea id="summernote" name="contents"></textarea>
+									<textarea id="summernote" name="contents">${read.contents}</textarea>
 								</div>
 								<div class="col-md-3 col-sm-3  col-12 thumnail" id="thumnail">
 									<div id=thumnailstrong>
-										<strong>사진을 등록해주세요</strong>
+										<strong>수정하실 새로운을 사진을 등록해주세요</strong>
 									</div>
 									
 								</div>
@@ -153,6 +154,7 @@
 								
 								<div class="px-1 col-sm-3 col-4 sel1" id="selbox">
 									<select name="product_index1" id="sel" class="select1">
+										<option value="${read.product_index1}">${read.product_name1}</option>
 										<c:forEach items="${productListAll}" var="productListAll" varStatus="status">
 										<option value="${productListAll.product_index}">[${productListAll.brand}]${productListAll.product_name}</option>
 										</c:forEach>
@@ -163,7 +165,7 @@
 								</div>
 								<div class="px-1 col-sm-3 col-4 sel2" id="selbox">
 									<select name="product_index2" id="sel" class="select1">		
-										<option value="0">없음</option>							
+											<option value="${read.product_index2}">${read.product_name2}</option>							
 										<c:forEach items="${productListAll}" var="productListAll" varStatus="status">
 										<option value="${productListAll.product_index}">[${productListAll.brand}]${productListAll.product_name}</option>
 										</c:forEach>
@@ -171,7 +173,7 @@
 								</div>
 								<div class="px-1 col-sm-3 col-4 sel3" id="selbox">
 									<select name="product_index3" id="sel" class="select1">
-										<option value="0">없음</option>
+										<option value="${read.product_index3}">${read.product_name3}</option>
 										<c:forEach items="${productListAll}" var="productListAll" varStatus="status">
 										<option value="${productListAll.product_index}">[${productListAll.brand}]${productListAll.product_name}</option>
 										</c:forEach>

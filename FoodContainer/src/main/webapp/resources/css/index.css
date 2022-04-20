@@ -539,6 +539,22 @@ a{
 	display : inline-block;
 }
 
+#notCheck{
+	font-size : 3rem;
+	text-align : center;
+}
+
+@media screen and (max-width : 600px){
+	#notCheck{
+		font-size : 2rem;
+	}
+}
+
+.header-badge{
+	font-size: .30em;
+	transform: translate(-65%,13%)!important;
+}
+
 /* productView ========================================================================================== */
 
 /*상품 이미지*/
