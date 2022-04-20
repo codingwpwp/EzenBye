@@ -17,7 +17,9 @@ SELECT *
 , (select name
           from member
 		 where member_index=reply.member_index) as name
-         
+, (select recipe_index
+          from recipe
+		 where recipe_index=reply.recipe_index) as name         
          FROM reply where  del_yn = 'N' and recipe_index=#{recipe_index}
 	
 </select>
@@ -36,6 +38,16 @@ INSERT INTO reply(
 
 </insert>
 
+<!-- 선택된 댓글 조회 -->
+	<select id="selectReply" resultType="ReplyVO">
+		SELECT *,(select recipe_index
+from recipe
+where recipe_index=reply.recipe_index
+		
+
+) as recipe_index FROM reply
+		 WHERE reply_index = #{reply_index}
+	</select>
 <!-- 댓글 수정 -->
 <update id="updateReply" parameterType="ReplyVO">
 UPDATE reply set contents=#{contents} where reply_index = #{reply_index}

@@ -52,6 +52,10 @@ height: 300px;
 margin-top: 7%;
 text-align: center;
 }
+.thumnail img{
+	width:290px;
+	height: 290px;
+}
 /* ( + ) div */
 
 
@@ -98,12 +102,30 @@ text-align: center;
     max-width: 120px;
     margin-right: 3%;
 }
-.btn.btn-danger{
-    width: 100%;
-    max-width: 120px;
-    margin-right: 3%;
+input#modifybtn{
+	width:100%;
+	max-width:60px;
+	height: 45px;
+}
+input#deletebtn{
+	width:100%;
+	max-width:60px;
+	height: 45px;
 }
 
+input.btn.btn-danger {
+    width: 120px;
+    max-width: 120px;
+     height: 50px;
+    margin-right: 3%;
+}
+@media(max-width:380px){
+    input.btn.btn-danger{
+        width: 80px;
+       max-width: 80px;
+       
+    }
+}
 .button{
     padding-top: 3%;
     border-bottom: 1px solid black;
