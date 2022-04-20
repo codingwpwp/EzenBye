@@ -15,8 +15,10 @@
 
             <!-- 검색 -->
             <div class="col-6 d-flex align-items-center">
-                <input class="form-control fs-6 fw-bold w-100 me-2" type="text" placeholder="상품을 입력하세요">
-                <i class="bi bi-search fs-2" id="search"></i>
+            	<label>
+	                <input class="form-control fs-6 fw-bold w-100 me-2" type="text" placeholder="상품을 입력하세요">
+	                <button onclick="search()"><i class="bi bi-search fs-2" id="search"></i></button>
+            	</label>
             </div>
 
             <!-- 3개의 아이콘 -->
