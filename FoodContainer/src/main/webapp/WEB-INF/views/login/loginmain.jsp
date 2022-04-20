@@ -74,27 +74,11 @@
 								</div>
 								
 							</div>
-							<div class="row code" style="display: none">
-								<div class="col-md-12 col-sm-12 col-12">아래에 글자를 보이는대로
-									입력해주세요!</div>
-								<div class="col-md-12 col-sm-6 col-12 mb-1 auto">
-									<input id="codeinput" type="text" name="output"
-										placeholder="코드생성 버튼을 클릭하세요" class="form-control"> <input
-										class="btn btn-secondary code" type="button" value="코드생성"
-										onclick="populateform(this.form.thelength.value);">
-
-								</div>
 							
-								<div class="col-md-12 col-sm-6 col-12 mb-1 autoin">
-									<input id="codeinput" type="text" name="che" placeholder="문자를 입력해주세요" class="form-control">
-									<input class="btn btn-secondary" type="button" value="코드확인"
-										onclick="check();">
-									<div hidden>
-										<b>문자길이:</b> <input type="text" name="thelength" size="3"
-											value="6">
-									</div>
-								</div>
+							<div class="row code">
+								<img src="<%=request.getContextPath()%>/captcha/index" id="imgCaptcha" style="cursor: pointer">
 							</div>
+							
 							<div class="row">
 								<div class="col-md-12 col-sm-12 col-12 loginbtn">
 									
@@ -104,14 +88,14 @@
 
 							<div class="row find">
 								<div class="col-md-4 col-sm-3 col-4 idsave">
-									<input type="radio" name="radio" id="radio"><label>아이디
-										저장</label>
+									<input type="checkbox" name="rememberId" value="Y" id="radio">
+										<label for="radio">&nbsp;아이디 저장</label>
 								</div>
 								<div class="col-md-4 col-sm-3 col-4 idfind">
-									<a href="<%=request.getContextPath()%>/id_find.do">아이디 찾기</a>
+									<a href="<%=request.getContextPath()%>/id_find.do" class="link-dark fw-bold">아이디 찾기</a>
 								</div>
 								<div class="col-md-4 col-sm-3 col-4 pwfind">
-									<a href="<%=request.getContextPath()%>/pw_find.do">비밀번호 찾기</a>
+									<a href="<%=request.getContextPath()%>/pw_find.do" class="link-dark fw-bold">비밀번호 찾기</a>
 								</div>
 
 							</div>
@@ -122,7 +106,7 @@
 							</div>
 							<div class="row lookup">
 								<div class="col-md-12 col-sm-12 col-12 loginbtn">
-									<button class="btn btn-dark">비회원 주 조회</button>
+									<button class="btn btn-dark">비회원 주문 조회</button>
 								</div>
 							</div>
 							
@@ -153,5 +137,10 @@
 	<script
 		src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
+	<script type="text/javascript">
+	$("#imgCaptcha").click(function(){
+        $(this).attr("src", "${_ctx}/captcha/index");
+    });
+	</script>
 </body>
 </html>

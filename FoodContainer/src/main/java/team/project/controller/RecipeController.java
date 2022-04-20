@@ -114,7 +114,7 @@ public class RecipeController {
 		System.out.println(vo.getProduct_index3());
 		System.out.println("==============================");
 		recipeService.insertRecipe(vo, tumnailImage, request);
-		return "recipemain.do";
+		return "redirect:recipemain.do";
 	}
 	
 	
@@ -127,12 +127,12 @@ public class RecipeController {
 		model.addAttribute("read", recipeService.recipeRead(vo.getRecipe_index()));
 		List<ProductVO> ProductListAll = productService.productListAll(productVO);
 		model.addAttribute("productListAll",ProductListAll);
-//		List<ReplyVO> readReply = replyService.readReply(replyvo);
+
 		
 		List<ReplyVO> replyList = replyService.replyList(replyvo);
 		model.addAttribute("replyList",replyList);
 		
-//		System.out.println(replyvo);
+	
 		System.out.println(replyList);
 		
 		return "recipe/recipeview";
