@@ -7,6 +7,9 @@ import team.project.vo.ReplyVO;
 
 public interface ReplyService {
 
+	
+	
+	
 	//댓글 목록
 	List<ReplyVO> replyList(ReplyVO replyvo) throws Exception;
 	//댓글 작성
@@ -20,6 +23,9 @@ public interface ReplyService {
 	public void updateReply(ReplyVO vo) throws Exception; 
 	
 	//댓글 삭제
-	public void deleteReply(ReplyVO vo)throws Exception;
+	public void deleteReply(int reply_index)throws Exception;
+	
+	//선택된 댓글 조회
+	public ReplyVO selectReply(int reply_index)throws Exception;
 	
 }

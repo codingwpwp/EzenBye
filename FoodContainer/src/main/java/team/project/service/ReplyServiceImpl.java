@@ -36,8 +36,14 @@ public class ReplyServiceImpl implements ReplyService{
 		
 	//댓글 삭제
 	@Override
-	public void deleteReply(ReplyVO vo)throws Exception{
-		replyDao.deleteReply(vo);
+	public void deleteReply(int reply_index)throws Exception{
+		replyDao.deleteReply(reply_index);
 	}
 	
+	//선택된 댓글 조회
+	@Override
+	public ReplyVO selectReply(int reply_index)throws Exception{
+		return replyDao.selectReply(reply_index);
+		
+	}
 }

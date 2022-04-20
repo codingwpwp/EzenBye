@@ -143,10 +143,10 @@
                                 
                                     <li class="page-item">
                                     <c:if test="${nowPage > 1 }">
-                                    <a class="page-link"  href="recipemain.do?nowPage=${nowPage-1}">Previous</a>
+                                    <a class="page-link"  href="recipemain.do?nowPage=${nowPage-1}"><</a>
                                     </c:if>
                                     <c:if test="${nowPage <= 1 }">
-                                    <a class="page-link"  href="recipemain.do?nowPage=1">Previous</a>
+                                    <a class="page-link"  href="recipemain.do?nowPage=1"><</a>
                                     </c:if>
                                     </li>
                                     
@@ -155,11 +155,11 @@
                                     </c:forEach>
                                     
                                     <li class="page-item">
-                                    <c:if test="${nowPage <= 0 }">
-                                    <a class="page-link" href="recipemain.do?nowPage=${nowPage}">Next</a>
+                                    <c:if test="${nowPage >= 0 }">
+                                    <a class="page-link" href="recipemain.do?nowPage=${nowPage+1}">></a>
                                  	</c:if>
-                                 	<c:if test="${nowPage >= 0 }">
-                                    <a class="page-link" href="recipemain.do?nowPage=${nowPage+1}">Next</a>
+                                 	<c:if test="${nowPage <= 0 }">
+                                    <a class="page-link" href="recipemain.do?nowPage=${nowPage}">></a>
                                  	</c:if>
                                     </li>
                                   </ul>
