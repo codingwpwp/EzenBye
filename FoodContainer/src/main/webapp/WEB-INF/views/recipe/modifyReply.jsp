@@ -126,7 +126,14 @@
 							</div>
 							<div class="col-sm-2  col-12">
 								<div class="thumnail" name="thumnailimg">
-									<img alt="" src="<%=request.getContextPath()%>/resources/img/recipe/${read.thumbnail_image}">
+									<svg xmlns="http://www.w3.org/2000/svg" width="140"
+										height="140" fill="currentColor" class="bi bi-images"
+										viewBox="0 0 16 16">
+                                    <path
+											d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                                    <path
+											d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z" />
+                                </svg>
 								</div>
 							</div>
 							<div class="col-sm-12 col-12" id="">
@@ -149,7 +156,7 @@
                                     <path
 											d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z" />
                                   </svg></button> -->
-								<div name="">(${vo.thumb})</div>
+								<div name="">(${read.thumb})</div>
 							</div>
 						</div>
 						<div class="row">
@@ -157,13 +164,8 @@
 								<div class="d-flex button">
 								<input type="button" value="목록" class="btn btn-primary" onclick="location.href='recipemain.do'">
 								<c:if test="${member.member_index==read.member_index}">
-								<input type="button" value="수정" class="btn btn-secondary" onclick="location.href='recipemodify.do?recipe_index=${vo.recipe_index}'">
-								
-								<form action="recipedelete" method="post">
-								<input type="submit" value="삭제" class="btn btn-danger">
-								<input type="hidden" value="${read.recipe_index}" name="recipe_index">
-								</form>
-								
+								<input type="button" value="수정" class="btn btn-secondary" onclick="location.href='recipemodify.do'">
+								<input type="button" value="삭제" class="btn btn-danger">
 								</c:if>
 								
 								</div> 
@@ -175,12 +177,12 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-12 col-12">
-								<h4>댓글${read.reply_index}</h4>
+								<h4>댓글 ${read.reply_index}</h4>
 							</div>
 						</div>
 						
 						<form method="post" action="wirteReply" id="writeReply">
-						<input type="hidden" value="${read.recipe_index}" name="recipe_index" id="recipe_index">
+						<input type="hidden" value="${read.recipe_index}" name="recipe_index">
 						<div class="row rp">
 							
 							<div class="col-sm-8 col-9 reply-write">
@@ -194,37 +196,28 @@
 						</form>
 						
 						
-						<div class="row rpt" id="replydiv">
-						
+						<div class="row rpt">
  						<c:forEach items="${replyList}" var="re"> 
  							
-							<div class="col-3 col-sm-2 col-md-2 col-lg-2 replyview" name="replyname"id="replyname">
+							<div class="col-3 col-sm-2 col-md-2 col-lg-2 replyview">
 								<p>${re.name}</p>
 							</div>
-							<div class="col-lg-2 col-md-2 col-sm-2 col-6 wday" name="replydate" id="replydate">${re.reply_date}
+							<div class="col-lg-2 col-md-2 col-sm-2 col-6 wday">${re.reply_date}
 							</div>
-							<div class="col-md-2 col-sm-2 col-3 report"  name="replybtn" id="replybtn">
-								<!-- <a href="#">신고<i class="bi bi-brightness-alt-high"></i></a> -->
+							<div class="col-md-2 col-sm-2 col-3 report">
+								<a href="#">신고<i class="bi bi-brightness-alt-high"></i></a>
 								<c:if test="${member.member_index==read.member_index}">
 							<!-- 	<a hrep="recipeview_reply_modify.do" onclick="recipeview_reply_modify.do">수정</a> -->
-								<span>
-								
-									<input type="button" value="수정" onclick="modifyReply(this,${re.reply_index},${re.recipe_index});" id="modifybtn" class="btn btn-secondary replymod">
-									<input type="button" value="삭제" onclick="deleteReply(this,${re.reply_index},${re.recipe_index});" id="deletebtn" class="btn btn-danger replydel">
-								</span>
-								<span>
-								</span>
+								<input type="button" value="수정" onclick="updateReply();">
+								<a>삭제</a>
 								</c:if>
 							</div>
-							<div name="replycontent" id="replycontent" class="col-12 replycontent" id="">┗ &nbsp;<span>${re.contents}</span>
-							<input type="hidden" value="${re.reply_index}" id="reply_index" name="reply_index">
-							<input type="hidden" value="${re.recipe_index}" id="recipe_index" name="recipe_index">
-						 <%-- 	<input type="hidden" value="${re.recip_index}" id="recip_index"> --%>
+							<div name="replycontent" class="col-12 replycontent">┗ &nbsp;<input type="text" value="${re.contents}">
+							<input type="hidden" value="${re.contents}">
 							
 							</div>
 								
 							 </c:forEach>	 
-							 
 						</div>
 						
 					</div>

@@ -24,12 +24,14 @@
                 <div class="d-flex justify-content-evenly">
                     <i class="bi bi-truck fs-1"></i>
                     <i class="bi bi-cart3 fs-1" onclick="location.href='/controller/shopBasket_main.do'"></i>
+                    
                     <c:if test="${not empty member }">
                     <i class="bi bi-person fs-1 position-relative" onclick="location.href='/controller/mypage_main.do'">
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger header-badge">
-					    99+
+					  
 					</span>
                     </i>
+                    <input type="hidden" value="${member.member_index}" name="messageNonReadCount" />
                     
                     </c:if>
                     <c:if test="${empty member }">

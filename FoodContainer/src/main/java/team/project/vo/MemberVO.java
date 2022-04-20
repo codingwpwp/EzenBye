@@ -1,7 +1,7 @@
 package team.project.vo;
 
 public class MemberVO {
-	private int member_index;
+	private int member_index;  
 	private String id;
 	private String pw;
 	private String pw1;

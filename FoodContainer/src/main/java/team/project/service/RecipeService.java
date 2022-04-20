@@ -13,6 +13,10 @@ import team.project.vo.ThumbVO;
 
 public interface RecipeService {
 
+	
+	
+	//레시피 번호
+	public RecipeVO selectRecipe(int recipe_index) throws Exception;
 	//레시피작성
 	public void insertRecipe(RecipeVO vo, MultipartFile tumnailImage,HttpServletRequest request) throws Exception;
 
@@ -32,7 +36,11 @@ public interface RecipeService {
 	public int countRecipe() throws Exception;
 	
 	
+	//레시피 수정
+	public void updateRecipe(RecipeVO vo, MultipartFile tumnailImage,HttpServletRequest request) throws Exception;
 	
+	//레시피 삭제
+	public void deletdRecipe(int recipe_index) throws Exception;
 	
 	
 	//레시피 게시글 추천

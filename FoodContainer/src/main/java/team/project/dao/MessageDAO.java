@@ -56,4 +56,8 @@ public class MessageDAO {
 		return sqlSession.insert(Namespace + ".messageInsert", vo);
 	}
 	
+	public int messageNonReadCount(int member_index) throws Exception{
+		return sqlSession.selectOne(Namespace + ".messageNonReadCount", member_index);
+	}
+	
 }
