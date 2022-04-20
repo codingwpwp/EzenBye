@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -71,28 +73,28 @@
 							<thead>
 								<tr>
 									<th scope="col">제목</th>
-									<td class="title">20220330공지사항입니다~!!!!!!!!!! 
+									<td class="title">${noticeDetail.title}
 												
 											 </td>
-									<td class="right">2022-03-23</td>
+									<td class="right">${noticeDetail.write_date}</td>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<th scope="row">작성자</th>
 									<td>관리자</td>
-									<td class="right">조회수10</td>
+									<td class="right">조회수(${noticeDetail.hit})</td>
 								</tr>
 								<tr>
 									<td colspan="3">
-										<textarea readonly="readonly"></textarea>
+										<textarea readonly="readonly">${noticeDetail.contents}</textarea>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 						<div class="row">
 						<div class="col-md-2 col-sm-2 col-3 leftbtn">
-							<input value="목록" type="button" class="btn btn-primary listbtn" onclick="location.href='notice_main.do'">
+							<input value="목록" type="button" class="btn btn-primary listbtn" onclick="location.href='notice_main.do?nowPage=${nowPage}'">
 						</div>
 						<div class="col-md-10 col-sm-10 col-9 rightbtn">
 							<input value="삭제" type="button" class="btn btn-danger delbtn">
