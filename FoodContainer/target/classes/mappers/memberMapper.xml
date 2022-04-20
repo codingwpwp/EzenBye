@@ -24,6 +24,15 @@
 		SELECT COUNT(*) FROM member where id=#{id} AND pw=#{pw}
 	</select>
 	
+	<!-- 로그인 관련페이지 -->
+	<!-- 간편 아이디 찾기 -->
+	<select id="idEasyCheck" resultType="MemberVO" parameterType="MemberVO">
+		SELECT id, name
+		FROM MEMBER
+		WHERE name=#{name}
+		AND phone LIKE CONCAT('%',#{phone},'%')
+		AND del_yn = 'N'
+	</select>
 	
 	<select id="memberInfor" resultType="MemberVO" parameterType="int">
 		SELECT *

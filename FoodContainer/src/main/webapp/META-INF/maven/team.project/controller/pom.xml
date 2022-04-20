@@ -46,14 +46,6 @@
             <version>${org.springframework-version}</version>
         </dependency>
 
-		<dependency>
-			<groupId>nl.captcha</groupId>
-			<artifactId>simplecaptcha</artifactId>
-			<version>1.2.1</version>
-			<scope>system</scope>
-			<systemPath>${basedir}\src\main\webapp\WEB-INF\lib\simplecaptcha-1.2.1.jar</systemPath>
-		</dependency>
-
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -226,19 +218,8 @@
 		    <version>4.1.1.RELEASE</version>
 		</dependency>
 		<!-- 트랜젝션 END -->
-		
-		
 		     
 	</dependencies>
-
-	<repositories>
-		<repository>
-		 <id>enonic</id>
-		 <name>Enonic Repository</name>
-		 <url>http://repo.enonic.com/public/</url>
-		</repository>
-	</repositories>
-
 
     <build>
         <plugins>
