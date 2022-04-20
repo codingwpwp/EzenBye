@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -82,68 +84,82 @@
 								</tr>
 							</thead>
 							<tbody>
+							
+							<c:forEach items="${noticeList}" var="list">
+							<c:set var="e" value="${e+1}" />
 								<tr>
-									<th scope="row" class="center">1</th>
-									<td class="left"><a href="<%=request.getContextPath()%>/notice_view.do"><span
+									<th scope="row" class="center">${e}</th>
+									<td class="left"><a href="<%=request.getContextPath()%>/notice_view.do?notice_index=${list.notice_index}&nowPage=${paging.nowPage}"><span
 											class="d-inline-block text-truncate">
-												공지사항입니다~!!!!!!!!!! 공지사항입니다~!!!!!!!!!! 공지사항입니다~!!!!!!!!!!
-												공지사항입니다~!!!!!!!!!! 공지사항입니다~!!!!!!!!!! 공지사항입니다~!!!!!!!!!!
+												${list.title}
 												 </span></a></td>
-									<td class="center">2022-3-23</td>
-									<td class="center">10</td>
+									<td class="center">${list.write_date}</td>
+									<td class="center">${list.hit}</td>
 								</tr>
-								<tr>
-									<th scope="row" class="center">1</th>
-									<td class="left"><a href="#"><span
-											class="d-inline-block text-truncate">
-												공지사항입니다~!!!!!!!!!! </span></a></td>
-									<td class="center">2022-3-23</td>
-									<td class="center">10</td>
-								</tr>
-								<tr>
-									<th scope="row" class="center">1</th>
-									<td class="left"><a href="#"><span
-											class="d-inline-block text-truncate">공지사항입니다~!!!!!!!!!!</span></a></td>
-									<td class="center">2022-3-23</td>
-									<td class="center">10</td>
-								</tr>
-								<tr>
-									<th scope="row" class="center">1</th>
-									<td class="left"><a href="#"><span
-											class="d-inline-block text-truncate">공지사항입니다~!!!!!!!!!!</span></a></td>
-									<td class="center">2022-3-23</td>
-									<td class="center">10</td>
-								</tr>
-								<tr>
-									<th scope="row" class="center">1</th>
-									<td class="left"><a href="#"><span
-											class="d-inline-block text-truncate">공지사항입니다~!!!!!!!!!!</span></a></td>
-									<td class="center">2022-3-23</td>
-									<td class="center">10</td>
-								</tr>
+							</c:forEach>
+							
 							</tbody>
 						</table>
 					</div>
 
 					<div class="row">
 					<div class="col-md-11 col-sm-11 col-12">
-						<input value="등록" type="button" class="btn btn-primary insertbtn" onclick="location.href='notice_insert.do'">
+						<input value="등록" type="button" class="btn btn-primary insertbtn" onclick="location.href='notice_insert.do?nowPage=${paging.nowPage}'">
 					</div>
 					<div class="col-12">
+					
 						<nav aria-label="Page navigation example">
-
-							<ul class="pagination">
-								<li class="page-item"><a class="page-link" href="#"
-									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-								</a></li>
-								<li class="page-item"><a class="page-link" href="#">1</a></li>
-								<li class="page-item"><a class="page-link" href="#">2</a></li>
-								<li class="page-item"><a class="page-link" href="#">3</a></li>
-								<li class="page-item"><a class="page-link" href="#"
-									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-								</a></li>
-							</ul>
-						</nav>
+					  <ul class="pagination review-paging">
+					  <!-- <부분 -->
+					  <c:if test="${paging.startPage > 1}">
+					  <li class="page-item">
+					      <a class="page-link" href="notice_main.do?nowPage=${paging.startPage - 1}" aria-label="Previous">
+					        <span aria-hidden="true">&lt;</span>
+					      </a>
+					    </li>
+					  </c:if>
+					   
+					  <c:if test="${paging.startPage <= 1}">
+			  			<li class="page-item" style="visibility: hidden">
+                               <a class="page-link" href="#" aria-label="Previous">
+                                   <span aria-hidden="true">&lt;</span>
+                               </a>
+                           </li>
+					  </c:if> 
+					  
+					  <!-- 각 페이지 -->
+					  <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i" step="1">
+					  	<c:if test="${i != paging.nowPage}">
+					  		<li class="page-item">
+					  			<a class="page-link" href="notice_main.do?nowPage=${i}">${i}</a>
+					  		</li>
+					  	</c:if>
+					  	<c:if test="${i == paging.nowPage}">
+					  		 <li class="page-item active" aria-current="page">
+					  		 	<a class="page-link fw-bold" href="#">${i}</a>
+					  		 </li>
+					  	</c:if>
+					  </c:forEach>
+					   
+				      <!-- >부분 -->
+				      <c:if test="${paging.endPage != paging.lastPage}">
+				      	<li class="page-item">
+					      <a class="page-link" href="notice_main.do?nowPage=${paging.endPage + 1}" aria-label="Next">
+					        <span aria-hidden="true">&gt;</span>
+					      </a>
+					    </li>
+				      </c:if>
+				      <c:if test="${paging.startPage == paging.lastPage}">
+				      	<li class="page-item" style="visibility: hidden">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&gt;</span>
+                            </a>
+                        </li>
+				      </c:if>
+					    
+					  </ul>
+					</nav>
+						
 					</div>
 					</div>
 

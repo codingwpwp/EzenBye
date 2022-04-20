@@ -65,13 +65,14 @@
                         필요한 사람은 <div>태그에 작성.
                     -->
                     <div class="fs-5 my-2 fw-bold">공지사항</div>
-
+					
+					<form name="frm" action="noticeInsert.do" method="post">
                  	<div class="maindiv">
 						<table class="table">
 							<thead>
 								<tr>
 									<th scope="col">제목</th>
-									<td class="title"><input type="text" class="tittext"></td>
+									<td class="title"><input type="text" class="tittext" name="title"></td>
 									
 								</tr>
 							</thead>
@@ -83,24 +84,23 @@
 								</tr>
 								<tr>
 									<td colspan="3">
-										<div id="summernote">
-										
-										</div>
+										<textarea id="summernote" name="contents"></textarea>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 						<div class="row">
 						<div class="col-md-2 col-sm-2 col-4 leftbtn">
-							<input value="목록" type="button" class="btn btn-primary listbtn" onclick="location.href='notice_main.do'">
+							<input value="목록" type="button" class="btn btn-primary listbtn" onclick="location.href='notice_main.do?nowPage=${nowPage}'">
 						</div>
 						<div class="col-md-10 col-sm-10 col-8 rightbtn">
 							
-							<input value="등록" type="button" class="btn btn-secondary insertbtn">
+							<input value="등록" type="button" class="btn btn-secondary insertbtn" onclick="noticeInsert(this)">
 						</div>
 						</div>
 
 					</div>
+					</form>
 
 
 					
