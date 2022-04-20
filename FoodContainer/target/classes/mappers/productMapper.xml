@@ -20,18 +20,20 @@
     	<if test="list != null">
     		and middleSort in (<foreach collection="list" item="filter" separator=",">#{filter.middleSort}</foreach>) 
     		and brand in (<foreach collection="list" item="filter" separator=",">#{filter.brand}</foreach>) 
-	    	<!-- 
-	    	<foreach collection="list" item="filter">
-		    	<if test="#{filter.price != null and filter.price.equals('0')}">
-		    		ORDER BY origin_price DESC
-		    	</if>
-		    	<if test="#{filter.price != null and filter.price.equals('1')}">
-		    		ORDER BY origin_price ASC
-		    	</if>
-	    	</foreach>
-	    	 -->
     	</if>
-    	    	
+    	<foreach collection="list" item="filter" separator=",">
+    		<if test="filter.free != null and filter.free eq 'ok'.toString()">
+    			and delivery_free_YN = 'Y'
+    		</if>
+    	</foreach>
+	    <foreach collection="list" item="filter" separator=",">
+			<if test="filter.price != null and filter.price eq '0'.toString()">
+				ORDER BY origin_price DESC
+			</if>
+			<if test="filter.price != null and filter.price eq '1'.toString()">
+				ORDER BY origin_price ASC
+			</if>
+	    </foreach>
     </select>
 
     <select id="view" resultType="ProductVO">

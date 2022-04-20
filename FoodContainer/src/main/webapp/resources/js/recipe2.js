@@ -14,114 +14,6 @@
             var text = prompt("금:1 | 은:2 | 동:3");
         }
         
-// 상품등록&수정페이지의 이미지 미리보기
-function previewImage(event,obj){
-
-    // 확장자를 추출하는 과정
-    var valueArray = obj.value.split(".");
-    var extension = valueArray[valueArray.length-1];
-
-    var id = $(obj).attr("name") + "Modal";
-  
-    console.log(id);
-
-    if(extension == "png" || extension == "PNG"){ // 확장자가 png일 경우
-
-        // 원래 있던 이미지는 삭제
-        $("div#" + id).find(".imageContainer").find("img").remove();
-
-        // 이미지가 없다는 문구를 삭제
-        $("div#" + id).find(".imageContainer").find("span").remove();
-	
-		
-		
-        // 리더기 생성
-        var reader = new FileReader();
-
-        // 리더기 작동
-        reader.onload = function(event) {
-            var img = document.createElement("img");
-            $(img).attr("src", event.target.result);
-            $(img).addClass("img-fluid");           
-           	$("div#" + id).find(".imageContainer").append(img);
-           
-        };
-		
-        // 이미지를 인코딩
-        reader.readAsDataURL(event.target.files[0]);
-
-        // 버튼 변경
-        $(obj).parent().parent().find(".previewButton").removeClass("btn-secondary");
-        $(obj).parent().parent().find(".previewButton").addClass("btn-primary");
-
-    }else{ // 확장자가 png가 아닐 경우
-
-        alert("확장자는 png만 가능합니다.");
-
-        // 이미지가 없다는 문구의 중복 방지를 위해 삭제
-        $("div#" + id).find(".imageContainer").find("span").remove();
-
-        // 파일input의 value값 초기화
-        $(obj).val("");
-
-        // 이미지가 있다면 삭제
-        $("div#" + id).find(".imageContainer").find("img").remove();
-
-        // 이미지가 없다는 문구를 생성하고 뿌리기
-        var span = document.createElement("span");
-        $(span).addClass("fs-5");
-        $(span).text("이미지가 없습니다.");
-        $("div#" + id).find(".imageContainer").append(span);
-
-        // 버튼 변경
-        $(obj).parent().parent().find(".previewButton").removeClass("btn-primary");
-        $(obj).parent().parent().find(".previewButton").addClass("btn-secondary");
-
-    }
-
-}
-function previewImage2(event,obj){
-
-    // 확장자를 추출하는 과정
-    var valueArray = obj.value.split(".");
-    var extension = valueArray[valueArray.length-1];
-
-    
-    var thumnail = document.getElementById("thumnail");
-    
-
-    if(extension == "png" || extension == "PNG"){ // 확장자가 png일 경우
-
-        // 원래 있던 이미지는 삭제
-        
-		$(thumnail).find("img").remove();
-        // 이미지가 없다는 문구를 삭제
-        $(thumnail).find("strong").remove();
-	
-		
-		
-        // 리더기 생성
-        var reader = new FileReader();
-
-        // 리더기 작동
-        reader.onload = function(event) {
-            var img = document.createElement("img");
-            $(img).attr("src", event.target.result);
-            $(img).addClass("img-fluid");           
-            $(thumnail).append(img);
-           
-        };
-		
-        // 이미지를 인코딩
-        reader.readAsDataURL(event.target.files[0]);
-
-        // 버튼 변경
-        $(obj).parent().parent().find(".previewButton").removeClass("btn-secondary");
-        $(obj).parent().parent().find(".previewButton").addClass("btn-primary");
-
-    }
-
-}
 
 
 
@@ -137,6 +29,57 @@ function insertThumb(){
 	});
 }
 
+
+function modifyReply(obj,reply_index){
+			var contents = $(obj).parent().parent().next().find("span").text(); 
+			var span = $(obj).parent();
+			
+			$("#replycontent").find("span").html("<input type='text' value='"+contents+"' name='contents'>");
+			$(obj).remove();
+			span.html('<input type="button" value="저장" onclick="updateReply(this,'+reply_index+')" id="updatebtn" class="btn btn-secondary">');
+			
+		
+};
+
+function updateReply(obj,reply_index,recipe_index){
+	var contents= $(obj).parent().parent().next().find("input[type=text]").val(); 
+	var span = $(obj).parent();
+	$.ajax({
+		type:"post",
+		url:"updateReply.do",
+		data:"reply_index="+reply_index+"&contents="+contents,
+		success:function(data){
+			alert("수정이 완료 되었습니다.");
+			$(obj).parent().parent().next().find("input[type=text]").remove();
+			$(obj).parent().parent().next().html("┗ &nbsp;<span>"+data.contents+"</span>");
+			$(obj).remove();
+			span.html('<input type="button" value="수정" onclick="modifyReply(this,'+reply_index+')" id="modifybtn" class="btn btn-secondary">'+
+				'<input type="button" value="삭제" onclick="deleteReply(this,'+reply_index+','+recipe_index+');" id="deletebtn" class="btn btn-danger replydel">')
+			
+		}
+	});
+}
+
+function deleteReply(obj,reply_index,recipe_index){
+	var span = $(obj).parent();
+	$.ajax({
+		type:"post",
+		url:"deleteReply.do",
+		data:"reply_index="+reply_index+"&recip_index="+recipe_index,
+		success:function(data){
+			alert("삭제가 완료되었습니다");
+			$("#replyname").remove();
+			$("#replydate").remove();
+			$("#replybtn").remove();
+			$("#replybtn").parent().append();
+			
+			span.remove();
+			$("#replycontent").remove();
+		
+			location.reload();
+		}
+	});
+}
 
 
 

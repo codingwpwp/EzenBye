@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/base.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/login.css">
 </head>
-<body>
+<body onselectstart="return false;">
 	<!-- 헤더 -->
 	<header class="border-bottom border-dark">
 		<%@include file="/WEB-INF/views/base/header.jsp"%>
@@ -27,15 +27,7 @@
         <div class="row">
             <div class="col-lg-2 d-none d-lg-block"></div>
 
-            <!--
-                id="navLeftMenu"인 현재 주석 바로 아래의 태그는 페이지의 종류에 따른 왼쪽메뉴.
-                네비게이션 바가 펼쳐질 때 알아서 태그가 안보이도록 설정.
-                필요시에만 div태그 사이에 코드를 작성.
-                작성시 border border-dark는 구분용으로만 작성했기 때문에 알아서 지우고 작업.
-                작성하지 않는 경우는 절대 건들지 않음.
-                base.js에 id="navLeftMenu"와 관련된 코드가 작성되어있음.
-            -->
-            <div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark" id="navLeftMenu"><!-- 여기에 작성 --></div>
+            <div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark" id="navLeftMenu"></div>
 
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
 
@@ -48,21 +40,12 @@
 
             <!-- 왼쪽 사이드메뉴 -->
             <div class="col-lg-2 d-none d-lg-block">
-                <aside>
-                  
-                </aside> 
+                <aside></aside> 
             </div>
 
             <!-- 메인 -->
             <div class="col-12 col-sm-9 col-md-10 col-lg-8">
                 <article id="mainSection">
-                    
-                    <!--
-                        헤딩.
-                        필요하지 않는 사람은 <div>태그를 삭제.
-                        필요한 사람은 <div>태그에 작성.
-                    -->
-                   
 
                   <div class="container head">
                     <div class="row head">
@@ -77,7 +60,7 @@
                    <div class="container">
                        <div class="row findform">
                         <div class="col-md-6 col-sm-6 col-12 mb-1 mail">
-                            <form class="easyfind" action="<%=request.getContextPath()%>/id_easy_check.do" method="get">
+                            <form class="easyfind" id="easyFindIdForm" action="id_easy_check.do" method="post">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-12 ">
@@ -87,13 +70,13 @@
                                             <p>입력하신 정보는 <strong>아이디 찾기</strong>에만 사용되며 <strong>저장되지 않습니다.</strong></p>
                                         </div>
                                         <div class="col-12 leftform">
-                                            <input type="text" class="form-control findinput" placeholder="이름를 입력해주세요">
+                                            <input type="text" name="name" class="form-control findinput" placeholder="이름를 입력해주세요" maxlength="6" autocomplete="off">
                                         </div>
                                         <div class="col-12 leftform">
-                                            <input type="text" class="form-control findinput" placeholder="핸드폰 뒤 7~8자리를 입력 해주세요">
+                                            <input type="text" name="phone" class="form-control findinput" placeholder="핸드폰 뒤 7~8자리를 입력 해주세요" maxlength="8" oninput="this.value = this.value.replace(/[^0-9]/,'')" autocomplete="off">
                                         </div>
                                         <div class="col-12 leftform">
-                                            <input type="submit" value="아이디 찾기" class="btn btn-secondary findbtn">
+                                            <input type="button" value="아이디 찾기" class="btn btn-secondary findbtn" onclick="easyFindIdBtn()">
                                         </div>
                                     </div>
                                 </div>

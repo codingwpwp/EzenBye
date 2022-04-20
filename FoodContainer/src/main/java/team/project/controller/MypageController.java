@@ -78,6 +78,16 @@ public class MypageController {
 	@Autowired
 	private MessageService messageService;
 	
+	// 헤더 아이콘 쪽지 안읽은 갯수
+	@RequestMapping(value = "messageNonReadCount.do", method = RequestMethod.POST)
+	@ResponseBody
+	 public int messageNonReadCount(Locale locale, Model model, int member_index) throws Exception {
+		  
+		int messageNonReadCount = messageService.messageNonReadCount(member_index);
+
+		return messageNonReadCount; 
+	  }
+	
 	 // 리뷰 등록
 	 @RequestMapping(value = "writeReview.do", method = RequestMethod.POST)
 	 public String bannerRegister(Locale locale, Model model, String orderItem_index, ReviewVO reviewVO,

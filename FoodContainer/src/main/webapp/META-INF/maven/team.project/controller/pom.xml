@@ -13,7 +13,7 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
-	<dependencies>
+	<dependencies>  
 	
 		<!--스프링 시큐리티 web 라이브러리-->
 		<dependency>
@@ -45,14 +45,6 @@
             <artifactId>spring-context-support</artifactId>
             <version>${org.springframework-version}</version>
         </dependency>
-
-		<dependency>
-			<groupId>nl.captcha</groupId>
-			<artifactId>simplecaptcha</artifactId>
-			<version>1.2.1</version>
-			<scope>system</scope>
-			<systemPath>${basedir}\src\main\webapp\WEB-INF\lib\simplecaptcha-1.2.1.jar</systemPath>
-		</dependency>
 
 		<!-- Spring -->
 		<dependency>
@@ -226,19 +218,8 @@
 		    <version>4.1.1.RELEASE</version>
 		</dependency>
 		<!-- 트랜젝션 END -->
-		
-		
 		     
 	</dependencies>
-
-	<repositories>
-		<repository>
-		 <id>enonic</id>
-		 <name>Enonic Repository</name>
-		 <url>http://repo.enonic.com/public/</url>
-		</repository>
-	</repositories>
-
 
     <build>
         <plugins>

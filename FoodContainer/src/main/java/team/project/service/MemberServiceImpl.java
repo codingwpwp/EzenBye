@@ -144,6 +144,27 @@ public class MemberServiceImpl implements MemberService {
 		int mypageChangeAddress = memberDao.mypageChangeAddress(memberVO);
 		return mypageChangeAddress;
 	}
+
+	/* 로그인 페이지 */
+	// 간편 아이디 찾기
+	@Override
+	public MemberVO idEasyCheck(MemberVO membervo) throws Exception {
+		MemberVO tempMember = memberDao.idEasyCheck(membervo);
+		if(tempMember != null) {
+			String id = tempMember.getId();
+			String tempId = id.substring(0, 4);
+			String tempId2 = id.substring(4, id.length());
+			String stars = "";
+			for(int i = 0; i < tempId2.length(); i++) {
+				stars += "*";
+			}
+			tempMember.setId(tempId + stars);
+		}
+		
+		return tempMember;
+	}
+	
+	
 	/* 여기서 부터는 관리자페이지 */
 	
 	// 회원 조회(페이징 + 리스트 출력)

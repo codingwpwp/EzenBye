@@ -37,6 +37,11 @@ public interface MemberService {
 	
 	int mypageChangeAddress(MemberVO memberVO) throws Exception;
 	
+	/* 로그인 페이지 */
+	// 간편 아이디 찾기
+	public MemberVO idEasyCheck(MemberVO membervo) throws Exception;
+	
+	
 	/* 여기서 부터는 관리자페이지 */
 	
 	// 회원 조회

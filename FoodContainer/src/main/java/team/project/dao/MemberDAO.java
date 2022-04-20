@@ -57,6 +57,12 @@ public class MemberDAO {
 		return Integer.toString(result);
 	}
 	
+	/* 로그인 페이지 */
+	// 간편 아이디 찾기
+	public MemberVO idEasyCheck(MemberVO membervo) throws Exception{
+		return sqlSession.selectOne(Namespace + ".idEasyCheck", membervo);
+	}
+	
 	public MemberVO memberInfor(int member_index) throws Exception{
 		return sqlSession.selectOne(Namespace+".memberInfor",member_index);
 	}

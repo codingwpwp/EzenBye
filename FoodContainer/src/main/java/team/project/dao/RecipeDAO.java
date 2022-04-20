@@ -17,6 +17,11 @@ public class RecipeDAO {
 	
 	private static final String Namespace = "team.project.mapper.recipeMapper";
 	
+	//레시피 번호 찾기
+	public RecipeVO selectRecipe(int recipe_index) throws Exception{
+		return sqlSession.selectOne(Namespace+".selectRecipe",recipe_index);
+	}
+	
 	//레시피 목록 조회
 	public List<RecipeVO> recipeList(PagingUtil pu ) throws Exception {
 		return sqlSession.selectList(Namespace + ".recipeList", pu );
@@ -25,17 +30,7 @@ public class RecipeDAO {
 	public RecipeVO recipeRead(int recipe_index) throws Exception{
 		return sqlSession.selectOne(Namespace+".recipeRead",recipe_index);
 	}
-//	//레시피 상세 상품목록
-//	public RecipeVO viewProduct1(String product_index1,String product_img1)throws Exception{
-//		return sqlSession.selectOne(Namespace+".viewProduct"+product_index1,product_img1);
-//	}
-//	public RecipeVO viewProduct2(String product_index2,String product_img2)throws Exception{
-//		return sqlSession.selectOne(Namespace+".viewProduct"+product_index2,product_img2);
-//	}
-//	public RecipeVO viewProduct3(String product_index3,String product_img3)throws Exception{
-//		return sqlSession.selectOne(Namespace+".viewProduct"+product_index3,product_img3);
-//	}
-	
+
 	//레시피 게시물 조회수
 	public void recipeHit(int recipe_index) throws Exception{
 		sqlSession.update(Namespace+".recipeHit",recipe_index);
@@ -68,7 +63,14 @@ public class RecipeDAO {
 		
 	}
 	
-	
+	//레시피 수정
+	public void updateRecipe(RecipeVO vo)throws Exception{
+		sqlSession.update(Namespace+".updateRecipe",vo);
+	}
+	//레시피 삭제
+	public void deletdRecipe(int recipe_index) throws Exception{
+		sqlSession.delete(Namespace+".deletdRecipe",recipe_index);
+	}
 	
 
 		

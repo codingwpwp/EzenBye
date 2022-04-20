@@ -68,6 +68,11 @@
 			#{member_index}, #{contents}, #{title}
 		)
 	</insert>
+	
+	<select id="messageNonReadCount" resultType="int" parameterType="int">
+		SELECT count(*) FROM message
+		WHERE member_index = #{member_index} and read_yn = 'N' and del_yn = 'N'
+	</select>
  	
 </mapper>
 

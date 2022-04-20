@@ -76,6 +76,12 @@ public class MessageServiceImpl implements MessageService {
 		return messageDAO.messageInsert(vo);
 	}
 
+	@Override
+	public int messageNonReadCount(int member_index) throws Exception {
+		int messageNonReadCount = messageDAO.messageNonReadCount(member_index);
+		return messageNonReadCount;
+	}
+
 
 }
 
