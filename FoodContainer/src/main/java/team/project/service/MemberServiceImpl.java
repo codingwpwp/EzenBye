@@ -164,6 +164,12 @@ public class MemberServiceImpl implements MemberService {
 		return tempMember;
 	}
 	
+	// 이메일 아이디 찾기
+	@Override
+	public MemberVO emailEasyCheck(MemberVO membervo) throws Exception {
+		return memberDao.emailEasyCheck(membervo);
+	}
+	
 	
 	/* 여기서 부터는 관리자페이지 */
 	

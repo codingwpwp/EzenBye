@@ -84,9 +84,12 @@
                                         </c:if>
                                         </div>
                                         <div class="col-md-12 col-sm-3 col-12">
-                                        
-                                         <input type="button" class="btn btn-secondary pwdfind" onclick="location.href='<%=request.getContextPath()%>/pw_find.do'" value="비밀번호 찾기">
-                                         
+                                        <c:if test="${not empty tempMember}">
+                                        	<input type="button" class="btn btn-secondary pwdfind" onclick="location.href='<%=request.getContextPath()%>/pw_find.do'" value="비밀번호 찾기">
+                                        </c:if>
+                                        <c:if test="${empty tempMember}">
+                                        	<input type="button" class="btn btn-secondary pwdfind" onclick="location.href='<%=request.getContextPath()%>/id_find.do'" value="아이디 다시 찾기">
+                                        </c:if>
                                          <input type="button" class="btn btn-dark login" onclick="location.href='<%=request.getContextPath()%>/loginmain.do'" value="로그인">
                                         </div>                                  
                                     </div>

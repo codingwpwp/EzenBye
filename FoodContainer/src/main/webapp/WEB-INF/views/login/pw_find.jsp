@@ -27,15 +27,7 @@
         <div class="row">
             <div class="col-lg-2 d-none d-lg-block"></div>
 
-            <!--
-                id="navLeftMenu"인 현재 주석 바로 아래의 태그는 페이지의 종류에 따른 왼쪽메뉴.
-                네비게이션 바가 펼쳐질 때 알아서 태그가 안보이도록 설정.
-                필요시에만 div태그 사이에 코드를 작성.
-                작성시 border border-dark는 구분용으로만 작성했기 때문에 알아서 지우고 작업.
-                작성하지 않는 경우는 절대 건들지 않음.
-                base.js에 id="navLeftMenu"와 관련된 코드가 작성되어있음.
-            -->
-            <div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark" id="navLeftMenu"><!-- 여기에 작성 --></div>
+            <div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark" id="navLeftMenu"></div>
 
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
 
@@ -56,58 +48,52 @@
             <!-- 메인 -->
             <div class="col-12 col-sm-9 col-md-10 col-lg-8">
                 <article id="mainSection">
-                    
-                    <!--
-                        헤딩.
-                        필요하지 않는 사람은 <div>태그를 삭제.
-                        필요한 사람은 <div>태그에 작성.
-                    -->
                   
- <div class="container head">
-                    <div class="row head">
-                        <div class="col-12">
-                            <h2>비밀번호 찾기</h2>
-                        </div>
-                        <div class="col-12">
-                            비밀번호가 기억나지 않으세요? 원하시는 방법을 &nbsp;선택해 비밀번호를 확인하실 수 있습니다.
-                        </div>
-                    </div>
+ 					<div class="container head">
+	                    <div class="row head">
+	                        <div class="col-12">
+	                            <h2>비밀번호 찾기</h2>
+	                        </div>
+	                        <div class="col-12">
+	                            비밀번호가 기억나지 않으세요? 원하시는 방법을 &nbsp;선택해 비밀번호를 확인하실 수 있습니다.
+	                        </div>
+	                    </div>
                    </div>
                    <div class="container from">
                        <div class="row pwfindform">
-                        <div class="col-md-12 col-sm-12 col-12">
-                            <form class="pwfind">
-                                <div class="container">
-                                    <div class="row rows">
-                                        <div class="col-12">
-                                            <h4>임시 비밀번호 발급</h4>
-                                        </div>
-                                        <div class="col-md-12 col-sm-12 col-12">
-                                            <p>입력하신 정보는 <strong>임시 비밀번호</strong> 발급에만&nbsp; 사용되며 <strong>저장 되지 않습니다.</strong></p>
-                                        </div>
-                                        <div class="col-md-10 col-sm-10 col-12">
-                                            <input type="text" class="form-control findinput" placeholder="이름를 입력해주세요">
-                                        </div>
-                                        <div class="col-md-10 col-sm-10 col-12">
-                                            <input type="text" class="form-control findinput" placeholder="아이디 입력해주세요">
-                                        </div>
-                                        <div class="col-md-12 col-sm-12 col-12">
-                                            <input type="text" class="form-control findemailinput" placeholder="이메일을 입력해주세요">
-                                            <button class="btn btn-secondary emailbtn">인증번호 발송</button>
-                                        </div>
-                                        <div class="col-md-10 col-sm-10 col-12 ">
-                                            <input type="text" class="form-control findinput" placeholder="인증번호 입력해주세요">
-                                            
-                                        </div>
-                                        <div class="col-md-12 col-sm-12 col-12">
-                                            <input type="button" value="임시 비밀번호 발급" class="btn btn-secondary pwfindbtn" onclick="location.href='pw_email_check.do'">
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+	                        <div class="col-md-12 col-sm-12 col-12">
+	                            <form class="pwfind">
+	                                <div class="container">
+	                                    <div class="row rows">
+	                                        <div class="col-12">
+	                                            <h4>임시 비밀번호 발급</h4>
+	                                        </div>
+	                                        <div class="col-md-12 col-sm-12 col-12">
+	                                            <p>입력하신 정보는 <strong>임시 비밀번호</strong> 발급에만&nbsp; 사용되며 <strong>저장 되지 않습니다.</strong></p>
+	                                            <div id="timer" class="text-danger fw-bold"></div>
+	                                        </div>
+	                                        <div class="col-md-10 col-sm-10 col-12">
+	                                            <input type="text" class="form-control findinput" placeholder="이름을 입력해주세요">
+	                                        </div>
+	                                        <div class="col-md-10 col-sm-10 col-12">
+	                                            <input type="text" class="form-control findinput" placeholder="아이디 입력해주세요">
+	                                        </div>
+	                                        <div class="col-md-12 col-sm-12 col-12">
+	                                            <input type="text" class="form-control findemailinput" placeholder="이메일을 입력해주세요" oninput="emailCheck(this)">
+	                                            <button class="btn btn-secondary emailbtn" onclick="sendEmail()">인증번호 발송</button>
+	                                        </div>
+	                                        <div class="col-md-10 col-sm-10 col-12 ">
+	                                            <input type="text" class="form-control findinput" placeholder="인증번호 입력해주세요">
+	                                        </div>
+	                                        <span id="emailMessageSpan" class="fw-bold"></span>
+	                                        <div class="col-md-12 col-sm-12 col-12">
+	                                            <input type="button" value="임시 비밀번호 발급" class="btn btn-secondary pwfindbtn" onclick="location.href='pw_email_check.do'">
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </form>
+	                        </div>
                        </div>
-                       
                    </div>
 
                 </article>
@@ -131,5 +117,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
+    <script src="<%=request.getContextPath()%>/resources/js/login.js"></script>
 </body>
 </html>
