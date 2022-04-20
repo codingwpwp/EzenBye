@@ -22,5 +22,7 @@ public interface MessageService {
 	
 	void messageRead(int message_index) throws Exception;
 	
-	int messageInsert(MessageVO vo) throws Exception; 
+	int messageInsert(MessageVO vo) throws Exception;
+	
+	int messageNonReadCount(int member_index) throws Exception;
 }

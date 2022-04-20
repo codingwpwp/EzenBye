@@ -55,6 +55,65 @@ public class ShopBasketController {
 		return "redirect:shopBasket_main.do";
 	}
 	
+	// 상품 선택삭제 비로그인
+	@RequestMapping(value = "chooseShopbasketDeleteNon.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String chooseShopbasketDeleteNon(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		//모든 쿠키 호출
+		Cookie[] cookies = request.getCookies();
+		String currentCookie = null;
+		String[] product_index = request.getParameterValues("product_index");
+		
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				if(cookie.getName().equals("noMemberCart")) {
+					currentCookie = URLDecoder.decode(cookie.getValue(),"UTF-8");
+				}
+			}
+		}
+		
+		if(currentCookie != null) {
+
+			String[] cartProductIndexArray = currentCookie.split(",");
+			for(String pro : product_index) {
+				for(int i = 0; i < cartProductIndexArray.length; i++) {
+					if(cartProductIndexArray[i].contains(pro)) {
+						cartProductIndexArray[i] = "";
+					}
+				}
+			}
+			
+			String tempCurrentCookie = "";
+			for(int i = 0; i < cartProductIndexArray.length; i++) {
+				if(!cartProductIndexArray[i].equals("")) {
+					tempCurrentCookie += cartProductIndexArray[i] + ","; 
+				}
+			}
+			if(tempCurrentCookie.length() > 0) {
+				tempCurrentCookie = tempCurrentCookie.substring(0, tempCurrentCookie.length() - 1);
+
+				tempCurrentCookie = URLEncoder.encode(tempCurrentCookie, "UTF-8");
+				Cookie pidxCookie = new Cookie("noMemberCart", tempCurrentCookie);
+				pidxCookie.setPath("/controller");
+				
+			    response.addCookie(pidxCookie);
+			}else {
+				Cookie pidxCookie = new Cookie("noMemberCart", null);
+				tempCurrentCookie = URLEncoder.encode(tempCurrentCookie, "UTF-8");
+				
+				pidxCookie.setPath("/controller");
+				pidxCookie.setMaxAge(0);
+			    response.addCookie(pidxCookie);
+			}
+			
+			
+		    
+		}
+		
+		return "redirect:shopBasket_main.do";
+	}
+	
 	// 상품 삭제
 	@RequestMapping(value = "shopbasketDelete.do", method = RequestMethod.POST)
 	@ResponseBody
