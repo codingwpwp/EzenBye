@@ -66,7 +66,7 @@
 			</li>
 			<!-- 무료배송 체크박스 -->
 			<button class="btn btn-toggle align-items-center rounded collapsed free" onclick="free(this); productFilter();">
-				<i class="bi bi-check-square"></i> 무료배송
+				<i class="bi bi-check-square" id="free"></i> 무료배송
 			</button>
 			
 		</ul>

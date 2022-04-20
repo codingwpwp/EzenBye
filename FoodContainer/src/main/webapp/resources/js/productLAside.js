@@ -41,6 +41,68 @@
 		}
 	}
 	
+	function linkIce0(){
+		var productAll = $("input[name='asideProductAll']");
+		var product = $("input[name='asideProduct']");
+		var ice0 = $("input[name='asideIce']:eq(0)");
+		var ice1 = $("input[name='asideIce']:eq(1)");
+		productAll.prop("checked",false);
+		product.prop("checked",false);
+		ice0.prop("checked",true);
+		ice1.prop("checked",false);
+	}
+	
+	function linkIce1(){
+		var productAll = $("input[name='asideProductAll']");
+		var product = $("input[name='asideProduct']");
+		var ice0 = $("input[name='asideIce']:eq(0)");
+		var ice1 = $("input[name='asideIce']:eq(1)");
+		productAll.prop("checked",false);
+		product.prop("checked",false);
+		ice0.prop("checked",false);
+		ice1.prop("checked",true);
+	}
+	
+	
+	function linkProduct0(){
+		var iceAll = $("input[name='asideIceAll']");
+		var ice = $("input[name='asideIce']");
+		var product0 = $("input[name='asideProduct']:eq(0)");
+		var product1 = $("input[name='asideProduct']:eq(1)");
+		var product2 = $("input[name='asideProduct']:eq(2)");
+		iceAll.prop("checked",false);
+		ice.prop("checked",false);
+		product0.prop("checked",true);
+		product1.prop("checked",false);
+		product2.prop("checked",false);
+	}
+	
+	function linkProduct1(){
+		var iceAll = $("input[name='asideIceAll']");
+		var ice = $("input[name='asideIce']");
+		var product0 = $("input[name='asideProduct']:eq(0)");
+		var product1 = $("input[name='asideProduct']:eq(1)");
+		var product2 = $("input[name='asideProduct']:eq(2)");
+		iceAll.prop("checked",false);
+		ice.prop("checked",false);
+		product0.prop("checked",false);
+		product1.prop("checked",true);
+		product2.prop("checked",false);
+	}
+	
+	function linkProduct2(){
+		var iceAll = $("input[name='asideIceAll']");
+		var ice = $("input[name='asideIce']");
+		var product0 = $("input[name='asideProduct']:eq(0)");
+		var product1 = $("input[name='asideProduct']:eq(1)");
+		var product2 = $("input[name='asideProduct']:eq(2)");
+		iceAll.prop("checked",false);
+		ice.prop("checked",false);
+		product0.prop("checked",false);
+		product1.prop("checked",false);
+		product2.prop("checked",true);
+	}
+	
 	window.onload = function(){
 	  //pc화면 - 처음 또는 새로고침 시 전체선택
 	  	//전체식품
@@ -614,6 +676,15 @@
 		var middleSort = "";
 		var brand = "";
 		var price = "";
+		var freeCheck = $("#free").attr("class");
+		var freeHtml = "bi bi-check-square";
+		var free = "";
+		if(freeCheck == freeHtml){
+			free = "no";
+		}else{
+			free = "ok";
+		}
+		
 		
 		for(var i=0; i<ice.length; i++){
 			if(ice.eq(i).is(":checked")){
@@ -639,201 +710,535 @@
 			}
 		}
 		
-									
-			/*	
-				<!-- 모바일 버전 -->	
-				<article class="pListM">
-					<div class="fs-5 my-2 fw-bold topText">전체상품</div>
-					<hr>
-					<div class="productListCardM">
-						<c:forEach items="${productListAll}" var="ProductVO" varStatus="status">
-						<div class="productListMDiv">
-						<a href="productView.do?product_index=${ProductVO.product_index}" onclick="productCookie(this)">
-							<div class="productListMImg">
-								<div style="width:100px; height:100px;">
-									<img src="/controller/resources/img/${ProductVO.brand}/${ProductVO.middleSort}/${ProductVO.thumbnail_image}" class="img-fluid" style="width:100px; height:100px;" alt="${ProductVO.product_name}">
-									<c:if test="${ProductVO.inventory == 0 }">
-									  	<img src="/controller/resources/img/매진.png" class="card-img-top pListSold">
-									  	<div class="pListSoldout"></div>
-									</c:if>
-								<input type="hidden" class="inventoryM${status.index}" value="${ProductVO.inventory}">
-								</div>
-								<div class="productListStarM">
-									<i class="bi bi-star-fill"></i>
-							        <i class="bi bi-star-fill"></i>
-							        <i class="bi bi-star-fill"></i>
-							      	<i class="bi bi-star-fill"></i>
-							       	<i class="bi bi-star"></i>
-								</div>
-							</div>
-							<div class="productListContent">
-								<c:if test="${ProductVO.quantity >= 500}">
-									<span style="color:red;">[인기]</span>
-								</c:if>
-								<span>[${ProductVO.brand}]</span>
-								<div class="productNameM">${ProductVO.product_name}</div>
-								<c:if test="${ProductVO.sale_price == -1}">
-								<div>
-									<fmt:formatNumber value="${ProductVO.origin_price}" pattern="#,###"/>원
-								</div>
-								</c:if>
-								<c:if test="${ProductVO.sale_price != -1}">
-								<div class="discountM">
-									[할인가]<fmt:formatNumber value="${ProductVO.sale_price}" pattern="#,###"/>원
-									<c:set var="sale" value="${((ProductVO.origin_price - ProductVO.sale_price)/ProductVO.origin_price)*100}" />
-				          			(<fmt:formatNumber value="${sale}" pattern="##.#"/>%)
-								</div>
-								</c:if>
-								<c:set var="delivery" value="${ProductVO.delivery_free_YN}" />
-								    	<c:choose>
-								    		<c:when test="${ProductVO.delivery_free_YN == 'N'}">
-								    			<div>배송비 3,000원</div>
-								    		</c:when>
-								    		
-								    		<c:when test="${ProductVO.delivery_free_YN == 'Y'}">
-								    			<div>무료배송</div>
-								    		</c:when>
-								    	</c:choose>
-							</div>
-							</a>
-							<input type="hidden" name="index" value="${ProductVO.product_index}">
-							<div class="pListSubImgM">
-								<c:if test="${member.id != null }">
-								  	<c:set var="heartCheck" value="0" />
-								 	<c:forEach items="${userDibsList}" var="userDibsList">
-								  		<c:if test="${userDibsList.member_index == member.member_index && ProductVO.product_index == userDibsList.product_index}">
-								  			<img src="/controller/resources/img/찬하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
-								  			<c:set var="heartCheck" value="1" />
-								  		</c:if>
-								  	</c:forEach>
-								  	<c:if test="${heartCheck == '0'}">
-								  		<img src="/controller/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
-								  	</c:if>
-									  	
-							  	</c:if>
-							  	<c:if test="${member.id == null}">
-								  	<img src="/controller/resources/img/빈하트.png" class="img-fluid hoverHeart" alt="찜" onclick="heart(this)">
-							  	</c:if>
-								<img src="/controller/resources/img/카트2.png" class="img-fluid hoverCart" alt="장바구니" onclick="pListCart(this)">
-								<input type="hidden" value="${status.index}">
-							</div>
-						</div>
-						</c:forEach>
-					</div>
-				</article>
-		*/
-		
 		$.ajax({
 			url : "productFilter.do",
-			data : "middleSort="+middleSort+"&brand="+brand+"&price="+price,
+			data : "middleSort="+middleSort+"&brand="+brand+"&price="+price+"&free="+free,
 			success : function(data){
-				
-				var mainSectionHtml = "<!-- pc버전 -->";
-				mainSectionHtml += "<article class='pList'>";
-				mainSectionHtml += "<div class='fs-5 my-2 fw-bold topText'>전체상품</div>";
-				mainSectionHtml += "<hr>";
-				mainSectionHtml += "<!-- 전체상품 -->";
-				mainSectionHtml += "<div class='container'>";
-				mainSectionHtml += "<div class='row'>";
-				for(var i=0; i<data.length; i++){
-					//mainSectionHtml += "<c:forEach items='${productListAll}' var='ProductVO' varStatus='status'>";
-					mainSectionHtml += "<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center'>";
-					mainSectionHtml += "<div class='card' style='width: 18rem;'>";
-					mainSectionHtml += "<a href='productView.do?product_index="+data[i].product_index+"' onclick='productCookie(this)'>";
-					mainSectionHtml += "<img src='/controller/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='card-img-top cardImg' alt='"+data[i].product_name+"'>";
-					if(data[i].inventory == 0){
-						//mainSectionHtml += "<c:if test='${ProductVO.inventory == 0 }'>";
-						mainSectionHtml += "<img src='/controller/resources/img/매진.png' class='card-img-top pListSold'>";
-						mainSectionHtml += "<div class='pListSoldout'></div>";
-						//mainSectionHtml += "</c:if>";
-					}
-					mainSectionHtml += "<input type='hidden' class='inventory"+i+"' value='"+data[i].inventory+"'>";
-					mainSectionHtml += "<div class='card-body'>";
-					mainSectionHtml += "<p class='card-text'>";
-					if(data[i].quantity >= 500){
-						//mainSectionHtml += "<c:if test='${ProductVO.quantity >= 500}'>";
-						mainSectionHtml += "<span style='color:red;'>[인기]</span>";
-						//mainSectionHtml += "</c:if>";
-					}
-					mainSectionHtml += "<span>["+data[i].brand+"]</span>";
-					mainSectionHtml += "<br>";
-					mainSectionHtml += "<span class='productName'>"+data[i].product_name+"</span><br>";
-					mainSectionHtml += "<span class='fs-4'>";
-					mainSectionHtml += data[i].origin_price.toLocaleString();
-					//mainSectionHtml += "<fmt:formatNumber value='${ProductVO.origin_price}' pattern='#,###'/>";
-					mainSectionHtml += "</span>원<br>";
-					if(data[i].sale_price != -1){
-						//mainSectionHtml += "<c:if test='${ProductVO.sale_price != -1}'>";
-						mainSectionHtml += "<span class='discount'>";
-						mainSectionHtml += data[i].sale_price.toLocaleString()+"원";
-						//mainSectionHtml += "<fmt:formatNumber value='${ProductVO.sale_price}' pattern='#,###'/>원";
-						var persent = ((data[i].origin_price - data[i].sale_price)/data[i].origin_price)*100;
-						//mainSectionHtml += "<c:set var='sale' value='${((ProductVO.origin_price - ProductVO.sale_price)/ProductVO.origin_price)*100}' />";
-						mainSectionHtml += "("+persent.toFixed(2)+"%)<br>";
-						//mainSectionHtml += "(<fmt:formatNumber value='${sale}' pattern='##.#'/>%)<br>";
+				var checkAll = $("button[name='lAsideProductAll']").find("i").attr("class");
+				var checkAllHtml = "bi bi-check-circle-fill";
+				if(checkAll == checkAllHtml){
+					var mainSectionHtml = "<!-- pc버전 -->";
+					mainSectionHtml += "<article class='pList'>";
+					mainSectionHtml += "<div class='fs-5 my-2 fw-bold topText'>전체상품</div>";
+					mainSectionHtml += "<hr>";
+					mainSectionHtml += "<!-- 전체상품 -->";
+					mainSectionHtml += "<div class='container'>";
+					mainSectionHtml += "<div class='row'>";
+					for(var i=0; i<data.length; i++){
+						mainSectionHtml += "<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center'>";
+						mainSectionHtml += "<div class='card' style='width: 18rem;'>";
+						mainSectionHtml += "<a href='productView.do?product_index="+data[i].product_index+"' onclick='productCookie(this)'>";
+						mainSectionHtml += "<img src='/controller/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='card-img-top cardImg' alt='"+data[i].product_name+"'>";
+						if(data[i].inventory == 0){
+							mainSectionHtml += "<img src='/controller/resources/img/매진.png' class='card-img-top pListSold'>";
+							mainSectionHtml += "<div class='pListSoldout'></div>";
+						}
+						mainSectionHtml += "<input type='hidden' class='inventory"+i+"' value='"+data[i].inventory+"'>";
+						mainSectionHtml += "<div class='card-body'>";
+						mainSectionHtml += "<p class='card-text'>";
+						if(data[i].quantity >= 500){
+							mainSectionHtml += "<span style='color:red;'>[인기]</span>";
+						}
+						mainSectionHtml += "<span>["+data[i].brand+"]</span>";
+						mainSectionHtml += "<br>";
+						mainSectionHtml += "<span class='productName'>"+data[i].product_name+"</span><br>";
+						mainSectionHtml += "<span class='fs-4'>";
+						mainSectionHtml += data[i].origin_price.toLocaleString();
+						mainSectionHtml += "</span>원<br>";
+						if(data[i].sale_price != -1){
+							mainSectionHtml += "<span class='discount'>";
+							mainSectionHtml += data[i].sale_price.toLocaleString()+"원";
+							var persent = ((data[i].origin_price - data[i].sale_price)/data[i].origin_price)*100;
+							mainSectionHtml += "("+persent.toFixed(2)+"%)<br>";
+							mainSectionHtml += "</span>";
+						}
+						mainSectionHtml += "<span class='productListStar'>";
+						mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+						mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+						mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+						mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+						mainSectionHtml += "<i class='bi bi-star'></i>";
 						mainSectionHtml += "</span>";
-						//mainSectionHtml += "</c:if>";
+						mainSectionHtml += "<br>";
+						if(data[i].delivery_free_YN != "Y"){
+							mainSectionHtml += "배송비 3,000원"; 
+						}else{
+							mainSectionHtml += "무료배송";
+						}
+						mainSectionHtml += "</p>";
+						mainSectionHtml += "</div>";
+						mainSectionHtml += "</a>";
+						mainSectionHtml += "<input type='hidden' name='index' value='"+data[i].product_index+"'>";
+						mainSectionHtml += "<div class='pListSubImg'>";
+						var loginCheck = $("input[name='LoginCheck']").val();
+						if(loginCheck != null){
+							var heartCheck = 0;
+							var userDibsCheck = $("input[name='userDibsCheck']").val();
+							var userDibslength = $("input[name='userDibslength']").val();
+							var userDibsProduct = $("input[name='userDibsProduct']").val();
+							userDibsProduct = userDibsProduct.replace("[","");
+							userDibsProduct = userDibsProduct.replace("]","");
+							var userDibsProductArr = [];
+							userDibsProductArr = userDibsProduct.split(",");
+							for(var j=0; j<userDibslength; j++){
+								if(userDibsCheck == loginCheck && data[i].product_index == $.trim(userDibsProductArr[j])){
+									mainSectionHtml += "<img src='/controller/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+									heartCheck = 1;
+								}
+							}
+							if(heartCheck == 0){
+								mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+							}
+						}else{
+							mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+						}
+						mainSectionHtml += "<img src='/controller/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='cart(this)'>";
+						mainSectionHtml += "<input type='hidden' value='"+i+"'>";  
+						mainSectionHtml += "</div>";
+						mainSectionHtml += "</div>";
+						mainSectionHtml += "</div>";
 					}
-					mainSectionHtml += "<span class='productListStar'>";
-					mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-					mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-					mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-					mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-					mainSectionHtml += "<i class='bi bi-star'></i>";
-					mainSectionHtml += "</span>";
-					mainSectionHtml += "<br>";
-					if(data[i].delivery_free_YN == "Y"){
-						mainSectionHtml += "배송비 3,000원"; 
-						/*mainSectionHtml += "<c:set var='delivery' value='${ProductVO.delivery_free_YN}' />";
-						mainSectionHtml += "<c:choose>";
-						mainSectionHtml += "<c:when test='${delivery == 'Y'}'>";
-						mainSectionHtml += "배송비 3,000원";
-						mainSectionHtml += "</c:when>";
-						mainSectionHtml += "<c:when test='${delivery == 'Y'}'>";
-						mainSectionHtml += "무료배송";
-						mainSectionHtml += "</c:when>";
-						mainSectionHtml += "</c:choose>";*/
+					if(loginCheck == null){
+						mainSectionHtml += "<input type='hidden' id='pListLoginCheck' value=''>";
 					}else{
-						mainSectionHtml += "무료배송";
+						mainSectionHtml += "<input type='hidden' id='pListLoginCheck' value='"+loginCheck+"'>";
 					}
-					mainSectionHtml += "</p>";
-					mainSectionHtml += "</div>";
-					mainSectionHtml += "</a>";
-					mainSectionHtml += "<input type='hidden' name='index' value='"+data[i].product_index+"'>";
-			/*		mainSectionHtml += "<div class='pListSubImg'>";
-					mainSectionHtml += "<c:if test='${member.id != null }'>";
-					mainSectionHtml += "<c:set var='heartCheck' value='0' />";
-					mainSectionHtml += "<c:forEach items='${userDibsList}' var='userDibsList'>";
-					mainSectionHtml += "<c:if test='${userDibsList.member_index == member.member_index && ProductVO.product_index == userDibsList.product_index}'>";
-					mainSectionHtml += "<img src='/controller/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
-					mainSectionHtml += "<c:set var='heartCheck' value='1' />";
-					mainSectionHtml += "</c:if>";
-					mainSectionHtml += "</c:forEach>";
-					mainSectionHtml += "<c:if test='${heartCheck == '0'}'>";
-					mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
-					mainSectionHtml += "</c:if>";
-					mainSectionHtml += "</c:if>";
-					mainSectionHtml += "<c:if test='${member.id == null}'>";
-					mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
-					mainSectionHtml += "</c:if>";
-					mainSectionHtml += "<img src='/controller/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='cart(this)'>";
-					mainSectionHtml += "<input type='hidden' value='${status.index}'>";  */
 					mainSectionHtml += "</div>";
 					mainSectionHtml += "</div>";
+					mainSectionHtml += "</article>";
+					mainSectionHtml += "<!-- 모바일 버전 -->";
+					mainSectionHtml += "<article class='pListM'>";
+					mainSectionHtml += "<div class='fs-5 my-2 fw-bold topText'>전체상품</div>";
+					mainSectionHtml += "<hr>";
+					mainSectionHtml += "<div class='productListCardM'>";
+					for(var i=0; i<data.length; i++){			
+					mainSectionHtml += "<div class='productListMDiv'>";
+					mainSectionHtml += "<a href='productView.do?product_index="+data[i].product_index+"' onclick='productCookie(this)'>";
+					mainSectionHtml += "<div class='productListMImg'>";
+					mainSectionHtml += "<div style='width:100px; height:100px;'>";
+					mainSectionHtml += "<img src='/controller/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='img-fluid' style='width:100px; height:100px;' alt='"+data[i].product_name+"'>";
+						if(data[i].inventory == 0){
+							mainSectionHtml += "<img src='/controller/resources/img/매진.png' class='card-img-top pListSold'>";
+							mainSectionHtml += "<div class='pListSoldout'></div>";
+						}	
+						mainSectionHtml += "<input type='hidden' class='inventoryM"+i+"' value='"+data[i].inventory+"'>";			
+						mainSectionHtml += "</div>";			
+						mainSectionHtml += "<div class='productListStarM'>";			
+						mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
+						mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
+						mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
+						mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
+						mainSectionHtml += "<i class='bi bi-star'></i>";			
+						mainSectionHtml += "</div>";			
+						mainSectionHtml += "</div>";			
+						mainSectionHtml += "<div class='productListContent'>";			
+						if(data[i].quantity >= 500){
+							mainSectionHtml += "<span style='color:red;'>[인기]</span>";	
+						}									
+						mainSectionHtml += "<span>["+data[i].brand+"]</span>";					
+						mainSectionHtml += "<div class='productNameM'>"+data[i].product_name+"</div>";					
+						if(data[i].sale_price == -1){
+							mainSectionHtml += "<div>";			
+							mainSectionHtml += data[i].origin_price.toLocaleString()+"원";	
+							mainSectionHtml += "</div>";	
+						}else{
+							mainSectionHtml += "<div class='discountM'>";
+							mainSectionHtml += "[할인가]"+data[i].sale_price.toLocaleString()+"원";
+							var persent = ((data[i].origin_price - data[i].sale_price)/data[i].origin_price)*100;
+							mainSectionHtml += "("+persent.toFixed(2)+"%)<br>";
+							mainSectionHtml += "</div>";
+						}
+						if(data[i].delivery_free_YN == "Y"){
+							mainSectionHtml += "<div>무료배송</div>";
+						}else{
+							mainSectionHtml += "<div>배송비 3,000원</div>";
+						}
+						mainSectionHtml += "</div>";
+						mainSectionHtml += "</a>";
+						mainSectionHtml += "<input type='hidden' name='index' value='"+data[i].product_index+"'>";
+						mainSectionHtml += "<div class='pListSubImgM'>";
+						var loginCheck = $("input[name='LoginCheck']").val();
+						if(loginCheck != null){
+							var heartCheck = 0;
+							var userDibsCheck = $("input[name='userDibsCheck']").val();
+							var userDibsProduct = $("input[name='userDibsProduct']").val();
+							var userDibsProductArr = [];
+							userDibsProductArr = userDibsProduct.split(",");
+							for(var j=0; j<userDibsCheck.lenght; j++){
+								if(userDibsCheck == loginCheck && data[i].product_index == userDibsProductArr[j]){
+									mainSectionHtml += "<img src='/controller/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+									heartCheck = 1;
+								}
+							}
+							if(heartCheck == 0){
+								mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+							}
+						}else{
+							mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+						}
+						mainSectionHtml += "<img src='/controller/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='pListCart(this)'>";
+						mainSectionHtml += "<input type='hidden' value='"+i+"'>";
+						mainSectionHtml += "</div>";
+						mainSectionHtml += "</div>";
+						}
 					mainSectionHtml += "</div>";
-					//mainSectionHtml += "</c:forEach>";
+					mainSectionHtml += "</article>";
+				
+				}else if(checkAll != checkAllHtml){
+					var mainSectionHtml = "<!-- pc버전 -->";
+					mainSectionHtml += "<article class='pList'>";
+					if(ice.is(":checked")){
+						mainSectionHtml += "<div class='fs-5 my-2 fw-bold topText'>냉동식품</div>";
+						mainSectionHtml += "<hr>";
+					}
+					mainSectionHtml += "<!-- 냉동식품 -->";
+					mainSectionHtml += "<div class='container'>";
+					mainSectionHtml += "<div class='row'>";
+					for(var i=0; i<data.length; i++){
+						if(data[i].bigSort == "냉동식품"){
+							mainSectionHtml += "<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center'>";
+							mainSectionHtml += "<div class='card' style='width: 18rem;'>";
+							mainSectionHtml += "<a href='productView.do?product_index="+data[i].product_index+"' onclick='productCookie(this)'>";
+							mainSectionHtml += "<img src='/controller/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='card-img-top cardImg' alt='"+data[i].product_name+"'>";
+							if(data[i].inventory == 0){
+								mainSectionHtml += "<img src='/controller/resources/img/매진.png' class='card-img-top pListSold'>";
+								mainSectionHtml += "<div class='pListSoldout'></div>";
+							}
+							mainSectionHtml += "<input type='hidden' class='inventory"+i+"' value='"+data[i].inventory+"'>";
+							mainSectionHtml += "<div class='card-body'>";
+							mainSectionHtml += "<p class='card-text'>";
+							if(data[i].quantity >= 500){
+								mainSectionHtml += "<span style='color:red;'>[인기]</span>";
+							}
+							mainSectionHtml += "<span>["+data[i].brand+"]</span>";
+							mainSectionHtml += "<br>";
+							mainSectionHtml += "<span class='productName'>"+data[i].product_name+"</span><br>";
+							mainSectionHtml += "<span class='fs-4'>";
+							mainSectionHtml += data[i].origin_price.toLocaleString();
+							mainSectionHtml += "</span>원<br>";
+							if(data[i].sale_price != -1){
+								mainSectionHtml += "<span class='discount'>";
+								mainSectionHtml += data[i].sale_price.toLocaleString()+"원";
+								var persent = ((data[i].origin_price - data[i].sale_price)/data[i].origin_price)*100;
+								mainSectionHtml += "("+persent.toFixed(2)+"%)<br>";
+								mainSectionHtml += "</span>";
+							}
+							mainSectionHtml += "<span class='productListStar'>";
+							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+							mainSectionHtml += "<i class='bi bi-star'></i>";
+							mainSectionHtml += "</span>";
+							mainSectionHtml += "<br>";
+							if(data[i].delivery_free_YN != "Y"){
+								mainSectionHtml += "배송비 3,000원"; 
+							}else{
+								mainSectionHtml += "무료배송";
+							}
+							mainSectionHtml += "</p>";
+							mainSectionHtml += "</div>";
+							mainSectionHtml += "</a>";
+							mainSectionHtml += "<input type='hidden' name='index' value='"+data[i].product_index+"'>";
+							mainSectionHtml += "<div class='pListSubImg'>";
+							var loginCheck = $("input[name='LoginCheck']").val();
+							if(loginCheck != null){
+								var heartCheck = 0;
+								var userDibsCheck = $("input[name='userDibsCheck']").val();
+								var userDibslength = $("input[name='userDibslength']").val();
+								var userDibsProduct = $("input[name='userDibsProduct']").val();
+								userDibsProduct = userDibsProduct.replace("[","");
+								userDibsProduct = userDibsProduct.replace("]","");
+								var userDibsProductArr = [];
+								userDibsProductArr = userDibsProduct.split(",");
+								for(var j=0; j<userDibslength; j++){
+									if(userDibsCheck == loginCheck && data[i].product_index == $.trim(userDibsProductArr[j])){
+										mainSectionHtml += "<img src='/controller/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+										heartCheck = 1;
+									}
+								}
+								if(heartCheck == 0){
+									mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+								}
+							}else{
+								mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+							}
+							mainSectionHtml += "<img src='/controller/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='cart(this)'>";
+							mainSectionHtml += "<input type='hidden' value='"+i+"'>";  
+							mainSectionHtml += "</div>";
+							mainSectionHtml += "</div>";
+							mainSectionHtml += "</div>";
+						}
+					}
+					
+					if(product.is(":checked")){
+						mainSectionHtml += "<div class='fs-5 my-2 fw-bold topText'>즉석식품</div>";
+						mainSectionHtml += "<hr>";
+					}
+					mainSectionHtml += "<!-- 즉석식품 -->";
+					mainSectionHtml += "<div class='container'>";
+					mainSectionHtml += "<div class='row'>";
+					for(var i=0; i<data.length; i++){
+						if(data[i].bigSort == "즉석식품"){
+							
+							mainSectionHtml += "<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center'>";
+							mainSectionHtml += "<div class='card' style='width: 18rem;'>";
+							mainSectionHtml += "<a href='productView.do?product_index="+data[i].product_index+"' onclick='productCookie(this)'>";
+							mainSectionHtml += "<img src='/controller/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='card-img-top cardImg' alt='"+data[i].product_name+"'>";
+							if(data[i].inventory == 0){
+								mainSectionHtml += "<img src='/controller/resources/img/매진.png' class='card-img-top pListSold'>";
+								mainSectionHtml += "<div class='pListSoldout'></div>";
+							}
+							mainSectionHtml += "<input type='hidden' class='inventory"+i+"' value='"+data[i].inventory+"'>";
+							mainSectionHtml += "<div class='card-body'>";
+							mainSectionHtml += "<p class='card-text'>";
+							if(data[i].quantity >= 500){
+								mainSectionHtml += "<span style='color:red;'>[인기]</span>";
+							}
+							mainSectionHtml += "<span>["+data[i].brand+"]</span>";
+							mainSectionHtml += "<br>";
+							mainSectionHtml += "<span class='productName'>"+data[i].product_name+"</span><br>";
+							mainSectionHtml += "<span class='fs-4'>";
+							mainSectionHtml += data[i].origin_price.toLocaleString();
+							mainSectionHtml += "</span>원<br>";
+							if(data[i].sale_price != -1){
+								mainSectionHtml += "<span class='discount'>";
+								mainSectionHtml += data[i].sale_price.toLocaleString()+"원";
+								var persent = ((data[i].origin_price - data[i].sale_price)/data[i].origin_price)*100;
+								mainSectionHtml += "("+persent.toFixed(2)+"%)<br>";
+								mainSectionHtml += "</span>";
+							}
+							mainSectionHtml += "<span class='productListStar'>";
+							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+							mainSectionHtml += "<i class='bi bi-star'></i>";
+							mainSectionHtml += "</span>";
+							mainSectionHtml += "<br>";
+							if(data[i].delivery_free_YN != "Y"){
+								mainSectionHtml += "배송비 3,000원"; 
+							}else{
+								mainSectionHtml += "무료배송";
+							}
+							mainSectionHtml += "</p>";
+							mainSectionHtml += "</div>";
+							mainSectionHtml += "</a>";
+							mainSectionHtml += "<input type='hidden' name='index' value='"+data[i].product_index+"'>";
+							mainSectionHtml += "<div class='pListSubImg'>";
+							var loginCheck = $("input[name='LoginCheck']").val();
+							if(loginCheck != null){
+								var heartCheck = 0;
+								var userDibsCheck = $("input[name='userDibsCheck']").val();
+								var userDibslength = $("input[name='userDibslength']").val();
+								var userDibsProduct = $("input[name='userDibsProduct']").val();
+								userDibsProduct = userDibsProduct.replace("[","");
+								userDibsProduct = userDibsProduct.replace("]","");
+								var userDibsProductArr = [];
+								userDibsProductArr = userDibsProduct.split(",");
+								for(var j=0; j<userDibslength; j++){
+									if(userDibsCheck == loginCheck && data[i].product_index == $.trim(userDibsProductArr[j])){
+										mainSectionHtml += "<img src='/controller/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+										heartCheck = 1;
+									}
+								}
+								if(heartCheck == 0){
+									mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+								}
+							}else{
+								mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+							}
+							mainSectionHtml += "<img src='/controller/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='cart(this)'>";
+							mainSectionHtml += "<input type='hidden' value='"+i+"'>";  
+							mainSectionHtml += "</div>";
+							mainSectionHtml += "</div>";
+							mainSectionHtml += "</div>";
+						}
+					}
+					
+					if(loginCheck == null){
+						mainSectionHtml += "<input type='hidden' id='pListLoginCheck' value=''>";
+					}else{
+						mainSectionHtml += "<input type='hidden' id='pListLoginCheck' value='"+loginCheck+"'>";
+					}
+					mainSectionHtml += "</div>";
+					mainSectionHtml += "</div>";
+					mainSectionHtml += "</article>";
+					mainSectionHtml += "<!-- 모바일 버전 -->";
+					mainSectionHtml += "<article class='pListM'>";
+					if(ice.is(":checked")){
+						mainSectionHtml += "<div class='fs-5 my-2 fw-bold topText'>냉동식품</div>";
+						mainSectionHtml += "<hr>";
+					}
+					mainSectionHtml += "<div class='productListCardM'>";
+					for(var i=0; i<data.length; i++){		
+						if(data[i].bigSort == "냉동식품"){
+							mainSectionHtml += "<div class='productListMDiv'>";
+							mainSectionHtml += "<a href='productView.do?product_index="+data[i].product_index+"' onclick='productCookie(this)'>";
+							mainSectionHtml += "<div class='productListMImg'>";
+							mainSectionHtml += "<div style='width:100px; height:100px;'>";
+							mainSectionHtml += "<img src='/controller/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='img-fluid' style='width:100px; height:100px;' alt='"+data[i].product_name+"'>";
+								if(data[i].inventory == 0){
+									mainSectionHtml += "<img src='/controller/resources/img/매진.png' class='card-img-top pListSold'>";
+									mainSectionHtml += "<div class='pListSoldout'></div>";
+								}	
+								mainSectionHtml += "<input type='hidden' class='inventoryM"+i+"' value='"+data[i].inventory+"'>";			
+								mainSectionHtml += "</div>";			
+								mainSectionHtml += "<div class='productListStarM'>";			
+								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
+								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
+								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
+								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
+								mainSectionHtml += "<i class='bi bi-star'></i>";			
+								mainSectionHtml += "</div>";			
+								mainSectionHtml += "</div>";			
+								mainSectionHtml += "<div class='productListContent'>";			
+								if(data[i].quantity >= 500){
+									mainSectionHtml += "<span style='color:red;'>[인기]</span>";	
+								}									
+								mainSectionHtml += "<span>["+data[i].brand+"]</span>";					
+								mainSectionHtml += "<div class='productNameM'>"+data[i].product_name+"</div>";					
+								if(data[i].sale_price == -1){
+									mainSectionHtml += "<div>";			
+									mainSectionHtml += data[i].origin_price.toLocaleString()+"원";	
+									mainSectionHtml += "</div>";	
+								}else{
+									mainSectionHtml += "<div class='discountM'>";
+									mainSectionHtml += "[할인가]"+data[i].sale_price.toLocaleString()+"원";
+									var persent = ((data[i].origin_price - data[i].sale_price)/data[i].origin_price)*100;
+									mainSectionHtml += "("+persent.toFixed(2)+"%)<br>";
+									mainSectionHtml += "</div>";
+								}
+								if(data[i].delivery_free_YN == "Y"){
+									mainSectionHtml += "<div>무료배송</div>";
+								}else{
+									mainSectionHtml += "<div>배송비 3,000원</div>";
+								}
+								mainSectionHtml += "</div>";
+								mainSectionHtml += "</a>";
+								mainSectionHtml += "<input type='hidden' name='index' value='"+data[i].product_index+"'>";
+								mainSectionHtml += "<div class='pListSubImgM'>";
+								var loginCheck = $("input[name='LoginCheck']").val();
+								if(loginCheck != null){
+									var heartCheck = 0;
+									var userDibsCheck = $("input[name='userDibsCheck']").val();
+									var userDibsProduct = $("input[name='userDibsProduct']").val();
+									var userDibsProductArr = [];
+									userDibsProductArr = userDibsProduct.split(",");
+									for(var j=0; j<userDibsCheck.lenght; j++){
+										if(userDibsCheck == loginCheck && data[i].product_index == userDibsProductArr[j]){
+											mainSectionHtml += "<img src='/controller/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+											heartCheck = 1;
+										}
+									}
+									if(heartCheck == 0){
+										mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+									}
+								}else{
+									mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+								}
+								mainSectionHtml += "<img src='/controller/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='pListCart(this)'>";
+								mainSectionHtml += "<input type='hidden' value='"+i+"'>";
+								mainSectionHtml += "</div>";
+								mainSectionHtml += "</div>";
+						}
+					}
+					
+					if(product.is(":checked")){
+						mainSectionHtml += "<div class='fs-5 my-2 fw-bold topText'>즉석식품</div>";
+						mainSectionHtml += "<hr>";
+					}
+					mainSectionHtml += "<div class='productListCardM'>";
+					for(var i=0; i<data.length; i++){		
+						if(data[i].bigSort == "즉석식품"){
+							mainSectionHtml += "<div class='productListMDiv'>";
+							mainSectionHtml += "<a href='productView.do?product_index="+data[i].product_index+"' onclick='productCookie(this)'>";
+							mainSectionHtml += "<div class='productListMImg'>";
+							mainSectionHtml += "<div style='width:100px; height:100px;'>";
+							mainSectionHtml += "<img src='/controller/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='img-fluid' style='width:100px; height:100px;' alt='"+data[i].product_name+"'>";
+								if(data[i].inventory == 0){
+									mainSectionHtml += "<img src='/controller/resources/img/매진.png' class='card-img-top pListSold'>";
+									mainSectionHtml += "<div class='pListSoldout'></div>";
+								}	
+								mainSectionHtml += "<input type='hidden' class='inventoryM"+i+"' value='"+data[i].inventory+"'>";			
+								mainSectionHtml += "</div>";			
+								mainSectionHtml += "<div class='productListStarM'>";			
+								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
+								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
+								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
+								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
+								mainSectionHtml += "<i class='bi bi-star'></i>";			
+								mainSectionHtml += "</div>";			
+								mainSectionHtml += "</div>";			
+								mainSectionHtml += "<div class='productListContent'>";			
+								if(data[i].quantity >= 500){
+									mainSectionHtml += "<span style='color:red;'>[인기]</span>";	
+								}									
+								mainSectionHtml += "<span>["+data[i].brand+"]</span>";					
+								mainSectionHtml += "<div class='productNameM'>"+data[i].product_name+"</div>";					
+								if(data[i].sale_price == -1){
+									mainSectionHtml += "<div>";			
+									mainSectionHtml += data[i].origin_price.toLocaleString()+"원";	
+									mainSectionHtml += "</div>";	
+								}else{
+									mainSectionHtml += "<div class='discountM'>";
+									mainSectionHtml += "[할인가]"+data[i].sale_price.toLocaleString()+"원";
+									var persent = ((data[i].origin_price - data[i].sale_price)/data[i].origin_price)*100;
+									mainSectionHtml += "("+persent.toFixed(2)+"%)<br>";
+									mainSectionHtml += "</div>";
+								}
+								if(data[i].delivery_free_YN == "Y"){
+									mainSectionHtml += "<div>무료배송</div>";
+								}else{
+									mainSectionHtml += "<div>배송비 3,000원</div>";
+								}
+								mainSectionHtml += "</div>";
+								mainSectionHtml += "</a>";
+								mainSectionHtml += "<input type='hidden' name='index' value='"+data[i].product_index+"'>";
+								mainSectionHtml += "<div class='pListSubImgM'>";
+								var loginCheck = $("input[name='LoginCheck']").val();
+								if(loginCheck != null){
+									var heartCheck = 0;
+									var userDibsCheck = $("input[name='userDibsCheck']").val();
+									var userDibsProduct = $("input[name='userDibsProduct']").val();
+									var userDibsProductArr = [];
+									userDibsProductArr = userDibsProduct.split(",");
+									for(var j=0; j<userDibsCheck.lenght; j++){
+										if(userDibsCheck == loginCheck && data[i].product_index == userDibsProductArr[j]){
+											mainSectionHtml += "<img src='/controller/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+											heartCheck = 1;
+										}
+									}
+									if(heartCheck == 0){
+										mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+									}
+								}else{
+									mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+								}
+								mainSectionHtml += "<img src='/controller/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='pListCart(this)'>";
+								mainSectionHtml += "<input type='hidden' value='"+i+"'>";
+								mainSectionHtml += "</div>";
+								mainSectionHtml += "</div>";
+						}
+					}
+					
+					mainSectionHtml += "</div>";
+					mainSectionHtml += "</article>";
+				
 				}
-			//	mainSectionHtml += "<input type='hidden' id='pListLoginCheck' value='${member.member_index}'>";
-				mainSectionHtml += "</div>";
-				mainSectionHtml += "</div>";
-				mainSectionHtml += "</article>";
+				
+				if(!(ice.is(":checked")) && !(product.is(":checked"))){
+					mainSectionHtml = "<div id='notCheck'>선택 된 상품이 없습니다.</div>"
+				}
 				
 				$("#mainSection").html(mainSectionHtml);
+				
 				
 			},
 			error : function() {
 				console.log('error');			
 			}
 		});
-		
 	}
+	
+	

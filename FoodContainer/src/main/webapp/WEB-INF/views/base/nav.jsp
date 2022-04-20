@@ -12,7 +12,7 @@
         <ul class="navbar-nav me-auto mb-md-0">
 
             <li class="nav-item">
-                <a class="nav-link text-dark px-lg-1 px-xl-2 menu" href="productList.do">전체식품</a>
+                <a class="nav-link text-dark px-lg-1 px-xl-2 menu" href="/controller/productList.do">전체식품</a>
             </li>
 
             <li class="nav-item dropdown" onmouseover="changeColorFn1(this)" onmouseout="changeColorFn2(this)">
@@ -20,28 +20,28 @@
                     <i class="bi bi-snow2"></i>냉동식품
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">볶음밥</a></li>
-                    <li><a class="dropdown-item" href="#">치킨,만두</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="linkIce0(); productFilter();">볶음밥</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="linkIce1(); productFilter();">치킨,만두</a></li>
                 </ul>
             </li>
 
             <li class="nav-item dropdown" onmouseover="changeColorFn1(this)" onmouseout="changeColorFn2(this)">
-                <a class="nav-link text-success text-opacity-50 px-lg-1 px-xl-2 menu" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link text-success text-opacity-50 px-lg-1 px-xl-2 menu" href="#" data-bs-toggle="dropdown" aria-expanded="false" onclick="linkProduct()">
                     <i class="fa-solid fa-utensils"></i>즉석식품
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">국</a></li>
-                    <li><a class="dropdown-item" href="#">반찬</a></li>
-                    <li><a class="dropdown-item" href="#">컵밥,햇반</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="linkProduct0(); productFilter();">국</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="linkProduct1(); productFilter();">반찬</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="linkProduct2(); productFilter();">컵밥,햇반</a></li>
                 </ul>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link px-lg-1 px-xl-2" href="<%=request.getContextPath()%>/event.do">이벤트</a>
+                <a class="nav-link px-lg-1 px-xl-2" href="/controller/<%=request.getContextPath()%>/event.do">이벤트</a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link px-lg-1 px-xl-2" href="<%=request.getContextPath()%>/recipemain.do">유저레시피</a>
+                <a class="nav-link px-lg-1 px-xl-2" href="/controller/<%=request.getContextPath()%>/recipemain.do">유저레시피</a>
             </li>
 
             <li class="nav-item">
