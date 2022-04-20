@@ -83,3 +83,13 @@ function filter(){
 	$("body").css("padding","0");
 }
 
+$("#search").keypress(function (e){
+		if(e.keyCode === 13){
+			$("#searchButton").click();
+		}
+	});
+
+function search(obj){
+	var value = $("#searchValue").val();
+	location.href = "productList.do?search="+value+"";
+}

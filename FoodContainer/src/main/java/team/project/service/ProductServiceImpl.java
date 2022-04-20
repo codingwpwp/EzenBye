@@ -42,6 +42,8 @@ public class ProductServiceImpl implements ProductService {
 		
 		return prodcutListAll;
 	}
+	
+	
 	//상세보기
 	@Override
 	public ProductVO view(String index) throws Exception {

@@ -44,10 +44,12 @@
 	function linkIce0(){
 		var productAll = $("input[name='asideProductAll']");
 		var product = $("input[name='asideProduct']");
+		var iceAll = $("input[name='asideIce']");
 		var ice0 = $("input[name='asideIce']:eq(0)");
 		var ice1 = $("input[name='asideIce']:eq(1)");
 		productAll.prop("checked",false);
 		product.prop("checked",false);
+		iceAll.prop("checked",false);
 		ice0.prop("checked",true);
 		ice1.prop("checked",false);
 	}
@@ -55,10 +57,12 @@
 	function linkIce1(){
 		var productAll = $("input[name='asideProductAll']");
 		var product = $("input[name='asideProduct']");
+		var iceAll = $("input[name='asideIce']");
 		var ice0 = $("input[name='asideIce']:eq(0)");
 		var ice1 = $("input[name='asideIce']:eq(1)");
 		productAll.prop("checked",false);
 		product.prop("checked",false);
+		iceAll.prop("checked",false);
 		ice0.prop("checked",false);
 		ice1.prop("checked",true);
 	}
@@ -67,11 +71,13 @@
 	function linkProduct0(){
 		var iceAll = $("input[name='asideIceAll']");
 		var ice = $("input[name='asideIce']");
+		var productAll = $("input[name='asideProduct']");
 		var product0 = $("input[name='asideProduct']:eq(0)");
 		var product1 = $("input[name='asideProduct']:eq(1)");
 		var product2 = $("input[name='asideProduct']:eq(2)");
 		iceAll.prop("checked",false);
 		ice.prop("checked",false);
+		productAll.prop("checked",false);
 		product0.prop("checked",true);
 		product1.prop("checked",false);
 		product2.prop("checked",false);
@@ -80,11 +86,13 @@
 	function linkProduct1(){
 		var iceAll = $("input[name='asideIceAll']");
 		var ice = $("input[name='asideIce']");
+		var productAll = $("input[name='asideProduct']");
 		var product0 = $("input[name='asideProduct']:eq(0)");
 		var product1 = $("input[name='asideProduct']:eq(1)");
 		var product2 = $("input[name='asideProduct']:eq(2)");
 		iceAll.prop("checked",false);
 		ice.prop("checked",false);
+		productAll.prop("checked",false);
 		product0.prop("checked",false);
 		product1.prop("checked",true);
 		product2.prop("checked",false);
@@ -93,11 +101,13 @@
 	function linkProduct2(){
 		var iceAll = $("input[name='asideIceAll']");
 		var ice = $("input[name='asideIce']");
+		var productAll = $("input[name='asideProduct']");
 		var product0 = $("input[name='asideProduct']:eq(0)");
 		var product1 = $("input[name='asideProduct']:eq(1)");
 		var product2 = $("input[name='asideProduct']:eq(2)");
 		iceAll.prop("checked",false);
 		ice.prop("checked",false);
+		productAll.prop("checked",false);
 		product0.prop("checked",false);
 		product1.prop("checked",false);
 		product2.prop("checked",true);
@@ -164,23 +174,46 @@
 		var param = decodeURI(decodeURIComponent(url)).split("?");
 		
 		if(param[1] == "볶음밥"){
-			productAll.click();
-			ice1.click();
+			productAll.prop("checked",false);
+			product.prop("checked",false);
+			iceAll.prop("checked",false);
+			ice0.prop("checked",true);
+			ice1.prop("checked",false);
+			productFilter();
 		}else if(param[1] == "치킨,만두"){
-			productAll.click();
-			ice0.click();
+			productAll.prop("checked",false);
+			product.prop("checked",false);
+			iceAll.prop("checked",false);
+			ice0.prop("checked",false);
+			ice1.prop("checked",true);
+			productFilter();
 		}else if(param[1] == "국"){
-			iceAll.click();
-			product1.click();
-			product2.click();
+			iceAll.prop("checked",false);
+			ice.prop("checked",false);
+			productAll.prop("checked",false);
+			product0.prop("checked",true);
+			product1.prop("checked",false);
+			product2.prop("checked",false);
+			productFilter();
 		}else if(param[1] == "반찬"){
-			iceAll.click();
-			product0.click();
-			product2.click();
+			iceAll.prop("checked",false);
+			ice.prop("checked",false);
+			productAll.prop("checked",false);
+			product0.prop("checked",false);
+			product1.prop("checked",true);
+			product2.prop("checked",false);
+			productFilter();
 		}else if(param[1] == "컵밥,햇반"){
-			iceAll.click();
-			product0.click();
-			product1.click();
+			iceAll.prop("checked",false);
+			ice.prop("checked",false);
+			productAll.prop("checked",false);
+			product0.prop("checked",false);
+			product1.prop("checked",false);
+			product2.prop("checked",true);
+			productFilter();
+		}else if(param[1].substring(0,6) == "search"){
+			var searchVal = param[1].substring(7,param[1].length);
+			$("#searchValue").val(searchVal);
 		}
 	}
 	
