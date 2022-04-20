@@ -41,6 +41,68 @@
 		}
 	}
 	
+	function linkIce0(){
+		var productAll = $("input[name='asideProductAll']");
+		var product = $("input[name='asideProduct']");
+		var ice0 = $("input[name='asideIce']:eq(0)");
+		var ice1 = $("input[name='asideIce']:eq(1)");
+		productAll.prop("checked",false);
+		product.prop("checked",false);
+		ice0.prop("checked",true);
+		ice1.prop("checked",false);
+	}
+	
+	function linkIce1(){
+		var productAll = $("input[name='asideProductAll']");
+		var product = $("input[name='asideProduct']");
+		var ice0 = $("input[name='asideIce']:eq(0)");
+		var ice1 = $("input[name='asideIce']:eq(1)");
+		productAll.prop("checked",false);
+		product.prop("checked",false);
+		ice0.prop("checked",false);
+		ice1.prop("checked",true);
+	}
+	
+	
+	function linkProduct0(){
+		var iceAll = $("input[name='asideIceAll']");
+		var ice = $("input[name='asideIce']");
+		var product0 = $("input[name='asideProduct']:eq(0)");
+		var product1 = $("input[name='asideProduct']:eq(1)");
+		var product2 = $("input[name='asideProduct']:eq(2)");
+		iceAll.prop("checked",false);
+		ice.prop("checked",false);
+		product0.prop("checked",true);
+		product1.prop("checked",false);
+		product2.prop("checked",false);
+	}
+	
+	function linkProduct1(){
+		var iceAll = $("input[name='asideIceAll']");
+		var ice = $("input[name='asideIce']");
+		var product0 = $("input[name='asideProduct']:eq(0)");
+		var product1 = $("input[name='asideProduct']:eq(1)");
+		var product2 = $("input[name='asideProduct']:eq(2)");
+		iceAll.prop("checked",false);
+		ice.prop("checked",false);
+		product0.prop("checked",false);
+		product1.prop("checked",true);
+		product2.prop("checked",false);
+	}
+	
+	function linkProduct2(){
+		var iceAll = $("input[name='asideIceAll']");
+		var ice = $("input[name='asideIce']");
+		var product0 = $("input[name='asideProduct']:eq(0)");
+		var product1 = $("input[name='asideProduct']:eq(1)");
+		var product2 = $("input[name='asideProduct']:eq(2)");
+		iceAll.prop("checked",false);
+		ice.prop("checked",false);
+		product0.prop("checked",false);
+		product1.prop("checked",false);
+		product2.prop("checked",true);
+	}
+	
 	window.onload = function(){
 	  //pc화면 - 처음 또는 새로고침 시 전체선택
 	  	//전체식품
@@ -1177,5 +1239,6 @@
 				console.log('error');			
 			}
 		});
-		
 	}
+	
+	
