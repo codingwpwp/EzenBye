@@ -15,7 +15,9 @@
 	if(member != null){
 		if(userDibsList != null){
 			for(int i=0; i<userDibsList.size(); i++){
-				dibsProductArr.add(userDibsList.get(i).getProduct_index());
+				if(userDibsList.get(i).getMember_index() == member.getMember_index()){
+					dibsProductArr.add(userDibsList.get(i).getProduct_index());
+				}
 			}
 		}
 		dibsProduct = dibsProductArr.toString();
@@ -79,14 +81,15 @@
 							<input type="hidden" name="userDibsCheck" value="<%=userDibsList.get(i).getMember_index()%>">
 							<%checkVal = 1; %>
 						<%}%>
+					<%} %>
 						<%if(checkVal == 0){ %>
 							<input type="hidden" name="userDibsCheck" value="">
 						<%} %>
-					<%} %>
 				<%}else{ %>
 					<input type="hidden" name="userDibsCheck" value="">
 				<%} %>
 					<input type="hidden" name="userDibsProduct" value="<%=dibsProduct%>">
+					<input type="hidden" name="userDibslength" value="<%=userDibsList.size()%>">
 			<%} %>
              
             
