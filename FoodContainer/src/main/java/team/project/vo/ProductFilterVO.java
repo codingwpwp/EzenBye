@@ -5,7 +5,16 @@ public class ProductFilterVO {
 	private String middleSort;
 	private String brand;
 	private String price;
+	private String free;
 	
+	
+	
+	public String getFree() {
+		return free;
+	}
+	public void setFree(String free) {
+		this.free = free;
+	}
 	public String getMiddleSort() {
 		return middleSort;
 	}

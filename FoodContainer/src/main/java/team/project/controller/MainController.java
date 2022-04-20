@@ -372,6 +372,13 @@ public class MainController {
 				filterList.add(temp);
 			}
 			
+			if(productFilterVO.getFree() != null) {
+				
+				ProductFilterVO temp = new ProductFilterVO();
+				temp.setFree(productFilterVO.getFree());
+				filterList.add(temp);
+			}
+			
 			ProductListAll = productService.productListAll2(filterList);
 			
 			model.addAttribute("productFilter",ProductListAll);

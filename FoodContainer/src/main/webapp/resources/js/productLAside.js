@@ -614,6 +614,15 @@
 		var middleSort = "";
 		var brand = "";
 		var price = "";
+		var freeCheck = $("#free").attr("class");
+		var freeHtml = "bi bi-check-square";
+		var free = "";
+		if(freeCheck == freeHtml){
+			free = "no";
+		}else{
+			free = "ok";
+		}
+		
 		
 		for(var i=0; i<ice.length; i++){
 			if(ice.eq(i).is(":checked")){
@@ -725,7 +734,7 @@
 		
 		$.ajax({
 			url : "productFilter.do",
-			data : "middleSort="+middleSort+"&brand="+brand+"&price="+price,
+			data : "middleSort="+middleSort+"&brand="+brand+"&price="+price+"&free="+free,
 			success : function(data){
 				
 				var mainSectionHtml = "<!-- pc버전 -->";
@@ -771,7 +780,7 @@
 					mainSectionHtml += "<i class='bi bi-star'></i>";
 					mainSectionHtml += "</span>";
 					mainSectionHtml += "<br>";
-					if(data[i].delivery_free_YN == "Y"){
+					if(data[i].delivery_free_YN != "Y"){
 						mainSectionHtml += "배송비 3,000원"; 
 					}else{
 						mainSectionHtml += "무료배송";
