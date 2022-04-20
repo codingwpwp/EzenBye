@@ -53,7 +53,22 @@ $(document).ready(function(){
         $("#navCenterMenuDiv").addClass("col-md-6");
 
     }
-
+	
+	var member_index = $("input[name='messageNonReadCount']").val();
+	
+	$.ajax({
+		type : 'POST',
+		url : 'messageNonReadCount.do',
+		data : "member_index=" + member_index,
+		success : function(data){
+			if(data > 5){
+				$(".header-badge").html("5+");
+			}else{
+				$(".header-badge").html(parseInt(data));
+			}
+		}
+	});
+	
 });
 
 //모바일 최근 본 상품 z-index
@@ -67,3 +82,4 @@ function filter(){
 	$(".rightAsideM").css("z-index","0");
 	$("body").css("padding","0");
 }
+

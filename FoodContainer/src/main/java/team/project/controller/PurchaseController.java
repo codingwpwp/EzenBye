@@ -214,7 +214,7 @@ public class PurchaseController {
 			int randomIndex = (int)(Math.random() * randomBox.length());
 			randomNum += randomBox.substring(randomIndex, randomIndex + 1);
 		}
-		
+		System.out.println(randomNum);
 		// 이메일 내용에 인증번호 넣기
 		String message = "인증번호는 " + randomNum + " 입니다. 3분이내에 입력하세요.";
 		emailvo.setMessage(message);
