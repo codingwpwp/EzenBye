@@ -12,6 +12,15 @@
     	    	
     </select>
     
+    <select id="ProductSearch" resultType="ProductVO">
+    	SELECT *
+    	FROM product
+    	WHERE del_YN = 'N' 
+    	
+    	and product_name LIKE CONCAT('%', #{product_name}, '%')
+    	    	
+    </select>
+    
     <select id="ProductFilter" resultType="ProductVO" parameterType="list">
     	SELECT *
     	FROM product

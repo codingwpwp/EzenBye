@@ -6,14 +6,7 @@ public class ProductFilterVO {
 	private String brand;
 	private String price;
 	private String free;
-	private String product_name;
 	
-	public String getProduct_name() {
-		return product_name;
-	}
-	public void setProduct_name(String product_name) {
-		this.product_name = product_name;
-	}
 	public String getFree() {
 		return free;
 	}

@@ -212,8 +212,8 @@
 	}
 	
 	window.onpageshow = function(e){ 
-		if(event.persisted || (window.performance && window.performance.navigation.type == 2)){ //뒤로가기 눌렀을때 로직실행 
-			
+		if(e.persisted || (window.performance && window.performance.navigation.type == 2)){ //뒤로가기 눌렀을때 로직실행 
+			$("#searchValue").val("");
 		} 
 	}
 	
