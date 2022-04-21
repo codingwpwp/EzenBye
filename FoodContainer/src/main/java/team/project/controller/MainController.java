@@ -386,4 +386,18 @@ public class MainController {
 		
 		return ProductListAll;
 	}
+	
+	@RequestMapping(value = "productSearch.do", method = RequestMethod.GET)
+	@ResponseBody
+	public List<ProductVO> productSearch(Locale locale, Model model, ProductVO productVO) throws Exception {
+		
+		List<ProductVO> productSearch = null;
+		
+		if(productVO != null) {
+			productSearch = productService.productSearch(productVO);
+		}
+		
+		return productSearch;
+	}
+
 }

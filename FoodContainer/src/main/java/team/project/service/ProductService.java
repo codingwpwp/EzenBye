@@ -26,6 +26,8 @@ public interface ProductService {
 	List<ProductVO> noMemberCartList(ArrayList<String> noMemberCartArr) throws Exception;
 	//메인 - 인기상품
 	List<ProductVO> popularList(ProductVO productVO) throws Exception;
+	//검색
+	List<ProductVO> productSearch(ProductVO productVO) throws Exception;
 	
 	/* 구매페이지 */
 	// 회원&비회원 결제화면 전에 상품 수량 확인 및 빼주기
