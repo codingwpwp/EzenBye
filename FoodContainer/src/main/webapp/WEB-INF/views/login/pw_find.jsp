@@ -66,17 +66,16 @@
 	                                <div class="container">
 	                                    <div class="row rows">
 	                                        <div class="col-12">
-	                                            <h4>임시 비밀번호 발급하기</h4>
+	                                            <h4>새로운 비밀번호 발급하기</h4>
 	                                        </div>
 	                                        <div class="col-md-12 col-sm-12 col-12">
-	                                            <p>입력하신 정보는 <strong>임시 비밀번호</strong> 발급에만&nbsp; 사용되며 <strong>저장 되지 않습니다.</strong></p>
 	                                            <div id="timer" class="text-danger fw-bold"></div>
 	                                        </div>
 	                                        <div class="col-md-10 col-sm-10 col-12">
-	                                            <input type="text" class="form-control findinput" name="name" placeholder="2 ~ 6자리의 한글" maxlength="6" autocomplete="off" oninput="checkNamePw(this)">
+	                                            <input type="text" class="form-control findinput" name="name" placeholder="2 ~ 6자리의 이름" maxlength="6" autocomplete="off" oninput="checkNamePw(this)">
 	                                        </div>
 	                                        <div class="col-md-10 col-sm-10 col-12">
-	                                            <input type="text" class="form-control findinput" name="id" placeholder="8 ~ 20자리의 영문 + 숫자 중 선택" maxlength="20" autocomplete="off" oninput="checkIdPw(this)">
+	                                            <input type="text" class="form-control findinput" name="id" placeholder="8 ~ 20자리의 영문 + 숫자" maxlength="20" autocomplete="off" oninput="checkIdPw(this)">
 	                                        </div>
 	                                        <div class="col-md-12 col-sm-12 col-12">
 	                                            <input type="text" class="form-control findemailinput" name="email" id="email" placeholder="이메일"  oninput="checkEmailPw(this)" maxlength="50" autocomplete="off">
@@ -87,7 +86,7 @@
 	                                        </div>
 	                                        <span id="emailMessageSpan" class="fw-bold"></span>
 	                                        <div class="col-md-12 col-sm-12 col-12">
-	                                            <input type="button" value="임시 비밀번호 발급" id="emailPwSubmitBtn" class="btn btn-secondary pwfindbtn" onclick="pwFindFormSubmitBtn()" disabled>
+	                                            <input type="button" value="비밀번호 발급" id="emailPwSubmitBtn" class="btn btn-secondary pwfindbtn" onclick="pwFindFormSubmitBtn()" disabled>
 	                                        </div>
 	                                    </div>
 	                                </div>

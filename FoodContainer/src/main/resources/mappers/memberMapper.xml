@@ -32,6 +32,7 @@
 		WHERE name=#{name}
 		AND phone LIKE CONCAT('%',#{phone},'%')
 		AND del_yn = 'N'
+		AND position = '일반'
 	</select>
 	<!-- 이메일 아이디 찾기 -->
 	<select id="emailEasyCheck" resultType="MemberVO" parameterType="MemberVO">
@@ -40,6 +41,7 @@
 		WHERE name=#{name}
 		AND email=#{email}
 		AND del_yn = 'N'
+		AND position = '일반'
 	</select>
 	
 	<!-- 이메일 인증 전에 회원 존재 여부 따지기 -->
@@ -49,6 +51,7 @@
 		WHERE name=#{name}
 		AND id=#{id}
 		AND email=#{email}
+		AND position = '일반'
 	</select>
    
 	<!-- 임시 비밀번호 관련 -->

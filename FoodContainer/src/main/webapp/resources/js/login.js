@@ -354,3 +354,61 @@ function pwFindFormSubmitBtn(){
 		alert("인증번호가 틀렸습니다. 다시 입력 하세요");
 	}
 }
+
+// 비회원 주문 비밀번호 찾기
+var noMemIndexSw = 0;
+var noMemEmailSw = 0;
+var noMemSendSw = 0;
+
+function noMemberCheckIndex(obj){
+	if(obj.value != ""){
+		noMemIndexSw = 1;
+	}else{
+		noMemIndexSw = 0;
+	}
+	if(noMemIndexSw == 1 && noMemEmailSw == 1){
+		$("#noMemberSendEmailBtn").attr("disabled", false);
+	}else{
+		$("#noMemberSendEmailBtn").attr("disabled", true);
+	}
+}
+function noMemberCheckEmail(obj){
+	var emailReg = /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/g;
+	if(emailReg.test(obj.value)){
+		noMemEmailSw = 1;
+	}else{
+		noMemEmailSw = 0;
+	}
+	if(noMemIndexSw == 1 && noMemEmailSw == 1){
+		$("#noMemberSendEmailBtn").attr("disabled", false);
+	}else{
+		$("#noMemberSendEmailBtn").attr("disabled", true);
+	}
+}
+function noMemberSendEmailFn(){
+	var form = $("#noMemberFindOrderForm");
+	if(noMemSendSw == 1){
+		
+	}else{
+		noMemSendSw = 1;
+		$("#noMemberSpan").text("보내는중...");
+		$.ajax({
+			url : "noMembersendEmailPw.do",
+			type : "post",
+			data : $(form).serialize(),
+			success : function(data){
+				$("#noMemberSpan").text("");
+				$("#noMemberSendEmailBtn").attr("disabled", true);
+				if(data.trim() == "none"){
+					alert("관련 정보가 존재 하지 않습니다");
+					noMemSendSw = 0;
+				}else{
+					noMemSendSw = 0;
+					alert(data.trim() + "님의 해당 이메일로 주문 비밀번호를 발송했습니다");
+					form.find(".btn-close").trigger('click');
+				}
+				
+			}
+		});
+	}
+}
