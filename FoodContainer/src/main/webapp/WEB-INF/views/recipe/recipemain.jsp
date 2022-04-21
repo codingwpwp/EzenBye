@@ -155,11 +155,11 @@
                                     </c:forEach>
                                     
                                     <li class="page-item">
-                                    <c:if test="${nowPage >= 0 }">
+                                    <c:if test="${nowPage >= 1 }">
                                     <a class="page-link" href="recipemain.do?nowPage=${nowPage+1}">></a>
                                  	</c:if>
-                                 	<c:if test="${nowPage <= 0 }">
-                                    <a class="page-link" href="recipemain.do?nowPage=${nowPage}">></a>
+                                 	<c:if test="${nowPage = endPage }">
+                                    <a class="page-link" href="recipemain.do?nowPage=${endPage}">></a>
                                  	</c:if>
                                     </li>
                                   </ul>

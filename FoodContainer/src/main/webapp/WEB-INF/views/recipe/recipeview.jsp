@@ -169,8 +169,20 @@
 								</div> 
 							</div>
 							<div class="col-sm-12 col-12">
+							<form name="frm" action="#">
+							<input type="hidden" value="${read.best_rank}" name="best_rank" id="best_rank">
+							<input type="hidden" value="${read.recipe_index}" name="recipe_index" >
+							
+							<c:if test="${member.member_index==0}">
 								<button onclick="best();" class="btn btn-success">베스트
 									레시피 선정</button>
+							</c:if>		
+							<c:if test="${member.member_index==15}">
+								<button onclick="best();" class="btn btn-success" type="submit">베스트
+									레시피 선정</button>
+							</c:if>		
+							<%-- <input type="hidden" value="${read.best_rank}" name="best_rank" id="best_rank"> --%>
+							</form>
 							</div>
 						</div>
 						<div class="row">
@@ -187,7 +199,12 @@
 								<input type="text" name="contents" placeholder="로그인 후 댓글 작성이 가능합니다.">
 							</div>
 							<div class="col-sm-2 col-3">
+						 	<c:if test="${member==null}">
+								<button class="btn btn-secondary" type="button" onclick="alert('로그인 후 이용해주세요!!')">등록</button>
+							</c:if>	
+							 	<c:if test="${member!=null}">
 								<button class="btn btn-secondary" type="submit">등록</button>
+							</c:if>	
 							</div>
 							
 						</div>
