@@ -65,42 +65,41 @@
                         필요한 사람은 <div>태그에 작성.
                     -->
                     <div class="fs-5 my-2 fw-bold">공지사항</div>
-
-                 	<div class="maindiv">
+				
+                 	<form name="frm" action="noticeModify.do" method="post" class="maindiv">
 						<table class="table">
 							<thead>
 								<tr>
 									<th scope="col">제목</th>
-									<td class="title"><input type="text" class="tittext"></td>
-									<td class="right">2022-03-23</td>
+									<td class="title"><input type="text" class="tittext" name="title" value="${noticeDetail.title}"></td>
+									<td class="right">${noticeDetail.write_date}</td>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<th scope="row">작성자</th>
 									<td>관리자</td>
-									<td class="right">조회수</td>
+									<td class="right">조회수(${noticeDetail.hit})</td>
 								</tr>
 								<tr>
 									<td colspan="3">
-										<div id="summernote">
-										
-										</div>
+										<textarea id="summernote" name="contents">${noticeDetail.contents}</textarea>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 						<div class="row">
 						<div class="col-md-2 col-sm-2 col-3 leftbtn">
-							<input value="목록" type="button" class="btn btn-primary listbtn" onclick="location.href='notice_main.do'">
+							<input value="취소" type="button" class="btn btn-primary listbtn" onclick="location.href='notice_view.do?nowPage=${nowPage}&notice_index=${noticeDetail.notice_index}'">
 						</div>
 						<div class="col-md-10 col-sm-10 col-8 rightbtn">
-							
-							<input value="등록" type="button" class="btn btn-secondary insertbtn">
+							<input type="hidden" value="${noticeDetail.notice_index}" name="notice_index" />
+							<input type="hidden" value="${nowPage}" name="nowPage" />
+							<input value="수정" type="button" class="btn btn-secondary insertbtn" onclick="noticeModify()">
 						</div>
 						</div>
 
-					</div>
+					</form>
 
 
 					

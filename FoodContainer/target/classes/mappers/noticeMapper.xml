@@ -28,4 +28,22 @@
     	VALUES(#{title},#{contents})
     </insert>
     
+    <update id="noticeModify" parameterType="NoticeVO">
+    	UPDATE notice
+    	SET title = #{title}, contents = #{contents}
+    	WHERE notice_index=#{notice_index}
+    </update>
+    
+    <update id="noticeDelete" parameterType="int">
+    	UPDATE notice
+    	SET del_YN = 'Y'
+    	WHERE notice_index=#{notice_index}
+    </update>
+    
+    <update id="plusHit" parameterType="int">
+    	UPDATE notice 
+    	SET hit = hit + 1 
+    	WHERE notice_index = #{notice_index}
+    </update>
+    
 </mapper>
