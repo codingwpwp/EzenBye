@@ -62,6 +62,10 @@ public class MemberDAO {
 	public MemberVO idEasyCheck(MemberVO membervo) throws Exception{
 		return sqlSession.selectOne(Namespace + ".idEasyCheck", membervo);
 	}
+	// 이메일 아이디 찾기
+	public MemberVO emailEasyCheck(MemberVO membervo) throws Exception{
+		return sqlSession.selectOne(Namespace + ".emailEasyCheck", membervo);
+	}
 	
 	public MemberVO memberInfor(int member_index) throws Exception{
 		return sqlSession.selectOne(Namespace+".memberInfor",member_index);

@@ -41,6 +41,10 @@ public interface MemberService {
 	// 간편 아이디 찾기
 	public MemberVO idEasyCheck(MemberVO membervo) throws Exception;
 	
+	// 이메일 아이디 찾기
+	public MemberVO emailEasyCheck(MemberVO membervo) throws Exception;
+
+	
 	
 	/* 여기서 부터는 관리자페이지 */
 	

@@ -216,11 +216,4 @@
 			
 		} 
 	}
-
-	function linkIce0(){
-		location.href = "/controller/productList.do";
-		
-		var product = $("input[name='asideProduct']");
-		product.click();
-	}
 	

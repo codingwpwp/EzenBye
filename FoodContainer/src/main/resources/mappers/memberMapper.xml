@@ -33,6 +33,14 @@
 		AND phone LIKE CONCAT('%',#{phone},'%')
 		AND del_yn = 'N'
 	</select>
+	<!-- 이메일 아이디 찾기 -->
+	<select id="emailEasyCheck" resultType="MemberVO" parameterType="MemberVO">
+		SELECT id, name
+		FROM MEMBER
+		WHERE name=#{name}
+		AND email=#{email}
+		AND del_yn = 'N'
+	</select>
 	
 	<select id="memberInfor" resultType="MemberVO" parameterType="int">
 		SELECT *

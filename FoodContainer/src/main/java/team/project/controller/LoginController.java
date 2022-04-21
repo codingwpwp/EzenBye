@@ -175,7 +175,36 @@ public class LoginController {
 			return "login/id_easy_check";
 		}
 	}
+	
+	// 이메일로 아이디 찾기 결과 페이지로 이동
+	@RequestMapping(value = "id_email_check.do", method = RequestMethod.POST)
+	public String emailEasyCheck(Model model, HttpServletRequest request) throws Exception {
 		
+		// 세션 소환
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("member") != null) {
+			return "redirect:index.do";
+		}else {
+			
+			if(request.getParameter("name") == null || request.getParameter("receiveMail") == null ) {
+				return "redirect:index.do";
+			}else {
+				String name = request.getParameter("name");
+				String email = request.getParameter("receiveMail");
+				MemberVO tempMember = new MemberVO();
+				tempMember.setName(name);
+				tempMember.setEmail(email);
+				
+				tempMember = memberService.emailEasyCheck(tempMember);
+				model.addAttribute("tempMember", tempMember);
+				
+				return "login/id_easy_check";
+			}
+			
+		}
+		
+	}		
 	
 	//비밀번호확인
 	@ResponseBody
@@ -196,10 +225,6 @@ public class LoginController {
 	}
 	
 
-	@RequestMapping(value = "id_email_check.do", method = RequestMethod.GET)
-	public String login4(Locale locale, Model model) {
-		return "login/id_email_check";
-	}
 	
 	@RequestMapping(value = "pw_find.do", method = RequestMethod.GET)
 	public String login5(Locale locale, Model model) {

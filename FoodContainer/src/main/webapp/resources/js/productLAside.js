@@ -153,6 +153,35 @@
 			brandM.prop("checked",true);
 			priceM.prop("checked",true);
 		}
+		
+		var ice0 = $("input[name='asideIce']:eq(0)");
+		var ice1 = $("input[name='asideIce']:eq(1)");
+		var product0 = $("input[name='asideProduct']:eq(0)");
+		var product1 = $("input[name='asideProduct']:eq(1)");
+		var product2 = $("input[name='asideProduct']:eq(2)");
+		
+		var url = document.location.href;
+		var param = decodeURI(decodeURIComponent(url)).split("?");
+		
+		if(param[1] == "볶음밥"){
+			productAll.click();
+			ice1.click();
+		}else if(param[1] == "치킨,만두"){
+			productAll.click();
+			ice0.click();
+		}else if(param[1] == "국"){
+			iceAll.click();
+			product1.click();
+			product2.click();
+		}else if(param[1] == "반찬"){
+			iceAll.click();
+			product0.click();
+			product2.click();
+		}else if(param[1] == "컵밥,햇반"){
+			iceAll.click();
+			product0.click();
+			product1.click();
+		}
 	}
 	
 	//전체메뉴

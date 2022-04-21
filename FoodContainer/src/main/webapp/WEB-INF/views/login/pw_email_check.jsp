@@ -47,23 +47,7 @@
             <!-- 메인 -->
             <div class="col-12 col-sm-9 col-md-10 col-lg-8">
                 <article id="mainSection">
-                    
-                    <!--
-                        헤딩.
-                        필요하지 않는 사람은 <div>태그를 삭제.
-                        필요한 사람은 <div>태그에 작성.
-                    -->
-                 
-                   <div class="container head">
-                    <div class="row head">
-                        <div class="col-12">
-                            <h2>아이디 확인</h2>
-                        </div>
-                        <div class="col-12">
-                            입력하신 정보와 일치하는 아이디는 다음과 같습니다.
-                        </div>
-                    </div>
-                   </div>
+
                    <div class="container from">
                        <div class="row checkfrm">
                         <div class="col-md-12 col-sm-12 col-12">

@@ -204,7 +204,7 @@ public class PurchaseController {
 	public String SendEmail(EmailVO emailvo) throws Exception {
 		
 		// 이메일 제목
-		String subject = "FoodContainer 비회원 이메일 인증번호";
+		String subject = "FoodContainer 이메일 인증번호";
 		emailvo.setSubject(subject);
 		
 		// 인증번호 생성
