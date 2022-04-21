@@ -70,13 +70,13 @@
                                             <p>입력하신 정보는 <strong>아이디 찾기</strong>에만 사용되며 <strong>저장되지 않습니다.</strong></p>
                                         </div>
                                         <div class="col-12 leftform">
-                                            <input type="text" name="name" class="form-control findinput" placeholder="이름를 입력해주세요" maxlength="6" autocomplete="off">
+                                            <input type="text" name="name" class="form-control findinput" placeholder="이름를 입력해주세요" maxlength="6" autocomplete="off" oninput="checkName(this)">
                                         </div>
                                         <div class="col-12 leftform">
-                                            <input type="text" name="phone" class="form-control findinput" placeholder="핸드폰 뒤 7~8자리를 입력 해주세요" maxlength="8" oninput="this.value = this.value.replace(/[^0-9]/,'')" autocomplete="off">
+                                            <input type="text" name="phone" class="form-control findinput" placeholder="핸드폰 뒤 7~8자리를 입력 해주세요" maxlength="8" oninput="checkPhone(this)" autocomplete="off">
                                         </div>
                                         <div class="col-12 leftform">
-                                            <input type="button" value="아이디 찾기" class="btn btn-secondary findbtn" onclick="easyFindIdBtn()">
+                                            <input type="submit" id="easyFindIdSubmitBtn" value="아이디 찾기" class="btn btn-secondary findbtn" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -84,7 +84,7 @@
                            
                         </div>
                         <div class="col-md-6 col-sm-6 col-12 mb-1">
-                            <form class="emailfind" action="<%=request.getContextPath()%>/id_email_check.do" method="get">
+                            <form class="emailfind" action="id_email_check.do" name="emailFindIdForm" method="post">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-12 ">
@@ -92,20 +92,21 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-12 rightform">
                                             <p>인증번호는 <strong>이메일로 발송되며,</strong> 인증 이외의 용도로 이용 또는 <strong>저장 되지 않습니다.</strong></p>
+                                            <div id="timer" class="text-danger fw-bold"></div>
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-12 rightform">
-                                            <input type="text" class="form-control findinput" placeholder="이름를 입력해주세요">
+                                            <input type="text" class="form-control findinput" name="name" placeholder="이름를 입력해주세요" maxlength="6" autocomplete="off">
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-12 rightform">
-                                            <input type="text" class="form-control findinput" placeholder="이메일을 입력해주세요" id="emailinput">
-                                           <input class="btn btn-secondary emailbtn" type="button" value="인증번호 발송" id="emailbtn">
+                                            <input type="text" class="form-control findinput" placeholder="이메일을 입력해주세요" name="receiveMail" oninput="emailCheck(this)" autocomplete="off">
+											<input class="btn btn-secondary emailbtn" type="button" value="인증번호 발송" id="emailbtn" onclick="sendEmail()">
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-12 rightform">
-                                            <input type="text" class="form-control findinput" placeholder="인증번호 입력해주세요">
-                                            
+                                            <input type="text" class="form-control findinput" id="randomNum" placeholder="인증번호 입력해주세요">
                                         </div>
+                                        <span id="emailMessageSpan" class="fw-bold"></span>
                                         <div class="col-md-12 col-sm-12 col-12 rightform">
-                                            <input type="submit" value="확인" class="btn btn-secondary findbtn">
+                                            <input type="button" value="확인" class="btn btn-secondary findbtn" id="emailCheckOkBtn" onclick="checkNum()" disabled>
                                         </div>
                                     </div>
                                 </div>

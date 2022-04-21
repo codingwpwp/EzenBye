@@ -21,6 +21,7 @@
     		and middleSort in (<foreach collection="list" item="filter" separator=",">#{filter.middleSort}</foreach>) 
     		and brand in (<foreach collection="list" item="filter" separator=",">#{filter.brand}</foreach>) 
     	</if>
+    	
     	<foreach collection="list" item="filter" separator=",">
     		<if test="filter.free != null and filter.free eq 'ok'.toString()">
     			and delivery_free_YN = 'Y'

@@ -66,10 +66,10 @@
 								</div>
 								<div class="col-12 mb-1 row mx-auto d-flex align-items-center">
 									<div class="col-2 d-none d-md-block"></div>
-									<div class="col-5 col-md-3">
-										<span id="codeSpan"></span>
+									<div class="col-6 col-sm-5 col-md-3">
+										<span id="codeSpan" style="padding : 8px; border-radius: 3px;"></span>
 									</div>
-									<div class="col-7 d-flex justify-content-start">
+									<div class="col-6 col-sm-7 d-flex justify-content-start">
 										<input type="text" id="codeInput" class="form-control" placeholder="영어만 입력하세요" style="max-width: 245px;" maxlength="6" autocomplete="off" oninput="replaceSpelling(this)">
 									</div>
 								</div>

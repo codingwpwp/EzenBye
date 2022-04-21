@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="team.project.mapper.noticeMapper" >
+ 	
+ 	<select id="countNotice" resultType="int" parameterType="SearchVO">
+        SELECT count(*) 
+        FROM 
+        notice WHERE del_YN = 'N'
+    </select>
+ 	
+ 	<select id="noticeList" resultType="NoticeVO" parameterType="PagingUtil">
+        SELECT * FROM notice
+		WHERE del_YN = 'N'
+		ORDER BY write_date desc
+		LIMIT #{start}, #{perPage}
+    </select>
+    
+    <select id="noticeDetail" resultType="NoticeVO" parameterType="int">
+        SELECT * FROM notice
+		WHERE notice_index = #{notice_index} 
+    </select>
+    
+    <insert id="noticeInsert" parameterType="NoticeVO">
+    	INSERT INTO notice(title, contents)
+    	VALUES(#{title},#{contents})
+    </insert>
+    
+</mapper>

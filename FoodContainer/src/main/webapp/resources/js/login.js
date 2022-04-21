@@ -42,6 +42,17 @@ function loginCheck(){
 document.oncontextmenu = function(){return false;}
 
 function spanColor(){
+	var random = Math.floor(Math.random() * 4);
+	
+	if(random == 0){
+		$("#codeSpan").css("background-color", "yellow");
+	}else if(random == 1){
+		$("#codeSpan").css("background-color", "#2a2727");
+	}else if(random == 2){
+		$("#codeSpan").css("background-color", "skyblue");
+	}else{
+		$("#codeSpan").css("background-color", "green");
+	}
 	
 	for(var i = 0; i < 6; i++){
 		var random1 = Math.floor(Math.random() * 2);
@@ -81,26 +92,152 @@ function replaceSpelling(obj){
 	obj.value = obj.value.toUpperCase();
 }
 
-// 아이디 찾기 페이지
-function easyFindIdBtn(){
-	var form = $("#easyFindIdForm");
-	var flag = true;
+// 간편 아이디 찾기
+var nSw = 0;	// 이름 스위치
+var eSw = 0;	// 이메일 스위티
+// 이름 실시간
+function checkName(obj){
 	var nameReg = /^[가-힣]{2,6}$/g;
-	var phoneReg = /^[0-9]{7,8}/g;
-	if(form.find("input[name='name']").val() == ""){
-		flag = false;
-	}else if(form.find("input[name='phone']").val() == ""){
-		flag = false;
-	}else if(!nameReg.test(form.find("input[name='name']").val())){
-		flag = false;
-	}else if(!phoneReg.test(form.find("input[name='phone']").val())){
-		flag = false;
+	if(!nameReg.test(obj.value)){
+		nSw = 0;
+	}else{
+		nSw = 1;
 	}
 	
-	
-	if(flag){
-		form.submit();
+	if(nSw == 1 && eSw == 1){
+		$("#easyFindIdSubmitBtn").removeClass("btn-secondary");
+		$("#easyFindIdSubmitBtn").addClass("btn-primary");
+		$("#easyFindIdSubmitBtn").attr("disabled", false);
 	}else{
-		alert("정확히 입력하세요");
+		$("#easyFindIdSubmitBtn").removeClass("btn-primary");
+		$("#easyFindIdSubmitBtn").addClass("btn-secondary");
+		$("#easyFindIdSubmitBtn").attr("disabled", true);
 	}
 }
+// 핸드폰번호 실시간
+function checkPhone(obj){
+	var phoneReg = /^[0-9]{7,8}/g;
+	if(!phoneReg.test(obj.value)){
+		eSw = 0;
+	}else{
+		eSw = 1;
+	}
+	
+	if(nSw == 1 && eSw == 1){
+		$("#easyFindIdSubmitBtn").removeClass("btn-secondary");
+		$("#easyFindIdSubmitBtn").addClass("btn-primary");
+		$("#easyFindIdSubmitBtn").attr("disabled", false);
+	}else{
+		$("#easyFindIdSubmitBtn").removeClass("btn-primary");
+		$("#easyFindIdSubmitBtn").addClass("btn-secondary");
+		$("#easyFindIdSubmitBtn").attr("disabled", true);
+	}
+}
+
+// 이메일 아이디 찾기
+var email = "";
+var emailCheckSw = 0;
+var sendEmailTimeSw = 0;
+var checkNumSw = 0;
+var randomNum = "";
+var time = 0;
+var min = "";
+var sec = "";
+
+function emailCheck(obj){
+	var emailReg = /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/g;
+	
+	if(emailReg.test(obj.value)){
+		$("#emailbtn").removeClass("btn-secondary");
+		$("#emailbtn").addClass("btn-primary");
+		emailCheckSw = 1;
+	}else{
+		$("#emailbtn").removeClass("btn-primary");
+		$("#emailbtn").addClass("btn-secondary");
+		emailCheckSw = 0;
+	}
+}
+
+function sendEmail(){
+	if(emailCheckSw == 0){
+		alert("이메일을 입력하지 않았거나 형식에 맞지 않는 이메일입니다");
+	}else if(emailCheckSw == 1){
+		
+		if(sendEmailTimeSw == 0 && checkNumSw == 0){
+			sendEmailTimeSw = 1;
+			email = $("#email").val();
+			$("#timer").html("보내는중...");
+			$.ajax({
+				url : "purchase/emailCertification.do",
+				type : "post",
+				data : $("form[name='emailFindIdForm']").serialize(),
+				success : function(data){
+					randomNum = data.trim();
+					$("input#emailCheckOkBtn").attr("disabled", false);
+					time = 179;
+					$("#emailCheckOkBtn").removeClass("btn-secondary");
+					$("#emailCheckOkBtn").addClass("btn-primary");
+					setInterval(function(){
+						if(checkNumSw == 0){
+							min = parseInt(time / 60);
+							sec = time % 60;
+							$("#timer").html(min + "분 " + sec + "초");
+							time--;
+							
+							if(time < 0){
+								clearInterval();
+								$("#timer").html("시간초과");
+								randomNum = "";
+								sendEmailTimeSw = 0;
+								$("#emailMessageSpan").html("");
+								$("#emailCheckOkBtn").removeClass("btn-primary");
+								$("#emailCheckOkBtn").addClass("btn-secondary");
+								$("#emailCheckOkBtn").attr("disabled", true);
+							}
+						}else{
+							$("#timer").html("인증완료");
+						}
+
+					}, 1000);
+					$("#emailMessageSpan").html("해당 이메일로 인증번호를 발송했습니다.<br>3분 이내에 입력하세요");
+				}
+			});			
+		}else if(sendEmailTimeSw == 1 && checkNumSw == 1){
+			alert("이미 인증하였습니다");
+		}else if(sendEmailTimeSw == 1 && checkNumSw == 0){
+			alert("이미 발송 했습니다 3분내에 입력하세요");
+		}else if(sendEmailTimeSw == 0 && checkNumSw == 1){
+			alert("잠시 기다려주시기 바랍니다");
+		}
+		
+	}
+}
+
+function checkNum(){
+	var nameReg = /^[가-힣]{2,6}$/g;
+	var form = $("form[name='emailFindIdForm']");
+	if(checkNumSw == 0){
+		if($("#randomNum").val() == randomNum){
+			$("#email").val(email);
+			$("#email").attr("readonly", true);
+			
+			checkNumSw = 1;
+			
+			if(!nameReg.test(form.find("input[name='name']").val())){
+				alert("인증이 완료되었지만 이름을 정확히 입력해야 합니다");
+			}else{
+				$("form[name='emailFindIdForm']").submit();
+			}
+			
+		}else{
+			alert("인증번호가 틀렸습니다. 다시 입력 하세요");
+		}			
+	}else if(checkNumSw == 1){
+		if(!nameReg.test(form.find("input[name='name']").val())){
+			alert("인증이 완료되었지만 이름을 정확히 입력해야 합니다");
+		}else{
+			$("form[name='emailFindIdForm']").submit();
+		}
+	}
+}
+

@@ -8,7 +8,7 @@ var min = "";
 var sec = "";
 
 function emailCheck(obj){
-	var emailReg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/g;
+	var emailReg = /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/g;
 	
 	if(emailReg.test(obj.value)){
 		$("#emailCheckBtn").removeClass("btn-secondary");
