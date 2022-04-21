@@ -1,4 +1,11 @@
 @charset "UTF-8";
+/*베스트 레시피 이미지*/
+#bestimg{
+width: 50px;
+height: 50px;
+position: absolute;
+}
+
 /* 버튼 스타일 시작*/
 .btnwr {
 	border-radius: 15px;
@@ -121,8 +128,12 @@ input.btn.btn-primary.selbtn{
 }
 /*셀럭트 박스 끝*/
 
-
-
+/*테이블 모바일*/
+@media ( max-width :380px) {
+	table {
+		width: 300px;
+	}
+}
 
 
 		

@@ -1,4 +1,10 @@
 @charset "UTF-8";
+/*베스트 레시피 이미지*/
+#bestimg{
+width: 50px;
+height: 50px;
+
+}
 
 /* 메뉴 div*/
 /*제목 부분 div*/
@@ -8,7 +14,9 @@
 /* 추천수 조회수 부분*/
 
 /* 사진 메뉴이름 전부 포함한 div*/
-
+.hddiv{
+	text-align: end;
+}
  .row.body{
      margin-top: 2%;
  }
@@ -24,6 +32,7 @@ th.plus{
 table{
     max-width: 500px;
     width: 100%;
+    margin-bottom:20px;
 }
 .tdimg{
     
@@ -33,6 +42,7 @@ table{
     width: 100%;
     max-width: 200px;
     padding-left: 3%;
+    font-size:13px;
 
 }
 /*내용*/
@@ -43,6 +53,9 @@ textarea{
     max-width: 900px;
     height: 300px;
     
+}
+.note-statusbar{
+	display: none;
 }
 /* 썸네일 사진 div*/
 .thumnail{
@@ -61,7 +74,11 @@ text-align: center;
 
 /* textarea 부분*/
 
-
+@media(max-width:380px){
+    .tt{
+    font-size:13px;
+    }
+}
 /* 추천 버튼*/
 @media(max-width:380px){
     .col-12.good{
