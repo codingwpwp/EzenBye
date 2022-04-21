@@ -103,9 +103,11 @@
 					</div>
 
 					<div class="row">
+					<c:if test="${!empty memberInfor && memberInfor.position eq '관리자'}">
 					<div class="col-md-11 col-sm-11 col-12">
 						<input value="등록" type="button" class="btn btn-primary insertbtn" onclick="location.href='notice_insert.do?nowPage=${paging.nowPage}'">
 					</div>
+					</c:if>
 					<div class="col-12">
 					
 						<nav aria-label="Page navigation example">
