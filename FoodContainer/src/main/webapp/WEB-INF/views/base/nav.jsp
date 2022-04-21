@@ -45,7 +45,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link px-lg-1 px-xl-2" href="#">공지사항</a>
+                <a class="nav-link px-lg-1 px-xl-2" href="/controller/notice_main.do?nowPage=1">공지사항</a>
             </li>
 
             <li class="nav-item">
