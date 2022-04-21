@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import team.project.dao.OrderProductDAO;
 import team.project.dao.ReviewDAO;
 import team.project.util.PagingUtil;
+import team.project.vo.ProductVO;
 import team.project.vo.ReviewVO;
 import team.project.vo.SearchVO;
 
@@ -64,6 +65,30 @@ public class ReviewServiceImpl implements ReviewService {
 		int countList = reviewDao.countList(member_index);
 		
 		return countList;
+	}
+
+	@Override
+	public List<ReviewVO> review(String product_index) throws Exception {
+		
+		List<ReviewVO> review = reviewDao.review(product_index);
+		
+		return review;
+	}
+	
+	@Override
+	public List<ReviewVO> review(List<ProductVO> ProductListAll) throws Exception {
+		
+		List<ReviewVO> review = reviewDao.review(ProductListAll);
+		
+		return review;
+	}
+	
+	@Override
+	public List<ReviewVO> indexReview(List<ProductVO> popularList) throws Exception {
+		
+		List<ReviewVO> review = reviewDao.review(popularList);
+		
+		return review;
 	}
 }
 

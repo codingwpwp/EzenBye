@@ -58,8 +58,9 @@
 		var price = $("input[name='asidePrice']");
 		
 		var url = document.location.href;
-		
-		if(url.length == 47){
+		var param = decodeURI(decodeURIComponent(url)).split(".");
+			
+		if(param[1] == "do"){
 			iceAll.prop("checked",true);
 			ice.prop("checked",true);
 			productAll.prop("checked",true);
@@ -67,7 +68,7 @@
 			brandAll.prop("checked",true);
 			brand.prop("checked",true);
 			price.prop("checked",true);
-			
+			all.find("i").attr("class","bi bi-check-circle-fill");
 		}
 		
 	  //모바일 화면 - 처음 또는 새로고침 시 전체선택
@@ -85,7 +86,7 @@
 		//가격
 		var priceM = $("input[name='asidePriceM']");
 		
-		if(url.length == 47){
+		if(param[1] == "do"){
 			iceAllM.prop("checked",true);
 			iceM.prop("checked",true);
 			productAllM.prop("checked",true);
@@ -93,6 +94,7 @@
 			brandAllM.prop("checked",true);
 			brandM.prop("checked",true);
 			priceM.prop("checked",true);
+			allM.find("i").attr("class","bi bi-check-circle-fill");
 		}
 		
 		var ice0 = $("input[name='asideIce']:eq(0)");
@@ -107,7 +109,7 @@
 		var product2M = $("input[name='asideProductM']:eq(2)");
 		
 		url = document.location.href;
-		var param = decodeURI(decodeURIComponent(url)).split("?");
+		param = decodeURI(decodeURIComponent(url)).split("?");
 		
 		if(param[1] == "볶음밥"){
 			productAll.prop("checked",false);
@@ -223,6 +225,30 @@
 				url : "productSearch.do",
 				data : "product_name="+searchVal,
 				success : function(data){
+					var inputVal = $(".inputText");
+					price.prop("checked",true);
+					
+					for(var i=0; i<data.length; i++){
+						for(var j=0; j<$(".inputText").length; j++){
+							if(data[i].middleSort == inputVal[j].innerHTML){
+								var val = inputVal[j].parentNode.childNodes[0].value;
+								if(data[i].bigSort == "냉동식품"){
+									$("input[name='asideIce']:eq("+val+")").prop("checked",true);
+								}else{
+									$("input[name='asideProduct']:eq("+val+")").prop("checked",true);
+								}
+							}
+						}
+					}
+					
+					for(var i=0; i<data.length; i++){
+						for(var j=0; j<$(".inputText").length; j++){
+							if(data[i].brand == inputVal[j].innerHTML){
+								var val = inputVal[j].parentNode.childNodes[0].value;
+								$("input[name='asideBrand']:eq("+val+")").prop("checked",true);
+							}
+						}
+					}
 					
 					var searchHtml = "";
 					if(data != ""){
