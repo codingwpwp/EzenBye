@@ -67,17 +67,14 @@
 			        <p class="fs-6 lookup-fs-6">쪽지 관리</p>
 			        <hr />
 			        
-			        <form action="mypage_noteManage.do" method="get" class="row">
+			        <form action="<%=request.getContextPath() %>/mypage_noteManage.do" method="get" class="row">
 			        	<div class="col-sm-12 col-md-3 col-lg-3 col-xl-2">
 			        		<div class="form-check form-check-inline">
 							  <input class="form-check-input" type="checkbox" id="inlineCheckbox" value="selectall" name="noteAll">
 							  <label class="form-check-label" for="inlineCheckbox">전체 선택</label>
 							</div>
 			        	</div>
-			        	<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 noteManage-btn">
-				        	<input type="hidden" value="${paging.searchType}" name="searchType" />
-				    	    <input type="hidden" value="${paging.searchValue}" name="searchValue" />
-				    	    <input type="hidden" value="${paging.nowPage}" name="nowPage" />	
+			        	<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 noteManage-btn">	
 			        		<button type="button" class="btn btn-secondary btn-sm" onclick="chooseDelete(this)">선택삭제</button>
 			        		<button type="button" class="btn btn-secondary btn-sm" onclick="chooseRead()">선택읽음</button>
 			        	</div>
@@ -93,7 +90,7 @@
 			        		<div class="input-group mb-3">
 							  <input type="text" name="searchValue" class="form-control" placeholder="내용을 입력해주세요." aria-label="Recipient's username" aria-describedby="basic-addon2" value="<c:if test="${not empty paging.searchValue and paging.searchValue ne ''}">${paging.searchValue}</c:if>">
 							  <!-- 페이지(히든) -->
-                              <input type="hidden" name="nowPage" value="1">
+                              <input type="hidden" name="nowPage" value="${paging.nowPage}">
 							  <button type="submit" class="btn btn-secondary btn-sm">검색</button>
 							</div>
 			        	</div>
@@ -130,7 +127,7 @@
 								</div>
 						      </th>
 						      <td>
-						      	<a href="mypage_noteManageView.do?searchType=${paging.searchType}&searchValue=${paging.searchValue}&nowPage=${paging.nowPage}&message_index=${list.message_index}"><span class="d-inline-block text-truncate" style="max-width: 150px;">
+						      	<a href="<%=request.getContextPath() %>/mypage_noteManageView.do?searchType=${paging.searchType}&searchValue=${paging.searchValue}&nowPage=${paging.nowPage}&message_index=${list.message_index}"><span class="d-inline-block text-truncate" style="max-width: 150px;">
 								  ${list.title}
 								</span></a>
 						      </td>
@@ -156,7 +153,7 @@
 					  <!-- <부분 -->
 					  <c:if test="${paging.startPage > 1}">
 					  <li class="page-item">
-					      <a class="page-link" href="mypage_noteManage.do?searchType=${paging.searchType}&searchValue=${paging.searchValue}&nowPage=${paging.startPage - 1}" aria-label="Previous">
+					      <a class="page-link" href="<%=request.getContextPath() %>/mypage_noteManage.do?searchType=${paging.searchType}&searchValue=${paging.searchValue}&nowPage=${paging.startPage - 1}" aria-label="Previous">
 					        <span aria-hidden="true">&lt;</span>
 					      </a>
 					    </li>
@@ -174,7 +171,7 @@
 					  <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i" step="1">
 					  	<c:if test="${i != paging.nowPage}">
 					  		<li class="page-item">
-					  			<a class="page-link" href="mypage_noteManage.do?searchType=${paging.searchType}&searchValue=${paging.searchValue}&nowPage=${i}">${i}</a>
+					  			<a class="page-link" href="<%=request.getContextPath() %>/mypage_noteManage.do?searchType=${paging.searchType}&searchValue=${paging.searchValue}&nowPage=${i}">${i}</a>
 					  		</li>
 					  	</c:if>
 					  	<c:if test="${i == paging.nowPage}">
@@ -187,7 +184,7 @@
 				      <!-- >부분 -->
 				      <c:if test="${paging.endPage != paging.lastPage}">
 				      	<li class="page-item">
-					      <a class="page-link" href="mypage_noteManage.do?searchType=${paging.searchType}&searchValue=${paging.searchValue}&nowPage=${paging.endPage + 1}" aria-label="Next">
+					      <a class="page-link" href="<%=request.getContextPath() %>/mypage_noteManage.do?searchType=${paging.searchType}&searchValue=${paging.searchValue}&nowPage=${paging.endPage + 1}" aria-label="Next">
 					        <span aria-hidden="true">&gt;</span>
 					      </a>
 					    </li>

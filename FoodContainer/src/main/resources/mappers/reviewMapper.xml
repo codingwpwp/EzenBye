@@ -35,5 +35,17 @@
 		LIMIT #{start}, #{perPage}
     </select>
     
+    <select id="viewReviewList" resultType="ReviewVO">
+    	SELECT * FROM review
+    	WHERE product_index = #{product_index} and del_YN = 'N'
+    </select>
+    
+    <select id="viewReviewListArr" resultType="ReviewVO" parameterType="list">
+    	SELECT * FROM review
+    	<if test="list != null">
+	    	WHERE product_index in (<foreach collection="list" item='test' separator=','>#{test.product_index}</foreach>) and del_YN = 'N'
+    	</if>
+    </select>
+    
     
 </mapper>

@@ -13,7 +13,7 @@
 			<ul class="list-unstyled ps-0">
 				<!-- 전체상품 -->
 				<button class="btn btn-toggle align-items-center rounded collapsed" name="lAsideProductAllM" onclick="allProductM(this); productFilter(); productFilterCheck();">
-					<i class="bi bi-check-circle-fill"></i> 전체상품
+					<i class="bi bi-check-circle"></i> 전체상품
 				</button>
 				<!-- 냉동식품 체크박스 목록 -->
 				<li class="mb-1">

@@ -116,21 +116,33 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "notice_insert.do", method = RequestMethod.GET)
-	public String notice3(Locale locale, Model model, int nowPage) throws Exception {
+	public String notice3(Locale locale, Model model, int nowPage, HttpSession session, HttpServletRequest request) throws Exception {
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String strReferer = request.getHeader("referer");
 		
-		model.addAttribute("nowPage", nowPage);
-		
-		return "notice/notice_insert";
+		if(member == null || strReferer == null) {
+			return "wrongAccessPage/wrongAccess";
+		}else {
+			model.addAttribute("nowPage", nowPage);
+			
+			return "notice/notice_insert";
+		}
 	}
 	
 	@RequestMapping(value = "notice_update.do", method = RequestMethod.GET)
-	public String notice4(Locale locale, Model model, int notice_index, int nowPage) throws Exception {
+	public String notice4(Locale locale, Model model, int notice_index, int nowPage, HttpSession session, HttpServletRequest request) throws Exception {
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String strReferer = request.getHeader("referer");
 		
-		NoticeVO noticeDetail = noticeService.noticeDetail(notice_index);
-		model.addAttribute("noticeDetail", noticeDetail);
-		model.addAttribute("nowPage", nowPage);
-		
-		return "notice/notice_update";
+		if(member == null || strReferer == null) {
+			return "wrongAccessPage/wrongAccess";
+		} else {
+			NoticeVO noticeDetail = noticeService.noticeDetail(notice_index);
+			model.addAttribute("noticeDetail", noticeDetail);
+			model.addAttribute("nowPage", nowPage);
+			
+			return "notice/notice_update";
+		}
 	}
 	
 	@RequestMapping(value = "noticeInsert.do", method = RequestMethod.POST)

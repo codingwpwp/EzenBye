@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import team.project.util.PagingUtil;
+import team.project.vo.ProductVO;
 import team.project.vo.ReviewVO;
 import team.project.vo.SearchVO;
 
@@ -21,4 +22,10 @@ public interface ReviewService {
 	PagingUtil countListPaging(SearchVO searchVO, int nowPage) throws Exception;
 	
 	int countList(int member_index) throws Exception;
+	
+	List<ReviewVO> review(String product_index) throws Exception;
+	
+	List<ReviewVO> review(List<ProductVO> ProductListAll) throws Exception;
+	
+	List<ReviewVO> indexReview(List<ProductVO> popularList) throws Exception;
 }

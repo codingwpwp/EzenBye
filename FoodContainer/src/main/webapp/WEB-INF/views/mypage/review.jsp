@@ -109,7 +109,7 @@
 						      <td>
 						      <span class="d-inline-block text-truncate" style="max-width: 150px;">
 								  <c:if test="${list.del_YN eq 'N'}">
-						          <a href="productView.do?product_index=${list.product_index }" class="productHref">
+						          <a href="<%=request.getContextPath() %>/productView.do?product_index=${list.product_index }" class="productHref">
 					        	  </c:if>
 					        	  <c:if test="${list.del_YN eq 'Y'}">
 					        	  <a href="javascript:alert('삭제된 상품입니다.');" class="productHref">
@@ -135,7 +135,7 @@
 						      	<div class="collapse" id="collapseExample${i}">
 						      		<div class="review-title">
 						      			<c:if test="${list.del_YN eq 'N'}">
-							        	<a href="productView.do?product_index=${list.product_index }" class="productHref">
+							        	<a href="<%=request.getContextPath() %>/productView.do?product_index=${list.product_index }" class="productHref">
 							        	</c:if>
 							        	<c:if test="${list.del_YN eq 'Y'}">
 							        	<a href="javascript:alert('삭제된 상품입니다.');" class="productHref">
@@ -162,7 +162,7 @@
 					  <!-- <부분 -->
 					  <c:if test="${paging.startPage > 1}">
 					  <li class="page-item">
-					      <a class="page-link" href="mypage_review.do?nowPage=${paging.startPage - 1}" aria-label="Previous">
+					      <a class="page-link" href="<%=request.getContextPath() %>/mypage_review.do?nowPage=${paging.startPage - 1}" aria-label="Previous">
 					        <span aria-hidden="true">&lt;</span>
 					      </a>
 					    </li>
@@ -180,7 +180,7 @@
 					  <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="a" step="1">
 					  	<c:if test="${a != paging.nowPage}">
 					  		<li class="page-item">
-					  			<a class="page-link" href="mypage_review.do?nowPage=${a}">${a}</a>
+					  			<a class="page-link" href="<%=request.getContextPath() %>/mypage_review.do?nowPage=${a}">${a}</a>
 					  		</li>
 					  	</c:if>
 					  	<c:if test="${a == paging.nowPage}">
@@ -193,7 +193,7 @@
 				      <!-- >부분 -->
 				      <c:if test="${paging.endPage != paging.lastPage}">
 				      	<li class="page-item">
-					      <a class="page-link" href="mypage_review.do?nowPage=${paging.endPage + 1}" aria-label="Next">
+					      <a class="page-link" href="<%=request.getContextPath() %>/mypage_review.do?nowPage=${paging.endPage + 1}" aria-label="Next">
 					        <span aria-hidden="true">&gt;</span>
 					      </a>
 					    </li>

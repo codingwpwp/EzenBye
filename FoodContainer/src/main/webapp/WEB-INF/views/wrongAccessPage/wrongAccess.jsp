@@ -12,7 +12,7 @@
 <script type="text/javascript">
 	function alertMessage(){
 		alert("잘못된 접근입니다");
-		location.href='/controller/index.do';
+		location.href='<%=request.getContextPath()%>/index.do';
 	}
 </script>
 </html>
