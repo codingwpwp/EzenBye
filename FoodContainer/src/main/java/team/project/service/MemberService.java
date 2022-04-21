@@ -11,6 +11,8 @@ import team.project.vo.SearchVO;
 public interface MemberService {
 	List<MemberVO> list(MemberVO vo) throws Exception;
 
+	List<MemberVO> MemberList(MemberVO memberVO) throws Exception;
+
 	public MemberVO Login(MemberVO vo) throws Exception;
 	
 	int insertMember(MemberVO vo) throws Exception;

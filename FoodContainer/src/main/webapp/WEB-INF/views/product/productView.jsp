@@ -271,15 +271,21 @@
 												${viewReview.contents}
 											</div>
 											<div class="col-1 align-self-center">
-												<i class="bi bi-caret-down reviewDown" data-bs-toggle="collapse" href="#reviewExtend0" role="button" aria-expanded="false" aria-controls="collapseExample"></i>
+												<i class="bi bi-caret-down reviewDown" data-bs-toggle="collapse" href="#reviewExtend${status.index }" role="button" aria-expanded="false" aria-controls="collapseExample"></i>
 											</div>
 										</div>
-										<div class="collapse reviewCard" id="reviewExtend0">
+										<div class="collapse reviewCard" id="reviewExtend${status.index }">
 											<img src="<%=request.getContextPath()%>/resources/img/mypage/good.jpg" class="img-fluid reviewCardImg">
 											<div>${viewReview.contents}</div>
 										</div>
 									</td>
-									<td>홍길동</td>
+									<td>
+										<c:forEach items="${MemberList}" var="MemberList">
+											<c:if test="${MemberList.member_index == viewReview.member_index}">
+												${MemberList.nickname}
+											</c:if>
+										</c:forEach>
+									</td>
 									<td>${viewReview.review_date}</td>
 								</tr>
 							</c:forEach>
