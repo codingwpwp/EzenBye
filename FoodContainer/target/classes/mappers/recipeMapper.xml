@@ -201,7 +201,11 @@ member_index
  where recipe_index=#{recipe_index};
  </update> 
 
- 
+ <select id="viewRecipeList" resultType="RecipeVO">
+	SELECT * 
+    FROM recipe 
+	WHERE del_YN = 'N'
+</select>
  
 </mapper>
 

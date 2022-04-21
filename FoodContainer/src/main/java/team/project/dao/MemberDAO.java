@@ -22,6 +22,11 @@ public class MemberDAO {
 		return sqlSession.selectList(Namespace+".selectMember",vo);
 	}
 	
+public List<MemberVO> MemberList(MemberVO memberVO) throws Exception {
+		
+		return sqlSession.selectList(Namespace+".memberList",memberVO);
+	}
+	
 	//로그인
 	public MemberVO Login(MemberVO vo) throws Exception {
 		return sqlSession.selectOne(Namespace+".Login", vo);

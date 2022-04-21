@@ -22,6 +22,8 @@ public interface RecipeService {
 	
 	//레시피 목록
 	List<RecipeVO> recipeList(PagingUtil pu ,SearchVO searchvo)throws Exception;
+
+	List<RecipeVO> viewRecipeList(RecipeVO recipeVO)throws Exception;
 	
 	//레시피 상세 조회
 	public RecipeVO recipeRead(int recipe_index) throws Exception;
