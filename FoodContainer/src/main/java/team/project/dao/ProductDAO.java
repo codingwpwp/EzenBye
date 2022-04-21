@@ -46,6 +46,11 @@ public class ProductDAO {
 	public List<ProductVO> popularList(ProductVO productVO) throws Exception{
 		return sqlSession.selectList(Namespace+".popularList",productVO);
 	}
+	
+	public List<ProductVO> productSearch(ProductVO productVO) throws Exception{
+		return sqlSession.selectList(Namespace+".ProductSearch",productVO);
+	}
+	
 
 	
 	/* **********************구매페이지************************ */

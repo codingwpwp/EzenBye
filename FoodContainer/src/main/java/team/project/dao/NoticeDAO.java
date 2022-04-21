@@ -38,4 +38,19 @@ public class NoticeDAO {
 		sqlSession.insert(Namespace+".noticeInsert",vo);
 	}
 	
+	public void noticeModify(NoticeVO vo) throws Exception {
+		
+		sqlSession.update(Namespace+".noticeModify",vo);
+	}
+	
+	public void noticeDelete(int notice_index) throws Exception {
+		
+		sqlSession.update(Namespace+".noticeDelete",notice_index);
+	}
+	
+	public int plusHit(int notice_index) throws Exception {
+		
+		return sqlSession.update(Namespace+".plusHit",notice_index);
+	}
+	
 }

@@ -120,11 +120,12 @@
 						  
 						    <c:forEach items="${messageList}" var="list">
 						    <c:set var="a" value="${a+1}" />
+						    <c:set var="b" value="${b+1}" />
 						    <tr>
 						      <th scope="row">
 						      	<div class="form-check form-check-inline">
 								  <input class="form-check-input" type="checkbox" id="inlineCheckbox${a}" value="${list.message_index }" name="note">
-								  <label class="form-check-label" for="inlineCheckbox${a}">${list.message_index }</label>
+								  <label class="form-check-label" for="inlineCheckbox${a}">${b}</label>
 								  <c:if test="${list.read_yn eq 'Y'}"><span style="color: black">(읽음)</span></c:if><c:if test="${list.read_yn eq 'N'}"><span style="color: red">(읽지않음)</span></c:if>
 								</div>
 						      </th>
