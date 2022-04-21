@@ -40,6 +40,22 @@ public class NoticeServiceImpl implements NoticeService {
 	public void noticeInsert(NoticeVO vo) throws Exception {
 		noticeDAO.noticeInsert(vo);
 	}
+
+	@Override
+	public void noticeModify(NoticeVO vo) throws Exception {
+		noticeDAO.noticeModify(vo);
+	}
+
+	@Override
+	public void noticeDelete(int notice_index) throws Exception {
+		noticeDAO.noticeDelete(notice_index);
+	}
+
+	@Override
+	public int plusHit(int notice_index) throws Exception {
+		int plusHit = noticeDAO.plusHit(notice_index);
+		return plusHit;
+	}
 	
 	
 }

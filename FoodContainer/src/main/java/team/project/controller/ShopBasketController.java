@@ -95,14 +95,14 @@ public class ShopBasketController {
 
 				tempCurrentCookie = URLEncoder.encode(tempCurrentCookie, "UTF-8");
 				Cookie pidxCookie = new Cookie("noMemberCart", tempCurrentCookie);
-				pidxCookie.setPath("/controller");
+				pidxCookie.setPath("/" + request.getContextPath());
 				
 			    response.addCookie(pidxCookie);
 			}else {
 				Cookie pidxCookie = new Cookie("noMemberCart", null);
 				tempCurrentCookie = URLEncoder.encode(tempCurrentCookie, "UTF-8");
 				
-				pidxCookie.setPath("/controller");
+				pidxCookie.setPath("/" + request.getContextPath());
 				pidxCookie.setMaxAge(0);
 			    response.addCookie(pidxCookie);
 			}

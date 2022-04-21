@@ -273,230 +273,319 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value = "mypage_main.do", method = RequestMethod.GET)
-	public String main(Locale locale, Model model, OrderProductVO opVO, HttpSession session) throws Exception {
+	public String main(Locale locale, Model model, OrderProductVO opVO, HttpSession session, HttpServletRequest request) throws Exception {
 		
 		MemberVO member = (MemberVO) session.getAttribute("member");
-		int member_index = member.getMember_index();
+		String strReferer = request.getHeader("referer");
 		
-		MemberVO memberInfor = memberService.memberInfor(member_index);
-		List<ServiceCenterVO> list = serviceCenterService.latelyServiceCenter(member_index);
-		List<OrdersVO> ordersList = ordersService.ordersList(member_index);
-		List<OrderProductVO> opList = orderProductService.orderProductList(opVO);
-		int couponvo = couponService.mypageCouponCount(member_index);
-		model.addAttribute("list",list);
-		model.addAttribute("couponvo",couponvo);
-		model.addAttribute("ordersList",ordersList);
-		model.addAttribute("opList",opList);
-		model.addAttribute("opListSize",opList.size());
-		model.addAttribute("memberInfor",memberInfor);
-		
-		return "mypage/main";
+		if(member == null || strReferer == null) {
+			return "wrongAccessPage/wrongAccess";
+		}else {
+			int member_index = member.getMember_index();
+			
+			MemberVO memberInfor = memberService.memberInfor(member_index);
+			List<ServiceCenterVO> list = serviceCenterService.latelyServiceCenter(member_index);
+			List<OrdersVO> ordersList = ordersService.ordersList(member_index);
+			List<OrderProductVO> opList = orderProductService.orderProductList(opVO);
+			int couponvo = couponService.mypageCouponCount(member_index);
+			model.addAttribute("list",list);
+			model.addAttribute("couponvo",couponvo);
+			model.addAttribute("ordersList",ordersList);
+			model.addAttribute("opList",opList);
+			model.addAttribute("opListSize",opList.size());
+			model.addAttribute("memberInfor",memberInfor);
+			
+			return "mypage/main";
+		}
 	}
 	
 	@RequestMapping(value = "mypage_lookup.do", method = RequestMethod.GET)
-	public String lookup(Locale locale, Model model, HttpSession session, OrderProductVO opVO) throws Exception {
+	public String lookup(Locale locale, Model model, HttpSession session, OrderProductVO opVO, HttpServletRequest request) throws Exception {
 		
 		MemberVO member = (MemberVO) session.getAttribute("member");
-		int member_index = member.getMember_index();
-		MemberVO memberInfor = memberService.memberInfor(member_index);
+		String strReferer = request.getHeader("referer");
 		
-		List<OrdersVO> ordersList = ordersService.ordersListAll(member_index);
-		
-		List<OrderProductVO> opList = orderProductService.orderProductList(opVO);
-		
-		model.addAttribute("ordersList",ordersList);
-		
-		model.addAttribute("opList",opList);
-		model.addAttribute("opListSize",opList.size());
-		
-		model.addAttribute("memberInfor",memberInfor);
-		
-		return "mypage/lookup";
+		if(member == null || strReferer == null) {
+			return "wrongAccessPage/wrongAccess";
+		}else {
+			int member_index = member.getMember_index();
+			MemberVO memberInfor = memberService.memberInfor(member_index);
+			
+			List<OrdersVO> ordersList = ordersService.ordersListAll(member_index);
+			
+			List<OrderProductVO> opList = orderProductService.orderProductList(opVO);
+			
+			model.addAttribute("ordersList",ordersList);
+			
+			model.addAttribute("opList",opList);
+			model.addAttribute("opListSize",opList.size());
+			
+			model.addAttribute("memberInfor",memberInfor);
+			
+			return "mypage/lookup";
+		}
 	}
 	
 	@RequestMapping(value = "mypage_lookupView.do", method = RequestMethod.GET)
-	public String lookupDetail(Locale locale, Model model, String member_order_index, OrderProductVO opVO, HttpSession session) throws Exception {
+	public String lookupDetail(Locale locale, Model model, String member_order_index, OrderProductVO opVO, HttpSession session, HttpServletRequest request) throws Exception {
 		
 		MemberVO member = (MemberVO) session.getAttribute("member");
-		int member_index = member.getMember_index();
-		MemberVO memberInfor = memberService.memberInfor(member_index);
+		String strReferer = request.getHeader("referer");
 		
-		OrdersVO ordersDetail = ordersService.ordersDetail(member_order_index);
-		
-		OrdersVO ordersDetailJoin = ordersService.ordersDetailJoin(member_order_index);
-		
-		List<OrderProductVO> opList = orderProductService.orderProductList(opVO);
-		
-		model.addAttribute("ordersDetail",ordersDetail);
-		
-		model.addAttribute("ordersDetailJoin",ordersDetailJoin);
-		
-		model.addAttribute("opList",opList);
-		
-		model.addAttribute("opListSize",opList.size());
-		
-		model.addAttribute("memberInfor",memberInfor);
-		
-		return "mypage/lookupView";
+		if(member == null || strReferer == null) {
+			return "wrongAccessPage/wrongAccess";
+		}else {
+			int member_index = member.getMember_index();
+			MemberVO memberInfor = memberService.memberInfor(member_index);
+			
+			OrdersVO ordersDetail = ordersService.ordersDetail(member_order_index);
+			
+			OrdersVO ordersDetailJoin = ordersService.ordersDetailJoin(member_order_index);
+			
+			List<OrderProductVO> opList = orderProductService.orderProductList(opVO);
+			
+			model.addAttribute("ordersDetail",ordersDetail);
+			
+			model.addAttribute("ordersDetailJoin",ordersDetailJoin);
+			
+			model.addAttribute("opList",opList);
+			
+			model.addAttribute("opListSize",opList.size());
+			
+			model.addAttribute("memberInfor",memberInfor);
+			
+			return "mypage/lookupView";
+		}
 	}
 	
 	@RequestMapping(value = "mypage_interItem.do", method = RequestMethod.GET)
-	public String dibsListAllJoin(Locale locale, Model model, HttpSession session) throws Exception {
+	public String dibsListAllJoin(Locale locale, Model model, HttpSession session, HttpServletRequest request) throws Exception {
 		
 		MemberVO member = (MemberVO) session.getAttribute("member");
-		int member_index = member.getMember_index();
-		List<DibsVO> dibsListAllJoin = dibsService.dibsListAllJoin(member_index);
+		String strReferer = request.getHeader("referer");
 		
-		int dibsListCount = dibsService.dibsListCount(member_index); 
-		
-		model.addAttribute("dibsListAllJoin",dibsListAllJoin);
-		model.addAttribute("dibsListCount",dibsListCount);
-		
-		return "mypage/interItem";
+		if(member == null || strReferer == null) {
+			return "wrongAccessPage/wrongAccess";
+		}else {
+			int member_index = member.getMember_index();
+			List<DibsVO> dibsListAllJoin = dibsService.dibsListAllJoin(member_index);
+			
+			int dibsListCount = dibsService.dibsListCount(member_index); 
+			
+			model.addAttribute("dibsListAllJoin",dibsListAllJoin);
+			model.addAttribute("dibsListCount",dibsListCount);
+			
+			return "mypage/interItem";
+		}
 	}
 	
 	@RequestMapping(value = "mypage_coupon.do", method = RequestMethod.GET)
-	public String couponList(Locale locale, Model model, HttpSession session) throws Exception {
+	public String couponList(Locale locale, Model model, HttpSession session, HttpServletRequest request) throws Exception {
 		
 		MemberVO member = (MemberVO) session.getAttribute("member");
-		int member_index = member.getMember_index();
+		String strReferer = request.getHeader("referer");
 		
-		List<CouponVO> couponList = couponService.couponList(member_index);
-		int couponvo = couponService.mypageCouponCount(member_index);
-		
-		model.addAttribute("couponList",couponList);
-		model.addAttribute("couponvo",couponvo);
-		
-		return "mypage/coupon";
+		if(member == null || strReferer == null) {
+			return "wrongAccessPage/wrongAccess";
+		}else {
+			int member_index = member.getMember_index();
+			
+			List<CouponVO> couponList = couponService.couponList(member_index);
+			int couponvo = couponService.mypageCouponCount(member_index);
+			
+			model.addAttribute("couponList",couponList);
+			model.addAttribute("couponvo",couponvo);
+			
+			return "mypage/coupon";
+		}
 	}
 	
 	@RequestMapping(value = "mypage_review.do", method = RequestMethod.GET)
-	public String reviewList(Locale locale, Model model, HttpSession session, SearchVO searchVO, int nowPage) throws Exception {
+	public String reviewList(Locale locale, Model model, HttpSession session, SearchVO searchVO, int nowPage, HttpServletRequest request) throws Exception {
 		
 		MemberVO member = (MemberVO) session.getAttribute("member");
-		int member_index = member.getMember_index();
+		String strReferer = request.getHeader("referer");
 		
-		// del_yn = "N"
-		searchVO.setMember_index(member_index);
-		// 현재페이지
-		int realnowPage = 1;
-		if(nowPage != 0) realnowPage = nowPage;
+		if(member == null || strReferer == null) {
+			return "wrongAccessPage/wrongAccess";
+		}else {
+			int member_index = member.getMember_index();
+			
+			// del_yn = "N"
+			searchVO.setMember_index(member_index);
+			// 현재페이지
+			int realnowPage = 1;
+			if(nowPage != 0) realnowPage = nowPage;
+			
+			List<ReviewVO> reviewList = reviewService.reviewList(searchVO, realnowPage);
+			model.addAttribute("reviewList",reviewList);
+			
+			PagingUtil paging = reviewService.countListPaging(searchVO, realnowPage);
+			
+			model.addAttribute("paging", paging);
+			
+			int countList = reviewService.countList(member_index);
 		
-		List<ReviewVO> reviewList = reviewService.reviewList(searchVO, realnowPage);
-		model.addAttribute("reviewList",reviewList);
-		
-		PagingUtil paging = reviewService.countListPaging(searchVO, realnowPage);
-		
-		model.addAttribute("paging", paging);
-		
-		int countList = reviewService.countList(member_index);
-	
-		model.addAttribute("countList",countList);
-		
-		return "mypage/review";
+			model.addAttribute("countList",countList);
+			
+			return "mypage/review";
+		}
 	}
 	
 	@RequestMapping(value = "mypage_recipe.do", method = RequestMethod.GET)
-	public String home9(Locale locale, Model model) {
-		return "mypage/recipe";
+	public String home9(Locale locale, Model model, HttpSession session, HttpServletRequest request) {
+		
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String strReferer = request.getHeader("referer");
+		
+		if(member == null || strReferer == null) {
+			return "wrongAccessPage/wrongAccess";
+		}else {
+			return "mypage/recipe";
+		}
+		
 	}
 	
 	@RequestMapping(value = "mypage_inquiries.do", method = RequestMethod.GET)
-	public String inquiries(Locale locale, Model model, HttpSession session, SearchVO searchVO, int nowPage) throws Exception {
+	public String inquiries(Locale locale, Model model, HttpSession session, SearchVO searchVO, int nowPage, HttpServletRequest request) throws Exception {
 		
 		MemberVO member = (MemberVO) session.getAttribute("member");
-		int member_index = member.getMember_index();
+		String strReferer = request.getHeader("referer");
 		
-		searchVO.setMember_index(member_index);
+		if(member == null || strReferer == null) {
+			return "wrongAccessPage/wrongAccess";
+		}else {
+			int member_index = member.getMember_index();
+			
+			searchVO.setMember_index(member_index);
+			
+			// 현재페이지
+			int realnowPage = 1;
+			if(nowPage != 0) realnowPage = nowPage;
+			
+			List<ServiceCenterVO> serviceCenterList = serviceCenterService.serviceCenterList(searchVO, realnowPage);
+			model.addAttribute("serviceCenterList",serviceCenterList);
+			
+			PagingUtil paging = serviceCenterService.serviceCenterListPaging(searchVO, realnowPage);
+			
+			model.addAttribute("paging", paging);
+			
+			int countServiceCenter = serviceCenterService.countServiceCenter(member_index);
+			model.addAttribute("countServiceCenter",countServiceCenter);
+			
+			return "mypage/inquiries";
+		}
 		
-		// 현재페이지
-		int realnowPage = 1;
-		if(nowPage != 0) realnowPage = nowPage;
-		
-		List<ServiceCenterVO> serviceCenterList = serviceCenterService.serviceCenterList(searchVO, realnowPage);
-		model.addAttribute("serviceCenterList",serviceCenterList);
-		
-		PagingUtil paging = serviceCenterService.serviceCenterListPaging(searchVO, realnowPage);
-		
-		model.addAttribute("paging", paging);
-		
-		int countServiceCenter = serviceCenterService.countServiceCenter(member_index);
-		model.addAttribute("countServiceCenter",countServiceCenter);
-		
-		return "mypage/inquiries";
 	}
 	
 	@RequestMapping(value = "mypage_changeInfor.do", method = RequestMethod.GET)
-	public String changeInfor(Locale locale, Model model) {	
-		return "mypage/changeInfor";
+	public String changeInfor(Locale locale, Model model, HttpSession session, HttpServletRequest request) {
+		
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String strReferer = request.getHeader("referer");
+		
+		if(member == null || strReferer == null) {
+			return "wrongAccessPage/wrongAccess";
+		}else {
+			return "mypage/changeInfor";
+		}
 	}
 	
 	@RequestMapping(value = "mypage_changeInforOk.do", method = RequestMethod.GET)
-	public String changeInforOk(Locale locale, Model model, HttpSession session) throws Exception {
+	public String changeInforOk(Locale locale, Model model, HttpSession session, HttpServletRequest request) throws Exception {
 		
 		MemberVO member = (MemberVO) session.getAttribute("member");
-		int member_index = member.getMember_index();
-		MemberVO memberInfor = memberService.memberInfor(member_index);
+		String strReferer = request.getHeader("referer");
+		if(member == null || strReferer == null) {
+			return "wrongAccessPage/wrongAccess";
+		}else {
+			int member_index = member.getMember_index();
+			MemberVO memberInfor = memberService.memberInfor(member_index);
+			
+			model.addAttribute("memberInfor",memberInfor);
+			
+			return "mypage/changeInforOk";
+		}
 		
-		model.addAttribute("memberInfor",memberInfor);
-		
-		return "mypage/changeInforOk";
 	}
 	
 	@RequestMapping(value = "mypage_addressManage.do", method = RequestMethod.GET)
-	public String addressManage(Locale locale, Model model, HttpSession session) throws Exception {
+	public String addressManage(Locale locale, Model model, HttpSession session, HttpServletRequest request) throws Exception {
 		
 		MemberVO member = (MemberVO) session.getAttribute("member");
-		int member_index = member.getMember_index();
-		MemberVO memberInfor = memberService.memberInfor(member_index);
-		
-		model.addAttribute("memberInfor",memberInfor);
-		
-		return "mypage/addressManage";
+		String strReferer = request.getHeader("referer");
+		if(member == null || strReferer == null) {
+			return "wrongAccessPage/wrongAccess";
+		}else {
+			int member_index = member.getMember_index();
+			MemberVO memberInfor = memberService.memberInfor(member_index);
+			
+			model.addAttribute("memberInfor",memberInfor);
+			
+			return "mypage/addressManage";
+		}
 	}
 	
 	@RequestMapping(value = "mypage_noteManage.do", method = RequestMethod.GET)
-	public String noteManage(Locale locale, Model model, HttpSession session, SearchVO searchVO, int nowPage) throws Exception {
+	public String noteManage(Locale locale, Model model, HttpSession session, SearchVO searchVO, int nowPage, HttpServletRequest request) throws Exception {
 		
 		MemberVO member = (MemberVO) session.getAttribute("member");
-		int member_index = member.getMember_index();
-		
-		// del_yn = "N"
-		searchVO.setDel_yn("N");
-		searchVO.setMember_index(member_index);
-		// 현재페이지
-		int realnowPage = 1;
-		if(nowPage != 0) realnowPage = nowPage;
-		
-		List<MessageVO> messageList = messageService.messageList(searchVO, realnowPage);
-		model.addAttribute("messageList",messageList);
-		
-		PagingUtil paging = messageService.messageListPaging(searchVO, realnowPage);
-		if(searchVO.getSearchValue() != null) {
-			paging.setSearchValue(searchVO.getSearchValue());
-			paging.setSearchType(searchVO.getSearchType());
+		String strReferer = request.getHeader("referer");
+		if(member == null || strReferer == null) {
+			return "wrongAccessPage/wrongAccess";
+		}else {
+			int member_index = member.getMember_index();
+			
+			// del_yn = "N"
+			searchVO.setDel_yn("N");
+			searchVO.setMember_index(member_index);
+			// 현재페이지
+			int realnowPage = 1;
+			if(nowPage != 0) realnowPage = nowPage;
+			
+			List<MessageVO> messageList = messageService.messageList(searchVO, realnowPage);
+			model.addAttribute("messageList",messageList);
+			
+			PagingUtil paging = messageService.messageListPaging(searchVO, realnowPage);
+			if(searchVO.getSearchValue() != null) {
+				paging.setSearchValue(searchVO.getSearchValue());
+				paging.setSearchType(searchVO.getSearchType());
+			}
+			model.addAttribute("paging", paging);
+			
+			return "mypage/noteManage";
 		}
-		model.addAttribute("paging", paging);
-		
-		return "mypage/noteManage";
 	}
 	
 	@RequestMapping(value = "mypage_noteManageView.do", method = RequestMethod.GET)
-	public String messageListDetail(Locale locale, Model model, SearchVO searchvo, int nowPage, int message_index) throws Exception {
+	public String messageListDetail(Locale locale, Model model, SearchVO searchvo, int nowPage, int message_index, HttpSession session, HttpServletRequest request) throws Exception {
 		
-		MessageVO messageListDetail = messageService.messageListDetail(message_index);
-		
-		model.addAttribute("searchType", searchvo.getSearchType());
-		model.addAttribute("searchValue", searchvo.getSearchValue());
-		model.addAttribute("nowPage", nowPage);
-		
-		model.addAttribute("messageListDetail",messageListDetail);
-		
-		return "mypage/noteManageView";
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String strReferer = request.getHeader("referer");
+		if(member == null || strReferer == null) {
+			return "wrongAccessPage/wrongAccess";
+		}else {
+			MessageVO messageListDetail = messageService.messageListDetail(message_index);
+			
+			model.addAttribute("searchType", searchvo.getSearchType());
+			model.addAttribute("searchValue", searchvo.getSearchValue());
+			model.addAttribute("nowPage", nowPage);
+			
+			model.addAttribute("messageListDetail",messageListDetail);
+			
+			return "mypage/noteManageView";
+		}
 	}
 	@RequestMapping(value = "mypage_memberSecession.do", method = RequestMethod.GET)
-	public String home16(Locale locale, Model model) {
-		return "mypage/memberSecession";
+	public String home16(Locale locale, Model model, HttpSession session, HttpServletRequest request) {
+		
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String strReferer = request.getHeader("referer");
+		if(member == null || strReferer == null) {
+			return "wrongAccessPage/wrongAccess";
+		}else {
+			return "mypage/memberSecession";
+		}
 	}
 	
 }

@@ -201,13 +201,11 @@ function sendEmail(){
 					}, 1000);
 					$("#emailMessageSpan").html("해당 이메일로 인증번호를 발송했습니다.<br>3분 이내에 입력하세요");
 				}
-			});			
+			});
 		}else if(sendEmailTimeSw == 1 && checkNumSw == 1){
 			alert("이미 인증하였습니다");
 		}else if(sendEmailTimeSw == 1 && checkNumSw == 0){
 			alert("이미 발송 했습니다 3분내에 입력하세요");
-		}else if(sendEmailTimeSw == 0 && checkNumSw == 1){
-			alert("잠시 기다려주시기 바랍니다");
 		}
 		
 	}
@@ -241,3 +239,176 @@ function checkNum(){
 	}
 }
 
+
+
+// 비밀번호 찾기
+var pwNameSw = 0;
+var pwIdSw = 0;
+var pwEmailSw = 0;
+
+var pwEmailBtnSw = 0;
+var pwRandomNum = "";
+
+function checkNamePw(obj){
+	var nameReg = /^[가-힣]{2,6}$/g;
+	if(!nameReg.test(obj.value)){
+		pwNameSw = 0;
+	}else{
+		pwNameSw = 1;
+	}
+	
+	if(pwNameSw == 1 && pwIdSw == 1 && pwEmailSw == 1){
+		$("#emailBtn").attr("disabled", false);
+	}else{
+		$("#emailBtn").attr("disabled", true);
+	}
+}
+
+function checkIdPw(obj){
+	var idReg = /^[a-z][a-zA-Z0-9]{7,19}/g;
+	if(!idReg.test(obj.value)){
+		pwIdSw = 0;
+	}else{
+		pwIdSw = 1;
+	}
+	
+	if(pwIdSw == 1 && pwIdSw == 1 && pwEmailSw == 1){
+		$("#emailBtn").attr("disabled", false);
+	}else{
+		$("#emailBtn").attr("disabled", true);
+	}
+}
+
+function checkEmailPw(obj){
+	var emailReg = /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/g;
+	if(!emailReg.test(obj.value)){
+		pwEmailSw = 0;
+	}else{
+		pwEmailSw = 1;
+	}
+	
+	if(pwIdSw == 1 && pwIdSw == 1 && pwEmailSw == 1){
+		$("#emailBtn").attr("disabled", false);
+	}else{
+		$("#emailBtn").attr("disabled", true);
+	}
+}
+
+function sendEmailPwBtn(){
+	if(pwEmailBtnSw == 1){
+		
+	}else{
+		pwEmailBtnSw = 1;
+		$.ajax({
+			url : "sendEmailPw.do",
+			type : "post",
+			data : $("form[name='emailPwForm']").serialize(),
+			success : function(data){
+				pwRandomNum = data.trim();
+				if(pwRandomNum == "none"){
+					alert("일치하는 회원 정보가 없습니다");
+					pwEmailBtnSw = 0;
+				}else{
+					$("input#emailPwSubmitBtn").attr("disabled", false);
+					$("input[name='name']").attr("readonly", true);
+					$("input[name='id']").attr("readonly", true);
+					$("input[name='email']").attr("readonly", true);
+					$("input#emailBtn").attr("disabled", true);
+					time = 179;
+					setInterval(function(){
+						min = parseInt(time / 60);
+						sec = time % 60;
+						$("#timer").html(min + "분 " + sec + "초");
+						time--;
+						
+						if(time < 0){
+							clearInterval();
+							$("#timer").html("시간초과");
+							pwRandomNum = "";
+							pwEmailBtnSw = 0;
+							$("input#emailPwSubmitBtn").attr("disabled", true);
+							$("input[name='name']").attr("readonly", false);
+							$("input[name='id']").attr("readonly", false);
+							$("input[name='email']").attr("readonly", false);
+							$("input#emailBtn").attr("disabled", false);
+							
+							$("#emailMessageSpan").html("");
+						}
+		
+					}, 1000);
+					$("#emailMessageSpan").html("해당 이메일로 인증번호를 발송했습니다.<br>3분 이내에 입력하세요");					
+				}
+
+			}
+		});		
+
+	}
+
+}
+
+function pwFindFormSubmitBtn(){
+	
+	if($("#randomNum").val() == pwRandomNum){
+		$("form[name='emailPwForm']").submit();
+	}else{
+		alert("인증번호가 틀렸습니다. 다시 입력 하세요");
+	}
+}
+
+// 비회원 주문 비밀번호 찾기
+var noMemIndexSw = 0;
+var noMemEmailSw = 0;
+var noMemSendSw = 0;
+
+function noMemberCheckIndex(obj){
+	if(obj.value != ""){
+		noMemIndexSw = 1;
+	}else{
+		noMemIndexSw = 0;
+	}
+	if(noMemIndexSw == 1 && noMemEmailSw == 1){
+		$("#noMemberSendEmailBtn").attr("disabled", false);
+	}else{
+		$("#noMemberSendEmailBtn").attr("disabled", true);
+	}
+}
+function noMemberCheckEmail(obj){
+	var emailReg = /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/g;
+	if(emailReg.test(obj.value)){
+		noMemEmailSw = 1;
+	}else{
+		noMemEmailSw = 0;
+	}
+	if(noMemIndexSw == 1 && noMemEmailSw == 1){
+		$("#noMemberSendEmailBtn").attr("disabled", false);
+	}else{
+		$("#noMemberSendEmailBtn").attr("disabled", true);
+	}
+}
+function noMemberSendEmailFn(){
+	var form = $("#noMemberFindOrderForm");
+	if(noMemSendSw == 1){
+		
+	}else{
+		noMemSendSw = 1;
+		$("#noMemberSpan").text("보내는중...");
+		$.ajax({
+			url : "noMembersendEmailPw.do",
+			type : "post",
+			data : $(form).serialize(),
+			success : function(data){
+				$("#noMemberSpan").text("");
+				$("#noMemberSendEmailBtn").attr("disabled", true);
+				if(data.trim() == "none"){
+					alert("관련 정보가 존재 하지 않습니다");
+					noMemSendSw = 0;
+				}else{
+					noMemSendSw = 0;
+					alert(data.trim() + "님의 해당 이메일로 주문 비밀번호를 발송했습니다");
+					form.find(".btn-close").trigger('click');
+				}
+				
+			}
+		});
+	}
+}

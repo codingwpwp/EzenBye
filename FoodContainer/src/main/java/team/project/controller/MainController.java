@@ -26,12 +26,14 @@ import team.project.service.BannerService;
 import team.project.service.CartService;
 import team.project.service.DibsService;
 import team.project.service.ProductService;
+import team.project.service.ReviewService;
 import team.project.vo.BannerVO;
 import team.project.vo.CartVO;
 import team.project.vo.DibsVO;
 import team.project.vo.MemberVO;
 import team.project.vo.ProductFilterVO;
 import team.project.vo.ProductVO;
+import team.project.vo.ReviewVO;
 
 /**
  * Handles requests for the application home page.
@@ -47,6 +49,8 @@ public class MainController {
 	private BannerService bannerService;
 	@Autowired
 	private CartService cartService;
+	@Autowired
+	private ReviewService reviewService;
 	
 	
 	/**
@@ -66,6 +70,10 @@ public class MainController {
 		List<DibsVO> dibsListAll = dibsService.dibsListAll(dibsVO);
 		
 		model.addAttribute("userDibsList", dibsListAll);
+		
+		List<ReviewVO> indexReview = reviewService.review(popularList);
+		
+		model.addAttribute("viewReview",indexReview);
 		
 		//쿠키 사용
 		Cookie[] cookies = request.getCookies();
@@ -109,6 +117,10 @@ public class MainController {
 		
 		model.addAttribute("userDibsList", dibsListAll);
 		
+		List<ReviewVO> review = reviewService.review(ProductListAll);
+		
+		model.addAttribute("viewReview",review);
+		
 		//쿠키 사용
 		Cookie[] cookies = request.getCookies();
 								
@@ -142,13 +154,17 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "productView.do", method = RequestMethod.GET)
-	public String productView(Locale locale, Model model, HttpServletRequest request) throws Exception {
+	public String productView(Locale locale, Model model, HttpServletRequest request, ReviewVO reviewVO) throws Exception {
 		
 		String product_index = request.getParameter("product_index");
 		
 		ProductVO vo = productService.view(product_index);
 		
 		model.addAttribute("view",vo);
+
+		List<ReviewVO> review = reviewService.review(product_index);
+		
+		model.addAttribute("viewReview",review);
 		
 		//쿠키 사용
 		Cookie[] cookies = request.getCookies();
@@ -387,4 +403,17 @@ public class MainController {
 		return ProductListAll;
 	}
 	
+	@RequestMapping(value = "productSearch.do", method = RequestMethod.GET)
+	@ResponseBody
+	public List<ProductVO> productSearch(Locale locale, Model model, ProductVO productVO) throws Exception {
+		
+		List<ProductVO> productSearch = null;
+		
+		if(productVO != null) {
+			productSearch = productService.productSearch(productVO);
+		}
+		
+		return productSearch;
+	}
+
 }

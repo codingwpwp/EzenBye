@@ -64,11 +64,26 @@
 				        	<div class="viewStar">
 				        		<span>평점 : 
 				        		<span class="fs-4 productViewStar">
-				        			<i class="bi bi-star-fill"></i>
-				        			<i class="bi bi-star-fill"></i>
-				        			<i class="bi bi-star-fill"></i>
-				        			<i class="bi bi-star-fill"></i>
-				        			<i class="bi bi-star"></i>
+				        			<c:set var="sum" value="0" />
+				        			
+				        			<c:forEach items="${viewReview}" var="viewReview">
+				        				<c:set var="sum" value="${sum+viewReview.star_count}" />
+				        			</c:forEach>
+				        			
+				        			<c:set var="reviewCnt" value="${viewReview}" />
+				        			<c:set var="length" value="${fn:length(reviewCnt)}" />
+				        			<c:set var="avrg" value="${sum/length}" />
+				        			<c:if test="${length == 0}">
+				        				<c:set var="avrg" value="0" />
+				        			</c:if>
+				        			<c:forEach begin="1" end="5" varStatus="reStatus">
+										<c:if test="${reStatus.index <= avrg}">
+									    	<i class="bi bi-star-fill"></i>
+										</c:if>
+										<c:if test="${reStatus.index > avrg}">
+											<i class="bi bi-star"></i>
+										</c:if>
+									</c:forEach>
 				        		</span>
 				        		</span>
 				        	</div>
@@ -217,156 +232,57 @@
 								</tr>
 							</thead>
 							<tbody>
+							<c:forEach items="${viewReview}" var="viewReview" varStatus="status">
 								<tr>
 									<td>
 										<span class="productViewReviewStar">
-									    	<i class="bi bi-star-fill"></i>
-							        		<i class="bi bi-star-fill"></i>
-							        		<i class="bi bi-star-fill"></i>
-							        		<i class="bi bi-star-fill"></i>
-							        		<i class="bi bi-star"></i>
+									    		<c:forEach begin="1" end="5" varStatus="reStatus">
+													<c:if test="${reStatus.index <= viewReview.star_count}">
+									    				<i class="bi bi-star-fill"></i>
+													</c:if>
+													<c:if test="${reStatus.index > viewReview.star_count}">
+										    			<i class="bi bi-star"></i>
+													</c:if>
+									    		</c:forEach>
 							        		<br>
 									    </span>
-							        	<div>좋음</div>
+									    <c:if test="${viewReview.star_count eq '1'}">
+							        		<div style="color:red;">매우 나빠요</div>
+							        	</c:if>
+									    <c:if test="${viewReview.star_count eq '2'}">
+							        		<div style="color:tomato;">나빠요</div>
+							        	</c:if>
+									    <c:if test="${viewReview.star_count eq '3'}">
+							        		<div>보통</div>
+							        	</c:if>
+									    <c:if test="${viewReview.star_count eq '4'}">
+							        		<div style="color:green;">좋아요</div>
+							        	</c:if>
+									    <c:if test="${viewReview.star_count eq '5'}">
+							        		<div style="color:blue;">매우 좋아요</div>
+							        	</c:if>
 									</td>
 									<td class="reviewContent">
 										<div class="row">
 											<div class="reViewImg col-3 align-self-center">
-												<img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid">
+												<img src="<%=request.getContextPath()%>/resources/img/mypage/good.jpg" class="img-fluid">
 											</div>
 											<div class="reviewTitle align-self-center col" data-bs-toggle="collapse" href="#reviewExtend0" role="button" aria-expanded="false" aria-controls="collapseExample">
-												좋아요
+												${viewReview.contents}
 											</div>
 											<div class="col-1 align-self-center">
 												<i class="bi bi-caret-down reviewDown" data-bs-toggle="collapse" href="#reviewExtend0" role="button" aria-expanded="false" aria-controls="collapseExample"></i>
 											</div>
 										</div>
 										<div class="collapse reviewCard" id="reviewExtend0">
-											<img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid reviewCardImg">
-											<div>좋아요</div>
+											<img src="<%=request.getContextPath()%>/resources/img/mypage/good.jpg" class="img-fluid reviewCardImg">
+											<div>${viewReview.contents}</div>
 										</div>
 									</td>
 									<td>홍길동</td>
-									<td>2022-03-22</td>
+									<td>${viewReview.review_date}</td>
 								</tr>
-								<tr>
-									<td>
-										<span class="productViewReviewStar">
-									    	<i class="bi bi-star-fill"></i>
-							        		<i class="bi bi-star-fill"></i>
-							        		<i class="bi bi-star-fill"></i>
-							        		<i class="bi bi-star-fill"></i>
-							        		<i class="bi bi-star"></i>
-							        		<br>
-									    </span>
-									    <div>좋음</div>
-									</td>
-									<td id="reviewContent">
-										<div class="row">
-											<div class="reViewImg col-3 align-self-center">
-											</div>
-											<div class="reviewTitle align-self-center col">
-												좋아요
-											</div>
-											<div class="col-1 align-self-center">
-											</div>
-										</div>
-									</td>
-									<td>홍길동</td>
-									<td>2022-03-22</td>
-								</tr>
-								<tr>
-									<td>
-										<span class="productViewReviewStar">
-									    	<i class="bi bi-star-fill"></i>
-							        		<i class="bi bi-star-fill"></i>
-							        		<i class="bi bi-star-fill"></i>
-							        		<i class="bi bi-star-fill"></i>
-							        		<i class="bi bi-star"></i>
-							        		<br>
-									    </span>
-									    <div>좋음</div>
-									</td>
-									<td class="reviewContent">
-										<div class="row">
-											<div class="reViewImg col-3 align-self-center">
-												<img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid">
-											</div>
-											<div class="reviewTitle align-self-center col" data-bs-toggle="collapse" href="#reviewExtend1" role="button" aria-expanded="false" aria-controls="collapseExample">
-												좋아요
-											</div>
-											<div class="col-1 align-self-center">
-												<i class="bi bi-caret-down reviewDown" data-bs-toggle="collapse" href="#reviewExtend1" role="button" aria-expanded="false" aria-controls="collapseExample"></i>
-											</div>
-										</div>
-										<div class="collapse reviewCard" id="reviewExtend1">
-											<img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid reviewCardImg">
-											<br>
-											<div>좋아요</div>
-										</div>
-									</td>
-									<td>홍길동</td>
-									<td>2022-03-22</td>
-								</tr>
-								<tr>
-									<td>
-										<span class="productViewReviewStar">
-									    	<i class="bi bi-star-fill"></i>
-							        		<i class="bi bi-star-fill"></i>
-							        		<i class="bi bi-star-fill"></i>
-							        		<i class="bi bi-star-fill"></i>
-							        		<i class="bi bi-star"></i>
-							        		<br>
-									    </span>
-									    <div>좋음</div>
-									</td>
-									<td id="reviewContent">
-										<div class="row">
-											<div class="reViewImg col-3 align-self-center">
-											</div>
-											<div class="reviewTitle align-self-center col">
-												좋아요
-											</div>
-											<div class="col-1 align-self-center">
-											</div>
-										</div>
-									</td>
-									<td>홍길동</td>
-									<td>2022-03-22</td>
-								</tr>
-								<tr>
-									<td>
-										<span class="productViewReviewStar">
-									    	<i class="bi bi-star-fill"></i>
-							        		<i class="bi bi-star-fill"></i>
-							        		<i class="bi bi-star-fill"></i>
-							        		<i class="bi bi-star-fill"></i>
-							        		<i class="bi bi-star"></i>
-							        		<br>
-									    </span>
-									    <div>좋음</div>
-									</td>
-									<td class="reviewContent">
-										<div class="row">
-											<div class="reViewImg col-3 align-self-center">
-												<img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid">
-											</div>
-											<div class="reviewTitle align-self-center col" data-bs-toggle="collapse" href="#reviewExtend2" role="button" aria-expanded="false" aria-controls="collapseExample">
-												좋아요
-											</div>
-											<div class="col-1 align-self-center">
-												<i class="bi bi-caret-down reviewDown" data-bs-toggle="collapse" href="#reviewExtend2" role="button" aria-expanded="false" aria-controls="collapseExample"></i>
-											</div>
-										</div>
-										<div class="collapse reviewCard" id="reviewExtend2">
-											<img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid reviewCardImg">
-											<br>
-											<div>좋아요</div>
-										</div>
-									</td>
-									<td>홍길동</td>
-									<td>2022-03-22</td>
-								</tr>
+							</c:forEach>
 							</tbody>
 						</table>
 						
@@ -380,65 +296,31 @@
 								</tr>
 							</thead>
 							<tbody>
+								<c:forEach items="${viewReview}" var="viewReview" varStatus="status">
 								<tr>
 									<td>
 										<div>
-											<img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid">
+											<img src="<%=request.getContextPath()%>/resources/img/mypage/good.jpg" class="img-fluid">
 										</div>
 										<div>
-											<span>홍길동 | 22.03.24</span>
+											<span>홍길동 | ${viewReview.review_date}</span>
 											<div class="productViewReviewStarM">
-												<i class="bi bi-star-fill"></i>
-								        		<i class="bi bi-star-fill"></i>
-								        		<i class="bi bi-star-fill"></i>
-								        		<i class="bi bi-star-fill"></i>
-								        		<i class="bi bi-star"></i>
+												<c:forEach begin="1" end="5" varStatus="reStatus">
+													<c:if test="${reStatus.index <= viewReview.star_count}">
+									    				<i class="bi bi-star-fill"></i>
+													</c:if>
+													<c:if test="${reStatus.index > viewReview.star_count}">
+										    			<i class="bi bi-star"></i>
+													</c:if>
+									    		</c:forEach>
 											</div>
 											<div>
-												좋아요
+												${viewReview.contents}
 											</div>
 										</div>
 									</td>
 								</tr>
-								<tr>
-									<td>
-										<div>
-										</div>
-										<div>
-											<span>홍길동 | 22.03.24</span>
-											<div class="productViewReviewStarM">
-												<i class="bi bi-star-fill"></i>
-								        		<i class="bi bi-star-fill"></i>
-								        		<i class="bi bi-star-fill"></i>
-								        		<i class="bi bi-star-fill"></i>
-								        		<i class="bi bi-star"></i>
-											</div>
-											<div>
-												좋아요
-											</div>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div>
-											<img src="<%=request.getContextPath()%>/resources/img/로고.png" class="img-fluid">
-										</div>
-										<div>
-											<span>홍길동 | 22.03.24</span>
-											<div class="productViewReviewStarM">
-												<i class="bi bi-star-fill"></i>
-								        		<i class="bi bi-star-fill"></i>
-								        		<i class="bi bi-star-fill"></i>
-								        		<i class="bi bi-star-fill"></i>
-								        		<i class="bi bi-star"></i>
-											</div>
-											<div>
-												좋아요
-											</div>
-										</div>
-									</td>
-								</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>

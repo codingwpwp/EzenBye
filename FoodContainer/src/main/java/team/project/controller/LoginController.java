@@ -2,7 +2,6 @@ package team.project.controller;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
@@ -10,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -21,16 +18,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.project.service.MemberService;
+import team.project.service.NoMemberOrdersService;
 import team.project.vo.MemberVO;
+import team.project.vo.NoMemberOrdersVO;
 
 @Controller
 public class LoginController {
-	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@Inject
 	BCryptPasswordEncoder pwdEncoder;
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private NoMemberOrdersService noMemberOrdersService;
 
 	// 로그인 페이지로 이동
 	@RequestMapping(value = "loginmain.do", method = RequestMethod.GET)
@@ -97,7 +98,7 @@ public class LoginController {
 			if(rememberIdYN != null) {	// 아이디 저장 했을 때
 				String id = URLEncoder.encode(vo.getId(), "UTF-8");
 				Cookie idCookie = new Cookie("idCookie", id);
-				idCookie.setPath("/controller");
+				idCookie.setPath("/FoodContainer");
 			    response.addCookie(idCookie);
 			}else {	// 아이디 저장 안 했을 때
 				Cookie[] cookies = request.getCookies();
@@ -112,6 +113,15 @@ public class LoginController {
 					}
 				}
 				
+			}
+			
+			// 임시비밀번호로 했을 때 마이페이지 변경으로 이동하는 로직도 짜야함
+			if(session.getAttribute("needChangePw") != null) {
+				MemberVO memberTemp = (MemberVO)session.getAttribute("needChangePw");
+				if(vo.getId().equals(memberTemp.getId())) {
+					session.setAttribute("needChangePw", null);
+					return "redirect:mypage_changeInforOk.do";
+				}
 			}
 			
 			if(login.getPosition().equals("관리자")) {
@@ -193,10 +203,21 @@ public class LoginController {
 				String name = request.getParameter("name");
 				String email = request.getParameter("receiveMail");
 				MemberVO tempMember = new MemberVO();
+				
 				tempMember.setName(name);
 				tempMember.setEmail(email);
 				
 				tempMember = memberService.emailEasyCheck(tempMember);
+				if(tempMember != null) {
+					String id = tempMember.getId();
+					String tempId = id.substring(0, 4);
+					String tempId2 = id.substring(4, id.length());
+					String stars = "";
+					for(int i = 0; i < tempId2.length(); i++) {
+						stars += "*";
+					}
+					tempMember.setId(tempId + stars);
+				}
 				model.addAttribute("tempMember", tempMember);
 				
 				return "login/id_easy_check";
@@ -206,34 +227,91 @@ public class LoginController {
 		
 	}		
 	
-	//비밀번호확인
-	@ResponseBody
-	@RequestMapping(value = "pwChk", method = RequestMethod.POST)
-	public boolean pwChk(MemberVO vo) throws Exception {
+	// 비밀번호 찾기 페이지로 이동
+	@RequestMapping(value = "pw_find.do", method = RequestMethod.GET)
+	public String FindPw(Model model, HttpServletRequest request) {
+		// 세션 소환
+		HttpSession session = request.getSession();
 		
-		MemberVO login =memberService.Login(vo);
-		boolean pwChk = pwdEncoder.matches(vo.getPw(), login.getPw());
-		return pwChk;
+		if(session.getAttribute("member") != null) {
+			return "redirect:index.do";
+		}else {
+			return "login/pw_find";
+		}
+		
 	}
 	
+	// 비밀번호 찾기페이지에서 인증번호 발송하는 비동기
+	@RequestMapping(value = "sendEmailPw.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String checkPwAndSendEmail(MemberVO vo) throws Exception{
+		return memberService.checkPwAndSendEmail(vo);
+	}
+	
+	// 임시비밀번호 발급 페이지
+	@RequestMapping(value = "pw_email_check.do", method = RequestMethod.POST)
+	public String tempPw(Model model, HttpServletRequest request, MemberVO vo) throws Exception{
+		// 세션 소환
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("member") != null) {
+			return "redirect:index.do";
+		}else {
+			if(vo.getId() == null || vo.getId().equals("")) {
+				return "redirect:index.do";
+			}else {
+				MemberVO memberTemp = memberService.sendTempPw(vo);
+				session.setAttribute("needChangePw", memberTemp);
+				model.addAttribute("memberTemp", memberTemp);
+				
+				return "login/pw_email_check";
+			}
+		}
+		
+	}
+	
+	// 비회원 주문조회페이지로 이동
+	@RequestMapping(value = "noMemberLogin.do", method = RequestMethod.GET)
+	public String noMemberLogin(HttpServletRequest request) {
+		// 세션 소환
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("member") != null) {
+			return "redirect:index.do";
+		}else {
+			return "login/noMemberLogin";
+		}
+		
+	}
+	
+	// 비회원 주문조회 검증 과정
+	@RequestMapping(value = "noMemberLogin.do", method = RequestMethod.POST)
+	public String noMemberCheck(Model model, HttpServletRequest request, NoMemberOrdersVO vo) throws Exception{
+		String resultString =  noMemberOrdersService.noMemberLogin(vo);
+		if(resultString == null) {
+			return "login/noMemberLoginFail";
+		}else {
+			model.addAttribute("no_member_order_index", resultString);
+			return "login/noMemberLoginOk";
+		}
+	}
+	
+	// 비회원 주문 비밀번호 찾기 이메일 보내기 비동기 과정
+	@RequestMapping(value = "noMembersendEmailPw.do", method = RequestMethod.POST, produces ="application/text; charset=utf8")
+	@ResponseBody
+	public String noMemberCheckPwAndSendEmail(NoMemberOrdersVO vo, HttpServletResponse res) throws Exception{
+		String name = noMemberOrdersService.noMemberCheckPwAndSendEmail(vo);
+		return name;
+	}	
+	
+	// 로그아웃
 	@RequestMapping(value = "logout.do", method = RequestMethod.GET)
 	public String loginout(HttpServletRequest request) throws Exception{
-		logger.info("로그아웃");
 		HttpSession session = request.getSession();
-		session.invalidate();
+		session.setAttribute("member", null);
 		return "redirect:index.do";
 	}
 	
-
 	
-	@RequestMapping(value = "pw_find.do", method = RequestMethod.GET)
-	public String login5(Locale locale, Model model) {
-		return "login/pw_find";
-	}
-	
-	@RequestMapping(value = "pw_email_check.do", method = RequestMethod.GET)
-	public String login6(Locale locale, Model model) {
-		return "login/pw_email_check";
-	}
 	
 }

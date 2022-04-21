@@ -62,32 +62,31 @@
                    <div class="container from">
                        <div class="row pwfindform">
 	                        <div class="col-md-12 col-sm-12 col-12">
-	                            <form class="pwfind">
+	                            <form class="pwfind" name="emailPwForm" method="post" action="pw_email_check.do">
 	                                <div class="container">
 	                                    <div class="row rows">
 	                                        <div class="col-12">
-	                                            <h4>임시 비밀번호 발급</h4>
+	                                            <h4>새로운 비밀번호 발급하기</h4>
 	                                        </div>
 	                                        <div class="col-md-12 col-sm-12 col-12">
-	                                            <p>입력하신 정보는 <strong>임시 비밀번호</strong> 발급에만&nbsp; 사용되며 <strong>저장 되지 않습니다.</strong></p>
 	                                            <div id="timer" class="text-danger fw-bold"></div>
 	                                        </div>
 	                                        <div class="col-md-10 col-sm-10 col-12">
-	                                            <input type="text" class="form-control findinput" placeholder="이름을 입력해주세요">
+	                                            <input type="text" class="form-control findinput" name="name" placeholder="2 ~ 6자리의 이름" maxlength="6" autocomplete="off" oninput="checkNamePw(this)">
 	                                        </div>
 	                                        <div class="col-md-10 col-sm-10 col-12">
-	                                            <input type="text" class="form-control findinput" placeholder="아이디 입력해주세요">
+	                                            <input type="text" class="form-control findinput" name="id" placeholder="8 ~ 20자리의 영문 + 숫자" maxlength="20" autocomplete="off" oninput="checkIdPw(this)">
 	                                        </div>
 	                                        <div class="col-md-12 col-sm-12 col-12">
-	                                            <input type="text" class="form-control findemailinput" placeholder="이메일을 입력해주세요" oninput="emailCheck(this)">
-	                                            <button class="btn btn-secondary emailbtn" onclick="sendEmail()">인증번호 발송</button>
+	                                            <input type="text" class="form-control findemailinput" name="email" id="email" placeholder="이메일"  oninput="checkEmailPw(this)" maxlength="50" autocomplete="off">
+	                                            <button type="button" class="btn btn-secondary emailbtn" id="emailBtn" disabled onclick="sendEmailPwBtn()">인증번호 발송</button>
 	                                        </div>
 	                                        <div class="col-md-10 col-sm-10 col-12 ">
-	                                            <input type="text" class="form-control findinput" placeholder="인증번호 입력해주세요">
+	                                            <input type="text" class="form-control findinput" id="randomNum" placeholder="인증번호 입력해주세요" maxlength="6"  autocomplete="off">
 	                                        </div>
 	                                        <span id="emailMessageSpan" class="fw-bold"></span>
 	                                        <div class="col-md-12 col-sm-12 col-12">
-	                                            <input type="button" value="임시 비밀번호 발급" class="btn btn-secondary pwfindbtn" onclick="location.href='pw_email_check.do'">
+	                                            <input type="button" value="비밀번호 발급" id="emailPwSubmitBtn" class="btn btn-secondary pwfindbtn" onclick="pwFindFormSubmitBtn()" disabled>
 	                                        </div>
 	                                    </div>
 	                                </div>

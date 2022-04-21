@@ -15,4 +15,10 @@ public interface NoticeService {
 	NoticeVO noticeDetail(int notice_index) throws Exception;
 	
 	void noticeInsert(NoticeVO vo) throws Exception;
+	
+	void noticeModify(NoticeVO vo) throws Exception;
+	
+	void noticeDelete(int notice_index) throws Exception;
+	
+	int plusHit(int notice_index) throws Exception;
 }

@@ -44,7 +44,7 @@
 			<div class="col-12 col-sm-9 col-md-10 col-lg-8">
 				<article id="mainSection">
 
-					<form action="loginmain.do" name="frm" id="loginForm" class="loginfrm" method="post">
+					<form action="loginmain.do" name="frm" id="loginForm" class="loginfrm" method="post" onsubmit="return false;">
 						<div class="container">
 						
 							<p class="display-5 my-3 fw-bold">로그인</p>
@@ -77,7 +77,7 @@
 							
 							<div class="row">
 								<div class="col-md-12 col-sm-12 col-12 loginbtn">
-									<input type="button" class="btn btn-secondary" value="로그인" onclick="loginCheck()">
+									<input type="submit" class="btn btn-secondary" value="로그인" onclick="loginCheck()">
 								</div>
 							</div>
 
@@ -101,7 +101,7 @@
 							</div>
 							<div class="row lookup">
 								<div class="col-md-12 col-sm-12 col-12 loginbtn">
-									<button class="btn btn-dark">비회원 주문 조회</button>
+									<button type="button" class="btn btn-dark" onclick="location.href='noMemberLogin.do'">비회원 주문 조회</button>
 								</div>
 							</div>
 							

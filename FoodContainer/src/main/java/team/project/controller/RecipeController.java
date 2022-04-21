@@ -55,6 +55,7 @@ public class RecipeController {
 	//레시피메인
 	@RequestMapping(value = "/recipemain.do", method = RequestMethod.GET)
 	public String recipe(Locale locale, Model model,RecipeVO vo,String nowPage,SearchVO searchvo,ReplyVO replyvo) throws Exception{
+		
 		//페이징
 		int nowPageNum = 1;
 		
@@ -64,29 +65,22 @@ public class RecipeController {
 		int count = recipeService.countRecipe();
 		
 		searchvo.setDel_yn("N");
-		//1.게시글 총갯수 구해오기
-		//service 추가 작업
-		//2.pagingutil 객체 생성
+		
 		PagingUtil pu = new PagingUtil(count,nowPageNum,6,5);
 		pu.setStart(pu.getStart()-1);
 		model.addAttribute("pu",pu);
 		//레시피 게시물 리스트
 		List<RecipeVO> recipeList = recipeService.recipeList(pu,searchvo);
-		System.out.println(recipeList);
+		
 		if(searchvo.getSearchValue()!=null) {
 			pu.setSearchValue(searchvo.getSearchValue());
 			pu.setSearchType(searchvo.getSearchType());
 		}
 		model.addAttribute("recipeList", recipeList);
-//		System.out.println("=======================");
-//		System.out.println(vo.getThumbnail_image());
-//		System.out.println("=======================");
+		System.out.println(recipeList);
 		model.addAttribute("nowPage", nowPageNum);
-		//3.2번 객체 model에 담
 		
-//		int replyList = replyService.countReply();
-//		model.addAttribute("replyList",replyList);
-//		System.out.println(replyList);
+	
 		return "recipe/recipemain";
 	}
 	//레시피 작성 화면 view
@@ -107,14 +101,7 @@ public class RecipeController {
 		//회원
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		vo.setMember_index(member.getMember_index());
-		System.out.println("==============================");
-		System.out.println(vo.getMember_index());
-		System.out.println(vo.getTitle());
-		System.out.println(vo.getContents());
-		System.out.println(vo.getProduct_index1());
-		System.out.println(vo.getProduct_index2());
-		System.out.println(vo.getProduct_index3());
-		System.out.println("==============================");
+		
 		recipeService.insertRecipe(vo, tumnailImage, request);
 		return "redirect:recipemain.do";
 	}
@@ -125,23 +112,27 @@ public class RecipeController {
 	public String recipe3(Locale locale, Model model,RecipeVO vo,HttpServletRequest request,ProductVO productVO,ReplyVO replyvo,int recipe_index) throws Exception {
 		logger.info("recipeRead");
 	
-		
 		model.addAttribute("read", recipeService.recipeRead(vo.getRecipe_index()));
 		List<ProductVO> ProductListAll = productService.productListAll(productVO);
 		model.addAttribute("productListAll",ProductListAll);
 
-		
 		List<ReplyVO> replyList = replyService.replyList(replyvo);
 		model.addAttribute("replyList",replyList);
-		
-
 		model.addAttribute("vo",vo);
-		
 		
 		return "recipe/recipeview";
 	}
 	
-
+	//베스트 레시피 선정
+	@RequestMapping(value="updateRank",method=RequestMethod.POST)
+	public String updateRank(@RequestParam("best_rank")int best_rank,@RequestParam("recipe_index")int recipe_index,RecipeVO vo) throws Exception{
+		
+		recipeService.initRank(best_rank);
+		recipeService.updateRank(vo);
+		
+		return "redirect:recipemain.do"; 
+		
+	}
 	
 	
 	//레시피내용 수정 view
@@ -173,8 +164,4 @@ public class RecipeController {
 	
 	
 	
-	@RequestMapping(value = "/recipe/popup.do", method = RequestMethod.GET)
-	public String popup(Locale locale, Model model) {
-		return "recipe/popup";
-	}
 }

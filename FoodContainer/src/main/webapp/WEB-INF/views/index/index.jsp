@@ -141,11 +141,36 @@
 									    		</span>
 									    	</c:if>
 									    	<span class="indexStar">
-									    		<i class="bi bi-star-fill"></i>
-							        			<i class="bi bi-star-fill"></i>
-							        			<i class="bi bi-star-fill"></i>
-							        			<i class="bi bi-star-fill"></i>
-							        			<i class="bi bi-star"></i>
+									    		<c:set var="sum" value="0" />
+										        <c:set var="length" value="0" />
+										        <c:set var="avrg" />
+										   		
+										   		<c:forEach items="${viewReview}" var="viewReview">
+											   		<c:if test="${popularList.product_index == viewReview.product_index}">
+									        			<c:set var="sum" value="${sum+viewReview.star_count}" />
+												   	</c:if>
+											   	</c:forEach>
+											   	
+											   	<c:forEach items="${viewReview}" var="viewReview">
+											   		<c:if test="${popularList.product_index == viewReview.product_index}">
+									        			<c:set var="length" value="${length+1}" />
+												   	</c:if>
+											   	</c:forEach>
+									        	
+										      	<c:set var="avrg" value="${sum/length}" />
+										       	
+										       	<c:if test="${length == 0 }">
+										       		<c:set var="avrg" value="0" />
+										       	</c:if>
+										       	
+										        <c:forEach begin="1" end="5" varStatus="reStatus">
+													<c:if test="${reStatus.index <= avrg}">
+													   	<i class="bi bi-star-fill"></i>
+													</c:if>
+													<c:if test="${reStatus.index > avrg}">
+														<i class="bi bi-star"></i>
+													</c:if>
+												</c:forEach>
 									    	</span>
 									    	<br>
 									    	<c:set var="delivery" value="${popularList.delivery_free_YN}" />
@@ -256,11 +281,36 @@
 									    		</span>
 									    	</c:if>
 										<span class="indexStarM">
-											<i class="bi bi-star-fill"></i>
-								        	<i class="bi bi-star-fill"></i>
-								        	<i class="bi bi-star-fill"></i>
-								        	<i class="bi bi-star-fill"></i>
-								        	<i class="bi bi-star"></i>
+											<c:set var="sum" value="0" />
+										        <c:set var="length" value="0" />
+										        <c:set var="avrg" />
+										   		
+										   		<c:forEach items="${viewReview}" var="viewReview">
+											   		<c:if test="${popularList.product_index == viewReview.product_index}">
+									        			<c:set var="sum" value="${sum+viewReview.star_count}" />
+												   	</c:if>
+											   	</c:forEach>
+											   	
+											   	<c:forEach items="${viewReview}" var="viewReview">
+											   		<c:if test="${popularList.product_index == viewReview.product_index}">
+									        			<c:set var="length" value="${length+1}" />
+												   	</c:if>
+											   	</c:forEach>
+									        	
+										      	<c:set var="avrg" value="${sum/length}" />
+										       	
+										       	<c:if test="${length == 0 }">
+										       		<c:set var="avrg" value="0" />
+										       	</c:if>
+										       	
+										        <c:forEach begin="1" end="5" varStatus="reStatus">
+													<c:if test="${reStatus.index <= avrg}">
+													   	<i class="bi bi-star-fill"></i>
+													</c:if>
+													<c:if test="${reStatus.index > avrg}">
+														<i class="bi bi-star"></i>
+													</c:if>
+												</c:forEach>
 										</span>
 										<br>
 										<c:set var="delivery" value="${popularList.delivery_free_YN}" />

@@ -20,7 +20,9 @@ form {
 #summernote {
 	height: 200px;
 }
-
+.note-statusbar{
+	display: none;
+}
 .note-editor.note-frame {
 	width: 100%;
 	max-width: 1000px;

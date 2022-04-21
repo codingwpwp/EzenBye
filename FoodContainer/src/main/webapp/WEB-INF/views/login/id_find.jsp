@@ -70,7 +70,7 @@
                                             <p>입력하신 정보는 <strong>아이디 찾기</strong>에만 사용되며 <strong>저장되지 않습니다.</strong></p>
                                         </div>
                                         <div class="col-12 leftform">
-                                            <input type="text" name="name" class="form-control findinput" placeholder="이름를 입력해주세요" maxlength="6" autocomplete="off" oninput="checkName(this)">
+                                            <input type="text" name="name" class="form-control findinput" placeholder="이름을 입력해주세요" maxlength="6" autocomplete="off" oninput="checkName(this)">
                                         </div>
                                         <div class="col-12 leftform">
                                             <input type="text" name="phone" class="form-control findinput" placeholder="핸드폰 뒤 7~8자리를 입력 해주세요" maxlength="8" oninput="checkPhone(this)" autocomplete="off">
@@ -95,14 +95,14 @@
                                             <div id="timer" class="text-danger fw-bold"></div>
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-12 rightform">
-                                            <input type="text" class="form-control findinput" name="name" placeholder="이름를 입력해주세요" maxlength="6" autocomplete="off">
+                                            <input type="text" class="form-control findinput" name="name" placeholder="이름을 입력해주세요" maxlength="6" autocomplete="off">
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-12 rightform">
                                             <input type="text" class="form-control findinput" placeholder="이메일을 입력해주세요" name="receiveMail" oninput="emailCheck(this)" autocomplete="off">
 											<input class="btn btn-secondary emailbtn" type="button" value="인증번호 발송" id="emailbtn" onclick="sendEmail()">
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-12 rightform">
-                                            <input type="text" class="form-control findinput" id="randomNum" placeholder="인증번호 입력해주세요">
+                                            <input type="text" class="form-control findinput" id="randomNum" placeholder="인증번호를 입력해주세요">
                                         </div>
                                         <span id="emailMessageSpan" class="fw-bold"></span>
                                         <div class="col-md-12 col-sm-12 col-12 rightform">

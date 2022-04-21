@@ -1,3 +1,4 @@
+  //썸머노트
   $('#summernote').summernote({
             placeholder: 'Hello stand alone ui',
             tabsize: 2,
@@ -9,9 +10,26 @@
             ]
         });
         $('#summernote').summernote('disable');
-
-        function best(){
-            var text = prompt("금:1 | 은:2 | 동:3");
+//베스트 레시피
+function best(){
+            var text = Number(prompt("금:1 | 은:2 | 동:3"));
+            if(text == 1 || text ==2 || text == 3){
+				if(text==1){
+					alert("베스트 레시피 금 선정!!");
+					
+				}else if(text==2){
+					alert("베스트 레시피 은 선정!!");
+					
+				}else if(text==3){
+					alert("베스트 레시피 동 선정!!");
+				
+				}
+				
+				
+			}else{
+				alert("잘못 입력하셨습니다.");
+			}
+            document.frm.best_rank.value=text;
         }
         
 
@@ -29,7 +47,7 @@ function insertThumb(){
 	});
 }
 
-
+//댓글 수정
 function modifyReply(obj,reply_index){
 			var contents = $(obj).parent().parent().next().find("span").text(); 
 			var span = $(obj).parent();
@@ -40,7 +58,7 @@ function modifyReply(obj,reply_index){
 			
 		
 };
-
+//댓글 수정
 function updateReply(obj,reply_index,recipe_index){
 	var contents= $(obj).parent().parent().next().find("input[type=text]").val(); 
 	var span = $(obj).parent();
@@ -59,7 +77,7 @@ function updateReply(obj,reply_index,recipe_index){
 		}
 	});
 }
-
+//댓글 삭제
 function deleteReply(obj,reply_index,recipe_index){
 	var span = $(obj).parent();
 	$.ajax({

@@ -43,6 +43,14 @@ public class ProductServiceImpl implements ProductService {
 		return prodcutListAll;
 	}
 	
+	@Override
+	public List<ProductVO> productSearch(ProductVO productVO) throws Exception {
+		
+		List<ProductVO> productSearch = productDao.productSearch(productVO);
+		
+		return productSearch;
+	}
+	
 	
 	//상세보기
 	@Override
@@ -366,5 +374,6 @@ public class ProductServiceImpl implements ProductService {
 	public void adminProductDelYNisN(String product_index) throws Exception {
 		productDao.adminProductDelYNisN(product_index);
 	}
+	
 	
 }

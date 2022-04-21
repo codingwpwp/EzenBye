@@ -32,6 +32,7 @@
 		WHERE name=#{name}
 		AND phone LIKE CONCAT('%',#{phone},'%')
 		AND del_yn = 'N'
+		AND position = '일반'
 	</select>
 	<!-- 이메일 아이디 찾기 -->
 	<select id="emailEasyCheck" resultType="MemberVO" parameterType="MemberVO">
@@ -40,7 +41,27 @@
 		WHERE name=#{name}
 		AND email=#{email}
 		AND del_yn = 'N'
+		AND position = '일반'
 	</select>
+	
+	<!-- 이메일 인증 전에 회원 존재 여부 따지기 -->
+	<select id="pwCheckYN" resultType="int" parameterType="MemberVO">
+		SELECT COUNT(*)
+		FROM member
+		WHERE name=#{name}
+		AND id=#{id}
+		AND email=#{email}
+		AND position = '일반'
+	</select>
+   
+	<!-- 임시 비밀번호 관련 -->
+	<update id="changeTempPw" parameterType="MemberVO">
+		UPDATE MEMBER SET pw = #{pw}
+		WHERE name = #{name}
+		AND id=#{id}
+		AND email=#{email}
+	</update>
+	
 	
 	<select id="memberInfor" resultType="MemberVO" parameterType="int">
 		SELECT *
@@ -106,7 +127,7 @@
 		UPDATE MEMBER SET
 		address = #{address}
 		WHERE member_index = #{member_index} 
-	</update>
+	</update>   
 	   
     <!-- 여기서 부터는 관리자페이지 -->
     

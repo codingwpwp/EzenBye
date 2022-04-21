@@ -77,28 +77,40 @@
 					<div class="fs-5 my-2 fw-bold"></div>
 
 					<div class="container">
+					
 						<div class="row hd">
 						
 							<div class="col-sm-9 col-xs-3 col-12">
-								<h3>${read.title}</h3>
+								<h3>
+								<c:if test="${read.best_rank==1 }">
+								<img src="<%=request.getContextPath()%>/resources/img/금메달.png" id="bestimg">
+								</c:if>
+								<c:if test="${read.best_rank==2 }">
+								<img src="<%=request.getContextPath()%>/resources/img/은메달.png" id="bestimg">
+								</c:if>
+								<c:if test="${read.best_rank==3 }">
+								<img src="<%=request.getContextPath()%>/resources/img/동메달.png" id="bestimg">
+								</c:if>
+								${read.title}
+								</h3>
 							</div>
 
 
-							<div class="col-sm-3 col-11">추천수 : (${read.thumb}) | 조회수 : (${read.hit}) | 댓글(${read.reply_index})</div>
+							<div class="col-sm-3 col-12 hddiv">조회수 : (${read.hit}) | 댓글(${read.reply_index})</div>
 						</div>
 
 						<div class="row body">
 
-							<div class="col-sm-8 col-10">
+							<div class="col-sm-8 col-12">
 								<table>
-							<%-- 	<c:forEach items="${product_index}" var="productListAll" varStatus="status"> --%>
+							
 									<tr>
 										<th class="tdimg"><img src="<%=request.getContextPath()%>/resources/img/${read.product_img1}" width="150"
 											height="150"></th>
 										
 										<td class="tdtx">${read.product_name1}</td>
 									</tr>
-									<%-- </c:forEach> --%>
+									
 									<c:if test="${not empty read.product_index2}">
 									<tr>
 										<th class="plus"><strong>+</strong></th>
@@ -133,25 +145,7 @@
 								<textarea readonly id="summernote">${read.contents}</textarea>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-sm-12 col-12 good">
-								 <a href="#" onclick="insertThumb(); return false;" name="thumb">
-								<svg xmlns="http://www.w3.org/2000/svg"
-										width="50" height="50" fill="currentColor"
-										class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
-                                    <path
-											d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z" />
-                                  </svg></a>
-                                <!--   <button type="button"onclick="insertThumb(); return false;" name="thumb">
-								<svg xmlns="http://www.w3.org/2000/svg"
-										width="50" height="50" fill="currentColor"
-										class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
-                                    <path
-											d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z" />
-                                  </svg></button> -->
-								<div name="">(${vo.thumb})</div>
-							</div>
-						</div>
+						
 						<div class="row">
 							<div class="col-sm-12 col-12">
 								<div class="d-flex button">
@@ -162,15 +156,29 @@
 								<form action="recipedelete" method="post">
 								<input type="submit" value="삭제" class="btn btn-danger">
 								<input type="hidden" value="${read.recipe_index}" name="recipe_index">
-								</form>
-								
+								</form>			
 								</c:if>
-								
+									<c:if test="${member.member_index==0}">
+								<input type="button" value="수정" class="btn btn-secondary" onclick="location.href='recipemodify.do?recipe_index=${vo.recipe_index}'">
+								<form action="recipedelete" method="post">
+								<input type="submit" value="삭제" class="btn btn-danger">
+								<input type="hidden" value="${read.recipe_index}" name="recipe_index">
+								</form>
+								</c:if>
 								</div> 
 							</div>
 							<div class="col-sm-12 col-12">
+							<form name="frm" action="updateRank" method="post">
+							
+							<input type="hidden" value="${read.best_rank}" name="best_rank" id="best_rank">
+							<input type="hidden" value="${read.recipe_index}" name="recipe_index" >
+							
+							<c:if test="${member.member_index==0}">
 								<button onclick="best();" class="btn btn-success">베스트
 									레시피 선정</button>
+							</c:if>		
+							
+							</form>
 							</div>
 						</div>
 						<div class="row">
@@ -187,7 +195,12 @@
 								<input type="text" name="contents" placeholder="로그인 후 댓글 작성이 가능합니다.">
 							</div>
 							<div class="col-sm-2 col-3">
-								<button class="btn btn-secondary" type="submit">등록</button>
+						 	<c:if test="${member==null}">
+								<button class="btn btn-secondary tt" type="button" onclick="alert('로그인 후 이용해주세요!!')">등록</button>
+							</c:if>	
+							 	<c:if test="${member!=null}">
+								<button class="btn btn-secondary tt" type="submit">등록</button>
+							</c:if>	
 							</div>
 							
 						</div>
@@ -204,9 +217,18 @@
 							<div class="col-lg-2 col-md-2 col-sm-2 col-6 wday" name="replydate" id="replydate">${re.reply_date}
 							</div>
 							<div class="col-md-2 col-sm-2 col-3 report"  name="replybtn" id="replybtn">
-								<!-- <a href="#">신고<i class="bi bi-brightness-alt-high"></i></a> -->
+								<!-- 회원 -->
 								<c:if test="${member.member_index==read.member_index}">
-							<!-- 	<a hrep="recipeview_reply_modify.do" onclick="recipeview_reply_modify.do">수정</a> -->
+								<span>
+								
+									<input type="button" value="수정" onclick="modifyReply(this,${re.reply_index},${re.recipe_index});" id="modifybtn" class="btn btn-secondary replymod">
+									<input type="button" value="삭제" onclick="deleteReply(this,${re.reply_index},${re.recipe_index});" id="deletebtn" class="btn btn-danger replydel">
+								</span>
+								<span>
+								</span>
+								</c:if>
+								<!-- 관리자 -->
+								<c:if test="${member.member_index==0}">
 								<span>
 								
 									<input type="button" value="수정" onclick="modifyReply(this,${re.reply_index},${re.recipe_index});" id="modifybtn" class="btn btn-secondary replymod">

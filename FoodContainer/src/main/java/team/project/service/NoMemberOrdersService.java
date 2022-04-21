@@ -20,4 +20,10 @@ public interface NoMemberOrdersService {
 	// 비회원 주문 조회
 	List<NoMemberOrdersVO> adminNoMemberOrdersList(SearchVO searchvo, int nowPage) throws Exception;
 	PagingUtil adminNoMemberOrdersPaging(SearchVO searchvo, int nowPage) throws Exception;
+	
+	// 비회원 로그인 검증 과정
+	String noMemberLogin(NoMemberOrdersVO vo) throws Exception;
+	
+	// 비회원 주문 비밀번호 찾기 이메일
+	String noMemberCheckPwAndSendEmail(NoMemberOrdersVO vo) throws Exception;
 }
