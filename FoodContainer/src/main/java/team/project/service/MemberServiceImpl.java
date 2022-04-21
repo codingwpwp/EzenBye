@@ -338,6 +338,14 @@ public class MemberServiceImpl implements MemberService {
 		}
 		
 	}
+
+	@Override
+	public List<MemberVO> MemberList(MemberVO memberVO) throws Exception {
+		
+		List<MemberVO> MemberList = memberDao.MemberList(memberVO);
+		
+		return MemberList;
+	}
 	
 }
  

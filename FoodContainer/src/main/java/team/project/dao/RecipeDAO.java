@@ -81,7 +81,9 @@ public class RecipeDAO {
 		sqlSession.update(Namespace+".updateRank",vo);
 	}
 	
-
+	public List<RecipeVO> viewRecipeList(RecipeVO recipeVO) throws Exception {
+		return sqlSession.selectList(Namespace + ".viewRecipeList", recipeVO);
+	}
 		
 }
 

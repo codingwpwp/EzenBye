@@ -267,9 +267,9 @@
 									searchHtml += "<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center'>";
 									searchHtml += "<div class='card' style='width: 18rem;'>";
 									searchHtml += "<a href='productView.do?product_index="+data[i].product_index+"' onclick='productCookie(this)'>";
-									searchHtml += "<img src='/controller/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='card-img-top cardImg' alt='"+data[i].product_name+"'>";
+									searchHtml += "<img src='/FoodContainer/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='card-img-top cardImg' alt='"+data[i].product_name+"'>";
 									if(data[i].inventory == 0){
-										searchHtml += "<img src='/controller/resources/img/매진.png' class='card-img-top pListSold'>";
+										searchHtml += "<img src='/FoodContainer/resources/img/매진.png' class='card-img-top pListSold'>";
 										searchHtml += "<div class='pListSoldout'></div>";
 									}
 									searchHtml += "<input type='hidden' class='inventory"+i+"' value='"+data[i].inventory+"'>";
@@ -321,17 +321,17 @@
 										userDibsProductArr = userDibsProduct.split(",");
 										for(var j=0; j<userDibslength; j++){
 											if(userDibsCheck == loginCheck && data[i].product_index == $.trim(userDibsProductArr[j])){
-												searchHtml += "<img src='/controller/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+												searchHtml += "<img src='/FoodContainer/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 												heartCheck = 1;
 											}
 										}
 										if(heartCheck == 0){
-											searchHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+											searchHtml += "<img src='/FoodContainer/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 										}
 									}else{
-										searchHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+										searchHtml += "<img src='/FoodContainer/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 									}
-									searchHtml += "<img src='/controller/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='cart(this)'>";
+									searchHtml += "<img src='/FoodContainer/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='cart(this)'>";
 									searchHtml += "<input type='hidden' value='"+i+"'>";  
 									searchHtml += "</div>";
 									searchHtml += "</div>";
@@ -352,9 +352,9 @@
 									searchHtml += "<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center'>";
 									searchHtml += "<div class='card' style='width: 18rem;'>";
 									searchHtml += "<a href='productView.do?product_index="+data[i].product_index+"' onclick='productCookie(this)'>";
-									searchHtml += "<img src='/controller/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='card-img-top cardImg' alt='"+data[i].product_name+"'>";
+									searchHtml += "<img src='/FoodContainer/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='card-img-top cardImg' alt='"+data[i].product_name+"'>";
 									if(data[i].inventory == 0){
-										searchHtml += "<img src='/controller/resources/img/매진.png' class='card-img-top pListSold'>";
+										searchHtml += "<img src='/FoodContainer/resources/img/매진.png' class='card-img-top pListSold'>";
 										searchHtml += "<div class='pListSoldout'></div>";
 									}
 									searchHtml += "<input type='hidden' class='inventory"+i+"' value='"+data[i].inventory+"'>";
@@ -406,17 +406,17 @@
 										userDibsProductArr = userDibsProduct.split(",");
 										for(var j=0; j<userDibslength; j++){
 											if(userDibsCheck == loginCheck && data[i].product_index == $.trim(userDibsProductArr[j])){
-												searchHtml += "<img src='/controller/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+												searchHtml += "<img src='/FoodContainer/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 												heartCheck = 1;
 											}
 										}
 										if(heartCheck == 0){
-											searchHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+											searchHtml += "<img src='/FoodContainer/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 										}
 									}else{
-										searchHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+										searchHtml += "<img src='/FoodContainer/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 									}
-									searchHtml += "<img src='/controller/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='cart(this)'>";
+									searchHtml += "<img src='/FoodContainer/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='cart(this)'>";
 									searchHtml += "<input type='hidden' value='"+i+"'>";  
 									searchHtml += "</div>";
 									searchHtml += "</div>";
@@ -445,9 +445,9 @@
 									searchHtml += "<a href='productView.do?product_index="+data[i].product_index+"' onclick='productCookie(this)'>";
 									searchHtml += "<div class='productListMImg'>";
 									searchHtml += "<div style='width:100px; height:100px;'>";
-									searchHtml += "<img src='/controller/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='img-fluid' style='width:100px; height:100px;' alt='"+data[i].product_name+"'>";
+									searchHtml += "<img src='/FoodContainer/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='img-fluid' style='width:100px; height:100px;' alt='"+data[i].product_name+"'>";
 										if(data[i].inventory == 0){
-											searchHtml += "<img src='/controller/resources/img/매진.png' class='card-img-top pListSold'>";
+											searchHtml += "<img src='/FoodContainer/resources/img/매진.png' class='card-img-top pListSold'>";
 											searchHtml += "<div class='pListSoldout'></div>";
 										}	
 										searchHtml += "<input type='hidden' class='inventoryM"+i+"' value='"+data[i].inventory+"'>";			
@@ -495,17 +495,17 @@
 											userDibsProductArr = userDibsProduct.split(",");
 											for(var j=0; j<userDibsCheck.lenght; j++){
 												if(userDibsCheck == loginCheck && data[i].product_index == userDibsProductArr[j]){
-													searchHtml += "<img src='/controller/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+													searchHtml += "<img src='/FoodContainer/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 													heartCheck = 1;
 												}
 											}
 											if(heartCheck == 0){
-												searchHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+												searchHtml += "<img src='/FoodContainer/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 											}
 										}else{
-											searchHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+											searchHtml += "<img src='/FoodContainer/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 										}
-										searchHtml += "<img src='/controller/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='pListCart(this)'>";
+										searchHtml += "<img src='/FoodContainer/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='pListCart(this)'>";
 										searchHtml += "<input type='hidden' value='"+i+"'>";
 										searchHtml += "</div>";
 										searchHtml += "</div>";
@@ -523,9 +523,9 @@
 									searchHtml += "<a href='productView.do?product_index="+data[i].product_index+"' onclick='productCookie(this)'>";
 									searchHtml += "<div class='productListMImg'>";
 									searchHtml += "<div style='width:100px; height:100px;'>";
-									searchHtml += "<img src='/controller/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='img-fluid' style='width:100px; height:100px;' alt='"+data[i].product_name+"'>";
+									searchHtml += "<img src='/FoodContainer/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='img-fluid' style='width:100px; height:100px;' alt='"+data[i].product_name+"'>";
 										if(data[i].inventory == 0){
-											searchHtml += "<img src='/controller/resources/img/매진.png' class='card-img-top pListSold'>";
+											searchHtml += "<img src='/FoodContainer/resources/img/매진.png' class='card-img-top pListSold'>";
 											searchHtml += "<div class='pListSoldout'></div>";
 										}	
 										searchHtml += "<input type='hidden' class='inventoryM"+i+"' value='"+data[i].inventory+"'>";			
@@ -573,17 +573,17 @@
 											userDibsProductArr = userDibsProduct.split(",");
 											for(var j=0; j<userDibsCheck.lenght; j++){
 												if(userDibsCheck == loginCheck && data[i].product_index == userDibsProductArr[j]){
-													searchHtml += "<img src='/controller/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+													searchHtml += "<img src='/FoodContainer/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 													heartCheck = 1;
 												}
 											}
 											if(heartCheck == 0){
-												searchHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+												searchHtml += "<img src='/FoodContainer/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 											}
 										}else{
-											searchHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+											searchHtml += "<img src='/FoodContainer/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 										}
-										searchHtml += "<img src='/controller/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='pListCart(this)'>";
+										searchHtml += "<img src='/FoodContainer/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='pListCart(this)'>";
 										searchHtml += "<input type='hidden' value='"+i+"'>";
 										searchHtml += "</div>";
 										searchHtml += "</div>";
@@ -1176,9 +1176,9 @@
 						mainSectionHtml += "<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center'>";
 						mainSectionHtml += "<div class='card' style='width: 18rem;'>";
 						mainSectionHtml += "<a href='productView.do?product_index="+data[i].product_index+"' onclick='productCookie(this)'>";
-						mainSectionHtml += "<img src='/controller/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='card-img-top cardImg' alt='"+data[i].product_name+"'>";
+						mainSectionHtml += "<img src='/FoodContainer/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='card-img-top cardImg' alt='"+data[i].product_name+"'>";
 						if(data[i].inventory == 0){
-							mainSectionHtml += "<img src='/controller/resources/img/매진.png' class='card-img-top pListSold'>";
+							mainSectionHtml += "<img src='/FoodContainer/resources/img/매진.png' class='card-img-top pListSold'>";
 							mainSectionHtml += "<div class='pListSoldout'></div>";
 						}
 						mainSectionHtml += "<input type='hidden' class='inventory"+i+"' value='"+data[i].inventory+"'>";
@@ -1230,17 +1230,17 @@
 							userDibsProductArr = userDibsProduct.split(",");
 							for(var j=0; j<userDibslength; j++){
 								if(userDibsCheck == loginCheck && data[i].product_index == $.trim(userDibsProductArr[j])){
-									mainSectionHtml += "<img src='/controller/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+									mainSectionHtml += "<img src='/FoodContainer/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 									heartCheck = 1;
 								}
 							}
 							if(heartCheck == 0){
-								mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+								mainSectionHtml += "<img src='/FoodContainer/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 							}
 						}else{
-							mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+							mainSectionHtml += "<img src='/FoodContainer/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 						}
-						mainSectionHtml += "<img src='/controller/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='cart(this)'>";
+						mainSectionHtml += "<img src='/FoodContainer/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='cart(this)'>";
 						mainSectionHtml += "<input type='hidden' value='"+i+"'>";  
 						mainSectionHtml += "</div>";
 						mainSectionHtml += "</div>";
@@ -1264,9 +1264,9 @@
 					mainSectionHtml += "<a href='productView.do?product_index="+data[i].product_index+"' onclick='productCookie(this)'>";
 					mainSectionHtml += "<div class='productListMImg'>";
 					mainSectionHtml += "<div style='width:100px; height:100px;'>";
-					mainSectionHtml += "<img src='/controller/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='img-fluid' style='width:100px; height:100px;' alt='"+data[i].product_name+"'>";
+					mainSectionHtml += "<img src='/FoodContainer/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='img-fluid' style='width:100px; height:100px;' alt='"+data[i].product_name+"'>";
 						if(data[i].inventory == 0){
-							mainSectionHtml += "<img src='/controller/resources/img/매진.png' class='card-img-top pListSold'>";
+							mainSectionHtml += "<img src='/FoodContainer/resources/img/매진.png' class='card-img-top pListSold'>";
 							mainSectionHtml += "<div class='pListSoldout'></div>";
 						}	
 						mainSectionHtml += "<input type='hidden' class='inventoryM"+i+"' value='"+data[i].inventory+"'>";			
@@ -1314,17 +1314,17 @@
 							userDibsProductArr = userDibsProduct.split(",");
 							for(var j=0; j<userDibsCheck.lenght; j++){
 								if(userDibsCheck == loginCheck && data[i].product_index == userDibsProductArr[j]){
-									mainSectionHtml += "<img src='/controller/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+									mainSectionHtml += "<img src='/FoodContainer/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 									heartCheck = 1;
 								}
 							}
 							if(heartCheck == 0){
-								mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+								mainSectionHtml += "<img src='/FoodContainer/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 							}
 						}else{
-							mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+							mainSectionHtml += "<img src='/FoodContainer/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 						}
-						mainSectionHtml += "<img src='/controller/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='pListCart(this)'>";
+						mainSectionHtml += "<img src='/FoodContainer/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='pListCart(this)'>";
 						mainSectionHtml += "<input type='hidden' value='"+i+"'>";
 						mainSectionHtml += "</div>";
 						mainSectionHtml += "</div>";
@@ -1347,9 +1347,9 @@
 							mainSectionHtml += "<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center'>";
 							mainSectionHtml += "<div class='card' style='width: 18rem;'>";
 							mainSectionHtml += "<a href='productView.do?product_index="+data[i].product_index+"' onclick='productCookie(this)'>";
-							mainSectionHtml += "<img src='/controller/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='card-img-top cardImg' alt='"+data[i].product_name+"'>";
+							mainSectionHtml += "<img src='/FoodContainer/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='card-img-top cardImg' alt='"+data[i].product_name+"'>";
 							if(data[i].inventory == 0){
-								mainSectionHtml += "<img src='/controller/resources/img/매진.png' class='card-img-top pListSold'>";
+								mainSectionHtml += "<img src='/FoodContainer/resources/img/매진.png' class='card-img-top pListSold'>";
 								mainSectionHtml += "<div class='pListSoldout'></div>";
 							}
 							mainSectionHtml += "<input type='hidden' class='inventory"+i+"' value='"+data[i].inventory+"'>";
@@ -1401,17 +1401,17 @@
 								userDibsProductArr = userDibsProduct.split(",");
 								for(var j=0; j<userDibslength; j++){
 									if(userDibsCheck == loginCheck && data[i].product_index == $.trim(userDibsProductArr[j])){
-										mainSectionHtml += "<img src='/controller/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+										mainSectionHtml += "<img src='/FoodContainer/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 										heartCheck = 1;
 									}
 								}
 								if(heartCheck == 0){
-									mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+									mainSectionHtml += "<img src='/FoodContainer/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 								}
 							}else{
-								mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+								mainSectionHtml += "<img src='/FoodContainer/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 							}
-							mainSectionHtml += "<img src='/controller/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='cart(this)'>";
+							mainSectionHtml += "<img src='/FoodContainer/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='cart(this)'>";
 							mainSectionHtml += "<input type='hidden' value='"+i+"'>";  
 							mainSectionHtml += "</div>";
 							mainSectionHtml += "</div>";
@@ -1432,9 +1432,9 @@
 							mainSectionHtml += "<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 productAll d-flex justify-content-center'>";
 							mainSectionHtml += "<div class='card' style='width: 18rem;'>";
 							mainSectionHtml += "<a href='productView.do?product_index="+data[i].product_index+"' onclick='productCookie(this)'>";
-							mainSectionHtml += "<img src='/controller/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='card-img-top cardImg' alt='"+data[i].product_name+"'>";
+							mainSectionHtml += "<img src='/FoodContainer/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='card-img-top cardImg' alt='"+data[i].product_name+"'>";
 							if(data[i].inventory == 0){
-								mainSectionHtml += "<img src='/controller/resources/img/매진.png' class='card-img-top pListSold'>";
+								mainSectionHtml += "<img src='/FoodContainer/resources/img/매진.png' class='card-img-top pListSold'>";
 								mainSectionHtml += "<div class='pListSoldout'></div>";
 							}
 							mainSectionHtml += "<input type='hidden' class='inventory"+i+"' value='"+data[i].inventory+"'>";
@@ -1486,17 +1486,17 @@
 								userDibsProductArr = userDibsProduct.split(",");
 								for(var j=0; j<userDibslength; j++){
 									if(userDibsCheck == loginCheck && data[i].product_index == $.trim(userDibsProductArr[j])){
-										mainSectionHtml += "<img src='/controller/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+										mainSectionHtml += "<img src='/FoodContainer/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 										heartCheck = 1;
 									}
 								}
 								if(heartCheck == 0){
-									mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+									mainSectionHtml += "<img src='/FoodContainer/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 								}
 							}else{
-								mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+								mainSectionHtml += "<img src='/FoodContainer/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 							}
-							mainSectionHtml += "<img src='/controller/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='cart(this)'>";
+							mainSectionHtml += "<img src='/FoodContainer/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='cart(this)'>";
 							mainSectionHtml += "<input type='hidden' value='"+i+"'>";  
 							mainSectionHtml += "</div>";
 							mainSectionHtml += "</div>";
@@ -1525,9 +1525,9 @@
 							mainSectionHtml += "<a href='productView.do?product_index="+data[i].product_index+"' onclick='productCookie(this)'>";
 							mainSectionHtml += "<div class='productListMImg'>";
 							mainSectionHtml += "<div style='width:100px; height:100px;'>";
-							mainSectionHtml += "<img src='/controller/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='img-fluid' style='width:100px; height:100px;' alt='"+data[i].product_name+"'>";
+							mainSectionHtml += "<img src='/FoodContainer/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='img-fluid' style='width:100px; height:100px;' alt='"+data[i].product_name+"'>";
 								if(data[i].inventory == 0){
-									mainSectionHtml += "<img src='/controller/resources/img/매진.png' class='card-img-top pListSold'>";
+									mainSectionHtml += "<img src='/FoodContainer/resources/img/매진.png' class='card-img-top pListSold'>";
 									mainSectionHtml += "<div class='pListSoldout'></div>";
 								}	
 								mainSectionHtml += "<input type='hidden' class='inventoryM"+i+"' value='"+data[i].inventory+"'>";			
@@ -1575,17 +1575,17 @@
 									userDibsProductArr = userDibsProduct.split(",");
 									for(var j=0; j<userDibsCheck.lenght; j++){
 										if(userDibsCheck == loginCheck && data[i].product_index == userDibsProductArr[j]){
-											mainSectionHtml += "<img src='/controller/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+											mainSectionHtml += "<img src='/FoodContainer/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 											heartCheck = 1;
 										}
 									}
 									if(heartCheck == 0){
-										mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+										mainSectionHtml += "<img src='/FoodContainer/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 									}
 								}else{
-									mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+									mainSectionHtml += "<img src='/FoodContainer/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 								}
-								mainSectionHtml += "<img src='/controller/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='pListCart(this)'>";
+								mainSectionHtml += "<img src='/FoodContainer/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='pListCart(this)'>";
 								mainSectionHtml += "<input type='hidden' value='"+i+"'>";
 								mainSectionHtml += "</div>";
 								mainSectionHtml += "</div>";
@@ -1603,9 +1603,9 @@
 							mainSectionHtml += "<a href='productView.do?product_index="+data[i].product_index+"' onclick='productCookie(this)'>";
 							mainSectionHtml += "<div class='productListMImg'>";
 							mainSectionHtml += "<div style='width:100px; height:100px;'>";
-							mainSectionHtml += "<img src='/controller/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='img-fluid' style='width:100px; height:100px;' alt='"+data[i].product_name+"'>";
+							mainSectionHtml += "<img src='/FoodContainer/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='img-fluid' style='width:100px; height:100px;' alt='"+data[i].product_name+"'>";
 								if(data[i].inventory == 0){
-									mainSectionHtml += "<img src='/controller/resources/img/매진.png' class='card-img-top pListSold'>";
+									mainSectionHtml += "<img src='/FoodContainer/resources/img/매진.png' class='card-img-top pListSold'>";
 									mainSectionHtml += "<div class='pListSoldout'></div>";
 								}	
 								mainSectionHtml += "<input type='hidden' class='inventoryM"+i+"' value='"+data[i].inventory+"'>";			
@@ -1653,17 +1653,17 @@
 									userDibsProductArr = userDibsProduct.split(",");
 									for(var j=0; j<userDibsCheck.lenght; j++){
 										if(userDibsCheck == loginCheck && data[i].product_index == userDibsProductArr[j]){
-											mainSectionHtml += "<img src='/controller/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+											mainSectionHtml += "<img src='/FoodContainer/resources/img/찬하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 											heartCheck = 1;
 										}
 									}
 									if(heartCheck == 0){
-										mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+										mainSectionHtml += "<img src='/FoodContainer/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 									}
 								}else{
-									mainSectionHtml += "<img src='/controller/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
+									mainSectionHtml += "<img src='/FoodContainer/resources/img/빈하트.png' class='img-fluid hoverHeart' alt='찜' onclick='heart(this)'>";
 								}
-								mainSectionHtml += "<img src='/controller/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='pListCart(this)'>";
+								mainSectionHtml += "<img src='/FoodContainer/resources/img/카트2.png' class='img-fluid hoverCart' alt='장바구니' onclick='pListCart(this)'>";
 								mainSectionHtml += "<input type='hidden' value='"+i+"'>";
 								mainSectionHtml += "</div>";
 								mainSectionHtml += "</div>";

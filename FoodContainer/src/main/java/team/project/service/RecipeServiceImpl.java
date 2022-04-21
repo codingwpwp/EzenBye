@@ -152,6 +152,14 @@ public class RecipeServiceImpl implements RecipeService{
 			
 			
 		}
+
+		@Override
+		public List<RecipeVO> viewRecipeList(RecipeVO recipeVO) throws Exception {
+			
+			List<RecipeVO> recipeList = recipeDao.viewRecipeList(recipeVO);
+			
+			return recipeList;
+		}
 	
 	
 	

@@ -187,6 +187,10 @@
     	event_ticket = event_ticket - 1
     	WHERE member_index = #{member_index}
     </update>
+    
+    <select id="memberList" resultType="MemberVO">
+        SELECT * FROM member where del_yn = 'N'
+    </select>
 
 </mapper>
 
