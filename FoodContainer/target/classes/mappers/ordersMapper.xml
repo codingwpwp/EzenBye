@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="team.project.mapper.ordersMapper" >
+ 	
+ 	<select id="ordersList" resultType="OrdersVO" parameterType="int">
+        SELECT * FROM orders
+		WHERE member_index=#{member_index}
+		order by order_date desc limit 3
+    </select>
+    
+    <select id="ordersListAll" resultType="OrdersVO" parameterType="int">
+        SELECT * FROM orders
+		WHERE member_index=#{member_index}
+		order by order_date desc
+    </select>
+    
+    <select id="ordersDetail" resultType="OrdersVO" parameterType="String">
+        SELECT * FROM orders
+		WHERE member_order_index=#{member_order_index}
+    </select>
+    
+    <select id="ordersDetailJoin" resultType="OrdersVO" parameterType="String">
+        SELECT * FROM orders AS orde JOIN coupon AS cou
+        ON orde.coupon_index = cou.coupon_index
+		WHERE member_order_index=#{member_order_index}
+    </select>
+    
+	<!-- 여기는 구매 페이지-->
+	<!-- 회원 결제하고 난뒤 DB에 올리는 쿼리 -->
+	<insert id="memberOrderInsert" parameterType="OrdersVO">
+		INSERT INTO orders(
+			member_order_index, member_index,
+			address, reciever, phone, delivery_free_YN,
+			<if test="request != ''">
+ 		 		request,
+ 			</if>
+			<if test="coupon_index != 0">
+ 		 		coupon_index,
+ 			</if>
+ 			used_point, pay_price
+		)VALUES(
+			#{member_order_index}, #{member_index},
+			#{address}, #{reciever}, #{phone}, #{delivery_free_YN},
+ 			<if test="request != ''">
+ 		 		#{request},
+ 			</if>
+			<if test="coupon_index != 0">
+ 		 		#{coupon_index},
+ 			</if>
+ 			#{used_point}, #{pay_price} 
+		)
+	</insert>
+	<!-- 회원 결제하고 난뒤 포인트&이벤트 티켓 -->
+    <update id="memberStatusUpdate" parameterType="MemberVO">
+    	UPDATE member SET
+    	point = point - #{point}, event_ticket = event_ticket + 1
+    	WHERE member_index = #{member_index}
+    </update>
+    <!-- 회원 결제하고 난뒤 쿠폰사용 -->
+    <update id="couponUpdate" parameterType="int">
+    	UPDATE coupon SET
+    	used_yn = 'Y'
+    	WHERE coupon_index = #{coupon_index}
+    </update>
+    <!-- 회원 결제하고 난뒤 배송지 업데이트 -->
+    <update id="addressUpdate" parameterType="MemberVO">
+    	UPDATE member SET
+    	address = #{address}
+    	WHERE member_index = #{member_index}
+    </update>
+    <!-- 회원 결제하고 난뒤 장바구니 비우기 -->
+    <delete id="cartUpdate" parameterType="CartVO">
+    	DELETE FROM cart
+    	WHERE product_index = #{product_index} AND member_index = #{member_index}
+    </delete>
+    
+    <!-- 여기서 부터는 관리자페이지 -->
+    
+    <!-- 회원 주문 조회할때 먼저 총 글의 총 갯수를 구하는 쿼리 -->
+    <select id="adminMemberOrdersCount" resultType="int" parameterType="SearchVO">
+    	SELECT COUNT(*)
+    	FROM orders
+        <if test="searchValue != null">
+        	WHERE member_index IN (SELECT member_index FROM member WHERE id LIKE CONCAT('%',#{searchValue},'%'))
+        </if>
+    </select>
+    
+    <!-- 회원 주문 조회 -->
+    <select id="adminMemberOrdersList" resultType="OrdersVO" parameterType="PagingUtil">
+		SELECT a.member_order_index, b.id, a.order_date FROM orders as a, member as b
+		WHERE a.member_index = b.member_index
+		<if test="searchValue != null">
+			AND a.member_index IN (SELECT member_index FROM member WHERE id LIKE CONCAT('%',#{searchValue},'%'))
+		</if>
+	    ORDER BY order_date DESC
+    	LIMIT #{start}, #{perPage}
+    </select>
+    
+    <!-- 회원 주문 상세조회 할때 대략적인 정보를 불러오는 쿼리 -->
+    <select id="adminMemberOrder" resultType="OrdersVO" parameterType="OrdersVO">
+    	SELECT a.*, b.id
+    	FROM orders as a, member as b
+    	WHERE a.member_index = b.member_index
+    	AND a.member_order_index = #{member_order_index}
+    </select>
+   
+</mapper>

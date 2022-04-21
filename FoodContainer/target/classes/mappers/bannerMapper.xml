@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team.project.mapper.bannerMapper">
+
+	<select resultType="BannerVO" id="adminMainBanner">
+		SELECT * FROM banner
+		ORDER BY register_date DESC
+    	LIMIT 0, 3
+	</select>
+
+	<select id="bannerList" resultType="BannerVO">
+		SELECT * FROM banner
+	</select>
+	
+	<insert id="bannerInsert" parameterType="BannerVO">
+		INSERT INTO banner(name, image, link_YN, link)
+		VALUES(#{name}, #{image}, #{link_YN}, #{link})
+	</insert>
+	
+	<update id="bannerUpdate" parameterType="BannerVO">
+		UPDATE banner SET
+		name = #{name},
+		image = #{image},
+		link_YN = #{link_YN},
+		link = #{link}
+		WHERE banner_index = #{banner_index}
+	</update>
+	
+	<delete id="bannerDelete" parameterType="list">
+		DELETE FROM banner
+		WHERE
+		<foreach collection="list" item="item" separator=" OR ">
+			banner_index = #{item}
+		</foreach>
+	</delete>
+	
+</mapper>

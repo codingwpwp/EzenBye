@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration 
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+    <configuration>
+ 		
+ 		<typeAliases>
+            <typeAlias type="team.project.vo.MemberVO" alias="MemberVO"/>
+            <typeAlias type="team.project.vo.ProductVO" alias="ProductVO"/>
+            <typeAlias type="team.project.vo.CouponVO" alias="CouponVO"/>
+            <typeAlias type="team.project.vo.ServiceCenterVO" alias="ServiceCenterVO"/>
+            <typeAlias type="team.project.vo.OrdersVO" alias="OrdersVO"/>
+            <typeAlias type="team.project.vo.OrderProductVO" alias="OrderProductVO"/>
+            <typeAlias type="team.project.vo.BannerVO" alias="BannerVO"/>
+            <typeAlias type="team.project.vo.SearchVO" alias="SearchVO"/>
+            <typeAlias type="team.project.vo.ReviewVO" alias="ReviewVO"/>
+            <typeAlias type="team.project.vo.MessageVO" alias="MessageVO"/>
+            <typeAlias type="team.project.vo.CartVO" alias="CartVO"/>
+            <typeAlias type="team.project.util.PagingUtil" alias="PagingUtil"/>
+            <typeAlias type="team.project.vo.RecipeVO" alias="RecipeVO"/>
+            <typeAlias type="team.project.vo.NoticeVO" alias="NoticeVO"/>
+            <typeAlias type="team.project.vo.NoMemberOrdersVO" alias="NoMemberOrdersVO"/>
+             <typeAlias type="team.project.vo.ReplyVO" alias="ReplyVO"/>    
+        </typeAliases>
+        
+    </configuration>

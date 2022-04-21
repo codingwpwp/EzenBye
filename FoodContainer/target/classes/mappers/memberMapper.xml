@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="team.project.mapper.MemberMapper" >
+ 	<!--로그인 -->
+ 	<select id="Login" resultType="MemberVO" parameterType="MemberVO">
+        SELECT member_index, id, pw, name, position FROM member where id=#{id} and del_yn = 'N'
+    </select>
+    <!--아이디중복체크 -->
+    <select id="idChk" resultType="int" parameterType="String">
+   		SELECT COUNT(*) FROM member where id=#{id}
+   </select>
+   <!--닉네임중복체크-->
+	<select id="nickChk" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM member where nickname=#{nickname}
+	</select>
+	<!--추천인 검색-->
+	<select id="recomChk" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM member where id=#{id}
+	</select>
+	<select id="pwChk" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM member where id=#{id} AND pw=#{pw}
+	</select>
+	
+	<!-- 로그인 관련페이지 -->
+	<!-- 간편 아이디 찾기 -->
+	<select id="idEasyCheck" resultType="MemberVO" parameterType="MemberVO">
+		SELECT id, name
+		FROM MEMBER
+		WHERE name=#{name}
+		AND phone LIKE CONCAT('%',#{phone},'%')
+		AND del_yn = 'N'
+		AND position = '일반'
+	</select>
+	<!-- 이메일 아이디 찾기 -->
+	<select id="emailEasyCheck" resultType="MemberVO" parameterType="MemberVO">
+		SELECT id, name
+		FROM MEMBER
+		WHERE name=#{name}
+		AND email=#{email}
+		AND del_yn = 'N'
+		AND position = '일반'
+	</select>
+	
+	<!-- 이메일 인증 전에 회원 존재 여부 따지기 -->
+	<select id="pwCheckYN" resultType="int" parameterType="MemberVO">
+		SELECT COUNT(*)
+		FROM member
+		WHERE name=#{name}
+		AND id=#{id}
+		AND email=#{email}
+		AND position = '일반'
+	</select>
+   
+	<!-- 임시 비밀번호 관련 -->
+	<update id="changeTempPw" parameterType="MemberVO">
+		UPDATE MEMBER SET pw = #{pw}
+		WHERE name = #{name}
+		AND id=#{id}
+		AND email=#{email}
+	</update>
+	
+	
+	<select id="memberInfor" resultType="MemberVO" parameterType="int">
+		SELECT *
+		FROM member 
+		WHERE member_index = #{member_index}
+	</select>
+   
+    
+    <insert id="insertMember" parameterType="MemberVO"> 
+    INSERT INTO member(
+    id,
+    pw,
+    name,
+    nickname,
+    phone,
+    email,
+    recommender
+    
+    )VALUES(
+    #{id},
+    #{pw},
+    #{name},
+    #{nickname},
+    #{phone},
+    #{email},
+    #{recommender}
+    
+    )
+    
+    </insert>
+    
+    <update id="updatePoint" parameterType="int">
+    	UPDATE member
+    	SET point=point + #{point}
+    	WHERE member_index=#{member_index}
+    </update>
+    
+    <update id="mypageMemberDelete" parameterType="MemberVO">
+    	UPDATE member SET
+    	del_yn = 'Y', del_date = NOW(), del_reason = #{del_reason}
+    	WHERE member_index = #{member_index}
+    </update>
+    
+    <update id="mypageMemberModify" parameterType="MemberVO">
+    	UPDATE member SET
+    	name = #{name}, phone = #{phone}, nickname = #{nickname}
+    	WHERE member_index = #{member_index}
+    </update>
+    
+    <select id="corretPW" resultType="MemberVO" parameterType="MemberVO">
+		SELECT pw, member_index 
+		FROM member 
+		WHERE member_index = #{member_index}
+	</select>
+	
+	<update id="modifyPW" parameterType="MemberVO">
+		UPDATE MEMBER SET
+		pw = #{pw}
+		WHERE member_index = #{member_index} 
+	</update>
+	
+	<update id="mypageChangeAddress" parameterType="MemberVO">
+		UPDATE MEMBER SET
+		address = #{address}
+		WHERE member_index = #{member_index} 
+	</update>   
+	   
+    <!-- 여기서 부터는 관리자페이지 -->
+    
+    <!-- 회원 조회할때 먼저 총 글의 총 갯수를 구하는 쿼리 -->
+    <select id="adminMemberListCount" resultType="int" parameterType="SearchVO">
+    	SELECT COUNT(*)
+    	FROM member
+    	WHERE del_yn = #{del_yn} AND position = '일반'
+    	<if test="searchType != null and searchType.equals('id')">
+    		AND id LIKE CONCAT('%',#{searchValue},'%')
+        </if>
+        <if test="searchType != null and searchType.equals('name')">
+    		AND name LIKE CONCAT('%',#{searchValue},'%')
+        </if>
+        <if test="searchType != null and searchType.equals('nickname')">
+    		AND nickname LIKE CONCAT('%',#{searchValue},'%')
+        </if>
+    </select>
+    
+    <!-- 회원 조회 -->
+    <select id="adminMemberList" resultType="MemberVO" parameterType="PagingUtil">
+    	SELECT member_index, id, nickname, name, join_date, del_date, del_reason
+    	FROM member
+    	WHERE del_yn = #{del_yn} AND position = '일반'
+    	<if test="searchType != null and searchType.equals('id')">
+    		AND id LIKE CONCAT('%',#{searchValue},'%')
+        </if>
+        <if test="searchType != null and searchType.equals('name')">
+    		AND name LIKE CONCAT('%',#{searchValue},'%')
+        </if>
+        <if test="searchType != null and searchType.equals('nickname')">
+    		AND nickname LIKE CONCAT('%',#{searchValue},'%')
+        </if>
+        ORDER BY join_date DESC
+    	LIMIT #{start}, #{perPage}
+    </select>
+    
+    <!-- 회원 추방 -->
+    <update id="adminChangeMemberDel_yn" parameterType="int">
+    	UPDATE member SET
+    	del_yn = 'Y', del_date = NOW(), del_reason = '관리자에 의한 추방'
+    	WHERE member_index = #{member_index}
+    </update>
+    
+    <!-- 이벤트 페이지 -->
+    
+    <!-- 티켓 조회 -->
+    <select id="eventTicketCheck" resultType="int" parameterType="int">
+    	SELECT event_ticket
+    	FROM member
+    	WHERE member_index = #{member_index}
+    </select>
+    
+    <!-- 티켓 하나 깎기 -->
+    <update id="eventTicketMinus" parameterType="int">
+    	UPDATE member SET
+    	event_ticket = event_ticket - 1
+    	WHERE member_index = #{member_index}
+    </update>
+
+</mapper>
+
+
