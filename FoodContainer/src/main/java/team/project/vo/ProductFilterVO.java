@@ -7,8 +7,6 @@ public class ProductFilterVO {
 	private String price;
 	private String free;
 	
-	
-	
 	public String getFree() {
 		return free;
 	}
