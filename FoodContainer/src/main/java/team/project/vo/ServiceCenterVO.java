@@ -1,6 +1,6 @@
 package team.project.vo;
 
-public class ServiceCenterVO {
+public class ServiceCenterVO extends MemberVO{
 	private int serviceCenter_index;
 	private int member_index;
 	private String sort1;

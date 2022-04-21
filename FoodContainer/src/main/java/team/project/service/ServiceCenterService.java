@@ -14,4 +14,16 @@ public interface ServiceCenterService {
 	PagingUtil serviceCenterListPaging(SearchVO searchVO, int nowPage) throws Exception;
 	
 	int countServiceCenter(int member_index) throws Exception;
+	
+	
+	/* 고객센터 */
+	// 종류2에 대한 FAQ조회
+	List<ServiceCenterVO> serviceCenterPageFAQList(String sort2) throws Exception;
+	
+	// 종류2에 대한 1:1문의 리스트 출력
+	List<ServiceCenterVO> serviceCenterPageList(String sort2, int nowPage) throws Exception;
+	
+	// 종류2에 대한 1:1문의 페이징
+	PagingUtil serviceCenterPagingUtil(String sort2, int nowPage) throws Exception;
+	
 }

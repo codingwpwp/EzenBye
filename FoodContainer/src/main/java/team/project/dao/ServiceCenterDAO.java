@@ -38,4 +38,21 @@ public class ServiceCenterDAO {
 		return sqlSession.selectOne(Namespace+".countServiceCenter",member_index);
 	}
 	
+	
+	/* 고객센터페이지 */
+	
+	// 종류2에 대한 FAQ조회
+	public List<ServiceCenterVO> serviceCenterPageFAQList(String sort2) throws Exception{
+		return sqlSession.selectList(Namespace + ".serviceCenterPageFAQList", sort2);
+	}
+	
+	// 종류2에 대한 1:1문의들 갯수
+	public int serviceCenterPageListCount(String sort2) throws Exception{
+		return sqlSession.selectOne(Namespace + ".serviceCenterPageListCount", sort2);
+	}
+	
+	// 종류2에 대한 1:1문의 리스트 출력
+	public List<ServiceCenterVO> serviceCenterPageList(ServiceCenterVO vo) throws Exception{
+		return sqlSession.selectList(Namespace + ".serviceCenterPageList", vo);
+	}
 }
