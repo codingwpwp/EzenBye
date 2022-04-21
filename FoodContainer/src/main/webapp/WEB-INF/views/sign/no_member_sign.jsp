@@ -27,15 +27,7 @@
         <div class="row">
             <div class="col-lg-2 d-none d-lg-block"></div>
 
-            <!--
-                id="navLeftMenu"인 현재 주석 바로 아래의 태그는 페이지의 종류에 따른 왼쪽메뉴.
-                네비게이션 바가 펼쳐질 때 알아서 태그가 안보이도록 설정.
-                필요시에만 div태그 사이에 코드를 작성.
-                작성시 border border-dark는 구분용으로만 작성했기 때문에 알아서 지우고 작업.
-                작성하지 않는 경우는 절대 건들지 않음.
-                base.js에 id="navLeftMenu"와 관련된 코드가 작성되어있음.
-            -->
-            <div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark" id="navLeftMenu"><!-- 여기에 작성 --></div>
+            <div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark" id="navLeftMenu"></div>
 
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
 
@@ -56,13 +48,6 @@
             <!-- 메인 -->
             <div class="col-12 col-sm-9 col-md-10 col-lg-8">
                 <article id="mainSection">
-                    
-                    <!--
-                        헤딩.
-                        필요하지 않는 사람은 <div>태그를 삭제.
-                        필요한 사람은 <div>태그에 작성.
-                    -->
-                    <div class="fs-5 my-2 fw-bold">헤딩</div>
 
                    <div class="container">
                         <div class="row">
@@ -76,7 +61,7 @@
                                         </div>
 
                                         <div class="col-sm-12 col-12">
-                                            <h4>핸드폰 인증</h4>
+                                            <h4>이메일 인증</h4>
                                           </div>
                                   
                                         <div class="row">
@@ -112,19 +97,19 @@
                                             <h4>이용약관 확인</h4>
                                           </div>
                                           <div class="col-sm-12 col-12 form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <input class="form-check-input" type="checkbox" name="checkOne" id="flexCheckDefault">
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 이용약관 및 개인정보수집 및 이용, 쇼핑정보 수신(선택)에 모두 동의합니다.
                                             </label>
                                           </div>
                                           <div class="col-sm-12 col-12 form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <input class="form-check-input" type="checkbox" name="checkTwo" id="flexCheckDefault">
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 [필수] 이용약관 동의
                                             </label>
                                           </div>
                                           <div class="col-sm-12 col-12 form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <input class="form-check-input" type="checkbox" name="checkThree" id="flexCheckDefault">
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 [필수] 개인정보 수집 및 이용 동의
                                             </label>

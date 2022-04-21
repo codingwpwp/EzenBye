@@ -67,6 +67,16 @@ public class MemberDAO {
 		return sqlSession.selectOne(Namespace + ".emailEasyCheck", membervo);
 	}
 	
+	// 비밀번호 찾기 페이지
+	// 회원 존재하는지 여부
+	public int pwCheckYN(MemberVO membervo) throws Exception{
+		return sqlSession.selectOne(Namespace + ".pwCheckYN", membervo);
+	}
+	// 임시 비밀번호로 변경
+	public void changeTempPw(MemberVO membervo) throws Exception{
+		sqlSession.update(Namespace + ".changeTempPw", membervo);
+	}
+	
 	public MemberVO memberInfor(int member_index) throws Exception{
 		return sqlSession.selectOne(Namespace+".memberInfor",member_index);
 	}

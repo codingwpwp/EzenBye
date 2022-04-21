@@ -25,7 +25,6 @@ import team.project.vo.MemberVO;
 
 @Controller
 public class LoginController {
-	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@Inject
 	BCryptPasswordEncoder pwdEncoder;
 	
@@ -112,6 +111,15 @@ public class LoginController {
 					}
 				}
 				
+			}
+			
+			// 임시비밀번호로 했을 때 마이페이지 변경으로 이동하는 로직도 짜야함
+			if(session.getAttribute("needChangePw") != null) {
+				MemberVO memberTemp = (MemberVO)session.getAttribute("needChangePw");
+				if(vo.getId().equals(memberTemp.getId())) {
+					session.setAttribute("needChangePw", null);
+					return "redirect:mypage_changeInforOk.do";
+				}
 			}
 			
 			if(login.getPosition().equals("관리자")) {
@@ -206,7 +214,50 @@ public class LoginController {
 		
 	}		
 	
-	//비밀번호확인
+	// 비밀번호 찾기 페이지로 이동
+	@RequestMapping(value = "pw_find.do", method = RequestMethod.GET)
+	public String FindPw(Model model, HttpServletRequest request) {
+		// 세션 소환
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("member") != null) {
+			return "redirect:index.do";
+		}else {
+			return "login/pw_find";
+		}
+		
+	}
+	
+	// 비밀번호 찾기페이지에서 인증번호 발송하는 비동기
+	@RequestMapping(value = "sendEmailPw.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String checkPwAndSendEmail(MemberVO vo) throws Exception{
+		return memberService.checkPwAndSendEmail(vo);
+	}
+	
+	// 임시비밀번호 발급 페이지
+	@RequestMapping(value = "pw_email_check.do", method = RequestMethod.POST)
+	public String tempPw(Model model, HttpServletRequest request, MemberVO vo) throws Exception{
+		// 세션 소환
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("member") != null) {
+			return "redirect:index.do";
+		}else {
+			if(vo.getId() == null || vo.getId().equals("")) {
+				return "redirect:index.do";
+			}else {
+				MemberVO memberTemp = memberService.sendTempPw(vo);
+				session.setAttribute("needChangePw", memberTemp);
+				model.addAttribute("memberTemp", memberTemp);
+				
+				return "login/pw_email_check";
+			}
+		}
+		
+	}
+	
+	// 비밀번호확인(마이페이지?)
 	@ResponseBody
 	@RequestMapping(value = "pwChk", method = RequestMethod.POST)
 	public boolean pwChk(MemberVO vo) throws Exception {
@@ -216,24 +267,14 @@ public class LoginController {
 		return pwChk;
 	}
 	
+	// 로그아웃
 	@RequestMapping(value = "logout.do", method = RequestMethod.GET)
 	public String loginout(HttpServletRequest request) throws Exception{
-		logger.info("로그아웃");
 		HttpSession session = request.getSession();
-		session.invalidate();
+		session.setAttribute("member", null);
 		return "redirect:index.do";
 	}
 	
-
 	
-	@RequestMapping(value = "pw_find.do", method = RequestMethod.GET)
-	public String login5(Locale locale, Model model) {
-		return "login/pw_find";
-	}
-	
-	@RequestMapping(value = "pw_email_check.do", method = RequestMethod.GET)
-	public String login6(Locale locale, Model model) {
-		return "login/pw_email_check";
-	}
 	
 }

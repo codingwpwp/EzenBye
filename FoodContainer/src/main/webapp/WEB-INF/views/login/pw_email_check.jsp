@@ -55,7 +55,9 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12 col-12">
-                                                <h3>홍길동님의 이메일로 임시 비밀번호를 발송 하였습니다.</h3>
+	                                        <h3>${memberTemp.name}님의 이메일로 임시 비밀번호를 발송 하였습니다.</h3>
+	                                        <span class="text-danger">*이전의 비밀번호는 사용하실수 없습니다.</span><br>
+	                                        <span class="text-danger">*로그인 이후 비밀번호 변경을 권장합니다.</span><br>
                                         </div>
                                         <div class="col-md-12 col-sm-3 col-12">                                  
                                          <input type="button" class="btn btn-dark pwlogin" onclick="location.href='<%=request.getContextPath()%>/loginmain.do'" value="로그인">

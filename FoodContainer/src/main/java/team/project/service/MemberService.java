@@ -44,7 +44,12 @@ public interface MemberService {
 	// 이메일 아이디 찾기
 	public MemberVO emailEasyCheck(MemberVO membervo) throws Exception;
 
+	// 비밀번호 찾기 페이지
+	// 인증번호 발송(회원 존재하는지 여부도 따짐)
+	public String checkPwAndSendEmail(MemberVO membervo) throws Exception;
 	
+	// 임시 비밀번호 발송
+	public MemberVO sendTempPw(MemberVO membervo) throws Exception;
 	
 	/* 여기서 부터는 관리자페이지 */
 	

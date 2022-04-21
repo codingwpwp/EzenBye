@@ -17,6 +17,7 @@ import team.project.dao.MemberDAO;
 import team.project.mapper.MemberMapper;
 import team.project.util.PagingUtil;
 import team.project.vo.CouponVO;
+import team.project.vo.EmailVO;
 import team.project.vo.MemberVO;
 import team.project.vo.SearchVO;
 
@@ -28,6 +29,8 @@ public class MemberServiceImpl implements MemberService {
 	private MemberMapper memberMapper;
 	@Autowired
 	private CouponDAO couponDao;
+	@Autowired
+	private EmailService emailService;
 	@Inject
 	private BCryptPasswordEncoder PasswordEncoder;
 	
@@ -170,6 +173,81 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.emailEasyCheck(membervo);
 	}
 	
+
+	// 비밀번호 찾기 페이지
+	// 인증번호 발송(회원 존재하는지 여부도 따짐)
+	@Override
+	public String checkPwAndSendEmail(MemberVO membervo) throws Exception {
+		
+		int result = memberDao.pwCheckYN(membervo);
+		if(result != 1) {
+			return "none";
+		}else {
+			EmailVO evo = new EmailVO();
+			evo.setSubject("FoodContainer 비밀번호 찾기 이메일 인증번호");
+			evo.setReceiveMail(membervo.getEmail());
+			
+			// 인증번호 생성
+			String randomBox = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+			String randomNum = "";
+			for(int i = 0; i < 6; i++) {
+				int randomIndex = (int)(Math.random() * randomBox.length());
+				randomNum += randomBox.substring(randomIndex, randomIndex + 1);
+			}
+			
+			// 이메일 내용에 인증번호 넣기
+			String message = "인증번호는 " + randomNum + " 입니다. 3분이내에 입력하세요.";
+			evo.setMessage(message);
+			
+			emailService.sendEmail(evo);
+			
+			return randomNum;
+		}
+	}
+	
+	// 임시 비밀번호 발송
+	@Override
+	public MemberVO sendTempPw(MemberVO membervo) throws Exception {
+		
+		// 임시 비밀번호로 변경
+		String randomAlpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		String randomNum = "0123456789";
+		String randomSpecial = "!@#$%^&*()";
+		String randomTempPw = "";
+		for(int i = 0; i < 15; i++) {
+			if(i > 12) {
+				int randomIndex = (int)(Math.random() * randomSpecial.length());
+				randomTempPw += randomSpecial.substring(randomIndex, randomIndex + 1);
+			}else if(i > 7 && i <= 12) {
+				int randomIndex = (int)(Math.random() * randomNum.length());
+				randomTempPw += randomNum.substring(randomIndex, randomIndex + 1);
+			}else {
+				int randomIndex = (int)(Math.random() * randomAlpha.length());
+				randomTempPw += randomAlpha.substring(randomIndex, randomIndex + 1);
+			}
+		}
+		
+		System.out.println(randomTempPw);
+		System.out.println(randomTempPw);
+		System.out.println(randomTempPw);
+		System.out.println(randomTempPw);
+		
+		membervo.setPw(PasswordEncoder.encode(randomTempPw));
+		
+		memberDao.changeTempPw(membervo);
+		
+		// 이제 임시 비밀번호를 이메일로 전송
+		membervo.setPhone(randomTempPw);
+		
+		EmailVO evo = new EmailVO();
+		evo.setSubject("FoodContainer " + membervo.getName() + "님의 임시 비밀번호입니다");
+		evo.setReceiveMail(membervo.getEmail());
+		String message = "임시 비밀번호는 " + randomTempPw + " 입니다. 현재 비밀번호는 입력 할 수 없습니다. 로그인 이후 변경을 권장합니다.";
+		evo.setMessage(message);
+		emailService.sendEmail(evo);
+		
+		return membervo;
+	}
 	
 	/* 여기서 부터는 관리자페이지 */
 	
