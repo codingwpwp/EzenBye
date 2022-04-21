@@ -72,6 +72,10 @@ public class RecipeDAO {
 		sqlSession.delete(Namespace+".deletdRecipe",recipe_index);
 	}
 	
+	//베스트 레시피
+	public void updateRank(RecipeVO vo)throws Exception{
+		sqlSession.update(Namespace+".updateRank",vo);
+	}
 
 		
 }

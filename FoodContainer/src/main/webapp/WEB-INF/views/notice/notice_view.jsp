@@ -96,10 +96,13 @@
 						<div class="col-md-2 col-sm-2 col-3 leftbtn">
 							<input value="목록" type="button" class="btn btn-primary listbtn" onclick="location.href='notice_main.do?nowPage=${nowPage}'">
 						</div>
+						<c:if test="${!empty memberInfor && memberInfor.position eq '관리자'}">
 						<div class="col-md-10 col-sm-10 col-9 rightbtn">
-							<input value="삭제" type="button" class="btn btn-danger delbtn">
-							<input value="수정" type="button" class="btn btn-secondary updatebtn" onclick="location.href='notice_update.do'">
+							<input type="hidden" value="${noticeDetail.notice_index}" name="notice_index" />
+							<input value="삭제" type="button" class="btn btn-danger delbtn" onclick="noticeDelete(this)">
+							<input value="수정" type="button" class="btn btn-secondary updatebtn" onclick="location.href='notice_update.do?nowPage=${nowPage}&notice_index=${noticeDetail.notice_index}'">
 						</div>
+						</c:if>
 						</div>
 
 					</div>

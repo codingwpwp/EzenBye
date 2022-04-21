@@ -42,6 +42,10 @@ public interface RecipeService {
 	//레시피 삭제
 	public void deletdRecipe(int recipe_index) throws Exception;
 	
+	//베스트 레시피
+	public void updateRank(RecipeVO vo) throws Exception;
+	
+	
 	
 	//레시피 게시글 추천
 	public int updateThumb(int recipe_index) throws Exception;

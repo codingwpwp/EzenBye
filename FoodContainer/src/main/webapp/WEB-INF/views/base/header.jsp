@@ -15,9 +15,9 @@
 
             <!-- 검색 -->
             <div class="col-6 d-flex align-items-center">
-            	<label>
-	                <input class="form-control fs-6 fw-bold w-100 me-2" type="text" placeholder="상품을 입력하세요">
-	                <button onclick="search()"><i class="bi bi-search fs-2" id="search"></i></button>
+            	<label class="d-flex" style="border:0; width:100%;" id="search">
+	                <input class="form-control fs-6 fw-bold w-100 me-2" type="text" placeholder="상품을 입력하세요" style="display:inline-block;" id="searchValue">
+	                <button style="border:0; background:white;" onclick="search(this)" id="searchButton"><i class="bi bi-search fs-2" id="search"></i></button>
             	</label>
             </div>
 
