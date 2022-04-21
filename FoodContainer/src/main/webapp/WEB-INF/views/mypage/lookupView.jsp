@@ -102,7 +102,7 @@
 					        	</div>
 					        	
 					        	<c:if test="${opList.del_YN eq 'N'}">
-					        	<a href="productView.do?product_index=${opList.product_index }" class="productHref">
+					        	<a href="<%=request.getContextPath() %>/productView.do?product_index=${opList.product_index }" class="productHref">
 					        	</c:if>
 					        	<c:if test="${opList.del_YN eq 'Y'}">
 					        	<a href="javascript:alert('삭제된 상품입니다.');" class="productHref">
@@ -247,7 +247,7 @@
 			        </div>
 			       
     			    <div class="d-grid gap-2 col-4 mx-auto lookupView-btn">
-					  <button class="btn btn-secondary" onclick="location.href='mypage_lookup.do'" type="button">주문목록으로</button>
+					  <button class="btn btn-secondary" onclick="location.href='<%=request.getContextPath() %>/mypage_lookup.do'" type="button">주문목록으로</button>
 					</div>
 			        
 			        <div class="h-100 p-2 bg-light border rounded-3 card-good">

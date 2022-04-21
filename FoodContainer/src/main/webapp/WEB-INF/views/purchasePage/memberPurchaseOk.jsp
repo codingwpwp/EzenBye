@@ -71,7 +71,7 @@
                         		<button class="btn btn-success p-1">계속 쇼핑하기</button>
                         	</div>
                         	<div class="col-6 px-0">
-                        		<button class="btn btn-primary p-1">주문 조회하기</button>
+                        		<button class="btn btn-primary p-1" onclick="location.href='<%=request.getContextPath()%>/mypage_lookup.do'">주문 조회하기</button>
                         	</div>
                         </div>
                     </div>
