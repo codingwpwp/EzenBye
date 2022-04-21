@@ -122,6 +122,14 @@ public class RecipeServiceImpl implements RecipeService{
 		
 		recipeDao.insertRecipe(vo);
 	}
+	//베스트 레시피
+	@Override
+	public void updateRank(RecipeVO vo) throws Exception{
+		recipeDao.updateRank(vo);
+	}
+	
+	
+	
 	
 	// 상품 이미지 업로드 메소드
 		public void imageUpload(RecipeVO vo, MultipartFile tumnailImage, HttpServletRequest request) throws Exception {
