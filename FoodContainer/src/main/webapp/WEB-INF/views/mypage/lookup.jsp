@@ -83,7 +83,7 @@
 				        		<span class="good-date">주문번호 : ${list.member_order_index }</span>
 				        	</div>
 				        	<div class="col-sm-12 col-lg-2 findT">
-				        		<button type="button" class="btn btn-primary btn-sm" onclick="location.href='mypage_lookupView.do?member_order_index=${list.member_order_index}'">주문상세</button>
+				        		<button type="button" class="btn btn-primary btn-sm" onclick="location.href='<%=request.getContextPath() %>/mypage_lookupView.do?member_order_index=${list.member_order_index}'">주문상세</button>
 				        	</div>
 				        </div>
 				        	
@@ -108,7 +108,7 @@
 						        	</div>
 						        	
 						        	<c:if test="${opList.del_YN eq 'N'}">
-						        	<a href="productView.do?product_index=${opList.product_index }" class="productHref">
+						        	<a href="<%=request.getContextPath() %>/productView.do?product_index=${opList.product_index }" class="productHref">
 						        	</c:if>
 						        	<c:if test="${opList.del_YN eq 'Y'}">
 						        	<a href="javascript:alert('삭제된 상품입니다.');" class="productHref">

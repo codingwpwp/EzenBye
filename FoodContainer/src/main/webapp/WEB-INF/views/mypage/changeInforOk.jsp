@@ -68,7 +68,7 @@
 			        <p class="fs-6 lookup-fs-6">개인정보 변경</p>
 			        <hr />
 			        
-			        <form action="mypageMemberModify.do" method="post" name="memberModify">
+			        <form action="<%=request.getContextPath() %>/mypageMemberModify.do" method="post" name="memberModify">
 			        	<div>
 				         	<div class="input-group mb-3 changeInforOk-inputId">
 							  <span class="input-group-text fw-bold" id="inputGroup-sizing-default">아이디</span>
@@ -136,7 +136,7 @@
 							  <input type="text" value="${fn:split(memberInfor.email, '@')[1]}" aria-label="Last name" class="form-control" disabled>
 							</div>
 							<div class="d-grid gap-3 d-md-flex justify-content-md-center">
-							  <button class="btn btn-secondary col-lg-3 col-md-3 me-md-2" type="button" onclick="location.href='mypage_changeInfor.do'">취소</button>
+							  <button class="btn btn-secondary col-lg-3 col-md-3 me-md-2" type="button" onclick="location.href='<%=request.getContextPath() %>/mypage_changeInfor.do'">취소</button>
 							  <button class="btn btn-dark col-lg-3 col-md-3" type="button" onclick="mypageMemberModify(this);">수정</button>
 							</div>
 						</div>
