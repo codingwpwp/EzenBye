@@ -126,6 +126,7 @@
 				          			<input type="hidden" name="sale_price" value="${view.sale_price}">
 				          	</span>
 				          </p>
+				          <span>[재고 : <span class="productInventory">${view.inventory}</span>]</span>
 				          <div class="card-text mb-auto productNum fs-4"><i class="bi bi-dash-square-fill" onclick="minusFn(this)"></i> <div class="pCnt">1</div> <i class="bi bi-plus-square-fill" onclick="plusFn(this)"></i></div>
 				          <div><span class="fs-5 totalPrice">
 				          		<c:if test="${view.sale_price == -1}">
@@ -267,7 +268,7 @@
 											<div class="reViewImg col-3 align-self-center">
 												<img src="<%=request.getContextPath()%>/resources/img/mypage/good.jpg" class="img-fluid">
 											</div>
-											<div class="reviewTitle align-self-center col" data-bs-toggle="collapse" href="#reviewExtend0" role="button" aria-expanded="false" aria-controls="collapseExample">
+											<div class="reviewTitle align-self-center col" data-bs-toggle="collapse" href="#reviewExtend${status.index }" role="button" aria-expanded="false" aria-controls="collapseExample">
 												${viewReview.contents}
 											</div>
 											<div class="col-1 align-self-center">

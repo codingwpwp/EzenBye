@@ -743,6 +743,9 @@ a{
 .reviewTitle{
 	text-align : left;
 	text-indent : 10px;
+	white-space : nowrap;
+	overflow : hidden;
+	text-overflow : ellipsis;
 }
 
 #reviewTableM th{
@@ -1010,4 +1013,8 @@ a{
 	width:30px;
 	display : inline-block;
 	text-align : center;
+}
+
+.productInventory{
+	font-size : 0.8rem;
 }

@@ -17,23 +17,32 @@
 		var num = $(".pCnt").html();
 		var price = $(".mdPrice").find("input[name='origin_price']").val();
 		var salePrice = $(".mdPrice").find("input[name='sale_price']").val();
+		var inventory = $(".productInventory").html();
 		if(num == 10){
 			alert("최대 선택 개수는 10개 입니다.");
 		}else{
 			if(salePrice == -1){
 				num++;
-				var tPrice = num*price;
-				var html = "<i class='bi bi-dash-square-fill' onclick='minusFn(this)'></i> <div class='pCnt'>"+num+"</div> <i class='bi bi-plus-square-fill' onclick='plusFn(this)'></i>";
-				$(".totalPrice").html("합계 : <span class='fs-3'>"+tPrice.toLocaleString()+"원</span>");
-				$(".productNum").html(html);
-				$(".productNumM").html(html);
+				if(num > inventory){
+					alert("재고 수량을 초과하였습니다.");
+				}else{
+					var tPrice = num*price;
+					var html = "<i class='bi bi-dash-square-fill' onclick='minusFn(this)'></i> <div class='pCnt'>"+num+"</div> <i class='bi bi-plus-square-fill' onclick='plusFn(this)'></i>";
+					$(".totalPrice").html("합계 : <span class='fs-3'>"+tPrice.toLocaleString()+"원</span>");
+					$(".productNum").html(html);
+					$(".productNumM").html(html);
+				}
 			}else{
 				num++;
-				var tPrice = num*salePrice;
-				var html = "<i class='bi bi-dash-square-fill' onclick='minusFn(this)'></i> <div class='pCnt'>"+num+"</div> <i class='bi bi-plus-square-fill' onclick='plusFn(this)'></i>";
-				$(".totalPrice").html("합계 : <span class='fs-3'>"+tPrice.toLocaleString()+"원</span>");
-				$(".productNum").html(html);
-				$(".productNumM").html(html);
+				if(num > inventory){
+					alert("재고 수량을 초과하였습니다.");
+				}else{
+					var tPrice = num*salePrice;
+					var html = "<i class='bi bi-dash-square-fill' onclick='minusFn(this)'></i> <div class='pCnt'>"+num+"</div> <i class='bi bi-plus-square-fill' onclick='plusFn(this)'></i>";
+					$(".totalPrice").html("합계 : <span class='fs-3'>"+tPrice.toLocaleString()+"원</span>");
+					$(".productNum").html(html);
+					$(".productNumM").html(html);
+				}
 			}
 		}
 	}
