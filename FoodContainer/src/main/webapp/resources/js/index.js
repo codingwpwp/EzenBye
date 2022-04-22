@@ -11,7 +11,7 @@
 			alert("로그인 후 사용 가능합니다.");
 		}else{
 			if(hCheck > 0){
-				obj.setAttribute("src","/controller/resources/img/찬하트.png");
+				obj.setAttribute("src","/FoodContainer/resources/img/찬하트.png");
 				
 				$.ajax({
 					url : "dibsInsert.do",
@@ -23,7 +23,7 @@
 				});
 				
 			}else if(hCheck < 0){
-				obj.setAttribute("src","/controller/resources/img/빈하트.png");
+				obj.setAttribute("src","/FoodContainer/resources/img/빈하트.png");
 				
 				$.ajax({
 					url : "dibsDelete.do",

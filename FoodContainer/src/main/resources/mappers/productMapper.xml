@@ -38,10 +38,10 @@
     	</foreach>
 	    <foreach collection="list" item="filter" separator=",">
 			<if test="filter.price != null and filter.price eq '0'.toString()">
-				ORDER BY origin_price DESC
+				ORDER BY origin_price ASC
 			</if>
 			<if test="filter.price != null and filter.price eq '1'.toString()">
-				ORDER BY origin_price ASC
+				ORDER BY origin_price DESC
 			</if>
 	    </foreach>
     </select>
