@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,7 +21,7 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"rel="stylesheet">
 	
 </head>
-<body>
+<body onselectstart="return false;">
 	<!-- 헤더 -->
 	<header class="border-bottom border-dark">
 		<%@include file="/WEB-INF/views/base/header.jsp"%>
@@ -29,15 +32,7 @@
         <div class="row">
             <div class="col-lg-2 d-none d-lg-block"></div>
 
-            <!--
-                id="navLeftMenu"인 현재 주석 바로 아래의 태그는 페이지의 종류에 따른 왼쪽메뉴.
-                네비게이션 바가 펼쳐질 때 알아서 태그가 안보이도록 설정.
-                필요시에만 div태그 사이에 코드를 작성.
-                작성시 border border-dark는 구분용으로만 작성했기 때문에 알아서 지우고 작업.
-                작성하지 않는 경우는 절대 건들지 않음.
-                base.js에 id="navLeftMenu"와 관련된 코드가 작성되어있음.
-            -->
-            <div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark" id="navLeftMenu"><!-- 여기에 작성 --></div>
+            <div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark" id="navLeftMenu"></div>
 
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
 
@@ -58,45 +53,39 @@
             <!-- 메인 -->
             <div class="col-12 col-sm-9 col-md-10 col-lg-8">
                 <article id="mainSection">
-                    
-                    <!--
-                        헤딩.
-                        필요하지 않는 사람은 <div>태그를 삭제.
-                        필요한 사람은 <div>태그에 작성.
-                    -->
-                    <div class="fs-5 my-2 fw-bold">공지사항</div>
+ 
+                    <div class="fs-5 my-2 fw-bold">1:1문의</div>
 
                  	<div class="maindiv">
 						<table class="table">
-							<thead>
+							<thead class="fw-bold fs-5">
 								<tr>
 									<th scope="col">제목</th>
-									<td class="title">20220330공지사항입니다~!!!!!!!!!! 
-												
-											 </td>
-									<td class="right">2022-03-23</td>
+									<td class="title">${view.title}</td>
+									<td style="text-align: left;">${fn:substring(view.write_date, 0,10)}</td>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
+								<tr class="fw-bold fs-5">
 									<th scope="row">작성자</th>
-									<td>관리자</td>
-									<td class="right">조회수10</td>
+									<td>${view.name}</td>
+									<td style="text-align: left;">${view.sort2}</td>
 								</tr>
 								<tr>
 									<td colspan="3">
-										<textarea readonly="readonly"></textarea>
+										<textarea class='p-3 w-100 mt-4' readonly>${view.contents}</textarea>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 						<div class="row">
 						<div class="col-md-2 col-sm-2 col-3 leftbtn">
-							<input value="목록" type="button" class="btn btn-primary listbtn" onclick="location.href='notice_main.do'">
+							<input value="목록" type="button" class="btn btn-primary listbtn" onclick="location.href='serviceCenter.do?sort2=${sort2}&nowPage=${nowPage}'">
 						</div>
 						<div class="col-md-10 col-sm-10 col-9 rightbtn">
-							<input value="삭제" type="button" class="btn btn-danger delbtn">
-							<input value="수정" type="button" class="btn btn-secondary updatebtn" onclick="location.href='notice_update.do'">
+							<c:if test="${member.position ne null and member.position eq '관리자'}">
+								<input value="삭제" type="button" class="btn btn-secondary updatebtn" onclick="location.href='notice_update.do'">
+							</c:if>
 						</div>
 						</div>
 

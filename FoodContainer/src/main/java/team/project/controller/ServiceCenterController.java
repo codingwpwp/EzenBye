@@ -20,6 +20,7 @@ public class ServiceCenterController {
 	@Autowired
 	ServiceCenterService service;
 
+	// 고객센터 메인
 	@RequestMapping(value = "serviceCenter.do", method = RequestMethod.GET)
 	public String serviceCenter(Model model,
 								@RequestParam(value="sort2", required = false) String sort2,
@@ -43,13 +44,41 @@ public class ServiceCenterController {
 		return "serviceCenterPage/serviceCenter_main";
 	}
 	
+	// 고객센터 메인 FAQ비동기
 	@RequestMapping(value = "FAQAjax.do", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ServiceCenterVO> FAQAjax(Model model, @RequestParam(value="sort2") String sort2) throws Exception{
+	public List<ServiceCenterVO> FAQAjax(@RequestParam(value="sort2") String sort2) throws Exception{
+		return service.serviceCenterPageFAQList(sort2);
+	}
+
+	// 고객센터 메인 페이징비동기
+	@RequestMapping(value = "pagingAjax.do", method = RequestMethod.POST)
+	@ResponseBody
+	public PagingUtil pagingAjax(Model model, @RequestParam(value="sort2") String sort2) throws Exception{
+		return service.serviceCenterPagingUtil(sort2, 1);
+	}
+	
+	// 고객센터 메인 1:1문의비동기
+	@RequestMapping(value = "sListAjax.do", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ServiceCenterVO> sListAjax(Model model, @RequestParam(value="sort2") String sort2) throws Exception{
+		return service.serviceCenterPageList(sort2, 1);
+	}
+	
+	// 고객센터 글 보기
+	@RequestMapping(value = "serviceCenter_view.do", method = RequestMethod.GET)
+	public String view(Model model,
+					   @RequestParam(value="sort2") String sort2,
+					   @RequestParam(value="nowPage") String nowPage,
+					   @RequestParam(value="serviceCenter_index") int serviceCenter_index) throws Exception{
 		
-		List<ServiceCenterVO> FAQList = service.serviceCenterPageFAQList(sort2);
+		ServiceCenterVO vo = service.serviceCenterPageView(serviceCenter_index);
+		model.addAttribute("view", vo);
 		
-		return FAQList;
+		model.addAttribute("sort2", sort2);
+		model.addAttribute("nowPage", nowPage);
+		
+		return "serviceCenterPage/serviceCenter_view";
 	}
 
 }

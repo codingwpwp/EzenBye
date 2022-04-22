@@ -55,10 +55,13 @@ public interface RecipeService {
 
 	public  int getThumb(ThumbVO vo) throws Exception;
 	
-
+	//마이페이지 부분
 	
-
+	List<RecipeVO> recipeMypageList(SearchVO searchVO, int nowPage) throws Exception;
 	
+	PagingUtil recipeListPaging(SearchVO searchVO, int nowPage) throws Exception;
+
+	int countRecipeMypage(SearchVO searchVO) throws Exception;
 
 	
 	    

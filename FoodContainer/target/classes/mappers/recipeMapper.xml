@@ -206,6 +206,21 @@ member_index
     FROM recipe 
 	WHERE del_YN = 'N'
 </select>
+
+<!-- 마이페이지 부분 -->
+<select id="countRecipeMypage" resultType="int" parameterType="SearchVO">
+    SELECT count(*) 
+    FROM 
+    recipe WHERE member_index = #{member_index} and del_yn = 'N'
+</select>
+
+<select id="recipeMypageList" resultType="RecipeVO" parameterType="PagingUtil">
+    SELECT * 
+    FROM 
+    recipe WHERE member_index = #{member_index} and del_yn = 'N' 
+    order by best_rank, write_date desc
+    LIMIT #{start}, #{perPage}
+</select>
  
 </mapper>
 

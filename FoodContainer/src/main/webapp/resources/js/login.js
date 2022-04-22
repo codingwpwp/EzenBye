@@ -35,7 +35,7 @@ function loginCheck(){
 	}
 	
 	if(loginFormSubmitSw == 1){
-		$("#loginForm").submit();
+		document.frm.submit();
 	}
 }
 

@@ -19,7 +19,7 @@
 	  		<a class="nav-link active nav4 left-nav-text" aria-current="page" href="<%=request.getContextPath() %>/mypage_coupon.do">할인쿠폰</a>
 	  		<p class="fs-5 nav-title">활동정보</p>
 	  		<a class="nav-link active nav5 left-nav-text" aria-current="page" href="<%=request.getContextPath() %>/mypage_review.do?nowPage=1">나의 리뷰</a>
-	  		<a class="nav-link nav6 left-nav-text" href="<%=request.getContextPath() %>/mypage_recipe.do">나의 레시피</a>
+	  		<a class="nav-link nav6 left-nav-text" href="<%=request.getContextPath() %>/mypage_recipe.do?nowPage=1">나의 레시피</a>
 	  		<a class="nav-link nav7 left-nav-text" href="<%=request.getContextPath() %>/mypage_inquiries.do?nowPage=1">문의내역</a>
 	  		<p class="fs-5 nav-title">개인정보</p>
 	  		<a class="nav-link active nav8 left-nav-text" aria-current="page" href="<%=request.getContextPath() %>/mypage_changeInfor.do">개인정보 변경</a>
