@@ -220,28 +220,72 @@
 						<hr>
 						<div class="container">
 							<div class="row">
-								<%for(int i=0; i<=2; i++){ %>
-								<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 popular d-flex justify-content-center">
-									<div class="card" style="width: 18rem;">
-									  <img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/매운 왕교자.png" class="card-img-top" alt="비비고만두">
-									  <%if(i==0){ %>
-									  <img src="<%=request.getContextPath()%>/resources/img/금메달.png" class="img-fluid medal" alt="1등">
-									  <%}else if(i==1){ %>
-									  <img src="<%=request.getContextPath()%>/resources/img/은메달.png" class="img-fluid medal" alt="2등">
-									  <%}else if(i==2){ %>
-									  <img src="<%=request.getContextPath()%>/resources/img/동메달.png" class="img-fluid medal" alt="3등">
-									  <%} %>
-									  <div class="card-body">
-									    <p class="card-text">
-									    	[유저 닉네임]<br>
-									    	비비고왕교자<br>
-									    	조회수 2,500<br>
-									    	추천수 3,000
-									    </p>
-									  </div>
-									</div>
-								</div>
-								<%} %>
+								<c:forEach items="${recipeList}" var="recipeList">
+								<c:if test="${recipeList.best_rank < 4}">
+									<c:if test="${recipeList.best_rank == 1}">
+										<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 popular d-flex justify-content-center">
+											<div class="card" style="width: 18rem;">
+											  <img src="<%=request.getContextPath()%>/resources/img/recipe/${recipeList.thumbnail_image}" class="card-img-top" alt="${recipeList.thumbnail_image}">
+											  <img src="<%=request.getContextPath()%>/resources/img/금메달.png" class="img-fluid medal" alt="1등">
+											  <div class="card-body">
+											    <p class="card-text">
+											    	<c:forEach items="${MemberList}" var="MemberList">
+														<c:if test="${MemberList.member_index == recipeList.member_index}">
+															[닉네임 : ${MemberList.nickname}]<br>
+														</c:if>
+													</c:forEach>
+											    	제목 : ${recipeList.title}<br>
+											    	조회 : ${recipeList.hit}<br>
+													추천 : ${recipeList.thumb}
+											    </p>
+											  </div>
+											</div>
+										</div>
+									</c:if>
+									
+									<c:if test="${recipeList.best_rank == 2}">
+										<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 popular d-flex justify-content-center">
+											<div class="card" style="width: 18rem;">
+											  <img src="<%=request.getContextPath()%>/resources/img/recipe/${recipeList.thumbnail_image}" class="card-img-top" alt="${recipeList.thumbnail_image}">
+											  <img src="<%=request.getContextPath()%>/resources/img/은메달.png" class="img-fluid medal" alt="2등">
+											  <div class="card-body">
+											    <p class="card-text">
+											    	<c:forEach items="${MemberList}" var="MemberList">
+														<c:if test="${MemberList.member_index == recipeList.member_index}">
+															[닉네임 : ${MemberList.nickname}]<br>
+														</c:if>
+													</c:forEach>
+											    	제목 : ${recipeList.title}<br>
+											    	조회 : ${recipeList.hit}<br>
+													추천 : ${recipeList.thumb}
+											    </p>
+											  </div>
+											</div>
+										</div>
+									</c:if>
+									
+									<c:if test="${recipeList.best_rank == 3}">
+										<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 popular d-flex justify-content-center">
+											<div class="card" style="width: 18rem;">
+											  <img src="<%=request.getContextPath()%>/resources/img/recipe/${recipeList.thumbnail_image}" class="card-img-top" alt="${recipeList.thumbnail_image}">
+											  <img src="<%=request.getContextPath()%>/resources/img/동메달.png" class="img-fluid medal" alt="3등">
+											  <div class="card-body">
+											    <p class="card-text">
+											    	<c:forEach items="${MemberList}" var="MemberList">
+														<c:if test="${MemberList.member_index == recipeList.member_index}">
+															[닉네임 : ${MemberList.nickname}]<br>
+														</c:if>
+													</c:forEach>
+											    	제목 : ${recipeList.title}<br>
+											    	조회 : ${recipeList.hit}<br>
+													추천 : ${recipeList.thumb}
+											    </p>
+											  </div>
+											</div>
+										</div>
+									</c:if>
+								</c:if>
+								</c:forEach>
 							</div>
 						</div>
 					</article>
@@ -354,22 +398,64 @@
 					<article class="bestRecipeM">
 						<p class="fs-5 my-2 fw-bold">베스트 레시피</p>
 						<hr>
+						<c:forEach items="${recipeList}" var="recipeList">
+						<c:if test="${recipeList.best_rank < 4}">
 						<div class="recipeCardM">
-							<%for(int i=0; i<3; i++){ %>
 							<div class="recipeMDiv">
+								<c:if test="${recipeList.best_rank == 1}">
 								<div class="recipeMImg">
-									<img src="<%=request.getContextPath()%>/resources/img/CJ/치킨,만두/매운 왕교자.png" class="img-fluid" alt="비비고만두">
+									<img src="<%=request.getContextPath()%>/resources/img/recipe/${recipeList.thumbnail_image}" class="img-fluid" alt="${recipeList.thumbnail_image}">
 								</div>
 								<div class="recipeMContent">
 									<img src="<%=request.getContextPath()%>/resources/img/금메달.png" class="img-fluid medalM" alt="1등">
-									<div>[유저닉네임]</div>
-									<div>비비고왕교자</div>
-									<div>조회수</div>
-									<div>추천수</div>
+									<c:forEach items="${MemberList}" var="MemberList">
+										<c:if test="${MemberList.member_index == recipeList.member_index}">
+											<div>[닉네임 : ${MemberList.nickname}]</div>
+										</c:if>
+									</c:forEach>
+									<div>제목 : ${recipeList.title}</div>
+									<div>조회 : ${recipeList.hit}</div>
+									<div>추천 : ${recipeList.thumb}</div>
 								</div>
+								</c:if>
+								
+								<c:if test="${recipeList.best_rank == 2}">
+								<div class="recipeMImg">
+									<img src="<%=request.getContextPath()%>/resources/img/recipe/${recipeList.thumbnail_image}" class="img-fluid" alt="${recipeList.thumbnail_image}">
+								</div>
+								<div class="recipeMContent">
+									<img src="<%=request.getContextPath()%>/resources/img/은메달.png" class="img-fluid medalM" alt="2등">
+									<c:forEach items="${MemberList}" var="MemberList">
+										<c:if test="${MemberList.member_index == recipeList.member_index}">
+											<div>[닉네임 : ${MemberList.nickname}]</div>
+										</c:if>
+									</c:forEach>
+									<div>제목 : ${recipeList.title}</div>
+									<div>조회 : ${recipeList.hit}</div>
+									<div>추천 : ${recipeList.thumb}</div>
+								</div>
+								</c:if>
+								
+								<c:if test="${recipeList.best_rank == 3}">
+								<div class="recipeMImg">
+									<img src="<%=request.getContextPath()%>/resources/img/recipe/${recipeList.thumbnail_image}" class="img-fluid" alt="${recipeList.thumbnail_image}">
+								</div>
+								<div class="recipeMContent">
+									<img src="<%=request.getContextPath()%>/resources/img/동메달.png" class="img-fluid medalM" alt="3등">
+									<c:forEach items="${MemberList}" var="MemberList">
+										<c:if test="${MemberList.member_index == recipeList.member_index}">
+											<div>[닉네임 : ${MemberList.nickname}]</div>
+										</c:if>
+									</c:forEach>
+									<div>제목 : ${recipeList.title}</div>
+									<div>조회 : ${recipeList.hit}</div>
+									<div>추천 : ${recipeList.thumb}</div>
+								</div>
+								</c:if>
 							</div>
-							<%} %>
 						</div>
+						</c:if>
+						</c:forEach>
 					</article>
                 </article>
             </div>

@@ -31,5 +31,36 @@
         FROM 
         servicecenter WHERE member_index = #{member_index} and del_YN = 'N'
     </select>
-  
+    
+    <!-- 고객센터페이지 -->
+    <!-- 종류2에 대한 FAQ조회 -->
+    <select id="serviceCenterPageFAQList" resultType="ServiceCenterVO" parameterType="String">
+    	SELECT *
+    	FROM servicecenter
+    	WHERE sort1 = 'FAQ'
+    	AND sort2 = #{sort2}
+    	AND del_YN = 'N'
+    </select>
+    
+    <!-- 종류2에 대한 1:1문의들 갯수 -->
+    <select id="serviceCenterPageListCount" resultType="int" parameterType="String">
+    	SELECT COUNT(*)
+    	FROM servicecenter
+    	WHERE sort1 = '1:1문의'
+    	AND sort2 = #{sort2}
+    	AND del_YN = 'N'
+    </select>
+    
+    <!-- 종류2에 대한 1:1문의들 리스트 -->
+    <select id="serviceCenterPageList" resultType="ServiceCenterVO" parameterType="ServiceCenterVO">
+    	SELECT a.*, b.name
+    	FROM serviceCenter as a, member as b
+    	WHERE a.member_index = b.member_index
+	    	AND sort1 = '1:1문의'
+	    	AND sort2 = #{sort2}
+	    	AND a.del_YN = 'N'
+    	ORDER BY write_date DESC
+    	LIMIT #{serviceCenter_index}, #{member_index}
+    </select>
+    
 </mapper>

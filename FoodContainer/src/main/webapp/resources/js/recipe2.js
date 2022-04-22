@@ -12,7 +12,7 @@
         $('#summernote').summernote('disable');
 //베스트 레시피
 function best(){
-            var text = prompt("금:1 | 은:2 | 동:3");
+            var text = Number(prompt("금:1 | 은:2 | 동:3"));
             if(text == 1 || text ==2 || text == 3){
 				if(text==1){
 					alert("베스트 레시피 금 선정!!");

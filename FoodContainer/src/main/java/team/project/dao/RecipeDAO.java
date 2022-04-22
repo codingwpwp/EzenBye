@@ -73,10 +73,17 @@ public class RecipeDAO {
 	}
 	
 	//베스트 레시피
+	
+	public int initRank(int best_rank)throws Exception{
+		return sqlSession.update(Namespace+".initRank",best_rank);
+	}
 	public void updateRank(RecipeVO vo)throws Exception{
 		sqlSession.update(Namespace+".updateRank",vo);
 	}
-
+	
+	public List<RecipeVO> viewRecipeList(RecipeVO recipeVO) throws Exception {
+		return sqlSession.selectList(Namespace + ".viewRecipeList", recipeVO);
+	}
 		
 }
 

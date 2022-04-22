@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/base.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/purchasePage.css">
 </head>
-<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="" onselectstart="return false;" oncontextmenu="return false;">
 	<script type="text/javascript">
 		 window.history.forward();
 		 function noBack(){window.history.forward();}

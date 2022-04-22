@@ -92,7 +92,7 @@
 			    	  <input type="hidden" value="${searchType}" name="searchType" />
 			    	  <input type="hidden" value="${searchValue}" name="searchValue" />
 			    	  <input type="hidden" value="${nowPage}" name="nowPage" />		
-					  <button class="btn btn-secondary me-3 noteManageView-btn2" type="button" onclick="location.href='mypage_noteManage.do?searchType=${searchType}&searchValue=${searchValue}&nowPage=${nowPage}'">뒤로</button>
+					  <button class="btn btn-secondary me-3 noteManageView-btn2" type="button" onclick="location.href='<%=request.getContextPath() %>/mypage_noteManage.do?searchType=${searchType}&searchValue=${searchValue}&nowPage=${nowPage}'">뒤로</button>
 					  <button class="btn btn-dark noteManageView-btn2" type="button" onclick="messageDelete(this)">삭제</button>
 					</div>
 			    	

@@ -25,7 +25,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import team.project.service.BannerService;
 import team.project.service.CartService;
 import team.project.service.DibsService;
+import team.project.service.MemberService;
 import team.project.service.ProductService;
+import team.project.service.RecipeService;
 import team.project.service.ReviewService;
 import team.project.vo.BannerVO;
 import team.project.vo.CartVO;
@@ -33,6 +35,7 @@ import team.project.vo.DibsVO;
 import team.project.vo.MemberVO;
 import team.project.vo.ProductFilterVO;
 import team.project.vo.ProductVO;
+import team.project.vo.RecipeVO;
 import team.project.vo.ReviewVO;
 
 /**
@@ -51,13 +54,17 @@ public class MainController {
 	private CartService cartService;
 	@Autowired
 	private ReviewService reviewService;
+	@Autowired
+	private RecipeService recipeService;
+	@Autowired
+	private MemberService memberService;
 	
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
-	public String index(Locale locale, Model model, HttpServletRequest request, ProductVO productVO, BannerVO bannerVO, DibsVO dibsVO) throws Exception {
+	public String index(Locale locale, Model model, HttpServletRequest request, ProductVO productVO, BannerVO bannerVO, DibsVO dibsVO, RecipeVO recipeVO, MemberVO memberVO) throws Exception {
 		
 		List<ProductVO> popularList = productService.popularList(productVO);
 		
@@ -74,6 +81,14 @@ public class MainController {
 		List<ReviewVO> indexReview = reviewService.review(popularList);
 		
 		model.addAttribute("viewReview",indexReview);
+		
+		List<RecipeVO> recipeList = recipeService.viewRecipeList(recipeVO);
+		
+		model.addAttribute("recipeList",recipeList);
+		
+		List<MemberVO> MemberList = memberService.MemberList(memberVO);
+		
+		model.addAttribute("MemberList",MemberList);
 		
 		//쿠키 사용
 		Cookie[] cookies = request.getCookies();
@@ -154,7 +169,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "productView.do", method = RequestMethod.GET)
-	public String productView(Locale locale, Model model, HttpServletRequest request, ReviewVO reviewVO) throws Exception {
+	public String productView(Locale locale, Model model, HttpServletRequest request, ReviewVO reviewVO, MemberVO memberVO) throws Exception {
 		
 		String product_index = request.getParameter("product_index");
 		
@@ -166,6 +181,10 @@ public class MainController {
 		
 		model.addAttribute("viewReview",review);
 		
+		List<MemberVO> MemberList = memberService.MemberList(memberVO);
+		
+		model.addAttribute("MemberList",MemberList);
+
 		//쿠키 사용
 		Cookie[] cookies = request.getCookies();
 						

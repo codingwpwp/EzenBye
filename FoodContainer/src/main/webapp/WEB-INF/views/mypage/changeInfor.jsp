@@ -67,7 +67,7 @@
 			        <p class="fs-6 lookup-fs-6">개인정보 변경</p>
 			        <hr />
 			        
-			        <form action="pwCheck.do" method="post">
+			        <form action="<%=request.getContextPath() %>/pwCheck.do" method="post">
 			         <div class="mb-3 row changeInfor d-flex justify-content-center">
 					    <div class="input-group mb-3 changeInfor-input">
 						  <span class="input-group-text changeInfor-label" id="inputGroup-sizing-default">비밀번호</span>

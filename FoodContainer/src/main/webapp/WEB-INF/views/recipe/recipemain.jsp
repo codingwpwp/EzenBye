@@ -68,22 +68,26 @@
                   	 <c:if test="${member!=null}">
                     <button class="btnwr" onclick="location.href='recipewrite.do'"><span>레시피 작성</span></button>
                   	</c:if>
-                    <select class="form-select sel1" name="searchType">
-                        <option>정렬</option>
-                        <option value="">추천순</option>
-                        <option value="">최신순</option>
-                    </select>
+                   
                     <div class="container">
                        
                             <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-xs-1 g-4 menu">
                             <c:forEach items="${recipeList}" var="list">	
+                            <input type="hidden" value="${list.recipe_index}">
 							<div class="col">
 								<div class="card h-100">
-								
-								
+								<c:if test="${list.best_rank==1}">
+									<img src="<%=request.getContextPath()%>/resources/img/금메달.png" id="bestimg">
+								</c:if>
+								<c:if test="${list.best_rank==2}">
+									<img src="<%=request.getContextPath()%>/resources/img/은메달.png" id="bestimg">
+								</c:if>
+								<c:if test="${list.best_rank==3}">
+									<img src="<%=request.getContextPath()%>/resources/img/동메달.png" id="bestimg">
+								</c:if>
 									<img
 										src="<%=request.getContextPath()%>/resources/img/recipe/${list.thumbnail_image}"
-										class="card-img-top" alt="${list.thumbnail_image}">
+										class="card-img-top" alt="${list.thumbnail_image}" onclick="location.href='<%=request.getContextPath()%>/recipeview.do?recipe_index=${list.recipe_index}'">
 									<div class="card-body">
 										<h6 class="card-title">
 										
@@ -92,7 +96,7 @@
 											</div>
 										</h6>
 										<div class="row recipe-text">
-											<div class="col">추천수(<c:out value="${list.thumb}"/>)</div>
+											<%-- <div class="col">추천수(<c:out value="${list.thumb}"/>)</div> --%>
 											<div class="col">조회수(<c:out value="${list.hit}"/>)</div>
 											<div class="col">댓글(<c:out value="${list.reply_index}"/>)</div>
 										</div>
@@ -100,20 +104,6 @@
 								</div>
 							</div>
 							</c:forEach>
-							<%--    <a href="<%=request.getContextPath()%>/recipeview.do">
-                                <div class="card shadow-sm">
-                                    <img src="1.jpg" width="100%" height="190">
-                                    <div class="card-body">
-                                        <p class="card-text">중식 특유의 그 맛이 땡기는 날! 멀리 배달 기다릴 필요도 없음</p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                          <div class="card-body">
-                                            <p class="card-text">작성자:관리자</p>
-                                            <p class="card-text">추천수:20 | 조회수:67 | 댓글(3)</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                </div>
-                           </a> --%>
                             </div>
                         
                     </div>
@@ -121,7 +111,7 @@
                         <div class="row">
 
 						<div class="col-12 seldiv">
-							<form action="recipemain.do" class="selbox" method="get">
+						<!-- 	<form action="recipemain.do" class="selbox" method="get">
 								<select class="form-select" name="searchType">
 									<option>검색</option>
 									<option value="title">제목</option>
@@ -132,7 +122,7 @@
 								<input type="hidden" name="nowPage" value="1">
 								
 								
-							</form>
+							</form> -->
 						</div>
 
 						</div>

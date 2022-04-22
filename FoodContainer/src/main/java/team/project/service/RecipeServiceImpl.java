@@ -96,12 +96,10 @@ public class RecipeServiceImpl implements RecipeService{
 	@Override
 	public void insertRecipe(RecipeVO vo,MultipartFile tumnailImage, HttpServletRequest request) throws Exception {
 		
-//		int member_index=vo.getMember_index();
+
 		String title=vo.getTitle();
 		String contents=vo.getContents();
-//		String thumbnail=vo.getThumbnail_image();
 		String product1=vo.getProduct_index1();
-
 		String product2=vo.getProduct_index2();
 		String product3=vo.getProduct_index3();
 		vo.setTitle(title);
@@ -124,12 +122,13 @@ public class RecipeServiceImpl implements RecipeService{
 	}
 	//베스트 레시피
 	@Override
-	public void updateRank(RecipeVO vo) throws Exception{
+	public int initRank(int best_rank) throws Exception{
+		return recipeDao.initRank(best_rank);
+	}
+	@Override
+	public void updateRank(RecipeVO vo)throws Exception{
 		recipeDao.updateRank(vo);
 	}
-	
-	
-	
 	
 	// 상품 이미지 업로드 메소드
 		public void imageUpload(RecipeVO vo, MultipartFile tumnailImage, HttpServletRequest request) throws Exception {
@@ -152,6 +151,14 @@ public class RecipeServiceImpl implements RecipeService{
 			}
 			
 			
+		}
+
+		@Override
+		public List<RecipeVO> viewRecipeList(RecipeVO recipeVO) throws Exception {
+			
+			List<RecipeVO> recipeList = recipeDao.viewRecipeList(recipeVO);
+			
+			return recipeList;
 		}
 	
 	

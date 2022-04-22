@@ -68,7 +68,7 @@
                         </div>
                         <br>
                         <div>
-                            <button class="btn btn-primary">주문 조회하기</button>
+                            <button class="btn btn-primary" onclick="location.href='<%=request.getContextPath()%>/lookupNon.do?no_member_order_index=${noMemberOrdersvo.no_member_order_index}'">주문 조회하기</button>
                         </div>
                     </div>
 

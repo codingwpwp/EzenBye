@@ -231,9 +231,9 @@ function sample6_execDaumPostcode() {
 	function chooseDelete(obj){
 		var valueArr = new Array();
 		var list = $("input[name='note']");
-		var searchType = $(obj).parent().find("input[name='searchType']").val();
-		var searchValue = $(obj).parent().find("input[name='searchValue']").val();
-		var nowPage = $(obj).parent().find("input[name='nowPage']").val();
+		var searchType = $(obj).parent().parent().find("input[name='searchType']").val();
+		var searchValue = $(obj).parent().parent().find("input[name='searchValue']").val();
+		var nowPage = $(obj).parent().parent().find("input[name='nowPage']").val();
 		for(var i = 0; i<list.length; i++){
 			if(list[i].checked){
 				valueArr.push(list[i].value);

@@ -227,17 +227,12 @@ public class MemberServiceImpl implements MemberService {
 			}
 		}
 		
-		System.out.println(randomTempPw);
-		System.out.println(randomTempPw);
-		System.out.println(randomTempPw);
-		System.out.println(randomTempPw);
-		
 		membervo.setPw(PasswordEncoder.encode(randomTempPw));
 		
 		memberDao.changeTempPw(membervo);
 		
 		// 이제 임시 비밀번호를 이메일로 전송
-		membervo.setPhone(randomTempPw);
+		// membervo.setPhone(randomTempPw);
 		
 		EmailVO evo = new EmailVO();
 		evo.setSubject("FoodContainer " + membervo.getName() + "님의 임시 비밀번호입니다");
@@ -342,6 +337,14 @@ public class MemberServiceImpl implements MemberService {
 			memberMapper.updatePoint(point, member.getMember_index());
 		}
 		
+	}
+
+	@Override
+	public List<MemberVO> MemberList(MemberVO memberVO) throws Exception {
+		
+		List<MemberVO> MemberList = memberDao.MemberList(memberVO);
+		
+		return MemberList;
 	}
 	
 }

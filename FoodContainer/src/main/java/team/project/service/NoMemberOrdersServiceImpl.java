@@ -3,7 +3,6 @@ package team.project.service;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -21,6 +20,7 @@ import team.project.dao.OrderProductDAO;
 import team.project.dao.ProductDAO;
 import team.project.util.PagingUtil;
 import team.project.vo.CartVO;
+import team.project.vo.EmailVO;
 import team.project.vo.NoMemberOrdersVO;
 import team.project.vo.OrderProductVO;
 import team.project.vo.SearchVO;
@@ -35,6 +35,9 @@ public class NoMemberOrdersServiceImpl implements NoMemberOrdersService{
 	
 	@Autowired
 	private ProductDAO productDao;
+	
+	@Autowired
+	private EmailService emailService;
 	
 	@Inject
 	private BCryptPasswordEncoder PasswordEncoder;
@@ -111,12 +114,23 @@ public class NoMemberOrdersServiceImpl implements NoMemberOrdersService{
 				}
 			}
 			
-			tempCurrentCookie = tempCurrentCookie.substring(0, tempCurrentCookie.length() - 1);
-			tempCurrentCookie = URLEncoder.encode(tempCurrentCookie, "UTF-8");
-			Cookie pidxCookie = new Cookie("noMemberCart", tempCurrentCookie);
-			pidxCookie.setPath("/controller");
-			
-		    response.addCookie(pidxCookie);
+		    
+		    if(tempCurrentCookie.length() > 0) {
+				
+		    	tempCurrentCookie = tempCurrentCookie.substring(0, tempCurrentCookie.length() - 1);
+				tempCurrentCookie = URLEncoder.encode(tempCurrentCookie, "UTF-8");
+				Cookie pidxCookie = new Cookie("noMemberCart", tempCurrentCookie);
+				pidxCookie.setPath("/" + request.getContextPath());
+				
+			    response.addCookie(pidxCookie);
+			}else {
+				Cookie pidxCookie = new Cookie("noMemberCart", "");
+				tempCurrentCookie = URLEncoder.encode(tempCurrentCookie, "UTF-8");
+				
+				pidxCookie.setPath("/" + request.getContextPath());
+				pidxCookie.setMaxAge(0);
+			    response.addCookie(pidxCookie);
+			}
 		    
 		}
 	}
@@ -128,6 +142,64 @@ public class NoMemberOrdersServiceImpl implements NoMemberOrdersService{
 		return noMemberOrdersList;
 	}
 
+	// 비회원 로그인(주문번호) 검증과정
+	@Override
+	public String noMemberLogin(NoMemberOrdersVO noMembervo) throws Exception {
+		NoMemberOrdersVO vo = noMemberOrderDao.noMemberOrdersList(noMembervo.getNo_member_order_index());
+		if(vo == null) {
+			return null;
+		}else {
+			if(PasswordEncoder.matches(noMembervo.getPw(), vo.getPw())) {
+				vo.setPw("");
+				return vo.getNo_member_order_index();
+			}else {
+				return null;				
+			}
+		}
+
+	}
+	
+	// 비회원 주문 비밀번호 찾기 이메일
+	@Override
+	public String noMemberCheckPwAndSendEmail(NoMemberOrdersVO vo) throws Exception {
+		NoMemberOrdersVO tempvo = noMemberOrderDao.noMemberOrdersSelect(vo);
+		
+		if(tempvo == null) {
+			return "none";
+		}else {
+			String randomAlpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+			String randomNum = "0123456789";
+			String randomSpecial = "!@#$%^&*()";
+			String randomTempPw = "";
+			for(int i = 0; i < 15; i++) {
+				if(i > 12) {
+					int randomIndex = (int)(Math.random() * randomSpecial.length());
+					randomTempPw += randomSpecial.substring(randomIndex, randomIndex + 1);
+				}else if(i > 7 && i <= 12) {
+					int randomIndex = (int)(Math.random() * randomNum.length());
+					randomTempPw += randomNum.substring(randomIndex, randomIndex + 1);
+				}else {
+					int randomIndex = (int)(Math.random() * randomAlpha.length());
+					randomTempPw += randomAlpha.substring(randomIndex, randomIndex + 1);
+				}
+			}
+			
+			tempvo.setPw(PasswordEncoder.encode(randomTempPw));
+			
+			noMemberOrderDao.noMemberOrdersInfoChange(tempvo);
+			
+			EmailVO evo = new EmailVO();
+			evo.setSubject("FoodContainer " + tempvo.getName() + "님의 새로운 주문 비밀번호 입니다");
+			evo.setReceiveMail(tempvo.getEmail());
+			String message = "새로운 비밀번호는 " + randomTempPw + " 입니다. 현재 비밀번호는 입력 할 수 없습니다.";
+			evo.setMessage(message);
+			emailService.sendEmail(evo);
+			
+			return tempvo.getName();
+		}
+		
+	}
+	
 	
 	/* 관리자페이지 */
 	
@@ -151,5 +223,7 @@ public class NoMemberOrdersServiceImpl implements NoMemberOrdersService{
 		int cnt = noMemberOrderDao.adminNoMemberOrdersCount(searchvo);
 		return new PagingUtil(cnt, nowPage, 10, 5);
 	}
+
+
 
 }

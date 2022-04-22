@@ -2,7 +2,6 @@ package team.project.controller;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
@@ -10,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -21,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.project.service.MemberService;
+import team.project.service.NoMemberOrdersService;
 import team.project.vo.MemberVO;
+import team.project.vo.NoMemberOrdersVO;
 
 @Controller
 public class LoginController {
@@ -30,6 +29,9 @@ public class LoginController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private NoMemberOrdersService noMemberOrdersService;
 
 	// 로그인 페이지로 이동
 	@RequestMapping(value = "loginmain.do", method = RequestMethod.GET)
@@ -96,7 +98,7 @@ public class LoginController {
 			if(rememberIdYN != null) {	// 아이디 저장 했을 때
 				String id = URLEncoder.encode(vo.getId(), "UTF-8");
 				Cookie idCookie = new Cookie("idCookie", id);
-				idCookie.setPath("/controller");
+				idCookie.setPath("/FoodContainer");
 			    response.addCookie(idCookie);
 			}else {	// 아이디 저장 안 했을 때
 				Cookie[] cookies = request.getCookies();
@@ -201,10 +203,21 @@ public class LoginController {
 				String name = request.getParameter("name");
 				String email = request.getParameter("receiveMail");
 				MemberVO tempMember = new MemberVO();
+				
 				tempMember.setName(name);
 				tempMember.setEmail(email);
 				
 				tempMember = memberService.emailEasyCheck(tempMember);
+				if(tempMember != null) {
+					String id = tempMember.getId();
+					String tempId = id.substring(0, 4);
+					String tempId2 = id.substring(4, id.length());
+					String stars = "";
+					for(int i = 0; i < tempId2.length(); i++) {
+						stars += "*";
+					}
+					tempMember.setId(tempId + stars);
+				}
 				model.addAttribute("tempMember", tempMember);
 				
 				return "login/id_easy_check";
@@ -257,15 +270,39 @@ public class LoginController {
 		
 	}
 	
-	// 비밀번호확인(마이페이지?)
-	@ResponseBody
-	@RequestMapping(value = "pwChk", method = RequestMethod.POST)
-	public boolean pwChk(MemberVO vo) throws Exception {
+	// 비회원 주문조회페이지로 이동
+	@RequestMapping(value = "noMemberLogin.do", method = RequestMethod.GET)
+	public String noMemberLogin(HttpServletRequest request) {
+		// 세션 소환
+		HttpSession session = request.getSession();
 		
-		MemberVO login =memberService.Login(vo);
-		boolean pwChk = pwdEncoder.matches(vo.getPw(), login.getPw());
-		return pwChk;
+		if(session.getAttribute("member") != null) {
+			return "redirect:index.do";
+		}else {
+			return "login/noMemberLogin";
+		}
+		
 	}
+	
+	// 비회원 주문조회 검증 과정
+	@RequestMapping(value = "noMemberLogin.do", method = RequestMethod.POST)
+	public String noMemberCheck(Model model, HttpServletRequest request, NoMemberOrdersVO vo) throws Exception{
+		String resultString =  noMemberOrdersService.noMemberLogin(vo);
+		if(resultString == null) {
+			return "login/noMemberLoginFail";
+		}else {
+			model.addAttribute("no_member_order_index", resultString);
+			return "login/noMemberLoginOk";
+		}
+	}
+	
+	// 비회원 주문 비밀번호 찾기 이메일 보내기 비동기 과정
+	@RequestMapping(value = "noMembersendEmailPw.do", method = RequestMethod.POST, produces ="application/text; charset=utf8")
+	@ResponseBody
+	public String noMemberCheckPwAndSendEmail(NoMemberOrdersVO vo, HttpServletResponse res) throws Exception{
+		String name = noMemberOrdersService.noMemberCheckPwAndSendEmail(vo);
+		return name;
+	}	
 	
 	// 로그아웃
 	@RequestMapping(value = "logout.do", method = RequestMethod.GET)
