@@ -34,7 +34,7 @@
 			<div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark" id="navLeftMenu"></div>
 
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
-
+			<input type="hidden" id="midx" value="${member.member_index}">
 		</div>
 	</nav>
 
@@ -110,10 +110,14 @@
 								<tr class="OneByOne">
 									<th scope="row">${cnt}</th>
 									<td class="fw-bold">
-									<c:if test="${member != null and (list.member_index == member.member_index or member.position eq '관리자')}"></c:if>
+									<c:if test="${member != null and (list.member_index == member.member_index or member.position eq '관리자')}">
 										<a href="serviceCenter_view.do?sort2=${sort2}&nowPage=${paging.nowPage}&serviceCenter_index=${list.serviceCenter_index}">
 											<span class="d-inline-block text-truncate">${list.title}</span>
 										</a>
+									</c:if>
+									<c:if test="${member == null or (list.member_index != member.member_index and member.position ne '관리자')}">
+										<span class="d-inline-block text-truncate"><i class="fa-solid fa-lock"></i>${list.title}</span>
+									</c:if>
 									</td>
 									<td>${list.name}</td>
 									<td>${fn:substring(list.write_date, 0,10)}</td>
@@ -127,7 +131,7 @@
 					</div>
 
 					<div class="row">
-						<div class="col-9 row" id="paging">
+						<div class="col-9 row" id="pagingDiv">
 	                        <!-- 페이징 -->
 	                        <ul class="col-12 col-md-4 d-flex align-items-center justify-content-center pagination mt-2 my-md-0">
 		                        <!-- <부분 -->
@@ -177,9 +181,13 @@
 		                        </c:if>
 	                        </ul>
 						</div>
-						<div class="col-3 d-flex justify-content-center">
-							<c:if test="${member.position ne null and member.position eq '관리자'}"><input value="FAQ 등록" type="button" class="btn btn-primary"></c:if>
-							<c:if test="${member.position ne null and member.position eq '일반'}"><input value="문의 하기" type="button" class="btn btn-secondary"></c:if>
+						<div class="col-3 d-flex justify-content-end">
+							<c:if test="${member.position ne null and member.position eq '관리자'}">
+								<input value="FAQ 등록" type="button" class="btn btn-primary" style="height: 40px;" onclick="location.href='serviceCenter_insert.do?sort1=FAQ&sort2=${sort2}&nowPage=${paging.nowPage}'">
+							</c:if>
+							<c:if test="${member.position ne null and member.position eq '일반'}">
+								<input value="문의 하기" type="button" class="btn btn-secondary" style="height: 40px;" onclick="location.href='serviceCenter_insert.do?sort1=1:1문의&sort2=${sort2}&nowPage=${paging.nowPage}'">
+							</c:if>
 						</div>
 					</div>
 					

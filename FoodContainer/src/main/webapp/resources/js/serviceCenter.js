@@ -40,7 +40,7 @@ function changeSort(sort){
 		success : function(data){
 			cnt = data.total - ( (data.nowPage - 1) * data.perPage );
 	
-			$("#paging").find("ul").remove();
+			$("#pagingDiv").find("ul").remove();
 			var html = "";
 			
 			html += "<ul class='col-12 col-md-4 d-flex align-items-center justify-content-center pagination mt-2 my-md-0'>";
@@ -79,7 +79,7 @@ function changeSort(sort){
 			
 			html += "</ul>";
 			
-			$("#paging").append(html);
+			$("#pagingDiv").append(html);
 		}
 	});
 	
@@ -88,6 +88,8 @@ function changeSort(sort){
 		type : "post",
 		data : "sort2=" + sort,
 		success : function(data){
+			var midx = $("#midx").val();
+			console.log(midx);
 			$(".OneByOne").remove();
 			for(var i = 0; i < data.length; i++){
 				var html = "";
@@ -95,9 +97,13 @@ function changeSort(sort){
 				html += "<tr class='OneByOne'>";
 					html += "<th scope='row'>" + cnt +"</th>";
 					html += "<td class='fw-bold'>";
+					if(midx != "" && (midx == data[i].member_index || midx == 0)){
 						html += "<a href='serviceCenter_view.do?sort2=" + sort + "&nowPage=1&serviceCenter_index=" + data[i].serviceCenter_index + "'>";
 							html += "<span class='d-inline-block text-truncate'>" + data[i].title + "</span>";
 						html += "</a>";
+					}else{
+						html += "<span class='d-inline-block text-truncate'><i class='fa-solid fa-lock'></i>" + data[i].title + "</span>";
+					}
 					html += "</td>";
 					html += "<td>" + data[i].name + "</td>";
 					html += "<td>" + data[i].write_date.substr(0, 10) + "</td>";

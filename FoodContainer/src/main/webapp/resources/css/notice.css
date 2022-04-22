@@ -2,8 +2,6 @@
 /*테이블 div*/
 .maindiv{
    width:90%;
-   overflow:auto;
-    
 }
 @media (max-width:380px) {
 	.maindiv{

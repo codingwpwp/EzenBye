@@ -2,6 +2,9 @@ package team.project.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.project.service.ServiceCenterService;
 import team.project.util.PagingUtil;
+import team.project.vo.MemberVO;
 import team.project.vo.ServiceCenterVO;
 
 @Controller
@@ -79,6 +83,41 @@ public class ServiceCenterController {
 		model.addAttribute("nowPage", nowPage);
 		
 		return "serviceCenterPage/serviceCenter_view";
+	}
+	
+	// 고객센터 글 작성
+	@RequestMapping(value = "serviceCenter_insert.do", method = RequestMethod.GET)
+	public String insert(Model model, HttpServletRequest request,
+						@RequestParam(value="sort1", required = false) String sort1,
+						@RequestParam(value="sort2") String sort2,
+						@RequestParam(value="nowPage") String nowPage) throws Exception{
+		
+		// 세션 소환
+		HttpSession session = request.getSession();
+		if(session.getAttribute("member") == null) {
+			return "redirect:index.do";
+		}else {
+			MemberVO vo = (MemberVO)session.getAttribute("member");
+			if(sort1 == null) {
+				return "redirect:index.do";
+			}else {
+				if(sort1.equals("FAQ")) {
+					if(!vo.getPosition().equals("관리자")) {
+						return "redirect:index.do";
+					}
+				}else if(sort1.equals("1:1문의")) {
+					if(vo.getPosition().equals("관리자")) {
+						return "redirect:index.do";
+					}
+				}
+				model.addAttribute("sort1", sort1);
+				model.addAttribute("sort2", sort2);
+				model.addAttribute("nowPage", nowPage);
+				
+				return "serviceCenterPage/serviceCenter_insert";
+			}
+		}
+		
 	}
 
 }

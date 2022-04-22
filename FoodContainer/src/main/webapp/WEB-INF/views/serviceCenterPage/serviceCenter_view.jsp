@@ -58,15 +58,15 @@
 
                  	<div class="maindiv">
 						<table class="table">
-							<thead class="fw-bold fs-5">
+							<thead class="fw-bold fs-6">
 								<tr>
 									<th scope="col">제목</th>
 									<td class="title">${view.title}</td>
-									<td style="text-align: left;">${fn:substring(view.write_date, 0,10)}</td>
+									<td style="text-align: left; font-size: small;">${fn:substring(view.write_date, 0,10)}</td>
 								</tr>
 							</thead>
 							<tbody>
-								<tr class="fw-bold fs-5">
+								<tr class="fw-bold fs-6">
 									<th scope="row">작성자</th>
 									<td>${view.name}</td>
 									<td style="text-align: left;">${view.sort2}</td>

@@ -29,15 +29,7 @@
         <div class="row">
             <div class="col-lg-2 d-none d-lg-block"></div>
 
-            <!--
-                id="navLeftMenu"인 현재 주석 바로 아래의 태그는 페이지의 종류에 따른 왼쪽메뉴.
-                네비게이션 바가 펼쳐질 때 알아서 태그가 안보이도록 설정.
-                필요시에만 div태그 사이에 코드를 작성.
-                작성시 border border-dark는 구분용으로만 작성했기 때문에 알아서 지우고 작업.
-                작성하지 않는 경우는 절대 건들지 않음.
-                base.js에 id="navLeftMenu"와 관련된 코드가 작성되어있음.
-            -->
-            <div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark" id="navLeftMenu"><!-- 여기에 작성 --></div>
+            <div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark" id="navLeftMenu"></div>
 
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
 
@@ -59,27 +51,31 @@
             <div class="col-12 col-sm-9 col-md-10 col-lg-8">
                 <article id="mainSection">
                     
-                    <!--
-                        헤딩.
-                        필요하지 않는 사람은 <div>태그를 삭제.
-                        필요한 사람은 <div>태그에 작성.
-                    -->
-                    <div class="fs-5 my-2 fw-bold">공지사항</div>
+                    <div class="fs-5 my-2 fw-bold">${sort1}</div>
 
-                 	<div class="maindiv">
+                 	<form class="maindiv">
 						<table class="table">
 							<thead>
 								<tr>
-									<th scope="col">제목</th>
-									<td class="title"><input type="text" class="tittext"></td>
-									
+									<th scope="col" style="vertical-align: middle;">제목</th>
+									<td class="title">
+										<input type="text" name="name" class="form-control" maxlength="20" autocomplete="off">
+										<input type="hidden" name="member_index" value="${member.member_index}">
+									</td>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<th scope="row">작성자</th>
-									<td>관리자</td>
-									
+									<td>${member.name}</td>
+									<td>
+										<select class="form-select form-select-sm p-1" name="sort2">
+		                                    <option value="상품">상품</option>
+		                                    <option value="배송">배송</option>
+		                                    <option value="취소">취소</option>
+		                                    <option value="회원">회원</option>
+		                                </select>
+									</td>
 								</tr>
 								<tr>
 									<td colspan="3">
@@ -92,18 +88,14 @@
 						</table>
 						<div class="row">
 						<div class="col-md-2 col-sm-2 col-4 leftbtn">
-							<input value="목록" type="button" class="btn btn-primary listbtn" onclick="location.href='notice_main.do'">
+							<input value="목록" type="button" class="btn btn-primary listbtn" onclick="location.href='serviceCenter.do?sort2=${sort2}&nowPage=${nowPage}'">
 						</div>
 						<div class="col-md-10 col-sm-10 col-8 rightbtn">
-							
 							<input value="등록" type="button" class="btn btn-secondary insertbtn">
 						</div>
 						</div>
 
-					</div>
-
-
-					
+					</form>
 
 				</article>
             </div>
