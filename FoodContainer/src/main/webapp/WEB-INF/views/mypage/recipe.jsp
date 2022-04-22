@@ -80,7 +80,8 @@
 			        
 			        <c:forEach items="${recipeMypageList}" var="list">
 					  <div class="col">
-					    <div class="card h-100">
+					  <a class="productHref" href="<%=request.getContextPath()%>/recipeview.do?recipe_index=${list.recipe_index}">
+					    <div class="card h-100 recipeBorder">
 					    
 						    <c:if test="${list.best_rank==1}">
 								<img src="<%=request.getContextPath()%>/resources/img/금메달.png" id="bestimg">
@@ -91,11 +92,11 @@
 							<c:if test="${list.best_rank==3}">
 								<img src="<%=request.getContextPath()%>/resources/img/동메달.png" id="bestimg">
 							</c:if>
-							
+							<figure class="swing">
 					        <img
 							src="<%=request.getContextPath()%>/resources/img/recipe/${list.thumbnail_image}"
-							class="card-img-top" alt="${list.thumbnail_image}" onclick="location.href='<%=request.getContextPath()%>/recipeview.do?recipe_index=${list.recipe_index}'">
-					      
+							class="card-img-top" alt="${list.thumbnail_image}">
+					      	</figure>
 					      <div class="card-body">
 					        <h6 class="card-title"> 	
 							  <div class="row">
@@ -117,6 +118,7 @@
 				        		</div>
 					      </div>
 					    </div>
+					    </a>
 					  </div>
 					  </c:forEach>
 					  

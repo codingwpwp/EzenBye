@@ -215,9 +215,9 @@ member_index
 </select>
 
 <select id="recipeMypageList" resultType="RecipeVO" parameterType="PagingUtil">
-    SELECT * 
-    FROM 
-    recipe WHERE member_index = #{member_index} and del_yn = 'N' 
+    SELECT * , (select count(reply_index)
+          from reply
+		 where recipe_index=recipe.recipe_index) as reply_index FROM recipe where member_index = #{member_index} and del_yn = 'N' 
     order by best_rank, write_date desc
     LIMIT #{start}, #{perPage}
 </select>
