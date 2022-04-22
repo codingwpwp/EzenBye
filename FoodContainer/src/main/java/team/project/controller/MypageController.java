@@ -449,7 +449,7 @@ public class MypageController {
 			int member_index = member.getMember_index();
 			
 			searchVO.setMember_index(member_index);
-			
+
 			// 현재페이지
 			int realnowPage = 1;
 			if(nowPage != 0) realnowPage = nowPage;
