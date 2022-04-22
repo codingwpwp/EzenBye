@@ -160,6 +160,30 @@ public class RecipeServiceImpl implements RecipeService{
 			
 			return recipeList;
 		}
+		
+		//마이페이지 부분
+		@Override
+		public List<RecipeVO> recipeMypageList(SearchVO searchVO, int nowPage) throws Exception {
+			PagingUtil paging = recipeListPaging(searchVO, nowPage);
+			
+			paging.setMember_index(searchVO.getMember_index());
+			
+			paging.setStart(paging.getStart() - 1);
+			
+			return recipeDao.recipeMypageList(paging);
+		}
+
+		@Override
+		public PagingUtil recipeListPaging(SearchVO searchVO, int nowPage) throws Exception {
+			int cnt = recipeDao.countRecipeMypage(searchVO);
+			return new PagingUtil(cnt, nowPage, 9, 5);
+		}
+
+		@Override
+		public int countRecipeMypage(SearchVO searchVO) throws Exception {
+			int cnt = recipeDao.countRecipeMypage(searchVO);
+			return cnt;
+		}
 	
 	
 	

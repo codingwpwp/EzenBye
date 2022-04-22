@@ -20,9 +20,17 @@ public class RecipeVO {
 	private String write_date;
 	private int best_rank;
 	private int reply_index;
+	private String del_yn;
 	
 	
-	
+	public String getDel_yn() {
+		return del_yn;
+	}
+
+	public void setDel_yn(String del_yn) {
+		this.del_yn = del_yn;
+	}
+
 	public int getReply_index() {
 		return reply_index;
 	}
