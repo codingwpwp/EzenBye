@@ -1625,7 +1625,7 @@
 									starHash = starHash.replace("}","");
 									starHash = starHash.replace(" ","");
 									var starPIndex = starHash.split(",");
-									
+									console.log(data[i].product_index);
 									for(var k=0; k<starPIndex.length; k++){
 										if(data[i].product_index == starPIndex[k].substring(0,5)){
 											console.log(starPIndex[k].substring(7,8));
