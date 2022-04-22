@@ -52,7 +52,7 @@
                    <div class="container">
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-12">
-                                <form action="member_email_sign" name="frm" method="post" onsubmit="return false;">
+                                <form action="member_email_sign" name="frm" method="post" id="email_sign" onsubmit="return false;">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-12 signhead">
@@ -69,8 +69,8 @@
                                                 <label for="name">이름</label>
                                             </div>
                                             <div class="col-sm-9 col-12">
-                                                <input type="text" class="pwinput" name="name" id="name" value=""
-                                                    placeholder="이름를 입력하세요" autocomplete="off" oninput="nameChk(this)">
+                                                <input type="text" class="pwinput" name="name" id="name" 
+                                                    placeholder="이름를 입력하세요" autocomplete="off" value="" oninput="nameChk(this)">
                                                
                                             </div>
                                            
@@ -83,7 +83,7 @@
                                                     placeholder="이메일을 입력해주세요" autocomplete="off" oninput="emailChk(this)">
                                             </div>
                                             <div class="col-sm-3 col-4 px-0">
-                                                <input type="button" class="btn btn-secondary mailnum" value="인증번호 발송" disabled id="sendEmail">
+                                                <input type="button" class="btn btn-secondary mailnum" value="인증번호 발송"  onclick="emailsendFn()" id="sendEmail" disabled>
                                             </div>
                                             <div class="col-sm-12 col-12 tit">
                                                 <label for="emailcheck">인증번호</label>
@@ -91,7 +91,7 @@
                                             <div class="col-sm-9 col-12">
                                                 <input type="text" class="emailinput" name="emailchk" id="emailchk"
                                                     placeholder="인증번호를 입력해주세요" >
-                                                
+                                                <span id="emailspan"></span>
                                             </div>
                                           <div class="col-sm-12 col-12 h4">
                                             <h4>이용약관 확인</h4>
@@ -120,7 +120,7 @@
                                             </div>
                                             <div class="col-sm-6 col-6 btndiv">
                                               <!--   <input type="submit" value="회원가입" class="btn btn-dark"disabled> -->
-                                                 <input type="button" value="회원가입" class="btn btn-dark"disabled>
+                                                 <input type="button" value="회원가입" class="btn btn-dark" id="singOk" disabled>
                                             </div>
                                         </div>
                                     </div>

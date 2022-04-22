@@ -83,9 +83,10 @@ public class SignController {
 		return "sign/member_email_sign";
 	}
 	//회원가입 이메일 인증 post
-	@RequestMapping(value="member_email_sign",method =RequestMethod.POST)
-	public String memberEmail( Model model,@RequestParam("name")String name,@RequestParam("email") String email,HttpServletRequest request) {
-		
+	@ResponseBody
+	@RequestMapping(value="member_email_send",method =RequestMethod.POST)
+	public String memberEmail( MemberVO vo,Model model,@RequestParam("name")String name,@RequestParam("email") String email,HttpServletRequest request) {
+//		String emailsend = 
 		
 		return email;
 		
