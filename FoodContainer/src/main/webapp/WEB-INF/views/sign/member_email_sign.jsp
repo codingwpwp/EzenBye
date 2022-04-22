@@ -52,7 +52,7 @@
                    <div class="container">
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-12">
-                                <form action="#" name="frm" method="post" onsubmit="checkFn();">
+                                <form action="member_email_sign" name="frm" method="post" onsubmit="return false;">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-12 signhead">
@@ -69,8 +69,8 @@
                                                 <label for="name">이름</label>
                                             </div>
                                             <div class="col-sm-9 col-12">
-                                                <input type="text" class="pwinput" name="name" id="name"
-                                                    placeholder="이름를 입력하세요" >
+                                                <input type="text" class="pwinput" name="name" id="name" value=""
+                                                    placeholder="이름를 입력하세요" autocomplete="off" oninput="nameChk(this)">
                                                
                                             </div>
                                            
@@ -79,17 +79,17 @@
                                                 <label for="email">이메일</label>
                                             </div>
                                             <div class="col-sm-9 col-8 ">
-                                                <input type="text" class="recominput" name="email" id="email"
-                                                    placeholder="이메일을 입력해주세요" >
+                                                <input type="text" class="recominput" name="email" id="email" 
+                                                    placeholder="이메일을 입력해주세요" autocomplete="off" oninput="emailChk(this)">
                                             </div>
                                             <div class="col-sm-3 col-4 px-0">
-                                                <input type="button" class="btn btn-secondary mailnum" value="인증번호 발송">
+                                                <input type="button" class="btn btn-secondary mailnum" value="인증번호 발송" disabled id="sendEmail">
                                             </div>
                                             <div class="col-sm-12 col-12 tit">
                                                 <label for="emailcheck">인증번호</label>
                                             </div>
                                             <div class="col-sm-9 col-12">
-                                                <input type="text" class="emailinput" name="email" id="email"
+                                                <input type="text" class="emailinput" name="emailchk" id="emailchk"
                                                     placeholder="인증번호를 입력해주세요" >
                                                 
                                             </div>
@@ -97,20 +97,21 @@
                                             <h4>이용약관 확인</h4>
                                           </div>
                                           <div class="col-sm-12 col-12 form-check">
-                                            <input class="form-check-input" type="checkbox" name="checkOne" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                이용약관 및 개인정보수집 및 이용, 쇼핑정보 수신(선택)에 모두 동의합니다.
+                                            <input class="form-check-input" type="checkbox" name="checkOne" id="flexCheckDefault1">
+                                            <label class="form-check-label" for="flexCheckDefault1">
+                                                 쇼핑정보 수신(선택)에 동의합니다.
                                             </label>
                                           </div>
                                           <div class="col-sm-12 col-12 form-check">
-                                            <input class="form-check-input" type="checkbox" name="checkTwo" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
+                                            <input class="form-check-input" type="checkbox" name="checkTwo" id="flexCheckDefault2">
+                                            <label class="form-check-label" for="flexCheckDefault2">
                                                 [필수] 이용약관 동의
                                             </label>
+                                            
                                           </div>
                                           <div class="col-sm-12 col-12 form-check">
-                                            <input class="form-check-input" type="checkbox" name="checkThree" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
+                                            <input class="form-check-input" type="checkbox" name="checkThree" id="flexCheckDefault3">
+                                            <label class="form-check-label" for="flexCheckDefault3">
                                                 [필수] 개인정보 수집 및 이용 동의
                                             </label>
                                           </div>
@@ -118,7 +119,8 @@
                                                 <input type="button" value="취소" class="btn btn-secondary can">
                                             </div>
                                             <div class="col-sm-6 col-6 btndiv">
-                                                <input type="submit" value="회원가입" class="btn btn-dark">
+                                              <!--   <input type="submit" value="회원가입" class="btn btn-dark"disabled> -->
+                                                 <input type="button" value="회원가입" class="btn btn-dark"disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -147,5 +149,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
+       <script src="<%=request.getContextPath()%>/resources/js/sign.js"></script>
 </body>
 </html>
