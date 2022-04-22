@@ -79,5 +79,11 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 		
 		return serviceCenterDAO.serviceCenterPageList(tempvo);
 	}
+
+	// 고객센터 글 상세조회
+	@Override
+	public ServiceCenterVO serviceCenterPageView(int serviceCenter_index) throws Exception {
+		return serviceCenterDAO.serviceCenterPageView(serviceCenter_index);
+	}
 	
 }

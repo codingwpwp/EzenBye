@@ -49,7 +49,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link px-lg-1 px-xl-2" href="#">고객센터</a>
+                <a class="nav-link px-lg-1 px-xl-2" href="<%=request.getContextPath()%>/serviceCenter.do">고객센터</a>
             </li>
 
         </ul>

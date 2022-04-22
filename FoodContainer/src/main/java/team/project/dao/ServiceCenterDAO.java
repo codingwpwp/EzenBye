@@ -55,4 +55,9 @@ public class ServiceCenterDAO {
 	public List<ServiceCenterVO> serviceCenterPageList(ServiceCenterVO vo) throws Exception{
 		return sqlSession.selectList(Namespace + ".serviceCenterPageList", vo);
 	}
+	
+	// 고객센터 글 상세조회
+	public ServiceCenterVO serviceCenterPageView(int serviceCenter_index) throws Exception{
+		return sqlSession.selectOne(Namespace + ".serviceCenterPageView", serviceCenter_index);
+	}
 }

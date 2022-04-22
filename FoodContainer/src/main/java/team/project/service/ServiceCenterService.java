@@ -26,4 +26,7 @@ public interface ServiceCenterService {
 	// 종류2에 대한 1:1문의 페이징
 	PagingUtil serviceCenterPagingUtil(String sort2, int nowPage) throws Exception;
 	
+	// 고객센터 글 상세조회
+	ServiceCenterVO serviceCenterPageView(int serviceCenter_index) throws Exception;
+	
 }

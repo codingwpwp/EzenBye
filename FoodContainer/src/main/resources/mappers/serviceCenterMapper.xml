@@ -63,4 +63,12 @@
     	LIMIT #{serviceCenter_index}, #{member_index}
     </select>
     
+    <!-- 고객센터 글 상세조회 -->
+    <select id="serviceCenterPageView" resultType="ServiceCenterVO" parameterType="int">
+    	SELECT a.*, b.name
+    	FROM serviceCenter as a, member as b
+    	WHERE serviceCenter_index = #{serviceCenter_index}
+    	AND a.member_index = b.member_index
+    </select>
+    
 </mapper>
