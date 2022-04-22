@@ -292,19 +292,30 @@
 									}
 									searchHtml += "<span class='productListStar'>";
 									var starHash = $("input[name='starHash']").val();
+									$.trim(starHash);
 									starHash = starHash.replace("{","");
 									starHash = starHash.replace("}","");
+									
+									for(var m=0; m<starHash.length; m++){
+										starHash = starHash.replace(" ","");
+									}
+									
 									var starPIndex = starHash.split(",");
+									var starCount = null;
+
 									for(var k=0; k<starPIndex.length; k++){
 										if(data[i].product_index == starPIndex[k].substring(0,5)){
-											console.log(starPIndex[k].substring(0,5));
+											starCount = starPIndex[k].substring(7,8);
 										}
 									}
-									searchHtml += "<i class='bi bi-star-fill'></i>";
-									searchHtml += "<i class='bi bi-star-fill'></i>";
-									searchHtml += "<i class='bi bi-star-fill'></i>";
-									searchHtml += "<i class='bi bi-star-fill'></i>";
-									searchHtml += "<i class='bi bi-star'></i>";
+									
+									for(var k=1; k<6; k++){
+										if(starCount >= k){
+											searchHtml += "<i class='bi bi-star-fill'></i>";
+										}else{
+											searchHtml += "<i class='bi bi-star'></i>";
+										}
+									}			
 									searchHtml += "</span>";
 									searchHtml += "<br>";
 									if(data[i].delivery_free_YN != "Y"){
@@ -385,11 +396,31 @@
 										searchHtml += "</span>";
 									}
 									searchHtml += "<span class='productListStar'>";
-									searchHtml += "<i class='bi bi-star-fill'></i>";
-									searchHtml += "<i class='bi bi-star-fill'></i>";
-									searchHtml += "<i class='bi bi-star-fill'></i>";
-									searchHtml += "<i class='bi bi-star-fill'></i>";
-									searchHtml += "<i class='bi bi-star'></i>";
+									var starHash = $("input[name='starHash']").val();
+									$.trim(starHash);
+									starHash = starHash.replace("{","");
+									starHash = starHash.replace("}","");
+									
+									for(var m=0; m<starHash.length; m++){
+										starHash = starHash.replace(" ","");
+									}
+									
+									var starPIndex = starHash.split(",");
+									var starCount = null;
+
+									for(var k=0; k<starPIndex.length; k++){
+										if(data[i].product_index == starPIndex[k].substring(0,5)){
+											starCount = starPIndex[k].substring(7,8);
+										}
+									}
+									
+									for(var k=1; k<6; k++){
+										if(starCount >= k){
+											searchHtml += "<i class='bi bi-star-fill'></i>";
+										}else{
+											searchHtml += "<i class='bi bi-star'></i>";
+										}
+									}			
 									searchHtml += "</span>";
 									searchHtml += "<br>";
 									if(data[i].delivery_free_YN != "Y"){
@@ -461,11 +492,31 @@
 										searchHtml += "<input type='hidden' class='inventoryM"+i+"' value='"+data[i].inventory+"'>";			
 										searchHtml += "</div>";			
 										searchHtml += "<div class='productListStarM'>";			
-										searchHtml += "<i class='bi bi-star-fill'></i>";			
-										searchHtml += "<i class='bi bi-star-fill'></i>";			
-										searchHtml += "<i class='bi bi-star-fill'></i>";			
-										searchHtml += "<i class='bi bi-star-fill'></i>";			
-										searchHtml += "<i class='bi bi-star'></i>";			
+										var starHash = $("input[name='starHash']").val();
+									$.trim(starHash);
+									starHash = starHash.replace("{","");
+									starHash = starHash.replace("}","");
+									
+									for(var m=0; m<starHash.length; m++){
+										starHash = starHash.replace(" ","");
+									}
+									
+									var starPIndex = starHash.split(",");
+									var starCount = null;
+
+									for(var k=0; k<starPIndex.length; k++){
+										if(data[i].product_index == starPIndex[k].substring(0,5)){
+											starCount = starPIndex[k].substring(7,8);
+										}
+									}
+									
+									for(var k=1; k<6; k++){
+										if(starCount >= k){
+											searchHtml += "<i class='bi bi-star-fill'></i>";
+										}else{
+											searchHtml += "<i class='bi bi-star'></i>";
+										}
+									}			
 										searchHtml += "</div>";			
 										searchHtml += "</div>";			
 										searchHtml += "<div class='productListContent'>";			
@@ -539,11 +590,31 @@
 										searchHtml += "<input type='hidden' class='inventoryM"+i+"' value='"+data[i].inventory+"'>";			
 										searchHtml += "</div>";			
 										searchHtml += "<div class='productListStarM'>";			
-										searchHtml += "<i class='bi bi-star-fill'></i>";			
-										searchHtml += "<i class='bi bi-star-fill'></i>";			
-										searchHtml += "<i class='bi bi-star-fill'></i>";			
-										searchHtml += "<i class='bi bi-star-fill'></i>";			
-										searchHtml += "<i class='bi bi-star'></i>";			
+										var starHash = $("input[name='starHash']").val();
+									$.trim(starHash);
+									starHash = starHash.replace("{","");
+									starHash = starHash.replace("}","");
+									
+									for(var m=0; m<starHash.length; m++){
+										starHash = starHash.replace(" ","");
+									}
+									
+									var starPIndex = starHash.split(",");
+									var starCount = null;
+
+									for(var k=0; k<starPIndex.length; k++){
+										if(data[i].product_index == starPIndex[k].substring(0,5)){
+											starCount = starPIndex[k].substring(7,8);
+										}
+									}
+									
+									for(var k=1; k<6; k++){
+										if(starCount >= k){
+											searchHtml += "<i class='bi bi-star-fill'></i>";
+										}else{
+											searchHtml += "<i class='bi bi-star'></i>";
+										}
+									}						
 										searchHtml += "</div>";			
 										searchHtml += "</div>";			
 										searchHtml += "<div class='productListContent'>";			
@@ -1209,11 +1280,32 @@
 							mainSectionHtml += "</span>";
 						}
 						mainSectionHtml += "<span class='productListStar'>";
-						mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-						mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-						mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-						mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-						mainSectionHtml += "<i class='bi bi-star'></i>";
+						var starHash = $("input[name='starHash']").val();
+									$.trim(starHash);
+									starHash = starHash.replace("{","");
+									starHash = starHash.replace("}","");
+									
+									for(var m=0; m<starHash.length; m++){
+										starHash = starHash.replace(" ","");
+									}
+									
+									var starPIndex = starHash.split(",");
+									
+									var starCount = null;
+									for(var k=0; k<starPIndex.length; k++){
+										if(data[i].product_index == starPIndex[k].substring(0,5)){
+											console.log(starPIndex[k].substring(0,5));
+											starCount = starPIndex[k].substring(7,8);
+										}
+									}
+									
+									for(var k=1; k<6; k++){
+										if(starCount >= k){
+											mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+										}else{
+											mainSectionHtml += "<i class='bi bi-star'></i>";
+										}
+									}	
 						mainSectionHtml += "</span>";
 						mainSectionHtml += "<br>";
 						if(data[i].delivery_free_YN != "Y"){
@@ -1280,11 +1372,31 @@
 						mainSectionHtml += "<input type='hidden' class='inventoryM"+i+"' value='"+data[i].inventory+"'>";			
 						mainSectionHtml += "</div>";			
 						mainSectionHtml += "<div class='productListStarM'>";			
-						mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-						mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-						mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-						mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-						mainSectionHtml += "<i class='bi bi-star'></i>";			
+						var starHash = $("input[name='starHash']").val();
+									$.trim(starHash);
+									starHash = starHash.replace("{","");
+									starHash = starHash.replace("}","");
+									
+									for(var m=0; m<starHash.length; m++){
+										starHash = starHash.replace(" ","");
+									}
+									
+									var starPIndex = starHash.split(",");
+									var starCount = null;
+
+									for(var k=0; k<starPIndex.length; k++){
+										if(data[i].product_index == starPIndex[k].substring(0,5)){
+											starCount = starPIndex[k].substring(7,8);
+										}
+									}
+									
+									for(var k=1; k<6; k++){
+										if(starCount >= k){
+											mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+										}else{
+											mainSectionHtml += "<i class='bi bi-star'></i>";
+										}
+									}				
 						mainSectionHtml += "</div>";			
 						mainSectionHtml += "</div>";			
 						mainSectionHtml += "<div class='productListContent'>";			
@@ -1380,11 +1492,31 @@
 								mainSectionHtml += "</span>";
 							}
 							mainSectionHtml += "<span class='productListStar'>";
-							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-							mainSectionHtml += "<i class='bi bi-star'></i>";
+							var starHash = $("input[name='starHash']").val();
+									$.trim(starHash);
+									starHash = starHash.replace("{","");
+									starHash = starHash.replace("}","");
+									
+									for(var m=0; m<starHash.length; m++){
+										starHash = starHash.replace(" ","");
+									}
+									
+									var starPIndex = starHash.split(",");
+									var starCount = null;
+
+									for(var k=0; k<starPIndex.length; k++){
+										if(data[i].product_index == starPIndex[k].substring(0,5)){
+											starCount = starPIndex[k].substring(7,8);
+										}
+									}
+									
+									for(var k=1; k<6; k++){
+										if(starCount >= k){
+											mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+										}else{
+											mainSectionHtml += "<i class='bi bi-star'></i>";
+										}
+									}	
 							mainSectionHtml += "</span>";
 							mainSectionHtml += "<br>";
 							if(data[i].delivery_free_YN != "Y"){
@@ -1465,11 +1597,31 @@
 								mainSectionHtml += "</span>";
 							}
 							mainSectionHtml += "<span class='productListStar'>";
-							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-							mainSectionHtml += "<i class='bi bi-star'></i>";
+							var starHash = $("input[name='starHash']").val();
+									$.trim(starHash);
+									starHash = starHash.replace("{","");
+									starHash = starHash.replace("}","");
+									
+									for(var m=0; m<starHash.length; m++){
+										starHash = starHash.replace(" ","");
+									}
+									
+									var starPIndex = starHash.split(",");
+									var starCount = null;
+
+									for(var k=0; k<starPIndex.length; k++){
+										if(data[i].product_index == starPIndex[k].substring(0,5)){
+											starCount = starPIndex[k].substring(7,8);
+										}
+									}
+									
+									for(var k=1; k<6; k++){
+										if(starCount >= k){
+											mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+										}else{
+											mainSectionHtml += "<i class='bi bi-star'></i>";
+										}
+									}	
 							mainSectionHtml += "</span>";
 							mainSectionHtml += "<br>";
 							if(data[i].delivery_free_YN != "Y"){
@@ -1541,11 +1693,31 @@
 								mainSectionHtml += "<input type='hidden' class='inventoryM"+i+"' value='"+data[i].inventory+"'>";			
 								mainSectionHtml += "</div>";			
 								mainSectionHtml += "<div class='productListStarM'>";			
-								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-								mainSectionHtml += "<i class='bi bi-star'></i>";			
+								var starHash = $("input[name='starHash']").val();
+									$.trim(starHash);
+									starHash = starHash.replace("{","");
+									starHash = starHash.replace("}","");
+									
+									for(var m=0; m<starHash.length; m++){
+										starHash = starHash.replace(" ","");
+									}
+									
+									var starPIndex = starHash.split(",");
+									var starCount = null;
+
+									for(var k=0; k<starPIndex.length; k++){
+										if(data[i].product_index == starPIndex[k].substring(0,5)){
+											starCount = starPIndex[k].substring(7,8);
+										}
+									}
+									
+									for(var k=1; k<6; k++){
+										if(starCount >= k){
+											mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+										}else{
+											mainSectionHtml += "<i class='bi bi-star'></i>";
+										}
+									}				
 								mainSectionHtml += "</div>";			
 								mainSectionHtml += "</div>";			
 								mainSectionHtml += "<div class='productListContent'>";			
@@ -1623,20 +1795,27 @@
 									$.trim(starHash);
 									starHash = starHash.replace("{","");
 									starHash = starHash.replace("}","");
-									starHash = starHash.replace(" ","");
+									
+									for(var m=0; m<starHash.length; m++){
+										starHash = starHash.replace(" ","");
+									}
+									
 									var starPIndex = starHash.split(",");
-									console.log(data[i].product_index);
+									var starCount = null;
+
 									for(var k=0; k<starPIndex.length; k++){
 										if(data[i].product_index == starPIndex[k].substring(0,5)){
-											console.log(starPIndex[k].substring(7,8));
-											console.log(data[i].product_index);
+											starCount = starPIndex[k].substring(7,8);
+										}
+									}
+									
+									for(var k=1; k<6; k++){
+										if(starCount >= k){
+											mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+										}else{
+											mainSectionHtml += "<i class='bi bi-star'></i>";
 										}
 									}			
-								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-								mainSectionHtml += "<i class='bi bi-star'></i>";			
 								mainSectionHtml += "</div>";			
 								mainSectionHtml += "</div>";			
 								mainSectionHtml += "<div class='productListContent'>";			

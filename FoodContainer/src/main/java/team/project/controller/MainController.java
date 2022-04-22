@@ -29,6 +29,7 @@ import team.project.service.MemberService;
 import team.project.service.ProductService;
 import team.project.service.RecipeService;
 import team.project.service.ReviewService;
+import team.project.util.PagingUtil;
 import team.project.vo.BannerVO;
 import team.project.vo.CartVO;
 import team.project.vo.DibsVO;
@@ -212,8 +213,7 @@ public class MainController {
 			
 			model.addAttribute("viewCookie", cookieListArr);
 		}
-						
-		
+			
 		return "product/productView";
 	}
 
