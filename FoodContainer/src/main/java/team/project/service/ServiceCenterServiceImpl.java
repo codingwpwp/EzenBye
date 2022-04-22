@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import team.project.dao.ServiceCenterDAO;
 import team.project.util.PagingUtil;
 import team.project.vo.SearchVO;
+import team.project.vo.ServiceCenterReplyVO;
 import team.project.vo.ServiceCenterVO;
 
 @Service
@@ -84,6 +85,32 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 	@Override
 	public ServiceCenterVO serviceCenterPageView(int serviceCenter_index) throws Exception {
 		return serviceCenterDAO.serviceCenterPageView(serviceCenter_index);
+	}
+	
+	// 고객센터 글 등록
+	@Override
+	public void insert(ServiceCenterVO vo) throws Exception {
+		serviceCenterDAO.insert(vo);
+	}
+
+	@Override
+	public void replyInsert(ServiceCenterReplyVO vo) throws Exception {
+		serviceCenterDAO.replyInsert(vo);
+	}
+
+	@Override
+	public void update(int serviceCenter_index) throws Exception {
+		serviceCenterDAO.update(serviceCenter_index);
+	}
+
+	@Override
+	public void deleteser(int serviceCenter_index) throws Exception {
+		serviceCenterDAO.deleteser(serviceCenter_index);
+	}
+
+	@Override
+	public ServiceCenterReplyVO reply(int serviceCenter_index) throws Exception {
+		return serviceCenterDAO.reply(serviceCenter_index);
 	}
 	
 }

@@ -53,14 +53,13 @@
                     
                     <div class="fs-5 my-2 fw-bold">${sort1}</div>
 
-                 	<form class="maindiv">
+                 	<form class="maindiv" id="serviceCenterForm" action="serviceCenter_insert.do" method="post">
 						<table class="table">
 							<thead>
 								<tr>
 									<th scope="col" style="vertical-align: middle;">제목</th>
 									<td class="title">
-										<input type="text" name="name" class="form-control" maxlength="20" autocomplete="off">
-										<input type="hidden" name="member_index" value="${member.member_index}">
+										<input type="text" name="title" class="form-control" maxlength="20" autocomplete="off">
 									</td>
 								</tr>
 							</thead>
@@ -69,29 +68,28 @@
 									<th scope="row">작성자</th>
 									<td>${member.name}</td>
 									<td>
-										<select class="form-select form-select-sm p-1" name="sort2">
-		                                    <option value="상품">상품</option>
-		                                    <option value="배송">배송</option>
-		                                    <option value="취소">취소</option>
-		                                    <option value="회원">회원</option>
+										<select class="form-select form-select-sm fw-bold" name="sort2" onchange="changeColorFn(this)">
+											<option value="no" disabled selected style="display: none;">종류를 선택하세요</option>
+		                                    <option class="fw-bold bg-primary bg-gradient bg-opacity-50" value="상품">상품</option>
+		                                    <option class="fw-bold bg-success bg-gradient bg-opacity-50" value="배송">배송</option>
+		                                    <option class="fw-bold bg-warning bg-gradient bg-opacity-50" value="취소">취소</option>
+		                                    <option class="fw-bold bg-info bg-gradient bg-opacity-50" value="회원">회원</option>
 		                                </select>
 									</td>
 								</tr>
 								<tr>
 									<td colspan="3">
-										<div id="summernote">
-										
-										</div>
+										<textarea id="summernote" name="contents"></textarea>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 						<div class="row">
 						<div class="col-md-2 col-sm-2 col-4 leftbtn">
-							<input value="목록" type="button" class="btn btn-primary listbtn" onclick="location.href='serviceCenter.do?sort2=${sort2}&nowPage=${nowPage}'">
+							<input value="목록" type="button" class="btn btn-secondary listbtn" onclick="location.href='serviceCenter.do?sort2=${sort2}&nowPage=${nowPage}'">
 						</div>
 						<div class="col-md-10 col-sm-10 col-8 rightbtn">
-							<input value="등록" type="button" class="btn btn-secondary insertbtn">
+							<input value="등록" type="button" class="btn btn-primary insertbtn" onclick="submitFn()">
 						</div>
 						</div>
 
@@ -120,5 +118,6 @@
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
         <script src="<%=request.getContextPath()%>/resources/js/notice.js"></script>
+        <script src="<%=request.getContextPath()%>/resources/js/serviceCenter.js"></script>
 </body>
 </html>

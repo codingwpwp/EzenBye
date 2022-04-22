@@ -115,3 +115,56 @@ function changeSort(sort){
 		}
 	});
 }
+
+function changeColorFn(obj){
+	var sort2 = $(obj).val();
+	if(sort2 == '상품'){
+		$(obj).css("background","#86b6fe");
+	}else if(sort2 == '배송'){
+		$(obj).css("background","#8cc3a9");
+	}else if(sort2 == '취소'){
+		$(obj).css("background","#ffe083");
+	}else if(sort2 == '회원'){
+		$(obj).css("background","#86e4f7");
+	}
+}
+
+function submitFn(){
+	var form = $("#serviceCenterForm");
+	var flag = true;
+	
+	if(form.find("input[name='name']").val() == ""){
+		flag = false;
+	}else if(form.find("textarea[id='summernote']").val() == ""){
+		flag = false;
+	}else if(form.find("select option:selected").val() == "no"){
+		flag = false;
+	}
+	if(flag){
+		
+		if(confirm("한번 등록하면 임의로 수정&삭제가 불가능합니다. 등록하시겠습니까?")){
+			alert("등록이 완료되었습니다");
+			form.submit();
+		}
+		
+	}else{
+		alert("입력란이 부족합니다");
+	}
+}
+
+function replySubmit(){
+	var flag = true;
+	if($("textarea#contents").val() == ""){
+		flag = false;
+	}
+	
+	if(flag){
+		if(!confirm("등록한 이후에는 재등록할수 없습니다")){
+			flag = false;
+		}
+	}else{
+		alert("내용을 입력하고 등록하세요");
+	}
+	
+	return flag;
+}

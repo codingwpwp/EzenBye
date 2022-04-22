@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import team.project.service.ServiceCenterService;
 import team.project.util.PagingUtil;
 import team.project.vo.MemberVO;
+import team.project.vo.ServiceCenterReplyVO;
 import team.project.vo.ServiceCenterVO;
 
 @Controller
@@ -82,6 +83,9 @@ public class ServiceCenterController {
 		model.addAttribute("sort2", sort2);
 		model.addAttribute("nowPage", nowPage);
 		
+		ServiceCenterReplyVO rvo = service.reply(vo.getServiceCenter_index());
+		model.addAttribute("reply", rvo);
+		
 		return "serviceCenterPage/serviceCenter_view";
 	}
 	
@@ -120,4 +124,47 @@ public class ServiceCenterController {
 		
 	}
 
+	// 고객센터 글 등록
+	@RequestMapping(value = "serviceCenter_insert.do", method = RequestMethod.POST)
+	public String insertOk(HttpServletRequest request, ServiceCenterVO vo) throws Exception{
+		// 세션 소환
+		HttpSession session = request.getSession();
+		MemberVO mvo = (MemberVO)session.getAttribute("member");
+		
+		vo.setMember_index(mvo.getMember_index());
+		if(mvo.getPosition().equals("관리자")) {
+			vo.setSort1("FAQ");
+		}else {
+			vo.setSort1("1:1문의");
+		}
+		
+		service.insert(vo);
+		
+		return "redirect:serviceCenter.do";
+	}
+	
+	
+	// 고객센터 답변 등록
+	@RequestMapping(value = "replyInsert.do", method = RequestMethod.POST)
+	public String replyInsert(HttpServletRequest request, ServiceCenterReplyVO vo) throws Exception{
+		
+		service.replyInsert(vo);
+		service.update(vo.getServiceCenter_index());
+		
+		return "redirect:serviceCenter.do";
+	}
+
+	// 고객센터 글 삭제
+	@RequestMapping(value = "serviceCenter_delete.do", method = RequestMethod.GET)
+	public String deleteser(int serviceCenter_index) throws Exception{
+		
+		System.out.println(serviceCenter_index);
+		System.out.println(serviceCenter_index);
+		System.out.println(serviceCenter_index);
+		System.out.println(serviceCenter_index);
+		service.deleteser(serviceCenter_index);
+		
+		return "redirect:serviceCenter.do";
+	}
+	
 }

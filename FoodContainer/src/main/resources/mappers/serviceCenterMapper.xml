@@ -71,4 +71,41 @@
     	AND a.member_index = b.member_index
     </select>
     
+    <!-- 고객센터 글 등록 -->
+    <insert id="insert" parameterType="ServiceCenterVO">
+    	INSERT INTO serviceCenter(
+    		member_index, sort1, sort2, title, contents
+    	)VALUES(
+    		#{member_index}, #{sort1}, #{sort2}, #{title}, #{contents}
+    	)
+    </insert>
+    
+    <!-- 답변 등록 -->
+    <insert id="replyInsert" parameterType="ServiceCenterReplyVO">
+    	INSERT INTO serviceCenter_reply(
+    		serviceCenter_index, contents
+    	)VALUES(
+    		#{serviceCenter_index}, #{contents}
+    	)
+    </insert>
+    
+    <!-- 처리완료로 변경 -->
+    <update id="update" parameterType="int">
+    	UPDATE serviceCenter SET
+    	progress = '처리완료'
+    	WHERE serviceCenter_index = #{serviceCenter_index}
+    </update>
+    
+    <!-- 고객센터 글 삭제 -->
+    <update id="deleteser" parameterType="int">
+    	UPDATE serviceCenter SET
+    	del_YN = 'Y'
+    	WHERE serviceCenter_index = #{serviceCenter_index}
+    </update>
+    
+    <!-- 답변 불러오기 -->
+    <select id="reply" resultType="ServiceCenterReplyVO" parameterType="int">
+    	SELECT * FROM serviceCenter_reply
+    	WHERE serviceCenter_index = #{serviceCenter_index}
+    </select>
 </mapper>

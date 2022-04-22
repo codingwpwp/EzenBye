@@ -1,5 +1,4 @@
   $('#summernote').summernote({
-            placeholder: 'Hello stand alone ui',
             tabsize: 2,
             height: 500,
             maxHeight: 500,

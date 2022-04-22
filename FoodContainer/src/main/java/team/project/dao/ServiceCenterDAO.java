@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import team.project.util.PagingUtil;
 import team.project.vo.SearchVO;
+import team.project.vo.ServiceCenterReplyVO;
 import team.project.vo.ServiceCenterVO;
 
 @Repository
@@ -59,5 +60,30 @@ public class ServiceCenterDAO {
 	// 고객센터 글 상세조회
 	public ServiceCenterVO serviceCenterPageView(int serviceCenter_index) throws Exception{
 		return sqlSession.selectOne(Namespace + ".serviceCenterPageView", serviceCenter_index);
+	}
+	
+	// 고객센터 글 등록
+	public void insert(ServiceCenterVO vo) throws Exception{
+		sqlSession.insert(Namespace + ".insert", vo);
+	}
+	
+	// 답변 등록
+	public void replyInsert(ServiceCenterReplyVO vo) throws Exception{
+		sqlSession.insert(Namespace + ".replyInsert", vo);
+	}
+	
+	// 처리완료로 변경
+	public void update(int serviceCenter_index) throws Exception{
+		sqlSession.update(Namespace + ".update", serviceCenter_index);
+	}
+	
+	// 고객센터 글 삭제
+	public void deleteser(int serviceCenter_index) throws Exception{
+		sqlSession.update(Namespace + ".deleteser", serviceCenter_index);
+	}
+	
+	// 답변 불러오기
+	public ServiceCenterReplyVO reply(int serviceCenter_index) throws Exception{
+		return sqlSession.selectOne(Namespace + ".reply", serviceCenter_index);
 	}
 }

@@ -20,7 +20,8 @@
             <typeAlias type="team.project.vo.RecipeVO" alias="RecipeVO"/>
             <typeAlias type="team.project.vo.NoticeVO" alias="NoticeVO"/>
             <typeAlias type="team.project.vo.NoMemberOrdersVO" alias="NoMemberOrdersVO"/>
-             <typeAlias type="team.project.vo.ReplyVO" alias="ReplyVO"/>    
+            <typeAlias type="team.project.vo.ReplyVO" alias="ReplyVO"/>
+            <typeAlias type="team.project.vo.ServiceCenterReplyVO" alias="ServiceCenterReplyVO"/>
         </typeAliases>
         
     </configuration>

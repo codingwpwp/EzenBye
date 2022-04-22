@@ -73,27 +73,59 @@
 								</tr>
 								<tr>
 									<td colspan="3">
-										<textarea class='p-3 w-100 mt-4' readonly>${view.contents}</textarea>
+										<div class='p-3 w-100 mt-4 border border-dark rounded-2' style="min-height: 300px;">${view.contents}</div>
 									</td>
 								</tr>
 							</tbody>
 						</table>
+						
+						<!-- 답변들 -->
+						<c:if test ="${not empty reply}">
+							<div class="my-3 container fw-bold row d-flex align-items-center">
+								<div class="col-4 col-md-3 col-xl-2" style="display: flex;align-items: center;flex-wrap: wrap;justify-content: center;">
+									<span class='bg-warning bg-opacity-50 p-1 border border-warning rounded-2'>
+										<img src="<%=request.getContextPath()%>/resources/img/adminicon.png" width="20"> 관리자
+									</span>
+									<br>
+									<span>${fn:substring(reply.reply_date, 0,10)}</span>
+								</div>
+								<div class="col-5 col-md-7 col-xl-8 p-3">
+									${reply.contents}
+								</div>
+							</div>
+						</c:if>
+
+						
+						<!-- 답변 쓰는 곳 -->
+						<c:if test ="${empty reply}">
+						<c:if test="${member.position ne null and member.position eq '관리자'}">
+							<form class="row d-flex align-items-center mt-5" action="replyInsert.do" method="post" id="replyForm" onsubmit="return replySubmit();">
+								<div class="col-10 col-xl-11 pe-2">
+									<input type="hidden" name="serviceCenter_index" value="${view.serviceCenter_index}">
+									<textarea style="max-height: 65px; border-radius: 3px;" placeholder="답변을 두 번이상 등록할 수 없습니다." name="contents" maxlength="100"></textarea>
+								</div>
+								<div class="col-2 col-xl-1 px-0">
+									<button class="btn btn-primary" type="submit">등록</button>
+								</div>
+							</form>
+						</c:if>
+						</c:if>
+						
+						<!-- 버튼 -->
+						<hr>
 						<div class="row">
-						<div class="col-md-2 col-sm-2 col-3 leftbtn">
-							<input value="목록" type="button" class="btn btn-primary listbtn" onclick="location.href='serviceCenter.do?sort2=${sort2}&nowPage=${nowPage}'">
-						</div>
-						<div class="col-md-10 col-sm-10 col-9 rightbtn">
-							<c:if test="${member.position ne null and member.position eq '관리자'}">
-								<input value="삭제" type="button" class="btn btn-secondary updatebtn" onclick="location.href='notice_update.do'">
-							</c:if>
-						</div>
+							<div class="col-md-2 col-sm-2 col-3 leftbtn">
+								<input value="목록" type="button" class="btn btn-primary listbtn" onclick="location.href='serviceCenter.do?sort2=${sort2}&nowPage=${nowPage}'">
+							</div>
+							<div class="col-md-10 col-sm-10 col-9 rightbtn">
+								<c:if test="${member.position ne null and member.position eq '관리자'}">
+									<input value="삭제" type="button" class="btn btn-secondary updatebtn" onclick="location.href='serviceCenter_delete.do?serviceCenter_index=${view.serviceCenter_index}'">
+								</c:if>
+							</div>
 						</div>
 
 					</div>
-
-
 					
-
 				</article>
             </div>
 
