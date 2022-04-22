@@ -31,7 +31,7 @@ function checkAll() {
 		alert("ID를 입력해주세요!");
 		return false;
 	}else if (!checkId.test(id.value)) {
-		alert("id는 6~12자리의 영문 및 영문숫자 가능");
+		alert("id는 5~12자리의 영문 및 영문숫자 가능");
 		return false;
 	}
 	else if(idChk =="N"){
@@ -108,6 +108,79 @@ function checkAll() {
 	return true;
 	
 }
+
+var nameSw=0;
+var emailSw=0
+
+function nameChk(obj){
+	var checkName = /^[가-힣]{2,6}$/g;
+
+	if (checkName.test(obj.value)) {
+	nameSw = 1;
+		
+	}else if(nameSw.value==""){
+		alert("이름을 입력해주세요!");
+		nameSw=0;
+	}
+	if(nameSw == 1 && emailSw == 1){
+		$("#sendEmail").attr("disabled", false);
+	}else{
+		$("#sendEmail").attr("disabled", true);
+	}
+}
+function emailChk(obj){
+	var emailReg = /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/g;
+	if(emailReg.test(obj.value)){
+		emailSw = 1;
+	}else{
+		emailSw = 0;
+	}
+	if(noMemIndexSw == 1 && noMemEmailSw == 1){
+		$("#sendEmail").attr("disabled", false);
+	}else{
+		$("#sendEmail").attr("disabled", true);
+	}
+}
+function checkFn(){
+	var checkName = /^[가-힣]{2,6}$/g;
+	var checkEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/g;
+	var name = document.getElementById("name");
+	var email = document.getElementById("email"); 
+	var check1 = document.frm.checkOne.checked;
+	var check2 = document.frm.checkTwo.checked;
+	var check3 = document.frm.checkThree.checked
+
+	
+	//이름
+	if (name.value == "") {
+		alert("이름을 입력해주세요!");
+		return false;
+	}
+	else if (!checkName.test(name.value)) {
+		alert("특수문자,영어,숫자는 사용할 수 없습니다. 한글만 입력해주세요!");
+		return false;
+	}
+	else if (email.value == "") {
+		alert("이메일을 입력해주세요!");
+		return false;
+	}
+	else if (!checkEmail.test(email.value)) {
+		alert("올바른 이메일 형식이 아닙니다.");
+		return false;
+	}
+	if(!check2){
+		alert("이용약관 동의하셔야 합니다.")
+		return false;
+	} 
+	if(!check3){
+		alert("이용약관 동의하셔야 합니다.")
+		return false;
+	} 
+	
+	alert("인증이 완료되었습니다!");
+	return true;
+}
+
 //아이디 중복확인
 function fn_idChk(){
 	var id =$("#id").val();
@@ -188,3 +261,7 @@ function fn_recomChk(){
 	})
 
 }
+
+
+
+

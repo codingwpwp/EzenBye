@@ -82,7 +82,7 @@
                                             </div>
                                             <div class="col-sm-9 col-8">
                                                 <input type="text" class="idinput" name="id" id="id"
-                                                    placeholder="8~20 영문+숫자" >
+                                                    placeholder="5~15 영문+숫자" >
                                               
                                             </div>
                                             <div class="col-sm-3 col-4">

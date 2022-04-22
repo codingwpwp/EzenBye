@@ -25,6 +25,7 @@ import team.project.service.MemberService;
 import team.project.service.MessageService;
 import team.project.service.OrderProductService;
 import team.project.service.OrdersService;
+import team.project.service.RecipeService;
 import team.project.service.ReviewService;
 import team.project.service.ServiceCenterService;
 import team.project.util.PagingUtil;
@@ -35,6 +36,7 @@ import team.project.vo.MemberVO;
 import team.project.vo.MessageVO;
 import team.project.vo.OrderProductVO;
 import team.project.vo.OrdersVO;
+import team.project.vo.RecipeVO;
 import team.project.vo.ReviewVO;
 import team.project.vo.SearchVO;
 import team.project.vo.ServiceCenterVO;
@@ -77,6 +79,8 @@ public class MypageController {
 	private CartService cartService;
 	@Autowired
 	private MessageService messageService;
+	@Autowired
+	private RecipeService recipeService;
 	
 	// 헤더 아이콘 쪽지 안읽은 갯수
 	@RequestMapping(value = "messageNonReadCount.do", method = RequestMethod.POST)
@@ -433,7 +437,7 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value = "mypage_recipe.do", method = RequestMethod.GET)
-	public String home9(Locale locale, Model model, HttpSession session, HttpServletRequest request) {
+	public String home9(Locale locale, Model model, HttpSession session, HttpServletRequest request, SearchVO searchVO, int nowPage) throws Exception {
 		
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		String strReferer = request.getHeader("referer");
@@ -441,6 +445,26 @@ public class MypageController {
 		if(member == null || strReferer == null) {
 			return "wrongAccessPage/wrongAccess";
 		}else {
+			
+			int member_index = member.getMember_index();
+			
+			searchVO.setMember_index(member_index);
+			
+			// 현재페이지
+			int realnowPage = 1;
+			if(nowPage != 0) realnowPage = nowPage;
+			
+			List<RecipeVO> recipeMypageList = recipeService.recipeMypageList(searchVO, realnowPage);
+		
+			model.addAttribute("recipeMypageList",recipeMypageList);
+			
+			PagingUtil paging = recipeService.recipeListPaging(searchVO, realnowPage);
+			
+			model.addAttribute("paging", paging);
+			
+			int countRecipeMypage = recipeService.countRecipeMypage(searchVO);
+			model.addAttribute("countRecipeMypage",countRecipeMypage);
+			
 			return "mypage/recipe";
 		}
 		

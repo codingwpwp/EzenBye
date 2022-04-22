@@ -22,6 +22,33 @@
 		}
 		dibsProduct = dibsProductArr.toString();
 	}
+	
+	List<ReviewVO> review = (List) request.getAttribute("viewReview");
+	ArrayList<String> reviewProductIndex = new ArrayList<>();
+	int sum = 0;
+	int length = 0;
+	HashMap<String,Integer> result = new HashMap<>();
+	
+	
+	if(review != null){
+		for(int i=0; i<review.size(); i++){
+			reviewProductIndex.add(review.get(i).getProduct_index());
+		}
+		
+		for(int i=0; i<review.size(); i++){
+			for(int j=0; j<reviewProductIndex.size(); j++){
+				if(review.get(i).getProduct_index() == reviewProductIndex.get(j)){
+					length++;
+					sum = sum + review.get(j).getStar_count();
+					result.put(review.get(i).getProduct_index()+"=",(sum/length));
+				}
+			}
+				length = 0;
+				sum = 0;
+		}
+	}
+	
+	String starHash = result.toString();
 %>
 
 <!DOCTYPE html>
@@ -91,7 +118,7 @@
 					<input type="hidden" name="userDibsProduct" value="<%=dibsProduct%>">
 					<input type="hidden" name="userDibslength" value="<%=userDibsList.size()%>">
 			<%} %>
-             
+            <input type="hidden" name="starHash" value="<%=starHash%>">
             
             
             <!-- 메인 -->

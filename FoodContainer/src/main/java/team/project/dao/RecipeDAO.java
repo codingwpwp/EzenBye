@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import team.project.util.PagingUtil;
 import team.project.vo.RecipeVO;
+import team.project.vo.SearchVO;
 import team.project.vo.ThumbVO;
 
 @Repository
@@ -83,6 +84,17 @@ public class RecipeDAO {
 	
 	public List<RecipeVO> viewRecipeList(RecipeVO recipeVO) throws Exception {
 		return sqlSession.selectList(Namespace + ".viewRecipeList", recipeVO);
+	}
+	
+	//마이페이지
+	public int countRecipeMypage(SearchVO searchVO) throws Exception {
+		
+		return sqlSession.selectOne(Namespace+".countRecipeMypage",searchVO);
+	}
+	
+	public List<RecipeVO> recipeMypageList(PagingUtil paging) throws Exception {
+		
+		return sqlSession.selectList(Namespace+".recipeMypageList",paging);
 	}
 		
 }
