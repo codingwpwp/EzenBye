@@ -58,9 +58,8 @@
 		var price = $("input[name='asidePrice']");
 		
 		var url = document.location.href;
-		var param = decodeURI(decodeURIComponent(url)).split(".");
-			
-		if(param[1] == "do"){
+		
+		if(url.substring(url.length-2,url.length) == "do"){
 			iceAll.prop("checked",true);
 			ice.prop("checked",true);
 			productAll.prop("checked",true);
@@ -86,7 +85,7 @@
 		//가격
 		var priceM = $("input[name='asidePriceM']");
 		
-		if(param[1] == "do"){
+		if(url.substring(url.length-2,url.length) == "do"){
 			iceAllM.prop("checked",true);
 			iceM.prop("checked",true);
 			productAllM.prop("checked",true);
@@ -293,13 +292,14 @@
 									}
 									searchHtml += "<span class='productListStar'>";
 									var starHash = $("input[name='starHash']").val();
-									console.log(starHash);
-									//console.log(starHashProductIndex[0].substring(0,4));
-									/*for(var k=0; k<starHashProductIndex.length; k++){
-										if(data[i].product_index == starHashProductIndex[k].substring(0,4)){
-											console.log("ddddddddddddddddddd");
+									starHash = starHash.replace("{","");
+									starHash = starHash.replace("}","");
+									var starPIndex = starHash.split(",");
+									for(var k=0; k<starPIndex.length; k++){
+										if(data[i].product_index == starPIndex[k].substring(0,5)){
+											console.log(starPIndex[k].substring(0,5));
 										}
-									}*/
+									}
 									searchHtml += "<i class='bi bi-star-fill'></i>";
 									searchHtml += "<i class='bi bi-star-fill'></i>";
 									searchHtml += "<i class='bi bi-star-fill'></i>";
@@ -1618,7 +1618,20 @@
 								}	
 								mainSectionHtml += "<input type='hidden' class='inventoryM"+i+"' value='"+data[i].inventory+"'>";			
 								mainSectionHtml += "</div>";			
-								mainSectionHtml += "<div class='productListStarM'>";			
+								mainSectionHtml += "<div class='productListStarM'>";
+								var starHash = $("input[name='starHash']").val();
+									$.trim(starHash);
+									starHash = starHash.replace("{","");
+									starHash = starHash.replace("}","");
+									starHash = starHash.replace(" ","");
+									var starPIndex = starHash.split(",");
+									console.log(data[i].product_index);
+									for(var k=0; k<starPIndex.length; k++){
+										if(data[i].product_index == starPIndex[k].substring(0,5)){
+											console.log(starPIndex[k].substring(7,8));
+											console.log(data[i].product_index);
+										}
+									}			
 								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
 								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
 								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
