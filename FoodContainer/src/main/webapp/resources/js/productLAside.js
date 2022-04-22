@@ -292,6 +292,14 @@
 										searchHtml += "</span>";
 									}
 									searchHtml += "<span class='productListStar'>";
+									var starHash = $("input[name='starHash']").val();
+									console.log(starHash);
+									//console.log(starHashProductIndex[0].substring(0,4));
+									/*for(var k=0; k<starHashProductIndex.length; k++){
+										if(data[i].product_index == starHashProductIndex[k].substring(0,4)){
+											console.log("ddddddddddddddddddd");
+										}
+									}*/
 									searchHtml += "<i class='bi bi-star-fill'></i>";
 									searchHtml += "<i class='bi bi-star-fill'></i>";
 									searchHtml += "<i class='bi bi-star-fill'></i>";
