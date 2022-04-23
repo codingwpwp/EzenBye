@@ -3,7 +3,6 @@ package team.project.controller;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.project.service.MemberService;
+import team.project.service.SignService;
 import team.project.vo.MemberVO;
 
 /**
@@ -26,10 +26,15 @@ public class SignController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private SignService signService;
+	
 	private static final Logger logger = LoggerFactory.getLogger(SignController.class);
 
 	@RequestMapping(value = "member_sign.do", method = RequestMethod.GET)
-	public String sign(Locale locale, Model model){
+	public String sign(Locale locale, Model model,@RequestParam("name")String name,@RequestParam("email") String email){
+		model.addAttribute("name",name);
+		model.addAttribute("email",email);
 		return "sign/member_sign";
 	}
 
@@ -83,12 +88,12 @@ public class SignController {
 		return "sign/member_email_sign";
 	}
 	//회원가입 이메일 인증 post
-	@ResponseBody
+	
 	@RequestMapping(value="member_email_send",method =RequestMethod.POST)
-	public String memberEmail( MemberVO vo,Model model,@RequestParam("name")String name,@RequestParam("email") String email,HttpServletRequest request) {
-//		String emailsend = 
-		
-		return email;
+	@ResponseBody
+	public String memberEmail( MemberVO vo,Model model,@RequestParam("name")String name,@RequestParam("email") String email)throws Exception {
+		String emailSend = signService.emailsend(vo); 	
+		return emailSend;
 		
 	}
 	

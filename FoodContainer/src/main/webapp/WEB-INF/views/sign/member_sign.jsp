@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -114,8 +117,8 @@
                                                 <label for="name">이름<span class="red">*</span></label>
                                             </div>
                                             <div class="col-sm-9 col-12">
-                                                <input type="text" class="pwinput" name="name" id="name"
-                                                    placeholder="이름를 입력하세요" >
+                                                <input type="text" class="pwinput" name="name" id="name" value="${name}"
+                                                    placeholder="이름를 입력하세요" readonly>
                                                
                                             </div>
                                             <div class="col-sm-12 col-12 tit">
@@ -152,7 +155,7 @@
                                             </div>
                                             <div class="col-sm-9 col-12">
                                                 <input type="text" class="emailinput" name="email" id="email"
-                                                    placeholder="이메일을 입력해주세요" >
+                                                    placeholder="이메일을 입력해주세요" value="${email}" readonly>
                                               
                                             </div>
                                             <div class="col-12 tit">
