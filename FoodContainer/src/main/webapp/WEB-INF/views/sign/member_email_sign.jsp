@@ -52,7 +52,7 @@
                    <div class="container">
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-12">
-                                <form action="member_email_sign" name="frm" method="post" id="email_sign" onsubmit="return false;">
+                                <form action="member_sign.do" name="mailSendfrm" method="get" id="email_sign">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-12 signhead">
@@ -89,8 +89,8 @@
                                                 <label for="emailcheck">인증번호</label>
                                             </div>
                                             <div class="col-sm-9 col-12">
-                                                <input type="text" class="emailinput" name="emailchk" id="emailchk"
-                                                    placeholder="인증번호를 입력해주세요" >
+                                                <input type="text" class="emailinput"  id="randomNum"
+                                                    placeholder="인증번호를 입력해주세요" maxlength="6"  autocomplete="off">
                                                 <span id="emailspan"></span>
                                             </div>
                                           <div class="col-sm-12 col-12 h4">
@@ -120,7 +120,7 @@
                                             </div>
                                             <div class="col-sm-6 col-6 btndiv">
                                               <!--   <input type="submit" value="회원가입" class="btn btn-dark"disabled> -->
-                                                 <input type="button" value="회원가입" class="btn btn-dark" id="singOk" disabled>
+                                                 <input type="button" value="회원가입" class="btn btn-dark" id="singOk" onclick="emailChksubmit()" disabled>
                                             </div>
                                         </div>
                                     </div>
