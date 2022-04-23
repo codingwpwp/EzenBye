@@ -68,7 +68,7 @@ $(document).ready(function() {
 				case 6 : return "10포인트ㅋㅋ";
 			}
         });
-        $('<img  src="/controller/resources/img/이벤트/coupon' + (gift + 1) + '.png" />').prependTo("#popup_gift .lottery_present");
+        $('<img  src="/FoodContainer/resources/img/이벤트/coupon' + (gift + 1) + '.png" />').prependTo("#popup_gift .lottery_present");
         
         setTimeout(function() {
             openPopup("popup_gift");
