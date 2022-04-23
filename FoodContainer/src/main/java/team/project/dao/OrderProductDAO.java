@@ -1,5 +1,6 @@
 package team.project.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -37,6 +38,12 @@ public class OrderProductDAO {
 	
 	
 	/* 관리자페이지 */
+	
+	// 메인페이지 30일 결산
+	public List<HashMap<String, String>> sales() throws Exception{
+		return sqlSession.selectList(Namespace + ".sales");
+	}
+	
 	// 회원 주문 상세조회할때 주문들 불러오기
 	public List<OrderProductVO> adminMemberOrderProductList(OrdersVO ordersvo) throws Exception {
 		return sqlSession.selectList(Namespace + ".adminMemberOrderProductList", ordersvo);

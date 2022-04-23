@@ -33,7 +33,7 @@ public class ServiceCenterController {
 
 		int realnowPage = 1;
 		if(sort2 == null) sort2 = "상품";
-		if(nowPage != null) realnowPage = Integer.parseInt(nowPage);
+		if(nowPage != null && !nowPage.equals("")) realnowPage = Integer.parseInt(nowPage);
 		
 		model.addAttribute("sort2", sort2);
 		
@@ -73,8 +73,8 @@ public class ServiceCenterController {
 	// 고객센터 글 보기
 	@RequestMapping(value = "serviceCenter_view.do", method = RequestMethod.GET)
 	public String view(Model model,
-					   @RequestParam(value="sort2") String sort2,
-					   @RequestParam(value="nowPage") String nowPage,
+					   @RequestParam(value="sort2", required = false) String sort2,
+					   @RequestParam(value="nowPage", required = false) String nowPage,
 					   @RequestParam(value="serviceCenter_index") int serviceCenter_index) throws Exception{
 		
 		ServiceCenterVO vo = service.serviceCenterPageView(serviceCenter_index);

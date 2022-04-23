@@ -1,5 +1,6 @@
 package team.project.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,13 @@ public class OrderProductServiceImpl implements OrderProductService{
 	}
 	
 	/* 관리자페이지 */
+	
+	// 30일 결산
+	@Override
+	public List<HashMap<String, String>> sales() throws Exception {
+		return orderProductDAO.sales();
+	}
+	
 	// 회원 주문 상세조회할때 주문들 불러오기
 	@Override
 	public List<OrderProductVO> adminMemberOrderProductList(OrdersVO ordersvo) throws Exception {

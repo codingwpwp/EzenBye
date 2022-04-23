@@ -113,4 +113,11 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 		return serviceCenterDAO.reply(serviceCenter_index);
 	}
 	
+	/* 관리자페이지 */
+	// 최근 문의 내역
+	@Override
+	public List<ServiceCenterVO> adminService() throws Exception {
+		return serviceCenterDAO.adminService();
+	}
+	
 }

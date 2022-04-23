@@ -48,6 +48,14 @@
     </insert>
     
     <!-- 관리자페이지 -->
+    
+    <!-- 메인 페이지 30일결산 -->
+    <select id="sales" resultType="java.util.HashMap">
+		SELECT b.middleSort as sort, SUM(a.price) as quantity FROM order_product as a, product as b
+		WHERE a.product_index = b.product_index
+		GROUP BY sort ORDER BY sort
+    </select>
+    
     <!-- 회원 주문 상세조회할때 주문들 불러오기 -->
     <select id="adminMemberOrderProductList" resultType="OrderProductVO" parameterType="OrdersVO">
     	SELECT *

@@ -52,7 +52,7 @@ $(document).ready(function(){
 	// 배송비 따지기
 	deliveryPrice = parseInt($("#deliveryPrice").text());
 	$(".productItem").each(function(){
-		if($(this).find(".productDeliveryPrice").val() != 0){
+		if($(this).find(".productDeliveryPrice").val() != 'Y'){
 			deliveryPrice = 3000;
 			return false;
 		}
@@ -482,7 +482,7 @@ function checkedCoupon(obj){
 			var discount_percent = parseInt(data.trim());
 			// console.log(discount_percent);
 			if(totalPrice > 0){
-				couponPrice = Math.floor((sumPrice + deliveryPrice) * (discount_percent * 0.01));
+				couponPrice = Math.floor((sumPrice) * (discount_percent * 0.01));
 				totalPrice = sumPrice + deliveryPrice - couponPrice - pointPrice;
 				if(totalPrice < 0 ){
 					totalPrice = 0;

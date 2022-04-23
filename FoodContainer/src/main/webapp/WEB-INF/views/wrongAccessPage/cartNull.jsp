@@ -12,7 +12,7 @@
 <script type="text/javascript">
 	function alertMessage(){
 		alert("아무것도 담기지 않았습니다. 메인페이지로 이동합니다.");
-		location.href='/controller/index.do';
+		location.href='<%=request.getContextPath()%>/index.do';
 	}
 </script>
 </html>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -51,6 +52,30 @@
                 <article id="mainSection">
                     <!-- 메인컨텐츠 -->
 
+                        <!-- 이달의 매출 -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+
+                                <div class="bg-primary bg-gradient bg-opacity-75 border rounded-top border-2 border-dark p-2">
+                                    <span class="h4 fw-bold">30일 결산</span>
+                                </div>
+                                
+                                <div class="row border border-2 border-top-0 border-dark container px-0 mx-0 py-4">
+                                    <div class="col-12 col-lg-6">
+                                	<c:forEach items="${salesList}" var="list">
+										<input type="hidden" name="${list.sort}" value="${list.quantity}">
+                                	</c:forEach>
+                                        <canvas id="settlementChart"></canvas>
+                                    </div>
+                                    
+                                    <div class="col-6 d-none d-lg-block">
+                                        dfdfdf
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
                         <!-- 신고 리스트&고객 센터 -->
                         <div class="row">
 
@@ -97,7 +122,7 @@
                             <div class="col-12 col-md-6">
 
                                 <div class="bg-info bg-gradient bg-opacity-75 border rounded-top border-2 border-dark p-2">
-                                    <span class="h4 fw-bold">최근 문의 내역</span><span class="moreContent"><a href="#" class="link-dark fw-bold float-end">[더보기]</a></span>
+                                    <span class="h4 fw-bold">최근 문의 내역</span><span class="moreContent"><a href="serviceCenter.do" class="link-dark fw-bold float-end">[더보기]</a></span>
                                 </div>
 
                                 <table class="table table-hover mb-0 border border-top-0 border-2 border-dark mb-3 centerTable">
@@ -111,21 +136,13 @@
                                     </thead>
 
                                     <tbody>
+                                    <c:forEach items = "${sList}" var = "list">
                                         <tr>
-                                            <th scope="row">1</th>
-                                            <td><a href="#" class="link-primary">문의내용1</a></td>
-                                            <td>2022-02-03</td>
+                                            <th scope="row">${list.serviceCenter_index}</th>
+                                            <td><a class="d-inline-block text-truncate" href="serviceCenter_view.do?serviceCenter_index=${list.serviceCenter_index}" class="link-primary">${list.title}</a></td>
+                                            <td>${fn:substring(list.write_date, 0,10)}</td>
                                         </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td><a href="#" class="link-primary">문의내용2</a></td>
-                                            <td>2022-02-03</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td><a href="#" class="link-primary">문의내용3</a></td>
-                                            <td>2022-02-03</td>
-                                        </tr>
+                                    </c:forEach>
                                     </tbody>
 
                                 </table>
@@ -186,7 +203,7 @@
                                 <table class="table table-hover align-middle border border-2 border-dark fw-bold">
 
                                     <colgroup>
-                                        <col style="width: 20%;"/>
+                                        <col style="width: 22%;"/>
                                     </colgroup>
                                     <tbody>
                                     <c:if test="${not empty pList}">
@@ -200,12 +217,15 @@
                                             <td>
                                             	<a href="productView.do?product_index=${list.product_index}" class="link-dark" target="blank">${list.product_name}</a>
                                             </td>
+                                            <td>
+                                            	<span class="text-danger">${list.quantity}</span>개 팔림
+                                            </td>
                                         </tr>
 	                                    </c:forEach>
                                     </c:if>
                                     <c:if test="${empty pList}">
 	                                    <tr>
-		                                    <td colspan="2" class="display-6 fw-bold p-3" style="text-align: center;">
+		                                    <td colspan="3" class="display-6 fw-bold p-3" style="text-align: center;">
 												등록된 상품이 없습니다.
 											</td>
 	                                    </tr>
@@ -236,9 +256,11 @@
     <script src="https://kit.fontawesome.com/b30bc4e0a9.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/adminPage.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/adminPage_leftMenu.js"></script>
+    <script src="<%=request.getContextPath()%>/resources/js/adminPage_chart.js"></script>
     <script type="text/javascript">
     window.onpageshow = function(event) {
         if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {

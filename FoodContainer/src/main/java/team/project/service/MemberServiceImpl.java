@@ -293,7 +293,7 @@ public class MemberServiceImpl implements MemberService {
 				return "2";
 			}else if(gacha >= 81 && gacha <= 88) {	// 10%쿠폰
 				return "1";
-			}else if(gacha >= 89 && gacha <= 95) {	// 1,000p
+			}else if(gacha >= 89 && gacha <= 98) {	// 1,000p
 				return "3";
 			}else{									// 50,000p
 				return "4";

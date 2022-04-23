@@ -1,5 +1,6 @@
 package team.project.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,8 @@ import team.project.service.NoMemberOrdersService;
 import team.project.service.OrderProductService;
 import team.project.service.OrdersService;
 import team.project.service.ProductService;
+import team.project.service.RecipeService;
+import team.project.service.ServiceCenterService;
 import team.project.util.PagingUtil;
 import team.project.vo.BannerVO;
 import team.project.vo.MemberVO;
@@ -29,7 +32,9 @@ import team.project.vo.NoMemberOrdersVO;
 import team.project.vo.OrderProductVO;
 import team.project.vo.OrdersVO;
 import team.project.vo.ProductVO;
+import team.project.vo.RecipeVO;
 import team.project.vo.SearchVO;
+import team.project.vo.ServiceCenterVO;
 
 @Controller
 public class AdminPageController {
@@ -48,6 +53,10 @@ public class AdminPageController {
 	private NoMemberOrdersService noMemberOrdersService;
 	@Autowired
 	private MessageService messageService;
+	@Autowired
+	private ServiceCenterService service;
+	@Autowired
+	private RecipeService recipeService;
 
 	MemberVO member;
 	
@@ -64,8 +73,13 @@ public class AdminPageController {
 				return "wrongAccessPage/wrongAccess";
 			}else {										// 관리자인 경우
 				
+				// 결산
+				List<HashMap<String, String>> salesList = orderProductService.sales();
+				model.addAttribute("salesList", salesList);
 				
-				
+				// 최근 문의 내역
+				List<ServiceCenterVO> serviceList = service.adminService();
+				model.addAttribute("sList", serviceList);
 				
 				// 등록중인 배너 3개 뿌리기
 				List<BannerVO> bannerList = bannerService.adminMainBanner();
@@ -469,7 +483,7 @@ public class AdminPageController {
 
 	// 상품 등록 페이지로 이동
 	@RequestMapping(value = "product_register.do", method = RequestMethod.GET)
-	public String productRegister(Model model, HttpServletRequest request) {
+	public String productRegister(HttpServletRequest request) {
 
 		// 세션 소환
 		HttpSession session = request.getSession();
@@ -488,10 +502,10 @@ public class AdminPageController {
 
 	// 상품을 실제로 DB에 등록하는 과정
 	@RequestMapping(value = "product_register.do", method = RequestMethod.POST)
-	public String productInsert(Model model, ProductVO product,
-									 @RequestParam("tumnailImage") MultipartFile tumnailImage,
-									 @RequestParam("detailImage") MultipartFile detailImage,
-									 HttpServletRequest request) throws Exception {
+	public String productInsert(ProductVO product,
+								@RequestParam("tumnailImage") MultipartFile tumnailImage,
+								@RequestParam("detailImage") MultipartFile detailImage,
+								HttpServletRequest request) throws Exception {
 		
 		int result = productService.adminProductInsert(product, tumnailImage, detailImage, request);
 		
@@ -527,7 +541,7 @@ public class AdminPageController {
 	
 	// 상품을 실제로 DB에 수정하는 과정
 	@RequestMapping(value = "product_modify.do", method = RequestMethod.POST)
-	public String productUpdate(Model model, ProductVO product,
+	public String productUpdate(ProductVO product,
 			 @RequestParam("tumnailImage") MultipartFile tumnailImage,
 			 @RequestParam("detailImage") MultipartFile detailImage,
 			 HttpServletRequest request) throws Exception {
@@ -605,7 +619,7 @@ public class AdminPageController {
 	// 상품 복구
 	@RequestMapping(value = "changeDelYNinN.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String productDelN(Model model, @RequestParam("product_index") String product_index) throws Exception{
+	public String productDelN(@RequestParam("product_index") String product_index) throws Exception{
 		productService.adminProductDelYNisN(product_index);
 		return "Success";
 	}	
@@ -634,9 +648,9 @@ public class AdminPageController {
 	
 	// 배너 등록
 	@RequestMapping(value = "bannerRegister.do", method = RequestMethod.POST)
-	public String bannerRegister(Model model, BannerVO bannervo,
-								@RequestParam("bannerFile") MultipartFile bannerFile,
-								HttpServletRequest request) throws Exception {
+	public String bannerRegister(BannerVO bannervo,
+								 @RequestParam("bannerFile") MultipartFile bannerFile,
+								 HttpServletRequest request) throws Exception {
 		
 		int result = bannerService.bannerInsert(bannervo, bannerFile, request);
 		
@@ -650,9 +664,9 @@ public class AdminPageController {
 	
 	// 배너 수정
 	@RequestMapping(value = "bannerModify.do", method = RequestMethod.POST)
-	public String bannerModify(Model model, BannerVO bannervo,
-								@RequestParam("bannerFile") MultipartFile bannerFile,
-								HttpServletRequest request) throws Exception {
+	public String bannerModify(BannerVO bannervo,
+							   @RequestParam("bannerFile") MultipartFile bannerFile,
+							   HttpServletRequest request) throws Exception {
 		
 		int result = bannerService.bannerModify(bannervo, bannerFile, request);
 		
@@ -666,8 +680,7 @@ public class AdminPageController {
 	// 배너 삭제
 	@RequestMapping(value = "bannerDelete.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String bannerDelete(Model model,
-							  @RequestParam(value="banner_index") int[] bannerIndexArr) throws Exception {
+	public String bannerDelete(@RequestParam(value="banner_index") int[] bannerIndexArr) throws Exception {
 		
 		int result = bannerService.bannerDelete(bannerIndexArr);
 		
@@ -678,9 +691,34 @@ public class AdminPageController {
 		}
 		
 	}
+	
+	// 베스트 레시피
 	@RequestMapping(value = "bestRecipe.do", method = RequestMethod.GET)
-	public String bestRecipe(Model model) {
-		return "adminPage/adminPage_bestRecipe";
+	public String bestRecipe(Model model, HttpServletRequest request) throws Exception{
+		
+		// 세션 소환
+		HttpSession session = request.getSession();
+		if(session.getAttribute("member") == null) {	// 로그인 안했을 때
+			return "wrongAccessPage/needLogin";
+		}else {
+			member = (MemberVO)session.getAttribute("member");
+			if(!member.getPosition().equals("관리자")) {	// 관리자가 아닐 경우
+				return "wrongAccessPage/wrongAccess";
+			}else {										// 관리자인 경우
+				
+				List<RecipeVO> bestRecipeList = recipeService.adminBestRecipeList();
+				model.addAttribute("bestRecipeList", bestRecipeList);
+				
+				return "adminPage/adminPage_bestRecipe";
+			}
+		}
+	}
+	
+	// 베스트 레시피 해제
+	@RequestMapping(value = "bestRecipe.do", method = RequestMethod.POST)
+	public String cancelRecipe(@RequestParam(value="recipe_index") int[] ridxArr) throws Exception{
+		recipeService.adminCancelBestRecipe(ridxArr);
+		return "redirect:bestRecipe.do";
 	}
 	
 }

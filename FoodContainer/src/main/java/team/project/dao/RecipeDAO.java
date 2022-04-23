@@ -96,7 +96,29 @@ public class RecipeDAO {
 		
 		return sqlSession.selectList(Namespace+".recipeMypageList",paging);
 	}
+	
+	/* 관리자 페이지 */
+	
+	// 베스트 레시피
+	public List<RecipeVO> adminBestRecipeList() throws Exception {
 		
+		return sqlSession.selectList(Namespace + ".adminBestRecipeList");
+	}
+	
+	// 레시피 해제
+	public void adminCancelBestRecipe(List<Integer> ridxList) throws Exception{
+		sqlSession.update(Namespace + ".adminCancelBestRecipe", ridxList);
+	}
+	
+	// 순위 조절1
+	public void adminUpdateBestRecipeRankOne() throws Exception{
+		sqlSession.update(Namespace + ".adminUpdateBestRecipeRankOne");
+	}
+	
+	// 순위 조절2
+	public void adminUpdateBestRecipeRankTwo() throws Exception{
+		sqlSession.update(Namespace + ".adminUpdateBestRecipeRankTwo");
+	}
 }
 
 

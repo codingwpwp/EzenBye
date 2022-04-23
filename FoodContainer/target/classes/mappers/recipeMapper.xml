@@ -64,10 +64,6 @@ select *
 UPDATE recipe set hit =hit+1 where recipe_index=#{recipe_index}
 </update>
 
-
-
-
-
 <!--레시피 게시글 작성 상품 찾기  -->
 <!-- <select id="viewProduct" resultType="RecipeVO">
 select title
@@ -221,7 +217,46 @@ member_index
     order by best_rank, write_date desc
     LIMIT #{start}, #{perPage}
 </select>
- 
+
+
+<!-- 관리자페이지 -->
+
+<!-- 베스트레시피 불러오기 -->
+<select id="adminBestRecipeList" resultType="RecipeVO">
+	SELECT recipe_index, best_rank, hit, title, write_date,
+		(SELECT COUNT(reply_index) FROM reply WHERE recipe_index = recipe.recipe_index) as thumb
+	FROM recipe WHERE best_rank IN(1,2,3) ORDER BY best_rank;
+</select>
+
+<!-- 레시피 해제 -->
+<update id="adminCancelBestRecipe" parameterType="list">
+	UPDATE recipe SET
+	best_rank = 4 WHERE
+	<foreach collection="list" item="item" separator=" OR ">
+		recipe_index = #{item}
+	</foreach>
+</update>
+
+<!-- 순위 조절1 -->
+<update id="adminUpdateBestRecipeRankOne">
+	UPDATE recipe
+	SET best_rank = 1
+	WHERE best_rank =
+		(SELECT MIN(best_rank) FROM
+  			(SELECT a.best_rank
+   			FROM recipe as a
+   			JOIN recipe as b ON a.recipe_index = b.recipe_index
+		) temp
+	)
+</update>
+
+<!-- 순위 조절2 -->
+<update id="adminUpdateBestRecipeRankTwo">
+	UPDATE recipe
+	SET best_rank = 2
+	WHERE best_rank BETWEEN 2 AND 3
+</update>
+
 </mapper>
 
 

@@ -44,4 +44,8 @@ public interface ServiceCenterService {
 	
 	// 답변
 	ServiceCenterReplyVO reply(int serviceCenter_index) throws Exception;
+	
+	/* 관리자페이지 */
+	// 최근 문의 내역
+	List<ServiceCenterVO> adminService() throws Exception;
 }

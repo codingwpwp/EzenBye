@@ -64,7 +64,11 @@ public interface RecipeService {
 	int countRecipeMypage(SearchVO searchVO) throws Exception;
 
 	
-	    
+	/* 관리자 페이지 */
+	// 베스트 레시피
+	List<RecipeVO> adminBestRecipeList() throws Exception;
 	
+	// 레시피 해제&순위 조절
+	void adminCancelBestRecipe(int[] ridxArr) throws Exception;
 	
 }

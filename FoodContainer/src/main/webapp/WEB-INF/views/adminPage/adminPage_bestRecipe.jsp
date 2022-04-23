@@ -1,3 +1,4 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -59,16 +60,18 @@
                     <div>
 
                         <div class="form-check my-2">
-                            <input class="form-check-input border border-dark" type="checkbox" value="" id="reportCheckbox">
-                            <label class="form-check-label me-3 text-dark fw-bold" for="reportCheckbox">
+                        <c:if test="${not empty bestRecipeList}">
+                            <input class="form-check-input border border-dark" type="checkbox" id="totalCheckbox" onchange="selectAllRecipeCheckbox(this)">
+                            <label class="form-check-label me-3 text-dark fw-bold" for="totalCheckbox">
                                 전체
                             </label>
-                            <button type="button" class="btn btn-outline-dark btn-sm p-1 fw-bold">선택 해제</button>
+                            <button type="button" class="btn btn-dark btn-sm p-1 fw-bold" onclick="cancelSelectedRecipe()">선택 해제</button>
+                        </c:if>
                         </div>
 
-                        <!-- 상품 테이블 -->
-                        <div class="table-responsive">
-                            <table class="table table-hover centerTable verticalAlignTable" style="white-space: nowrap;" id="productTable">
+                        <!-- 베스트 레시피 테이블 -->
+                        <form class="table-responsive" name="frm" method="post" action="bestRecipe.do">
+                            <table class="table table-hover centerTable verticalAlignTable" style="white-space: nowrap;" id="recipeTable">
 
                                 <colgroup></colgroup>
 
@@ -76,7 +79,7 @@
                                     <tr>
                                         <th scope="col"></th>
                                         <th scope="col">순위</th>
-                                        <th scope="col">글번호</th>
+                                        <th scope="col">조회수 | 댓글수</th>
                                         <th scope="col">레시피 제목</th>
                                         <th scope="col">작성일</th>
                                         <th scope="col">관리</th>
@@ -84,55 +87,38 @@
                                 </thead>
                                 
                                 <tbody>
-
-                                    <tr>
-                                        <th>
-                                            <input class="form-check-input border border-dark" type="checkbox" value="">
-                                        </th>
-                                        <td class="w-25">
-                                            <img src="<%=request.getContextPath()%>/resources/img/금메달.png" class="img-fluid medal">
-                                        </td>
-                                        <th>1</th>
-                                        <td><a href="#" class="link-primary">레시피 제목</a></td>
-                                        <td>2022-03-06</td>
-                                        <td>
-                                            <button class="btn btn-dark py-0">해제</button>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <th>
-                                            <input class="form-check-input border border-dark" type="checkbox" value="">
-                                        </th>
-                                        <td class="w-25">
-                                            <img src="<%=request.getContextPath()%>/resources/img/은메달.png" class="img-fluid medal">
-                                        </td>
-                                        <th>1</th>
-                                        <td><a href="#" class="link-primary">레시피 제목</a></td>
-                                        <td>2022-03-06</td>
-                                        <td>
-                                            <button class="btn btn-dark py-0">해제</button>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <th>
-                                            <input class="form-check-input border border-dark" type="checkbox" value="">
-                                        </th>
-                                        <td class="w-25">
-                                            <img src="<%=request.getContextPath()%>/resources/img/동메달.png" class="img-fluid medal">
-                                        </td>
-                                        <th>1</th>
-                                        <td><a href="#" class="link-primary">레시피 제목</a></td>
-                                        <td>2022-03-06</td>
-                                        <td>
-                                            <button class="btn btn-dark py-0">해제</button>
-                                        </td>
-                                    </tr>
-                                    
+									<c:if test="${not empty bestRecipeList}">
+									<c:forEach items="${bestRecipeList}" var="list">
+	                                    <tr>
+	                                        <th>
+	                                            <input class="form-check-input border border-dark recipeCheckbox" type="checkbox" name="recipe_index" value="${list.recipe_index}" onchange="recipeCheckbox()">
+	                                        </th>
+	                                        <td class="w-25">
+	                                            <img src="<%=request.getContextPath()%>/resources/img/<c:if test="${list.best_rank == 1}">금메달.png</c:if><c:if test="${list.best_rank == 2}">은메달.png</c:if><c:if test="${list.best_rank == 3}">동메달.png</c:if>" class="img-fluid medal">
+	                                        </td>
+	                                        <th>${list.hit} | ${list.thumb}</th>
+	                                        <td>
+	                                        	<a href="<%=request.getContextPath()%>/recipeview.do?recipe_index=${list.recipe_index}" class="link-primary" target="blank">
+	                                        		<span class="d-inline-block text-truncate">${list.title}</span>
+	                                        	</a>
+	                                        </td>
+	                                        <td>${fn:substring(list.write_date, 0,10)}</td>
+	                                        <td>
+	                                            <button class="btn btn-dark py-0" onclick="cancelRecipe(this)">해제</button>
+	                                        </td>
+	                                    </tr>
+									</c:forEach>
+									</c:if>
+									
+									<c:if test="${empty bestRecipeList}">
+										<td colspan="6" class="display-3 fw-bold p-3">
+											베스트 레시피가 없습니다.
+										</td>
+									</c:if>
                                 </tbody>
+                                
                             </table>
-                        </div>
+                        </form>
 
                     </div>
 

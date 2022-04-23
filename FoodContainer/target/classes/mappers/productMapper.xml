@@ -120,7 +120,7 @@
 			thumbnail_image,
 			product_name,
 			COALESCE(sale_price, sale_price, origin_price) as origin_price,
-			product_index
+			product_index, delivery_free_YN
 		FROM product
 		<foreach collection="list" item="item" open="WHERE " separator=" OR ">
 			product_index = #{item}
@@ -136,7 +136,7 @@
 			product_name,
 			COALESCE(sale_price, sale_price, origin_price) as origin_price,
 			a.product_index,
-			b.cart_count
+			b.cart_count, delivery_free_YN
 		FROM product as a, cart as b
 		WHERE a.product_index = b.product_index AND 
 		<foreach collection="list" item="item" open="(" separator=" OR " close=")">

@@ -19,7 +19,7 @@
         <div class="list-group my-2">
             <a href="member_list.do?nowPage=1" class="list-group-item list-group-item-action fs-6">회원 리스트</a>
             <a href="dely_list.do?nowPage=1" class="list-group-item list-group-item-action fs-6">탈퇴 리스트</a>
-            <a href="#" class="list-group-item list-group-item-action fs-6">고객 센터</a>
+            <a href="<%=request.getContextPath()%>/serviceCenter.do" class="list-group-item list-group-item-action fs-6">고객 센터</a>
         </div>
         
         <span class="h5 fw-bold">주문 관리</span>

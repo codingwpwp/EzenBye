@@ -86,4 +86,9 @@ public class ServiceCenterDAO {
 	public ServiceCenterReplyVO reply(int serviceCenter_index) throws Exception{
 		return sqlSession.selectOne(Namespace + ".reply", serviceCenter_index);
 	}
+	
+	/* 관리자페이지 최근 문의 내역 */
+	public List<ServiceCenterVO> adminService() throws Exception{
+		return sqlSession.selectList(Namespace + ".adminService");
+	}
 }

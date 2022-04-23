@@ -1,5 +1,6 @@
 package team.project.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import team.project.vo.OrderProductVO;
@@ -12,6 +13,9 @@ public interface OrderProductService {
 	
 	
 	/* 관리자페이지 */
+	// 30일 결산
+	List<HashMap<String, String>> sales() throws Exception;
+	
 	// 회원 주문 상세조회할때 주문들 불러오기
 	List<OrderProductVO> adminMemberOrderProductList(OrdersVO ordersvo) throws Exception;
 	
