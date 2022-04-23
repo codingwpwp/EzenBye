@@ -236,65 +236,80 @@ var nameSw=0;
 var emailSw=0
 var sendemailSW=0;
 
+var RandomNum="";
+
 function nameChk(obj){
 	var checkName = /^[가-힣]{2,6}$/g;
-	if (checkName.test(obj.value)) {
-	nameSw = 1;
+	if (!checkName.test(obj.value)) {
+	nameSw = 0;
 		
-	}else if(nameSw.value==""&& !checkName.test(obj.value)){
-		alert("이름을 입력해주세요!");
-		nameSw=0;
+	}else{
+		
+		nameSw=1;
 	}
 	if(nameSw == 1 && emailSw == 1){
 		$("#sendEmail").attr("disabled", false);
-		$("#singOk").attr("disabled", false);
+		
 	}else{
 		$("#sendEmail").attr("disabled", true);
-		$("#singOk").attr("disabled", false);
 	}
 }
 function emailChk(obj){
 	var emailReg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/g;
-	if(emailReg.test(obj.value)){
-		emailSw = 1;
-	}else{
+	if(!emailReg.test(obj.value)){
 		emailSw = 0;
+	}else{
+		emailSw = 1;
 	}
-	if(noMemIndexSw == 1 && noMemEmailSw == 1){
+	if(nameSw == 1 && emailSw == 1){
 		$("#sendEmail").attr("disabled", false);
-		$("#singOk").attr("disabled", false);
 		
 	}else{
 		$("#sendEmail").attr("disabled", true);
-		$("#singOk").attr("disabled", false);
 	}
 }
 
 function emailsendFn(){
-	var form = $("#email_sign");
+	
 	if(sendemailSW == 1){
 		
 	}else{
-		noMemSendSw = 1;
+		sendemailSW = 1;
 		$("#emailspan").text("보내는중...");
 		$.ajax({
-			url : "noMembersendEmailPw.do",
+			url : "member_email_send",
 			type : "post",
-			data : $(form).serialize(),
+			data : $("form[name='mailSendfrm']").serialize(),
 			success : function(data){
+				RandomNum = data.trim();
+				
 				$("#emailspan").text("");
 				$("#sendEmail").attr("disabled", true);
-				if(data.trim() == "none"){
-					alert("관련 정보가 존재 하지 않습니다");
-					noMemSendSw = 0;
+				if(RandomNum == "none"){
+					sendemailSW = 0;
 				}else{
-					noMemSendSw = 0;
-					alert(data.trim() + "님의 해당 이메일로 주문 비밀번호를 발송했습니다");
-					form.find(".btn-sendEmail").trigger('click');
+					$("input[name='name']").attr("readonly",true);
+					$("input[name='email']").attr("readonly",true);
+					alert($("input[name=name]").val() + "님의 해당 이메일로 인증번호를 발송했습니다");
+					$("#singOk").attr("disabled", false);
+					$("#sendEmail").attr("disabled",true);
 				}
 				
 			}
 		});
 	}
 }
-
+var flexCheckDefault2 = document.getElementById("flexCheckDefault2");
+var flexCheckDefault3 = document.getElementById("flexCheckDefault3");
+function emailChksubmit(){
+	if(!flexCheckDefault2.checked || !flexCheckDefault3.checked){
+		alert("이용약관 필수 체크해주세요");
+	}else{
+		if($("#randomNum").val() == RandomNum){
+		$("form[name='mailSendfrm']").submit();
+	}else{
+		alert("인증번호가 틀렸습니다. 다시 입력 하세요");
+		}
+	}
+	
+}
