@@ -57,7 +57,7 @@
                 <article id="mainSection">
 
                    <!-- 메인컨텐츠 -->
-                    <div class="col-8 col-md-5 col-xl-4 col-xxl-3 border border-dark mt-5 p-3" id="divs">
+                    <div class="col-8 col-md-5 col-xl-4 border border-dark mt-5 p-3" id="divs">
                         <div class="h3 fw-bold mb-3">주문 완료</div>
                         <div>
                             <div class="my-2 fw-bold">주문이 완료되었습니다.</div>
@@ -68,7 +68,7 @@
                         <br>
                         <div class="container row float-start mb-3">
                         	<div class="col-6 px-0 float-start">
-                        		<button class="btn btn-success p-1">계속 쇼핑하기</button>
+                        		<button class="btn btn-success p-1" onclick="<%=request.getContextPath()%>/productList.do">계속 쇼핑하기</button>
                         	</div>
                         	<div class="col-6 px-0">
                         		<button class="btn btn-primary p-1" onclick="location.href='<%=request.getContextPath()%>/mypage_lookup.do'">주문 조회하기</button>
@@ -97,5 +97,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
+	<script>
+	window.onkeydown = function() {
+		var kcode = event.keyCode;
+		if(kcode == 116) event.returnValue = false;
+	}
+	</script>
 </body>
 </html>

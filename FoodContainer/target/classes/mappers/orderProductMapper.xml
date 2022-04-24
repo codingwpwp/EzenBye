@@ -51,9 +51,59 @@
     
     <!-- 메인 페이지 30일결산 -->
     <select id="sales" resultType="java.util.HashMap">
-		SELECT b.middleSort as sort, SUM(a.price) as quantity FROM order_product as a, product as b
-		WHERE a.product_index = b.product_index
+		SELECT sort, SUM(quantity) as quantity FROM(
+			(SELECT c.middleSort as sort, SUM(b.price * b.order_quantity) as quantity
+			FROM orders as a, order_product as b, product c
+			WHERE a.member_order_index = b.member_order_index
+			AND b.product_index = c.product_index
+			AND a.order_date BETWEEN DATE_ADD(NOW(),INTERVAL -1 MONTH) AND NOW()
+			GROUP BY sort)
+			UNION
+			(SELECT c.middleSort as sort, SUM(b.price * b.order_quantity) as quantity
+			FROM no_member_orders as a, order_product as b, product c
+			WHERE a.no_member_order_index = b.no_member_order_index
+			AND b.product_index = c.product_index
+			AND a.order_date BETWEEN DATE_ADD(NOW(),INTERVAL -1 MONTH) AND NOW()
+			GROUP BY sort)
+		) as d
 		GROUP BY sort ORDER BY sort
+    </select>
+    
+    <!-- 수익관련(순서대로 상품 수익, 배송비, 쿠폰비, 포인트) -->
+    <select id="revenue" resultType="ProductVO">
+		SELECT * FROM ( 
+		(SELECT SUM(price) as quantity FROM (
+			(SELECT SUM(price * order_quantity) as price
+			FROM orders as a, order_product as b
+			WHERE a.member_order_index = b.member_order_index
+			AND a.order_date BETWEEN DATE_ADD(NOW(),INTERVAL -1 MONTH) AND NOW())
+			UNION
+			(SELECT SUM(price * order_quantity)
+			FROM no_member_orders as a, order_product as b
+			WHERE a.no_member_order_index = b.no_member_order_index
+			AND a.order_date BETWEEN DATE_ADD(NOW(),INTERVAL -1 MONTH) AND NOW())
+		) as c)
+		UNION
+		(SELECT SUM(delivery) * 3000 FROM (
+			(SELECT COUNT(delivery_free_YN) as delivery
+			FROM orders
+			WHERE delivery_free_YN = 'Y'
+			AND order_date BETWEEN DATE_ADD(NOW(),INTERVAL -1 MONTH) AND NOW())
+			UNION
+			(SELECT COUNT(delivery_free_YN)
+			FROM no_member_orders WHERE delivery_free_YN = 'Y'
+			AND order_date BETWEEN DATE_ADD(NOW(),INTERVAL -1 MONTH) AND NOW())
+		) as a)
+		UNION
+		(SELECT TRUNCATE(SUM((b.order_quantity * b.price) * ((100 - c.discount_percent) / 100)),0)
+		FROM orders as a, order_product as b, coupon as c
+		WHERE a.member_order_index = b.member_order_index
+		AND a.coupon_index = c.coupon_index
+		AND a.order_date BETWEEN DATE_ADD(NOW(),INTERVAL -1 MONTH) AND NOW())
+		UNION
+		(SELECT SUM(used_point) FROM orders
+		WHERE order_date BETWEEN DATE_ADD(NOW(),INTERVAL -1 MONTH) AND NOW())
+		) as d
     </select>
     
     <!-- 회원 주문 상세조회할때 주문들 불러오기 -->

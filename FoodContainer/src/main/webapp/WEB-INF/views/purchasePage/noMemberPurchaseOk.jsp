@@ -57,14 +57,14 @@
                 <article id="mainSection">
 
                    <!-- 메인컨텐츠 -->
-                    <div class="col-8 col-md-5 col-xl-4 col-xxl-3 border border-dark mt-5 p-3" id="divs">
+                    <div class="col-8 col-md-5 col-xl-4 border border-dark mt-5 p-3" id="divs">
                         <div class="h3 fw-bold mb-3">주문 완료</div>
                         <div>
                             <div class="my-2 fw-bold">주문이 완료되었습니다.</div>
                             <div class="my-2 fw-bold">주문 번호 : ${noMemberOrdersvo.no_member_order_index}</div>
                             <div class="my-2 fw-bold">주문 비밀번호 : ${noMemberOrdersvo.pw}</div>
                             <div class="my-2 fw-bold">최종 결제 가격 : <fmt:formatNumber value='${noMemberOrdersvo.pay_price}' pattern="#,###"/></div>
-                            주문 비밀번호는 꼭 기억하세요!
+                            주문 번호와 구매시 이메일을 잊으면 비밀번호를 찾을 수 없습니다!!!
                         </div>
                         <br>
                         <div>
@@ -93,5 +93,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
+	<script>
+	window.onkeydown = function() {
+		var kcode = event.keyCode;
+		if(kcode == 116) event.returnValue = false;
+	}
+	</script>
 </body>
 </html>

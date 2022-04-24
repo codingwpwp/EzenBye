@@ -5,6 +5,7 @@ import java.util.List;
 
 import team.project.vo.OrderProductVO;
 import team.project.vo.OrdersVO;
+import team.project.vo.ProductVO;
 
 public interface OrderProductService {
 	List<OrderProductVO> orderProductList(OrderProductVO vo) throws Exception;
@@ -15,6 +16,9 @@ public interface OrderProductService {
 	/* 관리자페이지 */
 	// 30일 결산
 	List<HashMap<String, String>> sales() throws Exception;
+	
+	// 수익
+	List<ProductVO> revenue() throws Exception;
 	
 	// 회원 주문 상세조회할때 주문들 불러오기
 	List<OrderProductVO> adminMemberOrderProductList(OrdersVO ordersvo) throws Exception;

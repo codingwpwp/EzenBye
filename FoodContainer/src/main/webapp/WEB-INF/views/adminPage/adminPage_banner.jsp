@@ -284,7 +284,7 @@
 
                                         <div class="row mb-3 d-flex align-items-center">
                                             <div class="col-4 col-sm-3 d-flex justify-content-center justify-content-sm-end">
-                                                <span class="infoTitle p-1"><span class="text-danger">*</span>사진첨부</span>
+                                                <span class="infoTitle p-1">사진첨부</span>
                                             </div>
 
                                             <div class="col-8 col-sm-9">
@@ -349,7 +349,7 @@
                                 </div>
                                 
                                 <div class="modal-footer d-flex justify-content-start">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="cancelBanner('bannerModifyrForm')">취소</button>
                                     <button type="button" class="btn btn-primary" onclick="bannerSumbit(this, 'bannerModifyrForm');">저장</button>
                                 </div>
 

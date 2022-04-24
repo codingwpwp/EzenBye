@@ -740,16 +740,24 @@ function linkYNCheck(formName){
 
 }
 
+// 배너 수정을 취소
+function cancelBanner(formName){
+	var form = $("form[name='" + formName + "']");
+	form.find("input[name='link']").attr('disabled', false);
+}
+
 // 배너페이지의 배너 등록&수정 submit
 function bannerSumbit(obj, formName){
 	var flag = true;
-	var form = $("form[name='" + formName + "']")
+	var form = $("form[name='" + formName + "']");
 	var urlReg = /(http(s)?:\/\/)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}/gi;
 	
 	if($(form).find("input[name='name']").val() == ""){
 		flag = false;
 	}else if($(form).find("input[name='bannerFile']").val() == ""){
-		flag = false;
+		if(formName != 'bannerModifyrForm'){
+			flag = false;
+		}
 	}else if($(form).find("input[name='link_YN']:checked").val() == "Y"){
 		if($(form).find("input[name='link']").val() == ""){
 			flag = false;

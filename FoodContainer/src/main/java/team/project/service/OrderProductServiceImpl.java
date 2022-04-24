@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import team.project.dao.OrderProductDAO;
 import team.project.vo.OrderProductVO;
 import team.project.vo.OrdersVO;
+import team.project.vo.ProductVO;
 
 @Service
 public class OrderProductServiceImpl implements OrderProductService{
@@ -33,6 +34,12 @@ public class OrderProductServiceImpl implements OrderProductService{
 	@Override
 	public List<HashMap<String, String>> sales() throws Exception {
 		return orderProductDAO.sales();
+	}
+
+	// 수익
+	@Override
+	public List<ProductVO> revenue() throws Exception {
+		return orderProductDAO.revenue();
 	}
 	
 	// 회원 주문 상세조회할때 주문들 불러오기

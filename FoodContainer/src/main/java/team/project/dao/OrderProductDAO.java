@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import team.project.vo.OrderProductVO;
 import team.project.vo.OrdersVO;
+import team.project.vo.ProductVO;
 
 @Repository
 public class OrderProductDAO {
@@ -42,6 +43,11 @@ public class OrderProductDAO {
 	// 메인페이지 30일 결산
 	public List<HashMap<String, String>> sales() throws Exception{
 		return sqlSession.selectList(Namespace + ".sales");
+	}
+	
+	// 수익
+	public List<ProductVO> revenue() throws Exception{
+		return sqlSession.selectList(Namespace + ".revenue");
 	}
 	
 	// 회원 주문 상세조회할때 주문들 불러오기

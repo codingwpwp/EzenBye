@@ -77,6 +77,10 @@ public class AdminPageController {
 				List<HashMap<String, String>> salesList = orderProductService.sales();
 				model.addAttribute("salesList", salesList);
 				
+				// 수익
+				List<ProductVO> revenueList = orderProductService.revenue();
+				model.addAttribute("rList", revenueList);
+				
 				// 최근 문의 내역
 				List<ServiceCenterVO> serviceList = service.adminService();
 				model.addAttribute("sList", serviceList);

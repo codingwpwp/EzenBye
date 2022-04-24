@@ -23,7 +23,9 @@
 	<update id="bannerUpdate" parameterType="BannerVO">
 		UPDATE banner SET
 		name = #{name},
+		<if test="image != null">
 		image = #{image},
+		</if>
 		link_YN = #{link_YN},
 		link = #{link}
 		WHERE banner_index = #{banner_index}
