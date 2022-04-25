@@ -105,4 +105,3 @@ function deleteReply(obj,reply_index,recipe_index){
 
 
 
-
