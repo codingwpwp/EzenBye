@@ -360,6 +360,22 @@ function sendMessage(id){
 	}
 }
 
+// 해당 상세주문상품 배송완료로 처리하기
+function deliveryOk(orderItemIndex, obj){
+	if(confirm("해당 주문을 배송완료로 처리하시겠습니까?")){
+		$.ajax({
+			url : "deliveryOk.do",
+			type : "post",
+			data : "orderItem_index=" + orderItemIndex,
+			success : function(){
+				alert("배송완료로 처리되었습니다");
+				$(obj).closest(".card-good").find(".orderStatus").text("배송완료");
+				$(obj).remove();
+			}
+		});	
+	}
+}
+
 
 // 등록상품조회페이지에서 전체 선택
 function selectAllProducts(obj){

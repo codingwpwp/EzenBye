@@ -59,4 +59,8 @@ public class OrderProductDAO {
 	public List<OrderProductVO> adminNoMemberOrderProductList(String no_member_order_index) throws Exception{
 		return sqlSession.selectList(Namespace + ".adminNoMemberOrderProductList", no_member_order_index);
 	}
+	
+	public void deliveryOk(String orderItem_index) throws Exception{
+		sqlSession.update(Namespace + ".deliveryOk", orderItem_index);
+	}
 }

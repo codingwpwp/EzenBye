@@ -285,6 +285,43 @@ public class MemberServiceImpl implements MemberService {
 		}else {
 			memberDao.eventTicketMinus(member_index);
 			int gacha = (int)(Math.random() * 100) + 1;
+			
+//			int[] gachaArr = new int[1000];
+//			for(int i = 0; i < gachaArr.length; i++) {
+//				int g = (int)(Math.random() * 100) + 1;
+//				gachaArr[i] = g;
+//			}
+//			
+//			
+//			int r170 = 0;
+//			int r7180 = 0;
+//			int r8188 = 0;
+//			int r8998 = 0;
+//			int r99100 = 0;
+//			for(int i = 0; i < gachaArr.length; i++) {
+//				
+//				if(gachaArr[i] >= 1 && gachaArr[i] <= 35) {			// 10p
+//					r170++;
+//				}else if(gachaArr[i] >= 36 && gachaArr[i] <= 70) {	// 10p
+//					r170++;
+//				}else if(gachaArr[i] >= 71 && gachaArr[i] <= 80) {	// 5%쿠폰
+//					r7180++;
+//				}else if(gachaArr[i] >= 81 && gachaArr[i] <= 88) {	// 10%쿠폰
+//					r8188++;
+//				}else if(gachaArr[i] >= 89 && gachaArr[i] <= 98) {	// 1,000p
+//					r8998++;
+//				}else{									// 50,000p
+//					r99100++;
+//				}
+//				
+//			}
+//			System.out.println(r170 + "번 나옴");
+//			System.out.println(r7180 + "번 나옴");
+//			System.out.println(r8188 + "번 나옴");
+//			System.out.println(r8998 + "번 나옴");
+//			System.out.println(r99100 + "번 나옴");
+
+			
 			if(gacha >= 1 && gacha <= 35) {			// 10p
 				return "6";
 			}else if(gacha >= 36 && gacha <= 70) {	// 10p
@@ -305,7 +342,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void eventResult(HttpServletRequest request, String r) throws Exception {
 		int result = Integer.parseInt(r);
-		System.out.println(result);
 		int point = 0;
 		String title = "";
 		HttpSession session = request.getSession();

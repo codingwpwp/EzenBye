@@ -95,7 +95,7 @@ public class ShopBasketController {
 
 				tempCurrentCookie = URLEncoder.encode(tempCurrentCookie, "UTF-8");
 				Cookie pidxCookie = new Cookie("noMemberCart", tempCurrentCookie);
-				pidxCookie.setPath("/" + request.getContextPath());
+				pidxCookie.setPath("/FoodContainer");
 				
 			    response.addCookie(pidxCookie);
 			}else {

@@ -58,10 +58,10 @@
                             <div class="col-12">
 
                                 <div class="bg-primary bg-gradient bg-opacity-75 border rounded-top border-2 border-dark p-2">
-                                    <span class="h4 fw-bold">30일 결산</span>
+                                    <span class="h4 fw-bold">이달의 매출</span>
                                 </div>
                                 
-                                <div class="row border border-2 border-top-0 border-dark container px-0 mx-0 py-4">
+                                <div class="row border border-2 border-top-0 border-dark container px-0 m-0 py-4">
                                     <div class="col-12 col-md-6">
                                 	<c:forEach items="${salesList}" var="list">
 										<input type="hidden" name="${list.sort}" value="${list.quantity}">
@@ -75,7 +75,7 @@
                                     	<input type="hidden" name="배송비" value="${rList[1].quantity}">
                                     	<input type="hidden" name="쿠폰비" value="${rList[2].quantity}">
                                     	<input type="hidden" name="적립금" value="${rList[3].quantity}">
-                                        <p class="fs-2 text-success fw-bold" style="text-align: center;">30일 수익</p>
+                                        <p class="fs-2 text-success fw-bold" style="text-align: center;">이번달 수익</p>
                                         <canvas id="revenue"></canvas>
                                         <div class="row mt-2 d-flex align-items-center">
                                             <div class="col-5 fs-3 fw-bold" style="color: rgba(255, 99, 132, 1); text-align: center;">
@@ -113,7 +113,7 @@
                             <!-- 30일 수익(모바일버전) -->
                             <div class="col-12 d-block d-md-none">
                                 <div class="bg-danger bg-gradient bg-opacity-75 border rounded-top border-2 border-dark p-2">
-                                    <span class="h4 fw-bold">30일 수익</span>
+                                    <span class="h4 fw-bold">이번달 수익</span>
                                 </div>
                                 <div class="mb-0 border border-top-0 border-2 border-dark mb-3">
 		                            <canvas id="revenue2"></canvas>

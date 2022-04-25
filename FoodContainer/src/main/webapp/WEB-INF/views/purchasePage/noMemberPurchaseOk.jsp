@@ -57,20 +57,22 @@
                 <article id="mainSection">
 
                    <!-- 메인컨텐츠 -->
-                    <div class="col-8 col-md-5 col-xl-4 border border-dark mt-5 p-3" id="divs">
+                    <form class="col-8 col-md-5 col-xl-4 border border-dark mt-5 p-3" id="divs" method="post" action="<%=request.getContextPath()%>/lookupNon.do">
                         <div class="h3 fw-bold mb-3">주문 완료</div>
                         <div>
                             <div class="my-2 fw-bold">주문이 완료되었습니다.</div>
                             <div class="my-2 fw-bold">주문 번호 : ${noMemberOrdersvo.no_member_order_index}</div>
+                            <input type="hidden" name="no_member_order_index" value="${noMemberOrdersvo.no_member_order_index}">
                             <div class="my-2 fw-bold">주문 비밀번호 : ${noMemberOrdersvo.pw}</div>
-                            <div class="my-2 fw-bold">최종 결제 가격 : <fmt:formatNumber value='${noMemberOrdersvo.pay_price}' pattern="#,###"/></div>
-                            주문 번호와 구매시 이메일을 잊으면 비밀번호를 찾을 수 없습니다!!!
+                            <input type="hidden" name="pw" value="${noMemberOrdersvo.pw}">
+                            <div class="my-2 fw-bold">최종 결제 가격 : <fmt:formatNumber value='${noMemberOrdersvo.pay_price}' pattern="#,###"/>원</div>
+                            <div class="mt-2 fs-5 fw-bold text-danger" style="text-align: center;">주문 번호와 이메일을 잊으면<br>비밀번호를 찾을 수 없습니다!!!</div>
                         </div>
                         <br>
                         <div>
-                            <button class="btn btn-primary" onclick="location.href='<%=request.getContextPath()%>/lookupNon.do?no_member_order_index=${noMemberOrdersvo.no_member_order_index}'">주문 조회하기</button>
+                            <button class="btn btn-primary">주문 조회하기</button>
                         </div>
-                    </div>
+                    </form>
 
                 </article>
             </div>
