@@ -243,10 +243,15 @@
 						  <tbody>
 						  <c:forEach items="${list}" var="list">
 						    <tr>
-						      <th scope="row">${list.progress }</th>
-						      <td>${list.title }</td>
-						      <td>${list.sort2 }</td>
-						      <td>${list.write_date }</td>
+						      <c:if test="${list.progress eq '처리완료'}">
+						      <th scope="row">${list.progress}</th>
+						      </c:if>
+						      <c:if test="${list.progress eq '처리중'}">
+						      <th scope="row" style="color: red;">${list.progress}</th>
+						      </c:if>
+						      <td><a class="centerHref fw-bold" href="<%=request.getContextPath() %>/serviceCenter_view.do?serviceCenter_index=${list.serviceCenter_index}">${list.title }</a></td>
+						      <td class="fw-bold">${list.sort2 }</td>
+						      <td class="fw-bold">${list.write_date }</td>
 						    </tr>
 					      </c:forEach>
 						  </tbody>
