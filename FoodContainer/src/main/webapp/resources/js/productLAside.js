@@ -226,6 +226,7 @@
 				success : function(data){
 					var inputVal = $(".inputText");
 					price.prop("checked",true);
+					priceM.prop("checked",true);
 					
 					for(var i=0; i<data.length; i++){
 						for(var j=0; j<$(".inputText").length; j++){
@@ -233,8 +234,10 @@
 								var val = inputVal[j].parentNode.childNodes[0].value;
 								if(data[i].bigSort == "냉동식품"){
 									$("input[name='asideIce']:eq("+val+")").prop("checked",true);
+									$("input[name='asideIceM']:eq("+val+")").prop("checked",true);
 								}else{
 									$("input[name='asideProduct']:eq("+val+")").prop("checked",true);
+									$("input[name='asideProductM']:eq("+val+")").prop("checked",true);
 								}
 							}
 						}
@@ -245,6 +248,7 @@
 							if(data[i].brand == inputVal[j].innerHTML){
 								var val = inputVal[j].parentNode.childNodes[0].value;
 								$("input[name='asideBrand']:eq("+val+")").prop("checked",true);
+								$("input[name='asideBrandM']:eq("+val+")").prop("checked",true);
 							}
 						}
 					}
