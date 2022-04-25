@@ -140,9 +140,8 @@ function producut1(){
 }
 
 
-function insertThumb(){
-	
-}
+
+
 
 
 

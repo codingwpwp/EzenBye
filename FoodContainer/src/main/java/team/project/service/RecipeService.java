@@ -71,4 +71,9 @@ public interface RecipeService {
 	// 레시피 해제&순위 조절
 	void adminCancelBestRecipe(int[] ridxArr) throws Exception;
 	
+	//추천수 증가
+	public int thumbPlus(int recipe_index) throws Exception;
+	
+	//추천수 테이블 추가
+	public int thumbTablePlus(int recipe_index, int member_index) throws Exception;
 }

@@ -213,5 +213,19 @@ public class RecipeServiceImpl implements RecipeService{
 			recipeDao.adminUpdateBestRecipeRankOne();
 		}
 	}
+	
+	//추천수 증가
+	@Override
+	public int thumbPlus(int recipe_index) throws Exception {
+		int thumbPlus = recipeDao.thumbPlus(recipe_index);
+		return thumbPlus;
+	}
+	
+	//추천수 테이블 추가
+	@Override
+	public int thumbTablePlus(int recipe_index, int member_index) throws Exception {
+		int thumbTablePlus = recipeDao.thumbTablePlus(recipe_index, member_index);
+		return thumbTablePlus;
+	}
 		
 }

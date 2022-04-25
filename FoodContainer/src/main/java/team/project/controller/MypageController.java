@@ -103,7 +103,7 @@ public class MypageController {
 		  int result = reviewService.reviewInsert(reviewVO, reviewImage, rating, request);
 		  
 		  if(result > 0 && revieweOk > 0) { 
-			  return "redirect:mypage_review.do"; 
+			  return "redirect:mypage_review.do?nowPage=1"; 
 		  }else {
 			  return "redirect:mypage_main.do"; 
 		  }

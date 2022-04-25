@@ -1,11 +1,10 @@
 package team.project.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -39,8 +38,29 @@ public class RecipeController {
 	@Autowired
 	private ReplyService replyService;
 	
-
-	
+	 // 추천수 증가
+	 @RequestMapping(value = "thumbUp.do", method = RequestMethod.POST)
+	 @ResponseBody
+	 public String thumbUp(@RequestParam(value="recipe_index") int recipe_index, @RequestParam(value="member_index") int member_index, HttpServletResponse response) throws Exception {
+		 
+		 int result = recipeService.thumbTablePlus(recipe_index, member_index);
+		 String result2 = "false";
+		 
+		 if(result == 1){
+			 
+			 try{
+				 recipeService.thumbPlus(recipe_index);
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				result2 = "true";
+				return result2;
+				
+			}else {
+				return result2;
+			}
+		 
+	 }
 	
 	//레시피 게시물 추천
 	@RequestMapping(value = "recipeThumb", method = RequestMethod.POST)
