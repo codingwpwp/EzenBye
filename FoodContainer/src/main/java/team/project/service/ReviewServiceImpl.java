@@ -90,6 +90,30 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		return review;
 	}
+
+	@Override
+	public int viewReviewCnt(String product_index) throws Exception {
+		
+		return reviewDao.viewReviewCnt(product_index);
+	}
+
+	@Override
+	public PagingUtil viewPaging(String product_index, int nowPage) throws Exception {
+		
+		int viewReviewCnt = reviewDao.viewReviewCnt(product_index);
+		
+		PagingUtil viewPaging = new PagingUtil(viewReviewCnt, nowPage, 5, 5);
+		
+		return viewPaging;
+	}
+
+	@Override
+	public List<ReviewVO> viewReview(String product_index, int nowPage) throws Exception {
+		
+		PagingUtil pagingUtil = viewPaging(product_index, nowPage);
+		
+		return reviewDao.viewReview(pagingUtil);
+	}
 }
 
 

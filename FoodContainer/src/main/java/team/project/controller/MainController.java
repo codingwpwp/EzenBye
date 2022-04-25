@@ -90,7 +90,7 @@ public class MainController {
 		List<MemberVO> MemberList = memberService.MemberList(memberVO);
 		
 		model.addAttribute("MemberList",MemberList);
-		
+		/*
 		//쿠키 사용
 		Cookie[] cookies = request.getCookies();
 										
@@ -118,7 +118,7 @@ public class MainController {
 					
 			model.addAttribute("viewCookie", cookieListArr);
 		}
-		
+		*/
 		return "index/index";
 	}
 	
@@ -136,7 +136,7 @@ public class MainController {
 		List<ReviewVO> review = reviewService.review(ProductListAll);
 		
 		model.addAttribute("viewReview",review);
-		
+		/*
 		//쿠키 사용
 		Cookie[] cookies = request.getCookies();
 								
@@ -164,28 +164,32 @@ public class MainController {
 			
 			model.addAttribute("viewCookie", cookieListArr);
 		}
-								
+			*/					
 		
 		return "product/productList";
 	}
 	
 	@RequestMapping(value = "productView.do", method = RequestMethod.GET)
-	public String productView(Locale locale, Model model, HttpServletRequest request, ReviewVO reviewVO, MemberVO memberVO) throws Exception {
+	public String productView(Locale locale, Model model, HttpServletRequest request, ReviewVO reviewVO, MemberVO memberVO, String nowPage) throws Exception {
 		
 		String product_index = request.getParameter("product_index");
 		
 		ProductVO vo = productService.view(product_index);
 		
 		model.addAttribute("view",vo);
-
-		List<ReviewVO> review = reviewService.review(product_index);
-		
-		model.addAttribute("viewReview",review);
 		
 		List<MemberVO> MemberList = memberService.MemberList(memberVO);
 		
 		model.addAttribute("MemberList",MemberList);
-
+		
+		int viewReviewCnt = reviewService.viewReviewCnt(product_index);
+		
+		List<ReviewVO> review = reviewService.viewReview(product_index, Integer.parseInt(nowPage));
+		
+		model.addAttribute("viewReview",review);
+		
+		//PagingUtil viewPaging = reviewService.viewPaging(Integer.parseInt(nowPage));
+/*
 		//쿠키 사용
 		Cookie[] cookies = request.getCookies();
 						
@@ -213,21 +217,17 @@ public class MainController {
 			
 			model.addAttribute("viewCookie", cookieListArr);
 		}
-			
+			*/
 		return "product/productView";
 	}
 
 	@RequestMapping(value = "viewProductCookie.do", method = RequestMethod.GET)
-	public String viewProductCookie(Locale locale, Model model, ProductVO productVO, HttpServletRequest request, 
+	public void viewProductCookie(Locale locale, Model model, ProductVO productVO, HttpServletRequest request, 
 									HttpServletResponse response) throws Exception {
 		//쿠키 value
 		String viewProduct = request.getParameter("name");
 		//모든 쿠키 호출
 		Cookie[] cookies = request.getCookies();
-		
-		String recentProduct = null;
-		List<ProductVO> recentProductAll = null;
-		List<ProductVO> recentProductArr = new ArrayList<>();
 		
 		Cookie cookieValue = null;
 		Cookie viewCookie;
@@ -253,14 +253,6 @@ public class MainController {
 				if(tempCookieArr[i].equals(viewProduct)) {
 					System.out.println("6");
 					if(i==0) {
-						ProductVO temp = new ProductVO();
-						temp.setProduct_index(viewProduct);
-						recentProductArr.add(temp);
-						
-						recentProductAll = productService.recentProduct(recentProductArr);
-						
-						model.addAttribute("recentProductAll", recentProductAll);
-						
 						overlap = true;
 						break;
 					}else {
@@ -268,19 +260,6 @@ public class MainController {
 						String setCookie = URLEncoder.encode(tempCookieArr[i] + "," + tempCookie,"UTF-8");
 						viewCookie = new Cookie("pIndex", setCookie);
 						response.addCookie(viewCookie);
-						
-						recentProduct = tempCookieArr[i] + "," + tempCookie;
-						String tempRecent[] = recentProduct.split(",");
-						
-						for(int j=0; j<tempRecent.length; j++) {
-							ProductVO temp = new ProductVO();
-							temp.setProduct_index(tempRecent[j]);
-							recentProductArr.add(temp);
-						}
-						
-						recentProductAll = productService.recentProduct(recentProductArr);
-						
-						model.addAttribute("recentProductAll", recentProductAll);
 						
 						overlap = true;
 						break;
@@ -295,37 +274,11 @@ public class MainController {
 					String setCookie = URLEncoder.encode(viewProduct + "," + tempCookieArr[0],"UTF-8");
 					viewCookie = new Cookie("pIndex", setCookie);
 					response.addCookie(viewCookie);
-					
-					recentProduct = viewProduct + "," + tempCookieArr[0];
-					String tempRecent[] = recentProduct.split(",");
-					
-					for(int i=0; i<tempRecent.length; i++) {
-						ProductVO temp = new ProductVO();
-						temp.setProduct_index(tempRecent[i]);
-						recentProductArr.add(temp);
-					}
-					
-					recentProductAll = productService.recentProduct(recentProductArr);
-					
-					model.addAttribute("recentProductAll", recentProductAll);
 				}else {
 					System.out.println("5");
 					String setCookies = URLEncoder.encode(viewProduct + "," + tempCookieArr[0] + "," + tempCookieArr[1],"UTF-8");
 					viewCookie = new Cookie("pIndex", setCookies);
 					response.addCookie(viewCookie);
-					
-					recentProduct = viewProduct + "," + tempCookieArr[0] + "," + tempCookieArr[1];
-					String tempRecent[] = recentProduct.split(",");
-					
-					for(int i=0; i<tempRecent.length; i++) {
-						ProductVO temp = new ProductVO();
-						temp.setProduct_index(tempRecent[i]);
-						recentProductArr.add(temp);
-					}
-					
-					recentProductAll = productService.recentProduct(recentProductArr);
-					
-					model.addAttribute("recentProductAll", recentProductAll);
 				}
 			}
 		//찾는 쿠키가 없을 때
@@ -333,18 +286,8 @@ public class MainController {
 			System.out.println("2");
 			viewCookie = new Cookie("pIndex", viewProduct);
 			response.addCookie(viewCookie);
-			
-			ProductVO temp = new ProductVO();
-			temp.setProduct_index(viewProduct);
-			recentProductArr.add(temp);
-			
-			recentProductAll = productService.recentProduct(recentProductArr);
-			
-			model.addAttribute("recentProductAll", recentProductAll);
 		}
 			
-		return "base/rightAside";
-		
 	}
 		
 
@@ -497,4 +440,40 @@ public class MainController {
 		return productSearch;
 	}
 
+	@RequestMapping(value = "recentProduct.do", method = RequestMethod.GET)
+	@ResponseBody
+	public List<ProductVO> recentProduct(Locale locale, Model model, ProductVO productVO, HttpServletRequest request) throws Exception {
+		
+		//쿠키 사용
+		Cookie[] cookies = request.getCookies();
+								
+		String currentCookie = null;
+		
+		List<ProductVO> cookieListArr = null;
+	
+		ArrayList<String> cookieArr = new ArrayList<>();
+				
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				if(cookie.getName().equals("pIndex")) {
+					currentCookie = URLDecoder.decode(cookie.getValue(),"UTF-8");
+				}
+			}
+		}
+								
+		if(currentCookie != null) {
+									
+			String[] CookieList = currentCookie.split(",");
+									
+			for(int i=0; i < CookieList.length; i++) {
+				cookieArr.add(CookieList[i]);
+			}
+					
+			cookieListArr = productService.cookieList(cookieArr);
+					
+			model.addAttribute("viewCookie", cookieListArr);
+		}
+					
+		return cookieListArr;		
+	}
 }
