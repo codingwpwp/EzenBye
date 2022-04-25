@@ -272,7 +272,7 @@
 					url : "noMemberCartCookie.do",
 					type : "get",
 					data : "product_index="+pIndex+"&productCnt="+productCnt,
-					succese : function(){
+					success : function(){
 								
 					}
 				});
@@ -282,7 +282,7 @@
 					url : "memberCartInsert.do",
 					type : "post",
 					data : "product_index="+pIndex+"&member_index="+loginCheck+"&cart_count="+productCnt,
-					succese : function(){
+					success : function(){
 								
 					}
 				});
@@ -333,6 +333,138 @@
 		    document.body.appendChild(form);
 		    form.submit();
 		}
+	}
+	
+	//paging
+	
+	function pagePrev(obj){
+		var startPage = $("input[name='startPage']").val();
+		var pram = document.location.href;
+		var product_index = pram.substring(pram.length-5,pram.length);
+		/*"nowPage="+(startPage-1)+"&product_index="+product_index,*/
+		
+		if(startPage != null){
+			$.ajax({
+				url : "productView.do",
+				type : "post",
+				data : "nowPage="+startPage+"&product_index="+product_index,
+				success : function(data){
+					var reviewHTML = "<thead>";
+						reviewHTML += "<tr>";
+						reviewHTML += "<th scope='col'>별점</th>";
+						reviewHTML += "<th scope='col'>리뷰</th>";
+						reviewHTML += "<th scope='col'>닉네임</th>";
+						reviewHTML += "<th scope='col'>작성일</th>";
+						reviewHTML += "</tr>";
+						reviewHTML += "</thead>";
+						reviewHTML += "<tbody>";
+							for(var i=0; i<data[i].length; i++){
+								reviewHTML += "<tr>";
+								reviewHTML += "<td>";
+								reviewHTML += "<span class='productViewReviewStar'>";
+								for(var j=1; j<6; j++){
+									if(j <= data[i].star_count){
+										reviewHTML += "<i class='bi bi-star-fill'></i>";
+									}else{
+										reviewHTML += "<i class='bi bi-star'></i>";
+									}
+								}
+								reviewHTML += "<br>";
+								reviewHTML += "</span>";
+								switch(data[i].star_count){
+									case 1 : reviewHTML += "<div style='color:red;'>매우 나빠요</div>";
+											 break;
+									case 2 : reviewHTML += "<div style='color:tomato;'>나빠요</div>";
+											 break;
+									case 3 : reviewHTML += "<div>보통</div>";
+											 break;
+									case 4 : reviewHTML += "<div style='color:green;'>좋아요</div>";
+											 break;
+									case 5 : reviewHTML += "<div style='color:blue;'>매우 좋아요</div>";
+											 break;
+								}
+								reviewHTML += "</td>";
+								reviewHTML += "<td class='reviewContent'>";
+								reviewHTML += "<div class='row'>";
+								reviewHTML += "<div class='reViewImg col-3 align-self-center'>";
+								reviewHTML += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid' alt='good'>";
+								reviewHTML += "</div>";
+								reviewHTML += "<div class='reviewTitle align-self-center col' data-bs-toggle='collapse' href='#reviewExtend"+i+"' role='button' aria-expanded='false' aria-controls='collapseExample'>";
+								reviewHTML += data[i].contents;
+								reviewHTML += "</div>";
+								reviewHTML += "<div class='col-1 align-self-center'>";
+								reviewHTML += "<i class='bi bi-caret-down reviewDown' data-bs-toggle='collapse' href='#reviewExtend"+i+"' role='button' aria-expanded='false' aria-controls='collapseExample'></i>";
+								reviewHTML += "</div>";
+								reviewHTML += "</div>";
+								reviewHTML += "<div class='collapse reviewCard' id='reviewExtend"+i+"'>";
+								reviewHTML += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid reviewCardImg' alt='good'>";
+								reviewHTML += "<div>"+data[i].contents+"</div>";
+								reviewHTML += "</div>";
+								reviewHTML += "</td>";
+								reviewHTML += "<td>";
+								
+								var memberHash = $("input[name='memberHash']").val()
+								memberHash = memberHash.replace("{","");
+								memberHash = memberHash.replace("}","");
+								
+								for(var m=0; m<memberHash.length; m++){
+									memberHash = memberHash.replace(" ","");
+								}
+								
+								var memberHashArr = memberHash.split(",");
+								var memberIndex = memberHash.split("=");
+								
+									console.log(memberHashArr);
+									console.log(memberIndex);
+							/*	for(var k=0; k<memberHashArr.length; k++){
+									console.log(memberIndex[k]);
+									
+									if(data[i].member_index == memberHashArr[k]){
+										reviewHTML += "<td>";
+									}
+										<c:forEach items="${MemberList}" var="MemberList">
+											<c:if test="${MemberList.member_index == reviewPaging.member_index}">
+												${MemberList.nickname}
+											</c:if>
+										</c:forEach>
+								}*/
+								reviewHTML += "</td>";
+								reviewHTML += "<td>"+data[i].review_date+"</td>";
+								reviewHTML += "</tr>";
+							}
+								reviewHTML += "</tbody>";
+					
+					$("#reviewTable").html(reviewHTML);
+					
+				},
+				error : function(){
+					console.log("error");
+				}
+			});
+		}
+	}
+	
+	function pageNext(obj){
+		var endPage = $("input[name='endPage']").val();
+		var lastPage = $("input[name='lastPage']").val();
+		var pram = document.location.href;
+		var product_index = pram.substring(pram.length-5,pram.length);
+		
+		
+		if(endPage != lastPage){
+			$.ajax({
+				url : "productView.do",
+				type : "post",
+				data : "nowPage="+(endPage+1)+"&product_index="+product_index,
+				success : function(data){
+								
+				}
+			});
+		}
+	}
+	
+	function pageMove(obj){
+	
 	}
 	
 	

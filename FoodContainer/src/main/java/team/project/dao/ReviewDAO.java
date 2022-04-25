@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import team.project.util.PagingUtil;
+import team.project.util.PagingUtil2;
 import team.project.vo.ProductVO;
 import team.project.vo.ReviewVO;
 import team.project.vo.SearchVO;
@@ -42,7 +43,7 @@ public class ReviewDAO {
 		return sqlSession.selectList(Namespace + ".viewReviewList", product_index);
 	}
 	
-	public List<ReviewVO> viewReview(PagingUtil pagingUtil) throws Exception {
+	public List<ReviewVO> viewReview(PagingUtil2 pagingUtil) throws Exception {
 		return sqlSession.selectList(Namespace + ".viewReivewPaging", pagingUtil);
 	}
 	

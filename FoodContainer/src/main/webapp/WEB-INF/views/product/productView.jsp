@@ -1,8 +1,23 @@
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import = "team.project.vo.*" %> 
+<%@ page import = "java.util.*" %> 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	List<MemberVO> memberList = (List) request.getAttribute("MemberList");
+	HashMap<Integer,String> result = new HashMap<>();
+	
+	for(int i=0; i<memberList.size(); i++){
+		result.put(memberList.get(i).getMember_index(),"="+memberList.get(i).getNickname());
+	}
+	
+	String memberHash = result.toString();
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -218,10 +233,10 @@
 					    	+ 자세히보기
 					    </div>
 					
+					<input type="hidden" name="memberHash" value="<%=memberHash%>">
+					
 					<!-- 리뷰 -->
 					<div id="review">
-					
-					
 						<div class="fs-2" id="reviewTop">리뷰</div>
 						<table id="reviewTable" class="table table-sm">
 							<thead>
@@ -233,65 +248,84 @@
 								</tr>
 							</thead>
 							<tbody>
-							<c:forEach items="${viewReview}" var="viewReview" varStatus="status">
+							<c:forEach items="${reviewPaging}" var="reviewPaging" varStatus="status">
 								<tr>
 									<td>
 										<span class="productViewReviewStar">
 									    		<c:forEach begin="1" end="5" varStatus="reStatus">
-													<c:if test="${reStatus.index <= viewReview.star_count}">
+													<c:if test="${reStatus.index <= reviewPaging.star_count}">
 									    				<i class="bi bi-star-fill"></i>
 													</c:if>
-													<c:if test="${reStatus.index > viewReview.star_count}">
+													<c:if test="${reStatus.index > reviewPaging.star_count}">
 										    			<i class="bi bi-star"></i>
 													</c:if>
 									    		</c:forEach>
 							        		<br>
 									    </span>
-									    <c:if test="${viewReview.star_count eq '1'}">
+									    <c:if test="${reviewPaging.star_count eq '1'}">
 							        		<div style="color:red;">매우 나빠요</div>
 							        	</c:if>
-									    <c:if test="${viewReview.star_count eq '2'}">
+									    <c:if test="${reviewPaging.star_count eq '2'}">
 							        		<div style="color:tomato;">나빠요</div>
 							        	</c:if>
-									    <c:if test="${viewReview.star_count eq '3'}">
+									    <c:if test="${reviewPaging.star_count eq '3'}">
 							        		<div>보통</div>
 							        	</c:if>
-									    <c:if test="${viewReview.star_count eq '4'}">
+									    <c:if test="${reviewPaging.star_count eq '4'}">
 							        		<div style="color:green;">좋아요</div>
 							        	</c:if>
-									    <c:if test="${viewReview.star_count eq '5'}">
+									    <c:if test="${reviewPaging.star_count eq '5'}">
 							        		<div style="color:blue;">매우 좋아요</div>
 							        	</c:if>
 									</td>
 									<td class="reviewContent">
 										<div class="row">
 											<div class="reViewImg col-3 align-self-center">
-												<img src="<%=request.getContextPath()%>/resources/img/mypage/good.jpg" class="img-fluid">
+												<img src="<%=request.getContextPath()%>/resources/img/mypage/good.jpg" class="img-fluid" alt="good">
 											</div>
 											<div class="reviewTitle align-self-center col" data-bs-toggle="collapse" href="#reviewExtend${status.index }" role="button" aria-expanded="false" aria-controls="collapseExample">
-												${viewReview.contents}
+												${reviewPaging.contents}
 											</div>
 											<div class="col-1 align-self-center">
 												<i class="bi bi-caret-down reviewDown" data-bs-toggle="collapse" href="#reviewExtend${status.index }" role="button" aria-expanded="false" aria-controls="collapseExample"></i>
 											</div>
 										</div>
 										<div class="collapse reviewCard" id="reviewExtend${status.index }">
-											<img src="<%=request.getContextPath()%>/resources/img/mypage/good.jpg" class="img-fluid reviewCardImg">
-											<div>${viewReview.contents}</div>
+											<img src="<%=request.getContextPath()%>/resources/img/mypage/good.jpg" class="img-fluid reviewCardImg" alt="good">
+											<div>${reviewPaging.contents}</div>
 										</div>
 									</td>
 									<td>
 										<c:forEach items="${MemberList}" var="MemberList">
-											<c:if test="${MemberList.member_index == viewReview.member_index}">
+											<c:if test="${MemberList.member_index == reviewPaging.member_index}">
 												${MemberList.nickname}
 											</c:if>
 										</c:forEach>
 									</td>
-									<td>${viewReview.review_date}</td>
+									<td>${reviewPaging.review_date}</td>
 								</tr>
 							</c:forEach>
 							</tbody>
 						</table>
+						
+						<input type="hidden" name="startPage" value="${viewPaging.startPage}">
+						<input type="hidden" name="endPage" value="${viewPaging.endPage}">
+						<input type="hidden" name="lastPage" value="${viewPaging.lastPage}">
+						<br>
+						<div class="d-flex" style="justify-content:center;">
+							<button style="width:30px;" onclick="pagePrev(this)">&lt;</button>
+							
+							<c:forEach begin="${viewPaging.startPage}" end="${viewPaging.endPage}" varStatus="status">
+								<c:if test="${status.index == viewPaging.nowPage}">
+									<div style="width:30px;" onclick="pageMove(this)">${status.index}</div>
+								</c:if>
+								<c:if test="${status.index != viewPaging.nowPage}">
+									<div style="width:30px;" onclick="pageMove(this)">${status.index}</div>
+								</c:if>
+							</c:forEach>
+						 
+							<div style="width:30px;" onclick="pageNext(this)">&gt;</div>
+						</div>
 						
 						
 						
@@ -303,26 +337,26 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${viewReview}" var="viewReview" varStatus="status">
+								<c:forEach items="${reviewPaging}" var="reviewPaging" varStatus="status">
 								<tr>
 									<td>
 										<div>
-											<img src="<%=request.getContextPath()%>/resources/img/mypage/good.jpg" class="img-fluid">
+											<img src="<%=request.getContextPath()%>/resources/img/mypage/good.jpg" class="img-fluid" alt="good">
 										</div>
 										<div>
-											<span>홍길동 | ${viewReview.review_date}</span>
+											<span>홍길동 | ${reviewPaging.review_date}</span>
 											<div class="productViewReviewStarM">
 												<c:forEach begin="1" end="5" varStatus="reStatus">
-													<c:if test="${reStatus.index <= viewReview.star_count}">
+													<c:if test="${reStatus.index <= reviewPaging.star_count}">
 									    				<i class="bi bi-star-fill"></i>
 													</c:if>
-													<c:if test="${reStatus.index > viewReview.star_count}">
+													<c:if test="${reStatus.index > reviewPaging.star_count}">
 										    			<i class="bi bi-star"></i>
 													</c:if>
 									    		</c:forEach>
 											</div>
 											<div>
-												${viewReview.contents}
+												${reviewPaging.contents}
 											</div>
 										</div>
 									</td>
