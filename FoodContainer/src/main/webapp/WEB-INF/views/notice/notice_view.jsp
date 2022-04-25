@@ -87,7 +87,7 @@
 								</tr>
 								<tr>
 									<td colspan="3">
-										<textarea readonly="readonly">${noticeDetail.contents}</textarea>
+										<div class='p-3 w-100 mt-4 border border-dark rounded-2' style="min-height: 300px;">${noticeDetail.contents}</div>
 									</td>
 								</tr>
 							</tbody>

@@ -102,7 +102,7 @@ public class ShopBasketController {
 				Cookie pidxCookie = new Cookie("noMemberCart", null);
 				tempCurrentCookie = URLEncoder.encode(tempCurrentCookie, "UTF-8");
 				
-				pidxCookie.setPath("/" + request.getContextPath());
+				pidxCookie.setPath("/FoodContainer");
 				pidxCookie.setMaxAge(0);
 			    response.addCookie(pidxCookie);
 			}
