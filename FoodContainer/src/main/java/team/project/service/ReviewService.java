@@ -25,7 +25,14 @@ public interface ReviewService {
 	
 	List<ReviewVO> review(String product_index) throws Exception;
 	
+	List<ReviewVO> viewReview(String product_index, int nowPage) throws Exception;
+	
 	List<ReviewVO> review(List<ProductVO> ProductListAll) throws Exception;
 	
 	List<ReviewVO> indexReview(List<ProductVO> popularList) throws Exception;
+	
+	int viewReviewCnt(String product_index) throws Exception;
+
+	PagingUtil viewPaging(String product_index, int nowPage) throws Exception;
+	
 }

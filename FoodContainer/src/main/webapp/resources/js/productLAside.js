@@ -58,9 +58,8 @@
 		var price = $("input[name='asidePrice']");
 		
 		var url = document.location.href;
-		var param = decodeURI(decodeURIComponent(url)).split(".");
-			
-		if(param[1] == "do"){
+		
+		if(url.substring(url.length-2,url.length) == "do"){
 			iceAll.prop("checked",true);
 			ice.prop("checked",true);
 			productAll.prop("checked",true);
@@ -86,7 +85,7 @@
 		//가격
 		var priceM = $("input[name='asidePriceM']");
 		
-		if(param[1] == "do"){
+		if(url.substring(url.length-2,url.length) == "do"){
 			iceAllM.prop("checked",true);
 			iceM.prop("checked",true);
 			productAllM.prop("checked",true);
@@ -227,6 +226,7 @@
 				success : function(data){
 					var inputVal = $(".inputText");
 					price.prop("checked",true);
+					priceM.prop("checked",true);
 					
 					for(var i=0; i<data.length; i++){
 						for(var j=0; j<$(".inputText").length; j++){
@@ -234,8 +234,10 @@
 								var val = inputVal[j].parentNode.childNodes[0].value;
 								if(data[i].bigSort == "냉동식품"){
 									$("input[name='asideIce']:eq("+val+")").prop("checked",true);
+									$("input[name='asideIceM']:eq("+val+")").prop("checked",true);
 								}else{
 									$("input[name='asideProduct']:eq("+val+")").prop("checked",true);
+									$("input[name='asideProductM']:eq("+val+")").prop("checked",true);
 								}
 							}
 						}
@@ -246,6 +248,7 @@
 							if(data[i].brand == inputVal[j].innerHTML){
 								var val = inputVal[j].parentNode.childNodes[0].value;
 								$("input[name='asideBrand']:eq("+val+")").prop("checked",true);
+								$("input[name='asideBrandM']:eq("+val+")").prop("checked",true);
 							}
 						}
 					}
@@ -292,11 +295,31 @@
 										searchHtml += "</span>";
 									}
 									searchHtml += "<span class='productListStar'>";
-									searchHtml += "<i class='bi bi-star-fill'></i>";
-									searchHtml += "<i class='bi bi-star-fill'></i>";
-									searchHtml += "<i class='bi bi-star-fill'></i>";
-									searchHtml += "<i class='bi bi-star-fill'></i>";
-									searchHtml += "<i class='bi bi-star'></i>";
+									var starHash = $("input[name='starHash']").val();
+									$.trim(starHash);
+									starHash = starHash.replace("{","");
+									starHash = starHash.replace("}","");
+									
+									for(var m=0; m<starHash.length; m++){
+										starHash = starHash.replace(" ","");
+									}
+									
+									var starPIndex = starHash.split(",");
+									var starCount = null;
+
+									for(var k=0; k<starPIndex.length; k++){
+										if(data[i].product_index == starPIndex[k].substring(0,5)){
+											starCount = starPIndex[k].substring(7,8);
+										}
+									}
+									
+									for(var k=1; k<6; k++){
+										if(starCount >= k){
+											searchHtml += "<i class='bi bi-star-fill'></i>";
+										}else{
+											searchHtml += "<i class='bi bi-star'></i>";
+										}
+									}			
 									searchHtml += "</span>";
 									searchHtml += "<br>";
 									if(data[i].delivery_free_YN != "Y"){
@@ -377,11 +400,31 @@
 										searchHtml += "</span>";
 									}
 									searchHtml += "<span class='productListStar'>";
-									searchHtml += "<i class='bi bi-star-fill'></i>";
-									searchHtml += "<i class='bi bi-star-fill'></i>";
-									searchHtml += "<i class='bi bi-star-fill'></i>";
-									searchHtml += "<i class='bi bi-star-fill'></i>";
-									searchHtml += "<i class='bi bi-star'></i>";
+									var starHash = $("input[name='starHash']").val();
+									$.trim(starHash);
+									starHash = starHash.replace("{","");
+									starHash = starHash.replace("}","");
+									
+									for(var m=0; m<starHash.length; m++){
+										starHash = starHash.replace(" ","");
+									}
+									
+									var starPIndex = starHash.split(",");
+									var starCount = null;
+
+									for(var k=0; k<starPIndex.length; k++){
+										if(data[i].product_index == starPIndex[k].substring(0,5)){
+											starCount = starPIndex[k].substring(7,8);
+										}
+									}
+									
+									for(var k=1; k<6; k++){
+										if(starCount >= k){
+											searchHtml += "<i class='bi bi-star-fill'></i>";
+										}else{
+											searchHtml += "<i class='bi bi-star'></i>";
+										}
+									}			
 									searchHtml += "</span>";
 									searchHtml += "<br>";
 									if(data[i].delivery_free_YN != "Y"){
@@ -453,11 +496,31 @@
 										searchHtml += "<input type='hidden' class='inventoryM"+i+"' value='"+data[i].inventory+"'>";			
 										searchHtml += "</div>";			
 										searchHtml += "<div class='productListStarM'>";			
-										searchHtml += "<i class='bi bi-star-fill'></i>";			
-										searchHtml += "<i class='bi bi-star-fill'></i>";			
-										searchHtml += "<i class='bi bi-star-fill'></i>";			
-										searchHtml += "<i class='bi bi-star-fill'></i>";			
-										searchHtml += "<i class='bi bi-star'></i>";			
+										var starHash = $("input[name='starHash']").val();
+									$.trim(starHash);
+									starHash = starHash.replace("{","");
+									starHash = starHash.replace("}","");
+									
+									for(var m=0; m<starHash.length; m++){
+										starHash = starHash.replace(" ","");
+									}
+									
+									var starPIndex = starHash.split(",");
+									var starCount = null;
+
+									for(var k=0; k<starPIndex.length; k++){
+										if(data[i].product_index == starPIndex[k].substring(0,5)){
+											starCount = starPIndex[k].substring(7,8);
+										}
+									}
+									
+									for(var k=1; k<6; k++){
+										if(starCount >= k){
+											searchHtml += "<i class='bi bi-star-fill'></i>";
+										}else{
+											searchHtml += "<i class='bi bi-star'></i>";
+										}
+									}			
 										searchHtml += "</div>";			
 										searchHtml += "</div>";			
 										searchHtml += "<div class='productListContent'>";			
@@ -531,11 +594,31 @@
 										searchHtml += "<input type='hidden' class='inventoryM"+i+"' value='"+data[i].inventory+"'>";			
 										searchHtml += "</div>";			
 										searchHtml += "<div class='productListStarM'>";			
-										searchHtml += "<i class='bi bi-star-fill'></i>";			
-										searchHtml += "<i class='bi bi-star-fill'></i>";			
-										searchHtml += "<i class='bi bi-star-fill'></i>";			
-										searchHtml += "<i class='bi bi-star-fill'></i>";			
-										searchHtml += "<i class='bi bi-star'></i>";			
+										var starHash = $("input[name='starHash']").val();
+									$.trim(starHash);
+									starHash = starHash.replace("{","");
+									starHash = starHash.replace("}","");
+									
+									for(var m=0; m<starHash.length; m++){
+										starHash = starHash.replace(" ","");
+									}
+									
+									var starPIndex = starHash.split(",");
+									var starCount = null;
+
+									for(var k=0; k<starPIndex.length; k++){
+										if(data[i].product_index == starPIndex[k].substring(0,5)){
+											starCount = starPIndex[k].substring(7,8);
+										}
+									}
+									
+									for(var k=1; k<6; k++){
+										if(starCount >= k){
+											searchHtml += "<i class='bi bi-star-fill'></i>";
+										}else{
+											searchHtml += "<i class='bi bi-star'></i>";
+										}
+									}						
 										searchHtml += "</div>";			
 										searchHtml += "</div>";			
 										searchHtml += "<div class='productListContent'>";			
@@ -1201,11 +1284,32 @@
 							mainSectionHtml += "</span>";
 						}
 						mainSectionHtml += "<span class='productListStar'>";
-						mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-						mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-						mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-						mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-						mainSectionHtml += "<i class='bi bi-star'></i>";
+						var starHash = $("input[name='starHash']").val();
+									$.trim(starHash);
+									starHash = starHash.replace("{","");
+									starHash = starHash.replace("}","");
+									
+									for(var m=0; m<starHash.length; m++){
+										starHash = starHash.replace(" ","");
+									}
+									
+									var starPIndex = starHash.split(",");
+									
+									var starCount = null;
+									for(var k=0; k<starPIndex.length; k++){
+										if(data[i].product_index == starPIndex[k].substring(0,5)){
+											console.log(starPIndex[k].substring(0,5));
+											starCount = starPIndex[k].substring(7,8);
+										}
+									}
+									
+									for(var k=1; k<6; k++){
+										if(starCount >= k){
+											mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+										}else{
+											mainSectionHtml += "<i class='bi bi-star'></i>";
+										}
+									}	
 						mainSectionHtml += "</span>";
 						mainSectionHtml += "<br>";
 						if(data[i].delivery_free_YN != "Y"){
@@ -1272,11 +1376,31 @@
 						mainSectionHtml += "<input type='hidden' class='inventoryM"+i+"' value='"+data[i].inventory+"'>";			
 						mainSectionHtml += "</div>";			
 						mainSectionHtml += "<div class='productListStarM'>";			
-						mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-						mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-						mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-						mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-						mainSectionHtml += "<i class='bi bi-star'></i>";			
+						var starHash = $("input[name='starHash']").val();
+									$.trim(starHash);
+									starHash = starHash.replace("{","");
+									starHash = starHash.replace("}","");
+									
+									for(var m=0; m<starHash.length; m++){
+										starHash = starHash.replace(" ","");
+									}
+									
+									var starPIndex = starHash.split(",");
+									var starCount = null;
+
+									for(var k=0; k<starPIndex.length; k++){
+										if(data[i].product_index == starPIndex[k].substring(0,5)){
+											starCount = starPIndex[k].substring(7,8);
+										}
+									}
+									
+									for(var k=1; k<6; k++){
+										if(starCount >= k){
+											mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+										}else{
+											mainSectionHtml += "<i class='bi bi-star'></i>";
+										}
+									}				
 						mainSectionHtml += "</div>";			
 						mainSectionHtml += "</div>";			
 						mainSectionHtml += "<div class='productListContent'>";			
@@ -1372,11 +1496,31 @@
 								mainSectionHtml += "</span>";
 							}
 							mainSectionHtml += "<span class='productListStar'>";
-							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-							mainSectionHtml += "<i class='bi bi-star'></i>";
+							var starHash = $("input[name='starHash']").val();
+									$.trim(starHash);
+									starHash = starHash.replace("{","");
+									starHash = starHash.replace("}","");
+									
+									for(var m=0; m<starHash.length; m++){
+										starHash = starHash.replace(" ","");
+									}
+									
+									var starPIndex = starHash.split(",");
+									var starCount = null;
+
+									for(var k=0; k<starPIndex.length; k++){
+										if(data[i].product_index == starPIndex[k].substring(0,5)){
+											starCount = starPIndex[k].substring(7,8);
+										}
+									}
+									
+									for(var k=1; k<6; k++){
+										if(starCount >= k){
+											mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+										}else{
+											mainSectionHtml += "<i class='bi bi-star'></i>";
+										}
+									}	
 							mainSectionHtml += "</span>";
 							mainSectionHtml += "<br>";
 							if(data[i].delivery_free_YN != "Y"){
@@ -1457,11 +1601,31 @@
 								mainSectionHtml += "</span>";
 							}
 							mainSectionHtml += "<span class='productListStar'>";
-							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-							mainSectionHtml += "<i class='bi bi-star-fill'></i>";
-							mainSectionHtml += "<i class='bi bi-star'></i>";
+							var starHash = $("input[name='starHash']").val();
+									$.trim(starHash);
+									starHash = starHash.replace("{","");
+									starHash = starHash.replace("}","");
+									
+									for(var m=0; m<starHash.length; m++){
+										starHash = starHash.replace(" ","");
+									}
+									
+									var starPIndex = starHash.split(",");
+									var starCount = null;
+
+									for(var k=0; k<starPIndex.length; k++){
+										if(data[i].product_index == starPIndex[k].substring(0,5)){
+											starCount = starPIndex[k].substring(7,8);
+										}
+									}
+									
+									for(var k=1; k<6; k++){
+										if(starCount >= k){
+											mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+										}else{
+											mainSectionHtml += "<i class='bi bi-star'></i>";
+										}
+									}	
 							mainSectionHtml += "</span>";
 							mainSectionHtml += "<br>";
 							if(data[i].delivery_free_YN != "Y"){
@@ -1533,11 +1697,31 @@
 								mainSectionHtml += "<input type='hidden' class='inventoryM"+i+"' value='"+data[i].inventory+"'>";			
 								mainSectionHtml += "</div>";			
 								mainSectionHtml += "<div class='productListStarM'>";			
-								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-								mainSectionHtml += "<i class='bi bi-star'></i>";			
+								var starHash = $("input[name='starHash']").val();
+									$.trim(starHash);
+									starHash = starHash.replace("{","");
+									starHash = starHash.replace("}","");
+									
+									for(var m=0; m<starHash.length; m++){
+										starHash = starHash.replace(" ","");
+									}
+									
+									var starPIndex = starHash.split(",");
+									var starCount = null;
+
+									for(var k=0; k<starPIndex.length; k++){
+										if(data[i].product_index == starPIndex[k].substring(0,5)){
+											starCount = starPIndex[k].substring(7,8);
+										}
+									}
+									
+									for(var k=1; k<6; k++){
+										if(starCount >= k){
+											mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+										}else{
+											mainSectionHtml += "<i class='bi bi-star'></i>";
+										}
+									}				
 								mainSectionHtml += "</div>";			
 								mainSectionHtml += "</div>";			
 								mainSectionHtml += "<div class='productListContent'>";			
@@ -1610,12 +1794,32 @@
 								}	
 								mainSectionHtml += "<input type='hidden' class='inventoryM"+i+"' value='"+data[i].inventory+"'>";			
 								mainSectionHtml += "</div>";			
-								mainSectionHtml += "<div class='productListStarM'>";			
-								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-								mainSectionHtml += "<i class='bi bi-star-fill'></i>";			
-								mainSectionHtml += "<i class='bi bi-star'></i>";			
+								mainSectionHtml += "<div class='productListStarM'>";
+								var starHash = $("input[name='starHash']").val();
+									$.trim(starHash);
+									starHash = starHash.replace("{","");
+									starHash = starHash.replace("}","");
+									
+									for(var m=0; m<starHash.length; m++){
+										starHash = starHash.replace(" ","");
+									}
+									
+									var starPIndex = starHash.split(",");
+									var starCount = null;
+
+									for(var k=0; k<starPIndex.length; k++){
+										if(data[i].product_index == starPIndex[k].substring(0,5)){
+											starCount = starPIndex[k].substring(7,8);
+										}
+									}
+									
+									for(var k=1; k<6; k++){
+										if(starCount >= k){
+											mainSectionHtml += "<i class='bi bi-star-fill'></i>";
+										}else{
+											mainSectionHtml += "<i class='bi bi-star'></i>";
+										}
+									}			
 								mainSectionHtml += "</div>";			
 								mainSectionHtml += "</div>";			
 								mainSectionHtml += "<div class='productListContent'>";			

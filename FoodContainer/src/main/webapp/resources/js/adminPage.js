@@ -360,6 +360,22 @@ function sendMessage(id){
 	}
 }
 
+// 해당 상세주문상품 배송완료로 처리하기
+function deliveryOk(orderItemIndex, obj){
+	if(confirm("해당 주문을 배송완료로 처리하시겠습니까?")){
+		$.ajax({
+			url : "deliveryOk.do",
+			type : "post",
+			data : "orderItem_index=" + orderItemIndex,
+			success : function(){
+				alert("배송완료로 처리되었습니다");
+				$(obj).closest(".card-good").find(".orderStatus").text("배송완료");
+				$(obj).remove();
+			}
+		});	
+	}
+}
+
 
 // 등록상품조회페이지에서 전체 선택
 function selectAllProducts(obj){
@@ -740,16 +756,24 @@ function linkYNCheck(formName){
 
 }
 
+// 배너 수정을 취소
+function cancelBanner(formName){
+	var form = $("form[name='" + formName + "']");
+	form.find("input[name='link']").attr('disabled', false);
+}
+
 // 배너페이지의 배너 등록&수정 submit
 function bannerSumbit(obj, formName){
 	var flag = true;
-	var form = $("form[name='" + formName + "']")
+	var form = $("form[name='" + formName + "']");
 	var urlReg = /(http(s)?:\/\/)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}/gi;
 	
 	if($(form).find("input[name='name']").val() == ""){
 		flag = false;
 	}else if($(form).find("input[name='bannerFile']").val() == ""){
-		flag = false;
+		if(formName != 'bannerModifyrForm'){
+			flag = false;
+		}
 	}else if($(form).find("input[name='link_YN']:checked").val() == "Y"){
 		if($(form).find("input[name='link']").val() == ""){
 			flag = false;
@@ -888,4 +912,57 @@ function deleteBannerAjax(){
 			}
 		}
 	});
+}
+
+function selectAllRecipeCheckbox(obj){
+	if($(obj).is(":checked")){
+		$("#recipeTable").find("input[type='checkbox']").prop("checked", true);
+	}else{
+		$("#recipeTable").find("input[type='checkbox']").prop("checked", false);
+	}
+}
+
+function recipeCheckbox(){
+	var trTotalCnt = $("#recipeTable").find("tbody").find("tr").length;
+	var trCnt = 0;
+	$("#recipeTable").find("input[type='checkbox']").each(function(){
+		if(!$(this).is(":checked")){
+			$("#totalCheckbox").prop("checked", false);
+			return false;
+		}else{
+			trCnt++;
+		}
+	});
+	if(trCnt == trTotalCnt){
+		$("#totalCheckbox").prop("checked", true);
+	}
+}
+
+function cancelSelectedRecipe(){
+	var trCnt = 0;
+	$("#recipeTable").find("input[type='checkbox']").each(function(){
+		if($(this).is(":checked")){
+			trCnt++;
+		}
+	});
+	
+	if(trCnt == 0){
+		alert("최소 한개는 선택해야 합니다");
+	}else{
+		if(confirm("선택한 베스트레시피를 해제하시겠습니까?")){
+			alert("순위는 자동으로 조절 됩니다");
+			document.frm.submit();
+		}
+	}
+}
+
+function cancelRecipe(obj){
+	if(confirm("해당 베스트레시피를 해제하시겠습니까?")){
+		alert("순위는 자동으로 조절 됩니다");
+		$("#recipeTable").find("input[type='checkbox']").each(function(){
+			$(this).prop("checked", false);
+		});
+		$(obj).parent().parent().find("input[type='checkbox']").prop("checked", true);
+		document.frm.submit();
+	}
 }

@@ -7,7 +7,10 @@
 
 <!-- 레시피 목록 리스트 -->
  <select id="recipeList" resultType="RecipeVO" parameterType="PagingUtil">
-	SELECT * , (select count(reply_index)
+	SELECT * , (select name
+          from member
+		 where member_index=recipe.member_index) as name 
+		, (select count(reply_index)
           from reply
 		 where recipe_index=recipe.recipe_index) as reply_index FROM recipe where del_yn = 'N' 
 	<if test="searchType != null and searchType.equals('title')">
@@ -54,7 +57,11 @@ select *
 		 where product_index=recipe.product_index3) as product_img3 
 	, (select count(reply_index)
           from reply
-		 where recipe_index=recipe.recipe_index) as reply_index	 
+		 where recipe_index=recipe.recipe_index) as reply_index
+	, (select name
+          from member
+		 where member_index=recipe.member_index) as name
+		 	 
 	from recipe where recipe_index =#{recipe_index}
 
 </select>
@@ -63,35 +70,6 @@ select *
 <update id="recipeHit" parameterType="int">
 UPDATE recipe set hit =hit+1 where recipe_index=#{recipe_index}
 </update>
-
-
-
-
-
-<!--레시피 게시글 작성 상품 찾기  -->
-<!-- <select id="viewProduct" resultType="RecipeVO">
-select title
-     , (select product_name 
-          from product 
-		 where product_index=recipe.product_index1) as product_name1
-	, (select thumbnail_image 
-          from product 
-		 where product_index=recipe.product_index1) as product_img1
-         
-     , (select product_name 
-          from product 
-		 where product_index=recipe.product_index2) as product_name2 
-    , (select thumbnail_image 
-          from product 
-		 where product_index=recipe.product_index2) as product_img2     
-	 , (select product_name 
-          from product 
-		 where product_index=recipe.product_index3) as product_name3
-     , (select thumbnail_image 
-          from product 
-		 where product_index=recipe.product_index3) as product_img3    
- from recipe
-</select> -->
 
 
 
@@ -204,9 +182,74 @@ member_index
  <select id="viewRecipeList" resultType="RecipeVO">
 	SELECT * 
     FROM recipe 
-	WHERE del_YN = 'N'
+	WHERE del_YN = 'N' order by best_rank
 </select>
- 
+
+<!-- 마이페이지 부분 -->
+<select id="countRecipeMypage" resultType="int" parameterType="SearchVO">
+    SELECT count(*) 
+    FROM 
+    recipe WHERE member_index = #{member_index} and del_yn = 'N'
+</select>
+
+<select id="recipeMypageList" resultType="RecipeVO" parameterType="PagingUtil">
+    SELECT * , (select count(reply_index)
+          from reply
+		 where recipe_index=recipe.recipe_index) as reply_index FROM recipe where member_index = #{member_index} and del_yn = 'N' 
+    order by best_rank, write_date desc
+    LIMIT #{start}, #{perPage}
+</select>
+
+<!-- 관리자페이지 -->
+
+<!-- 베스트레시피 불러오기 -->
+<select id="adminBestRecipeList" resultType="RecipeVO">
+	SELECT recipe_index, best_rank, hit, title, write_date,
+		(SELECT COUNT(reply_index) FROM reply WHERE recipe_index = recipe.recipe_index) as reply_index
+	FROM recipe WHERE best_rank IN(1,2,3) ORDER BY best_rank;
+</select>
+
+<!-- 레시피 해제 -->
+<update id="adminCancelBestRecipe" parameterType="list">
+	UPDATE recipe SET
+	best_rank = 4 WHERE
+	<foreach collection="list" item="item" separator=" OR ">
+		recipe_index = #{item}
+	</foreach>
+</update>
+
+<!-- 순위 조절1 -->
+<update id="adminUpdateBestRecipeRankOne">
+	UPDATE recipe
+	SET best_rank = 1
+	WHERE best_rank =
+		(SELECT MIN(best_rank) FROM
+  			(SELECT a.best_rank
+   			FROM recipe as a
+   			JOIN recipe as b ON a.recipe_index = b.recipe_index
+		) temp
+	)
+</update>
+
+<!-- 순위 조절2 -->
+<update id="adminUpdateBestRecipeRankTwo">
+	UPDATE recipe
+	SET best_rank = 2
+	WHERE best_rank BETWEEN 2 AND 3
+</update>
+
+<!-- 추천 +1 -->
+<update id="thumbPlus" parameterType="int">
+	UPDATE recipe
+	SET thumb = thumb+1
+	WHERE recipe_index = #{recipe_index}
+</update>
+
+<insert id="thumbTablePlus" parameterType="map">
+	INSERT INTO thumb(recipe_index, member_index)
+	VALUES(#{recipe_index}, #{member_index})
+</insert>
+
 </mapper>
 
 

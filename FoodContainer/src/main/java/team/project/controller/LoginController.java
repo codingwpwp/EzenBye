@@ -93,12 +93,13 @@ public class LoginController {
 			
 			// 아이디 저장 부분
 			String rememberIdYN = request.getParameter("rememberIdYN");
-			System.out.println("rememberIdYN : " + rememberIdYN);
+			//System.out.println("rememberIdYN : " + rememberIdYN);
 			
 			if(rememberIdYN != null) {	// 아이디 저장 했을 때
 				String id = URLEncoder.encode(vo.getId(), "UTF-8");
 				Cookie idCookie = new Cookie("idCookie", id);
 				idCookie.setPath("/FoodContainer");
+				idCookie.setMaxAge(60 * 60 * 24 * 30);
 			    response.addCookie(idCookie);
 			}else {	// 아이디 저장 안 했을 때
 				Cookie[] cookies = request.getCookies();

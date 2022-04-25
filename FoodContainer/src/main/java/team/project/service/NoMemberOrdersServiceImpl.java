@@ -120,14 +120,14 @@ public class NoMemberOrdersServiceImpl implements NoMemberOrdersService{
 		    	tempCurrentCookie = tempCurrentCookie.substring(0, tempCurrentCookie.length() - 1);
 				tempCurrentCookie = URLEncoder.encode(tempCurrentCookie, "UTF-8");
 				Cookie pidxCookie = new Cookie("noMemberCart", tempCurrentCookie);
-				pidxCookie.setPath("/" + request.getContextPath());
+				pidxCookie.setPath("/FoodContainer");
 				
 			    response.addCookie(pidxCookie);
 			}else {
 				Cookie pidxCookie = new Cookie("noMemberCart", "");
 				tempCurrentCookie = URLEncoder.encode(tempCurrentCookie, "UTF-8");
 				
-				pidxCookie.setPath("/" + request.getContextPath());
+				pidxCookie.setPath("/FoodContainer");
 				pidxCookie.setMaxAge(0);
 			    response.addCookie(pidxCookie);
 			}

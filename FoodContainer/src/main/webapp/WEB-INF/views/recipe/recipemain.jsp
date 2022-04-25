@@ -87,7 +87,7 @@
 								</c:if>
 									<img
 										src="<%=request.getContextPath()%>/resources/img/recipe/${list.thumbnail_image}"
-										class="card-img-top" alt="${list.thumbnail_image}" onclick="location.href='<%=request.getContextPath()%>/recipeview.do?recipe_index=${list.recipe_index}'">
+										class="card-img-top" alt="${list.thumbnail_image}" onclick="location.href='<%=request.getContextPath()%>/recipeview.do?recipe_index=${list.recipe_index}'" width="340" height="360" style="cursor:pointer;">
 									<div class="card-body">
 										<h6 class="card-title">
 										
@@ -96,7 +96,8 @@
 											</div>
 										</h6>
 										<div class="row recipe-text">
-											<%-- <div class="col">추천수(<c:out value="${list.thumb}"/>)</div> --%>
+											<div class="col">추천수(<c:out value="${list.thumb}"/>)</div> 
+											<%-- <div class="col">작성자:<c:out value="${list.name}"/></div> --%>
 											<div class="col">조회수(<c:out value="${list.hit}"/>)</div>
 											<div class="col">댓글(<c:out value="${list.reply_index}"/>)</div>
 										</div>

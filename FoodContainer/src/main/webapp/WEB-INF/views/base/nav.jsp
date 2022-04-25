@@ -49,7 +49,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link px-lg-1 px-xl-2" href="#">고객센터</a>
+                <a class="nav-link px-lg-1 px-xl-2" href="<%=request.getContextPath()%>/serviceCenter.do">고객센터</a>
             </li>
 
         </ul>
@@ -60,7 +60,7 @@
 <!-- 회원 -->
 <c:if test="${member==null}">
 <div class="col-6 col-sm-4 col-lg-2 col-xl-3 d-flex align-items-lg-center justify-content-end justify-content-sm-center justify-content-lg-start pe-4 pe-sm-2 fs-6" id="userLogin">
-    <a href="<%=request.getContextPath()%>/loginmain.do" class="link-dark">로그인</a>&nbsp;|&nbsp;<a href="<%=request.getContextPath()%>/member_sign.do" class="link-dark">회원가입</a>
+    <a href="<%=request.getContextPath()%>/loginmain.do" class="link-dark">로그인</a>&nbsp;|&nbsp;<a href="<%=request.getContextPath()%>/member_email_sign.do" class="link-dark">회원가입</a>
 </div>
 </c:if>
 <c:if test="${member!=null}">

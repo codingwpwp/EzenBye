@@ -38,10 +38,10 @@
     	</foreach>
 	    <foreach collection="list" item="filter" separator=",">
 			<if test="filter.price != null and filter.price eq '0'.toString()">
-				ORDER BY origin_price DESC
+				ORDER BY origin_price ASC
 			</if>
 			<if test="filter.price != null and filter.price eq '1'.toString()">
-				ORDER BY origin_price ASC
+				ORDER BY origin_price DESC
 			</if>
 	    </foreach>
     </select>
@@ -60,6 +60,26 @@
     		   detail_image
     	FROM product
     	WHERE del_YN != 'y' and product_index = #{index}
+    </select>
+    
+    <select id="recentProduct" resultType="ProductVO" parameterType="list">
+    	SELECT product_name,
+    		   bigSort,
+    		   middleSort,
+    		   origin_price,
+    		   sale_price,
+    		   brand,
+    		   inventory,
+    		   quantity,
+    		   delivery_free_YN,
+    		   thumbnail_image,
+    		   detail_image
+    	FROM product
+    	WHERE del_YN != 'y' 
+    	<if test="list != null">
+	    	and product_index in (<foreach collection="list" item="recent" separator=",">#{recent.product_index}</foreach>)
+    	</if>
+    	
     </select>
     
     <select id="cookiList" resultType="ProductVO" parameterType="list">
@@ -120,7 +140,7 @@
 			thumbnail_image,
 			product_name,
 			COALESCE(sale_price, sale_price, origin_price) as origin_price,
-			product_index
+			product_index, delivery_free_YN
 		FROM product
 		<foreach collection="list" item="item" open="WHERE " separator=" OR ">
 			product_index = #{item}
@@ -136,7 +156,7 @@
 			product_name,
 			COALESCE(sale_price, sale_price, origin_price) as origin_price,
 			a.product_index,
-			b.cart_count
+			b.cart_count, delivery_free_YN
 		FROM product as a, cart as b
 		WHERE a.product_index = b.product_index AND 
 		<foreach collection="list" item="item" open="(" separator=" OR " close=")">

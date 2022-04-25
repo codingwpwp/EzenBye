@@ -225,6 +225,7 @@
 									<c:if test="${recipeList.best_rank == 1}">
 										<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 popular d-flex justify-content-center">
 											<div class="card" style="width: 18rem;">
+											<a href = "<%=request.getContextPath()%>/recipeview.do?recipe_index=${recipeList.recipe_index}">
 											  <img src="<%=request.getContextPath()%>/resources/img/recipe/${recipeList.thumbnail_image}" class="card-img-top" alt="${recipeList.thumbnail_image}">
 											  <img src="<%=request.getContextPath()%>/resources/img/금메달.png" class="img-fluid medal" alt="1등">
 											  <div class="card-body">
@@ -239,13 +240,16 @@
 													추천 : ${recipeList.thumb}
 											    </p>
 											  </div>
+											</a>	
 											</div>
 										</div>
 									</c:if>
 									
+									
 									<c:if test="${recipeList.best_rank == 2}">
 										<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 popular d-flex justify-content-center">
 											<div class="card" style="width: 18rem;">
+											<a href = "<%=request.getContextPath()%>/recipeview.do?recipe_index=${recipeList.recipe_index}">
 											  <img src="<%=request.getContextPath()%>/resources/img/recipe/${recipeList.thumbnail_image}" class="card-img-top" alt="${recipeList.thumbnail_image}">
 											  <img src="<%=request.getContextPath()%>/resources/img/은메달.png" class="img-fluid medal" alt="2등">
 											  <div class="card-body">
@@ -260,6 +264,7 @@
 													추천 : ${recipeList.thumb}
 											    </p>
 											  </div>
+											</a>
 											</div>
 										</div>
 									</c:if>
@@ -267,6 +272,7 @@
 									<c:if test="${recipeList.best_rank == 3}">
 										<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 popular d-flex justify-content-center">
 											<div class="card" style="width: 18rem;">
+											<a href = "<%=request.getContextPath()%>/recipeview.do?recipe_index=${recipeList.recipe_index}">
 											  <img src="<%=request.getContextPath()%>/resources/img/recipe/${recipeList.thumbnail_image}" class="card-img-top" alt="${recipeList.thumbnail_image}">
 											  <img src="<%=request.getContextPath()%>/resources/img/동메달.png" class="img-fluid medal" alt="3등">
 											  <div class="card-body">
@@ -281,10 +287,12 @@
 													추천 : ${recipeList.thumb}
 											    </p>
 											  </div>
+											</a>
 											</div>
 										</div>
 									</c:if>
 								</c:if>
+								
 								</c:forEach>
 							</div>
 						</div>

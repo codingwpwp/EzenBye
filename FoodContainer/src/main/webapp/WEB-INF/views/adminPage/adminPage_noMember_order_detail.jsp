@@ -60,12 +60,12 @@
                         <hr>
                         
                         <!-- 날짜&주문번호 -->
-                        <div class="row fs-4 fw-bold">
-                            <div class="col-sm-3 col-5">
+                        <div class="row fs-4 fw-bold mb-3">
+                            <div class="col-12 col-md-5 mb-3 mb-md-0">
                                 <span>${fn:substring(order.order_date, 0,16)}</span>
                             </div>
-                            <div class="col-sm-6 col-7">
-                                <span>주문번호 : ${order.no_member_order_index}</span>
+                            <div class="col-12 col-md-7 mb-3 mb-md-0">
+                                <span class="float-sm-end">주문번호 : ${order.no_member_order_index}</span>
                             </div>
                         </div>
                         
@@ -81,7 +81,7 @@
 	
 	                            <div class="row">
 	                                <div class="col-sm-4">
-	                                    <span>${list.order_status}</span>
+	                                    <span class="orderStatus">${list.order_status}</span>
 	                                </div>
 	                                <div class="col-sm-8 number-good">
 	                                    <span>상품 주문번호 : ${list.orderItem_index}</span>
@@ -92,10 +92,15 @@
 	                                <div class="col-sm-3">
 	                                    <img src="<%=request.getContextPath()%>/resources/img/${list.brand}/${list.middleSort}/${list.thumbnail_image}" class="img-thumbnail" title="${list.product_name}" alt="${list.product_name}">
 	                                </div>
-	                                <div class="col-sm-8 d-flex align-items-start flex-column mb-3">
+	                                <div class="col-sm-6 col-md-7 d-flex align-items-start flex-column mb-3">
 	                                    <div class="mb-auto p-2">${list.product_name}</div>
 	                                    <div class="p-2"><fmt:formatNumber value="${list.price}" pattern="#,###"/>원 | ${list.order_quantity}개</div>
 	                                    <c:set var="totalPrice" value="${totalPrice + (list.price * list.order_quantity)}" />
+	                                </div>
+	                                <div class="col-sm-3 col-md-2 d-flex justify-content-center align-items-center p-0">
+	                                	<c:if test="${list.order_status eq '배송준비중'}">
+	                                		<button class="btn btn-primary btn-sm p-1" onclick="deliveryOk('${list.orderItem_index}', this)">배송완료처리</button>
+	                                	</c:if>
 	                                </div>
 	                            </div>
 	                            

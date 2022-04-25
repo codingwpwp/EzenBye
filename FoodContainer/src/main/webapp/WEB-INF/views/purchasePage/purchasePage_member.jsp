@@ -282,6 +282,7 @@
                                 <div class="mb-auto fw-bold pt-2">${cart.product_name}</div>
                                 <div class="fw-bold pb-2"><span class="productPrice">${cart.origin_price}</span>원 | <span class="productCount">${cart.cart_count}</span>개</div>
                                 <input type="hidden" id="cartItem" name="${cart.product_index}" value="${cart.cart_count}">
+                                <input type="hidden" class="productDeliveryPrice" value="${cart.delivery_free_YN}">
                             </div>
                         </div>                    
                     </c:forEach>

@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,7 +21,7 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"rel="stylesheet">
 	
 </head>
-<body>
+<body onselectstart="return false;">
 	<!-- 헤더 -->
 	<header class="border-bottom border-dark">
 		<%@include file="/WEB-INF/views/base/header.jsp"%>
@@ -29,15 +32,7 @@
         <div class="row">
             <div class="col-lg-2 d-none d-lg-block"></div>
 
-            <!--
-                id="navLeftMenu"인 현재 주석 바로 아래의 태그는 페이지의 종류에 따른 왼쪽메뉴.
-                네비게이션 바가 펼쳐질 때 알아서 태그가 안보이도록 설정.
-                필요시에만 div태그 사이에 코드를 작성.
-                작성시 border border-dark는 구분용으로만 작성했기 때문에 알아서 지우고 작업.
-                작성하지 않는 경우는 절대 건들지 않음.
-                base.js에 id="navLeftMenu"와 관련된 코드가 작성되어있음.
-            -->
-            <div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark" id="navLeftMenu"><!-- 여기에 작성 --></div>
+            <div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark" id="navLeftMenu"></div>
 
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
 
@@ -58,53 +53,79 @@
             <!-- 메인 -->
             <div class="col-12 col-sm-9 col-md-10 col-lg-8">
                 <article id="mainSection">
-                    
-                    <!--
-                        헤딩.
-                        필요하지 않는 사람은 <div>태그를 삭제.
-                        필요한 사람은 <div>태그에 작성.
-                    -->
-                    <div class="fs-5 my-2 fw-bold">공지사항</div>
+ 
+                    <div class="fs-5 my-2 fw-bold">1:1문의</div>
 
                  	<div class="maindiv">
 						<table class="table">
-							<thead>
+							<thead class="fw-bold fs-6">
 								<tr>
 									<th scope="col">제목</th>
-									<td class="title"><input type="text" class="tittext"></td>
-									<td class="right">2022-03-23</td>
+									<td class="title">${view.title}</td>
+									<td style="text-align: left; font-size: small;">${fn:substring(view.write_date, 0,10)}</td>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
+								<tr class="fw-bold fs-6">
 									<th scope="row">작성자</th>
-									<td>관리자</td>
-									<td class="right">조회수</td>
+									<td>${view.name}</td>
+									<td style="text-align: left;">${view.sort2}</td>
 								</tr>
 								<tr>
 									<td colspan="3">
-										<div id="summernote">
-										
-										</div>
+										<div class='p-3 w-100 mt-4 border border-dark rounded-2' style="min-height: 300px;">${view.contents}</div>
 									</td>
 								</tr>
 							</tbody>
 						</table>
+						
+						<!-- 답변들 -->
+						<c:if test ="${not empty reply}">
+							<div class="my-3 container fw-bold row d-flex align-items-center">
+								<div class="col-4 col-md-3 col-xl-2" style="display: flex;align-items: center;flex-wrap: wrap;justify-content: center;">
+									<span class='bg-warning bg-opacity-50 p-1 border border-warning rounded-2'>
+										<img src="<%=request.getContextPath()%>/resources/img/adminicon.png" width="20"> 관리자
+									</span>
+									<br>
+									<span>${fn:substring(reply.reply_date, 0,10)}</span>
+								</div>
+								<div class="col-5 col-md-7 col-xl-8 p-3">
+									${reply.contents}
+								</div>
+							</div>
+						</c:if>
+
+						
+						<!-- 답변 쓰는 곳 -->
+						<c:if test ="${empty reply}">
+						<c:if test="${member.position ne null and member.position eq '관리자'}">
+							<form class="row d-flex align-items-center mt-5" action="replyInsert.do" method="post" id="replyForm" onsubmit="return replySubmit();">
+								<div class="col-10 col-xl-11 pe-2">
+									<input type="hidden" name="serviceCenter_index" value="${view.serviceCenter_index}">
+									<textarea style="max-height: 65px; border-radius: 3px;" placeholder="답변을 두 번이상 등록할 수 없습니다." name="contents" maxlength="100"></textarea>
+								</div>
+								<div class="col-2 col-xl-1 px-0">
+									<button class="btn btn-primary" type="submit">등록</button>
+								</div>
+							</form>
+						</c:if>
+						</c:if>
+						
+						<!-- 버튼 -->
+						<hr>
 						<div class="row">
-						<div class="col-md-2 col-sm-2 col-3 leftbtn">
-							<input value="목록" type="button" class="btn btn-primary listbtn" onclick="location.href='notice_main.do'">
-						</div>
-						<div class="col-md-10 col-sm-10 col-8 rightbtn">
-							
-							<input value="등록" type="button" class="btn btn-secondary insertbtn">
-						</div>
+							<div class="col-md-2 col-sm-2 col-3 leftbtn">
+								<input value="목록" type="button" class="btn btn-primary listbtn" onclick="location.href='serviceCenter.do?sort2=${sort2}&nowPage=${nowPage}'">
+							</div>
+							<div class="col-md-10 col-sm-10 col-9 rightbtn">
+								<c:if test="${member.position ne null and member.position eq '관리자'}">
+									<input value="삭제" type="button" class="btn btn-secondary updatebtn" onclick="location.href='serviceCenter_delete.do?serviceCenter_index=${view.serviceCenter_index}'">
+								</c:if>
+							</div>
 						</div>
 
 					</div>
-
-
 					
-
 				</article>
             </div>
 

@@ -1,11 +1,10 @@
 package team.project.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -39,8 +38,29 @@ public class RecipeController {
 	@Autowired
 	private ReplyService replyService;
 	
-
-	
+	 // 추천수 증가
+	 @RequestMapping(value = "thumbUp.do", method = RequestMethod.POST)
+	 @ResponseBody
+	 public String thumbUp(@RequestParam(value="recipe_index") int recipe_index, @RequestParam(value="member_index") int member_index, HttpServletResponse response) throws Exception {
+		 
+		 int result = recipeService.thumbTablePlus(recipe_index, member_index);
+		 String result2 = "false";
+		 
+		 if(result == 1){
+			 
+			 try{
+				 recipeService.thumbPlus(recipe_index);
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				result2 = "true";
+				return result2;
+				
+			}else {
+				return result2;
+			}
+		 
+	 }
 	
 	//레시피 게시물 추천
 	@RequestMapping(value = "recipeThumb", method = RequestMethod.POST)
@@ -53,7 +73,7 @@ public class RecipeController {
 	
 	
 	//레시피메인
-	@RequestMapping(value = "/recipemain.do", method = RequestMethod.GET)
+	@RequestMapping(value = "recipemain.do", method = RequestMethod.GET)
 	public String recipe(Locale locale, Model model,RecipeVO vo,String nowPage,SearchVO searchvo,ReplyVO replyvo) throws Exception{
 		
 		//페이징
@@ -84,7 +104,7 @@ public class RecipeController {
 		return "recipe/recipemain";
 	}
 	//레시피 작성 화면 view
-	@RequestMapping(value = "/recipewrite.do", method = RequestMethod.GET)
+	@RequestMapping(value = "recipewrite.do", method = RequestMethod.GET)
 	public String recipeWrite(Locale locale, Model model,ProductVO productVO) throws Exception{
 		//셀렉터 박스 상품 리스트
 		List<ProductVO> ProductListAll = productService.productListAll(productVO);
@@ -93,8 +113,7 @@ public class RecipeController {
 	}
 	
 	//레시피 작성
-	@ResponseBody
-	@RequestMapping(value = "/recipewrite.do", method = RequestMethod.POST)
+	@RequestMapping(value = "recipewrite.do", method = RequestMethod.POST)
 	public String recipeInsert(RecipeVO vo, @RequestParam("tumnailImage") MultipartFile tumnailImage, HttpServletRequest request) throws Exception{ 	
 		System.out.println(vo);
 		HttpSession session = request.getSession();
@@ -108,14 +127,14 @@ public class RecipeController {
 	
 	
 	//레시피 상세확인
-	@RequestMapping(value = "/recipeview.do", method = RequestMethod.GET)
+	@RequestMapping(value = "recipeview.do", method = RequestMethod.GET)
 	public String recipe3(Locale locale, Model model,RecipeVO vo,HttpServletRequest request,ProductVO productVO,ReplyVO replyvo,int recipe_index) throws Exception {
 		logger.info("recipeRead");
 	
 		model.addAttribute("read", recipeService.recipeRead(vo.getRecipe_index()));
 		List<ProductVO> ProductListAll = productService.productListAll(productVO);
 		model.addAttribute("productListAll",ProductListAll);
-
+		
 		List<ReplyVO> replyList = replyService.replyList(replyvo);
 		model.addAttribute("replyList",replyList);
 		model.addAttribute("vo",vo);
@@ -136,7 +155,7 @@ public class RecipeController {
 	
 	
 	//레시피내용 수정 view
-	@RequestMapping(value = "/recipemodify.do", method = RequestMethod.GET)
+	@RequestMapping(value = "recipemodify.do", method = RequestMethod.GET)
 	public String recipemodify(Locale locale, Model model,RecipeVO vo,ProductVO productVO) throws Exception{
 		model.addAttribute("read", recipeService.recipeRead(vo.getRecipe_index()));
 		List<ProductVO> ProductListAll = productService.productListAll(productVO);
@@ -149,17 +168,17 @@ public class RecipeController {
 	}
 	
 	//레시피 내용수정
-	@RequestMapping(value = "/recipemodify", method = RequestMethod.POST)
+	@RequestMapping(value = "recipemodify", method = RequestMethod.POST)
 	public String recipeupdate(Locale locale, Model model,RecipeVO vo,ProductVO productVO,@RequestParam("tumnailImage") MultipartFile tumnailImage, HttpServletRequest request) throws Exception{
 		recipeService.updateRecipe(vo,tumnailImage, request);
 		
-		return "redirect:/recipeview.do?recipe_index="+vo.getRecipe_index();
+		return "redirect:recipeview.do?recipe_index="+vo.getRecipe_index();
 	}
 	//레시피 삭제
-	@RequestMapping(value = "/recipedelete", method = RequestMethod.POST)
+	@RequestMapping(value = "recipedelete", method = RequestMethod.POST)
 	public String recipedelete(Locale locale, Model model,int recipe_index)throws Exception{
 		recipeService.deletdRecipe(recipe_index);
-		return "redirect:/recipemain.do";
+		return "redirect:recipemain.do";
 	}
 	
 	

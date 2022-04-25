@@ -51,6 +51,14 @@ public class ProductServiceImpl implements ProductService {
 		return productSearch;
 	}
 	
+	@Override
+	public List<ProductVO> recentProduct(List<ProductVO> recentProductArr) throws Exception {
+		
+		List<ProductVO> recentProduct = productDao.recentProduct(recentProductArr);
+		
+		return recentProduct;
+	}
+	
 	
 	//상세보기
 	@Override

@@ -2,19 +2,20 @@ package team.project.controller;
 
 import java.util.Locale;
 
-import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.project.service.MemberService;
+import team.project.service.SignService;
 import team.project.vo.MemberVO;
 
 /**
@@ -25,10 +26,15 @@ public class SignController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private SignService signService;
+	
 	private static final Logger logger = LoggerFactory.getLogger(SignController.class);
 
 	@RequestMapping(value = "member_sign.do", method = RequestMethod.GET)
-	public String sign(Locale locale, Model model){
+	public String sign(Locale locale, Model model,@RequestParam("name")String name,@RequestParam("email") String email){
+		model.addAttribute("name",name);
+		model.addAttribute("email",email);
 		return "sign/member_sign";
 	}
 
@@ -76,10 +82,20 @@ public class SignController {
 		String result = memberService.recomChk(id);
 		return result;
 	}
-	//
-	@RequestMapping(value = "no_member_sign.do", method = RequestMethod.GET)
+	// 회원가입 이메일인증 화면
+	@RequestMapping(value = "member_email_sign.do", method = RequestMethod.GET)
 	public String sign2(Locale locale, Model model) {
-		return "sign/no_member_sign";
+		return "sign/member_email_sign";
 	}
+	//회원가입 이메일 인증 post
+	
+	@RequestMapping(value="member_email_send",method =RequestMethod.POST)
+	@ResponseBody
+	public String memberEmail( MemberVO vo,Model model,@RequestParam("name")String name,@RequestParam("email") String email)throws Exception {
+		String emailSend = signService.emailsend(vo); 	
+		return emailSend;
+		
+	}
+	
 	
 }

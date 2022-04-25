@@ -99,9 +99,33 @@ function deleteReply(obj,reply_index,recipe_index){
 	});
 }
 
-
-
-
+// 추천증가
+$('.fa-thumbs-up').on('click',function(){
+		var YN = confirm("추천 누르시겠습니까?");
+		if(YN){
+			var recipe_index = $(this).parent().find("input[name='recipe_index']").val();
+			var member_index = $(this).parent().find("input[name='member_index']").val();
+			console.log(recipe_index,member_index);
+			if(member_index == ''){
+				alert('로그인 후 이용 가능합니다.');
+			}else {
+				$.ajax({
+				url : "thumbUp.do",
+				type : "post",
+				data : "recipe_index="+recipe_index+"&member_index="+member_index,
+				success : function(data){
+					if(data == "true"){
+						alert('추천이 완료되었습니다.');
+						location.reload();
+					}else {
+						alert('이미 추천을 누른 글입니다.');
+					}
+				}
+			});
+			}
+			
+		}
+	});
 
 
 

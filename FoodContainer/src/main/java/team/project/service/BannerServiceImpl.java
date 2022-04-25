@@ -54,7 +54,9 @@ public class BannerServiceImpl implements BannerService {
 	public int bannerModify(BannerVO bannervo, MultipartFile bannerFile, HttpServletRequest request) throws Exception {
 		
 		// 파일명을 VO에 담기
-		bannervo.setImage(bannerFile.getOriginalFilename());
+		if(!bannerFile.getOriginalFilename().isEmpty()) {
+			bannervo.setImage(bannerFile.getOriginalFilename());
+		}
 		
 		// 파일을 업로드 하는 과정
 		String path = request.getSession().getServletContext().getRealPath("/resources/img/배너");

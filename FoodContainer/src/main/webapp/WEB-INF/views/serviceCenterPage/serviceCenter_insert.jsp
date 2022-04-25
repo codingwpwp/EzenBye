@@ -29,15 +29,7 @@
         <div class="row">
             <div class="col-lg-2 d-none d-lg-block"></div>
 
-            <!--
-                id="navLeftMenu"인 현재 주석 바로 아래의 태그는 페이지의 종류에 따른 왼쪽메뉴.
-                네비게이션 바가 펼쳐질 때 알아서 태그가 안보이도록 설정.
-                필요시에만 div태그 사이에 코드를 작성.
-                작성시 border border-dark는 구분용으로만 작성했기 때문에 알아서 지우고 작업.
-                작성하지 않는 경우는 절대 건들지 않음.
-                base.js에 id="navLeftMenu"와 관련된 코드가 작성되어있음.
-            -->
-            <div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark" id="navLeftMenu"><!-- 여기에 작성 --></div>
+            <div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark" id="navLeftMenu"></div>
 
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
 
@@ -59,51 +51,49 @@
             <div class="col-12 col-sm-9 col-md-10 col-lg-8">
                 <article id="mainSection">
                     
-                    <!--
-                        헤딩.
-                        필요하지 않는 사람은 <div>태그를 삭제.
-                        필요한 사람은 <div>태그에 작성.
-                    -->
-                    <div class="fs-5 my-2 fw-bold">공지사항</div>
+                    <div class="fs-5 my-2 fw-bold">${sort1}</div>
 
-                 	<div class="maindiv">
+                 	<form class="maindiv" id="serviceCenterForm" action="serviceCenter_insert.do" method="post">
 						<table class="table">
 							<thead>
 								<tr>
-									<th scope="col">제목</th>
-									<td class="title">20220330공지사항입니다~!!!!!!!!!! 
-												
-											 </td>
-									<td class="right">2022-03-23</td>
+									<th scope="col" style="vertical-align: middle;">제목</th>
+									<td class="title">
+										<input type="text" name="title" class="form-control" maxlength="20" autocomplete="off">
+									</td>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<th scope="row">작성자</th>
-									<td>관리자</td>
-									<td class="right">조회수10</td>
+									<td>${member.name}</td>
+									<td>
+										<select class="form-select form-select-sm fw-bold" name="sort2" onchange="changeColorFn(this)">
+											<option value="no" disabled selected style="display: none;">종류를 선택하세요</option>
+		                                    <option class="fw-bold bg-primary bg-gradient bg-opacity-50" value="상품">상품</option>
+		                                    <option class="fw-bold bg-success bg-gradient bg-opacity-50" value="배송">배송</option>
+		                                    <option class="fw-bold bg-warning bg-gradient bg-opacity-50" value="취소">취소</option>
+		                                    <option class="fw-bold bg-info bg-gradient bg-opacity-50" value="회원">회원</option>
+		                                </select>
+									</td>
 								</tr>
 								<tr>
 									<td colspan="3">
-										<textarea readonly="readonly"></textarea>
+										<textarea id="summernote" name="contents"></textarea>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 						<div class="row">
-						<div class="col-md-2 col-sm-2 col-3 leftbtn">
-							<input value="목록" type="button" class="btn btn-primary listbtn" onclick="location.href='notice_main.do'">
+						<div class="col-md-2 col-sm-2 col-4 leftbtn">
+							<input value="목록" type="button" class="btn btn-secondary listbtn" onclick="location.href='serviceCenter.do?sort2=${sort2}&nowPage=${nowPage}'">
 						</div>
-						<div class="col-md-10 col-sm-10 col-9 rightbtn">
-							<input value="삭제" type="button" class="btn btn-danger delbtn">
-							<input value="수정" type="button" class="btn btn-secondary updatebtn" onclick="location.href='notice_update.do'">
+						<div class="col-md-10 col-sm-10 col-8 rightbtn">
+							<input value="등록" type="button" class="btn btn-primary insertbtn" onclick="submitFn()">
 						</div>
 						</div>
 
-					</div>
-
-
-					
+					</form>
 
 				</article>
             </div>
@@ -128,5 +118,6 @@
     <script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
         <script src="<%=request.getContextPath()%>/resources/js/notice.js"></script>
+        <script src="<%=request.getContextPath()%>/resources/js/serviceCenter.js"></script>
 </body>
 </html>

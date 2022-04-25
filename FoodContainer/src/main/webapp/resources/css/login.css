@@ -113,6 +113,20 @@ form.loginfrm{
 .form-control{
 	display: initial;
 }
+
+
+/*아이디저장,아이디 찾기, 비밀번호 찾기 모바일*/
+
+@media screen and (max-width:380px){
+    a.link-dark.fw-bold{
+       	font-size:12px;
+    } 
+}
+@media screen and (max-width:380px){
+    label.fw-bold{
+       	font-size:13px;
+    } 
+}
 /*<===================================아이디 찾기===================================>*/
 /*모바일버전*/
 @media screen and (max-width:380px){
@@ -320,8 +334,9 @@ form.pwfind{
 @media screen and (max-width:380px){
    input.findemailinput{
       width:100%;
-      max-width:150px;
+      
       height:40px;
+       margin-bottom: 5%;
     }    
 }
 @media screen and (max-width:380px){
@@ -332,6 +347,11 @@ form.pwfind{
 @media screen and (max-width:380px){
    input.findinput{
       margin-bottom: 5%;
+    }    
+}
+@media screen and (max-width:380px){
+  button.btn.btn-secondary.emailbtn{
+      width:224px;
     }    
 }
 

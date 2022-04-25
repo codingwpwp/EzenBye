@@ -12,7 +12,7 @@
 <script type="text/javascript">
 	function alertMessage(){
 		alert("로그인이 필요합니다");
-		location.href='/controller/loginmain.do';
+		location.href='<%=request.getContextPath()%>/loginmain.do';
 	}
 </script>
 </html>

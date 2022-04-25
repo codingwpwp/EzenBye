@@ -31,7 +31,7 @@ function checkAll() {
 		alert("ID를 입력해주세요!");
 		return false;
 	}else if (!checkId.test(id.value)) {
-		alert("id는 6~12자리의 영문 및 영문숫자 가능");
+		alert("id는 5~12자리의 영문 및 영문숫자 가능");
 		return false;
 	}
 	else if(idChk =="N"){
@@ -108,6 +108,48 @@ function checkAll() {
 	return true;
 	
 }
+
+
+/*function checkFn(){
+	var checkName = /^[가-힣]{2,6}$/g;
+	var checkEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/g;
+	var name = document.getElementById("name");
+	var email = document.getElementById("email"); 
+	var check1 = document.frm.checkOne.checked;
+	var check2 = document.frm.checkTwo.checked;
+	var check3 = document.frm.checkThree.checked
+
+	
+	//이름
+	if (name.value == "") {
+		alert("이름을 입력해주세요!");
+		return false;
+	}
+	else if (!checkName.test(name.value)) {
+		alert("특수문자,영어,숫자는 사용할 수 없습니다. 한글만 입력해주세요!");
+		return false;
+	}
+	else if (email.value == "") {
+		alert("이메일을 입력해주세요!");
+		return false;
+	}
+	else if (!checkEmail.test(email.value)) {
+		alert("올바른 이메일 형식이 아닙니다.");
+		return false;
+	}
+	if(!check2){
+		alert("이용약관 동의하셔야 합니다.")
+		return false;
+	} 
+	if(!check3){
+		alert("이용약관 동의하셔야 합니다.")
+		return false;
+	} 
+	
+	alert("인증이 완료되었습니다!");
+	return true;
+}
+*/
 //아이디 중복확인
 function fn_idChk(){
 	var id =$("#id").val();
@@ -187,4 +229,87 @@ function fn_recomChk(){
 		
 	})
 
+}
+
+
+var nameSw=0;
+var emailSw=0
+var sendemailSW=0;
+
+var RandomNum="";
+
+function nameChk(obj){
+	var checkName = /^[가-힣]{2,6}$/g;
+	if (!checkName.test(obj.value)) {
+	nameSw = 0;
+		
+	}else{
+		
+		nameSw=1;
+	}
+	if(nameSw == 1 && emailSw == 1){
+		$("#sendEmail").attr("disabled", false);
+		
+	}else{
+		$("#sendEmail").attr("disabled", true);
+	}
+}
+function emailChk(obj){
+	var emailReg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/g;
+	if(!emailReg.test(obj.value)){
+		emailSw = 0;
+	}else{
+		emailSw = 1;
+	}
+	if(nameSw == 1 && emailSw == 1){
+		$("#sendEmail").attr("disabled", false);
+		
+	}else{
+		$("#sendEmail").attr("disabled", true);
+	}
+}
+
+function emailsendFn(){
+	
+	if(sendemailSW == 1){
+		
+	}else{
+		sendemailSW = 1;
+		$("#emailspan").text("보내는중...");
+		$.ajax({
+			url : "member_email_send",
+			type : "post",
+			data : $("form[name='mailSendfrm']").serialize(),
+			success : function(data){
+				RandomNum = data.trim();
+				
+				$("#emailspan").text("");
+				$("#sendEmail").attr("disabled", true);
+				if(RandomNum == "none"){
+					sendemailSW = 0;
+				}else{
+					$("input[name='name']").attr("readonly",true);
+					$("input[name='email']").attr("readonly",true);
+					alert($("input[name=name]").val() + "님의 해당 이메일로 인증번호를 발송했습니다");
+					$("#singOk").attr("disabled", false);
+					$("#sendEmail").attr("disabled",true);
+				}
+				
+			}
+		});
+	}
+}
+var flexCheckDefault2 = document.getElementById("flexCheckDefault2");
+var flexCheckDefault3 = document.getElementById("flexCheckDefault3");
+function emailChksubmit(){
+	if(!flexCheckDefault2.checked || !flexCheckDefault3.checked){
+		alert("이용약관 필수 체크해주세요");
+	}else{
+		if($("#randomNum").val() == RandomNum){
+		$("form[name='mailSendfrm']").submit();
+	}else{
+		alert("인증번호가 틀렸습니다. 다시 입력 하세요");
+		}
+	}
+	
 }

@@ -50,6 +50,10 @@ public class ProductDAO {
 	public List<ProductVO> productSearch(ProductVO productVO) throws Exception{
 		return sqlSession.selectList(Namespace+".ProductSearch",productVO);
 	}
+
+	public List<ProductVO> recentProduct(List<ProductVO> recentProductArr) throws Exception{
+		return sqlSession.selectList(Namespace+".recentProduct",recentProductArr);
+	}
 	
 
 	

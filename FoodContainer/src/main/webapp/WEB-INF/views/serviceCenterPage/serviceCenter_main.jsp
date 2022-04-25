@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -31,7 +34,7 @@
 			<div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark" id="navLeftMenu"></div>
 
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
-
+			<input type="hidden" id="midx" value="${member.member_index}">
 		</div>
 	</nav>
 
@@ -65,59 +68,76 @@
 						</div>
 					</div>
 
-					<table class="table table-hover maintab" style="text-align: center;">
-						<thead>
-							<tr>
-								<th scope="col" class="fs-5">번호</th>
-								<th scope="col" class="fs-5">제목</th>
-								<th scope="col" class="fs-5">작성자</th>
-								<th scope="col" class="fs-5">날짜</th>
-							</tr>
-						</thead>
-						<tbody>
-						<c:if test="${not empty FAQList}">
-						<c:forEach items="${FAQList}" var="FAQ">
-							<tr>
-								<th scope="row">-</th>
-								<td>
-									<a href="">
-									<span class="d-inline-block text-truncate">${FAQ.title}</span>
-									</a>
-								</td>
-								<td>관리자</td>
-								<td>${FAQ.write_date}</td>
-							</tr>
-						</c:forEach>
-						</c:if>
-						
-						<c:if test="${not empty sList}">
-						<c:set var="cnt" value="${paging.total - ( (paging.nowPage - 1) * paging.perPage )}" />
-						<c:forEach items="${sList}" var="list" step="1">
-							<tr>
-								<th scope="row">${cnt}</th>
-								<td>
-									<a href="">
-									<span class="d-inline-block text-truncate">${list.title}</span>
-									</a>
-								</td>
-								<td>${list.name}</td>
-								<td>${FAQ.write_date}</td>
-								<c:set var="cnt" value="${cnt - 1}"/>
-							</tr>
-						</c:forEach>
-						</c:if>
-						
-						</tbody>
-					</table>
+					<div class="table-responsive">
+						<table class="table table-hover maintab" style="text-align: center; min-width: 600px;">
+							
+							<colgroup>
+								<col width="10%">
+								<col width="60%">
+								<col width="20%">
+								<col width="20%">
+							</colgroup>
+							
+							<thead>
+								<tr>
+									<th scope="col" class="fs-5">번호</th>
+									<th scope="col" class="fs-5">제목</th>
+									<th scope="col" class="fs-5">작성자</th>
+									<th scope="col" class="fs-5">날짜</th>
+								</tr>
+							</thead>
+							
+							<tbody id="serviceTableBody">
+							<c:if test="${not empty FAQList}">
+							<c:forEach items="${FAQList}" var="FAQ">
+								<tr class="fw-bold FAQ" data-bs-toggle="collapse" data-bs-target="#collapse${FAQ.serviceCenter_index}" aria-expanded="false">
+									<th scope="row">-</th>
+									<td>
+										<span class="d-inline-block text-truncate">${FAQ.title}</span>
+									</td>
+									<td>관리자</td>
+									<td>${fn:substring(FAQ.write_date, 0,10)}</td>
+								</tr>
+								<tr class="FAQ">
+								  <td colspan="4" class="collapse collapse-horizontal p-5" id="collapse${FAQ.serviceCenter_index}">${FAQ.contents}</td>
+								</tr>
+							</c:forEach>
+							</c:if>
+							
+							<c:if test="${not empty sList}">
+							<c:set var="cnt" value="${paging.total - ( (paging.nowPage - 1) * paging.perPage )}" />
+							<c:forEach items="${sList}" var="list" step="1">
+								<tr class="OneByOne">
+									<th scope="row">${cnt}</th>
+									<td class="fw-bold">
+									<c:if test="${member != null and (list.member_index == member.member_index or member.position eq '관리자')}">
+										<a href="serviceCenter_view.do?sort2=${sort2}&nowPage=${paging.nowPage}&serviceCenter_index=${list.serviceCenter_index}">
+											<span class="d-inline-block text-truncate">${list.title}</span>
+										</a>
+									</c:if>
+									<c:if test="${member == null or (list.member_index != member.member_index and member.position ne '관리자')}">
+										<span class="d-inline-block text-truncate"><i class="fa-solid fa-lock"></i>${list.title}</span>
+									</c:if>
+									</td>
+									<td>${list.name}</td>
+									<td>${fn:substring(list.write_date, 0,10)}</td>
+									<c:set var="cnt" value="${cnt - 1}"/>
+								</tr>
+							</c:forEach>
+							</c:if>
+							
+							</tbody>
+						</table>
+					</div>
 
 					<div class="row">
-						<div class="col-9 row">
+						<div class="col-9 row" id="pagingDiv">
 	                        <!-- 페이징 -->
 	                        <ul class="col-12 col-md-4 d-flex align-items-center justify-content-center pagination mt-2 my-md-0">
 		                        <!-- <부분 -->
 								<c:if test="${paging.startPage > 1}">
 		                            <li class="page-item">
-		                                <a class="page-link" href="" aria-label="Previous">
+		                                <a class="page-link" href="serviceCenter.do?sort2=${sort2}&nowPage=${paging.startPage - 1}" aria-label="Previous">
 		                                    <span aria-hidden="true">&lt;</span>
 		                                </a>
 		                            </li>
@@ -134,7 +154,7 @@
 								<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i" step="1">
 									<c:if test="${i != paging.nowPage}">
 										<li class="page-item">
-											<a class="page-link" href="">${i}</a>
+											<a class="page-link" href="serviceCenter.do?sort2=${sort2}&nowPage=${i}">${i}</a>
 										</li>
 									</c:if>
 									<c:if test="${i == paging.nowPage}">
@@ -147,7 +167,7 @@
 								<!-- >부분 -->
 								<c:if test="${paging.endPage != paging.lastPage}">
 		                            <li class="page-item">
-		                                <a class="page-link" href="" aria-label="Next">
+		                                <a class="page-link" href="serviceCenter.do?sort2=${sort2}&nowPage=${paging.endPage + 1}" aria-label="Next">
 		                                    <span aria-hidden="true">&gt;</span>
 		                                </a>
 		                            </li>
@@ -161,9 +181,13 @@
 		                        </c:if>
 	                        </ul>
 						</div>
-						<div class="col-3 d-flex justify-content-center">
-							<input value="FAQ 등록" type="button" class="btn btn-primary me-3">
-							<input value="문의 하기" type="button" class="btn btn-secondary">
+						<div class="col-3 d-flex justify-content-end">
+							<c:if test="${member.position ne null and member.position eq '관리자'}">
+								<input value="FAQ 등록" type="button" class="btn btn-primary" style="height: 40px;" onclick="location.href='serviceCenter_insert.do?sort1=FAQ&sort2=${sort2}&nowPage=${paging.nowPage}'">
+							</c:if>
+							<c:if test="${member.position ne null and member.position eq '일반'}">
+								<input value="문의 하기" type="button" class="btn btn-secondary" style="height: 40px;" onclick="location.href='serviceCenter_insert.do?sort1=1:1문의&sort2=${sort2}&nowPage=${paging.nowPage}'">
+							</c:if>
 						</div>
 					</div>
 					

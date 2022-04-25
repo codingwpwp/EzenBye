@@ -1,6 +1,7 @@
 package team.project.service;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -131,36 +132,100 @@ public class RecipeServiceImpl implements RecipeService{
 	}
 	
 	// 상품 이미지 업로드 메소드
-		public void imageUpload(RecipeVO vo, MultipartFile tumnailImage, HttpServletRequest request) throws Exception {
-			
-	
-			
-			// 경로 설정
-			String path = request.getSession().getServletContext().getRealPath("/resources/img/recipe");
-			System.out.println(path);
-			System.out.println(path);
-			System.out.println(path);
-			
-			// 경로에 대한 디렉토리 생성
-			File dir = new File(path);
-			if(!dir.exists()) dir.mkdirs();	// 경로에 대한 디렉토리가 없으면 알아서 생성해준다.
-			
-			// 해당 경로에 업로드
-			if(tumnailImage != null) {
-				if(!tumnailImage.getOriginalFilename().isEmpty()) tumnailImage.transferTo(new File(path,vo.getThumbnail_image()));
-			}
-			
-			
-		}
+	public void imageUpload(RecipeVO vo, MultipartFile tumnailImage, HttpServletRequest request) throws Exception {
+		
 
-		@Override
-		public List<RecipeVO> viewRecipeList(RecipeVO recipeVO) throws Exception {
-			
-			List<RecipeVO> recipeList = recipeDao.viewRecipeList(recipeVO);
-			
-			return recipeList;
+		
+		// 경로 설정
+		String path = request.getSession().getServletContext().getRealPath("/resources/img/recipe");
+		System.out.println(path);
+		System.out.println(path);
+		System.out.println(path);
+		
+		// 경로에 대한 디렉토리 생성
+		File dir = new File(path);
+		if(!dir.exists()) dir.mkdirs();	// 경로에 대한 디렉토리가 없으면 알아서 생성해준다.
+		
+		// 해당 경로에 업로드
+		if(tumnailImage != null) {
+			if(!tumnailImage.getOriginalFilename().isEmpty()) tumnailImage.transferTo(new File(path,vo.getThumbnail_image()));
 		}
+		
+		
+	}
+
+	@Override
+	public List<RecipeVO> viewRecipeList(RecipeVO recipeVO) throws Exception {
+		
+		List<RecipeVO> recipeList = recipeDao.viewRecipeList(recipeVO);
+		
+		return recipeList;
+	}
 	
+	//마이페이지 부분
+	@Override
+	public List<RecipeVO> recipeMypageList(SearchVO searchVO, int nowPage) throws Exception {
+		PagingUtil paging = recipeListPaging(searchVO, nowPage);
+		
+		paging.setMember_index(searchVO.getMember_index());
+		
+		paging.setStart(paging.getStart() - 1);
+		
+		return recipeDao.recipeMypageList(paging);
+	}
+
+	@Override
+	public PagingUtil recipeListPaging(SearchVO searchVO, int nowPage) throws Exception {
+		int cnt = recipeDao.countRecipeMypage(searchVO);
+		return new PagingUtil(cnt, nowPage, 9, 5);
+	}
+
+	@Override
+	public int countRecipeMypage(SearchVO searchVO) throws Exception {
+		int cnt = recipeDao.countRecipeMypage(searchVO);
+		return cnt;
+	}
+
+	/* 관리자 페이지 */
+	// 베스트레시피 출력
+	@Override
+	public List<RecipeVO> adminBestRecipeList() throws Exception {
+		return recipeDao.adminBestRecipeList();
+	}
+
+	// 레시피 해제&순위 조절
+	@Override
+	public void adminCancelBestRecipe(int[] ridxArr) throws Exception {
+		
+		// 리스트로 변환 작업
+		List<Integer> ridxList = new ArrayList<Integer>();
+		for(int i : ridxArr) {
+			ridxList.add(i);
+		}
+		// 베스트 해제
+		recipeDao.adminCancelBestRecipe(ridxList);
+		
+		// 순위 조절 시간
+		if(ridxArr.length == 1) {
+			recipeDao.adminUpdateBestRecipeRankOne();
+			recipeDao.adminUpdateBestRecipeRankTwo();
+		}else if(ridxArr.length == 2) {
+			recipeDao.adminUpdateBestRecipeRankOne();
+		}
+	}
 	
+	//추천수 증가
+	@Override
+	public int thumbPlus(int recipe_index) throws Exception {
+		int thumbPlus = recipeDao.thumbPlus(recipe_index);
+		return thumbPlus;
+	}
 	
+	//추천수 테이블 추가
+	@Override
+	public int thumbTablePlus(int recipe_index, int member_index) throws Exception {
+		int thumbTablePlus = recipeDao.thumbTablePlus(recipe_index, member_index);
+		return thumbTablePlus;
+	}
+		
 }

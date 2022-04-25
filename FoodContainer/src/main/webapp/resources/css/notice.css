@@ -2,8 +2,6 @@
 /*테이블 div*/
 .maindiv{
    width:90%;
-   overflow:auto;
-    
 }
 @media (max-width:380px) {
 	.maindiv{
@@ -62,7 +60,6 @@ td.right{
 }
 textarea {
 	width: 100%;
-	max-width: 1030px;
 	height:500px;
 	 resize: none;
 	

@@ -80,7 +80,7 @@
 					
 						<div class="row hd">
 						
-							<div class="col-sm-9 col-xs-3 col-12">
+							<div class="col-sm-8 col-xs-3 col-12">
 								<h3>
 								<c:if test="${read.best_rank==1 }">
 								<img src="<%=request.getContextPath()%>/resources/img/금메달.png" id="bestimg">
@@ -96,7 +96,7 @@
 							</div>
 
 
-							<div class="col-sm-3 col-12 hddiv">조회수 : (${read.hit}) | 댓글(${read.reply_index})</div>
+							<div class="col-sm-4 col-12 hddiv">작성자: ${read.name} | 조회수 : (${read.hit}) | 댓글(${read.reply_index})</div>
 						</div>
 
 						<div class="row body">
@@ -145,7 +145,14 @@
 								<textarea readonly id="summernote">${read.contents}</textarea>
 							</div>
 						</div>
-						
+						<div class="row">
+							<div class="col-sm-12 col-12 good">
+							<input type="hidden" name="recipe_index" value="${read.recipe_index}" />
+							<input type="hidden" name="member_index" value="${member.member_index}" />
+								<i class = "fa-regular fa-thumbs-up fs-1"></i>
+								<div class="fw-bold thumbCount">${read.thumb}</div>
+							</div>
+						</div>
 						<div class="row">
 							<div class="col-sm-12 col-12">
 								<div class="d-flex button">
@@ -187,12 +194,12 @@
 							</div>
 						</div>
 						
-						<form method="post" action="wirteReply" id="writeReply">
+						<form method="post" action="wirteReply" id="writeReply"name="writeReply">
 						<input type="hidden" value="${read.recipe_index}" name="recipe_index" id="recipe_index">
 						<div class="row rp">
 							
 							<div class="col-sm-8 col-9 reply-write">
-								<input type="text" name="contents" placeholder="로그인 후 댓글 작성이 가능합니다.">
+								<input type="text" name="contents" id="replycontent" placeholder="로그인 후 댓글 작성이 가능합니다.">
 							</div>
 							<div class="col-sm-2 col-3">
 						 	<c:if test="${member==null}">
@@ -218,7 +225,7 @@
 							</div>
 							<div class="col-md-2 col-sm-2 col-3 report"  name="replybtn" id="replybtn">
 								<!-- 회원 -->
-								<c:if test="${member.member_index==read.member_index}">
+								<c:if test="${member.member_index==re.member_index}">
 								<span>
 								
 									<input type="button" value="수정" onclick="modifyReply(this,${re.reply_index},${re.recipe_index});" id="modifybtn" class="btn btn-secondary replymod">

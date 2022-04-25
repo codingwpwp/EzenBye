@@ -11,7 +11,7 @@
 			alert("로그인 후 사용 가능합니다.");
 		}else{
 			if(hCheck > 0){
-				obj.setAttribute("src","/controller/resources/img/찬하트.png");
+				obj.setAttribute("src","/FoodContainer/resources/img/찬하트.png");
 				
 				$.ajax({
 					url : "dibsInsert.do",
@@ -23,7 +23,7 @@
 				});
 				
 			}else if(hCheck < 0){
-				obj.setAttribute("src","/controller/resources/img/빈하트.png");
+				obj.setAttribute("src","/FoodContainer/resources/img/빈하트.png");
 				
 				$.ajax({
 					url : "dibsDelete.do",
@@ -189,7 +189,19 @@
 			type : "get",
 			data : "name="+name,
 			success : function(data){
+		/*	var recentHTML = "";
+				for(var i=0; i<data.length; i++){
+					recentHTML += "<div class='productImg'>";
+					recentHTML += "<a href='productView.do?product_index="+data[i].product_index+"'>";
+					recentHTML += "<img src='/FoodContainer/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='w-75 img-fluid mt-2 mb-3 border' alt='"+data[i].product_name+"'></img>";
+					recentHTML += "</a>";
+					recentHTML += "</div>";
+				}
 				
+				$("#recentProduct").html(recentHTML);*/
+			},
+			error : function(){
+				console.log("error");
 			}
 		});
 	}
