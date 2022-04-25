@@ -62,6 +62,26 @@
     	WHERE del_YN != 'y' and product_index = #{index}
     </select>
     
+    <select id="recentProduct" resultType="ProductVO" parameterType="list">
+    	SELECT product_name,
+    		   bigSort,
+    		   middleSort,
+    		   origin_price,
+    		   sale_price,
+    		   brand,
+    		   inventory,
+    		   quantity,
+    		   delivery_free_YN,
+    		   thumbnail_image,
+    		   detail_image
+    	FROM product
+    	WHERE del_YN != 'y' 
+    	<if test="list != null">
+	    	and product_index in (<foreach collection="list" item="recent" separator=",">#{recent.product_index}</foreach>)
+    	</if>
+    	
+    </select>
+    
     <select id="cookiList" resultType="ProductVO" parameterType="list">
     	SELECT *
     	FROM product

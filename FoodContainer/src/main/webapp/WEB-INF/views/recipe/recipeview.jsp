@@ -80,7 +80,7 @@
 					
 						<div class="row hd">
 						
-							<div class="col-sm-9 col-xs-3 col-12">
+							<div class="col-sm-8 col-xs-3 col-12">
 								<h3>
 								<c:if test="${read.best_rank==1 }">
 								<img src="<%=request.getContextPath()%>/resources/img/금메달.png" id="bestimg">
@@ -96,7 +96,7 @@
 							</div>
 
 
-							<div class="col-sm-3 col-12 hddiv">조회수 : (${read.hit}) | 댓글(${read.reply_index})</div>
+							<div class="col-sm-4 col-12 hddiv">작성자: ${read.name} | 조회수 : (${read.hit}) | 댓글(${read.reply_index})</div>
 						</div>
 
 						<div class="row body">
@@ -145,7 +145,17 @@
 								<textarea readonly id="summernote">${read.contents}</textarea>
 							</div>
 						</div>
-						
+						<div class="row">
+							<div class="col-sm-12 col-12 good">
+								<a href="#"><svg xmlns="http://www.w3.org/2000/svg"
+										width="50" height="50" fill="currentColor"
+										class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
+                                    <path
+											d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z" />
+                                  </svg></a>
+								<div>${read.thumb}</div>
+							</div>
+						</div>
 						<div class="row">
 							<div class="col-sm-12 col-12">
 								<div class="d-flex button">
@@ -187,12 +197,12 @@
 							</div>
 						</div>
 						
-						<form method="post" action="wirteReply" id="writeReply">
+						<form method="post" action="wirteReply" id="writeReply"name="writeReply">
 						<input type="hidden" value="${read.recipe_index}" name="recipe_index" id="recipe_index">
 						<div class="row rp">
 							
 							<div class="col-sm-8 col-9 reply-write">
-								<input type="text" name="contents" placeholder="로그인 후 댓글 작성이 가능합니다.">
+								<input type="text" name="contents" id="replycontent" placeholder="로그인 후 댓글 작성이 가능합니다.">
 							</div>
 							<div class="col-sm-2 col-3">
 						 	<c:if test="${member==null}">
@@ -218,7 +228,7 @@
 							</div>
 							<div class="col-md-2 col-sm-2 col-3 report"  name="replybtn" id="replybtn">
 								<!-- 회원 -->
-								<c:if test="${member.member_index==read.member_index}">
+								<c:if test="${member.member_index==re.member_index}">
 								<span>
 								
 									<input type="button" value="수정" onclick="modifyReply(this,${re.reply_index},${re.recipe_index});" id="modifybtn" class="btn btn-secondary replymod">

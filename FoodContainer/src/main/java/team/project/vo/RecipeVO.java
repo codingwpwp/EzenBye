@@ -21,8 +21,18 @@ public class RecipeVO {
 	private int best_rank;
 	private int reply_index;
 	private String del_yn;
+	private String name;
 	
 	
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getDel_yn() {
 		return del_yn;
 	}

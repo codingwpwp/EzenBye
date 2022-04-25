@@ -29,6 +29,8 @@ public interface ProductService {
 	//검색
 	List<ProductVO> productSearch(ProductVO productVO) throws Exception;
 	
+	List<ProductVO> recentProduct(List<ProductVO> recentProductArr) throws Exception;
+	
 	/* 구매페이지 */
 	// 회원&비회원 결제화면 전에 상품 수량 확인 및 빼주기
 	String checkProductInventory(HashMap<String, String> cartMap) throws Exception;
