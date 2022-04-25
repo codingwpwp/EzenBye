@@ -96,7 +96,7 @@
 	                                        <td class="w-25">
 	                                            <img src="<%=request.getContextPath()%>/resources/img/<c:if test="${list.best_rank == 1}">금메달.png</c:if><c:if test="${list.best_rank == 2}">은메달.png</c:if><c:if test="${list.best_rank == 3}">동메달.png</c:if>" class="img-fluid medal">
 	                                        </td>
-	                                        <th>${list.hit} | ${list.thumb}</th>
+	                                        <th>${list.hit} | ${list.reply_index}</th>
 	                                        <td>
 	                                        	<a href="<%=request.getContextPath()%>/recipeview.do?recipe_index=${list.recipe_index}" class="link-primary" target="blank">
 	                                        		<span class="d-inline-block text-truncate">${list.title}</span>

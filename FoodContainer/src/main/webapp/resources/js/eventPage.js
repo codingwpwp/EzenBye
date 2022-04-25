@@ -62,10 +62,10 @@ $(document).ready(function() {
 				case 4 : return "초대박!!!!50,000포인트 증정!!";
 				break;
 				
-				case 5 : return "10포인트ㅋㅋ";
+				case 5 : return "10포인트씩이나 당첨되셨군요?";
 				break;
 				
-				case 6 : return "10포인트ㅋㅋ";
+				case 6 : return "10포인트라...당신은 행운아^^";
 			}
         });
         $('<img  src="/FoodContainer/resources/img/이벤트/coupon' + (gift + 1) + '.png" />').prependTo("#popup_gift .lottery_present");
