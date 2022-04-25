@@ -51,21 +51,13 @@
 
             <!-- 왼쪽 사이드메뉴 -->
             <div class="col-lg-2 d-none d-lg-block">
-                <aside>
-                   
-                </aside> 
+                 
             </div>
 
             <!-- 메인 -->
             <div class="col-12 col-sm-9 col-md-10 col-lg-8">
                 <article id="mainSection">
-                    
-                    <!--
-                        헤딩.
-                        필요하지 않는 사람은 <div>태그를 삭제.
-                        필요한 사람은 <div>태그에 작성.
-                    -->
-                    
+    
 
                 <div class="container">
                         <div class="row">
@@ -118,7 +110,7 @@
                                             </div>
                                             <div class="col-sm-9 col-12">
                                                 <input type="text" class="pwinput" name="name" id="name" value="${name}"
-                                                    placeholder="이름를 입력하세요" readonly>
+                                                    placeholder="이름를 입력하세요" readonly style="background-color: #d2d2d2">
                                                
                                             </div>
                                             <div class="col-sm-12 col-12 tit">
@@ -155,7 +147,7 @@
                                             </div>
                                             <div class="col-sm-9 col-12">
                                                 <input type="text" class="emailinput" name="email" id="email"
-                                                    placeholder="이메일을 입력해주세요" value="${email}" readonly>
+                                                    placeholder="이메일을 입력해주세요" value="${email}" style="background-color: #d2d2d2"  readonly>
                                               
                                             </div>
                                             <div class="col-12 tit">
