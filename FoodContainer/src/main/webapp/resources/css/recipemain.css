@@ -5,6 +5,12 @@ width: 50px;
 height: 50px;
 position: absolute;
 }
+/*a태그 스타일*/
+a{
+	text-decoration-line: none; 
+	
+
+}
 
 /* 버튼 스타일 시작*/
 .btnwr {
@@ -127,6 +133,7 @@ input.btn.btn-primary.selbtn{
 	}
 }
 /*셀럭트 박스 끝*/
+
 
 /*테이블 모바일*/
 @media ( max-width :380px) {
