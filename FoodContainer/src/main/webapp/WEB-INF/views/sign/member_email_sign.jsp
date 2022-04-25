@@ -116,7 +116,7 @@
                                             </label>
                                           </div>
                                             <div class="col-sm-6 col-6 btndiv">
-                                                <input type="button" value="취소" class="btn btn-secondary can">
+                                                <input type="button" value="취소" class="btn btn-secondary can" onclick="location.href='<%=request.getContextPath()%>/loginmain.do'">
                                             </div>
                                             <div class="col-sm-6 col-6 btndiv">
                                               <!--   <input type="submit" value="회원가입" class="btn btn-dark"disabled> -->
