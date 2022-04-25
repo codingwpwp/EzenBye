@@ -1,5 +1,6 @@
 package team.project.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -118,6 +119,24 @@ public class RecipeDAO {
 	// 순위 조절2
 	public void adminUpdateBestRecipeRankTwo() throws Exception{
 		sqlSession.update(Namespace + ".adminUpdateBestRecipeRankTwo");
+	}
+	
+	//추천수 증가
+	public int thumbPlus(int recipe_index) throws Exception{
+		return sqlSession.update(Namespace + ".thumbPlus",recipe_index);
+	}
+	
+	//추천테이블 추가
+	public int thumbTablePlus(int recipe_index, int member_index) throws Exception{
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("recipe_index", recipe_index);
+		map.put("member_index", member_index);
+		try {
+			return sqlSession.insert(Namespace + ".thumbTablePlus",map);
+        }catch(Exception e) {
+        	e.printStackTrace();
+        }
+		return -1;
 	}
 }
 
