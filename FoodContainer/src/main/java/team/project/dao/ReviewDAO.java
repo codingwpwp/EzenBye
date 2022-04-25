@@ -42,6 +42,10 @@ public class ReviewDAO {
 		return sqlSession.selectList(Namespace + ".viewReviewList", product_index);
 	}
 	
+	public List<ReviewVO> viewReview(PagingUtil pagingUtil) throws Exception {
+		return sqlSession.selectList(Namespace + ".viewReivewPaging", pagingUtil);
+	}
+	
 	public List<ReviewVO> review(List<ProductVO> ProductListAll) throws Exception {
 		return sqlSession.selectList(Namespace + ".viewReviewListArr", ProductListAll);
 	}
@@ -50,4 +54,11 @@ public class ReviewDAO {
 		return sqlSession.selectList(Namespace + ".viewReviewListArr", popularList);
 	}
 	
+	public int viewReviewCnt(String product_index) throws Exception {
+		return sqlSession.selectOne(Namespace + ".viewReviewCnt", product_index);
+	}
+	
+	public List<ReviewVO> viewReivewPaging(String product_index) throws Exception {
+		return sqlSession.selectList(Namespace + ".viewReivewPaging", product_index);
+	}
 }

@@ -69,6 +69,26 @@ $(document).ready(function(){
 		}
 	});
 	
+	$.ajax({
+		url : 'recentProduct.do',
+		type : 'get',
+		success : function(data){
+			var recentHTML = "";
+			for(var i=0; i<data.length; i++){
+				recentHTML += "<div class='productImg'>";
+				recentHTML += "<a href='productView.do?product_index="+data[i].product_index+"'>";
+				recentHTML += "<img src='/FoodContainer/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='w-75 img-fluid mt-2 mb-3 border' alt='"+data[i].product_name+"'></img>";
+				recentHTML += "</a>";
+				recentHTML += "</div>";
+			}
+				
+				$("#recentProduct").html(recentHTML);
+		},
+		error : function(){
+			console.log("error");
+		}
+	});
+	
 });
 
 //모바일 최근 본 상품 z-index

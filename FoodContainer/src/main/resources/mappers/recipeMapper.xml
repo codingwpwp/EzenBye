@@ -182,7 +182,7 @@ member_index
  <select id="viewRecipeList" resultType="RecipeVO">
 	SELECT * 
     FROM recipe 
-	WHERE del_YN = 'N'
+	WHERE del_YN = 'N' order by best_rank
 </select>
 
 <!-- 마이페이지 부분 -->
@@ -199,7 +199,6 @@ member_index
     order by best_rank, write_date desc
     LIMIT #{start}, #{perPage}
 </select>
-
 
 <!-- 관리자페이지 -->
 
