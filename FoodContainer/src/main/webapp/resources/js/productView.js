@@ -272,7 +272,7 @@
 					url : "noMemberCartCookie.do",
 					type : "get",
 					data : "product_index="+pIndex+"&productCnt="+productCnt,
-					succese : function(){
+					success : function(){
 								
 					}
 				});
@@ -282,7 +282,7 @@
 					url : "memberCartInsert.do",
 					type : "post",
 					data : "product_index="+pIndex+"&member_index="+loginCheck+"&cart_count="+productCnt,
-					succese : function(){
+					success : function(){
 								
 					}
 				});
@@ -335,5 +335,633 @@
 		}
 	}
 	
+	//paging
+	
+	function pagePrev(obj){
+		var startPage = $("input[name='startPage']").val();
+		
+		var pram = document.location.href;
+		var product_index = pram.substring(pram.length-5,pram.length);
+		
+		if(startPage > 1){
+			$.ajax({
+				url : "productView.do",
+				type : "post",
+				data : "nowPage="+(startPage-1)+"&product_index="+product_index,
+				success : function(data){
+					var reviewHTML = "<thead>";
+						reviewHTML += "<tr>";
+						reviewHTML += "<th scope='col'>별점</th>";
+						reviewHTML += "<th scope='col'>리뷰</th>";
+						reviewHTML += "<th scope='col'>닉네임</th>";
+						reviewHTML += "<th scope='col'>작성일</th>";
+						reviewHTML += "</tr>";
+						reviewHTML += "</thead>";
+						reviewHTML += "<tbody>";
+							for(var i=0; i<data.length; i++){
+								reviewHTML += "<tr>";
+								reviewHTML += "<td>";
+								reviewHTML += "<span class='productViewReviewStar'>";
+								for(var j=1; j<6; j++){
+									if(j <= data[i].star_count){
+										reviewHTML += "<i class='bi bi-star-fill'></i>";
+									}else{
+										reviewHTML += "<i class='bi bi-star'></i>";
+									}
+								}
+								reviewHTML += "<br>";
+								reviewHTML += "</span>";
+								switch(data[i].star_count){
+									case 1 : reviewHTML += "<div style='color:red;'>매우 나빠요</div>";
+											 break;
+									case 2 : reviewHTML += "<div style='color:tomato;'>나빠요</div>";
+											 break;
+									case 3 : reviewHTML += "<div>보통</div>";
+											 break;
+									case 4 : reviewHTML += "<div style='color:green;'>좋아요</div>";
+											 break;
+									case 5 : reviewHTML += "<div style='color:blue;'>매우 좋아요</div>";
+											 break;
+								}
+								reviewHTML += "</td>";
+								reviewHTML += "<td class='reviewContent'>";
+								reviewHTML += "<div class='row'>";
+								reviewHTML += "<div class='reViewImg col-3 align-self-center'>";
+								reviewHTML += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid' alt='good'>";
+								reviewHTML += "</div>";
+								reviewHTML += "<div class='reviewTitle align-self-center col' data-bs-toggle='collapse' href='#reviewExtend"+i+"' role='button' aria-expanded='false' aria-controls='collapseExample'>";
+								reviewHTML += data[i].contents;
+								reviewHTML += "</div>";
+								reviewHTML += "<div class='col-1 align-self-center'>";
+								reviewHTML += "<i class='bi bi-caret-down reviewDown' data-bs-toggle='collapse' href='#reviewExtend"+i+"' role='button' aria-expanded='false' aria-controls='collapseExample'></i>";
+								reviewHTML += "</div>";
+								reviewHTML += "</div>";
+								reviewHTML += "<div class='collapse reviewCard' id='reviewExtend"+i+"'>";
+								reviewHTML += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid reviewCardImg' alt='good'>";
+								reviewHTML += "<div>"+data[i].contents+"</div>";
+								reviewHTML += "</div>";
+								reviewHTML += "</td>";
+								reviewHTML += "<td>";
+								
+								var memberHash = $("input[name='memberHash']").val()
+								memberHash = memberHash.replace("{","");
+								memberHash = memberHash.replace("}","");
+								
+								for(var m=0; m<memberHash.length; m++){
+									memberHash = memberHash.replace(" ","");
+								}
+								
+								var memberHashArr = memberHash.split(",");
+								var tempMember = memberHashArr.toString();
+								tempMember = tempMember.split("=");
+								var memberArr = tempMember.toString();
+								memberArr=memberArr.split(",");
+								
+								for(var k=0; k<memberArr.length; k++){
+									if(data[i].member_index == memberArr[k]){
+										reviewHTML += memberArr[k+1];
+									}
+								}
+								reviewHTML += "</td>";
+								reviewHTML += "<td>"+data[i].review_date+"</td>";
+								reviewHTML += "</tr>";
+							}
+								reviewHTML += "</tbody>";
+					
+					$("#reviewTable").html(reviewHTML);
+					
+					var reviewHTMLM = "<thead>";
+						reviewHTMLM += "<tr>";
+						reviewHTMLM += "<th>리뷰</th>";
+						reviewHTMLM += "</tr>";
+						reviewHTMLM += "</thead>";
+						reviewHTMLM += "<tbody>";
+						for(var i=0; i<data.length; i++){
+							reviewHTMLM += "<tr>";
+							reviewHTMLM += "<td>";
+							reviewHTMLM += "<div>";
+							reviewHTMLM += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid' alt='good'>";
+							reviewHTMLM += "</div>";
+							reviewHTMLM += "<div>";
+							reviewHTMLM += "<span>";
+							
+						var memberHash = $("input[name='memberHash']").val()
+							memberHash = memberHash.replace("{","");
+							memberHash = memberHash.replace("}","");
+								
+							for(var m=0; m<memberHash.length; m++){
+								memberHash = memberHash.replace(" ","");
+							}
+								
+							var memberHashArr = memberHash.split(",");
+							var tempMember = memberHashArr.toString();
+							tempMember = tempMember.split("=");
+							var memberArr = tempMember.toString();
+							memberArr=memberArr.split(",");
+								
+							for(var k=0; k<memberArr.length; k++){
+								if(data[i].member_index == memberArr[k]){
+									reviewHTMLM += memberArr[k+1];
+								}
+							}
+							
+							reviewHTMLM += " | ";
+							reviewHTMLM += data[i].review_date;
+							reviewHTMLM += "</span>";
+							reviewHTMLM += "<div class='productViewReviewStarM'>";
+								for(var j=1; j<6; j++){
+									if(j <= data[i].star_count){
+										reviewHTMLM += "<i class='bi bi-star-fill'></i>";
+									}else{
+										reviewHTMLM += "<i class='bi bi-star'></i>";
+									}
+								}
+							reviewHTMLM += "</div>";
+							reviewHTMLM += "<div>";
+							reviewHTMLM += data[i].contents;
+							reviewHTMLM += "</div>";
+							reviewHTMLM += "</div>";
+							reviewHTMLM += "</td>";
+							reviewHTMLM += "</tr>";
+						}
+							reviewHTMLM += "</tbody>";
+							
+					$("#reviewTableM").html(reviewHTMLM);
+					
+				},
+				error : function(){
+					console.log("error");
+				}
+			});
+			
+		}
+		if(startPage > 1){
+			startPage--;
+			$("input[name='startPage']").val(startPage);
+		}
+	}
+	
+	function pageNext(obj){
+		var endPage = $("input[name='endPage']").val();
+		var lastPage = $("input[name='lastPage']").val();
+		var pram = document.location.href;
+		var product_index = pram.substring(pram.length-5,pram.length);
+		
+		var startPageNum = $("input[name='startPage']").val();
+		if(startPageNum < lastPage){
+			startPageNum++;
+			$("input[name='startPage']").val(startPageNum);
+		}
+		
+		if(endPage != lastPage){
+			$.ajax({
+				url : "productView.do",
+				type : "post",
+				data : "nowPage="+(endPage+1)+"&product_index="+product_index,
+				success : function(data){
+					var reviewHTML = "<thead>";
+						reviewHTML += "<tr>";
+						reviewHTML += "<th scope='col'>별점</th>";
+						reviewHTML += "<th scope='col'>리뷰</th>";
+						reviewHTML += "<th scope='col'>닉네임</th>";
+						reviewHTML += "<th scope='col'>작성일</th>";
+						reviewHTML += "</tr>";
+						reviewHTML += "</thead>";
+						reviewHTML += "<tbody>";
+							for(var i=0; i<data.length; i++){
+								reviewHTML += "<tr>";
+								reviewHTML += "<td>";
+								reviewHTML += "<span class='productViewReviewStar'>";
+								for(var j=1; j<6; j++){
+									if(j <= data[i].star_count){
+										reviewHTML += "<i class='bi bi-star-fill'></i>";
+									}else{
+										reviewHTML += "<i class='bi bi-star'></i>";
+									}
+								}
+								reviewHTML += "<br>";
+								reviewHTML += "</span>";
+								switch(data[i].star_count){
+									case 1 : reviewHTML += "<div style='color:red;'>매우 나빠요</div>";
+											 break;
+									case 2 : reviewHTML += "<div style='color:tomato;'>나빠요</div>";
+											 break;
+									case 3 : reviewHTML += "<div>보통</div>";
+											 break;
+									case 4 : reviewHTML += "<div style='color:green;'>좋아요</div>";
+											 break;
+									case 5 : reviewHTML += "<div style='color:blue;'>매우 좋아요</div>";
+											 break;
+								}
+								reviewHTML += "</td>";
+								reviewHTML += "<td class='reviewContent'>";
+								reviewHTML += "<div class='row'>";
+								reviewHTML += "<div class='reViewImg col-3 align-self-center'>";
+								reviewHTML += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid' alt='good'>";
+								reviewHTML += "</div>";
+								reviewHTML += "<div class='reviewTitle align-self-center col' data-bs-toggle='collapse' href='#reviewExtend"+i+"' role='button' aria-expanded='false' aria-controls='collapseExample'>";
+								reviewHTML += data[i].contents;
+								reviewHTML += "</div>";
+								reviewHTML += "<div class='col-1 align-self-center'>";
+								reviewHTML += "<i class='bi bi-caret-down reviewDown' data-bs-toggle='collapse' href='#reviewExtend"+i+"' role='button' aria-expanded='false' aria-controls='collapseExample'></i>";
+								reviewHTML += "</div>";
+								reviewHTML += "</div>";
+								reviewHTML += "<div class='collapse reviewCard' id='reviewExtend"+i+"'>";
+								reviewHTML += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid reviewCardImg' alt='good'>";
+								reviewHTML += "<div>"+data[i].contents+"</div>";
+								reviewHTML += "</div>";
+								reviewHTML += "</td>";
+								reviewHTML += "<td>";
+								
+								var memberHash = $("input[name='memberHash']").val()
+								memberHash = memberHash.replace("{","");
+								memberHash = memberHash.replace("}","");
+								
+								for(var m=0; m<memberHash.length; m++){
+									memberHash = memberHash.replace(" ","");
+								}
+								
+								var memberHashArr = memberHash.split(",");
+								var tempMember = memberHashArr.toString();
+								tempMember = tempMember.split("=");
+								var memberArr = tempMember.toString();
+								memberArr=memberArr.split(",");
+								
+								for(var k=0; k<memberArr.length; k++){
+									if(data[i].member_index == memberArr[k]){
+										reviewHTML += memberArr[k+1];
+									}
+								}
+								reviewHTML += "</td>";
+								reviewHTML += "<td>"+data[i].review_date+"</td>";
+								reviewHTML += "</tr>";
+							}
+								reviewHTML += "</tbody>";
+					
+					$("#reviewTable").html(reviewHTML);
+					
+					var reviewHTMLM = "<thead>";
+						reviewHTMLM += "<tr>";
+						reviewHTMLM += "<th>리뷰</th>";
+						reviewHTMLM += "</tr>";
+						reviewHTMLM += "</thead>";
+						reviewHTMLM += "<tbody>";
+						for(var i=0; i<data.length; i++){
+							reviewHTMLM += "<tr>";
+							reviewHTMLM += "<td>";
+							reviewHTMLM += "<div>";
+							reviewHTMLM += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid' alt='good'>";
+							reviewHTMLM += "</div>";
+							reviewHTMLM += "<div>";
+							reviewHTMLM += "<span>";
+							
+						var memberHash = $("input[name='memberHash']").val()
+							memberHash = memberHash.replace("{","");
+							memberHash = memberHash.replace("}","");
+								
+							for(var m=0; m<memberHash.length; m++){
+								memberHash = memberHash.replace(" ","");
+							}
+								
+							var memberHashArr = memberHash.split(",");
+							var tempMember = memberHashArr.toString();
+							tempMember = tempMember.split("=");
+							var memberArr = tempMember.toString();
+							memberArr=memberArr.split(",");
+								
+							for(var k=0; k<memberArr.length; k++){
+								if(data[i].member_index == memberArr[k]){
+									reviewHTMLM += memberArr[k+1];
+								}
+							}
+							
+							reviewHTMLM += " | ";
+							reviewHTMLM += data[i].review_date;
+							reviewHTMLM += "</span>";
+							reviewHTMLM += "<div class='productViewReviewStarM'>";
+								for(var j=1; j<6; j++){
+									if(j <= data[i].star_count){
+										reviewHTMLM += "<i class='bi bi-star-fill'></i>";
+									}else{
+										reviewHTMLM += "<i class='bi bi-star'></i>";
+									}
+								}
+							reviewHTMLM += "</div>";
+							reviewHTMLM += "<div>";
+							reviewHTMLM += data[i].contents;
+							reviewHTMLM += "</div>";
+							reviewHTMLM += "</div>";
+							reviewHTMLM += "</td>";
+							reviewHTMLM += "</tr>";
+						}
+							reviewHTMLM += "</tbody>";
+							
+					$("#reviewTableM").html(reviewHTMLM);
+				}
+			});
+		}else{
+			$.ajax({
+				url : "productView.do",
+				type : "post",
+				data : "nowPage="+endPage+"&product_index="+product_index,
+				success : function(data){
+					var reviewHTML = "<thead>";
+						reviewHTML += "<tr>";
+						reviewHTML += "<th scope='col'>별점</th>";
+						reviewHTML += "<th scope='col'>리뷰</th>";
+						reviewHTML += "<th scope='col'>닉네임</th>";
+						reviewHTML += "<th scope='col'>작성일</th>";
+						reviewHTML += "</tr>";
+						reviewHTML += "</thead>";
+						reviewHTML += "<tbody>";
+							for(var i=0; i<data.length; i++){
+								reviewHTML += "<tr>";
+								reviewHTML += "<td>";
+								reviewHTML += "<span class='productViewReviewStar'>";
+								for(var j=1; j<6; j++){
+									if(j <= data[i].star_count){
+										reviewHTML += "<i class='bi bi-star-fill'></i>";
+									}else{
+										reviewHTML += "<i class='bi bi-star'></i>";
+									}
+								}
+								reviewHTML += "<br>";
+								reviewHTML += "</span>";
+								switch(data[i].star_count){
+									case 1 : reviewHTML += "<div style='color:red;'>매우 나빠요</div>";
+											 break;
+									case 2 : reviewHTML += "<div style='color:tomato;'>나빠요</div>";
+											 break;
+									case 3 : reviewHTML += "<div>보통</div>";
+											 break;
+									case 4 : reviewHTML += "<div style='color:green;'>좋아요</div>";
+											 break;
+									case 5 : reviewHTML += "<div style='color:blue;'>매우 좋아요</div>";
+											 break;
+								}
+								reviewHTML += "</td>";
+								reviewHTML += "<td class='reviewContent'>";
+								reviewHTML += "<div class='row'>";
+								reviewHTML += "<div class='reViewImg col-3 align-self-center'>";
+								reviewHTML += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid' alt='good'>";
+								reviewHTML += "</div>";
+								reviewHTML += "<div class='reviewTitle align-self-center col' data-bs-toggle='collapse' href='#reviewExtend"+i+"' role='button' aria-expanded='false' aria-controls='collapseExample'>";
+								reviewHTML += data[i].contents;
+								reviewHTML += "</div>";
+								reviewHTML += "<div class='col-1 align-self-center'>";
+								reviewHTML += "<i class='bi bi-caret-down reviewDown' data-bs-toggle='collapse' href='#reviewExtend"+i+"' role='button' aria-expanded='false' aria-controls='collapseExample'></i>";
+								reviewHTML += "</div>";
+								reviewHTML += "</div>";
+								reviewHTML += "<div class='collapse reviewCard' id='reviewExtend"+i+"'>";
+								reviewHTML += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid reviewCardImg' alt='good'>";
+								reviewHTML += "<div>"+data[i].contents+"</div>";
+								reviewHTML += "</div>";
+								reviewHTML += "</td>";
+								reviewHTML += "<td>";
+								
+								var memberHash = $("input[name='memberHash']").val()
+								memberHash = memberHash.replace("{","");
+								memberHash = memberHash.replace("}","");
+								
+								for(var m=0; m<memberHash.length; m++){
+									memberHash = memberHash.replace(" ","");
+								}
+								
+								var memberHashArr = memberHash.split(",");
+								var tempMember = memberHashArr.toString();
+								tempMember = tempMember.split("=");
+								var memberArr = tempMember.toString();
+								memberArr=memberArr.split(",");
+								
+								for(var k=0; k<memberArr.length; k++){
+									if(data[i].member_index == memberArr[k]){
+										reviewHTML += memberArr[k+1];
+									}
+								}
+								reviewHTML += "</td>";
+								reviewHTML += "<td>"+data[i].review_date+"</td>";
+								reviewHTML += "</tr>";
+							}
+								reviewHTML += "</tbody>";
+					
+					$("#reviewTable").html(reviewHTML);
+					
+					var reviewHTMLM = "<thead>";
+						reviewHTMLM += "<tr>";
+						reviewHTMLM += "<th>리뷰</th>";
+						reviewHTMLM += "</tr>";
+						reviewHTMLM += "</thead>";
+						reviewHTMLM += "<tbody>";
+						for(var i=0; i<data.length; i++){
+							reviewHTMLM += "<tr>";
+							reviewHTMLM += "<td>";
+							reviewHTMLM += "<div>";
+							reviewHTMLM += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid' alt='good'>";
+							reviewHTMLM += "</div>";
+							reviewHTMLM += "<div>";
+							reviewHTMLM += "<span>";
+							
+						var memberHash = $("input[name='memberHash']").val()
+							memberHash = memberHash.replace("{","");
+							memberHash = memberHash.replace("}","");
+								
+							for(var m=0; m<memberHash.length; m++){
+								memberHash = memberHash.replace(" ","");
+							}
+								
+							var memberHashArr = memberHash.split(",");
+							var tempMember = memberHashArr.toString();
+							tempMember = tempMember.split("=");
+							var memberArr = tempMember.toString();
+							memberArr=memberArr.split(",");
+								
+							for(var k=0; k<memberArr.length; k++){
+								if(data[i].member_index == memberArr[k]){
+									reviewHTMLM += memberArr[k+1];
+								}
+							}
+							
+							reviewHTMLM += " | ";
+							reviewHTMLM += data[i].review_date;
+							reviewHTMLM += "</span>";
+							reviewHTMLM += "<div class='productViewReviewStarM'>";
+								for(var j=1; j<6; j++){
+									if(j <= data[i].star_count){
+										reviewHTMLM += "<i class='bi bi-star-fill'></i>";
+									}else{
+										reviewHTMLM += "<i class='bi bi-star'></i>";
+									}
+								}
+							reviewHTMLM += "</div>";
+							reviewHTMLM += "<div>";
+							reviewHTMLM += data[i].contents;
+							reviewHTMLM += "</div>";
+							reviewHTMLM += "</div>";
+							reviewHTMLM += "</td>";
+							reviewHTMLM += "</tr>";
+						}
+							reviewHTMLM += "</tbody>";
+							
+					$("#reviewTableM").html(reviewHTMLM);
+				}
+			});
+		}
+	}
+	
+	function pageMove(obj){
+		var nowPage = $(obj).next().val();
+		var pram = document.location.href;
+		var product_index = pram.substring(pram.length-5,pram.length);
+		
+		$("input[name='startPage']").val(nowPage);
+		
+		
+		$.ajax({
+				url : "productView.do",
+				type : "post",
+				data : "nowPage="+nowPage+"&product_index="+product_index,
+				success : function(data){
+					var reviewHTML = "<thead>";
+						reviewHTML += "<tr>";
+						reviewHTML += "<th scope='col'>별점</th>";
+						reviewHTML += "<th scope='col'>리뷰</th>";
+						reviewHTML += "<th scope='col'>닉네임</th>";
+						reviewHTML += "<th scope='col'>작성일</th>";
+						reviewHTML += "</tr>";
+						reviewHTML += "</thead>";
+						reviewHTML += "<tbody>";
+							for(var i=0; i<data.length; i++){
+								reviewHTML += "<tr>";
+								reviewHTML += "<td>";
+								reviewHTML += "<span class='productViewReviewStar'>";
+								for(var j=1; j<6; j++){
+									if(j <= data[i].star_count){
+										reviewHTML += "<i class='bi bi-star-fill'></i>";
+									}else{
+										reviewHTML += "<i class='bi bi-star'></i>";
+									}
+								}
+								reviewHTML += "<br>";
+								reviewHTML += "</span>";
+								switch(data[i].star_count){
+									case 1 : reviewHTML += "<div style='color:red;'>매우 나빠요</div>";
+											 break;
+									case 2 : reviewHTML += "<div style='color:tomato;'>나빠요</div>";
+											 break;
+									case 3 : reviewHTML += "<div>보통</div>";
+											 break;
+									case 4 : reviewHTML += "<div style='color:green;'>좋아요</div>";
+											 break;
+									case 5 : reviewHTML += "<div style='color:blue;'>매우 좋아요</div>";
+											 break;
+								}
+								reviewHTML += "</td>";
+								reviewHTML += "<td class='reviewContent'>";
+								reviewHTML += "<div class='row'>";
+								reviewHTML += "<div class='reViewImg col-3 align-self-center'>";
+								reviewHTML += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid' alt='good'>";
+								reviewHTML += "</div>";
+								reviewHTML += "<div class='reviewTitle align-self-center col' data-bs-toggle='collapse' href='#reviewExtend"+i+"' role='button' aria-expanded='false' aria-controls='collapseExample'>";
+								reviewHTML += data[i].contents;
+								reviewHTML += "</div>";
+								reviewHTML += "<div class='col-1 align-self-center'>";
+								reviewHTML += "<i class='bi bi-caret-down reviewDown' data-bs-toggle='collapse' href='#reviewExtend"+i+"' role='button' aria-expanded='false' aria-controls='collapseExample'></i>";
+								reviewHTML += "</div>";
+								reviewHTML += "</div>";
+								reviewHTML += "<div class='collapse reviewCard' id='reviewExtend"+i+"'>";
+								reviewHTML += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid reviewCardImg' alt='good'>";
+								reviewHTML += "<div>"+data[i].contents+"</div>";
+								reviewHTML += "</div>";
+								reviewHTML += "</td>";
+								reviewHTML += "<td>";
+								
+								var memberHash = $("input[name='memberHash']").val()
+								memberHash = memberHash.replace("{","");
+								memberHash = memberHash.replace("}","");
+								
+								for(var m=0; m<memberHash.length; m++){
+									memberHash = memberHash.replace(" ","");
+								}
+								
+								var memberHashArr = memberHash.split(",");
+								var tempMember = memberHashArr.toString();
+								tempMember = tempMember.split("=");
+								var memberArr = tempMember.toString();
+								memberArr=memberArr.split(",");
+								
+								for(var k=0; k<memberArr.length; k++){
+									if(data[i].member_index == memberArr[k]){
+										reviewHTML += memberArr[k+1];
+									}
+								}
+								reviewHTML += "</td>";
+								reviewHTML += "<td>"+data[i].review_date+"</td>";
+								reviewHTML += "</tr>";
+							}
+								reviewHTML += "</tbody>";
+					
+					$("#reviewTable").html(reviewHTML);
+					
+					
+					var reviewHTMLM = "<thead>";
+						reviewHTMLM += "<tr>";
+						reviewHTMLM += "<th>리뷰</th>";
+						reviewHTMLM += "</tr>";
+						reviewHTMLM += "</thead>";
+						reviewHTMLM += "<tbody>";
+						for(var i=0; i<data.length; i++){
+							reviewHTMLM += "<tr>";
+							reviewHTMLM += "<td>";
+							reviewHTMLM += "<div>";
+							reviewHTMLM += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid' alt='good'>";
+							reviewHTMLM += "</div>";
+							reviewHTMLM += "<div>";
+							reviewHTMLM += "<span>";
+							
+						var memberHash = $("input[name='memberHash']").val()
+							memberHash = memberHash.replace("{","");
+							memberHash = memberHash.replace("}","");
+								
+							for(var m=0; m<memberHash.length; m++){
+								memberHash = memberHash.replace(" ","");
+							}
+								
+							var memberHashArr = memberHash.split(",");
+							var tempMember = memberHashArr.toString();
+							tempMember = tempMember.split("=");
+							var memberArr = tempMember.toString();
+							memberArr=memberArr.split(",");
+								
+							for(var k=0; k<memberArr.length; k++){
+								if(data[i].member_index == memberArr[k]){
+									reviewHTMLM += memberArr[k+1];
+								}
+							}
+							
+							reviewHTMLM += " | ";
+							reviewHTMLM += data[i].review_date;
+							reviewHTMLM += "</span>";
+							reviewHTMLM += "<div class='productViewReviewStarM'>";
+								for(var j=1; j<6; j++){
+									if(j <= data[i].star_count){
+										reviewHTMLM += "<i class='bi bi-star-fill'></i>";
+									}else{
+										reviewHTMLM += "<i class='bi bi-star'></i>";
+									}
+								}
+							reviewHTMLM += "</div>";
+							reviewHTMLM += "<div>";
+							reviewHTMLM += data[i].contents;
+							reviewHTMLM += "</div>";
+							reviewHTMLM += "</div>";
+							reviewHTMLM += "</td>";
+							reviewHTMLM += "</tr>";
+						}
+							reviewHTMLM += "</tbody>";
+							
+					$("#reviewTableM").html(reviewHTMLM);
+				}
+		});
+	}
 	
 	

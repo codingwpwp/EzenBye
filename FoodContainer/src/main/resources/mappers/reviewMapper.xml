@@ -53,7 +53,7 @@
     	WHERE product_index = #{product_index}
     </select>
     
-    <select id="viewReivewPaging" resultType="ReviewVO" parameterType="PagingUtil">
+    <select id="viewReivewPaging" resultType="ReviewVO" parameterType="team.project.util.PagingUtil2">
     	SELECT * FROM review 
     	WHERE product_index = #{product_index} 
     	and del_YN != 'Y' 
