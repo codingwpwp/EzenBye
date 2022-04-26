@@ -199,14 +199,14 @@
 						<div class="row rp">
 							
 							<div class="col-sm-8 col-9 reply-write">
-								<input type="text" name="contents" id="replycontent" placeholder="로그인 후 댓글 작성이 가능합니다.">
+								<input type="text" name="contents" id="contents" placeholder="로그인 후 댓글 작성이 가능합니다.">
 							</div>
 							<div class="col-sm-2 col-3">
 						 	<c:if test="${member==null}">
 								<button class="btn btn-secondary tt" type="button" onclick="alert('로그인 후 이용해주세요!!')">등록</button>
 							</c:if>	
 							 	<c:if test="${member!=null}">
-								<button class="btn btn-secondary tt" type="submit">등록</button>
+								<button class="btn btn-secondary tt" type="submit" id="submit">등록</button>
 							</c:if>	
 							</div>
 							

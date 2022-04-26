@@ -68,7 +68,11 @@
 							    <div class="carousel-item active">
 							      <c:if test="${mainBannerList.link_YN == 'Y' }">
 							      	<a href="${mainBannerList.link }">
-							      		<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.image}" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }" onclick="bannerFn(this)">
+							      		<c:set var="name" value="${mainBannerList.link}" />
+										<c:set var="length" value="${fn:length(name)}"/>
+										
+							      		<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.image}" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }" onclick="bannerFn(this); productCookie(this);">
+							      		<input type="hidden" name="index" value="${fn:substring(name,length-5,length)}">
 							      		<input type="hidden" name="link" value="${mainBannerList.link }">
 							      	</a>
 							      </c:if>
@@ -81,7 +85,11 @@
 							    <div class="carousel-item">
 							      <c:if test="${mainBannerList.link_YN == 'Y' }">
 							      	<a href="${mainBannerList.link }">
-							      		<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.image}" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }" onclick="bannerFn(this)">
+							      		<c:set var="name" value="${mainBannerList.link}" />
+										<c:set var="length" value="${fn:length(name)}"/>
+							      		
+							      		<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.image}" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }" onclick="bannerFn(this); productCookie(this);">
+							      		<input type="hidden" name="index" value="${fn:substring(name,length-5,length)}">
 							      		<input type="hidden" name="link" value="${mainBannerList.link }">
 							      	</a>
 							      </c:if>

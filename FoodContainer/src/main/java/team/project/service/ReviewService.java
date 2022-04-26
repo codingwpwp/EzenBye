@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import team.project.util.PagingUtil;
+import team.project.util.PagingUtil2;
 import team.project.vo.ProductVO;
 import team.project.vo.ReviewVO;
 import team.project.vo.SearchVO;
@@ -33,6 +34,6 @@ public interface ReviewService {
 	
 	int viewReviewCnt(String product_index) throws Exception;
 
-	PagingUtil viewPaging(String product_index, int nowPage) throws Exception;
+	PagingUtil2 viewPaging(String product_index, int nowPageI) throws Exception;
 	
 }

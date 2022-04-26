@@ -30,6 +30,7 @@ import team.project.service.ProductService;
 import team.project.service.RecipeService;
 import team.project.service.ReviewService;
 import team.project.util.PagingUtil;
+import team.project.util.PagingUtil2;
 import team.project.vo.BannerVO;
 import team.project.vo.CartVO;
 import team.project.vo.DibsVO;
@@ -170,13 +171,19 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "productView.do", method = RequestMethod.GET)
-	public String productView(Locale locale, Model model, HttpServletRequest request, ReviewVO reviewVO, MemberVO memberVO, String nowPage) throws Exception {
+	public String productView(Locale locale, Model model, HttpServletRequest request, ReviewVO reviewVO, MemberVO memberVO) throws Exception {
 		
 		String product_index = request.getParameter("product_index");
+		
+		String nowPage = request.getParameter("nowPage");
 		
 		ProductVO vo = productService.view(product_index);
 		
 		model.addAttribute("view",vo);
+		
+		List<ReviewVO> review = reviewService.review(product_index);
+		
+		model.addAttribute("viewReview",review);
 		
 		List<MemberVO> MemberList = memberService.MemberList(memberVO);
 		
@@ -184,11 +191,19 @@ public class MainController {
 		
 		int viewReviewCnt = reviewService.viewReviewCnt(product_index);
 		
-		List<ReviewVO> review = reviewService.viewReview(product_index, Integer.parseInt(nowPage));
+		String nowPageI = "1";
 		
-		model.addAttribute("viewReview",review);
+		if(nowPage != null && nowPage != "0" && nowPage !="") {
+			nowPageI = nowPage;
+		}
 		
-		//PagingUtil viewPaging = reviewService.viewPaging(Integer.parseInt(nowPage));
+		List<ReviewVO> veiwReview = reviewService.viewReview(product_index, Integer.parseInt(nowPageI));
+		
+		model.addAttribute("reviewPaging",veiwReview);
+		
+		PagingUtil2 viewPaging = reviewService.viewPaging(product_index, Integer.parseInt(nowPageI));
+		
+		model.addAttribute("viewPaging", viewPaging);
 /*
 		//쿠키 사용
 		Cookie[] cookies = request.getCookies();
@@ -476,4 +491,25 @@ public class MainController {
 					
 		return cookieListArr;		
 	}
+	
+	@RequestMapping(value = "productView.do", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ReviewVO> productViewReview(Locale locale, Model model, ProductVO productVO, HttpServletRequest request) throws Exception {
+		
+		String product_index = request.getParameter("product_index");
+		
+		String nowPage = request.getParameter("nowPage");
+		
+		String nowPageI = "1";
+		
+		if(nowPage != null) {
+			nowPageI = nowPage;
+		}
+		
+		List<ReviewVO> veiwReview = reviewService.viewReview(product_index, Integer.parseInt(nowPageI));
+		
+		return veiwReview;
+	}
+	
 }
+

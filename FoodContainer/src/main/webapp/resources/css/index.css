@@ -1018,3 +1018,25 @@ a{
 .productInventory{
 	font-size : 0.8rem;
 }
+
+@media screen and (min-width : 600px){
+	#paging{
+		display : flex;
+		justify-content : center;
+	}
+	
+	#pagingM{
+		display : none;
+	}
+}
+
+@media screen and (max-width : 600px){
+	#paging{
+		display : none;
+	}
+	
+	#pagingM{
+		display : flex;
+		justify-content : center;
+	}
+}
