@@ -36,6 +36,10 @@ public List<MemberVO> MemberList(MemberVO memberVO) throws Exception {
 	public int insertMember(MemberVO vo) throws Exception{
 		return sqlSession.insert(Namespace+".insertMember",vo);	
 	}
+	public void updateRecom(MemberVO vo) throws Exception{
+		sqlSession.update(Namespace+".updateRecom",vo);
+	}
+	
 	//아이디중복체크
 	public String idChk(String id) throws Exception{
 		int result =sqlSession.selectOne(Namespace+".idChk",id);
