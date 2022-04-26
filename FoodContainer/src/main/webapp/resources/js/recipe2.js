@@ -99,6 +99,20 @@ function deleteReply(obj,reply_index,recipe_index){
 	});
 }
 
+$(document).ready(function(){
+	$("#submit").click(function(){
+		if($("#contents").val().length==0){
+			alert("다시 입력하세요!");
+			$("#contents").focus();
+			return false;
+		}
+		
+		
+		
+	});
+	
+});
+
 // 추천증가
 $('.fa-thumbs-up').on('click',function(){
 		var YN = confirm("추천 누르시겠습니까?");
