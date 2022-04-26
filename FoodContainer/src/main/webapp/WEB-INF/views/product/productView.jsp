@@ -12,7 +12,7 @@
 	HashMap<Integer,String> result = new HashMap<>();
 	
 	for(int i=0; i<memberList.size(); i++){
-		result.put(memberList.get(i).getMember_index(),"="+memberList.get(i).getNickname());
+		result.put(memberList.get(i).getMember_index(),memberList.get(i).getNickname());
 	}
 	
 	String memberHash = result.toString();
@@ -308,23 +308,25 @@
 							</tbody>
 						</table>
 						
-						<input type="hidden" name="startPage" value="${viewPaging.startPage}">
+						<input type="hidden" name="startPage" value="1">
 						<input type="hidden" name="endPage" value="${viewPaging.endPage}">
 						<input type="hidden" name="lastPage" value="${viewPaging.lastPage}">
 						<br>
-						<div class="d-flex" style="justify-content:center;">
+						<div id="paging">
 							<button style="width:30px;" onclick="pagePrev(this)">&lt;</button>
 							
 							<c:forEach begin="${viewPaging.startPage}" end="${viewPaging.endPage}" varStatus="status">
 								<c:if test="${status.index == viewPaging.nowPage}">
-									<div style="width:30px;" onclick="pageMove(this)">${status.index}</div>
+									<button style="width:30px;" onclick="pageMove(this)">${status.index}</button>
+									<input type="hidden" value="${status.index}">
 								</c:if>
 								<c:if test="${status.index != viewPaging.nowPage}">
-									<div style="width:30px;" onclick="pageMove(this)">${status.index}</div>
+									<button style="width:30px;" onclick="pageMove(this)">${status.index}</button>
+									<input type="hidden" value="${status.index}">
 								</c:if>
 							</c:forEach>
 						 
-							<div style="width:30px;" onclick="pageNext(this)">&gt;</div>
+							<button style="width:30px;" onclick="pageNext(this)">&gt;</button>
 						</div>
 						
 						
@@ -344,7 +346,15 @@
 											<img src="<%=request.getContextPath()%>/resources/img/mypage/good.jpg" class="img-fluid" alt="good">
 										</div>
 										<div>
-											<span>홍길동 | ${reviewPaging.review_date}</span>
+											<span>
+												<c:forEach items="${MemberList}" var="MemberList">
+													<c:if test="${MemberList.member_index == reviewPaging.member_index}">
+														${MemberList.nickname}
+													</c:if>
+												</c:forEach>
+											| ${reviewPaging.review_date}
+											
+											</span>
 											<div class="productViewReviewStarM">
 												<c:forEach begin="1" end="5" varStatus="reStatus">
 													<c:if test="${reStatus.index <= reviewPaging.star_count}">
@@ -364,6 +374,25 @@
 								</c:forEach>
 							</tbody>
 						</table>
+						
+						<br>
+						
+						<div id="pagingM">
+							<button style="width:30px;" onclick="pagePrev(this)">&lt;</button>
+							
+							<c:forEach begin="${viewPaging.startPage}" end="${viewPaging.endPage}" varStatus="status">
+								<c:if test="${status.index == viewPaging.nowPage}">
+									<button style="width:30px;" onclick="pageMove(this)">${status.index}</button>
+									<input type="hidden" value="${status.index}">
+								</c:if>
+								<c:if test="${status.index != viewPaging.nowPage}">
+									<button style="width:30px;" onclick="pageMove(this)">${status.index}</button>
+									<input type="hidden" value="${status.index}">
+								</c:if>
+							</c:forEach>
+						 
+							<button style="width:30px;" onclick="pageNext(this)">&gt;</button>
+						</div>
 					</div>
 					
                 </article>
