@@ -46,6 +46,9 @@ public class SignController {
 //		vo.setPw(pwd);
 		memberService.insertMember(vo);
 		
+		
+		System.out.println(vo);
+		
 		return "redirect:loginmain.do";
 	}
 	
