@@ -12,14 +12,16 @@
 	
 	<div class="offcanvas offcanvas-bottom rightAsideDivM" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
 		<div class="offcanvas-body small d-flex justify-content-around">
-			<a href="shopBasket_main.do"><i class="bi bi-cart3 mobileCart"></i></a>
-    		<c:forEach items="${viewCookie}" var="viewCookie">
-		    	<div class="rightAsideImgM">
-			        <a href="productView.do?product_index=${viewCookie.product_index}">
-			        	<img src="<%=request.getContextPath()%>/resources/img/${viewCookie.brand}/${viewCookie.middleSort}/${viewCookie.thumbnail_image}" class="img-fluid border"></img>
-			        </a>
-		   		</div>
-    		</c:forEach>
+			<div id="recentProductM">
+				<a href="shopBasket_main.do"><i class="bi bi-cart3 mobileCart"></i></a>
+	    		<c:forEach items="${viewCookie}" var="viewCookie">
+			    	<div class="rightAsideImgM">
+				        <a href="productView.do?product_index=${viewCookie.product_index}">
+				        	<img src="<%=request.getContextPath()%>/resources/img/${viewCookie.brand}/${viewCookie.middleSort}/${viewCookie.thumbnail_image}" class="img-fluid border"></img>
+				        </a>
+			   		</div>
+	    		</c:forEach>
+	    	</div>
 		</div>
 	</div>
 </div>

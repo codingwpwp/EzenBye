@@ -83,6 +83,18 @@ $(document).ready(function(){
 			}
 				
 				$("#recentProduct").html(recentHTML);
+				
+				
+			var recentHTMLM = "<a href='shopBasket_main.do'><i class='bi bi-cart3 mobileCart'></i></a>";
+				for(var i=0; i<data.length; i++){
+					recentHTMLM += "<div class='rightAsideImgM'>";
+					recentHTMLM += "<a href='productView.do?product_index="+data[i].product_index+"'>";
+					recentHTMLM += "<img src='/FoodContainer/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='img-fluid border' alt='"+data[i].product_name+"'></img>";
+					recentHTMLM += "</a>";
+					recentHTMLM += "</div>";
+				}
+				
+				$("#recentProductM").html(recentHTMLM);
 		},
 		error : function(){
 			console.log("error");
