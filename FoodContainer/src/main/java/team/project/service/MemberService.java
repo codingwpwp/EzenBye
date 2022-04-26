@@ -15,8 +15,8 @@ public interface MemberService {
 
 	public MemberVO Login(MemberVO vo) throws Exception;
 	
-	int insertMember(MemberVO vo) throws Exception;
-	
+	void insertMember(MemberVO vo) throws Exception;
+
 	String idChk(String id) throws Exception;
 	
 	String nickChk(String nickname)throws Exception;

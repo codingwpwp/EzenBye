@@ -295,7 +295,7 @@ height: 100%;
     .replycontent{
        
        font-size:13px;
-       margin-top:-7%;
+       margin-top:-5%;
        padding-bottom:4%;
        
     }
@@ -303,6 +303,12 @@ height: 100%;
 @media screen and (max-width:380px){
    ::placeholder{
       font-size:0.8em;
+    }    
+}
+@media screen and (max-width:380px){
+   .hddiv{
+      font-size:0.8em;
+      text-align: inherit;
     }    
 }
 

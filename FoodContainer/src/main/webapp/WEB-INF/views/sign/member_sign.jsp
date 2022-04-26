@@ -155,7 +155,7 @@
                                             </div>
                                             <div class="col-sm-9 col-8">
                                                 <input type="text" class="recominput" name="recommender" id="recom"
-                                                    placeholder="추천인 아이디를 입력해주세요">
+                                                    placeholder="추천인 아이디 입력시 500point 지급!">
                                             </div>
                                             <div class="col-sm-3 col-4">
                                                <!--  <input type="button" class="btn btn-secondary ckinput" value="추천인확인"> -->
