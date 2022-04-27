@@ -115,6 +115,7 @@
     	FROM serviceCenter as a, member as b
     	WHERE a.del_YN = 'N' AND sort1 = '1:1문의'
     	AND a.member_index = b.member_index
+    	AND a.progress = '처리중'
     	ORDER BY write_date DESC
     	LIMIT 0, 3
     </select>

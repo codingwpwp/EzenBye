@@ -16,7 +16,7 @@
             <!-- 검색 -->
             <div class="col-6 d-flex align-items-center">
             	<label class="d-flex" style="border:0; width:100%;" id="search">
-	                <input class="form-control fs-6 fw-bold w-100 me-2" type="text" placeholder="상품을 입력하세요" style="display:inline-block;" id="searchValue">
+	                <input class="form-control fw-bold w-100 me-2 p-0 p-md-2" type="text" placeholder="상품을 입력하세요" style="display:inline-block;" id="searchValue">
 	                <button style="border:0; background:white;" onclick="search(this)" id="searchButton"><i class="bi bi-search fs-2" id="search"></i></button>
             	</label>
             </div>
@@ -24,7 +24,10 @@
             <!-- 3개의 아이콘 -->
             <div class="col-4 col-lg-3">
                 <div class="d-flex justify-content-evenly">
+                <c:if test="${empty member}"><a href="<%=request.getContextPath()%>/noMemberLogin.do" class="link-dark"></c:if>
+                <c:if test="${not empty member}"><a href="<%=request.getContextPath()%>/mypage_lookup.do" class="link-dark"></c:if>
                     <i class="bi bi-truck fs-1"></i>
+              	</a>
                     <i class="bi bi-cart3 fs-1" onclick="location.href='<%=request.getContextPath()%>/shopBasket_main.do'"></i>
                     
                     <c:if test="${not empty member }">

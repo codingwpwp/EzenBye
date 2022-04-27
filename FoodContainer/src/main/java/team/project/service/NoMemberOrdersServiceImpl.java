@@ -68,6 +68,15 @@ public class NoMemberOrdersServiceImpl implements NoMemberOrdersService{
 			orderProductList.add(opvo);
 		}
 		
+		// 이메일 전송
+		EmailVO evo = new EmailVO();
+		String subject = "구매가 완료되었습니다. 주문번호와 주문 비밀번호입니다.";
+		String message = "주문번호는 " + noMemberOrdersvo.getNo_member_order_index() + "이고, 주문 비밀번호는 " + noMemberOrdersvo.getPw() + "입니다.";
+		evo.setSubject(subject);
+		evo.setMessage(message);
+		evo.setReceiveMail(noMemberOrdersvo.getEmail());
+		emailService.sendEmail(evo);
+		
 		// 주문 비밀번호 해쉬로 변환
 		noMemberOrdersvo.setPw(PasswordEncoder.encode(noMemberOrdersvo.getPw()));
 		

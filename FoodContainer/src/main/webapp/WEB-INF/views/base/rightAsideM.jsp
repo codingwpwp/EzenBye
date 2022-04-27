@@ -13,7 +13,7 @@
 	<div class="offcanvas offcanvas-bottom rightAsideDivM" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
 		<div class="offcanvas-body small d-flex justify-content-around">
 			<div id="recentProductM">
-				<a href="shopBasket_main.do"><i class="bi bi-cart3 mobileCart"></i></a>
+				<a href="shopBasket_main.do" class="link-dark"><i class="bi bi-cart3 mobileCart"></i></a>
 	    		<c:forEach items="${viewCookie}" var="viewCookie">
 			    	<div class="rightAsideImgM">
 				        <a href="productView.do?product_index=${viewCookie.product_index}">
