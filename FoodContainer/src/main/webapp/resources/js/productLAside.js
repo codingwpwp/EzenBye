@@ -681,6 +681,16 @@
 							}
 							
 							$("#mainSection").html(searchHtml);
+							
+							if($(".discount").html() != -1){
+								$(".discount").prev().prev().css({"text-decoration-line" : "line-through",
+																  "text-decoration-color" : "red"
+																});
+							}else{
+								$(".discount").prev().prev().css({"text-decoration-line" : "none",
+																 
+																});							
+							}
 				}
 			});
 		}
@@ -1885,6 +1895,15 @@
 				
 				$("#mainSection").html(mainSectionHtml);
 				
+				if($(".discount").html() != -1){
+					$(".discount").prev().prev().css({"text-decoration-line" : "line-through",
+													  "text-decoration-color" : "red"
+													});
+				}else{
+					$(".discount").prev().prev().css({"text-decoration-line" : "none",
+													 
+													});							
+				}
 				
 			},
 			error : function() {
