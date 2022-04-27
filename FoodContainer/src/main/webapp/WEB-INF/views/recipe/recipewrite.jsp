@@ -1,6 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -22,7 +22,7 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-	<link rel="stylesheet" type="text/css"
+<link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/css/recipewrite.css">
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/css/base.css">
@@ -31,7 +31,7 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
 	rel="stylesheet">
-	
+
 
 </head>
 <body>
@@ -45,7 +45,8 @@
 		class="navbar-expand-lg navbar-light bg-warning bg-gradient bg-opacity-25 fw-bold fs-5">
 		<div class="row">
 			<div class="col-lg-2 d-none d-lg-block"></div>
-			<div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark" id="navLeftMenu"><!-- 여기에 작성 --></div>
+			<div class="col-2 col-sm-1 pe-0 d-lg-none border border-dark"
+				id="navLeftMenu"><!-- 여기에 작성 --></div>
 
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
 
@@ -64,10 +65,11 @@
 			<!-- 메인 -->
 			<div class="col-12 col-sm-9 col-md-10 col-lg-8">
 				<article id="mainSection">
-					 <div class="fs-5 my-2 fw-bold">레시피 등록</div> 
-					<form action="recipewrite.do" method="post" id="recipewr" enctype="multipart/form-data">
+					<div class="fs-5 my-2 fw-bold">레시피 등록</div>
+					<form action="recipewrite.do" method="post" id="recipewr"
+						enctype="multipart/form-data">
 						<div class="container">
-							
+
 							<div class="row title">
 								<div class="px-0 col-lg-1 col-md-1 col-sm-3 col-2" id="tit">
 									<strong>제목</strong>
@@ -81,16 +83,17 @@
 									<strong>내용</strong>
 								</div>
 								<div class="px-0 col-lg-6 col-md-6 col-sm-7 col-10 ">
-									
+
 									<textarea id="summernote" name="contents"></textarea>
 								</div>
-								<div class="col-lg-5 col-md-3 col-sm-3  col-12 thumnail" id="thumnail">
+								<div class="col-lg-5 col-md-3 col-sm-3  col-12 thumnail"
+									id="thumnail">
 									<div id=thumnailstrong>
 										<strong>사진을 등록해주세요</strong>
 									</div>
-									
+
 								</div>
-							
+
 							</div>
 							<!-- 대표이미지 -->
 							<div class="row my-3 imageRow d-flex justify-content-center">
@@ -103,15 +106,18 @@
 
 								<div class="col-8 col-md-6 col-lg-7 d-flex mt-2 inputImageFile">
 									<!-- 파일 등록 -->
-									<input class="form-control check" name="tumnailImage" type="file" accept="image/png" onchange="previewImage(event,this);previewImage2(event,this);">
+									<input class="form-control check" name="tumnailImage"
+										type="file" accept="image/png"
+										onchange="previewImage(event,this);previewImage2(event,this);">
 								</div>
 								<div
 									class="col-4 col-md-3 col-lg-2 d-flex justify-content-end imagePreview">
 									<!-- 이미지 미리보기 -->
-									<button type="button" class="btn btn-secondary previewButton" data-bs-toggle="modal" data-bs-target="#tumnailImageModal">미리보기</button>
+									<button type="button" class="btn btn-secondary previewButton"
+										data-bs-toggle="modal" data-bs-target="#tumnailImageModal">미리보기</button>
 								</div>
 							</div>
-							  <!-- 대표이미지 미리보기 모달 -->
+							<!-- 대표이미지 미리보기 모달 -->
 							<div class="modal fade" id="tumnailImageModal" tabindex="-1"
 								aria-labelledby="tumnailImageModalLabel" aria-hidden="true">
 								<div class="modal-dialog">
@@ -133,27 +139,16 @@
 								<div class="col-sm-2 col-12" id="hap">
 									<strong>조합 상품</strong>
 								</div>
-								
+
 								<div class="px-1 col-sm-3 col-4 sel1" id="selbox">
 									<select name="product_index1" id="sel" class="select1">
-										<c:forEach items="${productListAll}" var="productListAll" varStatus="status">
-										<option value="${productListAll.product_index}">[${productListAll.brand}]${productListAll.product_name}</option>
+										<c:forEach items="${productListAll}" var="productListAll"
+											varStatus="status">
+											<option value="${productListAll.product_index}">[${productListAll.brand}]${productListAll.product_name}</option>
 										</c:forEach>
-									</select>
-									<select name="product_index2" id="sel" class="select1">		
-										<option value="">없음</option>							
-										<c:forEach items="${productListAll}" var="productListAll" varStatus="status">
-										<option value="${productListAll.product_index}">[${productListAll.brand}]${productListAll.product_name}</option>
-										</c:forEach>
-									</select>
-									<select name="product_index3" id="sel" class="select1">
-										<option value="">없음</option>
-										<c:forEach items="${productListAll}" var="productListAll" varStatus="status">
-										<option value="${productListAll.product_index}">[${productListAll.brand}]${productListAll.product_name}</option>
-										</c:forEach>
-									</select>
+									</select> 
 								</div>
-								<%-- <div class="px-1 col-sm-3 col-4 sel2" id="selbox">
+								<div class="px-1 col-sm-3 col-4 sel2" id="selbox">
 									<select name="product_index2" id="sel" class="select1">		
 										<option value="">없음</option>							
 										<c:forEach items="${productListAll}" var="productListAll" varStatus="status">
@@ -168,7 +163,7 @@
 										<option value="${productListAll.product_index}">[${productListAll.brand}]${productListAll.product_name}</option>
 										</c:forEach>
 									</select>
-								</div> --%>
+								</div>
 
 							</div>
 							<div class="row">
@@ -209,9 +204,10 @@
 		src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/base.js"></script>
 	<script
-	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js">
+		src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js">
+		
 	</script>
 	<script src="<%=request.getContextPath()%>/resources/js/recipe.js"></script>
-	
+
 </body>
 </html>
