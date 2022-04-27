@@ -121,7 +121,8 @@
 						        	</div>
 						        	
 						        	<c:if test="${opList.del_YN eq 'N'}">
-						        	<a href="<%=request.getContextPath() %>/productView.do?product_index=${opList.product_index }" class="productHref">
+						        	<a href="<%=request.getContextPath() %>/productView.do?product_index=${opList.product_index }" class="productHref" onclick="productCookie(this)">
+						        	<input id="indexCookie" type="hidden" value="${opList.product_index}" />
 						        	</c:if>
 						        	<c:if test="${opList.del_YN eq 'Y'}">
 						        	<a href="javascript:alert('삭제된 상품입니다.');" class="productHref">

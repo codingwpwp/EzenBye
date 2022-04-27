@@ -81,28 +81,32 @@
 			        	<div class="row">
 			        		<div class="col-sm-3">
 			        			
-					        	<a href="<%=request.getContextPath() %>/productView.do?product_index=${list.product_index }" class="productHref">
+					        	<a href="<%=request.getContextPath() %>/productView.do?product_index=${list.product_index }" class="productHref" onclick="productCookie(this)">
 			        			<img src="<%=request.getContextPath() %>/resources/img/${list.brand}/${list.middleSort}/${list.thumbnail_image}" class="img-thumbnail" alt="...">
 			        			</a>
+			        			<input id="indexCookie" type="hidden" value="${list.product_index}" />
 			        		</div>
 			        		<div class="col-sm-6 d-flex align-items-start flex-column mb-3">
 						    	<div class="mb-auto p-2">
-						        	<a href="<%=request.getContextPath() %>/productView.do?product_index=${list.product_index }" class="productHref">
+						        	<a href="<%=request.getContextPath() %>/productView.do?product_index=${list.product_index }" class="productHref" onclick="productCookie(this)">
 							    	${list.brand } ${list.product_name }
 							    	</a>
+							    	<input id="indexCookie" type="hidden" value="${list.product_index}" />
 						    	</div>
 						    	<c:if test="${list.sale_price eq -1 }" >
   									<div class="p-2">
-							        	<a href="<%=request.getContextPath() %>/productView.do?product_index=${list.product_index }" class="productHref">
+							        	<a href="<%=request.getContextPath() %>/productView.do?product_index=${list.product_index }" class="productHref" onclick="productCookie(this)">
 	  									<fmt:formatNumber value="${list.origin_price}" pattern="#,###" />원
 	  									</a>
+	  									<input id="indexCookie" type="hidden" value="${list.product_index}" />
   									</div>
 			        			</c:if>
 			        			<c:if test="${list.sale_price ne -1 }" >
   									<div class="p-2">
-							        	<a href="<%=request.getContextPath() %>/productView.do?product_index=${list.product_index }" class="productHref">
+							        	<a href="<%=request.getContextPath() %>/productView.do?product_index=${list.product_index }" class="productHref" onclick="productCookie(this)">
 	  									<fmt:formatNumber value="${list.sale_price}" pattern="#,###" />원
 	  									</a>
+	  									<input id="indexCookie" type="hidden" value="${list.product_index}" />
   									</div>
 			        			</c:if>
 			        		</div>

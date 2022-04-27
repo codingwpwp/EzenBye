@@ -85,6 +85,11 @@
 	}
 }
 
+.indexSubImgM{
+	position : relative;
+	bottom : 1%;
+}
+
 .popular:hover{
 	cursor:pointer;
 }
@@ -240,7 +245,17 @@
 	border : 1px solid #DCDCDC;
 	border-radius : 5px;
 	width : 150px;
-	height : auto;
+	height : 370px;
+}
+
+.imgAreaM{
+	width : 150px;
+	height : 180px;
+	text-align : center;
+}
+
+.cardMContent{
+	height : 155px;
 }
 
 .productNameM{
@@ -248,8 +263,10 @@
 }
 
 #cardMimg{
-	width : 150px;
+	width : 148px;
 	height : 180px;
+	position : relative;
+	left : -1px;
 }
 
 .indexSoldM{

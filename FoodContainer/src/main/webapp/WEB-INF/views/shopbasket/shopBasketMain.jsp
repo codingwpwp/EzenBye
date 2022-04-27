@@ -32,9 +32,7 @@
         <div class="row">
             <div class="col-lg-2 d-none d-lg-block"></div>
             
-            <div class="col-2 col-sm-1 pe-0 d-lg-none" id="navLeftMenu">
-            	
-            </div>
+            
 
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
 
@@ -47,10 +45,7 @@
 
             <!-- 왼쪽 사이드메뉴 -->
             <div class="col-lg-2 d-none d-lg-block">
-                <aside id="leftAside">
-                    <!-- 실질적인 왼쪽 사이드메뉴 내용 -->
-                    
-                </aside>
+                <aside></aside>
             </div>
 
             <!-- 메인 -->
@@ -117,12 +112,14 @@
 										<c:set var="length" value="${fn:length(pCnt)}"/>
 											<c:if test="${length < 7}">
 												<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-1)}">
-													<a href="productView.do?product_index=${fn:substring(pCnt,0,length-1)}" class="productHref">
+													<a href="productView.do?product_index=${fn:substring(pCnt,0,length-1)}" class="productHref" onclick="productCookie(this)">
+													<input id="indexCookie" type="hidden" value="${fn:substring(pCnt,0,length-1)}" />
 												</c:if>
 											</c:if>
 											<c:if test="${length == 7}">
 												<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-2)}">
-													<a href="productView.do?product_index=${fn:substring(pCnt,0,length-2)}" class="productHref">
+													<a href="productView.do?product_index=${fn:substring(pCnt,0,length-2)}" class="productHref" onclick="productCookie(this)">
+													<input id="indexCookie" type="hidden" value="${fn:substring(pCnt,0,length-1)}" />
 												</c:if>
 											</c:if>
 										</c:forEach>
@@ -243,12 +240,14 @@
 										<c:set var="length" value="${fn:length(pCnt)}"/>
 											<c:if test="${length < 7}">
 												<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-1)}">
-													<a href="productView.do?product_index=${fn:substring(pCnt,0,length-1)}" class="productHref">
+													<a href="productView.do?product_index=${fn:substring(pCnt,0,length-1)}" class="productHref" onclick="productCookie(this)">
+													<input id="indexCookie" type="hidden" value="${fn:substring(pCnt,0,length-1)}" />
 												</c:if>
 											</c:if>
 											<c:if test="${length == 7}">
 												<c:if test="${noMemberCart.product_index == fn:substring(pCnt,0,length-2)}">
-													<a href="productView.do?product_index=${fn:substring(pCnt,0,length-2)}" class="productHref">
+													<a href="productView.do?product_index=${fn:substring(pCnt,0,length-2)}" class="productHref" onclick="productCookie(this)">
+													<input id="indexCookie" type="hidden" value="${fn:substring(pCnt,0,length-1)}" />
 												</c:if>
 											</c:if>
 										</c:forEach>
@@ -355,7 +354,8 @@
 							<div class="col-lg-8 col-md-8">
 								<div class="h-100 p-2 bg-light border rounded-3 card-good">
 								
-						        	<a href="productView.do?product_index=${list.product_index }" class="productHref">
+						        	<a href="productView.do?product_index=${list.product_index }" class="productHref" onclick="productCookie(this)">
+						        	<input id="indexCookie" type="hidden" value="${list.product_index}" />
 						        	<div class="row">
 						        		<div class="col-sm-3">
 						        			<img src="<%=request.getContextPath() %>/resources/img/${list.brand}/${list.middleSort}/${list.thumbnail_image}" class="img-thumbnail" alt="${list.product_name}">
@@ -408,7 +408,8 @@
 							<div class="col-lg-8 col-md-8">
 								<div class="h-100 p-2 bg-light border rounded-3 card-good">
 									
-									<a href="productView.do?product_index=${list.product_index }" class="productHref">
+									<a href="productView.do?product_index=${list.product_index }" class="productHref" onclick="productCookie(this)">
+									<input id="indexCookie" type="hidden" value="${list.product_index}" />
 						        	<div class="row">
 						        		<div class="col-sm-3">
 						        			<img src="<%=request.getContextPath() %>/resources/img/${list.brand}/${list.middleSort}/${list.thumbnail_image}" class="img-thumbnail" alt="${list.product_name}">

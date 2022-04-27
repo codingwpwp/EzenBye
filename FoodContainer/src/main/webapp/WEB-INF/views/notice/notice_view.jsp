@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -76,7 +77,7 @@
 									<td class="title">${noticeDetail.title}
 												
 											 </td>
-									<td class="right">${noticeDetail.write_date}</td>
+									<td class="right">${fn:substring(noticeDetail.write_date,0,10)}</td>
 								</tr>
 							</thead>
 							<tbody>
