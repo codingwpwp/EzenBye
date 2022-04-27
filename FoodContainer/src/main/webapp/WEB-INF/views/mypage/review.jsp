@@ -109,13 +109,14 @@
 						      <td>
 						      <span class="d-inline-block text-truncate" style="max-width: 150px;">
 								  <c:if test="${list.del_YN eq 'N'}">
-						          <a href="<%=request.getContextPath() %>/productView.do?product_index=${list.product_index }" class="productHref">
+						          <a href="<%=request.getContextPath() %>/productView.do?product_index=${list.product_index }" class="productHref" onclick="productCookie(this)">
 					        	  </c:if>
 					        	  <c:if test="${list.del_YN eq 'Y'}">
 					        	  <a href="javascript:alert('삭제된 상품입니다.');" class="productHref">
 					        	  </c:if>
 								  ${list.brand} ${list.product_name}
 								  </a>
+								  <input id="indexCookie" type="hidden" value="${list.product_index}" />
 							  </span>
 						      </td>
 						      <td>
@@ -135,13 +136,14 @@
 						      	<div class="collapse" id="collapseExample${i}">
 						      		<div class="review-title">
 						      			<c:if test="${list.del_YN eq 'N'}">
-							        	<a href="<%=request.getContextPath() %>/productView.do?product_index=${list.product_index }" class="productHref">
+							        	<a href="<%=request.getContextPath() %>/productView.do?product_index=${list.product_index }" class="productHref" onclick="productCookie(this)">
 							        	</c:if>
 							        	<c:if test="${list.del_YN eq 'Y'}">
 							        	<a href="javascript:alert('삭제된 상품입니다.');" class="productHref">
 							        	</c:if>
 						      			<img src="<%=request.getContextPath() %>/resources/img/${list.brand}/${list.middleSort}/${list.thumbnail_image}" class="img-thumbnail" alt="..." width="10%"> 상품명 : ${list.brand} ${list.product_name}
 						      			</a>
+						      			<input id="indexCookie" type="hidden" value="${list.product_index}" />
 						      		</div>
 						      		<c:if test="${!empty list.image}">	
 									<img src="<%=request.getContextPath() %>/resources/img/review/${list.image}" class="img-thumbnail" alt="...">
