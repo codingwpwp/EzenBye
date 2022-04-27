@@ -315,7 +315,7 @@
 							<c:forEach items="${popularList}" var="popularList" begin="${ran}" end="${ran+3}" varStatus="status">
 								<div class="cardM">
 								<a href="productView.do?product_index=${popularList.product_index}" onclick="productCookie(this)">
-									<div style = "width:150px; height:180px; text-align:center;">
+									<div class="imgAreaM">
 										<img src="<%=request.getContextPath()%>/resources/img/${popularList.brand}/${popularList.middleSort }/${popularList.thumbnail_image}" class="img-fluid" id="cardMimg" alt="${popularList.product_name }">
 										<c:if test="${popularList.inventory == 0 }">
 									  	  	<img src="<%=request.getContextPath()%>/resources/img/매진.png" class="card-img-top indexSoldM">
