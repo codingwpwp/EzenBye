@@ -141,7 +141,11 @@ input.btn.btn-primary.selbtn{
 		width: 300px;
 	}
 }
-
+@media ( max-width :380px) {
+	.recipe-text {
+		font-size:13px;
+	}
+}
 
 		
 /*페이징*/

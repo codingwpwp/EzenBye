@@ -80,7 +80,7 @@
 					
 						<div class="row hd">
 						
-							<div class="col-sm-8 col-xs-3 col-12">
+							<div class="col-sm-7 col-xs-3 col-12">
 								<h3>
 								<c:if test="${read.best_rank==1 }">
 								<img src="<%=request.getContextPath()%>/resources/img/금메달.png" id="bestimg">
@@ -96,7 +96,7 @@
 							</div>
 
 
-							<div class="col-sm-4 col-12 hddiv">작성자: ${read.name} | 조회수 : (${read.hit}) | 댓글(${read.reply_index})</div>
+							<div class="col-sm-5 col-12 hddiv">작성자: ${read.name}&nbsp;|&nbsp;추천수: (${read.thumb}) | 조회수 : (${read.hit}) | 댓글(${read.reply_index})</div>
 						</div>
 
 						<div class="row body">
@@ -199,14 +199,14 @@
 						<div class="row rp">
 							
 							<div class="col-sm-8 col-9 reply-write">
-								<input type="text" name="contents" id="replycontent" placeholder="로그인 후 댓글 작성이 가능합니다.">
+								<input type="text" name="contents" id="contents" placeholder="로그인 후 댓글 작성이 가능합니다.">
 							</div>
 							<div class="col-sm-2 col-3">
 						 	<c:if test="${member==null}">
 								<button class="btn btn-secondary tt" type="button" onclick="alert('로그인 후 이용해주세요!!')">등록</button>
 							</c:if>	
 							 	<c:if test="${member!=null}">
-								<button class="btn btn-secondary tt" type="submit">등록</button>
+								<button class="btn btn-secondary tt" type="submit" id="submit">등록</button>
 							</c:if>	
 							</div>
 							

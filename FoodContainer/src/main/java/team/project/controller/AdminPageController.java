@@ -7,14 +7,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 
+import team.project.dao.OrderProductDAO;
 import team.project.service.BannerService;
 import team.project.service.MemberService;
 import team.project.service.MessageService;
@@ -57,6 +60,8 @@ public class AdminPageController {
 	private ServiceCenterService service;
 	@Autowired
 	private RecipeService recipeService;
+	@Autowired
+	private OrderProductDAO orderProductDao;
 
 	MemberVO member;
 	
@@ -398,6 +403,13 @@ public class AdminPageController {
 			}
 		}
 		
+	}
+	
+	// 배송완료처리 비동기
+	@RequestMapping(value = "deliveryOk.do", method = RequestMethod.POST)
+	@ResponseStatus(value = HttpStatus.OK)
+	public void deliveryOk(@RequestParam(value="orderItem_index") String orderItem_index) throws Exception{
+		orderProductDao.deliveryOk(orderItem_index);
 	}
 	
 	// 등록 상품 조회 페이지로 이동

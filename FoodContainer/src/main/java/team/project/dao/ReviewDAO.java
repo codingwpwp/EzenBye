@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import team.project.util.PagingUtil;
+import team.project.util.PagingUtil2;
 import team.project.vo.ProductVO;
 import team.project.vo.ReviewVO;
 import team.project.vo.SearchVO;
@@ -42,6 +43,10 @@ public class ReviewDAO {
 		return sqlSession.selectList(Namespace + ".viewReviewList", product_index);
 	}
 	
+	public List<ReviewVO> viewReview(PagingUtil2 pagingUtil) throws Exception {
+		return sqlSession.selectList(Namespace + ".viewReivewPaging", pagingUtil);
+	}
+	
 	public List<ReviewVO> review(List<ProductVO> ProductListAll) throws Exception {
 		return sqlSession.selectList(Namespace + ".viewReviewListArr", ProductListAll);
 	}
@@ -50,4 +55,11 @@ public class ReviewDAO {
 		return sqlSession.selectList(Namespace + ".viewReviewListArr", popularList);
 	}
 	
+	public int viewReviewCnt(String product_index) throws Exception {
+		return sqlSession.selectOne(Namespace + ".viewReviewCnt", product_index);
+	}
+	
+	public List<ReviewVO> viewReivewPaging(String product_index) throws Exception {
+		return sqlSession.selectList(Namespace + ".viewReivewPaging", product_index);
+	}
 }

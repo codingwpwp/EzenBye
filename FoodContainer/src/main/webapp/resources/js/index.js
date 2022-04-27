@@ -208,7 +208,7 @@
 	
 	//배너 클릭
 	function bannerFn(obj){
-		var linkName=$(obj).next("input[name='link']").val();
+		var linkName=$(obj).next().next("input[name='link']").val();
 		var name = linkName.substring(linkName.length-5,linkName.length);
 		
 		console.log(name);

@@ -78,7 +78,7 @@
 							</div>
 							<div class="row">
 								<div class="col-md-12 col-sm-12 col-12 loginbtn">
-									<button class="btn btn-dark" type="button" onclick="location.href='<%=request.getContextPath()%>/member_sign.do'">회원가입</button>
+									<button class="btn btn-dark" type="button" onclick="location.href='<%=request.getContextPath()%>/member_email_sign.do'">회원가입</button>
 								</div>
 							</div>
 							

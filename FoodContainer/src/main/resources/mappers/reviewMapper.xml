@@ -47,5 +47,17 @@
     	</if>
     </select>
     
+    <select id="viewReviewCnt" resultType="int" parameterType="ReviewVO">
+    	SELECT count(review_index) 
+    	FROM review
+    	WHERE product_index = #{product_index}
+    </select>
     
+    <select id="viewReivewPaging" resultType="ReviewVO" parameterType="team.project.util.PagingUtil2">
+    	SELECT * FROM review 
+    	WHERE product_index = #{product_index} 
+    	and del_YN != 'Y' 
+    	ORDER BY review_index DESC 
+    	LIMIT #{start}, #{perPage}
+    </select>
 </mapper>

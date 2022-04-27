@@ -69,6 +69,38 @@ $(document).ready(function(){
 		}
 	});
 	
+	$.ajax({
+		url : 'recentProduct.do',
+		type : 'get',
+		success : function(data){
+			var recentHTML = "";
+			for(var i=0; i<data.length; i++){
+				recentHTML += "<div class='productImg'>";
+				recentHTML += "<a href='productView.do?product_index="+data[i].product_index+"'>";
+				recentHTML += "<img src='/FoodContainer/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='w-75 img-fluid mt-2 mb-3 border' alt='"+data[i].product_name+"'></img>";
+				recentHTML += "</a>";
+				recentHTML += "</div>";
+			}
+				
+				$("#recentProduct").html(recentHTML);
+				
+				
+			var recentHTMLM = "<a href='shopBasket_main.do'><i class='bi bi-cart3 mobileCart'></i></a>";
+				for(var i=0; i<data.length; i++){
+					recentHTMLM += "<div class='rightAsideImgM'>";
+					recentHTMLM += "<a href='productView.do?product_index="+data[i].product_index+"'>";
+					recentHTMLM += "<img src='/FoodContainer/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='img-fluid border' alt='"+data[i].product_name+"'></img>";
+					recentHTMLM += "</a>";
+					recentHTMLM += "</div>";
+				}
+				
+				$("#recentProductM").html(recentHTMLM);
+		},
+		error : function(){
+			console.log("error");
+		}
+	});
+	
 });
 
 //모바일 최근 본 상품 z-index

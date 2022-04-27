@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import team.project.dao.OrderProductDAO;
 import team.project.dao.ReviewDAO;
 import team.project.util.PagingUtil;
+import team.project.util.PagingUtil2;
 import team.project.vo.ProductVO;
 import team.project.vo.ReviewVO;
 import team.project.vo.SearchVO;
@@ -89,6 +90,33 @@ public class ReviewServiceImpl implements ReviewService {
 		List<ReviewVO> review = reviewDao.review(popularList);
 		
 		return review;
+	}
+
+	@Override
+	public int viewReviewCnt(String product_index) throws Exception {
+		
+		return reviewDao.viewReviewCnt(product_index);
+	}
+
+	@Override
+	public PagingUtil2 viewPaging(String product_index, int nowPage) throws Exception {
+		
+		int viewReviewCnt = reviewDao.viewReviewCnt(product_index);
+		
+		PagingUtil2 viewPaging = new PagingUtil2(viewReviewCnt, nowPage, 5, 5);
+		
+		return viewPaging;
+	}
+
+	@Override
+	public List<ReviewVO> viewReview(String product_index, int nowPageI) throws Exception {
+		
+		PagingUtil2 pagingUtil = viewPaging(product_index, nowPageI);
+		
+		pagingUtil.setProduct_index(product_index);
+		pagingUtil.setStart(pagingUtil.getStart() - 1);
+		
+		return reviewDao.viewReview(pagingUtil);
 	}
 }
 

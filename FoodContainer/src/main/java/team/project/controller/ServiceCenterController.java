@@ -32,7 +32,7 @@ public class ServiceCenterController {
 								@RequestParam(value="nowPage", required = false) String nowPage) throws Exception{
 
 		int realnowPage = 1;
-		if(sort2 == null) sort2 = "상품";
+		if(sort2 == null || sort2.equals("")) sort2 = "상품";
 		if(nowPage != null && !nowPage.equals("")) realnowPage = Integer.parseInt(nowPage);
 		
 		model.addAttribute("sort2", sort2);

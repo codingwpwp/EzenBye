@@ -35,7 +35,7 @@
     </nav>
 
     <!-- 섹션 -->
-    <section class="mt-1">
+    <section>
         <div class="row">
 
             <!-- 왼쪽 사이드메뉴 -->
@@ -68,7 +68,11 @@
 							    <div class="carousel-item active">
 							      <c:if test="${mainBannerList.link_YN == 'Y' }">
 							      	<a href="${mainBannerList.link }">
-							      		<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.image}" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }" onclick="bannerFn(this)">
+							      		<c:set var="name" value="${mainBannerList.link}" />
+										<c:set var="length" value="${fn:length(name)}"/>
+										
+							      		<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.image}" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }" onclick="bannerFn(this); productCookie(this);">
+							      		<input type="hidden" name="index" value="${fn:substring(name,length-5,length)}">
 							      		<input type="hidden" name="link" value="${mainBannerList.link }">
 							      	</a>
 							      </c:if>
@@ -81,7 +85,11 @@
 							    <div class="carousel-item">
 							      <c:if test="${mainBannerList.link_YN == 'Y' }">
 							      	<a href="${mainBannerList.link }">
-							      		<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.image}" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }" onclick="bannerFn(this)">
+							      		<c:set var="name" value="${mainBannerList.link}" />
+										<c:set var="length" value="${fn:length(name)}"/>
+							      		
+							      		<img src="<%=request.getContextPath()%>/resources/img/배너/${mainBannerList.image}" class="card-img-top" class="d-block w-100" alt="${mainBannerList.name }" title="${mainBannerList.name }" onclick="bannerFn(this); productCookie(this);">
+							      		<input type="hidden" name="index" value="${fn:substring(name,length-5,length)}">
 							      		<input type="hidden" name="link" value="${mainBannerList.link }">
 							      	</a>
 							      </c:if>
@@ -226,7 +234,7 @@
 										<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 popular d-flex justify-content-center">
 											<div class="card" style="width: 18rem;">
 											<a href = "<%=request.getContextPath()%>/recipeview.do?recipe_index=${recipeList.recipe_index}">
-											  <img src="<%=request.getContextPath()%>/resources/img/recipe/${recipeList.thumbnail_image}" class="card-img-top" alt="${recipeList.thumbnail_image}">
+											  <img src="<%=request.getContextPath()%>/resources/img/recipe/${recipeList.thumbnail_image}" class="card-img-top recipeImg" alt="${recipeList.thumbnail_image}">
 											  <img src="<%=request.getContextPath()%>/resources/img/금메달.png" class="img-fluid medal" alt="1등">
 											  <div class="card-body">
 											    <p class="card-text">
@@ -250,7 +258,7 @@
 										<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 popular d-flex justify-content-center">
 											<div class="card" style="width: 18rem;">
 											<a href = "<%=request.getContextPath()%>/recipeview.do?recipe_index=${recipeList.recipe_index}">
-											  <img src="<%=request.getContextPath()%>/resources/img/recipe/${recipeList.thumbnail_image}" class="card-img-top" alt="${recipeList.thumbnail_image}">
+											  <img src="<%=request.getContextPath()%>/resources/img/recipe/${recipeList.thumbnail_image}" class="card-img-top recipeImg" alt="${recipeList.thumbnail_image}">
 											  <img src="<%=request.getContextPath()%>/resources/img/은메달.png" class="img-fluid medal" alt="2등">
 											  <div class="card-body">
 											    <p class="card-text">
@@ -273,7 +281,7 @@
 										<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 popular d-flex justify-content-center">
 											<div class="card" style="width: 18rem;">
 											<a href = "<%=request.getContextPath()%>/recipeview.do?recipe_index=${recipeList.recipe_index}">
-											  <img src="<%=request.getContextPath()%>/resources/img/recipe/${recipeList.thumbnail_image}" class="card-img-top" alt="${recipeList.thumbnail_image}">
+											  <img src="<%=request.getContextPath()%>/resources/img/recipe/${recipeList.thumbnail_image}" class="card-img-top recipeImg" alt="${recipeList.thumbnail_image}">
 											  <img src="<%=request.getContextPath()%>/resources/img/동메달.png" class="img-fluid medal" alt="3등">
 											  <div class="card-body">
 											    <p class="card-text">
@@ -421,7 +429,7 @@
 											<div>[닉네임 : ${MemberList.nickname}]</div>
 										</c:if>
 									</c:forEach>
-									<div>제목 : ${recipeList.title}</div>
+									<div class="recipTitleM">제목 : ${recipeList.title}</div>
 									<div>조회 : ${recipeList.hit}</div>
 									<div>추천 : ${recipeList.thumb}</div>
 								</div>
@@ -438,7 +446,7 @@
 											<div>[닉네임 : ${MemberList.nickname}]</div>
 										</c:if>
 									</c:forEach>
-									<div>제목 : ${recipeList.title}</div>
+									<div class="recipTitleM">제목 : ${recipeList.title}</div>
 									<div>조회 : ${recipeList.hit}</div>
 									<div>추천 : ${recipeList.thumb}</div>
 								</div>
@@ -455,7 +463,7 @@
 											<div>[닉네임 : ${MemberList.nickname}]</div>
 										</c:if>
 									</c:forEach>
-									<div>제목 : ${recipeList.title}</div>
+									<div class="recipTitleM">제목 : ${recipeList.title}</div>
 									<div>조회 : ${recipeList.hit}</div>
 									<div>추천 : ${recipeList.thumb}</div>
 								</div>

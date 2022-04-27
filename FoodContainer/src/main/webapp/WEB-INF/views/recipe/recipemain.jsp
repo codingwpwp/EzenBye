@@ -95,6 +95,7 @@
 												<div class="col-12 text-truncate fw-bold"><a href="<%=request.getContextPath()%>/recipeview.do?recipe_index=${list.recipe_index}"><c:out value="${list.title}"/></a></div>
 											</div>
 										</h6>
+										<div class="col">작성자&nbsp;:&nbsp;<c:out value="${list.name}"/></div>
 										<div class="row recipe-text">
 											<div class="col">추천수(<c:out value="${list.thumb}"/>)</div> 
 											<%-- <div class="col">작성자:<c:out value="${list.name}"/></div> --%>
