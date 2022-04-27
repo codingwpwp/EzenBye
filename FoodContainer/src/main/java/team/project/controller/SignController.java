@@ -41,9 +41,7 @@ public class SignController {
 	//회원가입 post
 	@RequestMapping(value = "member_sign.do", method = RequestMethod.POST)
 	public String sign(Locale locale, Model model,MemberVO vo) throws Exception{
-//		String inputPw= vo.getPw();
-//		String pwd=pwdEncoder.encode(inputPw);
-//		vo.setPw(pwd);
+
 		memberService.insertMember(vo);
 		
 		

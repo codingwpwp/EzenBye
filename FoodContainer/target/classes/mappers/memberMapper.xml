@@ -78,7 +78,8 @@
     nickname,
     phone,
     email,
-    recommender
+    recommender,
+    point
     
     )VALUES(
     #{id},
@@ -87,11 +88,20 @@
     #{nickname},
     #{phone},
     #{email},
-    #{recommender}
-    
+    #{recommender},
+    <if test="recommender==null and recommender==''">
+    100
+    </if>
+    <if test="recommender!=null or recommender!=''">
+    500
+    </if>
     )
-    
     </insert>
+    <update id="updateRecom" parameterType="MemberVO">
+    UPDATE member
+    SET point=point + 500
+    WHERE recommender=#{recommender}
+    </update>
     
     <update id="updatePoint" parameterType="int">
     	UPDATE member
