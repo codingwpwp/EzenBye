@@ -415,7 +415,7 @@
 						<p class="fs-5 my-2 fw-bold">베스트 레시피</p>
 						<hr>
 						<c:forEach items="${recipeList}" var="recipeList">
-						<c:if test="${recipeList.best_rank < 4}">
+						<c:if test="${recipeList.best_rank < 4 && recipeList.best_rank != ''}">
 						<div class="recipeCardM">
 							<div class="recipeMDiv">
 								<c:if test="${recipeList.best_rank == 1}">
