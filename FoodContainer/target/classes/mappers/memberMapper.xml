@@ -100,7 +100,7 @@
     <update id="updateRecom" parameterType="MemberVO">
     UPDATE member
     SET point=point + 500
-    WHERE recommender=#{recommender}
+    WHERE id=#{recommender}
     </update>
     
     <update id="updatePoint" parameterType="int">
