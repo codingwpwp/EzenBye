@@ -58,7 +58,7 @@ $(document).ready(function(){
 	
 	$.ajax({
 		type : 'POST',
-		url : 'messageNonReadCount.do',
+		url : '/FoodContainer/messageNonReadCount.do',
 		data : "member_index=" + member_index,
 		success : function(data){
 			if(data > 5){
@@ -125,3 +125,30 @@ function search(obj){
 	var value = $("#searchValue").val();
 	location.href = "productList.do?search="+value+"";
 }
+
+//쿠키데이터
+	function productCookie(obj){
+		var name=$(obj).parent().find("#indexCookie").val();
+		console.log(name);
+		
+		$.ajax({
+			url : "/FoodContainer/viewProductCookie.do",
+			type : "get",
+			data : "name="+name,
+			success : function(data){
+		/*	var recentHTML = "";
+				for(var i=0; i<data.length; i++){
+					recentHTML += "<div class='productImg'>";
+					recentHTML += "<a href='productView.do?product_index="+data[i].product_index+"'>";
+					recentHTML += "<img src='/FoodContainer/resources/img/"+data[i].brand+"/"+data[i].middleSort+"/"+data[i].thumbnail_image+"' class='w-75 img-fluid mt-2 mb-3 border' alt='"+data[i].product_name+"'></img>";
+					recentHTML += "</a>";
+					recentHTML += "</div>";
+				}
+				
+				$("#recentProduct").html(recentHTML);*/
+			},
+			error : function(){
+				console.log("error");
+			}
+		});
+	}

@@ -159,8 +159,25 @@ input.btn.btn-primary {
 	#thumnail {
 		width: 100%;
 		max-width: 250px;
-		height: 100%;
-		max-height: 250px;
+		height: 250px;
+		
 		margin-left: 20%;
+	}
+}
+@media (max-width :1024px) {
+	.thumnail {
+		width: 100%;
+		max-width: 210px;
+		height: 250px;
+		margin-left:5%;
+		
+		
+	}
+}
+@media (max-width :1024px) {
+	.previewButton {
+		font-size:13px;
+		
+		
 	}
 }

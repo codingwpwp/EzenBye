@@ -109,7 +109,12 @@ function itemSum(obj){
 	
 	function shopbasketDelete(obj){
 		var cart_index = $(obj).parent().parent().parent().parent().find("input[name='cart_index']").val();
-		var YN = confirm('정말 삭제하시겠습니까?');
+		var cart_index2 = $(obj).parent().parent().parent().parent().find("input[name='cart_index']");
+		
+		var confirmProductName = $(obj).parent().parent().find(".confirmProductName").text();
+		
+		if(cart_index2.is(':checked')){
+			var YN = confirm(""+confirmProductName+" 정말 삭제하시겠습니까?");
 			if(YN){
 				$.ajax({
 					type : 'POST',
@@ -125,6 +130,10 @@ function itemSum(obj){
 					}
 				});
 			}
+		}else {
+			alert('상품을 선택한 후 눌러주세요.');
+		}
+			
 	}
 	
 	function minusCount(obj){
@@ -226,15 +235,13 @@ function itemSum(obj){
 		var cart_index = $(obj).parent().parent().parent().parent().find("input[name='cart_index']");
 		var totalPrice = $('.shopbasket-sum2').html();
 		
-		var YN = confirm("총 금액 "+totalPrice.toLocaleString()+"원 구매 하시겠습니까?"); 
-		if(YN){
-			
-			if(cart_index.is(':checked')){
-			form.submit();
-			}else {
-			alert('선택한 상품이 없습니다.');
+		if(cart_index.is(':checked')){
+			var YN = confirm("총 금액 "+totalPrice.toLocaleString()+"원 구매 하시겠습니까?"); 
+			if(YN){
+				form.submit();
 			}
-			
+		}else {
+			alert('선택한 상품이 없습니다.');
 		}
 		
 	}
@@ -245,18 +252,19 @@ function itemSum(obj){
 		
 		var cart_index = $(obj).parent().parent().parent().parent().find("input[name='cart_index']");
 		
-		var confirmProductName = $(obj).parent().parent().find(".confirmProductName").html();
+		var confirmProductName = $(obj).parent().parent().find(".confirmProductName").text();
 		
-		var YN = confirm(""+confirmProductName+" 바로 구매 하시겠습니까?");
-		
-		if(YN){
-			if(cart_index.is(':checked')){
+		if(cart_index.is(':checked')){
+			var YN = confirm(""+confirmProductName+" 바로 구매 하시겠습니까?");
+	
+			if(YN){
 				$("input[name='cart_index']").prop('checked',false);
 				cart_index.prop('checked',true);
 				form.submit();
-			}else {
-				alert('상품을 선택한 후 눌러주세요.');
 			}
+			
+		}else {
+			alert('상품을 선택한 후 눌러주세요.');
 		}
 		
 	}
@@ -361,15 +369,13 @@ function itemSum(obj){
 		var cart_index = $(obj).parent().parent().parent().parent().find("input[type='checkbox']");
 		var totalPrice = $('.shopbasket-sum2').html();
 		
-		var YN = confirm("총 금액 "+totalPrice.toLocaleString()+"원 구매 하시겠습니까?"); 
-		if(YN){
-			
-			if(cart_index.is(':checked')){
-			form.submit();
-			}else {
-			alert('선택한 상품이 없습니다.');
+		if(cart_index.is(':checked')){
+			var YN = confirm("총 금액 "+totalPrice.toLocaleString()+"원 구매 하시겠습니까?"); 
+			if(YN){
+				form.submit();
 			}
-			
+		}else {
+			alert('선택한 상품이 없습니다.');
 		}
 		
 	}
@@ -380,20 +386,18 @@ function itemSum(obj){
 		
 		var cart_index = $(obj).parent().parent().parent().parent().find("input[type='checkbox']");
 		
-		var confirmProductName = $(obj).parent().parent().find(".confirmProductName").html();
+		var confirmProductName = $(obj).parent().parent().find(".confirmProductName").text();
 		
-		var YN = confirm(""+confirmProductName+" 바로 구매 하시겠습니까?");
-		
-		if(YN){
-			if(cart_index.is(':checked')){
+		if(cart_index.is(':checked')){
+			var YN = confirm(""+confirmProductName+" 바로 구매 하시겠습니까?");
+			if(YN){
 				$("input[type='checkbox']").prop('checked',false);
 				cart_index.prop('checked',true);
 				form.submit();
-			}else {
-				alert('상품을 선택한 후 눌러주세요.');
-			}
+			}	
+		}else {
+			alert('상품을 선택한 후 눌러주세요.');
 		}
-		
 	}
 	
 	function chooseDeleteNon(obj){
@@ -434,7 +438,7 @@ function itemSum(obj){
 		var product_index = new Array();
 		var list = $(".cart_indexCheck");
 		var cart_index = $(obj).parent().parent().parent().parent().find(".cart_indexCheck");
-		var confirmProductName = $(obj).parent().parent().find(".confirmProductName").html();
+		var confirmProductName = $(obj).parent().parent().find(".confirmProductName").text();
 		
 		if(cart_index.is(':checked')){
 			
