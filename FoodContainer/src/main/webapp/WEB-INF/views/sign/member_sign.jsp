@@ -157,7 +157,7 @@
                                                 <input type="text" class="recominput" name="recommender" id="recom"
                                                     placeholder="추천인 아이디 입력시 500point 지급!">
                                             </div>
-                                            <div class="col-sm-3 col-4">
+                                            <div class="col-sm-3 col-4 p-0">
                                                <!--  <input type="button" class="btn btn-secondary ckinput" value="추천인확인"> -->
                                                  <button type="button" class="btn btn-secondary ckinput" value="N" onclick="fn_recomChk();" id="recomChk">추천인 확인</button>
                                             </div>
