@@ -101,7 +101,7 @@
 
 						<div class="row body">
 
-							<div class="col-sm-8 col-12">
+							<div class="col-xl-8 col-lg-6 col-12">
 								<table>
 							
 									<tr>
@@ -221,9 +221,9 @@
 							<div class="col-3 col-sm-2 col-md-2 col-lg-2 replyview" name="replyname"id="replyname">
 								<p>${re.name}</p>
 							</div>
-							<div class="col-lg-2 col-md-2 col-sm-2 col-6 wday" name="replydate" id="replydate">${re.reply_date}
+							<div class="col-lg-2 col-md-2 col-sm-2 col-5 wday" name="replydate" id="replydate">${re.reply_date}
 							</div>
-							<div class="col-md-2 col-sm-2 col-3 report"  name="replybtn" id="replybtn">
+							<div class="col-md-4 col-sm-2 col-4 p-0 report"  name="replybtn" id="replybtn">
 								<!-- 회원 -->
 								<c:if test="${member.member_index==re.member_index}">
 								<span>

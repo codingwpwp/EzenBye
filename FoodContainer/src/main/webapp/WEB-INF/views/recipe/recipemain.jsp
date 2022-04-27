@@ -69,7 +69,7 @@
                     <button class="btnwr" onclick="location.href='recipewrite.do'"><span>레시피 작성</span></button>
                   	</c:if>
                    
-                    <div class="container">
+                    <div class="container p-0">
                        
                             <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-xs-1 g-4 menu">
                             <c:forEach items="${recipeList}" var="list">	
@@ -95,12 +95,12 @@
 												<div class="col-12 text-truncate fw-bold"><a href="<%=request.getContextPath()%>/recipeview.do?recipe_index=${list.recipe_index}"><c:out value="${list.title}"/></a></div>
 											</div>
 										</h6>
-										<div class="col">작성자&nbsp;:&nbsp;<c:out value="${list.name}"/></div>
+										<div class="col p-0">작성자&nbsp;:&nbsp;<c:out value="${list.name}"/></div>
 										<div class="row recipe-text">
-											<div class="col">추천수(<c:out value="${list.thumb}"/>)</div> 
-											<%-- <div class="col">작성자:<c:out value="${list.name}"/></div> --%>
-											<div class="col">조회수(<c:out value="${list.hit}"/>)</div>
-											<div class="col">댓글(<c:out value="${list.reply_index}"/>)</div>
+											<div class="col p-0">추천수(<c:out value="${list.thumb}"/>)</div> 
+											
+											<div class="col p-0">조회수(<c:out value="${list.hit}"/>)</div>
+											<div class="col p-0">댓글(<c:out value="${list.reply_index}"/>)</div>
 										</div>
 									</div>
 								</div>

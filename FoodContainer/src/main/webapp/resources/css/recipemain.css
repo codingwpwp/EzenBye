@@ -146,8 +146,20 @@ input.btn.btn-primary.selbtn{
 		font-size:13px;
 	}
 }
-
+/*메인모바일*/
+@media ( max-width :1024px) {
+	img.card-img-top {
+		height: 200px;
+	}
+}
+@media ( max-width :1024px) {
+	.row.recipe-text{
 		
+		font-size:9px;
+		
+	}
+}
+		card-body
 /*페이징*/
 ul.pagination {
 		justify-content: center;
