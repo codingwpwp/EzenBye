@@ -31,9 +31,7 @@
         <div class="row">
             <div class="col-lg-2 d-none d-lg-block"></div>
             
-            <div class="col-2 col-sm-1 pe-0 d-lg-none" id="navLeftMenu">
-            	
-            </div>
+            
 
 			<%@include file="/WEB-INF/views/base/nav.jsp"%>
 
@@ -87,7 +85,8 @@
 			        	</div>
 			        	
 			        	<c:if test="${opList.del_YN eq 'N'}">
-			        	<a href="productView.do?product_index=${opList.product_index }" class="productHref">
+			        	<a href="productView.do?product_index=${opList.product_index }" class="productHref" onclick="productCookie(this)">
+			        	<input id="indexCookie" type="hidden" value="${opList.product_index}" />
 			        	</c:if>
 			        	<c:if test="${opList.del_YN eq 'Y'}">
 			        	<a href="javascript:alert('삭제된 상품입니다.');" class="productHref">

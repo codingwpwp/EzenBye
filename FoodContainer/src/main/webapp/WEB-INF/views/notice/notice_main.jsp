@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -93,7 +94,7 @@
 											class="d-inline-block text-truncate">
 												${list.title}
 												 </span></a></td>
-									<td class="center">${list.write_date}</td>
+									<td class="center">${fn:substring(list.write_date,0,10)}</td>
 									<td class="center">${list.hit}</td>
 								</tr>
 							</c:forEach>
