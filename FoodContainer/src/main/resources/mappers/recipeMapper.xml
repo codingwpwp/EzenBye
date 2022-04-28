@@ -145,14 +145,11 @@ member_index
 		WHERE recipe_index = #{recipe_index}
 	</update>
  <!-- 레시피 삭제 -->
- <delete id="deletdRecipe" parameterType="int">
- DELETE
- FROM recipe
- WHERE recipe_index=#{recipe_index}
- </delete>
- 
- 
- 
+ <update id="deletdRecipe" parameterType="int">
+ UPDATE recipe SET
+ del_yn = 'Y'
+ WHERE recipe_index =#{recipe_index}
+ </update> 
  <!-- 베스트 레시피 선정 -->
 
  

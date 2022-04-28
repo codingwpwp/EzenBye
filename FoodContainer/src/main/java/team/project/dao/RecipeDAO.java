@@ -71,7 +71,7 @@ public class RecipeDAO {
 	}
 	//레시피 삭제
 	public void deletdRecipe(int recipe_index) throws Exception{
-		sqlSession.delete(Namespace+".deletdRecipe",recipe_index);
+		sqlSession.update(Namespace+".deletdRecipe",recipe_index);
 	}
 	
 	//베스트 레시피
