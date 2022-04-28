@@ -387,7 +387,7 @@
 								reviewHTML += "<td class='reviewContent'>";
 								reviewHTML += "<div class='row'>";
 								reviewHTML += "<div class='reViewImg col-3 align-self-center'>";
-								reviewHTML += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid' alt='good'>";
+								reviewHTML += "<img src='/FoodContainer/resources/img/review/"+data[i].image+"' class='img-fluid' alt='"+data[i].image+"'>";
 								reviewHTML += "</div>";
 								reviewHTML += "<div class='reviewTitle align-self-center col' data-bs-toggle='collapse' href='#reviewExtend"+i+"' role='button' aria-expanded='false' aria-controls='collapseExample'>";
 								reviewHTML += data[i].contents;
@@ -397,7 +397,7 @@
 								reviewHTML += "</div>";
 								reviewHTML += "</div>";
 								reviewHTML += "<div class='collapse reviewCard' id='reviewExtend"+i+"'>";
-								reviewHTML += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid reviewCardImg' alt='good'>";
+								reviewHTML += "<img src='/FoodContainer/resources/img/review/"+data[i].image+"' class='img-fluid' alt='"+data[i].image+"'>";
 								reviewHTML += "<div>"+data[i].contents+"</div>";
 								reviewHTML += "</div>";
 								reviewHTML += "</td>";
@@ -440,7 +440,7 @@
 							reviewHTMLM += "<tr>";
 							reviewHTMLM += "<td>";
 							reviewHTMLM += "<div>";
-							reviewHTMLM += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid' alt='good'>";
+							reviewHTMLM += "<img src='/FoodContainer/resources/img/review/"+data[i].image+"' class='img-fluid' alt='"+data[i].image+"'>";
 							reviewHTMLM += "</div>";
 							reviewHTMLM += "<div>";
 							reviewHTMLM += "<span>";
@@ -557,7 +557,7 @@
 								reviewHTML += "<td class='reviewContent'>";
 								reviewHTML += "<div class='row'>";
 								reviewHTML += "<div class='reViewImg col-3 align-self-center'>";
-								reviewHTML += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid' alt='good'>";
+								reviewHTML += "<img src='/FoodContainer/resources/img/review/"+data[i].image+"' class='img-fluid' alt='"+data[i].image+"'>";
 								reviewHTML += "</div>";
 								reviewHTML += "<div class='reviewTitle align-self-center col' data-bs-toggle='collapse' href='#reviewExtend"+i+"' role='button' aria-expanded='false' aria-controls='collapseExample'>";
 								reviewHTML += data[i].contents;
@@ -567,7 +567,7 @@
 								reviewHTML += "</div>";
 								reviewHTML += "</div>";
 								reviewHTML += "<div class='collapse reviewCard' id='reviewExtend"+i+"'>";
-								reviewHTML += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid reviewCardImg' alt='good'>";
+								reviewHTML += "<img src='/FoodContainer/resources/img/review/"+data[i].image+"' class='img-fluid' alt='"+data[i].image+"'>";
 								reviewHTML += "<div>"+data[i].contents+"</div>";
 								reviewHTML += "</div>";
 								reviewHTML += "</td>";
@@ -610,7 +610,7 @@
 							reviewHTMLM += "<tr>";
 							reviewHTMLM += "<td>";
 							reviewHTMLM += "<div>";
-							reviewHTMLM += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid' alt='good'>";
+							reviewHTMLM += "<img src='/FoodContainer/resources/img/review/"+data[i].image+"' class='img-fluid' alt='"+data[i].image+"'>";
 							reviewHTMLM += "</div>";
 							reviewHTMLM += "<div>";
 							reviewHTMLM += "<span>";
@@ -703,7 +703,7 @@
 								reviewHTML += "<td class='reviewContent'>";
 								reviewHTML += "<div class='row'>";
 								reviewHTML += "<div class='reViewImg col-3 align-self-center'>";
-								reviewHTML += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid' alt='good'>";
+								reviewHTML += "<img src='/FoodContainer/resources/img/review/"+data[i].image+"' class='img-fluid' alt='"+data[i].image+"'>";
 								reviewHTML += "</div>";
 								reviewHTML += "<div class='reviewTitle align-self-center col' data-bs-toggle='collapse' href='#reviewExtend"+i+"' role='button' aria-expanded='false' aria-controls='collapseExample'>";
 								reviewHTML += data[i].contents;
@@ -713,7 +713,7 @@
 								reviewHTML += "</div>";
 								reviewHTML += "</div>";
 								reviewHTML += "<div class='collapse reviewCard' id='reviewExtend"+i+"'>";
-								reviewHTML += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid reviewCardImg' alt='good'>";
+								reviewHTML += "<img src='/FoodContainer/resources/img/review/"+data[i].image+"' class='img-fluid reviewCardImg' alt='"+data[i].image+"'>";
 								reviewHTML += "<div>"+data[i].contents+"</div>";
 								reviewHTML += "</div>";
 								reviewHTML += "</td>";
@@ -756,7 +756,7 @@
 							reviewHTMLM += "<tr>";
 							reviewHTMLM += "<td>";
 							reviewHTMLM += "<div>";
-							reviewHTMLM += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid' alt='good'>";
+							reviewHTMLM += "<img src='/FoodContainer/resources/img/review/"+data[i].image+"' class='img-fluid' alt='"+data[i].image+"'>";
 							reviewHTMLM += "</div>";
 							reviewHTMLM += "<div>";
 							reviewHTMLM += "<span>";
@@ -859,7 +859,7 @@
 								reviewHTML += "<td class='reviewContent'>";
 								reviewHTML += "<div class='row'>";
 								reviewHTML += "<div class='reViewImg col-3 align-self-center'>";
-								reviewHTML += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid' alt='good'>";
+								reviewHTML += "<img src='/FoodContainer/resources/img/review/"+data[i].image+"' class='img-fluid' alt='"+data[i].image+"'>";
 								reviewHTML += "</div>";
 								reviewHTML += "<div class='reviewTitle align-self-center col' data-bs-toggle='collapse' href='#reviewExtend"+i+"' role='button' aria-expanded='false' aria-controls='collapseExample'>";
 								reviewHTML += data[i].contents;
@@ -869,7 +869,7 @@
 								reviewHTML += "</div>";
 								reviewHTML += "</div>";
 								reviewHTML += "<div class='collapse reviewCard' id='reviewExtend"+i+"'>";
-								reviewHTML += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid reviewCardImg' alt='good'>";
+								reviewHTML += "<img src='/FoodContainer/resources/img/review/"+data[i].image+"' class='img-fluid reviewCardImg' alt='"+data[i].image+"'>";
 								reviewHTML += "<div>"+data[i].contents+"</div>";
 								reviewHTML += "</div>";
 								reviewHTML += "</td>";
@@ -913,7 +913,7 @@
 							reviewHTMLM += "<tr>";
 							reviewHTMLM += "<td>";
 							reviewHTMLM += "<div>";
-							reviewHTMLM += "<img src='/FoodContainer/resources/img/mypage/good.jpg' class='img-fluid' alt='good'>";
+							reviewHTMLM += "<img src='/FoodContainer/resources/img/review/"+data[i].image+"' class='img-fluid' alt='"+data[i].image+"'>";
 							reviewHTMLM += "</div>";
 							reviewHTMLM += "<div>";
 							reviewHTMLM += "<span>";

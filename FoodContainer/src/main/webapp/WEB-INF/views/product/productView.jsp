@@ -281,7 +281,7 @@
 									<td class="reviewContent">
 										<div class="row">
 											<div class="reViewImg col-3 align-self-center">
-												<img src="<%=request.getContextPath()%>/resources/img/mypage/good.jpg" class="img-fluid" alt="good">
+												<img src="<%=request.getContextPath()%>/resources/img/review/${reviewPaging.image}" class="img-fluid" alt="${reviewPaging.image}">
 											</div>
 											<div class="reviewTitle align-self-center col" data-bs-toggle="collapse" href="#reviewExtend${status.index }" role="button" aria-expanded="false" aria-controls="collapseExample">
 												${reviewPaging.contents}
@@ -291,7 +291,7 @@
 											</div>
 										</div>
 										<div class="collapse reviewCard" id="reviewExtend${status.index }">
-											<img src="<%=request.getContextPath()%>/resources/img/mypage/good.jpg" class="img-fluid reviewCardImg" alt="good">
+											<img src="<%=request.getContextPath()%>/resources/img/review/${reviewPaging.image}" class="img-fluid reviewCardImg" alt="${reviewPaging.image}">
 											<div>${reviewPaging.contents}</div>
 										</div>
 									</td>
@@ -343,7 +343,7 @@
 								<tr>
 									<td>
 										<div>
-											<img src="<%=request.getContextPath()%>/resources/img/mypage/good.jpg" class="img-fluid" alt="good">
+											<img src="<%=request.getContextPath()%>/resources/img/review/${reviewPaging.image}" class="img-fluid" alt="${reviewPaging.image}">
 										</div>
 										<div>
 											<span>
