@@ -47,17 +47,7 @@
     </select>
 
     <select id="view" resultType="ProductVO">
-    	SELECT product_name,
-    		   bigSort,
-    		   middleSort,
-    		   origin_price,
-    		   sale_price,
-    		   brand,
-    		   inventory,
-    		   quantity,
-    		   delivery_free_YN,
-    		   thumbnail_image,
-    		   detail_image
+    	SELECT *
     	FROM product
     	WHERE del_YN != 'y' and product_index = #{index}
     </select>
