@@ -119,8 +119,9 @@
 			        	
 			        	<form action="<%=request.getContextPath() %>/purchase/certification.do" method="post" class="d-grid gap-4 d-md-flex justify-content-md-center mt-2 interItem-btn">
 			        		<input type="hidden" name="${list.product_index}" value="1" />
+			        		<input type="hidden" id="inventoryDibs" value="${list.inventory}" />
 						  <button class="btn btn-dark col-lg-3 col-md-3" type="button" onclick="cartInsert(this)">장바구니 담기</button>
-						  <button class="btn btn-secondary col-lg-3 col-md-3" type="submit">바로구매</button>
+						  <button class="btn btn-secondary col-lg-3 col-md-3" type="button" onclick="dibsBuyOk(this)">바로구매</button>
 						</form>
 			        </div>
 			        

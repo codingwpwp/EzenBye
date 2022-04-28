@@ -459,12 +459,16 @@ function reviewSumbit(obj, formName){
 
 //관심상품 장바구니 추가
 function cartInsert(obj) {
-	var YN = confirm("장바구니에 추가 하시겠습니까?");
-	if(YN){
+	
 		var product_index = $(obj).parent().parent().find("input[name='product_index']").val();
 		var member_index = $(obj).parent().parent().find("input[name='member_index']").val();
-		
-		$.ajax({
+		var inventoryDibs = $(obj).parent().find("#inventoryDibs").val();
+		if(inventoryDibs == 0){
+			alert('매진된 상품입니다.');
+		}else {
+			var YN = confirm("장바구니에 추가 하시겠습니까?");
+			if(YN){
+			$.ajax({
 				url : "cartInsert.do",
 				type : "post",
 				data : "product_index="+product_index+"&member_index="+member_index,
@@ -482,6 +486,8 @@ function cartInsert(obj) {
 					}
 				}
 			});
+		}
+		
 	}
 }
 
@@ -752,7 +758,21 @@ function changeAddress(obj){
 	}
 }
 
+//장바구니 바로구매
+function dibsBuyOk(obj){
+	var inventoryDibs = $(obj).parent().find("#inventoryDibs").val();
+	var form = $(obj).closest('form');
 	
+	if(inventoryDibs == 0){
+		alert('매진된 상품입니다.');
+	}else {
+		var YN = confirm('정말 구매 하시겟습니까?');
+		if(YN){
+			form.submit();
+		}
+	}
+}
+
 
 
 
