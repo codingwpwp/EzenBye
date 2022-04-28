@@ -234,6 +234,7 @@
 					    </div>
 					
 					<input type="hidden" name="memberHash" value="<%=memberHash%>">
+					<input type="hidden" name="product_index" value="${view.product_index}">
 					
 					<!-- 리뷰 -->
 					<div id="review">

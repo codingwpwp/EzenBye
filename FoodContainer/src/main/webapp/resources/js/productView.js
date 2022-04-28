@@ -210,8 +210,7 @@
 	//툴팁
 	function viewCart(obj){
 		var loginCheck = $("#viewLoginCheck").val();
-		var pram = document.location.href;
-		var pIndex = pram.substring(pram.length-5,pram.length);
+		var pIndex = $("input[name='product_index']").val();
 		var productCnt = $(".pCnt").html();
 		console.log(loginCheck);
 		console.log(pIndex);
@@ -251,8 +250,7 @@
 	
 	function viewCartBottom(obj){
 		var loginCheck = $("#viewLoginCheck").val();
-		var pram = document.location.href;
-		var pIndex = pram.substring(pram.length-5,pram.length);
+		var pIndex = $("input[name='product_index']").val();;
 		var productCnt = $(".pCnt").html();
 		console.log(loginCheck);
 		console.log(pIndex);
@@ -315,8 +313,7 @@
 			
 			location.href="purchase/certification.do";
 			
-			var pram = document.location.href;
-			var product_index = pram.substring(pram.length-5,pram.length);
+			var product_index = $("input[name='product_index']").val();;
 			var prodcut_count = $(".pCnt").html();
 			
 			var form = document.createElement('form');
@@ -340,8 +337,7 @@
 	function pagePrev(obj){
 		var startPage = $("input[name='startPage']").val();
 		
-		var pram = document.location.href;
-		var product_index = pram.substring(pram.length-5,pram.length);
+		var product_index = $("input[name='product_index']").val();;
 		
 		if(startPage > 1){
 			$.ajax({
@@ -504,8 +500,7 @@
 	function pageNext(obj){
 		var endPage = $("input[name='endPage']").val();
 		var lastPage = $("input[name='lastPage']").val();
-		var pram = document.location.href;
-		var product_index = pram.substring(pram.length-5,pram.length);
+		var product_index = $("input[name='product_index']").val();;
 		
 		var startPageNum = $("input[name='startPage']").val();
 		if(startPageNum < lastPage){
@@ -810,8 +805,7 @@
 	
 	function pageMove(obj){
 		var nowPage = $(obj).next().val();
-		var pram = document.location.href;
-		var product_index = pram.substring(pram.length-5,pram.length);
+		var product_index = $("input[name='product_index']").val();;
 		
 		$("input[name='startPage']").val(nowPage);
 		
