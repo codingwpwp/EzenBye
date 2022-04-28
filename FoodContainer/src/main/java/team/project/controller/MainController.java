@@ -511,5 +511,10 @@ public class MainController {
 		return veiwReview;
 	}
 	
+	@RequestMapping(value = "aboutus.do", method = RequestMethod.GET)
+	public String aboutus() throws Exception {
+		return "base/aboutus";
+	}
+	
 }
 
